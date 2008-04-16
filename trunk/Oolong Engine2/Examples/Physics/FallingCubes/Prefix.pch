@@ -1,0 +1,8 @@
+#import <TargetConditionals.h>
+#if TARGET_IPHONE_SIMULATOR
+#error You cannot run this sample in the simulator because it requires OpenGL ES, which is not implemented for the simulator. To run this sample, choose Project > Set Active SDK > Device and connect a device. Then click Build and Go. 
+#endif
+
+#ifdef __OBJC__
+	#import <UIKit/UIKit.h>
+#endif

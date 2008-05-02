@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -270,6 +272,8 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>2D500B1D0D5A766B00DBA0E3</string>
+								<string>7999526F0DCAD14B0020F76F</string>
+								<string>799952710DCAD14B0020F76F</string>
 								<string>79EA043B0DAFC7950038ED3D</string>
 								<string>79EA04970DAFCC980038ED3D</string>
 								<string>79EA043C0DAFC7950038ED3D</string>
@@ -322,14 +326,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Application.mm</string>
+								<string>btCollisionWorld.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -337,21 +339,23 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>Application.mm</string>
+										<string>btCollisionWorld.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>799952620DCACBB50020F76F</string>
+										<string>799954070DCAD36F0020F76F</string>
 										<key>history</key>
 										<array>
 											<string>7925D1480DC1B63500EC1BDC</string>
 											<string>799952310DCAC7380020F76F</string>
-											<string>799952590DCACB040020F76F</string>
+											<string>799953D40DCAD18E0020F76F</string>
+											<string>799953D70DCAD18E0020F76F</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>7925D0B50DC1B1CD00EC1BDC</string>
 											<string>799952330DCAC7380020F76F</string>
+											<string>799953D60DCAD18E0020F76F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -409,9 +413,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799952630DCACBB50020F76F</string>
+				<string>799953DF0DCAD19F0020F76F</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799952640DCACBB50020F76F</string>
+				<string>799953E00DCAD19F0020F76F</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -524,7 +528,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>799952090DCA199B0020F76F</string>
+	<string>799954060DCAD32F0020F76F</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -547,6 +551,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>799953F50DCAD2480020F76F</string>
+		<string>799953F60DCAD2480020F76F</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Physics/FallingCubes/FallingCubes.xcodeproj</string>
 	</array>
@@ -628,7 +636,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799952650DCACBB50020F76F</string>
+				<string>799953E10DCAD19F0020F76F</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -748,13 +756,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>799951F00DCA19520020F76F</string>
+				<string>799953EC0DCAD2480020F76F</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>799951F10DCA19520020F76F</string>
-				<string>799951F20DCA19520020F76F</string>
-				<string>799951F30DCA19520020F76F</string>
-				<string>799951F40DCA19520020F76F</string>
-				<string>799951F50DCA19520020F76F</string>
+				<string>799953ED0DCAD2480020F76F</string>
+				<string>799953EE0DCAD2480020F76F</string>
+				<string>799953EF0DCAD2480020F76F</string>
+				<string>799953F00DCAD2480020F76F</string>
+				<string>799953F10DCAD2480020F76F</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -908,7 +916,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7925D0A60DC1B13000EC1BDC</string>
+				<string>799953F20DCAD2480020F76F</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

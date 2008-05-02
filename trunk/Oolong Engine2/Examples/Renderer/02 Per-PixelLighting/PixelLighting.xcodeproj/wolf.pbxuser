@@ -76,8 +76,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 230799274;
-			PBXWorkspaceStateSaveDate = 230799274;
+			PBXPerProjectTemplateStateSaveDate = 231348790;
+			PBXWorkspaceStateSaveDate = 231348790;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -124,6 +124,7 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryName = "Oolong Engine 2";
 		};
 	};
 	79235BFD0DAD053A00F918F8 /* Code sense */ = {
@@ -154,9 +155,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {762, 5194}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 5292}}";
 			sepNavSelRange = "{415, 22}";
-			sepNavVisRange = "{0, 931}";
+			sepNavVisRange = "{12625, 1264}";
 			sepNavWindowFrame = "{{562, 66}, {821, 781}}";
 		};
 	};

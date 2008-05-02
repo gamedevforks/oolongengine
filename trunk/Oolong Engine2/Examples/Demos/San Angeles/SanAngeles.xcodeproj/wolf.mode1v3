@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -282,7 +284,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>7</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -319,8 +321,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -338,20 +338,18 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7925D2E60DC3DAD000EC1BDC</string>
+										<string>7999522E0DCA1ABB0020F76F</string>
 										<key>history</key>
 										<array>
-											<string>7925D2D40DC3DAC400EC1BDC</string>
 											<string>7925D2D60DC3DAC400EC1BDC</string>
 											<string>7925D2D70DC3DAC400EC1BDC</string>
 											<string>7925D2D80DC3DAC400EC1BDC</string>
 											<string>7925D2D90DC3DAC400EC1BDC</string>
 											<string>7925D2DA0DC3DAC400EC1BDC</string>
-											<string>7925D2DB0DC3DAC400EC1BDC</string>
+											<string>7925D2E60DC3DAD000EC1BDC</string>
 										</array>
 										<key>prevStack</key>
 										<array>
-											<string>7925D2DC0DC3DAC400EC1BDC</string>
 											<string>7925D2DE0DC3DAC400EC1BDC</string>
 											<string>7925D2DF0DC3DAC400EC1BDC</string>
 											<string>7925D2E00DC3DAC400EC1BDC</string>
@@ -388,14 +386,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 175}, {509, 396}}</string>
+								<string>{{0, 175}, {509, 395}}</string>
 								<key>RubberWindowFrame</key>
 								<string>502 221 789 611 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>396pt</string>
+							<string>395pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -414,9 +412,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7925D2E40DC3DAC400EC1BDC</string>
+				<string>7999522F0DCA1ABB0020F76F</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7925D2E50DC3DAC400EC1BDC</string>
+				<string>799952300DCA1ABB0020F76F</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -529,7 +527,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>791406640DBAD7F700C9A379</string>
+	<string>7999522D0DCA1AB10020F76F</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -552,7 +550,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Demos/San Angeles/SanAngeles.xcodeproj</string>
+		<string>7999522D0DCA1AB10020F76F</string>
+		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Demos/San Angeles/SanAngeles.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>502 221 789 611 0 0 1440 878 </string>

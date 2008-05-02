@@ -257,10 +257,12 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>258</real>
+								<real>22</real>
+								<real>236</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
+								<string>SCMStatusColumn</string>
 								<string>MainColumn</string>
 							</array>
 						</dict>
@@ -285,7 +287,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -305,8 +307,10 @@
 						<string>{{0, 0}, {275, 356}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
+							<string>SCMStatusColumn</string>
+							<real>22</real>
 							<string>MainColumn</string>
-							<real>258</real>
+							<real>236</real>
 						</array>
 						<key>RubberWindowFrame</key>
 						<string>598 441 690 397 0 0 1440 878 </string>
@@ -390,9 +394,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7925D1340DC1B5F800EC1BDC</string>
+				<string>799952250DCA1AA50020F76F</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7925D1350DC1B5F800EC1BDC</string>
+				<string>799952260DCA1AA50020F76F</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -505,7 +509,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>791406DB0DBAD9A700C9A379</string>
+	<string>799952240DCA1A570020F76F</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -528,10 +532,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>79235C150DAD062200F918F8</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/03 POD Geometry/POD.xcodeproj</string>
+		<string>799952240DCA1A570020F76F</string>
+		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/03 POD Geometry/POD.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>598 441 690 397 0 0 1440 878 </string>

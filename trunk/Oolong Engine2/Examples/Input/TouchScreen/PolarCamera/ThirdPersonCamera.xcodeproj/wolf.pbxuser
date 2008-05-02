@@ -100,14 +100,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 230919338;
-			PBXWorkspaceStateSaveDate = 230919338;
+			PBXPerProjectTemplateStateSaveDate = 231003429;
+			PBXWorkspaceStateSaveDate = 231003429;
 		};
 		perUserProjectItems = {
 			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
 			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
-			7925D2C20DC38CE600EC1BDC /* PBXTextBookmark */ = 7925D2C20DC38CE600EC1BDC /* PBXTextBookmark */;
 			7925D2C30DC38CE600EC1BDC /* PBXTextBookmark */ = 7925D2C30DC38CE600EC1BDC /* PBXTextBookmark */;
+			7925D2F80DC4D5C200EC1BDC /* PBXTextBookmark */ = 7925D2F80DC4D5C200EC1BDC /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -155,9 +155,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 1694}}";
-			sepNavSelRange = "{1609, 0}";
-			sepNavVisRange = "{2068, 399}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2366}}";
+			sepNavSelRange = "{2155, 0}";
+			sepNavVisRange = "{0, 1052}";
 			sepNavWindowFrame = "{{50, 320}, {750, 558}}";
 		};
 	};
@@ -196,16 +196,6 @@
 		vrLen = 735;
 		vrLoc = 0;
 	};
-	7925D2C20DC38CE600EC1BDC /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 54";
-		rLen = 0;
-		rLoc = 1609;
-		rType = 0;
-		vrLen = 399;
-		vrLoc = 2068;
-	};
 	7925D2C30DC38CE600EC1BDC /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
@@ -215,6 +205,16 @@
 		rType = 0;
 		vrLen = 399;
 		vrLoc = 2068;
+	};
+	7925D2F80DC4D5C200EC1BDC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 85";
+		rLen = 0;
+		rLoc = 2155;
+		rType = 0;
+		vrLen = 1052;
+		vrLoc = 0;
 	};
 	79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */ = {
 		uiCtxt = {

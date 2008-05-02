@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -255,10 +257,12 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>258</real>
+								<real>22</real>
+								<real>236</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
+								<string>SCMStatusColumn</string>
 								<string>MainColumn</string>
 							</array>
 						</dict>
@@ -282,7 +286,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -302,8 +306,10 @@
 						<string>{{0, 0}, {275, 356}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
+							<string>SCMStatusColumn</string>
+							<real>22</real>
 							<string>MainColumn</string>
-							<real>258</real>
+							<real>236</real>
 						</array>
 						<key>RubberWindowFrame</key>
 						<string>629 425 690 397 0 0 1440 878 </string>
@@ -351,8 +357,6 @@
 							<string>0pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -389,9 +393,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7925D1990DC1B7B000EC1BDC</string>
+				<string>7999521C0DCA1A500020F76F</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7925D19A0DC1B7B000EC1BDC</string>
+				<string>7999521D0DCA1A500020F76F</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -504,7 +508,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>791406CD0DBAD96A00C9A379</string>
+	<string>7999521B0DCA1A390020F76F</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -527,14 +531,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7925D1DB0DC1C16100EC1BDC</string>
-		<string>7925D1DC0DC1C16100EC1BDC</string>
-		<string>7925D1BA0DC1BCF500EC1BDC</string>
-		<string>7925D1BB0DC1BCF500EC1BDC</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/02 Per-PixelLighting/PixelLighting.xcodeproj</string>
+		<string>7999521B0DCA1A390020F76F</string>
+		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/02 Per-PixelLighting/PixelLighting.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>629 425 690 397 0 0 1440 878 </string>

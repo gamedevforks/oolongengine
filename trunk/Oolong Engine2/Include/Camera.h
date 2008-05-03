@@ -16,6 +16,6 @@ subject to the following restrictions:
 #define CAMERA_H_
 
 
-#include "../Renderer/Camera/ThirdPersonCamera.h"
+#include "../Renderer/Camera/RotateObject.h"
 
 #endif

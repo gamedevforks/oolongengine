@@ -15,6 +15,6 @@ subject to the following restrictions:
 #ifndef TOUCHSCREENDEVICE_H_
 #define TOUCHSCREENDEVICE_H_
 
-#include "../Input/TouchScreen/TouchScreen.h"
+#include "../Input/TouchScreen/RotateObject.h"
 
 #endif

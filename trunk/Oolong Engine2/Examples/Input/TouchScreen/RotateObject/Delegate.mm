@@ -8,7 +8,7 @@
 
 #import "App.h"
 #import "Delegate.h"
-#include "Camera.h"
+#include "TouchScreen.h"
 
 //CONSTANTS:
 #define kFPS			30.0

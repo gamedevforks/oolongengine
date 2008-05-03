@@ -22,7 +22,7 @@ subject to the following restrictions:
 #include "GraphicsDevice.h"
 #include "UI.h"
 #include "Macros.h"
-#include "Camera.h"
+#include "TouchScreen.h"
 
 #include <stdio.h>
 #include <sys/time.h>

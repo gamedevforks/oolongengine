@@ -100,18 +100,24 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 231523939;
-			PBXWorkspaceStateSaveDate = 231523939;
+			PBXPerProjectTemplateStateSaveDate = 231525851;
+			PBXWorkspaceStateSaveDate = 231525851;
 		};
 		perUserProjectItems = {
-			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
-			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
-			799954D00DCCC9870020F76F /* PBXTextBookmark */ = 799954D00DCCC9870020F76F /* PBXTextBookmark */;
-			799954D10DCCC9870020F76F /* PBXTextBookmark */ = 799954D10DCCC9870020F76F /* PBXTextBookmark */;
-			799954D20DCCC9870020F76F /* PBXBookmark */ = 799954D20DCCC9870020F76F /* PBXBookmark */;
-			799954D30DCCC9870020F76F /* PBXTextBookmark */ = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
-			799954D40DCCC9870020F76F /* PBXTextBookmark */ = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
-			799954D50DCCC9870020F76F /* PBXTextBookmark */ = 799954D50DCCC9870020F76F /* PBXTextBookmark */;
+			7925D2B30DC38CA400EC1BDC = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
+			7925D2B50DC38CA400EC1BDC = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
+			799954D00DCCC9870020F76F = 799954D00DCCC9870020F76F /* PBXTextBookmark */;
+			799954D10DCCC9870020F76F = 799954D10DCCC9870020F76F /* PBXTextBookmark */;
+			799954D20DCCC9870020F76F = 799954D20DCCC9870020F76F /* PBXBookmark */;
+			799954D30DCCC9870020F76F = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
+			799954D40DCCC9870020F76F = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
+			799954D50DCCC9870020F76F = 799954D50DCCC9870020F76F /* PBXTextBookmark */;
+			799954EB0DCCCDF30020F76F /* PBXTextBookmark */ = 799954EB0DCCCDF30020F76F /* PBXTextBookmark */;
+			799954EC0DCCCDF30020F76F /* PBXTextBookmark */ = 799954EC0DCCCDF30020F76F /* PBXTextBookmark */;
+			799954EE0DCCCDF40020F76F /* PBXTextBookmark */ = 799954EE0DCCCDF40020F76F /* PBXTextBookmark */;
+			799954EF0DCCCDF40020F76F /* PBXTextBookmark */ = 799954EF0DCCCDF40020F76F /* PBXTextBookmark */;
+			799954F00DCCCDF40020F76F /* PBXTextBookmark */ = 799954F00DCCCDF40020F76F /* PBXTextBookmark */;
+			799954F10DCCCDF40020F76F /* PBXTextBookmark */ = 799954F10DCCCDF40020F76F /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -217,15 +223,14 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1470, 294}}";
 			sepNavSelRange = "{973, 45}";
-			sepNavVisRange = "{491, 527}";
-			sepNavWindowFrame = "{{15, 103}, {1196, 770}}";
+			sepNavVisRange = "{0, 1025}";
 		};
 	};
 	799954CC0DCCC9200020F76F /* RotateObject.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 2590}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2128}}";
 			sepNavSelRange = "{124, 0}";
-			sepNavVisRange = "{4348, 380}";
+			sepNavVisRange = "{4317, 411}";
 		};
 	};
 	799954D00DCCC9870020F76F /* PBXTextBookmark */ = {
@@ -281,6 +286,62 @@
 		rType = 0;
 		vrLen = 380;
 		vrLoc = 4348;
+	};
+	799954EB0DCCCDF30020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: ../Renderer/Camera/RotateObject.h: No such file or directory";
+		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		rLen = 1;
+		rLoc = 18;
+		rType = 1;
+	};
+	799954EC0DCCCDF30020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		name = "Camera.h: 19";
+		rLen = 45;
+		rLoc = 973;
+		rType = 0;
+		vrLen = 534;
+		vrLoc = 491;
+	};
+	799954EE0DCCCDF40020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+		name = "RotateObject.mm: 4";
+		rLen = 0;
+		rLoc = 124;
+		rType = 0;
+		vrLen = 411;
+		vrLoc = 4317;
+	};
+	799954EF0DCCCDF40020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: ../Renderer/Camera/RotateObject.h: No such file or directory";
+		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		rLen = 1;
+		rLoc = 18;
+		rType = 1;
+	};
+	799954F00DCCCDF40020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+		name = "RotateObject.mm: 4";
+		rLen = 0;
+		rLoc = 124;
+		rType = 0;
+		vrLen = 411;
+		vrLoc = 4317;
+	};
+	799954F10DCCCDF40020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		name = "Camera.h: 19";
+		rLen = 45;
+		rLoc = 973;
+		rType = 0;
+		vrLen = 1025;
+		vrLoc = 0;
 	};
 	79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */ = {
 		uiCtxt = {

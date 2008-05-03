@@ -19,7 +19,7 @@
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
 		7925D1270DC1B5C600EC1BDC /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7925D1210DC1B5C600EC1BDC /* ResourceFile.cpp */; };
 		7925D1280DC1B5C600EC1BDC /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7925D1230DC1B5C600EC1BDC /* Streaming.cpp */; };
-		799954B90DCCC6850020F76F /* RotateObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 799954B80DCCC6850020F76F /* RotateObject.mm */; };
+		799954CD0DCCC9200020F76F /* RotateObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */; };
 		79C65FA90DBA69B4009DA546 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F750DBA69B4009DA546 /* FixedPoint.cpp */; };
 		79C65FAA0DBA69B4009DA546 /* MatrixF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */; };
 		79C65FAB0DBA69B4009DA546 /* MatrixX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F7B0DBA69B4009DA546 /* MatrixX.cpp */; };
@@ -50,8 +50,8 @@
 		7925D1220DC1B5C600EC1BDC /* ResourceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceFile.h; sourceTree = "<group>"; };
 		7925D1230DC1B5C600EC1BDC /* Streaming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Streaming.cpp; sourceTree = "<group>"; };
 		7925D1240DC1B5C600EC1BDC /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Streaming.h; sourceTree = "<group>"; };
-		799954B70DCCC6850020F76F /* RotateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateObject.h; sourceTree = "<group>"; };
-		799954B80DCCC6850020F76F /* RotateObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RotateObject.mm; sourceTree = "<group>"; };
+		799954CB0DCCC9200020F76F /* RotateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateObject.h; sourceTree = "<group>"; };
+		799954CC0DCCC9200020F76F /* RotateObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RotateObject.mm; sourceTree = "<group>"; };
 		79C65F750DBA69B4009DA546 /* FixedPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedPoint.cpp; sourceTree = "<group>"; };
 		79C65F760DBA69B4009DA546 /* FixedPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPoint.h; sourceTree = "<group>"; };
 		79C65F770DBA69B4009DA546 /* FixedPointAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPointAPI.h; sourceTree = "<group>"; };
@@ -153,6 +153,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				799954CA0DCCC9200020F76F /* TouchScreen */,
 				7925D11F0DC1B5C600EC1BDC /* Resource */,
 				79C65FBE0DBA69F4009DA546 /* Application */,
 				79C65F740DBA69B4009DA546 /* Math */,
@@ -179,6 +180,16 @@
 			);
 			name = Resource;
 			path = ../../../../Renderer/Resource;
+			sourceTree = SOURCE_ROOT;
+		};
+		799954CA0DCCC9200020F76F /* TouchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				799954CB0DCCC9200020F76F /* RotateObject.h */,
+				799954CC0DCCC9200020F76F /* RotateObject.mm */,
+			);
+			name = TouchScreen;
+			path = ../../../../Input/TouchScreen;
 			sourceTree = SOURCE_ROOT;
 		};
 		79C65F740DBA69B4009DA546 /* Math */ = {
@@ -213,8 +224,6 @@
 		79C65F810DBA69B4009DA546 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				799954B70DCCC6850020F76F /* RotateObject.h */,
-				799954B80DCCC6850020F76F /* RotateObject.mm */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -337,7 +346,7 @@
 				791406400DBAD75200C9A379 /* Delegate.mm in Sources */,
 				7925D1270DC1B5C600EC1BDC /* ResourceFile.cpp in Sources */,
 				7925D1280DC1B5C600EC1BDC /* Streaming.cpp in Sources */,
-				799954B90DCCC6850020F76F /* RotateObject.mm in Sources */,
+				799954CD0DCCC9200020F76F /* RotateObject.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

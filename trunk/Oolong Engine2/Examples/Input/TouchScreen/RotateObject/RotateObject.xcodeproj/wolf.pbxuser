@@ -104,10 +104,14 @@
 			PBXWorkspaceStateSaveDate = 231523939;
 		};
 		perUserProjectItems = {
-			7925D2B30DC38CA400EC1BDC = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
-			7925D2B50DC38CA400EC1BDC = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
-			7925D2F80DC4D5C200EC1BDC = 7925D2F80DC4D5C200EC1BDC /* PBXTextBookmark */;
-			7999547C0DCCC1C00020F76F = 7999547C0DCCC1C00020F76F /* PBXTextBookmark */;
+			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
+			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
+			799954D00DCCC9870020F76F /* PBXTextBookmark */ = 799954D00DCCC9870020F76F /* PBXTextBookmark */;
+			799954D10DCCC9870020F76F /* PBXTextBookmark */ = 799954D10DCCC9870020F76F /* PBXTextBookmark */;
+			799954D20DCCC9870020F76F /* PBXBookmark */ = 799954D20DCCC9870020F76F /* PBXBookmark */;
+			799954D30DCCC9870020F76F /* PBXTextBookmark */ = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
+			799954D40DCCC9870020F76F /* PBXTextBookmark */ = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
+			799954D50DCCC9870020F76F /* PBXTextBookmark */ = 799954D50DCCC9870020F76F /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -163,9 +167,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 1834}}";
-			sepNavSelRange = "{2155, 0}";
-			sepNavVisRange = "{0, 1052}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2366}}";
+			sepNavSelRange = "{4133, 0}";
+			sepNavVisRange = "{3384, 843}";
 			sepNavWindowFrame = "{{50, 320}, {750, 558}}";
 		};
 	};
@@ -204,7 +208,27 @@
 		vrLen = 735;
 		vrLoc = 0;
 	};
-	7925D2F80DC4D5C200EC1BDC /* PBXTextBookmark */ = {
+	799954BE0DCCC6C50020F76F /* Camera.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Camera.h;
+		path = /Users/wolf/Desktop/OolongEngine2SVN/Examples/Input/TouchScreen/RotateObject/../../../../Include/Camera.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 294}}";
+			sepNavSelRange = "{973, 45}";
+			sepNavVisRange = "{491, 527}";
+			sepNavWindowFrame = "{{15, 103}, {1196, 770}}";
+		};
+	};
+	799954CC0DCCC9200020F76F /* RotateObject.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2590}}";
+			sepNavSelRange = "{124, 0}";
+			sepNavVisRange = "{4348, 380}";
+		};
+	};
+	799954D00DCCC9870020F76F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 85";
@@ -214,15 +238,49 @@
 		vrLen = 1052;
 		vrLoc = 0;
 	};
-	7999547C0DCCC1C00020F76F /* PBXTextBookmark */ = {
+	799954D10DCCC9870020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		name = "Camera.h: 19";
+		rLen = 0;
+		rLoc = 1014;
+		rType = 0;
+		vrLen = 1018;
+		vrLoc = 0;
+	};
+	799954D20DCCC9870020F76F /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+	};
+	799954D30DCCC9870020F76F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 85";
 		rLen = 0;
 		rLoc = 2155;
 		rType = 0;
-		vrLen = 1027;
+		vrLen = 1052;
 		vrLoc = 0;
+	};
+	799954D40DCCC9870020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		name = "Camera.h: 19";
+		rLen = 0;
+		rLoc = 1014;
+		rType = 0;
+		vrLen = 1018;
+		vrLoc = 0;
+	};
+	799954D50DCCC9870020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+		name = "RotateObject.mm: 4";
+		rLen = 0;
+		rLoc = 124;
+		rType = 0;
+		vrLen = 380;
+		vrLoc = 4348;
 	};
 	79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */ = {
 		uiCtxt = {

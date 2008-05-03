@@ -159,7 +159,7 @@ bool CShell::RenderScene()
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
 	// show text on the display
-	AppDisplayText->DisplayDefaultTitle("Polar Camera with TouchScreen", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("Rotate, Move and Scale Object with TouchScreen", "", eDisplayTextLogoIMG);
 	
 	AppDisplayText->Flush();	
 	

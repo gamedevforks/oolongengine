@@ -134,7 +134,8 @@ bool CShell::InitView()
 
 	// Finally load matrix
 	glMultMatrixf((GLfloat*)matrix);
-		
+	
+	
 	// rotate teapot
 	glRotatef(90.0, 0.0, 0.0, 1.0);
 
@@ -161,8 +162,12 @@ bool CShell::UpdateScene()
 		time = currTime;
 		frames = 0;
 	}
-
-
+	
+	double AccelerometerVector[3];
+	[gAccel GetAccelerometerVector:(double *) AccelerometerVector];
+	
+	AppDisplayText->DisplayText(0, 12, 0.4f, RGBA(255,255,255,255), "Accelerometer Vector: %3.2f, %3.2f, %3.2f", AccelerometerVector[0], AccelerometerVector[1], AccelerometerVector[2]);
+	
 	return true;
 }
 

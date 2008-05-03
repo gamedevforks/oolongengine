@@ -30,7 +30,7 @@ subject to the following restrictions:
 
 - (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)Acceleration
 {
-	//Use a basic low-pass filter to only keep the gravity in the accelerometer values
+	// use a basic low-pass filter to only keep the gravity in the accelerometer values
 	_accelerometer[0] = Acceleration.x * FILTERINGFACTOR + _accelerometer[0] * (1.0 - FILTERINGFACTOR);
 	_accelerometer[1] = Acceleration.y * FILTERINGFACTOR + _accelerometer[1] * (1.0 - FILTERINGFACTOR);
 	_accelerometer[2] = Acceleration.z * FILTERINGFACTOR + _accelerometer[2] * (1.0 - FILTERINGFACTOR);
@@ -66,9 +66,12 @@ subject to the following restrictions:
 	matrix[10] = matrix[0] * matrix[5] - matrix[1] * matrix[4];
 }
 
-- (void) GetAccelerometerValue:(UIAccelerationValue *) AccelValue;
+- (void) GetAccelerometerVector:(double *) AccelValue;
 {
-	AccelValue = _accelerometer;
+	// the vector is read-only, so make a copy of it and do not expose a pointer to it
+	AccelValue[0] = (double)_accelerometer[0];
+	AccelValue[1] = (double)_accelerometer[1];
+	AccelValue[2] = (double)_accelerometer[2];
 }
 
 @end

@@ -22,5 +22,5 @@ subject to the following restrictions:
 - (void) SetupAccelerometer: (float) AcclerometerFrequency;
 - (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)Acceleration;
 - (void) GetAccelerometerMatrix:(GLfloat *) matrix;
-- (void) GetAccelerometerValue:(UIAccelerationValue *) AccelValue;
+- (void) GetAccelerometerVector:(double *) AccelValue;
 @end

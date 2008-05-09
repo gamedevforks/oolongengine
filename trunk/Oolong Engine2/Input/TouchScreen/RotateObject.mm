@@ -29,9 +29,11 @@ void UpdatePolarCamera()
 
 @implementation EAGLCameraView
 
-- (id) initWithFrame:(CGRect)frame pixelFormat:(EAGLPixelFormat)format
+//- (id) initWithFrame:(CGRect)frame
+- (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained
+//- (id) initWithFrame:(CGRect)frame pixelFormat:(EAGLPixelFormat)format depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO
 {
-	if((self = [super initWithFrame:frame pixelFormat:format])) 
+	if((self = [super initWithFrame:(CGRect)frame pixelFormat:(GLuint)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained])) 
 	{
 		[self setMultipleTouchEnabled:YES];
 

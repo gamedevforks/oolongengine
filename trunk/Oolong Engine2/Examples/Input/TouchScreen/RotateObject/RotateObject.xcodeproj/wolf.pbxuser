@@ -24,6 +24,7 @@
 			1D6058900D05DD3D006BFB54 /* RotateObject */,
 		);
 		breakpoints = (
+			79AAE9B50DD415A900CC242E /* Delegate.mm:51 */,
 		);
 		codeSenseManager = 79235BFD0DAD053A00F918F8 /* Code sense */;
 		executables = (
@@ -59,7 +60,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					418,
+					614,
 					20,
 					48,
 					43,
@@ -100,35 +101,48 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 231525851;
-			PBXWorkspaceStateSaveDate = 231525851;
+			PBXPerProjectTemplateStateSaveDate = 231828516;
+			PBXWorkspaceStateSaveDate = 231828516;
 		};
 		perUserProjectItems = {
-			7925D2B30DC38CA400EC1BDC = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
-			7925D2B50DC38CA400EC1BDC = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
-			799954D00DCCC9870020F76F = 799954D00DCCC9870020F76F /* PBXTextBookmark */;
-			799954D10DCCC9870020F76F = 799954D10DCCC9870020F76F /* PBXTextBookmark */;
-			799954D20DCCC9870020F76F = 799954D20DCCC9870020F76F /* PBXBookmark */;
-			799954D30DCCC9870020F76F = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
-			799954D40DCCC9870020F76F = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
-			799954D50DCCC9870020F76F = 799954D50DCCC9870020F76F /* PBXTextBookmark */;
-			799954EB0DCCCDF30020F76F /* PBXTextBookmark */ = 799954EB0DCCCDF30020F76F /* PBXTextBookmark */;
-			799954EC0DCCCDF30020F76F /* PBXTextBookmark */ = 799954EC0DCCCDF30020F76F /* PBXTextBookmark */;
-			799954EE0DCCCDF40020F76F /* PBXTextBookmark */ = 799954EE0DCCCDF40020F76F /* PBXTextBookmark */;
-			799954EF0DCCCDF40020F76F /* PBXTextBookmark */ = 799954EF0DCCCDF40020F76F /* PBXTextBookmark */;
+			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
+			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
+			799954D00DCCC9870020F76F /* PBXTextBookmark */ = 799954D00DCCC9870020F76F /* PBXTextBookmark */;
+			799954D30DCCC9870020F76F /* PBXTextBookmark */ = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
+			799954D40DCCC9870020F76F /* PBXTextBookmark */ = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
 			799954F00DCCCDF40020F76F /* PBXTextBookmark */ = 799954F00DCCCDF40020F76F /* PBXTextBookmark */;
-			799954F10DCCCDF40020F76F /* PBXTextBookmark */ = 799954F10DCCCDF40020F76F /* PBXTextBookmark */;
+			799955080DCCCF390020F76F /* PBXTextBookmark */ = 799955080DCCCF390020F76F /* PBXTextBookmark */;
+			7999550C0DCCCF390020F76F /* PBXTextBookmark */ = 7999550C0DCCCF390020F76F /* PBXTextBookmark */;
+			79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = 79AAE9C90DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9CA0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CA0DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9CB0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CB0DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9CC0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CC0DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9CD0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CD0DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9CE0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CE0DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9CF0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CF0DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9D00DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D00DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9D10DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D10DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9D20DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D20DD4175800CC242E /* PBXTextBookmark */;
+			79AAE9D30DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D30DD4175800CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
 		};
 	};
+	7914063E0DBAD75200C9A379 /* Delegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {596, 286}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 247}";
+			sepNavWindowFrame = "{{15, 103}, {1196, 770}}";
+		};
+	};
 	7914063F0DBAD75200C9A379 /* Delegate.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1137, 1036}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 826}";
-			sepNavWindowFrame = "{{15, 103}, {1196, 770}}";
+			sepNavIntBoundsRect = "{{0, 0}, {870, 1050}}";
+			sepNavSelRange = "{1023, 58}";
+			sepNavVisRange = "{566, 955}";
+			sepNavWindowFrame = "{{270, 117}, {1161, 688}}";
 		};
 	};
 	79235BF70DAD051C00F918F8 /* RotateObject */ = {
@@ -174,9 +188,9 @@
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1470, 2366}}";
-			sepNavSelRange = "{4133, 0}";
-			sepNavVisRange = "{3384, 843}";
-			sepNavWindowFrame = "{{50, 320}, {750, 558}}";
+			sepNavSelRange = "{1009, 0}";
+			sepNavVisRange = "{0, 1502}";
+			sepNavWindowFrame = "{{50, 103}, {1106, 775}}";
 		};
 	};
 	7925D1210DC1B5C600EC1BDC /* ResourceFile.cpp */ = {
@@ -220,17 +234,12 @@
 		name = Camera.h;
 		path = /Users/wolf/Desktop/OolongEngine2SVN/Examples/Input/TouchScreen/RotateObject/../../../../Include/Camera.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 294}}";
-			sepNavSelRange = "{973, 45}";
-			sepNavVisRange = "{0, 1025}";
-		};
 	};
 	799954CC0DCCC9200020F76F /* RotateObject.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 2128}}";
-			sepNavSelRange = "{124, 0}";
-			sepNavVisRange = "{4317, 411}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2618}}";
+			sepNavSelRange = "{1569, 0}";
+			sepNavVisRange = "{1003, 746}";
 		};
 	};
 	799954D00DCCC9870020F76F /* PBXTextBookmark */ = {
@@ -238,31 +247,17 @@
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 85";
 		rLen = 0;
-		rLoc = 2155;
+		rLoc = 2160;
 		rType = 0;
 		vrLen = 1052;
 		vrLoc = 0;
-	};
-	799954D10DCCC9870020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
-		name = "Camera.h: 19";
-		rLen = 0;
-		rLoc = 1014;
-		rType = 0;
-		vrLen = 1018;
-		vrLoc = 0;
-	};
-	799954D20DCCC9870020F76F /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
 	};
 	799954D30DCCC9870020F76F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 85";
 		rLen = 0;
-		rLoc = 2155;
+		rLoc = 2160;
 		rType = 0;
 		vrLen = 1052;
 		vrLoc = 0;
@@ -277,52 +272,6 @@
 		vrLen = 1018;
 		vrLoc = 0;
 	};
-	799954D50DCCC9870020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
-		name = "RotateObject.mm: 4";
-		rLen = 0;
-		rLoc = 124;
-		rType = 0;
-		vrLen = 380;
-		vrLoc = 4348;
-	};
-	799954EB0DCCCDF30020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "error: ../Renderer/Camera/RotateObject.h: No such file or directory";
-		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
-		rLen = 1;
-		rLoc = 18;
-		rType = 1;
-	};
-	799954EC0DCCCDF30020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
-		name = "Camera.h: 19";
-		rLen = 45;
-		rLoc = 973;
-		rType = 0;
-		vrLen = 534;
-		vrLoc = 491;
-	};
-	799954EE0DCCCDF40020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
-		name = "RotateObject.mm: 4";
-		rLen = 0;
-		rLoc = 124;
-		rType = 0;
-		vrLen = 411;
-		vrLoc = 4317;
-	};
-	799954EF0DCCCDF40020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "error: ../Renderer/Camera/RotateObject.h: No such file or directory";
-		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
-		rLen = 1;
-		rLoc = 18;
-		rType = 1;
-	};
 	799954F00DCCCDF40020F76F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
@@ -333,15 +282,175 @@
 		vrLen = 411;
 		vrLoc = 4317;
 	};
-	799954F10DCCCDF40020F76F /* PBXTextBookmark */ = {
+	799955080DCCCF390020F76F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 799954BE0DCCC6C50020F76F /* Camera.h */;
+		fRef = 799955090DCCCF390020F76F /* TouchScreen.h */;
+		name = "TouchScreen.h: 18";
+		rLen = 0;
+		rLoc = 1037;
+		rType = 0;
+		vrLen = 1048;
+		vrLoc = 0;
+	};
+	799955090DCCCF390020F76F /* TouchScreen.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = TouchScreen.h;
+		path = /Users/wolf/Desktop/OolongEngine2SVN/Include/TouchScreen.h;
+		sourceTree = "<absolute>";
+	};
+	7999550C0DCCCF390020F76F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7999550D0DCCCF390020F76F /* TouchScreen.h */;
+		name = "TouchScreen.h: 18";
+		rLen = 0;
+		rLoc = 1037;
+		rType = 0;
+		vrLen = 1048;
+		vrLoc = 0;
+	};
+	7999550D0DCCCF390020F76F /* TouchScreen.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = TouchScreen.h;
+		path = /Users/wolf/Desktop/OolongEngine2SVN/Include/TouchScreen.h;
+		sourceTree = "<absolute>";
+	};
+	7999550F0DCCCF390020F76F /* Camera.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Camera.h;
+		path = /Users/wolf/Desktop/OolongEngine2SVN/Examples/Input/TouchScreen/RotateObject/../../../../Include/Camera.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 294}}";
+			sepNavSelRange = "{975, 45}";
+			sepNavVisRange = "{0, 1027}";
+		};
+	};
+	79AAE9B50DD415A900CC242E /* Delegate.mm:51 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 7914063F0DBAD75200C9A379 /* Delegate.mm */;
+		functionName = "-applicationDidFinishLaunching:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 51;
+		location = RotateObject;
+		modificationTime = 232003387.717455;
+		state = 2;
+	};
+	79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7999550F0DCCCF390020F76F /* Camera.h */;
 		name = "Camera.h: 19";
 		rLen = 45;
-		rLoc = 973;
+		rLoc = 975;
 		rType = 0;
-		vrLen = 1025;
+		vrLen = 1027;
 		vrLoc = 0;
+	};
+	79AAE9CA0DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79C65F8A0DBA69B4009DA546 /* EAGLView.m */;
+		name = "EAGLView.m: 60";
+		rLen = 0;
+		rLoc = 3206;
+		rType = 0;
+		vrLen = 569;
+		vrLoc = 3330;
+	};
+	79AAE9CB0DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7914063E0DBAD75200C9A379 /* Delegate.h */;
+		name = "Delegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 247;
+		vrLoc = 0;
+	};
+	79AAE9CC0DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7914063F0DBAD75200C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 49";
+		rLen = 58;
+		rLoc = 1023;
+		rType = 0;
+		vrLen = 955;
+		vrLoc = 566;
+	};
+	79AAE9CD0DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+		rLen = 0;
+		rLoc = 37;
+		rType = 1;
+	};
+	79AAE9CE0DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7999550F0DCCCF390020F76F /* Camera.h */;
+		name = "Camera.h: 19";
+		rLen = 45;
+		rLoc = 975;
+		rType = 0;
+		vrLen = 1027;
+		vrLoc = 0;
+	};
+	79AAE9CF0DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+		name = "RotateObject.mm: 32";
+		rLen = 130;
+		rLoc = 1304;
+		rType = 0;
+		vrLen = 304;
+		vrLoc = 1016;
+	};
+	79AAE9D00DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79C65F8A0DBA69B4009DA546 /* EAGLView.m */;
+		name = "EAGLView.m: 60";
+		rLen = 0;
+		rLoc = 3206;
+		rType = 0;
+		vrLen = 569;
+		vrLoc = 3330;
+	};
+	79AAE9D10DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7914063E0DBAD75200C9A379 /* Delegate.h */;
+		name = "Delegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 247;
+		vrLoc = 0;
+	};
+	79AAE9D20DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7914063F0DBAD75200C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 49";
+		rLen = 58;
+		rLoc = 1023;
+		rType = 0;
+		vrLen = 955;
+		vrLoc = 566;
+	};
+	79AAE9D30DD4175800CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */;
+		name = "RotateObject.mm: 38";
+		rLen = 0;
+		rLoc = 1577;
+		rType = 0;
+		vrLen = 920;
+		vrLoc = 1871;
 	};
 	79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */ = {
 		uiCtxt = {
@@ -352,18 +461,10 @@
 	};
 	79C65F8A0DBA69B4009DA546 /* EAGLView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1102, 3066}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{4078, 711}";
+			sepNavIntBoundsRect = "{{0, 0}, {1380, 3108}}";
+			sepNavSelRange = "{6104, 122}";
+			sepNavVisRange = "{5595, 1207}";
 			sepNavWindowFrame = "{{38, 164}, {1161, 688}}";
-		};
-	};
-	79C65F8C0DBA69B4009DA546 /* Texture.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 8764}}";
-			sepNavSelRange = "{0, 935}";
-			sepNavVisRange = "{0, 1220}";
-			sepNavWindowFrame = "{{50, 320}, {750, 558}}";
 		};
 	};
 	79C65FBF0DBA69F4009DA546 /* Application.h */ = {

@@ -15,10 +15,10 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = i386;
+		activeArchitecture = armv6;
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* POD */;
-		activeSDKForArchive = iphonesimulator2.0;
+		activeSDKForArchive = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* POD */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* POD */,
@@ -76,8 +76,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 231348821;
-			PBXWorkspaceStateSaveDate = 231348821;
+			PBXPerProjectTemplateStateSaveDate = 231828186;
+			PBXWorkspaceStateSaveDate = 231828186;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -155,9 +155,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 5992}}";
-			sepNavSelRange = "{4610, 0}";
-			sepNavVisRange = "{10385, 1186}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 3668}}";
+			sepNavSelRange = "{11063, 0}";
+			sepNavVisRange = "{10955, 305}";
 			sepNavWindowFrame = "{{15, 91}, {883, 787}}";
 		};
 	};
@@ -175,13 +175,6 @@
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{1822, 2729}";
 			sepNavWindowFrame = "{{15, 86}, {883, 792}}";
-		};
-	};
-	79EA04430DAFC7950038ED3D /* Texture.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {645, 8708}}";
-			sepNavSelRange = "{375, 22}";
-			sepNavVisRange = "{0, 472}";
 		};
 	};
 	79EA04440DAFC7950038ED3D /* Texture.h */ = {

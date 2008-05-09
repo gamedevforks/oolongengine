@@ -45,8 +45,9 @@ static CShell *shell = NULL;
 	_window = [[UIWindow alloc] initWithFrame:rect];
 	
 	// create the OpenGL view and add it to the window
-	_glView = [[EAGLCameraView alloc] initWithFrame:rect];
-	
+//	_glView = [[EAGLCameraView alloc] initWithFrame:rect];
+	_glView = [[EAGLCameraView alloc] initWithFrame:rect pixelFormat:GL_RGB565_OES depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO];
+
 	[_window addSubview:_glView];
 
 	// show the window

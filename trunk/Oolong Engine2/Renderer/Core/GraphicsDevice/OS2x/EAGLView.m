@@ -19,7 +19,7 @@ File: EAGLView.m
 Abstract: Convenience class that wraps the CAEAGLLayer from CoreAnimation into a
 UIView subclass.
 
-Version: 1.3
+Version: 1.4
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -70,7 +70,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 @implementation EAGLView
 
-@synthesize delegate=_delegate, autoresizesEAGLSurface=_autoresize, EAGLSurfaceSize=_size;
+@synthesize delegate=_delegate, autoresizesSurface=_autoresize, surfaceSize=_size, framebuffer = _framebuffer, pixelFormat = _format, depthFormat = _depthFormat, context = _context;
 
 + (Class) layerClass
 {
@@ -80,23 +80,52 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 - (BOOL) _createSurface
 {
 	CAEAGLLayer*			eaglLayer = (CAEAGLLayer*)[self layer];
+	CGSize					newSize;
+	GLuint					oldRenderbuffer;
+	GLuint					oldFramebuffer;
 	
-	if(!CALL_EAGL_FUNCTION(eaglCreateWindowSurface, _format, [eaglLayer nativeWindow], &_surface)) {
-		_surface = NULL;
+	if(![EAGLContext setCurrentContext:_context]) {
 		return NO;
 	}
 	
-	if(!CALL_EAGL_FUNCTION(eaglMakeCurrent, _surface, _context)) {
-		eaglDestroySurface(_surface);
-		_surface = NULL;
+	newSize = [eaglLayer bounds].size;
+	newSize.width = roundf(newSize.width);
+	newSize.height = roundf(newSize.height);
+	
+	glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint *) &oldRenderbuffer);
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES, (GLint *) &oldFramebuffer);
+	
+	glGenRenderbuffersOES(1, &_renderbuffer);
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderbuffer);
+	
+	if(![_context renderbufferStorage:GL_RENDERBUFFER_OES fromView:eaglLayer]) {
+		glDeleteRenderbuffersOES(1, &_renderbuffer);
+		glBindRenderbufferOES(GL_RENDERBUFFER_BINDING_OES, oldRenderbuffer);
 		return NO;
 	}
 	
-	_size = [eaglLayer bounds].size;
-	_size.width = roundf(_size.width);
-	_size.height = roundf(_size.height);
+	glGenFramebuffersOES(1, &_framebuffer);
+	glBindFramebufferOES(GL_FRAMEBUFFER_OES, _framebuffer);
+	glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, _renderbuffer);
+	if (_depthFormat) {
+		glGenRenderbuffersOES(1, &_depthBuffer);
+		glBindRenderbufferOES(GL_RENDERBUFFER_OES, _depthBuffer);
+		glRenderbufferStorageOES(GL_RENDERBUFFER_OES, _depthFormat, newSize.width, newSize.height);
+		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, _depthBuffer);
+	}
+
+	_size = newSize;
+	if(!_hasBeenCurrent) {
+		glViewport(0, 0, newSize.width, newSize.height);
+		glScissor(0, 0, newSize.width, newSize.height);
+		_hasBeenCurrent = YES;
+	}
+	else {
+		glBindFramebufferOES(GL_FRAMEBUFFER_OES, oldFramebuffer);
+	}
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, oldRenderbuffer);
 	
-	glViewport(0, 0, _size.width, _size.height);
+	CHECK_GL_ERROR();
 	
 	[_delegate didResizeEAGLSurfaceForView:self];
 	
@@ -105,27 +134,47 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 - (void) _destroySurface
 {
-	if(_surface) {
-		if(eaglGetCurrentSurface() == _surface)
-		CALL_EAGL_FUNCTION(eaglMakeCurrent, NULL, NULL);
-		
-		eaglDestroySurface(_surface);
-		_surface = NULL;
+	EAGLContext *oldContext = [EAGLContext currentContext];
+	
+	if (oldContext != _context)
+		[EAGLContext setCurrentContext:_context];
+	
+	if(_depthFormat) {
+		glDeleteRenderbuffersOES(1, &_depthBuffer);
+		_depthBuffer = 0;
 	}
+	
+	glDeleteRenderbuffersOES(1, &_renderbuffer);
+	_renderbuffer = 0;
+
+	glDeleteFramebuffersOES(1, &_framebuffer);
+	_framebuffer = 0;
+	
+	if (oldContext != _context)
+		[EAGLContext setCurrentContext:oldContext];
 }
 
 - (id) initWithFrame:(CGRect)frame
 {
-	return [self initWithFrame:frame pixelFormat:kEAGLPixelFormat_RGB565_D24];
+	return [self initWithFrame:frame pixelFormat:GL_RGB565_OES depthFormat:0 preserveBackbuffer:NO];
 }
 
-- (id) initWithFrame:(CGRect)frame pixelFormat:(EAGLPixelFormat)format
+- (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format 
+{
+	return [self initWithFrame:frame pixelFormat:format depthFormat:0 preserveBackbuffer:NO];
+}
+
+- (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained
 {
 	if((self = [super initWithFrame:frame])) {
+		CAEAGLLayer*			eaglLayer = (CAEAGLLayer*)[self layer];
+
+		[eaglLayer setSurfaceProperties:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:retained], EAGLViewPropertyRetainedBacking, [NSNumber numberWithUnsignedInt:format], EAGLViewPropertyColorFormat, nil]];
 		_format = format;
+		_depthFormat = depth;
 		
-		if(!CALL_EAGL_FUNCTION(eaglCreateContext, NULL, &_context)) {
-			_context = NULL;
+		_context = [[EAGLContext alloc] initWithAPI:EAGLRenderingAPI_GLES_1];
+		if(_context == nil) {
 			[self release];
 			return nil;
 		}
@@ -143,20 +192,10 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 {
 	[self _destroySurface];
 	
-	if(_context)
-	eaglDestroyContext(_context);
+	[_context release];
+	_context = nil;
 	
 	[super dealloc];
-}
-
-- (EAGLPixelFormat) EAGLPixelFormat
-{
-	return _format;
-}
-
-- (EAGLContext) EAGLContext
-{
-	return _context;
 }
 
 - (void) layoutSubviews
@@ -181,34 +220,50 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 - (void) setCurrentContext
 {
-	CALL_EAGL_FUNCTION(eaglMakeCurrent, _surface, _context);
+	if(![EAGLContext setCurrentContext:_context]) {
+		printf("Failed to set current context %p in %s\n", _context, __FUNCTION__);
+	}
 }
 
 - (BOOL) isCurrentContext
 {
-	return (eaglGetCurrentContext() == _context ? YES : NO);
+	return ([EAGLContext currentContext] == _context ? YES : NO);
 }
 
 - (void) clearCurrentContext
 {
-	CALL_EAGL_FUNCTION(eaglMakeCurrent, NULL, NULL);
+	if(![EAGLContext setCurrentContext:nil])
+		printf("Failed to clear current context in %s\n", __FUNCTION__);
 }
 
 - (void) swapBuffers
 {
+	EAGLContext *oldContext = [EAGLContext currentContext];
+	GLuint oldRenderbuffer;
+	
+	if(oldContext != _context)
+		[EAGLContext setCurrentContext:_context];
+	
 	CHECK_GL_ERROR();
 	
-	CALL_EAGL_FUNCTION(eaglSwapBuffers, _surface);
+	glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint *) &oldRenderbuffer);
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderbuffer);
+	
+	if(![_context presentRenderbuffer:GL_RENDERBUFFER_OES])
+		printf("Failed to swap renderbuffer in %s\n", __FUNCTION__);
+
+	if(oldContext != _context)
+		[EAGLContext setCurrentContext:oldContext];
 }
 
-- (CGPoint) convertPointFromViewToEAGLSurface:(CGPoint)point
+- (CGPoint) convertPointFromViewToSurface:(CGPoint)point
 {
 	CGRect				bounds = [self bounds];
 	
 	return CGPointMake((point.x - bounds.origin.x) / bounds.size.width * _size.width, (point.y - bounds.origin.y) / bounds.size.height * _size.height);
 }
 
-- (CGRect) convertRectFromViewToEAGLSurface:(CGRect)rect
+- (CGRect) convertRectFromViewToSurface:(CGRect)rect
 {
 	CGRect				bounds = [self bounds];
 	

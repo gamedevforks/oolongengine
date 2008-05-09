@@ -345,13 +345,13 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>799954700DCCBE1F0020F76F</string>
+										<string>79AAE9790DD16C0500CC242E</string>
 										<key>history</key>
 										<array>
 											<string>7925D2A60DC38C5E00EC1BDC</string>
 											<string>799954610DCCBCEF0020F76F</string>
 											<string>799954620DCCBCEF0020F76F</string>
-											<string>799954630DCCBCEF0020F76F</string>
+											<string>799954700DCCBE1F0020F76F</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -359,9 +359,6 @@
 											<string>799954640DCCBCEF0020F76F</string>
 											<string>799954650DCCBCEF0020F76F</string>
 											<string>799954660DCCBCEF0020F76F</string>
-											<string>799954670DCCBCEF0020F76F</string>
-											<string>799954680DCCBCEF0020F76F</string>
-											<string>799954690DCCBCEF0020F76F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -419,9 +416,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7999546B0DCCBCEF0020F76F</string>
+				<string>79AAE97A0DD16C0500CC242E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7999546C0DCCBCEF0020F76F</string>
+				<string>79AAE97B0DD16C0500CC242E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -555,10 +552,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7999546E0DCCBCEF0020F76F</string>
-		<string>7999546F0DCCBCEF0020F76F</string>
+		<string>79AAE9840DD16C0500CC242E</string>
+		<string>79AAE9850DD16C0500CC242E</string>
 		<string>1C78EAAD065D492600B07095</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Input/Accelerometer/Accelerometer.xcodeproj</string>
@@ -580,14 +576,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Accelerometer.m</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -643,7 +637,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799954200DCCB7980020F76F</string>
+				<string>79AAE97C0DD16C0500CC242E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -763,13 +757,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>799954210DCCB7980020F76F</string>
+				<string>79AAE97D0DD16C0500CC242E</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>799954220DCCB7980020F76F</string>
-				<string>799954230DCCB7980020F76F</string>
-				<string>799954240DCCB7980020F76F</string>
-				<string>799954250DCCB7980020F76F</string>
-				<string>799954260DCCB7980020F76F</string>
+				<string>79AAE97E0DD16C0500CC242E</string>
+				<string>79AAE97F0DD16C0500CC242E</string>
+				<string>79AAE9800DD16C0500CC242E</string>
+				<string>79AAE9810DD16C0500CC242E</string>
+				<string>79AAE9820DD16C0500CC242E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -923,7 +917,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>799954500DCCBAF00020F76F</string>
+				<string>79AAE9830DD16C0500CC242E</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

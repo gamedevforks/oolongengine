@@ -122,8 +122,8 @@
 		799953CD0DCAD14B0020F76F /* btGeometryUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799953580DCAD14B0020F76F /* btGeometryUtil.cpp */; };
 		799953CE0DCAD14B0020F76F /* btQuickprof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799953640DCAD14B0020F76F /* btQuickprof.cpp */; };
 		79A6EF910DB5A18200B35A2C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A6EF900DB5A18200B35A2C /* Default.png */; };
+		79AAE95F0DD16BAC00CC242E /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79AAE95E0DD16BAC00CC242E /* Texture.mm */; };
 		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
-		79EA04540DAFC7950038ED3D /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04430DAFC7950038ED3D /* Texture.cpp */; };
 		79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA044E0DAFC7950038ED3D /* DisplayText.cpp */; };
 		79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04500DAFC7950038ED3D /* DisplayTextAPI.cpp */; };
 		79EA049F0DAFCC980038ED3D /* BoneBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA048A0DAFCC980038ED3D /* BoneBatch.cpp */; };
@@ -403,10 +403,10 @@
 		7999536A0DCAD14B0020F76F /* btTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btTransformUtil.h; sourceTree = "<group>"; };
 		7999536B0DCAD14B0020F76F /* btVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btVector3.h; sourceTree = "<group>"; };
 		79A6EF900DB5A18200B35A2C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		79AAE95E0DD16BAC00CC242E /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		79EA04400DAFC7950038ED3D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		79EA04410DAFC7950038ED3D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
-		79EA04430DAFC7950038ED3D /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		79EA04440DAFC7950038ED3D /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		79EA044E0DAFC7950038ED3D /* DisplayText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayText.cpp; sourceTree = "<group>"; };
 		79EA044F0DAFC7950038ED3D /* DisplayText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayText.h; sourceTree = "<group>"; };
@@ -919,7 +919,7 @@
 			isa = PBXGroup;
 			children = (
 				79EA043F0DAFC7950038ED3D /* OS2x */,
-				79EA04430DAFC7950038ED3D /* Texture.cpp */,
+				79AAE95E0DD16BAC00CC242E /* Texture.mm */,
 				79EA04440DAFC7950038ED3D /* Texture.h */,
 			);
 			path = GraphicsDevice;
@@ -1043,7 +1043,6 @@
 				79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */,
 				79235D500DAD2BEA00F918F8 /* Application.mm in Sources */,
 				79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */,
-				79EA04540DAFC7950038ED3D /* Texture.cpp in Sources */,
 				79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */,
 				79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */,
 				79EA049F0DAFCC980038ED3D /* BoneBatch.cpp in Sources */,
@@ -1154,6 +1153,7 @@
 				799953CC0DCAD14B0020F76F /* btConvexHull.cpp in Sources */,
 				799953CD0DCAD14B0020F76F /* btGeometryUtil.cpp in Sources */,
 				799953CE0DCAD14B0020F76F /* btQuickprof.cpp in Sources */,
+				79AAE95F0DD16BAC00CC242E /* Texture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,12 +20,12 @@
 		7925D1270DC1B5C600EC1BDC /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7925D1210DC1B5C600EC1BDC /* ResourceFile.cpp */; };
 		7925D1280DC1B5C600EC1BDC /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7925D1230DC1B5C600EC1BDC /* Streaming.cpp */; };
 		799954CD0DCCC9200020F76F /* RotateObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 799954CC0DCCC9200020F76F /* RotateObject.mm */; };
+		79AAE98D0DD16C3500CC242E /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79AAE98C0DD16C3500CC242E /* Texture.mm */; };
 		79C65FA90DBA69B4009DA546 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F750DBA69B4009DA546 /* FixedPoint.cpp */; };
 		79C65FAA0DBA69B4009DA546 /* MatrixF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */; };
 		79C65FAB0DBA69B4009DA546 /* MatrixX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F7B0DBA69B4009DA546 /* MatrixX.cpp */; };
 		79C65FAC0DBA69B4009DA546 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F7D0DBA69B4009DA546 /* Transform.cpp */; };
 		79C65FAF0DBA69B4009DA546 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F8A0DBA69B4009DA546 /* EAGLView.m */; };
-		79C65FB00DBA69B4009DA546 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F8C0DBA69B4009DA546 /* Texture.cpp */; };
 		79C65FB10DBA69B4009DA546 /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F8F0DBA69B4009DA546 /* DisplayText.cpp */; };
 		79C65FB20DBA69B4009DA546 /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C65F910DBA69B4009DA546 /* DisplayTextAPI.cpp */; };
 		79C65FC40DBA69F4009DA546 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C65FC20DBA69F4009DA546 /* main.m */; };
@@ -52,6 +52,7 @@
 		7925D1240DC1B5C600EC1BDC /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Streaming.h; sourceTree = "<group>"; };
 		799954CB0DCCC9200020F76F /* RotateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateObject.h; sourceTree = "<group>"; };
 		799954CC0DCCC9200020F76F /* RotateObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RotateObject.mm; sourceTree = "<group>"; };
+		79AAE98C0DD16C3500CC242E /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		79C65F750DBA69B4009DA546 /* FixedPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedPoint.cpp; sourceTree = "<group>"; };
 		79C65F760DBA69B4009DA546 /* FixedPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPoint.h; sourceTree = "<group>"; };
 		79C65F770DBA69B4009DA546 /* FixedPointAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPointAPI.h; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		79C65F890DBA69B4009DA546 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		79C65F8A0DBA69B4009DA546 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		79C65F8B0DBA69B4009DA546 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
-		79C65F8C0DBA69B4009DA546 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		79C65F8D0DBA69B4009DA546 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		79C65F8F0DBA69B4009DA546 /* DisplayText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayText.cpp; sourceTree = "<group>"; };
 		79C65F900DBA69B4009DA546 /* DisplayText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayText.h; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				79C65F880DBA69B4009DA546 /* OS2x */,
-				79C65F8C0DBA69B4009DA546 /* Texture.cpp */,
+				79AAE98C0DD16C3500CC242E /* Texture.mm */,
 				79C65F8D0DBA69B4009DA546 /* Texture.h */,
 			);
 			path = GraphicsDevice;
@@ -339,7 +339,6 @@
 				79C65FAB0DBA69B4009DA546 /* MatrixX.cpp in Sources */,
 				79C65FAC0DBA69B4009DA546 /* Transform.cpp in Sources */,
 				79C65FAF0DBA69B4009DA546 /* EAGLView.m in Sources */,
-				79C65FB00DBA69B4009DA546 /* Texture.cpp in Sources */,
 				79C65FB10DBA69B4009DA546 /* DisplayText.cpp in Sources */,
 				79C65FB20DBA69B4009DA546 /* DisplayTextAPI.cpp in Sources */,
 				79C65FC40DBA69F4009DA546 /* main.m in Sources */,
@@ -347,6 +346,7 @@
 				7925D1270DC1B5C600EC1BDC /* ResourceFile.cpp in Sources */,
 				7925D1280DC1B5C600EC1BDC /* Streaming.cpp in Sources */,
 				799954CD0DCCC9200020F76F /* RotateObject.mm in Sources */,
+				79AAE98D0DD16C3500CC242E /* Texture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

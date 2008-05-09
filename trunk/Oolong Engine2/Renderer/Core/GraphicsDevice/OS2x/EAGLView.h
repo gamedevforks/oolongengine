@@ -19,7 +19,7 @@ File: EAGLView.h
 Abstract: Convenience class that wraps the CAEAGLLayer from CoreAnimation into a
 UIView subclass.
 
-Version: 1.3
+Version: 1.4
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -63,6 +63,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 #import <UIKit/UIKit.h>
 #import <OpenGLES/EAGL.h>
+#import <OpenGLES/EAGLDisplay.h>
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 
@@ -86,19 +87,28 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
 @interface EAGLView : UIView
 {
 @private
-	EAGLPixelFormat			_format;
+	GLuint					_format;
+	GLuint					_depthFormat;
 	BOOL					_autoresize;
-	EAGLContext				_context;
-	EAGLSurface				_surface;
+	EAGLContext				*_context;
+	GLuint					_framebuffer;
+	GLuint					_renderbuffer;
+	GLuint					_depthBuffer;
 	CGSize					_size;
+	BOOL					_hasBeenCurrent;
 	id<EAGLViewDelegate>	_delegate;
 }
-- (id) initWithFrame:(CGRect)frame pixelFormat:(EAGLPixelFormat)format; //This also sets the current context
-@property(readonly) EAGLPixelFormat EAGLPixelFormat;
-@property(readonly) EAGLContext EAGLContext;
+- (id) initWithFrame:(CGRect)frame; //These also set the current context
+- (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format;
+- (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained;
 
-@property BOOL autoresizesEAGLSurface; //NO by default - Set to YES to have the EAGL surface automatically resized when the view bounds change, otherwise the EAGL surface contents is rendered scaled
-@property(readonly, nonatomic) CGSize EAGLSurfaceSize;
+@property(readonly) GLuint framebuffer;
+@property(readonly) GLuint pixelFormat;
+@property(readonly) GLuint depthFormat;
+@property(readonly) EAGLContext *context;
+
+@property BOOL autoresizesSurface; //NO by default - Set to YES to have the EAGL surface automatically resized when the view bounds change, otherwise the EAGL surface contents is rendered scaled
+@property(readonly, nonatomic) CGSize surfaceSize;
 
 @property(assign) id<EAGLViewDelegate> delegate;
 
@@ -108,6 +118,6 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
 
 - (void) swapBuffers; //This also checks the current OpenGL error and logs an error if needed
 
-- (CGPoint) convertPointFromViewToEAGLSurface:(CGPoint)point;
-- (CGRect) convertRectFromViewToEAGLSurface:(CGRect)rect;
+- (CGPoint) convertPointFromViewToSurface:(CGPoint)point;
+- (CGRect) convertRectFromViewToSurface:(CGRect)rect;
 @end

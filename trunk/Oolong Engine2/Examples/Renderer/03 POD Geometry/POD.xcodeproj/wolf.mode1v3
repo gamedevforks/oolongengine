@@ -287,7 +287,10 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>15</integer>
+									<integer>14</integer>
+									<integer>6</integer>
+									<integer>5</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -394,9 +397,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799952250DCA1AA50020F76F</string>
+				<string>79AAE93D0DD16B0300CC242E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799952260DCA1AA50020F76F</string>
+				<string>79AAE93E0DD16B0300CC242E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -532,7 +535,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>799952240DCA1A570020F76F</string>
+		<string>79AAE94E0DD16B4400CC242E</string>
+		<string>79AAE94F0DD16B4400CC242E</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/03 POD Geometry/POD.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -613,7 +620,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>7925D1360DC1B5F800EC1BDC</string>
+				<string>79AAE93F0DD16B0300CC242E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -733,13 +740,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>7925D1370DC1B5F800EC1BDC</string>
+				<string>79AAE9400DD16B0300CC242E</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>7925D1380DC1B5F800EC1BDC</string>
-				<string>7925D1390DC1B5F800EC1BDC</string>
-				<string>7925D13A0DC1B5F800EC1BDC</string>
-				<string>7925D13B0DC1B5F800EC1BDC</string>
-				<string>7925D13C0DC1B5F800EC1BDC</string>
+				<string>79AAE9410DD16B0300CC242E</string>
+				<string>79AAE9420DD16B0300CC242E</string>
+				<string>79AAE9430DD16B0300CC242E</string>
+				<string>79AAE9440DD16B0300CC242E</string>
+				<string>79AAE9450DD16B0300CC242E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -893,7 +900,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7925D13D0DC1B5F800EC1BDC</string>
+				<string>79AAE9460DD16B0300CC242E</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

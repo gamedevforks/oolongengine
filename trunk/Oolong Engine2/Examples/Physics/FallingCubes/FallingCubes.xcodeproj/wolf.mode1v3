@@ -341,14 +341,14 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>79AAE9650DD16BD600CC242E</string>
+										<string>79AAEA440DD5683B00CC242E</string>
 										<key>history</key>
 										<array>
 											<string>7925D1480DC1B63500EC1BDC</string>
 											<string>799952310DCAC7380020F76F</string>
 											<string>7999549F0DCCC4AE0020F76F</string>
 											<string>79AAE9620DD16BD600CC242E</string>
-											<string>79AAE9630DD16BD600CC242E</string>
+											<string>79AAE9650DD16BD600CC242E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -412,9 +412,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>79AAE9660DD16BD600CC242E</string>
+				<string>79AAEA350DD566F500CC242E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>79AAE9670DD16BD600CC242E</string>
+				<string>79AAEA360DD566F500CC242E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -550,8 +550,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>79AAE9700DD16BD600CC242E</string>
-		<string>79AAE9710DD16BD600CC242E</string>
+		<string>79AAEA4D0DD5683B00CC242E</string>
+		<string>79AAEA4E0DD5683B00CC242E</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
@@ -574,14 +574,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>btMultiSapBroadphase.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -637,7 +635,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>79AAE9680DD16BD600CC242E</string>
+				<string>79AAEA450DD5683B00CC242E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -648,7 +646,7 @@
 			<key>WindowToolGUID</key>
 			<string>79235C150DAD062200F918F8</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -757,13 +755,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>79AAE9690DD16BD600CC242E</string>
+				<string>79AAEA460DD5683B00CC242E</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>79AAE96A0DD16BD600CC242E</string>
-				<string>79AAE96B0DD16BD600CC242E</string>
-				<string>79AAE96C0DD16BD600CC242E</string>
-				<string>79AAE96D0DD16BD600CC242E</string>
-				<string>79AAE96E0DD16BD600CC242E</string>
+				<string>79AAEA470DD5683B00CC242E</string>
+				<string>79AAEA480DD5683B00CC242E</string>
+				<string>79AAEA490DD5683B00CC242E</string>
+				<string>79AAEA4A0DD5683B00CC242E</string>
+				<string>79AAEA4B0DD5683B00CC242E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -917,7 +915,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>79AAE96F0DD16BD600CC242E</string>
+				<string>79AAEA4C0DD5683B00CC242E</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

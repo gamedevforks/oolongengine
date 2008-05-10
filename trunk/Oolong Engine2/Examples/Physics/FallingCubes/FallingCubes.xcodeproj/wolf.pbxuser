@@ -98,8 +98,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 231828309;
-			PBXWorkspaceStateSaveDate = 231828309;
+			PBXPerProjectTemplateStateSaveDate = 232089305;
+			PBXWorkspaceStateSaveDate = 232089305;
 		};
 		perUserProjectItems = {
 			7925D0B50DC1B1CD00EC1BDC /* PBXTextBookmark */ = 7925D0B50DC1B1CD00EC1BDC /* PBXTextBookmark */;
@@ -108,9 +108,9 @@
 			799952330DCAC7380020F76F /* PBXTextBookmark */ = 799952330DCAC7380020F76F /* PBXTextBookmark */;
 			7999549F0DCCC4AE0020F76F /* PBXTextBookmark */ = 7999549F0DCCC4AE0020F76F /* PBXTextBookmark */;
 			79AAE9620DD16BD600CC242E /* PBXTextBookmark */ = 79AAE9620DD16BD600CC242E /* PBXTextBookmark */;
-			79AAE9630DD16BD600CC242E /* PBXTextBookmark */ = 79AAE9630DD16BD600CC242E /* PBXTextBookmark */;
 			79AAE9640DD16BD600CC242E /* PBXTextBookmark */ = 79AAE9640DD16BD600CC242E /* PBXTextBookmark */;
 			79AAE9650DD16BD600CC242E /* PBXTextBookmark */ = 79AAE9650DD16BD600CC242E /* PBXTextBookmark */;
+			79AAEA440DD5683B00CC242E /* PBXTextBookmark */ = 79AAEA440DD5683B00CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -258,9 +258,9 @@
 	};
 	799952800DCAD14B0020F76F /* btMultiSapBroadphase.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 3976}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 4172}}";
 			sepNavSelRange = "{1643, 94}";
-			sepNavVisRange = "{1180, 688}";
+			sepNavVisRange = "{1134, 1038}";
 		};
 	};
 	799952910DCAD14B0020F76F /* btCollisionObject.h */ = {
@@ -297,14 +297,6 @@
 		vrLen = 1658;
 		vrLoc = 0;
 	};
-	79AAE9630DD16BD600CC242E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "warning:   when initialized here";
-		fRef = 799952800DCAD14B0020F76F /* btMultiSapBroadphase.cpp */;
-		rLen = 1;
-		rLoc = 39;
-		rType = 1;
-	};
 	79AAE9640DD16BD600CC242E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
@@ -324,6 +316,16 @@
 		rType = 0;
 		vrLen = 988;
 		vrLoc = 1178;
+	};
+	79AAEA440DD5683B00CC242E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 799952800DCAD14B0020F76F /* btMultiSapBroadphase.cpp */;
+		name = "btMultiSapBroadphase.cpp: 40";
+		rLen = 94;
+		rLoc = 1643;
+		rType = 0;
+		vrLen = 1038;
+		vrLoc = 1134;
 	};
 	79EA04400DAFC7950038ED3D /* EAGLView.h */ = {
 		uiCtxt = {

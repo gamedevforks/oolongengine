@@ -37,6 +37,7 @@ int numBodies = 50;
 #include "GraphicsDevice.h"
 #include "UI.h"
 #include "Macros.h"
+#include "TouchScreen.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -46,6 +47,12 @@ int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 
 int frames;
 float frameRate;
+
+// touch screen values
+TouchScreenValues *TouchScreen;
+btVector3 Ray;
+
+btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 cameraUp, btVector3 CameraPosition, btVector3 CameraTargetPosition);
 
 bool CShell::InitApplication()
 {
@@ -145,7 +152,7 @@ bool CShell::InitView()
 	glLoadIdentity();
 	
 	MATRIX	MyPerspMatrix;
-	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
+	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(1.0f), f2vt(10000.0f), 0);
 	myglMultMatrix(MyPerspMatrix.f);
 
 //	glOrthof(-40 / 2, 40 / 2, -60 / 2, 60 / 2, -1, 1);
@@ -163,8 +170,34 @@ bool CShell::InitView()
 	glLoadIdentity();
 	glTranslatef(0.0, -10.0, -30.0f);
 //	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
+	
+	//
+	// Touch screen support
+	//
+	// touch screen coordinates go from 0, 0 in the upper left corner to
+	// 320, 480 in the lower right corner
+	TouchScreen = GetValuesTouchScreen();
+	
+	// the center of the ray coordinates are located in the middle of the 
+	// screen ... in the x direction the values range from -9875..9875 in x direction and
+	// 15.000..-15000 in the y direction
+	Ray = btVector3(0.0f, 0.0f, 0.0f);
+	
 
+	if(TouchScreen->TouchesEnd == false)
+	{
+		Ray = GetRayTo(TouchScreen->LocationXTouchesMoved, TouchScreen->LocationYTouchesMoved, 
+					   1.0f, 10000.0f, btVector3(0.0f, 1.0f, 0.0f), btVector3(0.0f, 0.0f, 0.0f), 
+					   btVector3(0.0f, 0.0f, -1.0f));
+		
+		AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "touchesBegan: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
+									TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, TouchScreen->CountTouchesBegan, TouchScreen->TapCountTouchesBegan);
+		AppDisplayText->DisplayText(0, 14, 0.4f, RGBA(255,255,255,255), "touchesMoved: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
+									TouchScreen->LocationXTouchesMoved, TouchScreen->LocationYTouchesMoved, TouchScreen->CountTouchesMoved, TouchScreen->TapCountTouchesMoved);
+		AppDisplayText->DisplayText(0, 18, 0.4f, RGBA(255,255,255,255), "Ray: X: %3.2f Y: %3.2f Z: %3.2f", Ray.getX(), Ray.getY(), Ray.getZ());
 
+	}
+	
 	return true;
 }
 
@@ -172,6 +205,55 @@ bool CShell::ReleaseView()
 {
 	return true;
 }
+
+btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 cameraUp, btVector3 CameraPosition, btVector3 CameraTargetPosition)
+{
+	float top = 1.f;
+	float bottom = -1.f;
+	float tanFov = (top - bottom) * 0.5f / nearPlane;
+	float fov = 2.0 * atanf (tanFov);
+	
+	btVector3	rayFrom = CameraPosition;
+	btVector3 rayForward = (CameraTargetPosition - CameraPosition);
+	rayForward.normalize();
+	//float fPlane = 10000.f;
+	rayForward *= farPlane;
+	
+	btVector3 rightOffset;
+	btVector3 vertical = cameraUp;
+	
+	btVector3 hor;
+	
+	hor = rayForward.cross(vertical);
+	hor.normalize();
+	vertical = hor.cross(rayForward);
+	vertical.normalize();
+	
+	float tanfov = tanf(0.5f*fov);
+	
+	float aspect = (float)480 / (float)320;
+	
+	hor *= 2.f * farPlane * tanfov;
+	vertical *= 2.f * farPlane * tanfov;
+	
+	if (aspect<1)
+	{
+		hor/=aspect;
+	} else
+	{
+		vertical*=aspect;
+	}
+	
+	btVector3 rayToCenter = rayFrom + rayForward;
+	btVector3 dHor = hor * 1.f/float(320);
+	btVector3 dVert = vertical * 1.f/float(480);
+	
+	btVector3 rayTo = rayToCenter - 0.5f * hor + 0.5f * vertical;
+	rayTo += x * dHor;
+	rayTo -= y * dVert;
+	return rayTo;
+}
+
 
 bool CShell::UpdateScene()
 {
@@ -191,9 +273,16 @@ bool CShell::UpdateScene()
 	float deltaTime = 1.f/60.f;
 	if (sDynamicsWorld)
 		sDynamicsWorld->stepSimulation(deltaTime);
-
+	
+	
 	return true;
 }
+
+btRigidBody* pickedBody = 0;//for deactivation state
+btPoint2PointConstraint* PickConstraint = 0;
+int gPickingConstraintId = 0;
+btVector3 gOldPickingPos;
+float gOldPickingDist  = 0.f;
 
 
 bool CShell::RenderScene()
@@ -201,70 +290,99 @@ bool CShell::RenderScene()
 	float worldMat[16];
 	for (int i=0;i<numBodies;i++)
 	{
-	sBoxBodies[i]->getCenterOfMassTransform().getOpenGLMatrix(worldMat);
-	glPushMatrix();
-	glMultMatrixf(worldMat);
+		sBoxBodies[i]->getCenterOfMassTransform().getOpenGLMatrix(worldMat);
+		glPushMatrix();
+		glMultMatrixf(worldMat);
+		
+		
+		if(TouchScreen->TouchesEnd == false)
+		{			
+			btVector3 CameraPosition = btVector3(0.0f, 0.0f, 0.0f);
+		
+			btCollisionWorld::ClosestRayResultCallback rayCallback(CameraPosition, Ray);
+		
+			if (sDynamicsWorld)
+			{
+				sDynamicsWorld->rayTest(CameraPosition, Ray, rayCallback);
+				if (rayCallback.HasHit())
+				{
+					btRigidBody* body = btRigidBody::upcast(rayCallback.m_collisionObject);
+					if (body)
+					{
+						body->setActivationState(ACTIVE_TAG);
+						btVector3 impulse = Ray;
+						impulse.normalize();
+						float impulseStrength = 10.f;
+						impulse *= impulseStrength;
+						btVector3 relPos = rayCallback.m_hitPointWorld - body->getCenterOfMassPosition();
+						body->applyImpulse(impulse,relPos);
+					}
+				}
+			}
+		}
+		
+		
 
-    const float verts[] =
-    {
-         1.0f, 1.0f,-1.0f,	
-        -1.0f, 1.0f,-1.0f,	
-        -1.0f, 1.0f, 1.0f,	
-         1.0f, 1.0f, 1.0f,	
+		const float verts[] =
+		{
+			1.0f, 1.0f,-1.0f,	
+			-1.0f, 1.0f,-1.0f,	
+			-1.0f, 1.0f, 1.0f,	
+			1.0f, 1.0f, 1.0f,	
 
-         1.0f,-1.0f, 1.0f,	
-        -1.0f,-1.0f, 1.0f,	
-        -1.0f,-1.0f,-1.0f,	
-         1.0f,-1.0f,-1.0f,	
+			1.0f,-1.0f, 1.0f,	
+			-1.0f,-1.0f, 1.0f,	
+			-1.0f,-1.0f,-1.0f,	
+			1.0f,-1.0f,-1.0f,	
 
-         1.0f, 1.0f, 1.0f,	
-        -1.0f, 1.0f, 1.0f,	
-        -1.0f,-1.0f, 1.0f,	
-         1.0f,-1.0f, 1.0f,	
+			1.0f, 1.0f, 1.0f,	
+			-1.0f, 1.0f, 1.0f,	
+			-1.0f,-1.0f, 1.0f,	
+			1.0f,-1.0f, 1.0f,	
 
-         1.0f,-1.0f,-1.0f,	
-        -1.0f,-1.0f,-1.0f,	
-        -1.0f, 1.0f,-1.0f,	
-         1.0f, 1.0f,-1.0f,	
+			1.0f,-1.0f,-1.0f,	
+			-1.0f,-1.0f,-1.0f,	
+			-1.0f, 1.0f,-1.0f,	
+			1.0f, 1.0f,-1.0f,	
 
-         1.0f, 1.0f,-1.0f,	
-         1.0f, 1.0f, 1.0f,	
-         1.0f,-1.0f, 1.0f,	
-         1.0f,-1.0f,-1.0f,
+			1.0f, 1.0f,-1.0f,	
+			1.0f, 1.0f, 1.0f,	
+			1.0f,-1.0f, 1.0f,	
+			1.0f,-1.0f,-1.0f,
 
-        -1.0f, 1.0f, 1.0f,	
-        -1.0f, 1.0f,-1.0f,	
-        -1.0f,-1.0f,-1.0f,	
-        -1.0f,-1.0f, 1.0f
-     };
+			-1.0f, 1.0f, 1.0f,	
+			-1.0f, 1.0f,-1.0f,	
+			-1.0f,-1.0f,-1.0f,	
+			-1.0f,-1.0f, 1.0f
+		};
 
-    glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_VERTEX_ARRAY);
     
-    glColor4f(0, 1, 0, 1);
-    glVertexPointer(3, GL_FLOAT, 0, verts);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(0, 1, 0, 1);
+		glVertexPointer(3, GL_FLOAT, 0, verts);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     
-    glColor4f(1, 0, 1, 1);
-    glVertexPointer(3, GL_FLOAT, 0, verts + 12);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(1, 0, 1, 1);
+		glVertexPointer(3, GL_FLOAT, 0, verts + 12);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     
-    glColor4f(0, 0, 1, 1);
-    glVertexPointer(3, GL_FLOAT, 0, verts + 24);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(0, 0, 1, 1);
+		glVertexPointer(3, GL_FLOAT, 0, verts + 24);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     
-    glColor4f(1, 1, 0, 1);
-    glVertexPointer(3, GL_FLOAT, 0, verts + 36);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(1, 1, 0, 1);
+		glVertexPointer(3, GL_FLOAT, 0, verts + 36);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     
-    glColor4f(1, 0, 0, 1);
-    glVertexPointer(3, GL_FLOAT, 0, verts + 48);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(1, 0, 0, 1);
+		glVertexPointer(3, GL_FLOAT, 0, verts + 48);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     
-    glColor4f(0, 1, 1, 1);
-    glVertexPointer(3, GL_FLOAT, 0, verts + 60);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(0, 1, 1, 1);
+		glVertexPointer(3, GL_FLOAT, 0, verts + 60);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
-	glPopMatrix();
+		glPopMatrix();
 	}
 	
 	// show text on the display

@@ -12,10 +12,38 @@ subject to the following restrictions:
 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
-#ifndef TOUCHSCREENDEVICE_H_
-#define TOUCHSCREENDEVICE_H_
 
-//#include "../Input/TouchScreen/RotateObject.h"
-#include "../Input/TouchScreen/TouchScreen.h"
+#import "EAGLView.h"
 
-#endif
+@class EAGLCameraView;
+
+typedef struct Touches
+{ 
+	float LocationXTouchesBegan;
+	float LocationYTouchesBegan;
+	float CountTouchesBegan;
+	float TapCountTouchesBegan;
+		
+	float LocationXTouchesMoved;
+	float LocationYTouchesMoved;
+	float CountTouchesMoved;
+	float TapCountTouchesMoved;
+		
+	bool TouchesEnd;
+} 
+TouchScreenValues; 
+
+
+@interface EAGLCameraView : EAGLView
+{
+	TouchScreenValues TouchScreen;	
+}
+
+- (TouchScreenValues*) GetValuesTouchScreen;
+
+@end
+
+
+// C wrapper
+TouchScreenValues* GetValuesTouchScreen();
+

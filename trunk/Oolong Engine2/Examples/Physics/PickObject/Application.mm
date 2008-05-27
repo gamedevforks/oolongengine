@@ -301,7 +301,10 @@ bool CShell::RenderScene()
 		
 			btCollisionWorld::ClosestRayResultCallback rayCallback(CameraPosition, Ray);
 		
-			if (sDynamicsWorld)
+			// CountTouchesMoved shows how many fingers are moved ... if there is one finger or more moved this is 
+			// 1 or higher
+			// while CountTouchesBegan shows how many fingers have touched the sreen when the gesture started
+			if (sDynamicsWorld && (TouchScreen->CountTouchesMoved >= 1))
 			{
 				sDynamicsWorld->rayTest(CameraPosition, Ray, rayCallback);
 				if (rayCallback.HasHit())

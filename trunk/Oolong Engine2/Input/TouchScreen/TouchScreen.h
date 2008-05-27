@@ -19,17 +19,17 @@ subject to the following restrictions:
 
 typedef struct Touches
 { 
-	float LocationXTouchesBegan;
+	float LocationXTouchesBegan;    // x and y coordinates where the touch began
 	float LocationYTouchesBegan;
-	float CountTouchesBegan;
-	float TapCountTouchesBegan;
+	float CountTouchesBegan;		// how many fingers are pressed
+	float TapCountTouchesBegan;		// tap with one, two or three fingers or more at once
 		
-	float LocationXTouchesMoved;
+	float LocationXTouchesMoved;	// x and y coordinates where the touch moved
 	float LocationYTouchesMoved;
 	float CountTouchesMoved;
 	float TapCountTouchesMoved;
 		
-	bool TouchesEnd;
+	bool TouchesEnd;				// nothing touches the screen anymore
 } 
 TouchScreenValues; 
 

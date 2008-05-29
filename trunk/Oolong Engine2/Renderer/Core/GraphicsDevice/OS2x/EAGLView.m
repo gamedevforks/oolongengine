@@ -62,9 +62,9 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 */
 
 #import <QuartzCore/QuartzCore.h>
+#import <OpenGLES/EAGLDrawable.h>
 
 #import "EAGLView.h"
-#import "OpenGL_Internal.h"
 
 //CLASS IMPLEMENTATIONS:
 
@@ -98,7 +98,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	glGenRenderbuffersOES(1, &_renderbuffer);
 	glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderbuffer);
 	
-	if(![_context renderbufferStorage:GL_RENDERBUFFER_OES fromView:eaglLayer]) {
+	if(![_context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(id<EAGLDrawable>)eaglLayer]) {
 		glDeleteRenderbuffersOES(1, &_renderbuffer);
 		glBindRenderbufferOES(GL_RENDERBUFFER_BINDING_OES, oldRenderbuffer);
 		return NO;
@@ -125,7 +125,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	}
 	glBindRenderbufferOES(GL_RENDERBUFFER_OES, oldRenderbuffer);
 	
-	CHECK_GL_ERROR();
+	// Error handling here
 	
 	[_delegate didResizeEAGLSurfaceForView:self];
 	
@@ -168,12 +168,14 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 {
 	if((self = [super initWithFrame:frame])) {
 		CAEAGLLayer*			eaglLayer = (CAEAGLLayer*)[self layer];
-
-		[eaglLayer setSurfaceProperties:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:retained], EAGLViewPropertyRetainedBacking, [NSNumber numberWithUnsignedInt:format], EAGLViewPropertyColorFormat, nil]];
+		
+		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+										[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+		
 		_format = format;
 		_depthFormat = depth;
 		
-		_context = [[EAGLContext alloc] initWithAPI:EAGLRenderingAPI_GLES_1];
+		_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
 		if(_context == nil) {
 			[self release];
 			return nil;
@@ -204,9 +206,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	
 	if(_autoresize && ((roundf(bounds.size.width) != _size.width) || (roundf(bounds.size.height) != _size.height))) {
 		[self _destroySurface];
-#if __DEBUG__
-		REPORT_ERROR(@"Resizing surface from %fx%f to %fx%f", _size.width, _size.height, roundf(bounds.size.width), roundf(bounds.size.height));
-#endif
 		[self _createSurface];
 	}
 }
@@ -244,7 +243,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	if(oldContext != _context)
 		[EAGLContext setCurrentContext:_context];
 	
-	CHECK_GL_ERROR();
+	// CHECK_GL_ERROR();
 	
 	glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint *) &oldRenderbuffer);
 	glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderbuffer);

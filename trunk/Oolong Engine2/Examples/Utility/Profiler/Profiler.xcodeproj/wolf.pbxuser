@@ -15,10 +15,8 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = armv6;
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Profiler */;
-		activeSDKForArchive = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Profiler */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Profiler */,
@@ -76,12 +74,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 232003447;
-			PBXWorkspaceStateSaveDate = 232003447;
+			PBXPerProjectTemplateStateSaveDate = 233761280;
+			PBXWorkspaceStateSaveDate = 233761280;
 		};
 		perUserProjectItems = {
+			796AC1C80DEEEA4F005F8387 /* PBXTextBookmark */ = 796AC1C80DEEEA4F005F8387 /* PBXTextBookmark */;
 			79AAEA030DD418A100CC242E /* PBXTextBookmark */ = 79AAEA030DD418A100CC242E /* PBXTextBookmark */;
-			79AAEA040DD418A100CC242E /* PBXBookmark */ = 79AAEA040DD418A100CC242E /* PBXBookmark */;
 			79AAEA050DD418A100CC242E /* PBXTextBookmark */ = 79AAEA050DD418A100CC242E /* PBXTextBookmark */;
 			79AAEA060DD418A100CC242E /* PBXTextBookmark */ = 79AAEA060DD418A100CC242E /* PBXTextBookmark */;
 		};
@@ -175,6 +173,16 @@
 			sepNavWindowFrame = "{{510, 70}, {883, 794}}";
 		};
 	};
+	796AC1C80DEEEA4F005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79EA04440DAFC7950038ED3D /* Texture.h */;
+		name = "Texture.h: 6";
+		rLen = 53;
+		rLoc = 290;
+		rType = 0;
+		vrLen = 1729;
+		vrLoc = 0;
+	};
 	79AAE9F20DD417EB00CC242E /* Texture.mm */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1470, 8932}}";
@@ -192,10 +200,6 @@
 		rType = 0;
 		vrLen = 932;
 		vrLoc = 3464;
-	};
-	79AAEA040DD418A100CC242E /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 79EA04440DAFC7950038ED3D /* Texture.h */;
 	};
 	79AAEA050DD418A100CC242E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -235,7 +239,7 @@
 	};
 	79EA04440DAFC7950038ED3D /* Texture.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 2464}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 3808}}";
 			sepNavSelRange = "{290, 53}";
 			sepNavVisRange = "{0, 1729}";
 			sepNavWindowFrame = "{{15, 91}, {883, 787}}";

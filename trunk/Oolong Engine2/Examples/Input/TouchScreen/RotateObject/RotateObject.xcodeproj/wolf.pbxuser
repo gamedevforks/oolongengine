@@ -15,10 +15,8 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = armv6;
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* RotateObject */;
-		activeSDKForArchive = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* RotateObject */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* RotateObject */,
@@ -101,18 +99,19 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 233375912;
-			PBXWorkspaceStateSaveDate = 233375912;
+			PBXPerProjectTemplateStateSaveDate = 233761088;
+			PBXWorkspaceStateSaveDate = 233761088;
 		};
 		perUserProjectItems = {
 			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
 			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
+			796AC16D0DEEE958005F8387 /* PBXTextBookmark */ = 796AC16D0DEEE958005F8387 /* PBXTextBookmark */;
+			796AC17E0DEEE98D005F8387 /* PBXTextBookmark */ = 796AC17E0DEEE98D005F8387 /* PBXTextBookmark */;
 			799954D30DCCC9870020F76F /* PBXTextBookmark */ = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
 			799954D40DCCC9870020F76F /* PBXTextBookmark */ = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
 			799954F00DCCCDF40020F76F /* PBXTextBookmark */ = 799954F00DCCCDF40020F76F /* PBXTextBookmark */;
 			799955080DCCCF390020F76F /* PBXTextBookmark */ = 799955080DCCCF390020F76F /* PBXTextBookmark */;
 			7999550C0DCCCF390020F76F /* PBXTextBookmark */ = 7999550C0DCCCF390020F76F /* PBXTextBookmark */;
-			79A99E970DE908B600979729 /* PBXTextBookmark */ = 79A99E970DE908B600979729 /* PBXTextBookmark */;
 			79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = 79AAE9C90DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9CA0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CA0DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9CB0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CB0DD4175800CC242E /* PBXTextBookmark */;
@@ -123,7 +122,6 @@
 			79AAEAFD0DD957FC00CC242E /* PBXTextBookmark */ = 79AAEAFD0DD957FC00CC242E /* PBXTextBookmark */;
 			79AAEAFE0DD957FC00CC242E /* PBXTextBookmark */ = 79AAEAFE0DD957FC00CC242E /* PBXTextBookmark */;
 			79AAEB000DD957FC00CC242E /* PBXTextBookmark */ = 79AAEB000DD957FC00CC242E /* PBXTextBookmark */;
-			79AAEB1F0DD959B200CC242E /* PBXTextBookmark */ = 79AAEB1F0DD959B200CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -187,9 +185,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 1792}}";
-			sepNavSelRange = "{1640, 0}";
-			sepNavVisRange = "{0, 1340}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2352}}";
+			sepNavSelRange = "{1767, 22}";
+			sepNavVisRange = "{1485, 561}";
 			sepNavWindowFrame = "{{50, 103}, {1106, 775}}";
 		};
 	};
@@ -228,6 +226,24 @@
 		vrLen = 735;
 		vrLoc = 0;
 	};
+	796AC16D0DEEE958005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'UpdatePolarCamera' was not declared in this scope";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 60;
+		rType = 1;
+	};
+	796AC17E0DEEE98D005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 61";
+		rLen = 22;
+		rLoc = 1767;
+		rType = 0;
+		vrLen = 561;
+		vrLoc = 1485;
+	};
 	799954BE0DCCC6C50020F76F /* Camera.h */ = {
 		isa = PBXFileReference;
 		lastKnownFileType = sourcecode.c.h;
@@ -237,9 +253,9 @@
 	};
 	799954CB0DCCC9200020F76F /* RotateObject.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 924}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 868}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1755}";
+			sepNavVisRange = "{0, 1962}";
 			sepNavWindowFrame = "{{38, 102}, {1161, 750}}";
 		};
 	};
@@ -255,7 +271,7 @@
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 85";
 		rLen = 0;
-		rLoc = 2160;
+		rLoc = 2161;
 		rType = 0;
 		vrLen = 1052;
 		vrLoc = 0;
@@ -321,16 +337,6 @@
 		path = /Users/wolf/Desktop/OolongEngine2SVN/Examples/Input/TouchScreen/RotateObject/../../../../Include/Camera.h;
 		sourceTree = "<absolute>";
 	};
-	79A99E970DE908B600979729 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 56";
-		rLen = 0;
-		rLoc = 1640;
-		rType = 0;
-		vrLen = 1340;
-		vrLoc = 0;
-	};
 	79AAE9B50DD415A900CC242E /* Delegate.mm:51 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -345,7 +351,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = RotateObject;
-		modificationTime = 232003387.717455;
+		modificationTime = 233761152.554083;
 		state = 2;
 	};
 	79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = {
@@ -447,16 +453,6 @@
 		rType = 0;
 		vrLen = 1755;
 		vrLoc = 0;
-	};
-	79AAEB1F0DD959B200CC242E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 61";
-		rLen = 22;
-		rLoc = 1766;
-		rType = 0;
-		vrLen = 558;
-		vrLoc = 1485;
 	};
 	79C65F7A0DBA69B4009DA546 /* MatrixF.cpp */ = {
 		uiCtxt = {

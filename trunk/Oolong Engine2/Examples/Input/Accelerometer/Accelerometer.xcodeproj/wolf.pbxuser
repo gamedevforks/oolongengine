@@ -15,10 +15,8 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = armv6;
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Accelerometer */;
-		activeSDKForArchive = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Accelerometer */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Accelerometer */,
@@ -76,18 +74,18 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 231828455;
-			PBXWorkspaceStateSaveDate = 231828455;
+			PBXPerProjectTemplateStateSaveDate = 233761057;
+			PBXWorkspaceStateSaveDate = 233761057;
 		};
 		perUserProjectItems = {
 			7925D2A60DC38C5E00EC1BDC /* PBXTextBookmark */ = 7925D2A60DC38C5E00EC1BDC /* PBXTextBookmark */;
 			7925D2A90DC38C5E00EC1BDC /* PBXTextBookmark */ = 7925D2A90DC38C5E00EC1BDC /* PBXTextBookmark */;
+			796AC1590DEEE93C005F8387 /* PBXTextBookmark */ = 796AC1590DEEE93C005F8387 /* PBXTextBookmark */;
 			799954610DCCBCEF0020F76F /* PBXTextBookmark */ = 799954610DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954620DCCBCEF0020F76F /* PBXTextBookmark */ = 799954620DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954640DCCBCEF0020F76F /* PBXTextBookmark */ = 799954640DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954650DCCBCEF0020F76F /* PBXTextBookmark */ = 799954650DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954660DCCBCEF0020F76F /* PBXTextBookmark */ = 799954660DCCBCEF0020F76F /* PBXTextBookmark */;
-			799954700DCCBE1F0020F76F /* PBXTextBookmark */ = 799954700DCCBE1F0020F76F /* PBXTextBookmark */;
 			79AAE9790DD16C0500CC242E /* PBXTextBookmark */ = 79AAE9790DD16C0500CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
@@ -224,6 +222,16 @@
 		vrLen = 271;
 		vrLoc = 693;
 	};
+	796AC1590DEEE93C005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
+		name = "Accelerometer.m: 70";
+		rLen = 0;
+		rLoc = 3076;
+		rType = 0;
+		vrLen = 480;
+		vrLoc = 2769;
+	};
 	799954290DCCB7980020F76F /* UIAccelerometer.h */ = {
 		isa = PBXFileReference;
 		lastKnownFileType = sourcecode.c.h;
@@ -281,16 +289,6 @@
 		vrLen = 200;
 		vrLoc = 0;
 	};
-	799954700DCCBE1F0020F76F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
-		name = "Accelerometer.m: 70";
-		rLen = 0;
-		rLoc = 3076;
-		rType = 0;
-		vrLen = 480;
-		vrLoc = 2769;
-	};
 	79AAE9790DD16C0500CC242E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
@@ -311,7 +309,7 @@
 	};
 	79EA026A0DAEFC190038ED3D /* Accelerometer.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 952}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 1064}}";
 			sepNavSelRange = "{3076, 0}";
 			sepNavVisRange = "{2769, 480}";
 			sepNavWindowFrame = "{{348, 91}, {883, 787}}";

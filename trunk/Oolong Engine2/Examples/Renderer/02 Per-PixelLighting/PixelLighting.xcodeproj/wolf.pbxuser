@@ -15,10 +15,8 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = armv6;
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* PixelLighting */;
-		activeSDKForArchive = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* PixelLighting */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* PixelLighting */,
@@ -76,14 +74,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 231828004;
-			PBXWorkspaceStateSaveDate = 231828004;
+			PBXPerProjectTemplateStateSaveDate = 233761210;
+			PBXWorkspaceStateSaveDate = 233761210;
 		};
 		perUserProjectItems = {
+			796AC19D0DEEE9D7005F8387 /* PBXTextBookmark */ = 796AC19D0DEEE9D7005F8387 /* PBXTextBookmark */;
 			79AAE90C0DD16A0B00CC242E /* PBXTextBookmark */ = 79AAE90C0DD16A0B00CC242E /* PBXTextBookmark */;
 			79AAE90D0DD16A0B00CC242E /* PBXTextBookmark */ = 79AAE90D0DD16A0B00CC242E /* PBXTextBookmark */;
 			79AAE90F0DD16A0B00CC242E /* PBXTextBookmark */ = 79AAE90F0DD16A0B00CC242E /* PBXTextBookmark */;
-			79AAE9250DD16A9300CC242E /* PBXTextBookmark */ = 79AAE9250DD16A9300CC242E /* PBXTextBookmark */;
 			79AAE9500DD16B4500CC242E /* PBXTextBookmark */ = 79AAE9500DD16B4500CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
@@ -162,11 +160,21 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 3164}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 5236}}";
 			sepNavSelRange = "{988, 0}";
 			sepNavVisRange = "{125, 926}";
 			sepNavWindowFrame = "{{562, 66}, {821, 781}}";
 		};
+	};
+	796AC19D0DEEE9D7005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 16";
+		rLen = 0;
+		rLoc = 988;
+		rType = 0;
+		vrLen = 926;
+		vrLoc = 125;
 	};
 	79AAE8FE0DD169AE00CC242E /* NSObjCRuntime.h */ = {
 		isa = PBXFileReference;
@@ -218,16 +226,6 @@
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 975}";
 		};
-	};
-	79AAE9250DD16A9300CC242E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 16";
-		rLen = 0;
-		rLoc = 988;
-		rType = 0;
-		vrLen = 926;
-		vrLoc = 125;
 	};
 	79AAE9500DD16B4500CC242E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

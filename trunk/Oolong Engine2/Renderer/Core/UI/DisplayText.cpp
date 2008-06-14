@@ -242,7 +242,7 @@ void CDisplayText::DisplayDefaultTitle(const char * const pszTitle, const char *
 	 */
 	if(pszDescription)
 	{
-		DisplayText(0.0f, 8.0f, 0.9f,  RGBA(255, 255, 255, 255), pszDescription);
+		DisplayText(0.0f, 6.0f, 0.4f,  RGBA(255, 255, 255, 255), pszDescription);
 	}
 
 	m_uLogoToDisplay = uDisplayLogo;

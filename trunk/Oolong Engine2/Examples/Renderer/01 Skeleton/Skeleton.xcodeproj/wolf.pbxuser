@@ -17,6 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Skeleton */;
+		activeSDKPreference = iphonesimulator2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Skeleton */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Skeleton */,
@@ -57,7 +58,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					171,
+					399,
 					20,
 					48,
 					43,
@@ -74,14 +75,22 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 233761178;
-			PBXWorkspaceStateSaveDate = 233761178;
+			PBXPerProjectTemplateStateSaveDate = 235030565;
+			PBXWorkspaceStateSaveDate = 235030565;
 		};
 		perUserProjectItems = {
-			796AC1880DEEE9B6005F8387 /* PBXTextBookmark */ = 796AC1880DEEE9B6005F8387 /* PBXTextBookmark */;
+			7944B6230E02497E00E3797C /* PBXBookmark */ = 7944B6230E02497E00E3797C /* PBXBookmark */;
+			796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = 796AC2AF0DF27654005F8387 /* PBXTextBookmark */;
+			796AC2B20DF27654005F8387 /* PBXTextBookmark */ = 796AC2B20DF27654005F8387 /* PBXTextBookmark */;
+			796AC2BB0DF27671005F8387 /* PBXTextBookmark */ = 796AC2BB0DF27671005F8387 /* PBXTextBookmark */;
+			796AC2BF0DF27671005F8387 /* PBXTextBookmark */ = 796AC2BF0DF27671005F8387 /* PBXTextBookmark */;
+			796AC2C00DF27671005F8387 /* PlistBookmark */ = 796AC2C00DF27671005F8387 /* PlistBookmark */;
+			796AC2C10DF27671005F8387 /* PBXBookmark */ = 796AC2C10DF27671005F8387 /* PBXBookmark */;
+			796AC2C20DF27671005F8387 /* PBXBookmark */ = 796AC2C20DF27671005F8387 /* PBXBookmark */;
+			796AC2EA0DF2771C005F8387 /* PlistBookmark */ = 796AC2EA0DF2771C005F8387 /* PlistBookmark */;
+			796AC2EC0DF2771C005F8387 /* PBXBookmark */ = 796AC2EC0DF2771C005F8387 /* PBXBookmark */;
 			7976CA4B0DD160970043302E /* PBXTextBookmark */ = 7976CA4B0DD160970043302E /* PBXTextBookmark */;
 			7976CA4D0DD160970043302E /* PBXTextBookmark */ = 7976CA4D0DD160970043302E /* PBXTextBookmark */;
-			79AAE8E90DD1698A00CC242E /* PBXTextBookmark */ = 79AAE8E90DD1698A00CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -159,13 +168,24 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 1036}}";
-			sepNavSelRange = "{415, 22}";
-			sepNavVisRange = "{201, 534}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2534}}";
+			sepNavSelRange = "{1713, 124}";
+			sepNavVisRange = "{1350, 1055}";
 			sepNavWindowFrame = "{{64, 91}, {821, 781}}";
 		};
 	};
-	796AC1880DEEE9B6005F8387 /* PBXTextBookmark */ = {
+	7944B6230E02497E00E3797C /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 79EA070F0DAFF0550038ED3D /* Default.png */;
+	};
+	796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = NSObjCRuntime.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObjCRuntime.h;
+		sourceTree = "<absolute>";
+	};
+	796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */;
 		name = "NSObjCRuntime.h: 123";
@@ -175,11 +195,76 @@
 		vrLen = 124;
 		vrLoc = 3988;
 	};
-	796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */ = {
+	796AC2B20DF27654005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */;
+		name = "NSObjCRuntime.h: 123";
+		rLen = 27;
+		rLoc = 4021;
+		rType = 0;
+		vrLen = 124;
+		vrLoc = 3988;
+	};
+	796AC2B40DF27654005F8387 /* Prefix.pch */ = {
 		isa = PBXFileReference;
-		name = NSObjCRuntime.h;
-		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObjCRuntime.h;
+		lastKnownFileType = sourcecode.c.h;
+		name = Prefix.pch;
+		path = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/01 Skeleton/Prefix.pch";
 		sourceTree = "<absolute>";
+	};
+	796AC2BB0DF27671005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 796AC2B40DF27654005F8387 /* Prefix.pch */;
+		name = "Prefix.pch: 3";
+		rLen = 0;
+		rLoc = 71;
+		rType = 0;
+		vrLen = 79;
+		vrLoc = 0;
+	};
+	796AC2BF0DF27671005F8387 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 796AC2B40DF27654005F8387 /* Prefix.pch */;
+		name = "Prefix.pch: 3";
+		rLen = 0;
+		rLoc = 71;
+		rType = 0;
+		vrLen = 79;
+		vrLoc = 0;
+	};
+	796AC2C00DF27671005F8387 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/01 Skeleton/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	796AC2C10DF27671005F8387 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 1B26781D0DA2F9B000B24DA5 /* icon.png */;
+	};
+	796AC2C20DF27671005F8387 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 79EA070F0DAFF0550038ED3D /* Default.png */;
+	};
+	796AC2EA0DF2771C005F8387 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/01 Skeleton/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	796AC2EC0DF2771C005F8387 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 1B26781D0DA2F9B000B24DA5 /* icon.png */;
 	};
 	7976CA4B0DD160970043302E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -200,28 +285,6 @@
 		rType = 0;
 		vrLen = 534;
 		vrLoc = 201;
-	};
-	79AAE8E90DD1698A00CC242E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79AAE8EA0DD1698A00CC242E /* NSObjCRuntime.h */;
-		name = "NSObjCRuntime.h: 127";
-		rLen = 27;
-		rLoc = 4021;
-		rType = 0;
-		vrLen = 191;
-		vrLoc = 3992;
-	};
-	79AAE8EA0DD1698A00CC242E /* NSObjCRuntime.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = NSObjCRuntime.h;
-		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObjCRuntime.h;
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {606, 2632}}";
-			sepNavSelRange = "{4021, 27}";
-			sepNavVisRange = "{3988, 96}";
-		};
 	};
 	79EA04400DAFC7950038ED3D /* EAGLView.h */ = {
 		uiCtxt = {
@@ -275,6 +338,13 @@
 			sepNavIntBoundsRect = "{{0, 0}, {645, 3668}}";
 			sepNavSelRange = "{87, 0}";
 			sepNavVisRange = "{0, 886}";
+		};
+	};
+	79EA049C0DAFCC980038ED3D /* Streaming.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 924}}";
+			sepNavSelRange = "{1158, 2}";
+			sepNavVisRange = "{857, 517}";
 		};
 	};
 }

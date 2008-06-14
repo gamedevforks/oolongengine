@@ -21,5 +21,7 @@ subject to the following restrictions:
 #include "../Renderer/Geometry/ModelPOD.h"
 #include "../Renderer/Geometry/Vertex.h"
 #include "../Renderer/Geometry/VertexLookup.h"
+#include "../Renderer/Geometry/TriStrip.h"
+
 
 #endif

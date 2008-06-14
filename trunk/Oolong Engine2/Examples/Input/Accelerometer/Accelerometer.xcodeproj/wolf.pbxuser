@@ -74,19 +74,19 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 233761057;
-			PBXWorkspaceStateSaveDate = 233761057;
+			PBXPerProjectTemplateStateSaveDate = 235030212;
+			PBXWorkspaceStateSaveDate = 235030212;
 		};
 		perUserProjectItems = {
 			7925D2A60DC38C5E00EC1BDC /* PBXTextBookmark */ = 7925D2A60DC38C5E00EC1BDC /* PBXTextBookmark */;
 			7925D2A90DC38C5E00EC1BDC /* PBXTextBookmark */ = 7925D2A90DC38C5E00EC1BDC /* PBXTextBookmark */;
+			7944B5AF0E02470500E3797C /* PBXTextBookmark */ = 7944B5AF0E02470500E3797C /* PBXTextBookmark */;
 			796AC1590DEEE93C005F8387 /* PBXTextBookmark */ = 796AC1590DEEE93C005F8387 /* PBXTextBookmark */;
 			799954610DCCBCEF0020F76F /* PBXTextBookmark */ = 799954610DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954620DCCBCEF0020F76F /* PBXTextBookmark */ = 799954620DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954640DCCBCEF0020F76F /* PBXTextBookmark */ = 799954640DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954650DCCBCEF0020F76F /* PBXTextBookmark */ = 799954650DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954660DCCBCEF0020F76F /* PBXTextBookmark */ = 799954660DCCBCEF0020F76F /* PBXTextBookmark */;
-			79AAE9790DD16C0500CC242E /* PBXTextBookmark */ = 79AAE9790DD16C0500CC242E /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -222,6 +222,16 @@
 		vrLen = 271;
 		vrLoc = 693;
 	};
+	7944B5AF0E02470500E3797C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
+		name = "Accelerometer.m: 70";
+		rLen = 0;
+		rLoc = 3076;
+		rType = 0;
+		vrLen = 480;
+		vrLoc = 2769;
+	};
 	796AC1590DEEE93C005F8387 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
@@ -289,16 +299,6 @@
 		vrLen = 200;
 		vrLoc = 0;
 	};
-	79AAE9790DD16C0500CC242E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
-		name = "Accelerometer.m: 70";
-		rLen = 0;
-		rLoc = 3076;
-		rType = 0;
-		vrLen = 480;
-		vrLoc = 2769;
-	};
 	79EA01420DAEF0020038ED3D /* Accelerometer.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1470, 638}}";
@@ -309,7 +309,7 @@
 	};
 	79EA026A0DAEFC190038ED3D /* Accelerometer.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 1064}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 1078}}";
 			sepNavSelRange = "{3076, 0}";
 			sepNavVisRange = "{2769, 480}";
 			sepNavWindowFrame = "{{348, 91}, {883, 787}}";

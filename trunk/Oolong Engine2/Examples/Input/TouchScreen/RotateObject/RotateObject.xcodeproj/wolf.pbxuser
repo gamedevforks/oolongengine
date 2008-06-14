@@ -99,13 +99,13 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 233761088;
-			PBXWorkspaceStateSaveDate = 233761088;
+			PBXPerProjectTemplateStateSaveDate = 235030152;
+			PBXWorkspaceStateSaveDate = 235030152;
 		};
 		perUserProjectItems = {
 			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
 			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
-			796AC16D0DEEE958005F8387 /* PBXTextBookmark */ = 796AC16D0DEEE958005F8387 /* PBXTextBookmark */;
+			7944B59B0E0246BB00E3797C /* PBXTextBookmark */ = 7944B59B0E0246BB00E3797C /* PBXTextBookmark */;
 			796AC17E0DEEE98D005F8387 /* PBXTextBookmark */ = 796AC17E0DEEE98D005F8387 /* PBXTextBookmark */;
 			799954D30DCCC9870020F76F /* PBXTextBookmark */ = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
 			799954D40DCCC9870020F76F /* PBXTextBookmark */ = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
@@ -185,7 +185,7 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 2352}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2324}}";
 			sepNavSelRange = "{1767, 22}";
 			sepNavVisRange = "{1485, 561}";
 			sepNavWindowFrame = "{{50, 103}, {1106, 775}}";
@@ -226,13 +226,15 @@
 		vrLen = 735;
 		vrLoc = 0;
 	};
-	796AC16D0DEEE958005F8387 /* PBXTextBookmark */ = {
+	7944B59B0E0246BB00E3797C /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		comments = "error: 'UpdatePolarCamera' was not declared in this scope";
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		rLen = 1;
-		rLoc = 60;
-		rType = 1;
+		name = "Application.mm: 61";
+		rLen = 22;
+		rLoc = 1767;
+		rType = 0;
+		vrLen = 561;
+		vrLoc = 1485;
 	};
 	796AC17E0DEEE98D005F8387 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -351,7 +353,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = RotateObject;
-		modificationTime = 233761152.554083;
+		modificationTime = 235030174.242958;
 		state = 2;
 	};
 	79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = {

@@ -225,7 +225,7 @@ unsigned int LoadTextureFromPointer(const void* pointer, GLuint *const texName, 
 
 //-------------------- load Texture from PVR -----------------------
 
-unsigned int  LoadTextureFromPVR(const char * const filename, GLuint * const texName, const void *psTextureHeader);
+unsigned int  LoadTextureFromPVR(const char * const filename, GLuint * const texName, const void *psTextureHeader=NULL);
 
 //														   
 // Can load parts of a mipmaped texture (ie skipping the highest detailed levels) from a PVR file.
@@ -238,7 +238,7 @@ unsigned int LoadPartialTextureFromPVR(const char * const filename,
 										   const char * const altHeader,
 										   const unsigned int nLoadFromLevel,
 										   GLuint * const texName,
-										   const void *psTextureHeader);
+										   const void *psTextureHeader=NULL);
 
 //
 // Can load parts of a mipmapped texture (ie skipping the highest detailed levels) from a PVR file.

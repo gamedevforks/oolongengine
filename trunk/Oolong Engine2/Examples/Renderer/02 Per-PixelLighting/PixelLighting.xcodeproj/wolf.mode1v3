@@ -286,10 +286,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>10</integer>
-									<integer>9</integer>
-									<integer>6</integer>
-									<integer>5</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -343,12 +340,12 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>796AC19D0DEEE9D7005F8387</string>
+										<string>7944B4AF0E0243DE00E3797C</string>
 										<key>history</key>
 										<array>
 											<string>79AAE90C0DD16A0B00CC242E</string>
 											<string>79AAE90D0DD16A0B00CC242E</string>
-											<string>79AAE9500DD16B4500CC242E</string>
+											<string>79E81A080DFCC77C00592D01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -410,9 +407,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>796AC19E0DEEE9D7005F8387</string>
+				<string>7944B4B00E0243DE00E3797C</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>796AC19F0DEEE9D7005F8387</string>
+				<string>7944B4B10E0243DE00E3797C</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -525,7 +522,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>7999521B0DCA1A390020F76F</string>
+	<string>79E819D10DFCBF5700592D01</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -548,8 +545,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>796AC1A80DEEE9D7005F8387</string>
-		<string>796AC1A90DEEE9D7005F8387</string>
+		<string>7944B4BA0E0243DE00E3797C</string>
+		<string>7944B4BB0E0243DE00E3797C</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
@@ -633,7 +630,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>796AC1A00DEEE9D7005F8387</string>
+				<string>7944B4B20E0243DE00E3797C</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -753,13 +750,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>796AC1A10DEEE9D7005F8387</string>
+				<string>7944B4B30E0243DE00E3797C</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>796AC1A20DEEE9D7005F8387</string>
-				<string>796AC1A30DEEE9D7005F8387</string>
-				<string>796AC1A40DEEE9D7005F8387</string>
-				<string>796AC1A50DEEE9D7005F8387</string>
-				<string>796AC1A60DEEE9D7005F8387</string>
+				<string>7944B4B40E0243DE00E3797C</string>
+				<string>7944B4B50E0243DE00E3797C</string>
+				<string>7944B4B60E0243DE00E3797C</string>
+				<string>7944B4B70E0243DE00E3797C</string>
+				<string>7944B4B80E0243DE00E3797C</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -913,7 +910,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>796AC1A70DEEE9D7005F8387</string>
+				<string>7944B4B90E0243DE00E3797C</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

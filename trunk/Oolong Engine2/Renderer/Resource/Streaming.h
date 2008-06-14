@@ -21,7 +21,7 @@ class CStreamResource
 {
 public:
 	//CSource();
-	//~CSource();
+	virtual ~CStreamResource() { }
 	
 	virtual bool Read(void* lpBuffer, const unsigned int dwNumberOfBytesToRead) = 0;
 	virtual bool Skip(const unsigned int nBytes) = 0;

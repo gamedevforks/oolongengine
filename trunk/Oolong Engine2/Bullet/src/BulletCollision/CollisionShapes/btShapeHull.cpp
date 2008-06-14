@@ -99,8 +99,8 @@ btShapeHull::buildHull (btScalar margin)
 	}
 
 	btVector3 supportPoints[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
-	int i;
-	for (i = 0; i < numSampleDirections; i++)
+
+	for (int i = 0; i < numSampleDirections; i++)
 	{
 		supportPoints[i] = m_shape->localGetSupportingVertex(btUnitSpherePoints[i]);
 	}
@@ -127,13 +127,13 @@ btShapeHull::buildHull (btScalar margin)
 	m_vertices.resize (hr.mNumOutputVertices);
 
 
-	for (i = 0; i < hr.mNumOutputVertices; i++)
+	for (unsigned int i = 0; i < hr.mNumOutputVertices; i++)
 	{
 		m_vertices[i] = hr.m_OutputVertices[i];
 	}
 	m_numIndices = hr.mNumIndices;
 	m_indices.resize(m_numIndices);
-	for (i = 0; i < m_numIndices; i++)
+	for (unsigned int i = 0; i < m_numIndices; i++)
 	{
 		m_indices[i] = hr.m_Indices[i];
 	}

@@ -81,6 +81,7 @@ struct	btDbvt
 	/* ICollide	*/ 
 	struct	ICollide
 		{
+		virtual ~ICollide() {}
 		virtual void	Process(const Node*,const Node*)		{}
 		virtual void	Process(const Node*)					{}
 		virtual bool	Descent(const Node*)					{ return(false); }		

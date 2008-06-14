@@ -260,7 +260,7 @@ if(leafs.size()>1)
 		tNodeArray			sets[2];
 		int					bestaxis=-1;
 		int					bestmidp=leafs.size();
-		int					splitcount[3][2]={0,0,0,0,0,0};
+		int					splitcount[3][2]={{0,0},{0,0},{0,0}};
 		for(int i=0;i<leafs.size();++i)
 			{
 			const btVector3	x=leafs[i]->box.Center()-org;

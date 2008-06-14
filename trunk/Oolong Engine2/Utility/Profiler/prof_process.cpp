@@ -585,7 +585,7 @@ Prof_Report *Prof_create_report(void)
 #endif
 
    if (speedstep_warning)
-      pob->title[1] = StrDup("WARNING: SpeedStep-like timer inconsistencies detected.  Results are unreliable!");
+      pob->title[1] = strdup("WARNING: SpeedStep-like timer inconsistencies detected.  Results are unreliable!");
 
    if (displayed_quantity == Prof_CALL_GRAPH) {
       Prof_Report_Record *r = (Prof_Report_Record *) expand->highlevel;
@@ -637,15 +637,15 @@ Prof_Report *Prof_create_report(void)
       update_cursor = 0;
    }
 
-   pob->header[0] = StrDup("zone");
+   pob->header[0] = strdup("zone");
    if (displayed_quantity == Prof_HIERARCHICAL_TIME) {
-      pob->header[1] = StrDup("hier");
-      pob->header[2] = StrDup("self");
+      pob->header[1] = strdup("hier");
+      pob->header[2] = strdup("self");
    } else {
-      pob->header[1] = StrDup("self");
-      pob->header[2] = StrDup("hier");
+      pob->header[1] = strdup("self");
+      pob->header[2] = strdup("hier");
    }
-   pob->header[3] = StrDup("count");
+   pob->header[3] = strdup("count");
 
    if (cursor < 0) cursor = 0;
    if (cursor >= pob->num_record) cursor = pob->num_record-1;

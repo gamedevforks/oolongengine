@@ -93,15 +93,6 @@ VECTOR3 m_fObjectCentre;
 unsigned int m_ui32Mode;
 bool m_bUsePBuffer;
 
-//#ifdef GL_OES_VERSION_1_1
-//EGLSurface m_PBufferSurface;
-
-/* Render contexts, etc */
-//EGLDisplay m_CurrentDisplay;
-//EGLContext m_CurrentContext;
-//EGLSurface m_CurrentSurface;
-//#endif
-
 VERTTYPE m_fAngle;
 VERTTYPE m_fObjectAngle;
 
@@ -122,8 +113,6 @@ void findPlane(VECTOR4 &plane, const VECTOR3 &v0, const VECTOR3 &v1, const VECTO
 void DrawProjectedShadow(SPODNode* pNode);
 bool RenderToTexture(SPODNode *pNode);
 bool RenderFromLightsView();
-//EGLConfig SelectEGLConfig();
-
 
 bool CShell::InitApplication()
 {
@@ -136,9 +125,6 @@ bool CShell::InitApplication()
 
 	Textures = new CTexture;
 
-	// Request PBuffer support
-//	PVRShellSet(prefPBufferContext, true);
-	
 	/*
 	 Loads the scene from the .h file into a CPVRTPODScene object.
 	 We could also export the scene into a binary .pod file and
@@ -154,61 +140,15 @@ bool CShell::InitApplication()
 	}
 	
 	m_fAngle = f2vt(0);
-	//m_uiFPSFrameCnt = 0;
 	m_fFPS = 0;
 	
-//	if(!PVRShellGet(prefPBufferContext))
-//		m_bUsePBuffer = false;
-	
-//#ifdef GL_OES_VERSION_1_1
-//	m_bUsePBuffer = true;
-	
-	/*
-	 First check whether PBuffer is available. If it is not then exit.
-	 */
-	
-	/*
-	 Get the current display, context and surface so we can switch between the
-	 PBuffer surface and the main render surface.
-	 */
-	
-//	m_CurrentDisplay = eglGetCurrentDisplay();
-//	m_CurrentContext = eglGetCurrentContext();
-//	m_CurrentSurface = eglGetCurrentSurface(EGL_DRAW);
-	
-	/*
-	 Set up a configuration and attribute list used for creating a PBuffer surface.
-	 */
-//	EGLConfig eglConfig = SelectEGLConfig();
-//	
-//	EGLint list[]=
-//	{
-//		/* First we specify the width of the surface... */
-//		EGL_WIDTH, TEXTURESIZE,
-//		/* ...then the height of the surface...*/
-//		EGL_HEIGHT, TEXTURESIZE,
-//		/* ... then we specifiy the target for the texture
-//		 that will be created when the pbuffer is created...*/
-//		EGL_TEXTURE_TARGET, EGL_TEXTURE_2D,
-//		/*..then the format of the texture that will be created
-//		 when the pBuffer is bound to a texture...*/
-//		EGL_TEXTURE_FORMAT, EGL_TEXTURE_RGB,
-//		/* The final thing is EGL_NONE which signifies the end. */
-//		EGL_NONE
-//	};
 	
 	/*
 	 Using out attribute list and our egl configuration then set up the
 	 required PBuffer.
 	 */
-//	m_PBufferSurface = eglCreatePbufferSurface(m_CurrentDisplay, eglConfig, list);
-	
-	/*If we don't have the surfaces return false. */
-//	if(m_PBufferSurface == EGL_NO_SURFACE)
-//		m_bUsePBuffer = false;
-//#else
 	m_bUsePBuffer = false;
-//#endif
+
 	
 	/*
 	 Start the demo with the advanced blob
@@ -269,7 +209,6 @@ bool CShell::InitApplication()
 	MatrixLookAtRH(m_mView, vFrom, vTo, vUp);
 	
 	// Calculates the projection matrix
-	//bool bRotate = PVRShellGet(prefIsRotated) && PVRShellGet(prefFullScreen);
 	MatrixPerspectiveFovRH(m_mProjection, f2vt(45), f2vt((float)HEIGHT/(float)WIDTH), f2vt(CAM_NEAR), f2vt(CAM_FAR), true);
 	
 	// Reads the light direction from the scene.
@@ -397,11 +336,6 @@ bool CShell::QuitApplication()
 	Textures->ReleaseTexture(m_uiKettle);
 	Textures->ReleaseTexture(m_uiTableCover);
 		
-//#ifdef GL_OES_VERSION_1_1
-//	if(m_bUsePBuffer)
-//		eglDestroySurface(m_CurrentDisplay,m_PBufferSurface);
-//#endif
-	
 	glDeleteTextures(1, &m_uiShadow);
 
 	// Frees the memory allocated for the scene
@@ -455,10 +389,6 @@ bool RenderToTexture(SPODNode *pNode)
 	
 	glDisable(GL_TEXTURE_2D);
 	
-	/*
-	 For some reason on some platforms the rendering to a PBuffer fails if culling is enabled. 
-	 Therefore I'm disabling culling before I render to the PBuffer.
-	 */
 	glDisable(GL_CULL_FACE);
 	
 	DrawMesh(pNode);
@@ -557,24 +487,6 @@ bool RenderFromLightsView()
 {
 	glEnable(GL_DEPTH_TEST);
 	
-//#ifdef GL_OES_VERSION_1_1
-//	if(m_bUsePBuffer)
-//	{
-//		glBindTexture(GL_TEXTURE_2D, m_uiShadow);
-//		if(!eglReleaseTexImage(m_CurrentDisplay, m_PBufferSurface, EGL_BACK_BUFFER))
-//		{
-//			PVRShellOutputDebug("Failed to release m_PBufferSurface");
-//			return false;
-//		}
-//		
-//		if(!eglMakeCurrent(m_CurrentDisplay, m_PBufferSurface, m_PBufferSurface, m_CurrentContext))
-//		{
-//			PVRShellOutputDebug("Unable to make the pbuffer context current");
-//			return false;
-//		}
-//	}
-//#endif
-	
 	glViewport(0, 0, TEXTURESIZE, TEXTURESIZE);
 	myglClearColor(f2vt(1), f2vt(1), f2vt(1), f2vt(1));
 	
@@ -588,22 +500,6 @@ bool RenderFromLightsView()
 	myglLoadMatrix(proj.f);
 	
 	RenderToTexture(&m_Scene.pNode[SHADOW_CASTER]);
-	
-//#ifdef GL_OES_VERSION_1_1
-//	if(m_bUsePBuffer)
-//	{
-//		if(!eglBindTexImage(m_CurrentDisplay, m_PBufferSurface, EGL_BACK_BUFFER))
-//		{
-//			PVRShellOutputDebug("Failed to bind m_PBufferSurface\n");
-//		}
-//		
-//		if (!eglMakeCurrent(m_CurrentDisplay, m_CurrentSurface, m_CurrentSurface, m_CurrentContext))
-//		{
-//			PVRShellOutputDebug("Unable to make the main context current");
-//			return false;
-//		}
-//	}
-//#endif
 	
 	return true;
 }
@@ -629,8 +525,6 @@ bool CShell::RenderScene()
 	if(startTime == 0)
 		startTime = TimeInterval;
 	
-//	AppDisplayText->DisplayText(0, 14, 0.4f, RGBA(255,255,255,255), "Time: %3.2f", TimeInterval - startTime);
-
 	frames++;
 	if (TimeInterval - startTime) 
 	{
@@ -901,11 +795,7 @@ bool CShell::RenderScene()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
-	
-	// Displays the demo name using the tools. For a detailed explanation, see the training course IntroducingPVRTools
-//	m_Print3D.Flush();
-	
-	
+		
 	AppDisplayText->Flush();	
 	
 	return true;
@@ -1155,51 +1045,3 @@ void DrawAdvancedBlobShadow()
 	
 	DrawBaseBlob(fInter);
 }
-
-/*!****************************************************************************
- @Function		SelectEGLConfig
- @Return		EGLConfig
- @Description	Returns a suitable config for creating a PBuffer.
- ******************************************************************************/
-//EGLConfig SelectEGLConfig()
-//{
-//	EGLConfig EglConfig = 0;
-	
-//#ifdef GL_OES_VERSION_1_1
-//	EGLint i32ConfigID;
-//	int i32BufferSize;
-	
-	// Get the colour buffer size of the current surface so we can create a PBuffer surface
-	// that matches.
-//	EGLDisplay eglDisplay = eglGetCurrentDisplay();
-//	eglQueryContext(eglDisplay, eglGetCurrentContext(), EGL_CONFIG_ID, &i32ConfigID);
-//	eglGetConfigAttrib(eglDisplay, (EGLConfig) i32ConfigID, EGL_BUFFER_SIZE,&i32BufferSize);
-	
-//	EGLint i32ConfigNo;
-	
-	/* Setup the configuration list for our surface. */
-  //  EGLint conflist[] =
-	//{
-//		EGL_CONFIG_CAVEAT, EGL_NONE,
-		/* 
-		 Tell it the minimum size we want for our colour buffer and the depth size so 
-		 eglChooseConfig will choose the config that is the closest match.
-		 */
-//		EGL_BUFFER_SIZE, i32BufferSize,
-//		EGL_DEPTH_SIZE, 16,
-		/* The PBuffer bit is the important part as it shows we want a PBuffer*/
-//		EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,
-//		EGL_BIND_TO_TEXTURE_RGB, EGL_TRUE,
-//		EGL_NONE
-//	};
-	
-	/* Find and return the config */
-//    if(!eglChooseConfig(m_CurrentDisplay, conflist, &EglConfig, 1, &i32ConfigNo) || i32ConfigNo != 1)
-//	{
-//		PVRShellOutputDebug("Error: Failed to find a suitable config.\n");
-//		return 0;
-//}
-//#endif
-	
-//    return EglConfig;
-//}

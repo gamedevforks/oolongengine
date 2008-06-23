@@ -231,8 +231,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -325,6 +323,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -342,7 +342,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>798070B20E04B3CC002602F5</string>
+										<string>798070D00E0FFB2B002602F5</string>
 										<key>history</key>
 										<array>
 											<string>796AC2AF0DF27654005F8387</string>
@@ -351,7 +351,8 @@
 											<string>796AC2EB0DF2771C005F8387</string>
 											<string>796AC2EC0DF2771C005F8387</string>
 											<string>79F921850DFA40C7003CD043</string>
-											<string>798070B10E04B3CC002602F5</string>
+											<string>798070CC0E0FFB2B002602F5</string>
+											<string>798070CD0E0FFB2B002602F5</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -362,6 +363,7 @@
 											<string>796AC2C10DF27671005F8387</string>
 											<string>796AC2C20DF27671005F8387</string>
 											<string>79F921860DFA40C7003CD043</string>
+											<string>798070CF0E0FFB2B002602F5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -419,9 +421,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>798070B30E04B3CC002602F5</string>
+				<string>798070C70E0FFB07002602F5</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>798070B40E04B3CC002602F5</string>
+				<string>798070C80E0FFB07002602F5</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -557,8 +559,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>798070B00E04B3C7002602F5</string>
-		<string>798070AE0E04B3B4002602F5</string>
+		<string>798070D90E0FFB2B002602F5</string>
+		<string>798070DA0E0FFB2B002602F5</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/05 Shadows/Shadows.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -639,7 +644,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>7944B4F30E0244B400E3797C</string>
+				<string>798070C90E0FFB07002602F5</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -759,13 +764,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>7944B4F40E0244B400E3797C</string>
+				<string>798070D20E0FFB2B002602F5</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>7944B4F50E0244B400E3797C</string>
-				<string>7944B4F60E0244B400E3797C</string>
-				<string>7944B4F70E0244B400E3797C</string>
-				<string>7944B4F80E0244B400E3797C</string>
-				<string>7944B4F90E0244B400E3797C</string>
+				<string>798070D30E0FFB2B002602F5</string>
+				<string>798070D40E0FFB2B002602F5</string>
+				<string>798070D50E0FFB2B002602F5</string>
+				<string>798070D60E0FFB2B002602F5</string>
+				<string>798070D70E0FFB2B002602F5</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -919,7 +924,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7944B4FA0E0244B400E3797C</string>
+				<string>798070D80E0FFB2B002602F5</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

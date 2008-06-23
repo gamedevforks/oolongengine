@@ -103,7 +103,6 @@ bool CShell::InitApplication()
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-//		LOG("Display text textures loaded", Logger::LOG_DATA);
 				printf("Display text textures loaded\n");
 
 	/* Load all header objects */
@@ -114,10 +113,6 @@ bool CShell::InitApplication()
 	
 	MATRIX	MyPerspMatrix;
 	int			i;
-	//int			err;
-	//SPVRTContext Context;
-	//float		fWidth  = (float)PVRShellGet(prefWidth);
-	//float		fHeight = (float)PVRShellGet(prefHeight);
 	
 	/* Load textures */
 	if (!Texture->LoadTextureFromPointer((void*)GRANITE, &texNameObject))

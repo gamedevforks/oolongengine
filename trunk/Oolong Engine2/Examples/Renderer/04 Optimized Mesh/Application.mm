@@ -138,8 +138,6 @@ bool CShell::InitApplication()
 	if(!Textures->LoadTextureFromPointer((void*)model_texture, &m_Texture))
 	{
 		printf("**ERROR** Failed to load texture for Background.\n");
-		
-		//		PVRShellOutputDebug("**ERROR** Failed to load texture for Background.\n");
 		return false;
 	}
 	

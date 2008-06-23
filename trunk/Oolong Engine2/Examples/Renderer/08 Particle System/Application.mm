@@ -129,7 +129,6 @@ bool CShell::InitApplication()
 	AppDisplayText = new CDisplayText;  
 	Textures = new CTexture;
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-//		LOG("Display text textures loaded", Logger::LOG_DATA);
 				printf("Display text textures loaded\n");
 	/*
 	 Initializes variables.
@@ -141,13 +140,7 @@ bool CShell::InitApplication()
 	vTo.x	= f2vt(0.0f); vTo.y		= f2vt(20.0f); vTo.z	= f2vt(-1.0f);
 	
 	MATRIX		MyPerspMatrix;
-//	float			width  = (float)PVRShellGet(prefWidth);
-//	float			height =  (float)PVRShellGet(prefHeight);
-//	int				err;
-//	SPVRTContext	Context;
-	
-	// Initialize Extensions
-//	glExtensions.Init();
+
 #ifdef GL_OES_VERSION_1_1
 	bUsePointSprites = 1;
 #else
@@ -159,14 +152,12 @@ bool CShell::InitApplication()
 	 */
 	if (!Textures->LoadTextureFromPointer((void*)LightTex, &texName))
 	{
-		//PVRShellSet(prefExitMessage, "ERROR: Cannot load texture\n");
 		return false;
 	}
 	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	if (!Textures->LoadTextureFromPointer((void*)FloorTex8, &floorTexName))
 	{
-//		PVRShellSet(prefExitMessage, "ERROR: Cannot load texture\n");
 		return false;
 	}
 	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -177,12 +168,6 @@ bool CShell::InitApplication()
 	 */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//if (PVRShellGet(prefIsRotated) && PVRShellGet(prefFullScreen))
-	//{
-	//	myglRotate(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
-	//	width = (float)PVRShellGet(prefHeight);
-	//	height = (float)PVRShellGet(prefWidth);
-	//}
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(45.0f*(PIf/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
 	myglMultMatrix(MyPerspMatrix.f);
 	
@@ -814,13 +799,11 @@ void render_particle(int NmbrOfParticles, bool bReflect)
 		glBindBuffer(GL_ARRAY_BUFFER, iVertVboID);
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
-		//glVertexPointer(3,VERTTYPEENUM,sizeof(SVtxPointSprite),&ParticleVTXPSBuf[0].x);  // Old Point Sprite (nonVBO code)
 		glVertexPointer(3,VERTTYPEENUM,sizeof(SVtxPointSprite),0);
 		
 		myglTexEnv( GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE );
 		
 		glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
-		//glPointSizePointerOES(VERTTYPEENUM,sizeof(SVtxPointSprite),&ParticleVTXPSBuf[0].size);  // Old Point Sprite (nonVBO code)
 		glPointSizePointerOES(VERTTYPEENUM,sizeof(SVtxPointSprite),(GLvoid*) (sizeof(VERTTYPE)*3));
 		
 #ifndef PVRTFIXEDPOINTENABLE
@@ -836,13 +819,11 @@ void render_particle(int NmbrOfParticles, bool bReflect)
 		if(bReflect)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, iColBVboID);
-			//glColorPointer(4,GL_UNSIGNED_BYTE,sizeof(SColors),&ReflectColor[0].r);  // Old Point Sprite (nonVBO code)
 			glColorPointer(4,GL_UNSIGNED_BYTE,0,0);
 		}
 		else
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, iColAVboID);
-			//glColorPointer(4,GL_UNSIGNED_BYTE,sizeof(SColors),&NormalColor[0].r);  // Old Point Sprite (nonVBO code)
 			glColorPointer(4,GL_UNSIGNED_BYTE,0,0);
 		}
 		

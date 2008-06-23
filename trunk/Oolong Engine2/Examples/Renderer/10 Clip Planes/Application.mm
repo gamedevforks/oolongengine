@@ -85,10 +85,8 @@ bool CShell::InitApplication()
 
 #ifdef GL_OES_VERSION_1_1
 #define ClipPlane glClipPlanef
-#else
-//	CPVRTglesExt::PFNGLCLIPPLANEFIMG ClipPlane;
 #endif
-
+	
 	nFrame = 0L;
 	
 	LightPosition[0]= f2vt(-1.0f);
@@ -101,11 +99,8 @@ bool CShell::InitApplication()
 	MATRIX	MyPerspMatrix;
 	VERTTYPE	fValue[4];
 	
-	/* Initialize Extensions */
-	//glExtensions.Init();
-	
 	/* Detects if we are using OpenGL ES 1.1 or if the extension exists */
-//	bClipPlaneSupported = false;
+
 #ifdef GL_OES_VERSION_1_1
 	bClipPlaneSupported = true;
 #endif

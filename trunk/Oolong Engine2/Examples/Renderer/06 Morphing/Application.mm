@@ -127,8 +127,6 @@ void doRenderScene();
 
 bool CShell::InitApplication()
 {
-//	LOGFUNC("InitApplication()");
-	
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))

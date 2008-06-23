@@ -19,7 +19,6 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
-//#include "Log.h"
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
@@ -72,13 +71,10 @@ void RenderBackground();
 
 bool CShell::InitApplication()
 {
-//	LOGFUNC("InitApplication()");
-	
 	AppDisplayText = new CDisplayText;  
 	Textures = new CTexture;
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-//		LOG("Display text textures loaded", Logger::LOG_DATA);
 				printf("Display text textures loaded\n");
 
 	/* Init values to defaults */
@@ -89,8 +85,6 @@ bool CShell::InitApplication()
 	glassMesh	= LoadHeaderObject(&Mesh[M_GLASS]);
 	silverMesh	= LoadHeaderObject(&Mesh[M_SILVER]);
 	
-	//bool			err;
-	//SPVRTContext	Context;
 	MATRIX		MyPerspMatrix;
 	
 	
@@ -209,8 +203,6 @@ bool CShell::RenderScene()
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-//	if(PVRShellGet(prefIsRotated) && PVRShellGet(prefFullScreen))
-//		myglRotate(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
 	
 	/* Set modelview matrix to identity for background */
 	glMatrixMode(GL_MODELVIEW);

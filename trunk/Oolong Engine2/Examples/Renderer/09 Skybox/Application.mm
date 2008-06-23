@@ -20,7 +20,6 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
-//#include "Log.h"
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
@@ -68,7 +67,6 @@ GLuint skyboxTex[6];
 
 /* Print3D, Extension and POD Class Objects */
 CPODScene		g_sScene;
-//CPVRTglesExt		g_PVRTglesExt;
 
 /* View and Projection Matrices */
 MATRIX	g_mView, g_mProj;
@@ -98,13 +96,10 @@ void DestroySkybox(VERTTYPE* Vertices, VERTTYPE* UVs);
 
 bool CShell::InitApplication()
 {
-//	LOGFUNC("InitApplication()");
-	
 	AppDisplayText = new CDisplayText;  
 	Textures = new CTexture;
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-//		LOG("Display text textures loaded", Logger::LOG_DATA);
 				printf("Display text textures loaded\n");
 
 	/* Init values to defaults */
@@ -146,8 +141,6 @@ bool CShell::InitApplication()
 	} while((res < 0) || (res >= len));
 	pszExePath[res] = '\0'; // Null-terminate readlink's result
 */
-	//	bool	bErr;
-	//	SPVRTContext TempContext;
 	int		i;
 	
 	/* Gets the Data Path */

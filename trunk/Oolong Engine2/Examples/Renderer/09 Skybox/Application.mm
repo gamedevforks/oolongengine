@@ -12,6 +12,10 @@ subject to the following restrictions:
 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
+/*
+ This example uses art assets from the PowerVR SDK. Imagination Technologies / PowerVR allowed us to use those art assets and we are thankful for this. 
+ Having art assets that are optimized for the underlying hardware allows us to show off the capabilties of the graphics chip better.
+ */
 
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
@@ -122,9 +126,28 @@ bool CShell::InitApplication()
 	vUp.z = f2vt(0);
 	
 	g_sScene.ReadFromMemory(c_BALLOON_H);
-
-//	bool	bErr;
-//	SPVRTContext TempContext;
+/*	
+	
+	// Construct the binary path
+	// Get PID
+	pid_t ourPid = getpid();
+	char *pszExePath, pszSrcLink[1024];
+	int len = 64;
+	int res;
+	
+	sprintf(pszSrcLink, "/proc/%d/exe", ourPid);
+	pszExePath = 0;
+	do
+	{
+		len *= 2;
+		delete[] pszExePath;
+		pszExePath = new char[len];
+		res = readlink(pszSrcLink, pszExePath, len);
+	} while((res < 0) || (res >= len));
+	pszExePath[res] = '\0'; // Null-terminate readlink's result
+*/
+	//	bool	bErr;
+	//	SPVRTContext TempContext;
 	int		i;
 	
 	/* Gets the Data Path */

@@ -342,7 +342,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7944B4F00E0244B400E3797C</string>
+										<string>798070B20E04B3CC002602F5</string>
 										<key>history</key>
 										<array>
 											<string>796AC2AF0DF27654005F8387</string>
@@ -351,7 +351,7 @@
 											<string>796AC2EB0DF2771C005F8387</string>
 											<string>796AC2EC0DF2771C005F8387</string>
 											<string>79F921850DFA40C7003CD043</string>
-											<string>79F922240DFB64A0003CD043</string>
+											<string>798070B10E04B3CC002602F5</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -419,9 +419,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7944B4F10E0244B400E3797C</string>
+				<string>798070B30E04B3CC002602F5</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7944B4F20E0244B400E3797C</string>
+				<string>798070B40E04B3CC002602F5</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -534,7 +534,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>79F9221D0DFA5A5A003CD043</string>
+	<string>798070B00E04B3C7002602F5</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -557,11 +557,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7944B4FB0E0244B400E3797C</string>
-		<string>7944B4FC0E0244B400E3797C</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>79235C150DAD062200F918F8</string>
+		<string>798070B00E04B3C7002602F5</string>
+		<string>798070AE0E04B3B4002602F5</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/05 Shadows/Shadows.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

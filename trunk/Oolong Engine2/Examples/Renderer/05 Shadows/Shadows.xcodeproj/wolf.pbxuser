@@ -80,11 +80,10 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 235029651;
-			PBXWorkspaceStateSaveDate = 235029651;
+			PBXPerProjectTemplateStateSaveDate = 235189020;
+			PBXWorkspaceStateSaveDate = 235189020;
 		};
 		perUserProjectItems = {
-			7944B4F00E0244B400E3797C /* PBXTextBookmark */ = 7944B4F00E0244B400E3797C /* PBXTextBookmark */;
 			796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = 796AC2AF0DF27654005F8387 /* PBXTextBookmark */;
 			796AC2B20DF27654005F8387 /* PBXTextBookmark */ = 796AC2B20DF27654005F8387 /* PBXTextBookmark */;
 			796AC2BB0DF27671005F8387 /* PBXTextBookmark */ = 796AC2BB0DF27671005F8387 /* PBXTextBookmark */;
@@ -96,9 +95,10 @@
 			796AC2EB0DF2771C005F8387 /* PBXBookmark */ = 796AC2EB0DF2771C005F8387 /* PBXBookmark */;
 			796AC2EC0DF2771C005F8387 /* PBXBookmark */ = 796AC2EC0DF2771C005F8387 /* PBXBookmark */;
 			7976CA4D0DD160970043302E /* PBXTextBookmark */ = 7976CA4D0DD160970043302E /* PBXTextBookmark */;
+			798070B10E04B3CC002602F5 /* PBXTextBookmark */ = 798070B10E04B3CC002602F5 /* PBXTextBookmark */;
+			798070B20E04B3CC002602F5 /* PBXTextBookmark */ = 798070B20E04B3CC002602F5 /* PBXTextBookmark */;
 			79F921850DFA40C7003CD043 /* PBXTextBookmark */ = 79F921850DFA40C7003CD043 /* PBXTextBookmark */;
 			79F921860DFA40C7003CD043 /* PBXTextBookmark */ = 79F921860DFA40C7003CD043 /* PBXTextBookmark */;
-			79F922240DFB64A0003CD043 /* PBXTextBookmark */ = 79F922240DFB64A0003CD043 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -177,20 +177,10 @@
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1470, 16464}}";
-			sepNavSelRange = "{17755, 0}";
-			sepNavVisRange = "{17658, 625}";
+			sepNavSelRange = "{17781, 1}";
+			sepNavVisRange = "{17655, 626}";
 			sepNavWindowFrame = "{{268, 97}, {821, 781}}";
 		};
-	};
-	7944B4F00E0244B400E3797C /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 667";
-		rLen = 0;
-		rLoc = 17755;
-		rType = 0;
-		vrLen = 625;
-		vrLoc = 17658;
 	};
 	796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */ = {
 		isa = PBXFileReference;
@@ -301,10 +291,30 @@
 		vrLen = 534;
 		vrLoc = 201;
 	};
+	798070B10E04B3CC002602F5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 669";
+		rLen = 1;
+		rLoc = 17781;
+		rType = 0;
+		vrLen = 626;
+		vrLoc = 17655;
+	};
+	798070B20E04B3CC002602F5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 669";
+		rLen = 1;
+		rLoc = 17781;
+		rType = 0;
+		vrLen = 626;
+		vrLoc = 17655;
+	};
 	79EA04400DAFC7950038ED3D /* EAGLView.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1176, 1722}}";
-			sepNavSelRange = "{3852, 28}";
+			sepNavSelRange = "{5022, 29}";
 			sepNavVisRange = "{3411, 1716}";
 			sepNavWindowFrame = "{{15, 91}, {883, 787}}";
 		};
@@ -313,7 +323,8 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1614, 3822}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{3760, 1615}";
+			sepNavVisRange = "{2312, 1635}";
+			sepNavWindowFrame = "{{15, 86}, {1060, 787}}";
 		};
 	};
 	79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */ = {
@@ -321,7 +332,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {1404, 1176}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{1822, 2729}";
-			sepNavWindowFrame = "{{15, 86}, {883, 792}}";
+			sepNavWindowFrame = "{{15, 89}, {883, 789}}";
 		};
 	};
 	79EA044E0DAFC7950038ED3D /* DisplayText.cpp */ = {
@@ -490,15 +501,5 @@
 		location = Shadows;
 		modificationTime = 235029670.867267;
 		state = 2;
-	};
-	79F922240DFB64A0003CD043 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 667";
-		rLen = 0;
-		rLoc = 17755;
-		rType = 0;
-		vrLen = 651;
-		vrLoc = 17658;
 	};
 }

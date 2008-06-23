@@ -100,7 +100,7 @@ bool CShell::InitApplication()
 	Textures = new CTexture;
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-				printf("Display text textures loaded\n");
+		printf("Display text textures loaded\n");
 
 	/* Init values to defaults */
 	fViewAngle = PIOVERTWO;
@@ -141,6 +141,7 @@ bool CShell::InitApplication()
 	} while((res < 0) || (res >= len));
 	pszExePath[res] = '\0'; // Null-terminate readlink's result
 */
+	
 	int		i;
 	
 	/* Gets the Data Path */

@@ -116,8 +116,6 @@ bool RenderFromLightsView();
 
 bool CShell::InitApplication()
 {
-//	LOGFUNC("InitApplication()");
-	
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
@@ -421,11 +419,7 @@ bool DrawShadowTexture()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
-	//float fWidth = (float) PVRShellGet(prefWidth);
-	//float fHeight= (float) PVRShellGet(prefHeight);
 	float fScale = HEIGHT / WIDTH;
-	
-	//bool bRotate = PVRShellGet(prefIsRotated);
 	
 	if(1)
 	{
@@ -624,7 +618,6 @@ bool CShell::RenderScene()
 	glEnable(GL_DEPTH_TEST);
 	myglColor4(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
 	
-	//glViewport(0,0,PVRShellGet(prefWidth),PVRShellGet(prefHeight));
 	glViewport(0,0,HEIGHT,WIDTH);
 	
 	myglClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));

@@ -74,11 +74,10 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 235184871;
-			PBXWorkspaceStateSaveDate = 235184871;
+			PBXPerProjectTemplateStateSaveDate = 235929174;
+			PBXWorkspaceStateSaveDate = 235929174;
 		};
 		perUserProjectItems = {
-			7944B6580E024BFE00E3797C /* PBXTextBookmark */ = 7944B6580E024BFE00E3797C /* PBXTextBookmark */;
 			796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = 796AC2AF0DF27654005F8387 /* PBXTextBookmark */;
 			796AC2B20DF27654005F8387 /* PBXTextBookmark */ = 796AC2B20DF27654005F8387 /* PBXTextBookmark */;
 			796AC2BB0DF27671005F8387 /* PBXTextBookmark */ = 796AC2BB0DF27671005F8387 /* PBXTextBookmark */;
@@ -90,7 +89,8 @@
 			796AC2EB0DF2771C005F8387 /* PBXBookmark */ = 796AC2EB0DF2771C005F8387 /* PBXBookmark */;
 			796AC2EC0DF2771C005F8387 /* PBXBookmark */ = 796AC2EC0DF2771C005F8387 /* PBXBookmark */;
 			7976CA4D0DD160970043302E /* PBXTextBookmark */ = 7976CA4D0DD160970043302E /* PBXTextBookmark */;
-			798070B50E0FF8B0002602F5 /* PBXTextBookmark */ = 798070B50E0FF8B0002602F5 /* PBXTextBookmark */;
+			798070E20E0FFE79002602F5 /* PBXTextBookmark */ = 798070E20E0FFE79002602F5 /* PBXTextBookmark */;
+			798070EF0E100474002602F5 /* PBXTextBookmark */ = 798070EF0E100474002602F5 /* PBXTextBookmark */;
 			79E81A2A0DFCCD7400592D01 /* PBXTextBookmark */ = 79E81A2A0DFCCD7400592D01 /* PBXTextBookmark */;
 			79E81A2B0DFCCD7400592D01 /* PBXTextBookmark */ = 79E81A2B0DFCCD7400592D01 /* PBXTextBookmark */;
 			79E81A2E0DFCCD7400592D01 /* PBXTextBookmark */ = 79E81A2E0DFCCD7400592D01 /* PBXTextBookmark */;
@@ -180,21 +180,11 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 8582}}";
-			sepNavSelRange = "{3569, 412}";
-			sepNavVisRange = "{3689, 377}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 8804}}";
+			sepNavSelRange = "{4130, 1}";
+			sepNavVisRange = "{3911, 527}";
 			sepNavWindowFrame = "{{188, 140}, {1030, 726}}";
 		};
-	};
-	7944B6580E024BFE00E3797C /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 238";
-		rLen = 0;
-		rLoc = 7647;
-		rType = 0;
-		vrLen = 477;
-		vrLoc = 3907;
 	};
 	796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */ = {
 		isa = PBXFileReference;
@@ -298,15 +288,23 @@
 		vrLen = 534;
 		vrLoc = 201;
 	};
-	798070B50E0FF8B0002602F5 /* PBXTextBookmark */ = {
+	798070E20E0FFE79002602F5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'SArray' was not declared in this scope";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 143;
+		rType = 1;
+	};
+	798070EF0E100474002602F5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 127";
-		rLen = 412;
-		rLoc = 3569;
+		name = "Application.mm: 143";
+		rLen = 1;
+		rLoc = 4130;
 		rType = 0;
-		vrLen = 377;
-		vrLoc = 3689;
+		vrLen = 295;
+		vrLoc = 3911;
 	};
 	79E81A190DFCC8FA00592D01 /* Texture.h */ = {
 		uiCtxt = {

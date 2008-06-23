@@ -14,9 +14,26 @@
 #include <Mathematics.h>
 
 
+/*
+static CFTimeInterval	startTime = 0;
+CFTimeInterval			TimeInterval;
+
+// Absolute time is measured in seconds relative to the absolute reference date of Jan 1 2001 00:00:00 GMT. 
+// A positive value represents a date after the reference date, a negative value represents a date before it. 
+TimeInterval = CFAbsoluteTimeGetCurrent();
+if(startTime == 0)
+startTime = TimeInterval;
+
+frames++;
+if (TimeInterval - startTime) 
+{
+	m_fFPS = ((float)frames/(TimeInterval - startTime));
+}
+*/
 // 
 // GetTime
 // Time in milliseconds since 1970
+// this is probably not very stable .. check out CFAbsoluteTimeGetCurrent() instead
 //
 unsigned long GetTimeInMsSince1970()
 {

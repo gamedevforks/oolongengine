@@ -271,6 +271,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
+								<string>2D500B1D0D5A766B00DBA0E3</string>
 								<string>2D500B6F0D5A793600DBA0E3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
@@ -282,7 +283,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -336,18 +336,16 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7944B4D60E02448F00E3797C</string>
+										<string>791F49DD0E17561900E927FE</string>
 										<key>history</key>
 										<array>
 											<string>796AC20C0DF260C3005F8387</string>
-											<string>796AC2490DF26A0A005F8387</string>
-											<string>79F9222C0DFB6504003CD043</string>
+											<string>7944B4D60E02448F00E3797C</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>7976CA4D0DD160970043302E</string>
 											<string>796AC2100DF260C3005F8387</string>
-											<string>796AC24A0DF26A0A005F8387</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -405,9 +403,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7944B4D70E02448F00E3797C</string>
+				<string>791F49DE0E17561900E927FE</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7944B4D80E02448F00E3797C</string>
+				<string>791F49DF0E17561900E927FE</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -543,12 +541,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7944B4E10E02448F00E3797C</string>
-		<string>7944B4E20E02448F00E3797C</string>
+		<string>791F49E80E17561900E927FE</string>
+		<string>791F49E90E17561900E927FE</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/04 Optimized Mesh/OptimizedMesh.xcodeproj</string>
+		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/02 Optimized Mesh/OptimizedMesh.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>45 217 1186 630 0 0 1440 878 </string>
@@ -628,7 +626,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>7944B4D90E02448F00E3797C</string>
+				<string>791F49E00E17561900E927FE</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -748,13 +746,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>7944B4DA0E02448F00E3797C</string>
+				<string>791F49E10E17561900E927FE</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>7944B4DB0E02448F00E3797C</string>
-				<string>7944B4DC0E02448F00E3797C</string>
-				<string>7944B4DD0E02448F00E3797C</string>
-				<string>7944B4DE0E02448F00E3797C</string>
-				<string>7944B4DF0E02448F00E3797C</string>
+				<string>791F49E20E17561900E927FE</string>
+				<string>791F49E30E17561900E927FE</string>
+				<string>791F49E40E17561900E927FE</string>
+				<string>791F49E50E17561900E927FE</string>
+				<string>791F49E60E17561900E927FE</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -908,7 +906,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7944B4E00E02448F00E3797C</string>
+				<string>791F49E70E17561900E927FE</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

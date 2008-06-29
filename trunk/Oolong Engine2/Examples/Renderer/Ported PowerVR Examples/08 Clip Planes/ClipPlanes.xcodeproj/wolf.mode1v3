@@ -272,10 +272,6 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>2D500B1D0D5A766B00DBA0E3</string>
-								<string>79EA043B0DAFC7950038ED3D</string>
-								<string>79EA04970DAFCC980038ED3D</string>
-								<string>79EA043C0DAFC7950038ED3D</string>
-								<string>79235CD00DAD243A00F918F8</string>
 								<string>2D500B6F0D5A793600DBA0E3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
@@ -287,7 +283,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -338,10 +333,6 @@
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>sphere_float.h</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>7944B55D0E0245FD00E3797C</string>
 										<key>history</key>
 										<array>
 											<string>796AC2AF0DF27654005F8387</string>
@@ -350,7 +341,6 @@
 											<string>796AC2EB0DF2771C005F8387</string>
 											<string>796AC2EC0DF2771C005F8387</string>
 											<string>79E81AE10DFCD87000592D01</string>
-											<string>79E81B5E0DFCDFA000592D01</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -417,9 +407,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7944B55F0E0245FD00E3797C</string>
+				<string>791F47680E1752CF00E927FE</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7944B5600E0245FD00E3797C</string>
+				<string>791F47690E1752CF00E927FE</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -555,12 +545,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7944B5690E0245FD00E3797C</string>
-		<string>7944B56A0E0245FD00E3797C</string>
+		<string>791F47720E1752CF00E927FE</string>
+		<string>791F47730E1752CF00E927FE</string>
 		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/10 Clip Planes/ClipPlanes.xcodeproj</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/08 Clip Planes/ClipPlanes.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>212 182 918 569 0 0 1440 878 </string>
@@ -640,7 +630,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>7944B5610E0245FD00E3797C</string>
+				<string>791F476A0E1752CF00E927FE</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -760,13 +750,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>7944B5620E0245FD00E3797C</string>
+				<string>791F476B0E1752CF00E927FE</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>7944B5630E0245FD00E3797C</string>
-				<string>7944B5640E0245FD00E3797C</string>
-				<string>7944B5650E0245FD00E3797C</string>
-				<string>7944B5660E0245FD00E3797C</string>
-				<string>7944B5670E0245FD00E3797C</string>
+				<string>791F476C0E1752CF00E927FE</string>
+				<string>791F476D0E1752CF00E927FE</string>
+				<string>791F476E0E1752CF00E927FE</string>
+				<string>791F476F0E1752CF00E927FE</string>
+				<string>791F47700E1752CF00E927FE</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -920,7 +910,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7944B5680E0245FD00E3797C</string>
+				<string>791F47710E1752CF00E927FE</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

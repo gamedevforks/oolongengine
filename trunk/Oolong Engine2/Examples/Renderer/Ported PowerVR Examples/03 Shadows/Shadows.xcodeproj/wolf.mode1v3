@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -270,11 +272,6 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>2D500B1D0D5A766B00DBA0E3</string>
-								<string>79EA043B0DAFC7950038ED3D</string>
-								<string>79EA04970DAFCC980038ED3D</string>
-								<string>79EA043C0DAFC7950038ED3D</string>
-								<string>79EA043F0DAFC7950038ED3D</string>
-								<string>79235CD00DAD243A00F918F8</string>
 								<string>2D500B6F0D5A793600DBA0E3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
@@ -286,7 +283,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -323,8 +319,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -339,10 +333,6 @@
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>Application.mm</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>798070D00E0FFB2B002602F5</string>
 										<key>history</key>
 										<array>
 											<string>796AC2AF0DF27654005F8387</string>
@@ -350,9 +340,7 @@
 											<string>796AC2EA0DF2771C005F8387</string>
 											<string>796AC2EB0DF2771C005F8387</string>
 											<string>796AC2EC0DF2771C005F8387</string>
-											<string>79F921850DFA40C7003CD043</string>
 											<string>798070CC0E0FFB2B002602F5</string>
-											<string>798070CD0E0FFB2B002602F5</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -362,8 +350,6 @@
 											<string>796AC2C00DF27671005F8387</string>
 											<string>796AC2C10DF27671005F8387</string>
 											<string>796AC2C20DF27671005F8387</string>
-											<string>79F921860DFA40C7003CD043</string>
-											<string>798070CF0E0FFB2B002602F5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -421,9 +407,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>798070C70E0FFB07002602F5</string>
+				<string>791F49370E17557B00E927FE</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>798070C80E0FFB07002602F5</string>
+				<string>791F49380E17557B00E927FE</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -559,12 +545,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>798070D90E0FFB2B002602F5</string>
-		<string>798070DA0E0FFB2B002602F5</string>
+		<string>791F49410E17557B00E927FE</string>
+		<string>791F49420E17557B00E927FE</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/05 Shadows/Shadows.xcodeproj</string>
+		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/03 Shadows/Shadows.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>209 201 918 569 0 0 1440 878 </string>
@@ -644,7 +630,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>798070C90E0FFB07002602F5</string>
+				<string>791F49390E17557B00E927FE</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -764,13 +750,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>798070D20E0FFB2B002602F5</string>
+				<string>791F493A0E17557B00E927FE</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>798070D30E0FFB2B002602F5</string>
-				<string>798070D40E0FFB2B002602F5</string>
-				<string>798070D50E0FFB2B002602F5</string>
-				<string>798070D60E0FFB2B002602F5</string>
-				<string>798070D70E0FFB2B002602F5</string>
+				<string>791F493B0E17557B00E927FE</string>
+				<string>791F493C0E17557B00E927FE</string>
+				<string>791F493D0E17557B00E927FE</string>
+				<string>791F493E0E17557B00E927FE</string>
+				<string>791F493F0E17557B00E927FE</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -924,7 +910,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>798070D80E0FFB2B002602F5</string>
+				<string>791F49400E17557B00E927FE</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>7944B6390E024A4900E3797C</string>
+						<string>799EB45A0E175FD60083AAC5</string>
 						<key>history</key>
 						<array>
-							<string>7944B60A0E02495500E3797C</string>
+							<string>79B418820E175BF90062106F</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -373,7 +373,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7944B6380E024A4900E3797C</string>
+										<string>799EB4570E175FD60083AAC5</string>
 										<key>history</key>
 										<array>
 											<string>7925D2D60DC3DAC400EC1BDC</string>
@@ -381,7 +381,7 @@
 											<string>7925D2D90DC3DAC400EC1BDC</string>
 											<string>7925D2DA0DC3DAC400EC1BDC</string>
 											<string>79AAEA130DD418B500CC242E</string>
-											<string>7944B6060E02495500E3797C</string>
+											<string>79B418810E175BF90062106F</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -448,9 +448,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7944B62D0E02498E00E3797C</string>
+				<string>799EB4580E175FD60083AAC5</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7944B62E0E02498E00E3797C</string>
+				<string>799EB4590E175FD60083AAC5</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -586,9 +586,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>79235C150DAD062200F918F8</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>7944B6010E02484100E3797C</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Demos/San Angeles/SanAngeles.xcodeproj</string>
 	</array>

@@ -17,6 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Accelerometer */;
+		activeSDKPreference = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Accelerometer */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Accelerometer */,
@@ -74,14 +75,15 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 235030212;
-			PBXWorkspaceStateSaveDate = 235030212;
+			PBXPerProjectTemplateStateSaveDate = 236750937;
+			PBXWorkspaceStateSaveDate = 236750937;
 		};
 		perUserProjectItems = {
 			7925D2A60DC38C5E00EC1BDC /* PBXTextBookmark */ = 7925D2A60DC38C5E00EC1BDC /* PBXTextBookmark */;
 			7925D2A90DC38C5E00EC1BDC /* PBXTextBookmark */ = 7925D2A90DC38C5E00EC1BDC /* PBXTextBookmark */;
-			7944B5AF0E02470500E3797C /* PBXTextBookmark */ = 7944B5AF0E02470500E3797C /* PBXTextBookmark */;
-			796AC1590DEEE93C005F8387 /* PBXTextBookmark */ = 796AC1590DEEE93C005F8387 /* PBXTextBookmark */;
+			7991204B0E1C88A700035EEA /* PBXTextBookmark */ = 7991204B0E1C88A700035EEA /* PBXTextBookmark */;
+			7991204C0E1C88A700035EEA /* PBXTextBookmark */ = 7991204C0E1C88A700035EEA /* PBXTextBookmark */;
+			7991204D0E1C88A700035EEA /* PBXTextBookmark */ = 7991204D0E1C88A700035EEA /* PBXTextBookmark */;
 			799954610DCCBCEF0020F76F /* PBXTextBookmark */ = 799954610DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954620DCCBCEF0020F76F /* PBXTextBookmark */ = 799954620DCCBCEF0020F76F /* PBXTextBookmark */;
 			799954640DCCBCEF0020F76F /* PBXTextBookmark */ = 799954640DCCBCEF0020F76F /* PBXTextBookmark */;
@@ -94,9 +96,9 @@
 	};
 	791406530DBAD7AB00C9A379 /* Delegate.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {744, 1036}}";
+			sepNavIntBoundsRect = "{{0, 0}, {834, 1036}}";
 			sepNavSelRange = "{897, 0}";
-			sepNavVisRange = "{693, 271}";
+			sepNavVisRange = "{139, 174}";
 			sepNavWindowFrame = "{{15, 185}, {1161, 688}}";
 		};
 	};
@@ -222,7 +224,7 @@
 		vrLen = 271;
 		vrLoc = 693;
 	};
-	7944B5AF0E02470500E3797C /* PBXTextBookmark */ = {
+	7991204B0E1C88A700035EEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
 		name = "Accelerometer.m: 70";
@@ -232,7 +234,7 @@
 		vrLen = 480;
 		vrLoc = 2769;
 	};
-	796AC1590DEEE93C005F8387 /* PBXTextBookmark */ = {
+	7991204C0E1C88A700035EEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */;
 		name = "Accelerometer.m: 70";
@@ -241,6 +243,16 @@
 		rType = 0;
 		vrLen = 480;
 		vrLoc = 2769;
+	};
+	7991204D0E1C88A700035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 791406530DBAD7AB00C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 48";
+		rLen = 0;
+		rLoc = 897;
+		rType = 0;
+		vrLen = 174;
+		vrLoc = 139;
 	};
 	799954290DCCB7980020F76F /* UIAccelerometer.h */ = {
 		isa = PBXFileReference;

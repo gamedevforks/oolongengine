@@ -99,14 +99,16 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 235030152;
-			PBXWorkspaceStateSaveDate = 235030152;
+			PBXPerProjectTemplateStateSaveDate = 236751027;
+			PBXWorkspaceStateSaveDate = 236751027;
 		};
 		perUserProjectItems = {
 			7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B30DC38CA400EC1BDC /* PBXTextBookmark */;
 			7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */ = 7925D2B50DC38CA400EC1BDC /* PBXTextBookmark */;
-			7944B59B0E0246BB00E3797C /* PBXTextBookmark */ = 7944B59B0E0246BB00E3797C /* PBXTextBookmark */;
-			796AC17E0DEEE98D005F8387 /* PBXTextBookmark */ = 796AC17E0DEEE98D005F8387 /* PBXTextBookmark */;
+			799120620E1C88E700035EEA /* PBXTextBookmark */ = 799120620E1C88E700035EEA /* PBXTextBookmark */;
+			799120630E1C88E700035EEA /* PBXTextBookmark */ = 799120630E1C88E700035EEA /* PBXTextBookmark */;
+			799120640E1C88E700035EEA /* PBXTextBookmark */ = 799120640E1C88E700035EEA /* PBXTextBookmark */;
+			799120650E1C88E700035EEA /* PBXTextBookmark */ = 799120650E1C88E700035EEA /* PBXTextBookmark */;
 			799954D30DCCC9870020F76F /* PBXTextBookmark */ = 799954D30DCCC9870020F76F /* PBXTextBookmark */;
 			799954D40DCCC9870020F76F /* PBXTextBookmark */ = 799954D40DCCC9870020F76F /* PBXTextBookmark */;
 			799954F00DCCCDF40020F76F /* PBXTextBookmark */ = 799954F00DCCCDF40020F76F /* PBXTextBookmark */;
@@ -115,7 +117,6 @@
 			79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = 79AAE9C90DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9CA0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CA0DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9CB0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CB0DD4175800CC242E /* PBXTextBookmark */;
-			79AAE9CC0DD4175800CC242E /* PBXTextBookmark */ = 79AAE9CC0DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9D00DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D00DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9D10DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D10DD4175800CC242E /* PBXTextBookmark */;
 			79AAE9D20DD4175800CC242E /* PBXTextBookmark */ = 79AAE9D20DD4175800CC242E /* PBXTextBookmark */;
@@ -137,9 +138,9 @@
 	};
 	7914063F0DBAD75200C9A379 /* Delegate.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {870, 1050}}";
+			sepNavIntBoundsRect = "{{0, 0}, {870, 1036}}";
 			sepNavSelRange = "{1023, 58}";
-			sepNavVisRange = "{566, 955}";
+			sepNavVisRange = "{0, 629}";
 			sepNavWindowFrame = "{{270, 117}, {1161, 688}}";
 		};
 	};
@@ -226,7 +227,7 @@
 		vrLen = 735;
 		vrLoc = 0;
 	};
-	7944B59B0E0246BB00E3797C /* PBXTextBookmark */ = {
+	799120620E1C88E700035EEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 61";
@@ -236,7 +237,17 @@
 		vrLen = 561;
 		vrLoc = 1485;
 	};
-	796AC17E0DEEE98D005F8387 /* PBXTextBookmark */ = {
+	799120630E1C88E700035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7914063F0DBAD75200C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 49";
+		rLen = 58;
+		rLoc = 1023;
+		rType = 0;
+		vrLen = 959;
+		vrLoc = 564;
+	};
+	799120640E1C88E700035EEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 		name = "Application.mm: 61";
@@ -245,6 +256,16 @@
 		rType = 0;
 		vrLen = 561;
 		vrLoc = 1485;
+	};
+	799120650E1C88E700035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7914063F0DBAD75200C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 49";
+		rLen = 58;
+		rLoc = 1023;
+		rType = 0;
+		vrLen = 629;
+		vrLoc = 0;
 	};
 	799954BE0DCCC6C50020F76F /* Camera.h */ = {
 		isa = PBXFileReference;
@@ -353,7 +374,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = RotateObject;
-		modificationTime = 235030174.242958;
+		modificationTime = 236751053.561332;
 		state = 2;
 	};
 	79AAE9C90DD4175800CC242E /* PBXTextBookmark */ = {
@@ -385,16 +406,6 @@
 		rType = 0;
 		vrLen = 247;
 		vrLoc = 0;
-	};
-	79AAE9CC0DD4175800CC242E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 7914063F0DBAD75200C9A379 /* Delegate.mm */;
-		name = "Delegate.mm: 49";
-		rLen = 58;
-		rLoc = 1023;
-		rType = 0;
-		vrLen = 955;
-		vrLoc = 566;
 	};
 	79AAE9D00DD4175800CC242E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

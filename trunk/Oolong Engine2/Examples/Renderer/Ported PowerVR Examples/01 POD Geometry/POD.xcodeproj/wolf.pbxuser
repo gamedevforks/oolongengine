@@ -17,6 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* POD */;
+		activeSDKPreference = iphoneos2.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* POD */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* POD */,
@@ -57,7 +58,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					171,
+					266,
 					20,
 					48,
 					43,
@@ -74,8 +75,16 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 236410316;
-			PBXWorkspaceStateSaveDate = 236410316;
+			PBXPerProjectTemplateStateSaveDate = 236706744;
+			PBXWorkspaceStateSaveDate = 236706744;
+		};
+		perUserProjectItems = {
+			79911F600E1BDC4200035EEA /* PBXTextBookmark */ = 79911F600E1BDC4200035EEA /* PBXTextBookmark */;
+			79911F650E1BDC4200035EEA /* PBXTextBookmark */ = 79911F650E1BDC4200035EEA /* PBXTextBookmark */;
+			79911F9B0E1BDCBF00035EEA /* PBXTextBookmark */ = 79911F9B0E1BDCBF00035EEA /* PBXTextBookmark */;
+			79911F9C0E1BDCBF00035EEA /* PBXTextBookmark */ = 79911F9C0E1BDCBF00035EEA /* PBXTextBookmark */;
+			79911F9E0E1BDCBF00035EEA /* PBXTextBookmark */ = 79911F9E0E1BDCBF00035EEA /* PBXTextBookmark */;
+			79911F9F0E1BDCBF00035EEA /* PBXTextBookmark */ = 79911F9F0E1BDCBF00035EEA /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -83,9 +92,9 @@
 	};
 	791406D70DBAD99A00C9A379 /* Delegate.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1102, 1036}}";
-			sepNavSelRange = "{897, 0}";
-			sepNavVisRange = "{561, 835}";
+			sepNavIntBoundsRect = "{{0, 0}, {834, 1008}}";
+			sepNavSelRange = "{226, 0}";
+			sepNavVisRange = "{0, 468}";
 			sepNavWindowFrame = "{{15, 185}, {1161, 688}}";
 		};
 	};
@@ -135,6 +144,93 @@
 			sepNavSelRange = "{8850, 93}";
 			sepNavVisRange = "{7938, 1530}";
 			sepNavWindowFrame = "{{15, 91}, {883, 787}}";
+		};
+	};
+	79911F600E1BDC4200035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 791406D70DBAD99A00C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 14";
+		rLen = 0;
+		rLoc = 226;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 0;
+	};
+	79911F650E1BDC4200035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 791406D70DBAD99A00C9A379 /* Delegate.mm */;
+		name = "Delegate.mm: 14";
+		rLen = 0;
+		rLoc = 226;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 0;
+	};
+	79911F670E1BDC4200035EEA /* Delegate.mm */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.objcpp;
+		name = Delegate.mm;
+		path = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/02 Optimized Mesh/Delegate.mm";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {444, 1162}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 409}";
+		};
+	};
+	79911F9B0E1BDCBF00035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79911F670E1BDC4200035EEA /* Delegate.mm */;
+		name = "Delegate.mm: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 409;
+		vrLoc = 0;
+	};
+	79911F9C0E1BDCBF00035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79911F9D0E1BDCBF00035EEA /* Delegate.mm */;
+		rLen = 0;
+		rLoc = 2147483647;
+		rType = 0;
+	};
+	79911F9D0E1BDCBF00035EEA /* Delegate.mm */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.objcpp;
+		name = Delegate.mm;
+		path = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/05 Eight Point Lights/Delegate.mm";
+		sourceTree = "<absolute>";
+	};
+	79911F9E0E1BDCBF00035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79911F670E1BDC4200035EEA /* Delegate.mm */;
+		name = "Delegate.mm: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 409;
+		vrLoc = 0;
+	};
+	79911F9F0E1BDCBF00035EEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79911FA00E1BDCBF00035EEA /* Delegate.mm */;
+		name = "Delegate.mm: 14";
+		rLen = 0;
+		rLoc = 226;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 0;
+	};
+	79911FA00E1BDCBF00035EEA /* Delegate.mm */ = {
+		isa = PBXFileReference;
+		name = Delegate.mm;
+		path = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/05 Eight Point Lights/Delegate.mm";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {444, 1148}}";
+			sepNavSelRange = "{226, 0}";
+			sepNavVisRange = "{0, 468}";
 		};
 	};
 }

@@ -11,7 +11,7 @@
 #include "Camera.h"
 
 //CONSTANTS:
-#define kFPS			30.0
+#define kFPS			60.0
 #define kSpeed			10.0
 
 static CShell *shell = NULL;

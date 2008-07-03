@@ -197,7 +197,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>799EB4FD0E194D110083AAC5</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>VertexLookup.cpp</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>799EB5400E1980BA0083AAC5</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>VertexLookup.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>799120300E1C87D700035EEA</string>
+						<key>history</key>
+						<array>
+							<string>799EB5410E1980BA0083AAC5</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {894, 545}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>84 224 894 586 0 0 1440 878 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -272,6 +313,7 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>2D500B1D0D5A766B00DBA0E3</string>
+								<string>791F496A0E17558F00E927FE</string>
 								<string>2D500B6F0D5A793600DBA0E3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
@@ -283,6 +325,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>21</integer>
+									<integer>9</integer>
+									<integer>5</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -336,11 +381,11 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>791F49DD0E17561900E927FE</string>
+										<string>7991202D0E1C87D700035EEA</string>
 										<key>history</key>
 										<array>
 											<string>796AC20C0DF260C3005F8387</string>
-											<string>7944B4D60E02448F00E3797C</string>
+											<string>799EB53D0E1980BA0083AAC5</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -403,9 +448,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>791F49DE0E17561900E927FE</string>
+				<string>7991202E0E1C87D700035EEA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>791F49DF0E17561900E927FE</string>
+				<string>7991202F0E1C87D700035EEA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -518,7 +563,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>79F921380DF96DD2003CD043</string>
+	<string>799EB4FD0E194D110083AAC5</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -541,11 +586,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>791F49E80E17561900E927FE</string>
-		<string>791F49E90E17561900E927FE</string>
+		<string>799120390E1C87D700035EEA</string>
+		<string>7991203A0E1C87D700035EEA</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
+		<string>799EB4FD0E194D110083AAC5</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/02 Optimized Mesh/OptimizedMesh.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -626,7 +672,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>791F49E00E17561900E927FE</string>
+				<string>799120310E1C87D700035EEA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -746,13 +792,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>791F49E10E17561900E927FE</string>
+				<string>799120320E1C87D700035EEA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>791F49E20E17561900E927FE</string>
-				<string>791F49E30E17561900E927FE</string>
-				<string>791F49E40E17561900E927FE</string>
-				<string>791F49E50E17561900E927FE</string>
-				<string>791F49E60E17561900E927FE</string>
+				<string>799120330E1C87D700035EEA</string>
+				<string>799120340E1C87D700035EEA</string>
+				<string>799120350E1C87D700035EEA</string>
+				<string>799120360E1C87D700035EEA</string>
+				<string>799120370E1C87D700035EEA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -906,7 +952,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>791F49E70E17561900E927FE</string>
+				<string>799120380E1C87D700035EEA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

@@ -25,6 +25,8 @@
 
 //#define FIXEDPOINTENABLE
 
+//#define INDEXEDTRIANGLELIST
+
 #include "GraphicsDevice.h"
 #include "Mathematics.h"
 #include "UI.h"
@@ -33,10 +35,6 @@
 #include "Camera.h"
 
 #include "Geometry.h"
-
-//#ifdef __cplusplus
-//extern "C" {
-//#endif
 
 #include "demo.h"
 #include "shapes.h"
@@ -105,13 +103,19 @@ typedef struct
     VERTTYPE *vertexArray;
     GLubyte *colorArray;
     VERTTYPE *normalArray;
-    GLint vertexComponents;
-    GLsizei VertexCount;
+    GLint vertexComponents; 
+
+#ifdef INDEXEDTRIANGLELIST
     GLsizei IndexCount;
-//	CSphere *CullSphere;
-//	CAABB *AABBox;
 	unsigned short *IndexList;
+    GLsizei VertexCount;
+#else
+    GLsizei VertexCount;
+#endif
 	//unsigned byte* IndexList;
+	//	CSphere *CullSphere;
+	//	CAABB *AABBox;
+
 } GLOBJECT;
 
 
@@ -135,38 +139,59 @@ static void freeGLObject(GLOBJECT *object)
 {
     if (object == NULL)
         return;
-    free(object->normalArray);
-    free(object->colorArray);
-    free(object->vertexArray);
+	if(object->normalArray)
+		free(object->normalArray);
+    
+	free(object->colorArray);
+
 //	free(object->AABBox);
 //	free(object->CullSphere);
+#ifdef INDEXEDTRIANGLELIST	
 	free(object->IndexList);
+	// this is allocated in createSuperShape ... not really a clean solution here
+	free(object->vertexArray);
+#else
+	free(object->vertexArray);
+#endif
     free(object);
 }
 
 
-static GLOBJECT * newGLObject(long vertices, int vertexComponents,
-                              int useNormalArray)
+static GLOBJECT * newGLObject(
+#ifdef INDEXEDTRIANGLELIST
+							  long indices,
+#else
+							  long vertices, 
+#endif							  
+							  int vertexComponents,
+                              bool useNormalArray)
 {
     GLOBJECT *result;
     result = (GLOBJECT *)malloc(sizeof(GLOBJECT));
     if (result == NULL)
         return NULL;
-		
 	
-//    result->IndexCount = vertices;
+#ifdef INDEXEDTRIANGLELIST
     result->vertexComponents = vertexComponents;
-	
-//	result->AABBox = (CAABB *) malloc(sizeof(CAABB));
-//	result->CullSphere = (CSphere *) malloc(sizeof(CSphere));
-	
-//    result->vertexArray = (VERTTYPE *)malloc(vertices * vertexComponents * sizeof(VERTTYPE));
-	
-	// for four vertices I need six indices
-	float NumIndices = 1.5 * vertices;
-	
-    result->IndexList = (unsigned short *)malloc(NumIndices * sizeof(unsigned short));
 
+	result->IndexCount = indices;
+
+    result->IndexList = (unsigned short *)malloc(indices * sizeof(unsigned short));
+	
+	// can't tell the number of vertices here so allocate later
+//    result->vertexArray = (VERTTYPE *)malloc(vertices * vertexComponents * sizeof(VERTTYPE));
+
+    result->colorArray = (GLubyte *)malloc(indices * 4 * sizeof(GLubyte));
+	
+	if (useNormalArray)
+    {
+        result->normalArray = (VERTTYPE *)malloc(indices * 3 * sizeof(VERTTYPE));
+    }
+    else
+        result->normalArray = NULL;
+#else	
+    result->vertexComponents = vertexComponents;
+    result->vertexArray = (VERTTYPE *)malloc(vertices * vertexComponents * sizeof(VERTTYPE));
     result->colorArray = (GLubyte *)malloc(vertices * 4 * sizeof(GLubyte));
 	
 	if (useNormalArray)
@@ -175,16 +200,26 @@ static GLOBJECT * newGLObject(long vertices, int vertexComponents,
     }
     else
         result->normalArray = NULL;
-		
-		
-    if (//result->vertexArray == NULL ||
-		result->IndexList == NULL ||
+
+#endif	
+	
+//	result->AABBox = (CAABB *) malloc(sizeof(CAABB));
+//	result->CullSphere = (CSphere *) malloc(sizeof(CSphere));
+	
+	if (
+#ifdef INDEXEDTRIANGLELIST
+        result->IndexList == NULL ||
+#else
+		result->vertexArray == NULL ||
+#endif
         result->colorArray == NULL ||
         (useNormalArray && result->normalArray == NULL))
     {
         freeGLObject(result);
         return NULL;
     }
+	
+		
     return result;
 }
 
@@ -210,10 +245,6 @@ static void drawGLObject(GLOBJECT *object)
 
     glColorPointer(4, GL_UNSIGNED_BYTE, 0, object->colorArray);
 
-    // Already done in initialization:
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //glEnableClientState(GL_COLOR_ARRAY);
-
     if (object->normalArray)
     {
 	#ifdef FIXEDPOINTENABLE
@@ -225,18 +256,18 @@ static void drawGLObject(GLOBJECT *object)
     }
     else
         glDisableClientState(GL_NORMAL_ARRAY);
-		
-    // glDrawArrays(GL_TRIANGLES, 0, object->VertexCount);
-	
-	//
-	// 
-	//
+
+#ifdef INDEXEDTRIANGLELIST	
     glDrawElements(GL_TRIANGLES, object->IndexCount, GL_UNSIGNED_SHORT, object->IndexList);
+#else	
+    glDrawArrays(GL_TRIANGLES, 0, object->VertexCount);
+#endif
 	
 	Stats.NumDrawCalls += 1;
 	Stats.NumOfVertices += object->VertexCount;
 	Stats.NumOfTriangles += object->VertexCount / 3;
 }
+
 /*
 static bool cullGLObject(GLOBJECT *object)
 {
@@ -273,9 +304,9 @@ static void vector3Sub(DEMOVECTOR3 *dest, DEMOVECTOR3 *v1, DEMOVECTOR3 *v2)
 static void superShapeMap(DEMOVECTOR3 *point, float r1, float r2, float t, float p)
 {
     // sphere-mapping of supershape parameters
-    point->x = (float)(cos(t) * cos(p) / r1 / r2);
-    point->y = (float)(sin(t) * cos(p) / r1 / r2);
-    point->z = (float)(sin(p) / r2);
+    point->x = (float)(cosf(t) * cosf(p) / r1 / r2);
+    point->y = (float)(sinf(t) * cosf(p) / r1 / r2);
+    point->z = (float)(sinf(p) / r2);
 }
 
 
@@ -301,24 +332,37 @@ static GLOBJECT * createSuperShape(const float *params)
     const int longitudeCount = resol1;
     const int latitudeCount = latitudeEnd - latitudeBegin;
     const long triangleCount = longitudeCount * latitudeCount * 2;
+#ifdef INDEXEDTRIANGLELIST
+    const long indizes = triangleCount * 3;
+#else
     const long vertices = triangleCount * 3;
+#endif
     GLOBJECT *result;
     float baseColor[3];
     int a, longitude, latitude;
     long currentVertex, currentQuad;
-	
-    result = newGLObject(vertices, 3, 1);
-    if (result == NULL)
-        return NULL;
+
+#ifdef INDEXEDTRIANGLELIST
+    result = newGLObject(indizes, 3, 1);
 	
 	// vertex soup to indexed triangle conversion
 	VertexLookup vl = Vl_createVertexLookup();
+#else
+    result = newGLObject(vertices, 3, 1);
+#endif
+	if (result == NULL)
+        return NULL;
 
     for (a = 0; a < 3; ++a)
         baseColor[a] = ((randomUInt() % 155) + 100) / 255.f;
 
     currentQuad = 0;
     currentVertex = 0;
+	
+	DEMOVECTOR3 pa, pb, pc, pd;
+	DEMOVECTOR3 v1, v2, n;
+	float ca;
+
 
     // longitude -pi to pi
     for (longitude = 0; longitude < longitudeCount; ++longitude)
@@ -340,9 +384,6 @@ static GLOBJECT * createSuperShape(const float *params)
 
             if (r0 != 0 && r1 != 0 && r2 != 0 && r3 != 0)
             {
-                DEMOVECTOR3 pa, pb, pc, pd;
-                DEMOVECTOR3 v1, v2, n;
-                float ca;
                 int i;
                 //float lenSq, invLenSq;
 
@@ -391,11 +432,11 @@ static GLOBJECT * createSuperShape(const float *params)
                     result->normalArray[i + 1] = FIXED(n.y);
                     result->normalArray[i + 2] = FIXED(n.z);
                 }
-                for (i = currentVertex * 4;
+				for (i = currentVertex * 4;
                      i < (currentVertex + 6) * 4;
-                     i += 4)
-                {
-                    int a, color[3];
+					i += 4)
+				{
+					int a, color[3];
                     for (a = 0; a < 3; ++a)
                     {
                         color[a] = (int)(ca * baseColor[a] * 255);
@@ -407,6 +448,7 @@ static GLOBJECT * createSuperShape(const float *params)
                     result->colorArray[i + 3] = 0;
                 }
 
+#ifdef INDEXEDTRIANGLELIST
 				result->IndexList[currentVertex] = Vl_getIndex(vl, (const float *)&pa);
                 ++currentVertex;
 				result->IndexList[currentVertex] = Vl_getIndex(vl, (const float *)&pb);
@@ -419,7 +461,7 @@ static GLOBJECT * createSuperShape(const float *params)
                 ++currentVertex;
 				result->IndexList[currentVertex] = Vl_getIndex(vl, (const float *)&pd);
                 ++currentVertex;
-/*			
+#else			
                 result->vertexArray[currentVertex * 3] = FIXED(pa.x);
                 result->vertexArray[currentVertex * 3 + 1] = FIXED(pa.y);
                 result->vertexArray[currentVertex * 3 + 2] = FIXED(pa.z);
@@ -444,33 +486,81 @@ static GLOBJECT * createSuperShape(const float *params)
                 result->vertexArray[currentVertex * 3 + 1] = FIXED(pd.y);
                 result->vertexArray[currentVertex * 3 + 2] = FIXED(pd.z);
                 ++currentVertex;
-*/
+#endif
 				
             } // r0 && r1 && r2 && r3
             ++currentQuad;
         } // latitude
     } // longitude
-	
-    // Vl_releaseVertexLookup(vl);
-	// Set number of vertices in object to the actual amount created.
-//    result->VertexCount = currentVertex;
 
+#ifdef INDEXEDTRIANGLELIST
 	// get the number of vertices
-    result->VertexCount = Vl_getVcount(vl);
+	result->VertexCount = Vl_getVcount(vl);
 	result->IndexCount = currentVertex;
-	
+
 	// get a pointer to the pool of vertex data
 	const float * vert= (GLfloat*)Vl_getVertices(vl);
-	
+
 	// allocate an vertex array
 	result->vertexArray = (VERTTYPE *)malloc(result->VertexCount * result->vertexComponents * sizeof(VERTTYPE));
-   
+	
 	// fill up the vertex array
-    memcpy(result->vertexArray, vert, result->VertexCount * result->vertexComponents * sizeof(VERTTYPE));
-		
+	memcpy(result->vertexArray, vert, result->VertexCount * result->vertexComponents * sizeof(VERTTYPE));
+	
 	// release the vertex lookup interface
 	Vl_releaseVertexLookup(vl);		
+#else	
+	// Set number of vertices in object to the actual amount created.
+    result->VertexCount = currentVertex;
+#endif
+	
+	
+	//
+	// optimize triangle list
+	//
+/*	
+	//
+	// create normals
+	//
+	for(int i = 0; i < result->VertexCount; i++)
+	{
+		pa.x = vert[0];
+		pa.y = vert[1];
+		pa.z = vert[2];
+		pb.x = vert[3];
+		pb.y = vert[4];
+		pb.z = vert[5];
+		pd.x = vert[6];
+		pd.y = vert[7];
+		pd.z = vert[8];
+		vert+=3;
+		
+		vector3Sub(&v1, &pb, &pa);
+		vector3Sub(&v2, &pd, &pa);
+		
+		n.x = v1.y * v2.z - v1.z * v2.y;
+		n.y = v1.z * v2.x - v1.x * v2.z;
+		n.z = v1.x * v2.y - v1.y * v2.x;
+		
+		result->normalArray[i] = (n.x);
+		result->normalArray[i + 1] = (n.y);
+		result->normalArray[i + 2] = (n.z);
 
+		ca = pa.z + 0.5f;
+		
+		int a, color[3];
+		for (a = 0; a < 3; ++a)
+		{
+			color[a] = (int)(ca * baseColor[a] * 255);
+			if (color[a] > 255) color[a] = 255;
+		}
+		result->colorArray[i] = (GLubyte)color[0];
+		result->colorArray[i + 1] = (GLubyte)color[1];
+		result->colorArray[i + 2] = (GLubyte)color[2];
+		result->colorArray[i + 3] = 0;
+
+ }
+*/		
 	// create AABB box
 	//result->AABBox->ComputeAABB((const VECTOR3 *)result->vertexArray, (const int) result->VertexCount);
 	
@@ -483,7 +573,7 @@ static GLOBJECT * createSuperShape(const float *params)
 
 static GLOBJECT * createGroundPlane()
 {
-    const int scale = 4;
+    const int scale = 32;
     const int yBegin = -15, yEnd = 15;    // ends are non-inclusive
     const int xBegin = -15, xEnd = 15;
     const long triangleCount = (yEnd - yBegin) * (xEnd - xBegin) * 2;
@@ -491,18 +581,25 @@ static GLOBJECT * createGroundPlane()
     GLOBJECT *result;
     int x, y;
     long currentVertex, currentQuad;
-	
-	float vertexComponents = 2.0f;
 
+#ifdef INDEXEDTRIANGLELIST
+	GLuint vertexComponents = 3;
+#else
+	GLuint vertexComponents = 2;
+#endif
+	
     result = newGLObject(vertices, vertexComponents, 0);
     if (result == NULL)
         return NULL;
-		
-	// vertex soup to indexed triangle conversion
+	
+#ifdef INDEXEDTRIANGLELIST
+	// vertex soup to indexed triangle list conversion
 	VertexLookup vl = Vl_createVertexLookup();
-
+#endif
+	
     currentQuad = 0;
     currentVertex = 0;
+	DEMOVECTOR3 vec;
 
     for (y = yBegin; y < yEnd; ++y)
     {
@@ -524,36 +621,46 @@ static GLOBJECT * createGroundPlane()
             // x: 001110 (0x0e), y: 100011 (0x23)  (counter-clockwise)
             for (a = 0; a < 6; ++a)
             {
-                const int xm = x + ((0x1c >> a) & 1);
-                const int ym = y + ((0x31 >> a) & 1);
+                //const int xm = x + ((0x1c >> a) & 1);
+                //const int ym = y + ((0x31 >> a) & 1);
+                const int xm = x + ((28 >> a) & 1);
+                const int ym = y + ((49 >> a) & 1);
                 const float m = (float)(cos(xm * 2) * sin(ym * 4) * 0.75f);
-				const float xmscaleplusm = FIXED(xm * scale + m);
-				const float ymscaleplusm = FIXED(ym * scale + m);
-				
-				result->IndexList[currentVertex * 2] = Vl_getIndex(vl, &xmscaleplusm);
-                result->IndexList[currentVertex * 2 + 1] = Vl_getIndex(vl, &ymscaleplusm);
-
-//                result->vertexArray[currentVertex * 2] = FIXED(xm * scale + m);
-//                result->vertexArray[currentVertex * 2 + 1] = FIXED(ym * scale + m);
+#ifdef INDEXEDTRIANGLELIST
+				// this is a vector with a x and y component ... no z component
+				vec.x = FIXED(xm * scale + m);
+				vec.y = FIXED(ym * scale + m);
+				vec.z = 0.25f;
+				result->IndexList[currentVertex] = Vl_getIndex(vl,(const float *)&vec);
+#else
+                result->vertexArray[currentVertex * 2] = FIXED(xm * scale + m);
+                result->vertexArray[currentVertex * 2 + 1] = FIXED(ym * scale + m);
+#endif
                 ++currentVertex;
             }
             ++currentQuad;
         }
     }
-		// get the number of vertices
-    result->VertexCount = Vl_getVcount(vl);
-	
+#ifdef INDEXEDTRIANGLELIST
+	// get the number of vertices
+	result->VertexCount = Vl_getVcount(vl);
 	result->IndexCount = currentVertex;
 	
-	// allocate the vertex array
-	result->vertexArray = (VERTTYPE *)malloc(result->VertexCount * vertexComponents * sizeof(VERTTYPE));
-   
+	// get a pointer to the pool of vertex data
+	const float * vert= (GLfloat*)Vl_getVertices(vl);
+	
+	// allocate an vertex array
+	result->vertexArray = (VERTTYPE *)malloc(result->VertexCount * result->vertexComponents * sizeof(VERTTYPE));
+	
 	// fill up the vertex array
-    result->vertexArray = (GLfloat*)Vl_getVertices(vl);
+	memcpy(result->vertexArray, vert, result->VertexCount * result->vertexComponents * sizeof(VERTTYPE));
 	
 	// release the vertex lookup interface
 	Vl_releaseVertexLookup(vl);		
-
+#else	
+	result->VertexCount = currentVertex;	
+#endif
+	
     return result;
 }
 
@@ -654,8 +761,8 @@ void appInit()
         sSuperShapeObjects[a] = createSuperShape(sSuperShapeParams[a]);
         assert(sSuperShapeObjects[a] != NULL);
     }
-//    sGroundPlane = createGroundPlane();
-//    assert(sGroundPlane != NULL);
+    sGroundPlane = createGroundPlane();
+    assert(sGroundPlane != NULL);
 }
 
 
@@ -665,6 +772,8 @@ void appDeinit()
     int a;
     for (a = 0; a < (int)SUPERSHAPE_COUNT; ++a)
         freeGLObject(sSuperShapeObjects[a]);
+	
+
     freeGLObject(sGroundPlane);
 	
 //	free(Frustum);
@@ -699,8 +808,7 @@ static void prepareFrame(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
-	// if I set the far plane to 75 it crashes in-between
-	gluPerspective(75, (float)height / width, 0.5f, 70.0f);
+	gluPerspective(80, (float)height / width, 0.3f, 75.0f);
 	myglRotate(f2vt(90), 0, 0, f2vt(1));
 	
 	MATRIX	PerspMatrix;
@@ -994,9 +1102,10 @@ void appRender(long tick, int width, int height)
     // Update the camera position and set the lookat.
     camTrack();
 	
-	glDisable(GL_CULL_FACE); /// switched on backface culling
+	glDisable(GL_CULL_FACE); /// switched off backface culling
 	
-//	glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE); /// switched on backface culling
+	//glCullFace(GL_FRONT);
 
     // Draw the reflection by drawing models with negated Z-axis.
     glPushMatrix();
@@ -1004,8 +1113,12 @@ void appRender(long tick, int width, int height)
     glPopMatrix();
 
     // Blend the ground plane to the window.
-//    drawGroundPlane();
+    drawGroundPlane();
 
+	// some of the models need culling off
+	//glEnable(GL_CULL_FACE); /// switched on backface culling
+	//glCullFace(GL_BACK);
+	
     // Draw all the models normally.
     drawModels(1);
 

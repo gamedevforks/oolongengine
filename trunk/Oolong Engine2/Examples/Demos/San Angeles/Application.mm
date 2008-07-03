@@ -29,7 +29,7 @@ subject to the following restrictions:
 #include <sys/time.h>
 
 
-#define FIXEDPOINTENABLE
+//#define FIXEDPOINTENABLE
 
 int gAppAlive = 1;
 
@@ -124,7 +124,7 @@ bool CShell::RenderScene()
 	AppDisplayText->DisplayText(0, 18, 0.4f, RGBA(255,255,255,255), "Number of Vertices %d", NumVertices);
 
 	// show text on the display
-	AppDisplayText->DisplayDefaultTitle("San Andreas", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("San Angeles", "", eDisplayTextLogoIMG);
 
 	AppDisplayText->Flush();	
 

@@ -121,46 +121,24 @@ bool CShell::InitApplication()
 	vUp.z = f2vt(0);
 	
 	g_sScene.ReadFromMemory(c_BALLOON_H);
-/*	
-	
-	// Construct the binary path
-	// Get PID
-	pid_t ourPid = getpid();
-	char *pszExePath, pszSrcLink[1024];
-	int len = 64;
-	int res;
-	
-	sprintf(pszSrcLink, "/proc/%d/exe", ourPid);
-	pszExePath = 0;
-	do
-	{
-		len *= 2;
-		delete[] pszExePath;
-		pszExePath = new char[len];
-		res = readlink(pszSrcLink, pszExePath, len);
-	} while((res < 0) || (res >= len));
-	pszExePath[res] = '\0'; // Null-terminate readlink's result
-*/
+
+	NSString* readPath = [[NSBundle mainBundle] resourcePath];
+
+	char *buffer = new char[2048];
+
+	[readPath getCString:buffer maxLength:2048 encoding:NSASCIIStringEncoding];
 	
 	int		i;
 	
 	/* Gets the Data Path */
-	//char	*dataPath = new char[2048];
 	char		*filename = new char[2048];
-//	dataPath = (char*)PVRShellGet(prefDataPath);
-
-//	if (!dataPath)
-//	{
-//		PVRShellOutputDebug("**ERROR** Failed to provide a buffer large enough for OGLESGetDataPath.\n");
-//		return false;
-//	}
 	
 	/******************************
 	 ** Create Textures           **
 	 *******************************/
 	for (i=0; i<6; i++)
 	{
-		sprintf(filename, "%sskybox%d.pvr", "Media/", (i+1));
+		sprintf(filename, "%s/skybox%d.pvr", buffer, (i+1));
 		if(!Textures->LoadTextureFromPVR(filename, &skyboxTex[i]))
 		{
 			printf("**ERROR** Failed to load texture for skybox.\n");
@@ -169,7 +147,7 @@ bool CShell::InitApplication()
 		myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 	
-	sprintf(filename, "%sballoon.pvr", "Media/");
+	sprintf(filename, "%s/balloon.pvr", buffer);
 	if(!Textures->LoadTextureFromPVR(filename, &balloonTex))
 	{
 		printf("**ERROR** Failed to load texture for Background.\n");
@@ -178,7 +156,8 @@ bool CShell::InitApplication()
 	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	delete [] filename;
-		
+	delete [] buffer;
+	
 	/*********************/
 	/* Create the skybox */
 	/*********************/
@@ -303,7 +282,7 @@ bool CShell::UpdateScene()
 	if (currTime.tv_usec - time.tv_usec) 
 	{
 		frameRate = ((float)frames/((currTime.tv_usec - time.tv_usec) / 1000000.0f));
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
+		AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
 		time = currTime;
 		frames = 0;
 	}

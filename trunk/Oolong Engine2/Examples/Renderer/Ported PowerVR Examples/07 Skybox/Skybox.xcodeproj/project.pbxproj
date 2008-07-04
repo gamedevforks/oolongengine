@@ -35,6 +35,13 @@
 		791F47070E17519A00E927FE /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F47040E17519A00E927FE /* Streaming.cpp */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
+		799120D30E1E349D00035EEA /* balloon.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120CC0E1E349D00035EEA /* balloon.pvr */; };
+		799120D40E1E349D00035EEA /* skybox1.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120CD0E1E349D00035EEA /* skybox1.pvr */; };
+		799120D50E1E349D00035EEA /* skybox2.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120CE0E1E349D00035EEA /* skybox2.pvr */; };
+		799120D60E1E349D00035EEA /* skybox3.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120CF0E1E349D00035EEA /* skybox3.pvr */; };
+		799120D70E1E349D00035EEA /* skybox4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120D00E1E349D00035EEA /* skybox4.pvr */; };
+		799120D80E1E349D00035EEA /* skybox5.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120D10E1E349D00035EEA /* skybox5.pvr */; };
+		799120D90E1E349D00035EEA /* skybox6.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120D20E1E349D00035EEA /* skybox6.pvr */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +98,13 @@
 		791F47050E17519A00E927FE /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Streaming.h; path = ../../../../Renderer/Resource/Streaming.h; sourceTree = SOURCE_ROOT; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
+		799120CC0E1E349D00035EEA /* balloon.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = balloon.pvr; path = Media/balloon.pvr; sourceTree = "<group>"; };
+		799120CD0E1E349D00035EEA /* skybox1.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox1.pvr; path = Media/skybox1.pvr; sourceTree = "<group>"; };
+		799120CE0E1E349D00035EEA /* skybox2.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox2.pvr; path = Media/skybox2.pvr; sourceTree = "<group>"; };
+		799120CF0E1E349D00035EEA /* skybox3.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox3.pvr; path = Media/skybox3.pvr; sourceTree = "<group>"; };
+		799120D00E1E349D00035EEA /* skybox4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox4.pvr; path = Media/skybox4.pvr; sourceTree = "<group>"; };
+		799120D10E1E349D00035EEA /* skybox5.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox5.pvr; path = Media/skybox5.pvr; sourceTree = "<group>"; };
+		799120D20E1E349D00035EEA /* skybox6.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox6.pvr; path = Media/skybox6.pvr; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +161,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				799120CC0E1E349D00035EEA /* balloon.pvr */,
+				799120CD0E1E349D00035EEA /* skybox1.pvr */,
+				799120CE0E1E349D00035EEA /* skybox2.pvr */,
+				799120CF0E1E349D00035EEA /* skybox3.pvr */,
+				799120D00E1E349D00035EEA /* skybox4.pvr */,
+				799120D10E1E349D00035EEA /* skybox5.pvr */,
+				799120D20E1E349D00035EEA /* skybox6.pvr */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				79EA070F0DAFF0550038ED3D /* Default.png */,
@@ -334,6 +355,13 @@
 				1B26781E0DA2F9B000B24DA5 /* icon.png in Resources */,
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				79EA07100DAFF0550038ED3D /* Default.png in Resources */,
+				799120D30E1E349D00035EEA /* balloon.pvr in Resources */,
+				799120D40E1E349D00035EEA /* skybox1.pvr in Resources */,
+				799120D50E1E349D00035EEA /* skybox2.pvr in Resources */,
+				799120D60E1E349D00035EEA /* skybox3.pvr in Resources */,
+				799120D70E1E349D00035EEA /* skybox4.pvr in Resources */,
+				799120D80E1E349D00035EEA /* skybox5.pvr in Resources */,
+				799120D90E1E349D00035EEA /* skybox6.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

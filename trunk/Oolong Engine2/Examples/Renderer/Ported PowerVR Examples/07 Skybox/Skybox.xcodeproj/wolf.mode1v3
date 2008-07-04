@@ -274,6 +274,7 @@
 								<string>2D500B1D0D5A766B00DBA0E3</string>
 								<string>2D500B6F0D5A793600DBA0E3</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
+								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
@@ -335,7 +336,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>799EB4BB0E17FD0D0083AAC5</string>
+										<string>799121310E1E738700035EEA</string>
 										<key>history</key>
 										<array>
 											<string>796AC2BB0DF27671005F8387</string>
@@ -345,7 +346,7 @@
 											<string>791F46A40E174E8B00E927FE</string>
 											<string>791F470B0E1751CA00E927FE</string>
 											<string>791F470C0E1751CA00E927FE</string>
-											<string>791F49F70E17564500E927FE</string>
+											<string>799120DA0E1E34A100035EEA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -413,9 +414,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799EB4BC0E17FD0D0083AAC5</string>
+				<string>799120F00E1E697500035EEA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799EB4BD0E17FD0D0083AAC5</string>
+				<string>799120F10E1E697500035EEA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -528,7 +529,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>799EB4750E17988C0083AAC5</string>
+	<string>799120FF0E1E69A100035EEA</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -551,6 +552,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>799121320E1E738700035EEA</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>799120FF0E1E69A100035EEA</string>
+		<string>799120FC0E1E697500035EEA</string>
+		<string>799120FD0E1E697500035EEA</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/07 Skybox/Skybox.xcodeproj</string>
@@ -594,8 +601,6 @@
 							<string>177pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -635,7 +640,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799EB4A00E179AFE0083AAC5</string>
+				<string>799120F20E1E697500035EEA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -755,13 +760,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>799EB4BE0E17FD0D0083AAC5</string>
+				<string>799120F30E1E697500035EEA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>799EB4BF0E17FD0D0083AAC5</string>
-				<string>799EB4C00E17FD0D0083AAC5</string>
-				<string>799EB4C10E17FD0D0083AAC5</string>
-				<string>799EB4C20E17FD0D0083AAC5</string>
-				<string>799EB4C30E17FD0D0083AAC5</string>
+				<string>799120F40E1E697500035EEA</string>
+				<string>799120F50E1E697500035EEA</string>
+				<string>799120F60E1E697500035EEA</string>
+				<string>799120F70E1E697500035EEA</string>
+				<string>799120F80E1E697500035EEA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -788,14 +793,12 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>DisplayTextAPI.cpp</string>
+										<string>&lt;No Editor&gt;</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -804,7 +807,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {781, 212}}</string>
 										<key>RubberWindowFrame</key>
-										<string>36 380 781 470 0 0 1440 878 </string>
+										<string>477 383 781 470 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -816,6 +819,8 @@
 							<string>212pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -828,7 +833,7 @@
 								<key>Frame</key>
 								<string>{{0, 217}, {781, 212}}</string>
 								<key>RubberWindowFrame</key>
-								<string>36 380 781 470 0 0 1440 878 </string>
+								<string>477 383 781 470 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -851,13 +856,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>79EA054D0DAFD5830038ED3D</string>
-				<string>79EA054E0DAFD5830038ED3D</string>
+				<string>7991212F0E1E738400035EEA</string>
+				<string>799121300E1E738400035EEA</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>36 380 781 470 0 0 1440 878 </string>
+			<string>477 383 781 470 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
@@ -915,7 +920,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>791F47110E1751CA00E927FE</string>
+				<string>799120F90E1E697500035EEA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

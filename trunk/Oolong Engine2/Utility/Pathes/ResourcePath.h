@@ -12,16 +12,9 @@
  2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
  3. This notice may not be removed or altered from any source distribution.
 */
-#ifndef CULLING_H_
-#define CULLING_H_
 
-#include "../Renderer/Culling/AABB.h"
-#include "../Renderer/Culling/Sphere.h"
-#include "../Renderer/Culling/Plane.h"
-#include "../Renderer/Culling/AABB_inline.h"
-#include "../Renderer/Culling/Sphere_inline.h"
-#include "../Renderer/Culling/Plane_inline.h"
-#include "../Renderer/Culling/Frustum.h"
-#include "../Renderer/Culling/Frustum_inline.h"
-
-#endif
+//
+// returns the path to the content package in *.app
+// expects a pointer to an allocated buffer of iLength
+//
+void GetResourcePathASCII(char* cBuffer, int iLength);

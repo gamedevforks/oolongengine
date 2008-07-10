@@ -17,7 +17,6 @@ subject to the following restrictions:
 
 
 #include "../Renderer/Core/UI/DisplayText.h"
-//#include "../Core/UI/DisplayTextdat.h"
-//#include "../Renderer/Core/UI/UIApplication.h"
+
 
 #endif

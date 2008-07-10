@@ -28,6 +28,7 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "Memory.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -121,12 +122,13 @@ bool CShell::InitApplication()
 	vUp.z = f2vt(0);
 	
 	g_sScene.ReadFromMemory(c_BALLOON_H);
-
-	NSString* readPath = [[NSBundle mainBundle] resourcePath];
-
+	
 	char *buffer = new char[2048];
+	
+	GetResourcePathASCII(buffer, 2048);
 
-	[readPath getCString:buffer maxLength:2048 encoding:NSASCIIStringEncoding];
+//	NSString* readPath = [[NSBundle mainBundle] resourcePath];
+//	[readPath getCString:buffer maxLength:2048 encoding:NSASCIIStringEncoding];
 	
 	int		i;
 	

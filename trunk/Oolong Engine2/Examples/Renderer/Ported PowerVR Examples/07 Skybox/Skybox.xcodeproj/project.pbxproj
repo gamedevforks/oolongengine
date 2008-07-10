@@ -42,6 +42,7 @@
 		799120D70E1E349D00035EEA /* skybox4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120D00E1E349D00035EEA /* skybox4.pvr */; };
 		799120D80E1E349D00035EEA /* skybox5.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120D10E1E349D00035EEA /* skybox5.pvr */; };
 		799120D90E1E349D00035EEA /* skybox6.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 799120D20E1E349D00035EEA /* skybox6.pvr */; };
+		799121BE0E1F410C00035EEA /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 799121BD0E1F410C00035EEA /* ResourcePath.mm */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,8 @@
 		799120D00E1E349D00035EEA /* skybox4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox4.pvr; path = Media/skybox4.pvr; sourceTree = "<group>"; };
 		799120D10E1E349D00035EEA /* skybox5.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox5.pvr; path = Media/skybox5.pvr; sourceTree = "<group>"; };
 		799120D20E1E349D00035EEA /* skybox6.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = skybox6.pvr; path = Media/skybox6.pvr; sourceTree = "<group>"; };
+		799121BC0E1F410C00035EEA /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		799121BD0E1F410C00035EEA /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +194,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				799121BB0E1F410C00035EEA /* Pathes */,
 				791F47090E1751B300E927FE /* Resources */,
 				791F46810E174E4200E927FE /* Application */,
 				791F46840E174E4200E927FE /* Math */,
@@ -310,6 +314,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		799121BB0E1F410C00035EEA /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				799121BC0E1F410C00035EEA /* ResourcePath.h */,
+				799121BD0E1F410C00035EEA /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -392,6 +406,7 @@
 				791F46940E174E4200E927FE /* Transform.cpp in Sources */,
 				791F47060E17519A00E927FE /* ResourceFile.cpp in Sources */,
 				791F47070E17519A00E927FE /* Streaming.cpp in Sources */,
+				799121BE0E1F410C00035EEA /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

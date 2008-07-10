@@ -284,7 +284,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>4</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -338,7 +338,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>799120400E1C884900035EEA</string>
+										<string>799123830E2002AF00035EEA</string>
 										<key>history</key>
 										<array>
 											<string>7925D2D70DC3DAC400EC1BDC</string>
@@ -349,7 +349,7 @@
 											<string>799EB5030E19617A0083AAC5</string>
 											<string>799EB54B0E1985770083AAC5</string>
 											<string>799EB54C0E1985770083AAC5</string>
-											<string>79911E480E1B30AF00035EEA</string>
+											<string>7991232C0E1FF3BF00035EEA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -418,9 +418,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>79911D990E19976500035EEA</string>
+				<string>799123840E2002AF00035EEA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>79911D9A0E19976500035EEA</string>
+				<string>799123850E2002AF00035EEA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -533,7 +533,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>79911DAA0E1997EE00035EEA</string>
+	<string>799123510E1FF51300035EEA</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -556,13 +556,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>79911DEC0E19A18F00035EEA</string>
-		<string>79911DAA0E1997EE00035EEA</string>
-		<string>79911DB20E1998EE00035EEA</string>
-		<string>79911DA40E19976500035EEA</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>79235C150DAD062200F918F8</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Demos/San Angeles/SanAngeles.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -582,14 +575,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>demo.mm</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -645,7 +636,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>79911D9B0E19976500035EEA</string>
+				<string>799121430E1E8DEE00035EEA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -765,13 +756,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>79911D9C0E19976500035EEA</string>
+				<string>799121440E1E8DEE00035EEA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>79911D9D0E19976500035EEA</string>
-				<string>79911D9E0E19976500035EEA</string>
-				<string>79911D9F0E19976500035EEA</string>
-				<string>79911DA00E19976500035EEA</string>
-				<string>79911DA10E19976500035EEA</string>
+				<string>799121450E1E8DEE00035EEA</string>
+				<string>799121460E1E8DEE00035EEA</string>
+				<string>799121470E1E8DEE00035EEA</string>
+				<string>799121480E1E8DEE00035EEA</string>
+				<string>799121490E1E8DEE00035EEA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -890,8 +881,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -927,7 +916,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>79911DA20E19976500035EEA</string>
+				<string>7991214A0E1E8DEE00035EEA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

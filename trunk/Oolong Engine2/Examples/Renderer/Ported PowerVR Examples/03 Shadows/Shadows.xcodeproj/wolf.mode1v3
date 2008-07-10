@@ -283,6 +283,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>13</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -407,9 +408,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>79911F870E1BDC9000035EEA</string>
+				<string>799120C40E1E345D00035EEA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>79911F880E1BDC9000035EEA</string>
+				<string>799120C50E1E345D00035EEA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -545,11 +546,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>79911F890E1BDC9000035EEA</string>
-		<string>79911F8A0E1BDC9000035EEA</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/03 Shadows/Shadows.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

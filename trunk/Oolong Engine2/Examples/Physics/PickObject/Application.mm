@@ -27,7 +27,7 @@ static btBroadphaseInterface* sBroadphase=0;
 btAlignedObjectArray<btCollisionShape*> sCollisionShapes;
 btAlignedObjectArray<btRigidBody*> sBoxBodies;
 btRigidBody* sFloorPlaneBody=0;
-int numBodies = 50;
+int numBodies = 25;
 
 //////////////////////////////////
 
@@ -75,7 +75,7 @@ bool CShell::InitApplication()
 	sCollisionDispatcher = new btCollisionDispatcher(sCollisionConfig);
 	sConstraintSolver = new btSequentialImpulseConstraintSolver;
 	sDynamicsWorld = new btDiscreteDynamicsWorld(sCollisionDispatcher,sBroadphase,sConstraintSolver,sCollisionConfig);
-	sDynamicsWorld->setGravity(btVector3(0,-10,0));
+	sDynamicsWorld->setGravity(btVector3(0,0,0));
 	//btCollisionShape* shape = new btBoxShape(btVector3(1,1,1));
 	{
 		btTransform groundTransform;
@@ -137,6 +137,101 @@ bool CShell::QuitApplication()
 	return true;
 }
 
+btVector3 m_cameraPosition;
+btScalar m_ele(0),m_azi(0);
+btVector3 m_cameraUp(0,1,0);
+int m_forwardAxis=2;
+int m_glutScreenWidth = 320;
+int m_glutScreenHeight = 480;
+btVector3 m_cameraTargetPosition(0,0,0);
+btScalar m_cameraDistance = 20;
+
+
+
+
+void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
+			GLfloat centerx, GLfloat centery, GLfloat centerz,
+			GLfloat upx, GLfloat upy, GLfloat upz)
+{
+	
+	GLfloat m[16];
+	GLfloat x[3], y[3], z[3];
+	btScalar mag;
+	
+	/* Make rotation matrix */
+	
+	/* Z vector */
+	z[0] = eyex - centerx;
+	z[1] = eyey - centery;
+	z[2] = eyez - centerz;
+	mag = btSqrt(z[0] * z[0] + z[1] * z[1] + z[2] * z[2]);
+	if (mag) {			/* mpichler, 19950515 */
+		z[0] /= mag;
+		z[1] /= mag;
+		z[2] /= mag;
+	}
+	
+	/* Y vector */
+	y[0] = upx;
+	y[1] = upy;
+	y[2] = upz;
+	
+	/* X vector = Y cross Z */
+	x[0] = y[1] * z[2] - y[2] * z[1];
+	x[1] = -y[0] * z[2] + y[2] * z[0];
+	x[2] = y[0] * z[1] - y[1] * z[0];
+	
+	/* Recompute Y = Z cross X */
+	y[0] = z[1] * x[2] - z[2] * x[1];
+	y[1] = -z[0] * x[2] + z[2] * x[0];
+	y[2] = z[0] * x[1] - z[1] * x[0];
+	
+	/* mpichler, 19950515 */
+	/* cross product gives area of parallelogram, which is < 1.0 for
+	 * non-perpendicular unit-length vectors; so normalize x, y here
+	 */
+	
+	mag = btSqrt( x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
+	if (mag) {
+		x[0] /= mag;
+		x[1] /= mag;
+		x[2] /= mag;
+	}
+	
+	mag = btSqrt( y[0] * y[0] + y[1] * y[1] + y[2] * y[2]);
+	if (mag) {
+		y[0] /= mag;
+		y[1] /= mag;
+		y[2] /= mag;
+	}
+	
+#define M(row,col)  m[col*4+row]
+	M(0, 0) = x[0];
+	M(0, 1) = x[1];
+	M(0, 2) = x[2];
+	M(0, 3) = 0.0;
+	M(1, 0) = y[0];
+	M(1, 1) = y[1];
+	M(1, 2) = y[2];
+	M(1, 3) = 0.0;
+	M(2, 0) = z[0];
+	M(2, 1) = z[1];
+	M(2, 2) = z[2];
+	M(2, 3) = 0.0;
+	M(3, 0) = 0.0;
+	M(3, 1) = 0.0;
+	M(3, 2) = 0.0;
+	M(3, 3) = 1.0;
+#undef M
+	glMultMatrixf(m);
+	
+	/* Translate Eye to Origin */
+	glTranslatef(-eyex, -eyey, -eyez);
+	
+}
+
+
+
 bool CShell::InitView()
 {
     glEnable(GL_DEPTH_TEST);
@@ -146,7 +241,7 @@ bool CShell::InitView()
 //    glDisable(GL_CULL_FACE);
 	
 //	UpdatePolarCamera();
-
+/*
 	//Set the OpenGL projection matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -168,8 +263,54 @@ bool CShell::InitView()
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0.0, -10.0, -30.0f);
+	glTranslatef(0.0, 0.0, -30.0f);
 //	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
+*/
+	
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	float rele = m_ele * 0.01745329251994329547;// rads per deg
+	float razi = m_azi * 0.01745329251994329547;// rads per deg
+	
+	
+	btQuaternion rot(m_cameraUp,razi);
+	
+	
+	btVector3 eyePos(0,0,0);
+	eyePos[m_forwardAxis] = -m_cameraDistance;
+	
+	btVector3 forward(eyePos[0],eyePos[1],eyePos[2]);
+	if (forward.length2() < SIMD_EPSILON)
+	{
+		forward.setValue(1.f,0.f,0.f);
+	}
+	btVector3 right = m_cameraUp.cross(forward);
+	btQuaternion roll(right,-rele);
+	
+	eyePos = btMatrix3x3(rot) * btMatrix3x3(roll) * eyePos;
+	
+	m_cameraPosition[0] = eyePos.getX();
+	m_cameraPosition[1] = eyePos.getY();
+	m_cameraPosition[2] = eyePos.getZ();
+	
+	if (m_glutScreenWidth > m_glutScreenHeight) 
+	{
+		btScalar aspect = m_glutScreenWidth / (btScalar)m_glutScreenHeight;
+		myglFrustum (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
+	} else 
+	{
+		btScalar aspect = m_glutScreenHeight / (btScalar)m_glutScreenWidth;
+		myglFrustum (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
+	}
+	
+	
+    glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	lookAt(m_cameraPosition[0], m_cameraPosition[1], m_cameraPosition[2], 
+              m_cameraTargetPosition[0], m_cameraTargetPosition[1], m_cameraTargetPosition[2], 
+			  m_cameraUp.getX(),m_cameraUp.getY(),m_cameraUp.getZ());
+
 	
 	//
 	// Touch screen support
@@ -181,14 +322,11 @@ bool CShell::InitView()
 	// the center of the ray coordinates are located in the middle of the 
 	// screen ... in the x direction the values range from -9875..9875 in x direction and
 	// 15.000..-15000 in the y direction
-	Ray = btVector3(0.0f, 0.0f, 0.0f);
 	
 
+	
 	if(TouchScreen->TouchesEnd == false)
 	{
-		Ray = GetRayTo(TouchScreen->LocationXTouchesMoved, TouchScreen->LocationYTouchesMoved, 
-					   1.0f, 10000.0f, btVector3(0.0f, 1.0f, 0.0f), btVector3(0.0f, 0.0f, 0.0f), 
-					   btVector3(0.0f, 0.0f, -1.0f));
 		
 		AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "touchesBegan: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
 									TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, TouchScreen->CountTouchesBegan, TouchScreen->TapCountTouchesBegan);
@@ -263,17 +401,20 @@ bool CShell::UpdateScene()
  	frames++;
 	gettimeofday(&currTime, NULL); // gets the current time passed since the last frame in seconds
 	
+	btScalar deltaTime = 0.f;
+	
 	if (currTime.tv_usec - time.tv_usec) 
 	{
-		frameRate = ((float)frames/((currTime.tv_usec - time.tv_usec) / 1000000.0f));
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
+		deltaTime = (currTime.tv_usec - time.tv_usec) / 1000000.0f;
+		
+		frameRate = ((float)frames)/(deltaTime);
+		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f, deltaTime = %3.2f", frameRate,deltaTime);
 		time = currTime;
 		frames = 0;
 	}
-	float deltaTime = 1.f/60.f;
+	deltaTime = 1./60.f;
 	if (sDynamicsWorld)
-		sDynamicsWorld->stepSimulation(deltaTime);
-	
+		sDynamicsWorld->stepSimulation(deltaTime,4);
 	
 	return true;
 }
@@ -295,20 +436,26 @@ bool CShell::RenderScene()
 		glMultMatrixf(worldMat);
 		
 		
-		if(TouchScreen->TouchesEnd == false)
+		//if(TouchScreen->TouchesEnd == false)
 		{			
-			btVector3 CameraPosition = btVector3(0.0f, 0.0f, 0.0f);
-		
+			btVector3 CameraPosition = m_cameraPosition;
+			
 			btCollisionWorld::ClosestRayResultCallback rayCallback(CameraPosition, Ray);
 		
 			// CountTouchesMoved shows how many fingers are moved ... if there is one finger or more moved this is 
 			// 1 or higher
 			// while CountTouchesBegan shows how many fingers have touched the sreen when the gesture started
-			if (sDynamicsWorld && (TouchScreen->CountTouchesMoved >= 1))
+			if (sDynamicsWorld)// && (TouchScreen->CountTouchesMoved >= 1))
 			{
+				Ray = GetRayTo(TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, 
+							   1.0f, 10000.0f,m_cameraUp, m_cameraPosition, 
+							   m_cameraTargetPosition);
+				
 				sDynamicsWorld->rayTest(CameraPosition, Ray, rayCallback);
 				if (rayCallback.HasHit())
 				{
+					AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "RayHit!");
+					
 					btRigidBody* body = btRigidBody::upcast(rayCallback.m_collisionObject);
 					if (body)
 					{

@@ -61,12 +61,39 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 */
 
-#if !TARGET_IPHONE_SIMULATOR
 /*==================================================================================================
 	SoundEngine.cpp
 ==================================================================================================*/
 #if !defined(__SoundEngine_cpp__)
 #define __SoundEngine_cpp__
+
+
+// Local Includes
+#include "SoundEngine.h"
+
+
+#if TARGET_IPHONE_SIMULATOR
+
+//
+// dummy functions whilst the simulator doesn't support OpenAL
+//
+extern "C"
+OSStatus  SoundEngine_Teardown()
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_Initialize(Float32 inMixerOutputRate)
+{
+    return noErr;
+}
+
+//
+// end dummy functions whilst the simulator doesn't support OpenAL
+//
+
+#else
 
 //==================================================================================================
 //	Includes
@@ -81,9 +108,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #include <vector>
 #include <pthread.h>
 #include <mach/mach.h>
-
-// Local Includes
-#include "SoundEngine.h"
 
 #define	AssertNoError(inMessage, inHandler)						\
 			if(result != noErr)									\
@@ -1586,5 +1610,5 @@ OSStatus  SoundEngine_SetReferenceDistance(Float32 inValue)
 	return (sOpenALObject) ? sOpenALObject->SetReferenceDistance(inValue) : kSoundEngineErrUnitialized;
 }
 
-#endif
-#endif
+#endif  // #if TARGET_IPHONE_SIMULATOR
+#endif  // #if !defined(__SoundEngine_cpp__)

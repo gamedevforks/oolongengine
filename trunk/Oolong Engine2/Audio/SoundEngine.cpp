@@ -89,6 +89,7 @@ OSStatus  SoundEngine_Initialize(Float32 inMixerOutputRate)
     return noErr;
 }
 
+
 //
 // end dummy functions whilst the simulator doesn't support OpenAL
 //

@@ -364,7 +364,7 @@ void CDisplayText::APIRenderStates(int nAction)
 {
 	static GLint		iMatrixMode, iFrontFace, iCullFaceMode, iDestBlend, iSrcBlend;
 	static GLboolean	bLighting, bCullFace, bFog, bDepthTest, bBlend, bVertexPointerEnabled, bColorPointerEnabled, bTexCoorPointerEnabled ; //, bVertexProgram;
-
+   static GLboolean  bTextureEnabled0, bTextureEnabled1;
 	MATRIX Matrix;
 	int i;
 
@@ -395,6 +395,13 @@ void CDisplayText::APIRenderStates(int nAction)
 		glGetIntegerv(GL_CULL_FACE_MODE, &iCullFaceMode);
 		glGetIntegerv(GL_BLEND_DST, &iDestBlend);
 		glGetIntegerv(GL_BLEND_SRC, &iSrcBlend);
+      
+      // save texture unit state
+      glActiveTexture(GL_TEXTURE0);
+      bTextureEnabled0 = glIsEnabled(GL_TEXTURE_2D);
+      
+		glActiveTexture(GL_TEXTURE1);
+      bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
 		
 		/* Save matrices */
 		glGetIntegerv(GL_MATRIX_MODE, &iMatrixMode);
@@ -501,6 +508,13 @@ void CDisplayText::APIRenderStates(int nAction)
 
 		glBlendFunc(iSrcBlend, iDestBlend);
 		if(bBlend == 0) glDisable(GL_BLEND);
+
+      // restore texture states
+      glActiveTexture(GL_TEXTURE1);
+		bTextureEnabled1 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+		glActiveTexture(GL_TEXTURE0);
+		bTextureEnabled0 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+
 
 		break;
 	}

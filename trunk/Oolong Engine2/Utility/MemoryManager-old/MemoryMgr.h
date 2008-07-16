@@ -30,7 +30,7 @@ T *reallocEM(T *array, size_t old_size, size_t new_size)
 	char strData[128];
   	sprintf(strData,"%5s %3d %5s %3d", 
             "New memory piece", (int)new_size, "Old memory piece", (int)old_size);
-	LOG(string(strData), Logger::LOG_BLOK);
+//	LOG(string(strData), Logger::LOG_BLOK);
 #endif
 
    return copy(array, array + old_size, temp);
@@ -52,7 +52,7 @@ bool SafeAlloc(T* &ptr, size_t cnt)
 	char strData[128];
   	sprintf(strData,"%5s %3d", 
             "Memory", (int)cnt);
-	LOG(string(strData), Logger::LOG_BLOK);
+//	LOG(string(strData), Logger::LOG_BLOK);
 #endif
 
 	return true;
@@ -77,7 +77,7 @@ void SafeRealloc(T* &ptr, size_t cnt)
 	char strData[128];
   	sprintf(strData,"%5s %3d %5s %3d", 
             "New memory piece", (int)cnt, "Old memory piece", (int)old_size);
-	LOG(string(strData), Logger::LOG_BLOK);
+//	LOG(string(strData), Logger::LOG_BLOK);
 #endif
  	_ASSERT(ptr);
 }

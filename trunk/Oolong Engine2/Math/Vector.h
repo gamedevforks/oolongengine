@@ -15,10 +15,11 @@ subject to the following restrictions:
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
-typedef struct
+typedef struct _VECTOR2F
 {
 	float x;	/*!< x coordinate */
 	float y;	/*!< y coordinate */
+   inline void set(float _x, float _y) { x = _x; y = _y; }
 } VECTOR2f;
 
 
@@ -28,11 +29,16 @@ typedef struct
 	int y;	/*!< y coordinate */
 } VECTOR2x;
 
-typedef struct
+typedef struct _VECTOR3f
 {
 	float x;	/*!< x coordinate */
 	float y;	/*!< y coordinate */
 	float z;	/*!< z coordinate */
+   inline void set(float _x, float _y, float _z) { x = _x; y = _y; z = _z; }
+   inline const _VECTOR3f operator-(const _VECTOR3f& rhs) const{ _VECTOR3f tmp = { x - rhs.x, y - rhs.y, z - rhs.z }; return tmp; }
+   inline const _VECTOR3f operator+(const _VECTOR3f& rhs) const{ _VECTOR3f tmp = { x + rhs.x, y + rhs.y, z + rhs.z }; return tmp; }
+   inline const _VECTOR3f operator*(float rhs) const { _VECTOR3f tmp = { x * rhs, y * rhs, z * rhs }; return tmp; }
+   inline float lenSquared() const { return x*x + y*y + z*z; }
 } VECTOR3f;
 
 typedef struct
@@ -62,11 +68,13 @@ typedef struct
 
 
 #ifdef FIXEDPOINTENABLE
-typedef VECTOR3x		VECTOR3;
-typedef VECTOR4x		VECTOR4;
+typedef VECTOR2x     VECTOR2;
+typedef VECTOR3x     VECTOR3;
+typedef VECTOR4x     VECTOR4;
 #else
-typedef VECTOR3f		VECTOR3;
-typedef VECTOR4f		VECTOR4;
+typedef VECTOR2f     VECTOR2;
+typedef VECTOR3f     VECTOR3;
+typedef VECTOR4f     VECTOR4;
 #endif
 
 

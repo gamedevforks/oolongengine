@@ -26,6 +26,12 @@
 		799123D10E20082200035EEA /* SoundEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799123CF0E20082200035EEA /* SoundEngine.cpp */; };
 		799123FB0E2373FC00035EEA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799123FA0E2373FC00035EEA /* CoreAudio.framework */; };
 		799124030E23742600035EEA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799124020E23742600035EEA /* AudioToolbox.framework */; };
+		79E5F1360E330B6200C7BFD6 /* Failure.caf in Resources */ = {isa = PBXBuildFile; fileRef = 79E5F1320E330B6200C7BFD6 /* Failure.caf */; };
+		79E5F1370E330B6200C7BFD6 /* Start.caf in Resources */ = {isa = PBXBuildFile; fileRef = 79E5F1330E330B6200C7BFD6 /* Start.caf */; };
+		79E5F1380E330B6200C7BFD6 /* Success.caf in Resources */ = {isa = PBXBuildFile; fileRef = 79E5F1340E330B6200C7BFD6 /* Success.caf */; };
+		79E5F1390E330B6200C7BFD6 /* Thrust.caf in Resources */ = {isa = PBXBuildFile; fileRef = 79E5F1350E330B6200C7BFD6 /* Thrust.caf */; };
+		79E5F1600E330EFB00C7BFD6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79E5F15F0E330EFB00C7BFD6 /* ResourcePath.mm */; };
+		79E5F1DE0E33180D00C7BFD6 /* TouchScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */; };
 		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
 		79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA044E0DAFC7950038ED3D /* DisplayText.cpp */; };
 		79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04500DAFC7950038ED3D /* DisplayTextAPI.cpp */; };
@@ -72,6 +78,14 @@
 		799123D00E20082200035EEA /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundEngine.h; path = ../../../Audio/SoundEngine.h; sourceTree = SOURCE_ROOT; };
 		799123FA0E2373FC00035EEA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		799124020E23742600035EEA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		79E5F1320E330B6200C7BFD6 /* Failure.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Failure.caf; path = Sounds/Failure.caf; sourceTree = "<group>"; };
+		79E5F1330E330B6200C7BFD6 /* Start.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Start.caf; path = Sounds/Start.caf; sourceTree = "<group>"; };
+		79E5F1340E330B6200C7BFD6 /* Success.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Success.caf; path = Sounds/Success.caf; sourceTree = "<group>"; };
+		79E5F1350E330B6200C7BFD6 /* Thrust.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Thrust.caf; path = Sounds/Thrust.caf; sourceTree = "<group>"; };
+		79E5F15E0E330EFB00C7BFD6 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		79E5F15F0E330EFB00C7BFD6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		79E5F1DC0E33180D00C7BFD6 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchScreen.h; path = ../../../Input/TouchScreen/TouchScreen.h; sourceTree = SOURCE_ROOT; };
+		79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TouchScreen.mm; path = ../../../Input/TouchScreen/TouchScreen.mm; sourceTree = SOURCE_ROOT; };
 		79EA04400DAFC7950038ED3D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		79EA04410DAFC7950038ED3D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
@@ -156,6 +170,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79E5F1320E330B6200C7BFD6 /* Failure.caf */,
+				79E5F1330E330B6200C7BFD6 /* Start.caf */,
+				79E5F1340E330B6200C7BFD6 /* Success.caf */,
+				79E5F1350E330B6200C7BFD6 /* Thrust.caf */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				79EA070F0DAFF0550038ED3D /* Default.png */,
@@ -182,6 +200,9 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79E5F1DC0E33180D00C7BFD6 /* TouchScreen.h */,
+				79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */,
+				79E5F15D0E330EFB00C7BFD6 /* Pathes */,
 				799123CF0E20082200035EEA /* SoundEngine.cpp */,
 				799123D00E20082200035EEA /* SoundEngine.h */,
 				79EA043B0DAFC7950038ED3D /* Core */,
@@ -225,6 +246,16 @@
 			);
 			name = Math;
 			path = ../../../Math;
+			sourceTree = SOURCE_ROOT;
+		};
+		79E5F15D0E330EFB00C7BFD6 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				79E5F15E0E330EFB00C7BFD6 /* ResourcePath.h */,
+				79E5F15F0E330EFB00C7BFD6 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
 		79EA043B0DAFC7950038ED3D /* Core */ = {
@@ -347,6 +378,10 @@
 				1B26781E0DA2F9B000B24DA5 /* icon.png in Resources */,
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				79EA07100DAFF0550038ED3D /* Default.png in Resources */,
+				79E5F1360E330B6200C7BFD6 /* Failure.caf in Resources */,
+				79E5F1370E330B6200C7BFD6 /* Start.caf in Resources */,
+				79E5F1380E330B6200C7BFD6 /* Success.caf in Resources */,
+				79E5F1390E330B6200C7BFD6 /* Thrust.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +412,8 @@
 				79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */,
 				7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */,
 				799123D10E20082200035EEA /* SoundEngine.cpp in Sources */,
+				79E5F1600E330EFB00C7BFD6 /* ResourcePath.mm in Sources */,
+				79E5F1DE0E33180D00C7BFD6 /* TouchScreen.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "Wolfgang Engel";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (

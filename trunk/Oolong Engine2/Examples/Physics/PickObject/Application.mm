@@ -536,7 +536,7 @@ bool CShell::RenderScene()
 	}
 	
 	// show text on the display
-	AppDisplayText->DisplayDefaultTitle("Falling Cubes", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("Kick Cubes :-)", "", eDisplayTextLogoIMG);
 	
 	AppDisplayText->Flush();	
 	

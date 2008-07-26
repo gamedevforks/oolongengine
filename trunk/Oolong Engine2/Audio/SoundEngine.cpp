@@ -910,7 +910,15 @@ class SoundEngineEffect
 				mDecayDataSize(0),
 				mIsLoopingEffect(inDoLoop),
 				mPlayThread(NULL),
-				mPlayThreadState(kPlayThreadState_Loop) { alGenSources(1, &mSourceID); }
+				mPlayThreadState(kPlayThreadState_Loop) 
+				{ 
+					alGetError(); 
+					alGenSources(1, &mSourceID); 
+					float result =  alGetError();
+					if(result != AL_NO_ERROR)
+						printf("%s: %x\n", "alGenSource did not load", (int)result);
+				}
+
 		
 		~SoundEngineEffect()
 		{
@@ -968,7 +976,8 @@ class SoundEngineEffect
 				
 			if (!TestAudioFormatNativeEndian(theFileFormat) && (theFileFormat.mBitsPerChannel > 8)) 
 				return kSoundEngineErrInvalidFileFormat;
-		
+			
+			alGetError();
 			alGenBuffers(1, &outBufferID);
 				AssertNoOALError("Error generating buffer\n", fail);
 			

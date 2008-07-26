@@ -70,6 +70,17 @@ TouchScreenValues* GetValuesTouchScreen()
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	TouchScreen.TouchesEnd = true;
+    TouchScreen.LocationXTouchesBegan = 0.0;
+    TouchScreen.LocationYTouchesBegan = 0.0;
+	TouchScreen.CountTouchesBegan = (int) 0;
+	TouchScreen.TapCountTouchesBegan = 0;
+	
+    TouchScreen.LocationXTouchesMoved = 0.0;
+    TouchScreen.LocationYTouchesMoved =  0.0;
+	TouchScreen.CountTouchesMoved = (int) 0;
+	TouchScreen.TapCountTouchesMoved = 0;
+	
+	
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

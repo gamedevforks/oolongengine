@@ -24,6 +24,8 @@ subject to the following restrictions:
 #include "UI.h"
 #include "Macros.h"
 #include "Audio.h"
+#include "Pathes.h"
+#include "TouchScreen.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -31,8 +33,24 @@ subject to the following restrictions:
 CDisplayText * AppDisplayText;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 
+// touch screen values
+TouchScreenValues *TouchScreen;
+
+
 int frames;
 float frameRate;
+
+enum {
+	kSound_Thrust = 0,
+	kSound_Start,
+	kSound_Success,
+	kSound_Failure,
+	kNumSounds
+};
+
+UInt32 Sounds[kNumSounds];
+OSStatus IsSoundRunning[kNumSounds];
+
 
 bool CShell::InitApplication()
 {
@@ -43,6 +61,36 @@ bool CShell::InitApplication()
 	
 	// Setup sound engine. Run it at 44Khz to match the sound files
 	SoundEngine_Initialize(44100);
+	
+	SoundEngine_SetListenerPosition(0.0, 0.0, 0.0f);
+	
+	// keeps the file name
+	char *filename = new char[2048];
+
+	// keeps the path to the sound data
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
+	
+	// Load each of the four sounds used here
+	sprintf(filename, "%s/Start.caf", buffer);
+	if(SoundEngine_LoadEffect(filename, &Sounds[kSound_Start]))
+		printf("**ERROR** Failed to load sound file.\n");
+	sprintf(filename, "%s/Success.caf", buffer);
+	if(SoundEngine_LoadEffect(filename, &Sounds[kSound_Success]))
+		printf("**ERROR** Failed to load sound file.\n");
+	sprintf(filename, "%s/Failure.caf", buffer);
+	if(SoundEngine_LoadEffect(filename, &Sounds[kSound_Failure]))
+		printf("**ERROR** Failed to load sound file.\n");
+	sprintf(filename, "%s/Thrust.caf", buffer);
+	if(SoundEngine_LoadLoopingEffect(filename, NULL, NULL, &Sounds[kSound_Thrust]))
+		printf("**ERROR** Failed to load sound file.\n");
+	
+	delete buffer;
+	delete filename;
+	
+	IsSoundRunning[kSound_Thrust] = true;
+	SoundEngine_StartEffect( Sounds[kSound_Thrust]);
+	
 	
 	return true;
 }
@@ -86,6 +134,83 @@ bool CShell::InitView()
 	glLoadIdentity();
 	glTranslatef(0.0, 0.0, - 10.0f);
 	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
+	
+	//Start or stop thurst sound & update its position
+	//	SoundEngine_Vibrate();
+	//	if(thrust && !_lastThrust)
+	//		SoundEngine_StartEffect( _sounds[kSound_Thrust]);
+	//	else if(!thrust && _lastThrust)
+	//		SoundEngine_StopEffect(_sounds[kSound_Thrust], false);
+	//	if(thrust)
+
+	//SoundEngine_SetEffectPosition(Sounds[kSound_Thrust], 50.0f * fmod(time, 360.0), 0.0, 0.0);
+
+	//
+	// Touch screen support
+	//
+	// touch screen coordinates go from 0, 0 in the upper left corner to
+	// 320, 480 in the lower right corner
+	TouchScreen = GetValuesTouchScreen();
+
+	// someone touched the screen ...
+	if(TouchScreen->TouchesEnd == false)
+	{
+		// upper right corner .. box is 40 x 40
+		if(TouchScreen->LocationXTouchesBegan <= 40 && TouchScreen->LocationYTouchesBegan <= 40)
+		{
+			if(IsSoundRunning[kSound_Thrust])
+			{
+				IsSoundRunning[kSound_Thrust] = false;
+				SoundEngine_StopEffect(Sounds[kSound_Thrust], false);
+			}
+		}
+		
+		// lower right corner .. box is 40 x 40
+		if(TouchScreen->LocationXTouchesBegan >= 280 && TouchScreen->LocationYTouchesBegan >= 440)
+		{
+			if(!IsSoundRunning[kSound_Thrust])
+			{
+				SoundEngine_StartEffect(Sounds[kSound_Thrust]);
+				IsSoundRunning[kSound_Thrust] = true;
+			}
+		}
+		
+		// go to the right
+		if(TouchScreen->LocationXTouchesBegan >= 280 && TouchScreen->LocationYTouchesBegan <=40)
+		{
+			if(IsSoundRunning[kSound_Thrust])
+				SoundEngine_SetEffectPosition(Sounds[kSound_Thrust], 2.0 * (TouchScreen->LocationXTouchesBegan / 320) - 1.0, 0.0, 0.0);
+		}
+		
+		// go to the right
+		if(TouchScreen->LocationXTouchesBegan <=40 && TouchScreen->LocationYTouchesBegan >=440)
+		{
+			if(IsSoundRunning[kSound_Thrust])
+				SoundEngine_SetEffectPosition(Sounds[kSound_Thrust], 2.0 * (TouchScreen->LocationXTouchesBegan / 320) - 1.0, 0.0, 0.0);
+		}
+		
+		// if center reset everything and vibrate if it is a iPhone
+		if(TouchScreen->LocationXTouchesBegan >= 140 &&  
+		   TouchScreen->LocationXTouchesBegan <= 180 && 
+		   TouchScreen->LocationYTouchesBegan >= 220 && 
+		   TouchScreen->LocationYTouchesBegan <= 260)
+		{
+			if(IsSoundRunning[kSound_Thrust])
+			{
+			#if TARGET_OS_IPHONE
+				SoundEngine_Vibrate();
+			#endif
+				SoundEngine_SetEffectPosition(Sounds[kSound_Thrust], 0.0, 0.0, 0.0);
+			}
+		}
+		
+		AppDisplayText->DisplayText(0, 18, 0.4f, RGBA(255,255,255,255), "touchesBegan: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
+									TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, TouchScreen->CountTouchesBegan, TouchScreen->TapCountTouchesBegan);
+		AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "touchesMoved: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
+									TouchScreen->LocationXTouchesMoved, TouchScreen->LocationYTouchesMoved, TouchScreen->CountTouchesMoved, TouchScreen->TapCountTouchesMoved);
+	}
+	AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "Upper right corner/Lower left corner: Sound off/on");
+	AppDisplayText->DisplayText(0, 14, 0.4f, RGBA(255,255,255,255), "Lower right corner/Upper left corner/Center: Sound right/left/center");
 	
 	return true;
 }
@@ -175,6 +300,16 @@ bool CShell::RenderScene()
     glColor4f(0, 1, 1, 1);
     glVertexPointer(3, GL_FLOAT, 0, verts + 60);
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	//Start or stop thurst sound & update its position
+//	SoundEngine_Vibrate();
+//	if(thrust && !_lastThrust)
+//		SoundEngine_StartEffect( _sounds[kSound_Thrust]);
+//	else if(!thrust && _lastThrust)
+//		SoundEngine_StopEffect(_sounds[kSound_Thrust], false);
+//	if(thrust)
+//		SoundEngine_SetEffectPosition(_sounds[kSound_Thrust], 2.0 * (_position.x / bounds.size.width) - 1.0, 0.0, 0.0);
+	
 	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("Load wav audio file", "", eDisplayTextLogoIMG);

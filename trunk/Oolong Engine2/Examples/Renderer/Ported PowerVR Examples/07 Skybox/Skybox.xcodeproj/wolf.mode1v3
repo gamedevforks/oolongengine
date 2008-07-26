@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,7 +282,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>5</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -317,8 +319,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -336,7 +336,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>799121DB0E1F420100035EEA</string>
+										<string>79E5F1700E330F3900C7BFD6</string>
 										<key>history</key>
 										<array>
 											<string>796AC2BB0DF27671005F8387</string>
@@ -360,7 +360,7 @@
 											<string>799121830E1F3E7100035EEA</string>
 											<string>799121D50E1F420100035EEA</string>
 											<string>799121D60E1F420100035EEA</string>
-											<string>799121D70E1F420100035EEA</string>
+											<string>79E5F11E0E330B2300C7BFD6</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -385,7 +385,6 @@
 											<string>7991219E0E1F3E7100035EEA</string>
 											<string>799121A00E1F3E7100035EEA</string>
 											<string>799121D90E1F420100035EEA</string>
-											<string>799121DA0E1F420100035EEA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -443,9 +442,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799121DD0E1F420100035EEA</string>
+				<string>79E5F1450E330BAF00C7BFD6</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799121DE0E1F420100035EEA</string>
+				<string>79E5F1460E330BAF00C7BFD6</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -558,7 +557,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>799121C60E1F419200035EEA</string>
+	<string>79E5F1430E330BA700C7BFD6</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -581,12 +580,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>799121E60E1F420100035EEA</string>
-		<string>799121E70E1F420100035EEA</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/07 Skybox/Skybox.xcodeproj</string>
+		<string>/Users/wolf/Desktop/Oolong/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/07 Skybox/Skybox.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>380 259 918 569 0 0 1440 878 </string>

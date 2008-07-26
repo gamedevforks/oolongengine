@@ -94,8 +94,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 236929173;
-			PBXWorkspaceStateSaveDate = 236929173;
+			PBXPerProjectTemplateStateSaveDate = 238226340;
+			PBXWorkspaceStateSaveDate = 238226340;
 		};
 		perUserProjectItems = {
 			791F46A40E174E8B00E927FE /* PBXTextBookmark */ = 791F46A40E174E8B00E927FE /* PBXTextBookmark */;
@@ -139,10 +139,9 @@
 			799121A00E1F3E7100035EEA /* PBXTextBookmark */ = 799121A00E1F3E7100035EEA /* PBXTextBookmark */;
 			799121D50E1F420100035EEA /* PBXTextBookmark */ = 799121D50E1F420100035EEA /* PBXTextBookmark */;
 			799121D60E1F420100035EEA /* PBXTextBookmark */ = 799121D60E1F420100035EEA /* PBXTextBookmark */;
-			799121D70E1F420100035EEA /* PBXTextBookmark */ = 799121D70E1F420100035EEA /* PBXTextBookmark */;
 			799121D90E1F420100035EEA /* PBXTextBookmark */ = 799121D90E1F420100035EEA /* PBXTextBookmark */;
-			799121DA0E1F420100035EEA /* PBXTextBookmark */ = 799121DA0E1F420100035EEA /* PBXTextBookmark */;
-			799121DB0E1F420100035EEA /* PBXTextBookmark */ = 799121DB0E1F420100035EEA /* PBXTextBookmark */;
+			79E5F11E0E330B2300C7BFD6 /* PBXTextBookmark */ = 79E5F11E0E330B2300C7BFD6 /* PBXTextBookmark */;
+			79E5F1700E330F3900C7BFD6 /* PBXTextBookmark */ = 79E5F1700E330F3900C7BFD6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -242,10 +241,10 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 8568}}";
-			sepNavSelRange = "{3733, 0}";
-			sepNavVisRange = "{3635, 231}";
-			sepNavWindowFrame = "{{50, 119}, {1160, 759}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 8652}}";
+			sepNavSelRange = "{3958, 61}";
+			sepNavVisRange = "{3633, 1276}";
+			sepNavWindowFrame = "{{360, 73}, {1160, 759}}";
 		};
 	};
 	796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */ = {
@@ -750,12 +749,6 @@
 		name = ResourcePath.h;
 		path = /Users/wolf/Desktop/OolongEngine2SVN/Utility/Pathes/ResourcePath.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1476, 631}}";
-			sepNavSelRange = "{947, 61}";
-			sepNavVisRange = "{0, 1008}";
-			sepNavWindowFrame = "{{15, 114}, {1160, 759}}";
-		};
 	};
 	799121A00E1F3E7100035EEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -780,11 +773,6 @@
 		name = ResourcePath.mm;
 		path = /Users/wolf/Desktop/OolongEngine2SVN/Utility/Pathes/ResourcePath.mm;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1476, 266}}";
-			sepNavSelRange = "{944, 0}";
-			sepNavVisRange = "{0, 1150}";
-		};
 	};
 	799121BC0E1F410C00035EEA /* ResourcePath.h */ = {
 		uiCtxt = {
@@ -822,14 +810,27 @@
 		vrLen = 535;
 		vrLoc = 938;
 	};
-	799121D70E1F420100035EEA /* PBXTextBookmark */ = {
+	799121D90E1F420100035EEA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 799121D80E1F420100035EEA /* Pathes.h */;
+		fRef = 799121A50E1F3E7100035EEA /* ResourcePath.mm */;
+		name = "ResourcePath.mm: 14";
 		rLen = 0;
-		rLoc = 2147483654;
+		rLoc = 944;
 		rType = 0;
+		vrLen = 1150;
+		vrLoc = 0;
 	};
-	799121D80E1F420100035EEA /* Pathes.h */ = {
+	79E5F11E0E330B2300C7BFD6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79E5F11F0E330B2300C7BFD6 /* Pathes.h */;
+		name = "Pathes.h: 18";
+		rLen = 0;
+		rLoc = 1000;
+		rType = 0;
+		vrLen = 978;
+		vrLoc = 45;
+	};
+	79E5F11F0E330B2300C7BFD6 /* Pathes.h */ = {
 		isa = PBXFileReference;
 		lastKnownFileType = sourcecode.c.h;
 		name = Pathes.h;
@@ -841,29 +842,9 @@
 			sepNavVisRange = "{45, 978}";
 		};
 	};
-	799121D90E1F420100035EEA /* PBXTextBookmark */ = {
+	79E5F1700E330F3900C7BFD6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 799121A50E1F3E7100035EEA /* ResourcePath.mm */;
-		name = "ResourcePath.mm: 14";
-		rLen = 0;
-		rLoc = 944;
-		rType = 0;
-		vrLen = 1150;
-		vrLoc = 0;
-	};
-	799121DA0E1F420100035EEA /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 23";
-		rLen = 17;
-		rLoc = 1284;
-		rType = 0;
-		vrLen = 535;
-		vrLoc = 938;
-	};
-	799121DB0E1F420100035EEA /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 799121DC0E1F420100035EEA /* Pathes.h */;
+		fRef = 79E5F1710E330F3900C7BFD6 /* Pathes.h */;
 		name = "Pathes.h: 18";
 		rLen = 0;
 		rLoc = 1000;
@@ -871,7 +852,7 @@
 		vrLen = 978;
 		vrLoc = 45;
 	};
-	799121DC0E1F420100035EEA /* Pathes.h */ = {
+	79E5F1710E330F3900C7BFD6 /* Pathes.h */ = {
 		isa = PBXFileReference;
 		name = Pathes.h;
 		path = /Users/wolf/Desktop/OolongEngine2SVN/Include/Pathes.h;

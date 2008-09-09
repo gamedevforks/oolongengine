@@ -28,12 +28,14 @@ class	btSoftBodyRigidBodyCollisionConfiguration : public btDefaultCollisionConfi
 
 	//default CreationFunctions, filling the m_doubleDispatch table
 	btCollisionAlgorithmCreateFunc*	m_softSoftCreateFunc;
-	btCollisionAlgorithmCreateFunc*	m_softRigidCreateFunc;
-	btCollisionAlgorithmCreateFunc*	m_swappedSoftRigidCreateFunc;
+	btCollisionAlgorithmCreateFunc*	m_softRigidConvexCreateFunc;
+	btCollisionAlgorithmCreateFunc*	m_swappedSoftRigidConvexCreateFunc;
+	btCollisionAlgorithmCreateFunc*	m_softRigidConcaveCreateFunc;
+	btCollisionAlgorithmCreateFunc*	m_swappedSoftRigidConcaveCreateFunc;
 	
 public:
 
-	btSoftBodyRigidBodyCollisionConfiguration(btStackAlloc*	stackAlloc=0,btPoolAllocator*	persistentManifoldPool=0,btPoolAllocator*	collisionAlgorithmPool=0);
+	btSoftBodyRigidBodyCollisionConfiguration(const btDefaultCollisionConstructionInfo& constructionInfo = btDefaultCollisionConstructionInfo());
 
 	virtual ~btSoftBodyRigidBodyCollisionConfiguration();
 

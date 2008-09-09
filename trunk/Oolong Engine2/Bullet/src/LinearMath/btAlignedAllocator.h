@@ -40,10 +40,20 @@ void	btAlignedFreeInternal	(void* ptr,int line,char* filename);
 
 	#define btAlignedAlloc(a,b) btAlignedAllocInternal(a,b)
 	#define btAlignedFree(ptr) btAlignedFreeInternal(ptr)
+
 #endif
 typedef int	size_type;
 
+typedef void *(btAlignedAllocFunc)(size_t size, int alignment);
+typedef void (btAlignedFreeFunc)(void *memblock);
+typedef void *(btAllocFunc)(size_t size);
+typedef void (btFreeFunc)(void *memblock);
 
+void btAlignedAllocSetCustomAligned(btAlignedAllocFunc *allocFunc, btAlignedFreeFunc *freeFunc);
+void btAlignedAllocSetCustom(btAllocFunc *allocFunc, btFreeFunc *freeFunc);
+
+///The btAlignedAllocator is a portable class for aligned memory allocations.
+///Default implementations for unaligned and aligned allocations can be overridden by a custom allocator using btAlignedAllocSetCustom and btAlignedAllocSetCustomAligned.
 template < typename T , unsigned Alignment >
 class btAlignedAllocator {
 	

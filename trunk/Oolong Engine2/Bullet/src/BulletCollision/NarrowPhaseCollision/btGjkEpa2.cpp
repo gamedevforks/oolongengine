@@ -1,3 +1,27 @@
+/*
+Bullet Continuous Collision Detection and Physics Library
+Copyright (c) 2003-2008 Erwin Coumans  http://continuousphysics.com/Bullet/
+
+This software is provided 'as-is', without any express or implied warranty.
+In no event will the authors be held liable for any damages arising from the
+use of this software.
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely,
+subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+claim that you wrote the original software. If you use this software in a
+product, an acknowledgment in the product documentation would be appreciated
+but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+*/
+
+/*
+GJK-EPA collision solver by Nathanael Presson, 2008
+*/
 #include "BulletCollision/CollisionShapes/btConvexInternalShape.h"
 #include "BulletCollision/CollisionShapes/btSphereShape.h"
 #include "btGjkEpa2.h"
@@ -74,6 +98,7 @@ struct	MinkowskiDiff
 	};
 
 typedef	MinkowskiDiff	tShape;
+
 
 // GJK
 struct	GJK
@@ -263,9 +288,9 @@ bool					EncloseOrigin()
 				{
 				btVector3		axis=btVector3(0,0,0);
 				axis[i]=1;
-				if(btFabs(dot(axis,d))>0)
+				const btVector3	p=cross(d,axis);
+				if(p.length2()>0)
 					{
-					const btVector3	p=cross(d,axis);
 					appendvertice(*m_simplex, p);
 					if(EncloseOrigin())	return(true);
 					removevertice(*m_simplex);
@@ -280,8 +305,7 @@ bool					EncloseOrigin()
 			{
 			const btVector3	n=cross(m_simplex->c[1]->w-m_simplex->c[0]->w,
 									m_simplex->c[2]->w-m_simplex->c[0]->w);
-			const btScalar	l=n.length();
-			if(l>0)
+			if(n.length2()>0)
 				{
 				appendvertice(*m_simplex,n);
 				if(EncloseOrigin())	return(true);
@@ -364,7 +388,7 @@ static btScalar		projectorigin(	const btVector3& a,
 				if((mindist<0)||(subd<mindist))
 					{
 					mindist		=	subd;
-					m			=	((subm&1)?1<<i:0)+((subm&2)?1<<j:0);
+					m			=	static_cast<U>(((subm&1)?1<<i:0)+((subm&2)?1<<j:0));
 					w[i]		=	subw[0];
 					w[j]		=	subw[1];
 					w[imd3[j]]	=	0;				
@@ -412,9 +436,9 @@ static btScalar		projectorigin(	const btVector3& a,
 				if((mindist<0)||(subd<mindist))
 					{
 					mindist		=	subd;
-					m			=	(subm&1?1<<i:0)+
+					m			=	static_cast<U>((subm&1?1<<i:0)+
 									(subm&2?1<<j:0)+
-									(subm&4?8:0);
+									(subm&4?8:0));
 					w[i]		=	subw[0];
 					w[j]		=	subw[1];
 					w[imd3[j]]	=	0;
@@ -476,7 +500,7 @@ struct	eStatus { enum _ {
 	OutOfVertices,
 	AccuraryReached,
 	FallBack,
-	Failed,		};};
+	Failed		};};
 /* Fields		*/ 
 eStatus::_		m_status;
 GJK::sSimplex	m_result;
@@ -492,6 +516,30 @@ sList			m_stock;
 	{
 	Initialize();	
 	}
+
+
+					static inline void		bind(sFace* fa,U ea,sFace* fb,U eb)
+	{
+	fa->e[ea]=(U1)eb;fa->f[ea]=fb;
+	fb->e[eb]=(U1)ea;fb->f[eb]=fa;
+	}
+static inline void		append(sList& list,sFace* face)
+	{
+	face->l[0]	=	0;
+	face->l[1]	=	list.root;
+	if(list.root) list.root->l[0]=face;
+	list.root	=	face;
+	++list.count;
+	}
+static inline void		remove(sList& list,sFace* face)
+	{
+	if(face->l[1]) face->l[1]->l[0]=face->l[0];
+	if(face->l[0]) face->l[0]->l[1]=face->l[1];
+	if(face==list.root) list.root=face->l[1];
+	--list.count;
+	}
+
+
 void				Initialize()
 	{
 	m_status	=	eStatus::Failed;
@@ -508,10 +556,11 @@ eStatus::_			Evaluate(GJK& gjk,const btVector3& guess)
 	GJK::sSimplex&	simplex=*gjk.m_simplex;
 	if((simplex.rank>1)&&gjk.EncloseOrigin())
 		{
+
 		/* Clean up				*/ 
 		while(m_hull.root)
 			{
-			sFace*	f(m_hull.root);
+			sFace*	f = m_hull.root;
 			remove(m_hull,f);
 			append(m_stock,f);
 			}
@@ -693,26 +742,7 @@ bool				expand(U pass,sSV* w,sFace* f,U e,sHorizon& horizon)
 		}
 	return(false);
 	}
-static inline void		bind(sFace* fa,U ea,sFace* fb,U eb)
-	{
-	fa->e[ea]=(U1)eb;fa->f[ea]=fb;
-	fb->e[eb]=(U1)ea;fb->f[eb]=fa;
-	}
-static inline void		append(sList& list,sFace* face)
-	{
-	face->l[0]	=	0;
-	face->l[1]	=	list.root;
-	if(list.root) list.root->l[0]=face;
-	list.root	=	face;
-	++list.count;
-	}
-static inline void		remove(sList& list,sFace* face)
-	{
-	if(face->l[1]) face->l[1]->l[0]=face->l[0];
-	if(face->l[0]) face->l[0]->l[1]=face->l[1];
-	if(face==list.root) list.root=face->l[1];
-	--list.count;
-	}
+
 };
 
 //
@@ -749,16 +779,17 @@ return(sizeof(GJK)+sizeof(EPA));
 }
 
 //
-btScalar	btGjkEpaSolver2::Distance(	const btConvexShape*	shape0,
+bool		btGjkEpaSolver2::Distance(	const btConvexShape*	shape0,
 										const btTransform&		wtrs0,
 										const btConvexShape*	shape1,
 										const btTransform&		wtrs1,
+										const btVector3&		guess,
 										sResults&				results)
 {
 tShape			shape;
 Initialize(shape0,wtrs0,shape1,wtrs1,results,shape,false);
-GJK				gjk;	
-GJK::eStatus::_	gjk_status=gjk.Evaluate(shape,btVector3(1,1,1));
+GJK				gjk;
+GJK::eStatus::_	gjk_status=gjk.Evaluate(shape,guess);
 if(gjk_status==GJK::eStatus::Valid)
 	{
 	btVector3	w0=btVector3(0,0,0);
@@ -771,15 +802,60 @@ if(gjk_status==GJK::eStatus::Valid)
 		}
 	results.witnesses[0]	=	wtrs0*w0;
 	results.witnesses[1]	=	wtrs0*w1;
-	return((w0-w1).length());
+	results.normal			=	w0-w1;
+	results.distance		=	results.normal.length();
+	results.normal			/=	results.distance>GJK_MIN_DISTANCE?results.distance:1;
+	return(true);
 	}
 	else
 	{
 	results.status	=	gjk_status==GJK::eStatus::Inside?
 							sResults::Penetrating	:
 							sResults::GJK_Failed	;
-	return(-1);
+	return(false);
 	}
+}
+
+//
+bool	btGjkEpaSolver2::Penetration(	const btConvexShape*	shape0,
+										const btTransform&		wtrs0,
+										const btConvexShape*	shape1,
+										const btTransform&		wtrs1,
+										const btVector3&		guess,
+										sResults&				results,
+										bool					usemargins)
+{
+tShape			shape;
+Initialize(shape0,wtrs0,shape1,wtrs1,results,shape,usemargins);
+GJK				gjk;	
+GJK::eStatus::_	gjk_status=gjk.Evaluate(shape,-guess);
+switch(gjk_status)
+	{
+	case	GJK::eStatus::Inside:
+		{
+		EPA				epa;
+		EPA::eStatus::_	epa_status=epa.Evaluate(gjk,-guess);
+		if(epa_status!=EPA::eStatus::Failed)
+			{
+			btVector3	w0=btVector3(0,0,0);
+			for(U i=0;i<epa.m_result.rank;++i)
+				{
+				w0+=shape.Support(epa.m_result.c[i]->d,0)*epa.m_result.p[i];
+				}
+			results.status			=	sResults::Penetrating;
+			results.witnesses[0]	=	wtrs0*w0;
+			results.witnesses[1]	=	wtrs0*(w0-epa.m_normal*epa.m_depth);
+			results.normal			=	-epa.m_normal;
+			results.distance		=	-epa.m_depth;
+			return(true);
+			} else results.status=sResults::EPA_Failed;
+		}
+	break;
+	case	GJK::eStatus::Failed:
+	results.status=sResults::GJK_Failed;
+	break;
+	}
+return(false);
 }
 
 //
@@ -825,7 +901,8 @@ if(gjk_status==GJK::eStatus::Valid)
 			const btVector3	delta=	results.witnesses[0]-
 									results.witnesses[1];
 			const btScalar	length=	delta.length();
-			results.normal	=	delta/length;			
+			if (length >= SIMD_EPSILON)
+				results.normal	=	delta/length;			
 			return(-length);
 			}
 		}	
@@ -834,42 +911,17 @@ return(SIMD_INFINITY);
 }
 
 //
-bool	btGjkEpaSolver2::Penetration(	const btConvexShape*	shape0,
+bool	btGjkEpaSolver2::SignedDistance(const btConvexShape*	shape0,
 										const btTransform&		wtrs0,
 										const btConvexShape*	shape1,
 										const btTransform&		wtrs1,
 										const btVector3&		guess,
 										sResults&				results)
 {
-tShape			shape;
-Initialize(shape0,wtrs0,shape1,wtrs1,results,shape,true);
-GJK				gjk;	
-GJK::eStatus::_	gjk_status=gjk.Evaluate(shape,-guess);
-switch(gjk_status)
-	{
-	case	GJK::eStatus::Inside:
-		{
-		EPA				epa;
-		EPA::eStatus::_	epa_status=epa.Evaluate(gjk,-guess);
-		if(epa_status!=EPA::eStatus::Failed)
-			{
-			btVector3	w0=btVector3(0,0,0);
-			for(U i=0;i<epa.m_result.rank;++i)
-				{
-				w0+=shape.Support(epa.m_result.c[i]->d,0)*epa.m_result.p[i];
-				}
-			results.status			=	sResults::Penetrating;
-			results.witnesses[0]	=	wtrs0*w0;
-			results.witnesses[1]	=	wtrs0*(w0-epa.m_normal*epa.m_depth);
-			return(true);
-			} else results.status=sResults::EPA_Failed;
-		}
-	break;
-	case	GJK::eStatus::Failed:
-	results.status=sResults::GJK_Failed;
-	break;
-	}
-return(false);
+if(!Distance(shape0,wtrs0,shape1,wtrs1,guess,results))
+	return(Penetration(shape0,wtrs0,shape1,wtrs1,guess,results,false));
+	else
+	return(true);
 }
 
 /* Symbols cleanup		*/ 

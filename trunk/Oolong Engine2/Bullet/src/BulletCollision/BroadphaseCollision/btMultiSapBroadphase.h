@@ -26,7 +26,9 @@ class btSimpleBroadphase;
 
 typedef btAlignedObjectArray<btBroadphaseInterface*> btSapBroadphaseArray;
 
-///multi SAP broadphase
+///The btMultiSapBroadphase is a broadphase that contains multiple SAP broadphases.
+///The user can add SAP broadphases that cover the world. A btBroadphaseProxy can be in multiple child broadphases at the same time.
+///A btQuantizedBvh acceleration structures finds overlapping SAPs for each btBroadphaseProxy.
 ///See http://www.continuousphysics.com/Bullet/phpBB2/viewtopic.php?t=328
 ///and http://www.continuousphysics.com/Bullet/phpBB2/viewtopic.php?t=1329
 class btMultiSapBroadphase :public btBroadphaseInterface
@@ -37,7 +39,7 @@ class btMultiSapBroadphase :public btBroadphaseInterface
 
 	btOverlappingPairCache*	m_overlappingPairs;
 
-	class btOptimizedBvh*			m_optimizedAabbTree;
+	class btQuantizedBvh*			m_optimizedAabbTree;
 
 
 	bool					m_ownsPairCache;
@@ -83,7 +85,6 @@ public:
 
 protected:
 
-	void	addToChildBroadphase(btMultiSapProxy* parentMultiSapProxy, btBroadphaseProxy* childProxy, btBroadphaseInterface*	childBroadphase);
 
 	btAlignedObjectArray<btMultiSapProxy*> m_multiSapProxies;
 
@@ -107,7 +108,9 @@ public:
 	virtual btBroadphaseProxy*	createProxy(  const btVector3& aabbMin,  const btVector3& aabbMax,int shapeType,void* userPtr, short int collisionFilterGroup,short int collisionFilterMask, btDispatcher* dispatcher,void* multiSapProxy);
 	virtual void	destroyProxy(btBroadphaseProxy* proxy,btDispatcher* dispatcher);
 	virtual void	setAabb(btBroadphaseProxy* proxy,const btVector3& aabbMin,const btVector3& aabbMax, btDispatcher* dispatcher);
-	
+
+	void	addToChildBroadphase(btMultiSapProxy* parentMultiSapProxy, btBroadphaseProxy* childProxy, btBroadphaseInterface*	childBroadphase);
+
 	///calculateOverlappingPairs is optional: incremental algorithms (sweep and prune) might do it during the set aabb
 	virtual void	calculateOverlappingPairs(btDispatcher* dispatcher);
 

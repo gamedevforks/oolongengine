@@ -486,6 +486,7 @@ struct btWheelContactPoint
 
 };
 
+btScalar calcRollingFriction(btWheelContactPoint& contactPoint);
 btScalar calcRollingFriction(btWheelContactPoint& contactPoint)
 {
 
@@ -711,11 +712,11 @@ void* btDefaultVehicleRaycaster::castRay(const btVector3& from,const btVector3& 
 
 	m_dynamicsWorld->rayTest(from, to, rayCallback);
 
-	if (rayCallback.HasHit())
+	if (rayCallback.hasHit())
 	{
 		
 		btRigidBody* body = btRigidBody::upcast(rayCallback.m_collisionObject);
-		if (body)
+        if (body && body->hasContactResponse())
 		{
 			result.m_hitPointInWorld = rayCallback.m_hitPointWorld;
 			result.m_hitNormalInWorld = rayCallback.m_hitNormalWorld;

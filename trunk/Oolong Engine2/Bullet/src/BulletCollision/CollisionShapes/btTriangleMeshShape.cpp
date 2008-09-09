@@ -24,7 +24,14 @@ subject to the following restrictions:
 btTriangleMeshShape::btTriangleMeshShape(btStridingMeshInterface* meshInterface)
 : m_meshInterface(meshInterface)
 {
-	recalcLocalAabb();
+	if(meshInterface->hasPremadeAabb())
+	{
+		meshInterface->getPremadeAabb(&m_localAabbMin, &m_localAabbMax);
+	}
+	else
+	{
+		recalcLocalAabb();
+	}
 }
 
 
@@ -40,6 +47,7 @@ void btTriangleMeshShape::getAabb(const btTransform& trans,btVector3& aabbMin,bt
 {
 
 	btVector3 localHalfExtents = btScalar(0.5)*(m_localAabbMax-m_localAabbMin);
+	localHalfExtents += btVector3(getMargin(),getMargin(),getMargin());
 	btVector3 localCenter = btScalar(0.5)*(m_localAabbMax+m_localAabbMin);
 	
 	btMatrix3x3 abs_b = trans.getBasis().absolute();  
@@ -49,12 +57,10 @@ void btTriangleMeshShape::getAabb(const btTransform& trans,btVector3& aabbMin,bt
 	btVector3 extent = btVector3(abs_b[0].dot(localHalfExtents),
 		   abs_b[1].dot(localHalfExtents),
 		  abs_b[2].dot(localHalfExtents));
-	extent += btVector3(getMargin(),getMargin(),getMargin());
-
 	aabbMin = center - extent;
 	aabbMax = center + extent;
 
-	
+
 }
 
 void	btTriangleMeshShape::recalcLocalAabb()

@@ -27,7 +27,7 @@ static btBroadphaseInterface* sBroadphase=0;
 btAlignedObjectArray<btCollisionShape*> sCollisionShapes;
 btAlignedObjectArray<btRigidBody*> sBoxBodies;
 btRigidBody* sFloorPlaneBody=0;
-int numBodies = 50;
+int numBodies = 10;
 
 //////////////////////////////////
 
@@ -37,6 +37,7 @@ int numBodies = 50;
 #include "GraphicsDevice.h"
 #include "UI.h"
 #include "Macros.h"
+#include "Accelerometer.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -44,12 +45,24 @@ int numBodies = 50;
 CDisplayText * AppDisplayText;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 
+#define kAccelerometerFrequency		30.0 //Hz
+#define kFilteringFactor			0.1
+
+
 int frames;
 float frameRate;
+
+Accel* gAccel;
+
 
 bool CShell::InitApplication()
 {
 //	LOGFUNC("InitApplication()");
+	
+	gAccel = [Accel alloc];
+	
+	[gAccel SetupAccelerometer: kAccelerometerFrequency];
+	
 	
 	AppDisplayText = new CDisplayText;  
 	
@@ -60,20 +73,24 @@ bool CShell::InitApplication()
 
 	sCollisionConfig = new btDefaultCollisionConfiguration();
 	
-	///the maximum size of the collision world. Make sure objects stay within these boundaries
-	///Don't make the world AABB size too large, it will harm simulation quality and performance
-	btVector3 worldAabbMin(-10000,-10000,-10000);
-	btVector3 worldAabbMax(10000,10000,10000);
-	sBroadphase = new btAxisSweep3(worldAabbMin,worldAabbMax,MAX_PROXIES);
+	sBroadphase = new btDbvtBroadphase();
+	
 	sCollisionDispatcher = new btCollisionDispatcher(sCollisionConfig);
 	sConstraintSolver = new btSequentialImpulseConstraintSolver;
 	sDynamicsWorld = new btDiscreteDynamicsWorld(sCollisionDispatcher,sBroadphase,sConstraintSolver,sCollisionConfig);
 	sDynamicsWorld->setGravity(btVector3(0,-10,0));
-	//btCollisionShape* shape = new btBoxShape(btVector3(1,1,1));
+	
+	btBoxShape* worldBoxShape = new btBoxShape(btVector3(10,10,10));
+	///create 6 planes/half spaces
+	for (int i=0;i<6;i++)
 	{
 		btTransform groundTransform;
 		groundTransform.setIdentity();
-		btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0,1,0),0);
+		groundTransform.setOrigin(btVector3(0,10,0));
+		btVector4 planeEq;
+		worldBoxShape->getPlaneEquation(planeEq,i);
+		
+		btCollisionShape* groundShape = new btStaticPlaneShape(-planeEq,planeEq[3]);
 		btScalar mass(0.);	//rigidbody is dynamic if and only if mass is non zero, otherwise static
 		bool isDynamic = (mass != 0.f);
 		btVector3 localInertia(0,0,0);
@@ -90,7 +107,7 @@ bool CShell::InitApplication()
 	{
 		btTransform bodyTransform;
 		bodyTransform.setIdentity();
-		bodyTransform.setOrigin(btVector3(0,10+i*2,0));
+		bodyTransform.setOrigin(btVector3(0,10+i*3,0));
 		btCollisionShape* boxShape = new btBoxShape(btVector3(1,1,1));
 		btScalar mass(1.);//positive mass means dynamic/moving  object
 		bool isDynamic = (mass != 0.f);
@@ -102,6 +119,7 @@ bool CShell::InitApplication()
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
 		btRigidBody* boxBody=new btRigidBody(rbInfo);
 		sBoxBodies.push_back(boxBody);
+		boxBody->setActivationState(DISABLE_DEACTIVATION);
 		//add the body to the dynamics world
 		sDynamicsWorld->addRigidBody(boxBody);
 	}
@@ -114,6 +132,9 @@ bool CShell::QuitApplication()
 	AppDisplayText->ReleaseTextures();
 	
 	delete AppDisplayText;
+	
+	[gAccel release];
+
 	
 	///cleanup Bullet stuff
 	delete sDynamicsWorld;
@@ -181,16 +202,38 @@ bool CShell::UpdateScene()
  	frames++;
 	gettimeofday(&currTime, NULL); // gets the current time passed since the last frame in seconds
 	
+	btScalar realDt = ((currTime.tv_usec - time.tv_usec) / 1000000.0f);
+	
 	if (currTime.tv_usec - time.tv_usec) 
 	{
-		frameRate = ((float)frames/((currTime.tv_usec - time.tv_usec) / 1000000.0f));
+		frameRate = ((float)frames/realDt);
 		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
 		time = currTime;
 		frames = 0;
 	}
+	
+	double AccelerometerVector[3];
+	[gAccel GetAccelerometerVector:(double *) AccelerometerVector];
+	
+	
+	AppDisplayText->DisplayText(0, 12, 0.4f, RGBA(255,255,255,255), "Accelerometer Vector: %3.2f, %3.2f, %3.2f, realDt=%f", AccelerometerVector[0], AccelerometerVector[1], AccelerometerVector[2],realDt);
+	
 	float deltaTime = 1.f/60.f;
+	float scaling=20.f;
+	
 	if (sDynamicsWorld)
-		sDynamicsWorld->stepSimulation(deltaTime);
+	{
+		
+		if (realDt < 0.f)
+			realDt = deltaTime;
+		if (realDt > 1.f)
+			realDt = deltaTime;
+		
+		sDynamicsWorld->setGravity(btVector3(AccelerometerVector[0]*scaling,AccelerometerVector[1]*scaling,AccelerometerVector[2]*scaling));
+		sDynamicsWorld->stepSimulation(realDt,2);//deltaTime);
+	}
+	
+
 
 	return true;
 }

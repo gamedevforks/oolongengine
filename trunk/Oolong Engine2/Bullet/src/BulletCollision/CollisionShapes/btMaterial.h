@@ -1,6 +1,6 @@
 /*
 Bullet Continuous Collision Detection and Physics Library
-Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
+Copyright (c) 2003-2008 Erwin Coumans  http://continuousphysics.com/Bullet/
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -13,38 +13,22 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef CONTACT_JOINT_H
-#define CONTACT_JOINT_H
+/// This file was created by Alex Silverman
 
-#include "btOdeJoint.h"
-struct btOdeSolverBody;
-class btPersistentManifold;
+#ifndef MATERIAL_H
+#define MATERIAL_H
 
-class btOdeContactJoint : public btOdeJoint
+// Material class to be used by btMultimaterialTriangleMeshShape to store triangle properties
+class btMaterial
 {
-	btPersistentManifold* m_manifold;
-	int		m_index;
-	bool	m_swapBodies;
-	btOdeSolverBody* m_body0;
-	btOdeSolverBody* m_body1;
-
-
+    // public members so that materials can change due to world events
 public:
+    btScalar m_friction;
+    btScalar m_restitution;
+    int pad[2];
 
-	btOdeContactJoint() {};
-
-	btOdeContactJoint(btPersistentManifold* manifold,int index,bool swap,btOdeSolverBody* body0,btOdeSolverBody* body1);
-
-	//btOdeJoint interface for solver
-
-	virtual void GetInfo1(Info1 *info);
-
-	virtual void GetInfo2(Info2 *info);
-
-
-	
-
+    btMaterial(){}
+    btMaterial(btScalar fric, btScalar rest) { m_friction = fric; m_restitution = rest; }
 };
 
-#endif //CONTACT_JOINT_H
-
+#endif // MATERIAL_H

@@ -56,11 +56,12 @@ extern int gFindPairs;
 
 const int BT_NULL_PAIR=0xffffffff;
 
-///btOverlappingPairCache is an interface that allows different ways of pair management.
-///btHashedOverlappingPairCache or btSortedOverlappingPairCache are two implementations.
+///The btOverlappingPairCache provides an interface for overlapping pair management (add, remove, storage), used by the btBroadphaseInterface broadphases.
+///The btHashedOverlappingPairCache and btSortedOverlappingPairCache classes are two implementations.
 class btOverlappingPairCache : public btOverlappingPairCallback
 {
 public:
+	virtual ~btOverlappingPairCache() {} // this is needed so we can get to the derived class destructor
 
 	virtual btBroadphasePair*	getOverlappingPairArrayPtr() = 0;
 	
@@ -205,7 +206,7 @@ private:
 	
 	SIMD_FORCE_INLINE	unsigned int getHash(unsigned int proxyId1, unsigned int proxyId2)
 	{
-		int key = ((unsigned int)proxyId1) | (((unsigned int)proxyId2) <<16);
+		int key = static_cast<int>(((unsigned int)proxyId1) | (((unsigned int)proxyId2) <<16));
 		// Thomas Wang's hash
 
 		key += ~(key << 15);
@@ -214,7 +215,7 @@ private:
 		key ^=  (key >> 6);
 		key += ~(key << 11);
 		key ^=  (key >> 16);
-		return key;
+		return static_cast<unsigned int>(key);
 	}
 	
 
@@ -225,8 +226,10 @@ private:
 	{
 		int proxyId1 = proxy0->getUid();
 		int proxyId2 = proxy1->getUid();
+		#if 0 // wrong, 'equalsPair' use unsorted uids, copy-past devil striked again. Nat.
 		if (proxyId1 > proxyId2) 
 			btSwap(proxyId1, proxyId2);
+		#endif
 
 		int index = m_hashTable[hash];
 		
@@ -378,7 +381,7 @@ public:
 		return m_overlappingPairArray;
 	}
 	
-	virtual	void	cleanOverlappingPair(btBroadphasePair& pair,btDispatcher* dispatcher)
+	virtual	void	cleanOverlappingPair(btBroadphasePair& /*pair*/,btDispatcher* /*dispatcher*/)
 	{
 
 	}
@@ -388,20 +391,20 @@ public:
 		return 0;
 	}
 
-	virtual void	cleanProxyFromPairs(btBroadphaseProxy* proxy,btDispatcher* dispatcher)
+	virtual void	cleanProxyFromPairs(btBroadphaseProxy* /*proxy*/,btDispatcher* /*dispatcher*/)
 	{
 
 	}
 
-	virtual	void setOverlapFilterCallback(btOverlapFilterCallback* callback)
+	virtual	void setOverlapFilterCallback(btOverlapFilterCallback* /*callback*/)
 	{
 	}
 
-	virtual void	processAllOverlappingPairs(btOverlapCallback*,btDispatcher* dispatcher)
+	virtual void	processAllOverlappingPairs(btOverlapCallback*,btDispatcher* /*dispatcher*/)
 	{
 	}
 
-	virtual btBroadphasePair* findPair(btBroadphaseProxy* proxy0, btBroadphaseProxy* proxy1)
+	virtual btBroadphasePair* findPair(btBroadphaseProxy* /*proxy0*/, btBroadphaseProxy* /*proxy1*/)
 	{
 		return 0;
 	}
@@ -411,17 +414,17 @@ public:
 		return true;
 	}
 
-	virtual btBroadphasePair*	addOverlappingPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1)
+	virtual btBroadphasePair*	addOverlappingPair(btBroadphaseProxy* /*proxy0*/,btBroadphaseProxy* /*proxy1*/)
 	{
 		return 0;
 	}
 
-	virtual void*	removeOverlappingPair(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1,btDispatcher* dispatcher)
+	virtual void*	removeOverlappingPair(btBroadphaseProxy* /*proxy0*/,btBroadphaseProxy* /*proxy1*/,btDispatcher* /*dispatcher*/)
 	{
 		return 0;
 	}
 
-	virtual void	removeOverlappingPairsContainingProxy(btBroadphaseProxy* proxy0,btDispatcher* dispatcher)
+	virtual void	removeOverlappingPairsContainingProxy(btBroadphaseProxy* /*proxy0*/,btDispatcher* /*dispatcher*/)
 	{
 	}
 

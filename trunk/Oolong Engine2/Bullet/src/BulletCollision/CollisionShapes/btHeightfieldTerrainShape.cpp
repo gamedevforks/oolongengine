@@ -91,19 +91,15 @@ btHeightfieldTerrainShape::~btHeightfieldTerrainShape()
 
 void btHeightfieldTerrainShape::getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
 {
-/*
-	aabbMin.setValue(-1e30f,-1e30f,-1e30f);
-	aabbMax.setValue(1e30f,1e30f,1e30f);
-*/
-
 	btVector3 halfExtents = (m_localAabbMax-m_localAabbMin)* m_localScaling * btScalar(0.5);
+	halfExtents += btVector3(getMargin(),getMargin(),getMargin());
 
 	btMatrix3x3 abs_b = t.getBasis().absolute();  
 	btPoint3 center = t.getOrigin();
 	btVector3 extent = btVector3(abs_b[0].dot(halfExtents),
 		   abs_b[1].dot(halfExtents),
 		  abs_b[2].dot(halfExtents));
-	extent += btVector3(getMargin(),getMargin(),getMargin());
+	
 
 	aabbMin = center - extent;
 	aabbMax = center + extent;
@@ -182,7 +178,7 @@ void	btHeightfieldTerrainShape::getVertex(int x,int y,btVector3& vertex) const
 }
 
 
-void btHeightfieldTerrainShape::quantizeWithClamp(int* out, const btVector3& point,int isMax) const
+void btHeightfieldTerrainShape::quantizeWithClamp(int* out, const btVector3& point,int /*isMax*/) const
 {
 	btVector3 clampedPoint(point);
 	clampedPoint.setMax(m_localAabbMin);

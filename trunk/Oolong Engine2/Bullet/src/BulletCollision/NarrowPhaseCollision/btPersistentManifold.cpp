@@ -162,7 +162,7 @@ int btPersistentManifold::getCacheEntry(const btManifoldPoint& newPoint) const
 	return nearestPoint;
 }
 
-void btPersistentManifold::AddManifoldPoint(const btManifoldPoint& newPoint)
+int btPersistentManifold::addManifoldPoint(const btManifoldPoint& newPoint)
 {
 	assert(validContactDistance(newPoint));
 
@@ -175,7 +175,7 @@ void btPersistentManifold::AddManifoldPoint(const btManifoldPoint& newPoint)
 #else
 		insertIndex = 0;
 #endif
-
+		clearUserCache(m_pointCache[insertIndex]);
 		
 	} else
 	{
@@ -183,7 +183,9 @@ void btPersistentManifold::AddManifoldPoint(const btManifoldPoint& newPoint)
 
 		
 	}
-	replaceContactPoint(newPoint,insertIndex);
+	btAssert(m_pointCache[insertIndex].m_userPersistentData==0);
+	m_pointCache[insertIndex] = newPoint;
+	return insertIndex;
 }
 
 btScalar	btPersistentManifold::getContactBreakingThreshold() const

@@ -20,6 +20,26 @@ subject to the following restrictions:
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
 
+// Modified Paul Hsieh hash
+template <const int DWORDLEN>
+unsigned int HsiehHash(const void* pdata)
+	{
+	const unsigned short*	data=(const unsigned short*)pdata;
+	unsigned				hash=DWORDLEN<<2,tmp;
+	for(int i=0;i<DWORDLEN;++i)
+		{
+		hash	+=	data[0];
+		tmp		=	(data[1]<<11)^hash;
+		hash	=	(hash<<16)^tmp;
+		data	+=	2;
+		hash	+=	hash>>11;
+		}
+	hash^=hash<<3;hash+=hash>>5;
+	hash^=hash<<4;hash+=hash>>17;
+	hash^=hash<<25;hash+=hash>>6;
+	return(hash);
+	}
+
 template <const int CELLSIZE>
 struct	btSparseSdf
 	{
@@ -109,6 +129,28 @@ struct	btSparseSdf
 				/* else setup a priority list...						*/ 
 		}
 	//
+	int						RemoveReferences(btCollisionShape* pcs)
+		{
+		int	refcount=0;
+		for(int i=0;i<cells.size();++i)
+			{
+			Cell*&	root=cells[i];
+			Cell*	pp=0;
+			Cell*	pc=root;
+			while(pc)
+				{
+				Cell*	pn=pc->next;
+				if(pc->pclient==pcs)
+					{
+					if(pp) pp->next=pn; else root=pn;
+					delete pc;pc=pp;++refcount;
+					}
+				pp=pc;pc=pn;
+				}
+			}
+		return(refcount);
+		}
+	//
 	btScalar				Evaluate(	const btVector3& x,
 										btCollisionShape* shape,
 										btVector3& normal,
@@ -120,7 +162,7 @@ struct	btSparseSdf
 		const IntFrac	iy=Decompose(scx.y());
 		const IntFrac	iz=Decompose(scx.z());
 		const unsigned	h=Hash(ix.b,iy.b,iz.b,shape);
-		Cell*&			root=cells[h%cells.size()];
+		Cell*&			root=cells[static_cast<int>(h%cells.size())];
 		Cell*			c=root;
 		++nqueries;
 		while(c)
@@ -236,32 +278,29 @@ struct	btSparseSdf
 		{
 		return(a+(b-a)*t);
 		}
+
+	
+
 	//
-	static inline unsigned	Hash(int x,int y,int z,btCollisionShape* shape)
+	static inline unsigned int	Hash(int x,int y,int z,btCollisionShape* shape)
 		{
-		struct { int x,y,z;void* p; } set;
-		set.x=x;set.y=y;set.z=z;set.p=shape;
-		return(HsiehHash<sizeof(set)/4>(&set));
+		struct btS
+		{ 
+			int x,y,z;
+			void* p;
+		};
+
+		btS myset;
+		
+		myset.x=x;myset.y=y;myset.z=z;myset.p=shape;
+		const void* ptr = &myset;
+
+		unsigned int result = HsiehHash<sizeof(btS)/4> (ptr);
+		
+
+		return result;
 		}
-	// Modified Paul Hsieh hash
-	template <const int DWORDLEN>
-	static inline unsigned	HsiehHash(const void* pdata)
-		{
-		const unsigned short*	data=(const unsigned short*)pdata;
-		unsigned				hash=DWORDLEN<<2,tmp;
-		for(int i=0;i<DWORDLEN;++i)
-			{
-			hash	+=	data[0];
-			tmp		=	(data[1]<<11)^hash;
-			hash	=	(hash<<16)^tmp;
-			data	+=	2;
-			hash	+=	hash>>11;
-			}
-		hash^=hash<<3;hash+=hash>>5;
-		hash^=hash<<4;hash+=hash>>17;
-		hash^=hash<<25;hash+=hash>>6;
-		return(hash);
-		}
-	};
+};
+	
 
 #endif

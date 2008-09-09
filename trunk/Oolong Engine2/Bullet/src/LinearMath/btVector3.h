@@ -47,6 +47,7 @@ public:
 
 	SIMD_FORCE_INLINE btVector3& operator+=(const btVector3& v)
 	{
+
 		m_x += v.x(); m_y += v.y(); m_z += v.z();
 		return *this;
 	}

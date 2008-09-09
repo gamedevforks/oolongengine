@@ -25,7 +25,7 @@ struct btSimpleBroadphaseProxy : public btBroadphaseProxy
 	btVector3	m_min;
 	btVector3	m_max;
 	int			m_nextFree;
-	int			m_nextAllocated;
+	
 //	int			m_handleId;
 
 	
@@ -42,15 +42,13 @@ struct btSimpleBroadphaseProxy : public btBroadphaseProxy
 	SIMD_FORCE_INLINE void SetNextFree(int next) {m_nextFree = next;}
 	SIMD_FORCE_INLINE int GetNextFree() const {return m_nextFree;}
 
-	SIMD_FORCE_INLINE void SetNextAllocated(int next) {m_nextAllocated = next;}
-	SIMD_FORCE_INLINE int GetNextAllocated() const {return m_nextAllocated;}
+	
 
 
 };
 
-///SimpleBroadphase is a brute force aabb culling broadphase based on O(n^2) aabb checks
-///btSimpleBroadphase is just a unit-test implementation to verify and test other broadphases.
-///So please don't use this class, but use bt32BitAxisSweep3 or btAxisSweep3 instead!
+///The SimpleBroadphase is just a unit-test for btAxisSweep3, bt32BitAxisSweep3, or btDbvtBroadphase, so use those classes instead.
+///It is a brute force aabb culling broadphase based on O(n^2) aabb checks
 class btSimpleBroadphase : public btBroadphaseInterface
 {
 
@@ -58,21 +56,18 @@ protected:
 
 	int		m_numHandles;						// number of active handles
 	int		m_maxHandles;						// max number of handles
+	
 	btSimpleBroadphaseProxy* m_pHandles;						// handles pool
-	int		m_firstFreeHandle;		// free handles list
-	int		m_firstAllocatedHandle;
 
+	void* m_pHandlesRawPtr;
+	int		m_firstFreeHandle;		// free handles list
+	
 	int allocHandle()
 	{
-
+		btAssert(m_numHandles < m_maxHandles);
 		int freeHandle = m_firstFreeHandle;
 		m_firstFreeHandle = m_pHandles[freeHandle].GetNextFree();
-		
-		m_pHandles[freeHandle].SetNextAllocated(m_firstAllocatedHandle);
-		m_firstAllocatedHandle = freeHandle;
-		
 		m_numHandles++;
-
 		return freeHandle;
 	}
 
@@ -84,12 +79,8 @@ protected:
 		proxy->SetNextFree(m_firstFreeHandle);
 		m_firstFreeHandle = handle;
 
-		m_firstAllocatedHandle = proxy->GetNextAllocated();
-		proxy->SetNextAllocated(-1);
-
 		m_numHandles--;
 	}
-
 
 	btOverlappingPairCache*	m_pairCache;
 	bool	m_ownsPairCache;

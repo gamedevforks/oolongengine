@@ -63,23 +63,27 @@ static btScalar dDOT44 (const btScalar *a, const btScalar *b) { return dDOTpq(a,
 static btScalar dDOT41 (const btScalar *a, const btScalar *b) { return dDOTpq(a,b,4,1); }
 static btScalar dDOT14 (const btScalar *a, const btScalar *b) { return dDOTpq(a,b,1,4); }
 #define dMULTIPLYOP1_331(A,op,B,C) \
-do { \
+{\
   (A)[0] op dDOT41((B),(C)); \
   (A)[1] op dDOT41((B+1),(C)); \
   (A)[2] op dDOT41((B+2),(C)); \
-} while(0)
+}
+
 #define dMULTIPLYOP0_331(A,op,B,C) \
-do { \
+{ \
   (A)[0] op dDOT((B),(C)); \
   (A)[1] op dDOT((B+4),(C)); \
   (A)[2] op dDOT((B+8),(C)); \
-} while(0)
+} 
 
 #define dMULTIPLY1_331(A,B,C) dMULTIPLYOP1_331(A,=,B,C)
 #define dMULTIPLY0_331(A,B,C) dMULTIPLYOP0_331(A,=,B,C)
 
 typedef btScalar dMatrix3[4*3];
 
+void dLineClosestApproach (const btVector3& pa, const btVector3& ua,
+			   const btVector3& pb, const btVector3& ub,
+			   btScalar *alpha, btScalar *beta);
 void dLineClosestApproach (const btVector3& pa, const btVector3& ua,
 			   const btVector3& pb, const btVector3& ub,
 			   btScalar *alpha, btScalar *beta)
@@ -118,7 +122,7 @@ static int intersectRectQuad2 (btScalar h[2], btScalar p[8], btScalar ret[16])
 {
   // q (and r) contain nq (and nr) coordinate points for the current (and
   // chopped) polygons
-  int nq=4,nr;
+  int nq=4,nr=0;
   btScalar buffer[16];
   btScalar *q = p;
   btScalar *r = ret;
@@ -167,7 +171,7 @@ static int intersectRectQuad2 (btScalar h[2], btScalar p[8], btScalar ret[16])
   return nr;
 }
 
-#define dAtan2(y,x) ((float)atan2f((y),(x)))	/* arc tangent with 2 args */
+
 #define M__PI 3.14159265f
 
 // given n points in the plane (array p, of size 2*n), generate m points that
@@ -178,6 +182,7 @@ static int intersectRectQuad2 (btScalar h[2], btScalar p[8], btScalar ret[16])
 // n must be in the range [1..8]. m must be in the range [1..n]. i0 must be
 // in the range [0..n-1].
 
+void cullPoints2 (int n, btScalar p[], int m, int i0, int iret[]);
 void cullPoints2 (int n, btScalar p[], int m, int i0, int iret[])
 {
   // compute the centroid of the polygon in cx,cy
@@ -209,7 +214,7 @@ void cullPoints2 (int n, btScalar p[], int m, int i0, int iret[])
 
   // compute the angle of each point w.r.t. the centroid
   btScalar A[8];
-  for (i=0; i<n; i++) A[i] = dAtan2(p[i*2+1]-cy,p[i*2]-cx);
+  for (i=0; i<n; i++) A[i] = btAtan2(p[i*2+1]-cy,p[i*2]-cx);
 
   // search for points that have angles closest to A[i0] + i*(2*pi/m).
   int avail[8];
@@ -221,12 +226,12 @@ void cullPoints2 (int n, btScalar p[], int m, int i0, int iret[])
     a = btScalar(j)*(2*M__PI/m) + A[i0];
     if (a > M__PI) a -= 2*M__PI;
     btScalar maxdiff=1e9,diff;
-#ifndef dNODEBUG
+#if defined(DEBUG) || defined (_DEBUG)
     *iret = i0;			// iret is not allowed to keep this value
 #endif
     for (i=0; i<n; i++) {
       if (avail[i]) {
-	diff = fabsf (A[i]-a);
+	diff = btFabs (A[i]-a);
 	if (diff > M__PI) diff = 2*M__PI - diff;
 	if (diff < maxdiff) {
 	  maxdiff = diff;
@@ -234,7 +239,7 @@ void cullPoints2 (int n, btScalar p[], int m, int i0, int iret[])
 	}
       }
     }
-#ifndef dNODEBUG
+#if defined(DEBUG) || defined (_DEBUG)
     btAssert (*iret != i0);	// ensure iret got set
 #endif
     avail[*iret] = 0;
@@ -244,12 +249,16 @@ void cullPoints2 (int n, btScalar p[], int m, int i0, int iret[])
 
 
 
-
 int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
 	     const btVector3& side1, const btVector3& p2,
 	     const dMatrix3 R2, const btVector3& side2,
 	     btVector3& normal, btScalar *depth, int *return_code,
-		 int maxc, dContactGeom *contact, int skip,btDiscreteCollisionDetectorInterface::Result& output)
+		 int maxc, dContactGeom * /*contact*/, int /*skip*/,btDiscreteCollisionDetectorInterface::Result& output);
+int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
+	     const btVector3& side1, const btVector3& p2,
+	     const dMatrix3 R2, const btVector3& side2,
+	     btVector3& normal, btScalar *depth, int *return_code,
+		 int maxc, dContactGeom * /*contact*/, int /*skip*/,btDiscreteCollisionDetectorInterface::Result& output)
 {
   const btScalar fudge_factor = btScalar(1.05);
   btVector3 p,pp,normalC;
@@ -275,9 +284,9 @@ int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
   R21 = dDOT44(R1+1,R2+0); R22 = dDOT44(R1+1,R2+1); R23 = dDOT44(R1+1,R2+2);
   R31 = dDOT44(R1+2,R2+0); R32 = dDOT44(R1+2,R2+1); R33 = dDOT44(R1+2,R2+2);
 
-  Q11 = fabsf(R11); Q12 = fabsf(R12); Q13 = fabsf(R13);
-  Q21 = fabsf(R21); Q22 = fabsf(R22); Q23 = fabsf(R23);
-  Q31 = fabsf(R31); Q32 = fabsf(R32); Q33 = fabsf(R33);
+  Q11 = btFabs(R11); Q12 = btFabs(R12); Q13 = btFabs(R13);
+  Q21 = btFabs(R21); Q22 = btFabs(R22); Q23 = btFabs(R23);
+  Q31 = btFabs(R31); Q32 = btFabs(R32); Q33 = btFabs(R33);
 
   // for all 15 possible separating axes:
   //   * see if the axis separates the boxes. if so, return 0.
@@ -290,7 +299,7 @@ int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
   // the normal should be flipped.
 
 #define TST(expr1,expr2,norm,cc) \
-  s2 = fabsf(expr1) - (expr2); \
+  s2 = btFabs(expr1) - (expr2); \
   if (s2 > 0) return 0; \
   if (s2 > s) { \
     s = s2; \
@@ -317,9 +326,9 @@ int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
   // normal (n1,n2,n3) is relative to box 1.
 #undef TST
 #define TST(expr1,expr2,n1,n2,n3,cc) \
-  s2 = fabsf(expr1) - (expr2); \
+  s2 = btFabs(expr1) - (expr2); \
   if (s2 > 0) return 0; \
-  l = sqrtf((n1)*(n1) + (n2)*(n2) + (n3)*(n3)); \
+  l = btSqrt((n1)*(n1) + (n2)*(n2) + (n3)*(n3)); \
   if (l > 0) { \
     s2 /= l; \
     if (s2*fudge_factor > s) { \
@@ -452,9 +461,9 @@ int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
     normal2[2] = -normal[2];
   }
   dMULTIPLY1_331 (nr,Rb,normal2);
-  anr[0] = fabsf (nr[0]);
-  anr[1] = fabsf (nr[1]);
-  anr[2] = fabsf (nr[2]);
+  anr[0] = btFabs (nr[0]);
+  anr[1] = btFabs (nr[1]);
+  anr[2] = btFabs (nr[2]);
 
   // find the largest compontent of anr: this corresponds to the normal
   // for the indident face. the other axis numbers of the indicent face
@@ -626,7 +635,7 @@ int dBoxBox2 (const btVector3& p1, const dMatrix3 R1,
   return cnum;
 }
 
-void	btBoxBoxDetector::getClosestPoints(const ClosestPointInput& input,Result& output,class btIDebugDraw* debugDraw)
+void	btBoxBoxDetector::getClosestPoints(const ClosestPointInput& input,Result& output,class btIDebugDraw* /*debugDraw*/,bool /*swapResults*/)
 {
 	
 	const btTransform& transformA = input.m_transformA;

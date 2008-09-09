@@ -21,7 +21,7 @@ subject to the following restrictions:
 #include "btConvexInternalShape.h"
 
 
-///PolyhedralConvexShape is an interface class for feature based (vertex/edge/face) convex shapes.
+///The btPolyhedralConvexShape is an internal interface class for polyhedral convex shapes.
 class btPolyhedralConvexShape : public btConvexInternalShape
 {
 
@@ -53,6 +53,7 @@ public:
 
 
 		btVector3 localHalfExtents = btScalar(0.5)*(m_localAabbMax-m_localAabbMin);
+		localHalfExtents+= btVector3(margin,margin,margin);
 		btVector3 localCenter = btScalar(0.5)*(m_localAabbMax+m_localAabbMin);
 		
 		btMatrix3x3 abs_b = trans.getBasis().absolute();  
@@ -62,16 +63,17 @@ public:
 		btVector3 extent = btVector3(abs_b[0].dot(localHalfExtents),
 			   abs_b[1].dot(localHalfExtents),
 			  abs_b[2].dot(localHalfExtents));
-		extent += btVector3(margin,margin,margin);
 
-		aabbMin = center - extent;
-		aabbMax = center + extent;
+		aabbMin = center-extent;
+		aabbMax = center+extent;
 
 		
 	}
 
 	
 	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+
+	virtual void	setLocalScaling(const btVector3& scaling);
 
 	void	recalcLocalAabb();
 

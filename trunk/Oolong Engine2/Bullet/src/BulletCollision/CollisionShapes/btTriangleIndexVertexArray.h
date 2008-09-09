@@ -21,9 +21,8 @@ subject to the following restrictions:
 #include "LinearMath/btScalar.h"
 
 
-///IndexedMesh indexes into existing vertex and index arrays, in a similar way OpenGL glDrawElements
-///instead of the number of indices, we pass the number of triangles
-///todo: explain with pictures
+///The btIndexedMesh indexes a single vertex and index array. Multiple btIndexedMesh objects can be passed into a btTriangleIndexVertexArray using addIndexedMesh.
+///Instead of the number of indices, we pass the number of triangles.
 ATTRIBUTE_ALIGNED16( struct)	btIndexedMesh
 {
 	BT_DECLARE_ALIGNED_ALLOCATOR();
@@ -44,7 +43,7 @@ ATTRIBUTE_ALIGNED16( struct)	btIndexedMesh
 
 typedef btAlignedObjectArray<btIndexedMesh>	IndexedMeshArray;
 
-///TriangleIndexVertexArray allows to use multiple meshes, by indexing into existing triangle/index arrays.
+///The btTriangleIndexVertexArray allows to access multiple triangle meshes, by indexing into existing triangle/index arrays.
 ///Additional meshes can be added using addIndexedMesh
 ///No duplcate is made of the vertex/index data, it only indexes into external vertex/index arrays.
 ///So keep those arrays around during the lifetime of this btTriangleIndexVertexArray.
@@ -52,14 +51,16 @@ ATTRIBUTE_ALIGNED16( class) btTriangleIndexVertexArray : public btStridingMeshIn
 {
 protected:
 	IndexedMeshArray	m_indexedMeshes;
-	int m_pad[3];
+	int m_pad[2];
+	int m_hasAabb; // using int instead of bool to maintain alignment
+	btVector3 m_aabbMin;
+	btVector3 m_aabbMax;
 
-		
 public:
 
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
-	btTriangleIndexVertexArray()
+	btTriangleIndexVertexArray() : m_hasAabb(0)
 	{
 	}
 
@@ -103,6 +104,10 @@ public:
 
 	virtual void	preallocateVertices(int numverts){(void) numverts;}
 	virtual void	preallocateIndices(int numindices){(void) numindices;}
+
+	virtual bool	hasPremadeAabb() const;
+	virtual void	setPremadeAabb(const btVector3& aabbMin, const btVector3& aabbMax );
+	virtual void	getPremadeAabb(btVector3* aabbMin, btVector3* aabbMax ) const;
 
 }
 ;

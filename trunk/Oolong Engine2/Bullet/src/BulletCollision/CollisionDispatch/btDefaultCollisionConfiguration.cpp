@@ -1,4 +1,3 @@
-
 /*
 Bullet Continuous Collision Detection and Physics Library
 Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
@@ -23,9 +22,12 @@ subject to the following restrictions:
 #include "BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h"
 #include "BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h"
+#ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
 #include "BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h"
+#endif //USE_BUGGY_SPHERE_BOX_ALGORITHM
 #include "BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h"
 #include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
+#include "BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
 #include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
 
 
@@ -35,17 +37,24 @@ subject to the following restrictions:
 
 
 
-#define DEFAULT_MAX_OVERLAPPING_PAIRS 65535
-#define DEFAULT_STACK_ALLOCATOR_SIZE	(5*1024*1024)
 
 
-btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(btStackAlloc*	stackAlloc,btPoolAllocator*	persistentManifoldPool,btPoolAllocator*	collisionAlgorithmPool)
+btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(const btDefaultCollisionConstructionInfo& constructionInfo)
+//btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(btStackAlloc*	stackAlloc,btPoolAllocator*	persistentManifoldPool,btPoolAllocator*	collisionAlgorithmPool)
 {
 
 	void* mem = btAlignedAlloc(sizeof(btVoronoiSimplexSolver),16);
 	m_simplexSolver = new (mem)btVoronoiSimplexSolver();
+	
+#define USE_EPA 1
+#ifdef USE_EPA
 	mem = btAlignedAlloc(sizeof(btGjkEpaPenetrationDepthSolver),16);
 	m_pdSolver = new (mem)btGjkEpaPenetrationDepthSolver;
+#else
+	mem = btAlignedAlloc(sizeof(btMinkowskiPenetrationDepthSolver),16);
+	m_pdSolver = new (mem)btMinkowskiPenetrationDepthSolver;
+#endif//USE_EPA	
+	
 
 	//default CreationFunctions, filling the m_doubleDispatch table
 	mem = btAlignedAlloc(sizeof(btConvexConvexAlgorithm::CreateFunc),16);
@@ -63,11 +72,14 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(btStackAlloc*	s
 	
 	mem = btAlignedAlloc(sizeof(btSphereSphereCollisionAlgorithm::CreateFunc),16);
 	m_sphereSphereCF = new(mem) btSphereSphereCollisionAlgorithm::CreateFunc;
+#ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
 	mem = btAlignedAlloc(sizeof(btSphereBoxCollisionAlgorithm::CreateFunc),16);
 	m_sphereBoxCF = new(mem) btSphereBoxCollisionAlgorithm::CreateFunc;
 	mem = btAlignedAlloc(sizeof(btSphereBoxCollisionAlgorithm::CreateFunc),16);
 	m_boxSphereCF = new (mem)btSphereBoxCollisionAlgorithm::CreateFunc;
 	m_boxSphereCF->m_swapped = true;
+#endif //USE_BUGGY_SPHERE_BOX_ALGORITHM
+
 	mem = btAlignedAlloc(sizeof(btSphereTriangleCollisionAlgorithm::CreateFunc),16);
 	m_sphereTriangleCF = new (mem)btSphereTriangleCollisionAlgorithm::CreateFunc;
 	mem = btAlignedAlloc(sizeof(btSphereTriangleCollisionAlgorithm::CreateFunc),16);
@@ -94,37 +106,37 @@ btDefaultCollisionConfiguration::btDefaultCollisionConfiguration(btStackAlloc*	s
 	collisionAlgorithmMaxElementSize = btMax(collisionAlgorithmMaxElementSize,maxSize3);
 	collisionAlgorithmMaxElementSize = btMax(collisionAlgorithmMaxElementSize,maxSize4);
 
-	if (stackAlloc)
+	if (constructionInfo.m_stackAlloc)
 	{
 		m_ownsStackAllocator = false;
-		this->m_stackAlloc = stackAlloc;
+		this->m_stackAlloc = constructionInfo.m_stackAlloc;
 	} else
 	{
 		m_ownsStackAllocator = true;
 		void* mem = btAlignedAlloc(sizeof(btStackAlloc),16);
-		m_stackAlloc = new(mem)btStackAlloc(DEFAULT_STACK_ALLOCATOR_SIZE);
+		m_stackAlloc = new(mem)btStackAlloc(constructionInfo.m_defaultStackAllocatorSize);
 	}
 		
-	if (persistentManifoldPool)
+	if (constructionInfo.m_persistentManifoldPool)
 	{
 		m_ownsPersistentManifoldPool = false;
-		m_persistentManifoldPool = persistentManifoldPool;
+		m_persistentManifoldPool = constructionInfo.m_persistentManifoldPool;
 	} else
 	{
 		m_ownsPersistentManifoldPool = true;
 		void* mem = btAlignedAlloc(sizeof(btPoolAllocator),16);
-		m_persistentManifoldPool = new (mem) btPoolAllocator(sizeof(btPersistentManifold),DEFAULT_MAX_OVERLAPPING_PAIRS);
+		m_persistentManifoldPool = new (mem) btPoolAllocator(sizeof(btPersistentManifold),constructionInfo.m_defaultMaxPersistentManifoldPoolSize);
 	}
 	
-	if (collisionAlgorithmPool)
+	if (constructionInfo.m_collisionAlgorithmPool)
 	{
 		m_ownsCollisionAlgorithmPool = false;
-		m_collisionAlgorithmPool = collisionAlgorithmPool;
+		m_collisionAlgorithmPool = constructionInfo.m_collisionAlgorithmPool;
 	} else
 	{
 		m_ownsCollisionAlgorithmPool = true;
 		void* mem = btAlignedAlloc(sizeof(btPoolAllocator),16);
-		m_collisionAlgorithmPool = new(mem) btPoolAllocator(collisionAlgorithmMaxElementSize,DEFAULT_MAX_OVERLAPPING_PAIRS);
+		m_collisionAlgorithmPool = new(mem) btPoolAllocator(collisionAlgorithmMaxElementSize,constructionInfo.m_defaultMaxCollisionAlgorithmPoolSize);
 	}
 
 
@@ -169,10 +181,13 @@ btDefaultCollisionConfiguration::~btDefaultCollisionConfiguration()
 	m_sphereSphereCF->~btCollisionAlgorithmCreateFunc();
 	btAlignedFree( m_sphereSphereCF);
 
+#ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
 	m_sphereBoxCF->~btCollisionAlgorithmCreateFunc();
 	btAlignedFree( m_sphereBoxCF);
 	m_boxSphereCF->~btCollisionAlgorithmCreateFunc();
 	btAlignedFree( m_boxSphereCF);
+#endif //USE_BUGGY_SPHERE_BOX_ALGORITHM
+
 	m_sphereTriangleCF->~btCollisionAlgorithmCreateFunc();
 	btAlignedFree( m_sphereTriangleCF);
 	m_triangleSphereCF->~btCollisionAlgorithmCreateFunc();
@@ -187,7 +202,9 @@ btDefaultCollisionConfiguration::~btDefaultCollisionConfiguration()
 
 	m_simplexSolver->~btVoronoiSimplexSolver();
 	btAlignedFree(m_simplexSolver);
-	m_pdSolver->~btGjkEpaPenetrationDepthSolver();
+
+	m_pdSolver->~btConvexPenetrationDepthSolver();
+	
 	btAlignedFree(m_pdSolver);
 
 
@@ -203,7 +220,7 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 	{
 		return	m_sphereSphereCF;
 	}
-
+#ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
 	if ((proxyType0 == SPHERE_SHAPE_PROXYTYPE) && (proxyType1==BOX_SHAPE_PROXYTYPE))
 	{
 		return	m_sphereBoxCF;
@@ -213,6 +230,8 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 	{
 		return	m_boxSphereCF;
 	}
+#endif //USE_BUGGY_SPHERE_BOX_ALGORITHM
+
 
 	if ((proxyType0 == SPHERE_SHAPE_PROXYTYPE ) && (proxyType1==TRIANGLE_SHAPE_PROXYTYPE))
 	{
@@ -222,12 +241,12 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 	if ((proxyType0 == TRIANGLE_SHAPE_PROXYTYPE  ) && (proxyType1==SPHERE_SHAPE_PROXYTYPE))
 	{
 		return	m_triangleSphereCF;
-	}
+	} 
 
-//	if ((proxyType0 == BOX_SHAPE_PROXYTYPE) && (proxyType1 == BOX_SHAPE_PROXYTYPE))
-//	{
-//		return m_boxBoxCF;
-//	}
+	if ((proxyType0 == BOX_SHAPE_PROXYTYPE) && (proxyType1 == BOX_SHAPE_PROXYTYPE))
+	{
+		//return m_boxBoxCF;
+	}
 	
 	if (btBroadphaseProxy::isConvex(proxyType0) && (proxyType1 == STATIC_PLANE_PROXYTYPE))
 	{
@@ -238,6 +257,8 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 	{
 		return m_planeConvexCF;
 	}
+	
+
 
 	if (btBroadphaseProxy::isConvex(proxyType0) && btBroadphaseProxy::isConvex(proxyType1))
 	{

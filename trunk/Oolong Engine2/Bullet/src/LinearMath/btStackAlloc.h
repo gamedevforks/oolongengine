@@ -29,7 +29,7 @@ struct btBlock
 	unsigned char*		address;
 };
 
-///StackAlloc provides some fast stack-based memory allocator (LIFO last-in first-out)
+///The StackAlloc class provides some fast stack-based memory allocator (LIFO last-in first-out)
 class btStackAlloc
 {
 public:
@@ -61,7 +61,7 @@ public:
 
 	int	getAvailableMemory() const
 	{
-		return totalsize - usedsize;
+		return static_cast<int>(totalsize - usedsize);
 	}
 
 	unsigned char*			allocate(unsigned int size)

@@ -81,7 +81,7 @@ btShapeHull::~btShapeHull ()
 }
 
 bool
-btShapeHull::buildHull (btScalar margin)
+btShapeHull::buildHull (btScalar /*margin*/)
 {
 	int numSampleDirections = NUM_UNITSPHERE_POINTS;
 	{
@@ -99,15 +99,15 @@ btShapeHull::buildHull (btScalar margin)
 	}
 
 	btVector3 supportPoints[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
-
-	for (int i = 0; i < numSampleDirections; i++)
+	int i;
+	for (i = 0; i < numSampleDirections; i++)
 	{
 		supportPoints[i] = m_shape->localGetSupportingVertex(btUnitSpherePoints[i]);
 	}
 
 	HullDesc hd;
 	hd.mFlags = QF_TRIANGLES;
-	hd.mVcount = numSampleDirections;
+	hd.mVcount = static_cast<unsigned int>(numSampleDirections);
 
 #ifdef BT_USE_DOUBLE_PRECISION
 	hd.mVertices = &supportPoints[0];
@@ -124,16 +124,16 @@ btShapeHull::buildHull (btScalar margin)
 		return false;
 	}
 
-	m_vertices.resize (hr.mNumOutputVertices);
+	m_vertices.resize (static_cast<int>(hr.mNumOutputVertices));
 
 
-	for (unsigned int i = 0; i < hr.mNumOutputVertices; i++)
+	for (i = 0; i < static_cast<int>(hr.mNumOutputVertices); i++)
 	{
 		m_vertices[i] = hr.m_OutputVertices[i];
 	}
 	m_numIndices = hr.mNumIndices;
-	m_indices.resize(m_numIndices);
-	for (unsigned int i = 0; i < m_numIndices; i++)
+	m_indices.resize(static_cast<int>(m_numIndices));
+	for (i = 0; i < static_cast<int>(m_numIndices); i++)
 	{
 		m_indices[i] = hr.m_Indices[i];
 	}
@@ -147,7 +147,7 @@ btShapeHull::buildHull (btScalar margin)
 int
 btShapeHull::numTriangles () const
 {
-	return m_numIndices / 3;
+	return static_cast<int>(m_numIndices / 3);
 }
 
 int
@@ -159,6 +159,6 @@ btShapeHull::numVertices () const
 int
 btShapeHull::numIndices () const
 {
-	return m_numIndices;
+	return static_cast<int>(m_numIndices);
 }
 

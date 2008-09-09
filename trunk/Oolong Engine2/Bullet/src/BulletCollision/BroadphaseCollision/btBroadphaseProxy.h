@@ -52,6 +52,8 @@ CONCAVE_SHAPES_START_HERE,
 	TERRAIN_SHAPE_PROXYTYPE,
 ///Used for GIMPACT Trimesh integration
 	GIMPACT_SHAPE_PROXYTYPE,
+///Multimaterial mesh
+    MULTIMATERIAL_TRIANGLE_MESH_PROXYTYPE,
 	
 	EMPTY_SHAPE_PROXYTYPE,
 	STATIC_PLANE_PROXYTYPE,
@@ -64,9 +66,9 @@ CONCAVE_SHAPES_END_HERE,
 	MAX_BROADPHASE_COLLISION_TYPES
 };
 
-//#include <stdio.h>
 
-///btBroadphaseProxy
+///The btBroadphaseProxy is the main class that can be used with the Bullet broadphases. 
+///It stores collision shape type information, collision filter information and a client object, typically a btCollisionObject or btRigidBody.
 ATTRIBUTE_ALIGNED16(struct) btBroadphaseProxy
 {
 
@@ -80,7 +82,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 	        KinematicFilter = 4,
 	        DebrisFilter = 8,
 			SensorTrigger = 16,
-	        AllFilter = DefaultFilter | StaticFilter | KinematicFilter | DebrisFilter | SensorTrigger
+	        AllFilter = -1 //all bits sets: DefaultFilter | StaticFilter | KinematicFilter | DebrisFilter | SensorTrigger
 	};
 
 	//Usually the client btCollisionObject or Rigidbody class
@@ -147,7 +149,8 @@ struct btBroadphaseProxy;
 
 
 
-/// contains a pair of aabb-overlapping objects
+///The btBroadphasePair class contains a pair of aabb-overlapping objects.
+///A btDispatcher can search a btCollisionAlgorithm that performs exact/narrowphase collision detection on the actual collision shapes.
 ATTRIBUTE_ALIGNED16(struct) btBroadphasePair
 {
 	btBroadphasePair ()

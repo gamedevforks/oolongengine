@@ -37,6 +37,13 @@ btConvexConcaveCollisionAlgorithm::~btConvexConcaveCollisionAlgorithm()
 {
 }
 
+void	btConvexConcaveCollisionAlgorithm::getAllContactManifolds(btManifoldArray&	manifoldArray)
+{
+	if (m_btConvexTriangleCallback.m_manifoldPtr)
+	{
+		manifoldArray.push_back(m_btConvexTriangleCallback.m_manifoldPtr);
+	}
+}
 
 
 btConvexTriangleCallback::btConvexTriangleCallback(btDispatcher*  dispatcher,btCollisionObject* body0,btCollisionObject* body1,bool isSwapped):
@@ -109,14 +116,10 @@ void btConvexTriangleCallback::processTriangle(btVector3* triangle,int partId, i
 	{
 		btTriangleShape tm(triangle[0],triangle[1],triangle[2]);	
 		tm.setMargin(m_collisionMarginTriangle);
+		
 		btCollisionShape* tmpShape = ob->getCollisionShape();
-
-		//copy over user pointers to temporary shape
-		tm.setUserPointer(tmpShape->getUserPointer());
+		ob->internalSetTemporaryCollisionShape( &tm );
 		
-		ob->setCollisionShape( &tm );
-		
-
 		btCollisionAlgorithm* colAlgo = ci.m_dispatcher1->findAlgorithm(m_convexBody,m_triBody,m_manifoldPtr);
 		///this should use the btDispatcher, so the actual registered algorithm is used
 		//		btConvexConvexAlgorithm cvxcvxalgo(m_manifoldPtr,ci,m_convexBody,m_triBody);
@@ -127,11 +130,9 @@ void btConvexTriangleCallback::processTriangle(btVector3* triangle,int partId, i
 		colAlgo->processCollision(m_convexBody,m_triBody,*m_dispatchInfoPtr,m_resultOut);
 		colAlgo->~btCollisionAlgorithm();
 		ci.m_dispatcher1->freeCollisionAlgorithm(colAlgo);
-		ob->setCollisionShape( tmpShape );
-
+		ob->internalSetTemporaryCollisionShape( tmpShape);
 	}
 
-	
 
 }
 

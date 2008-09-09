@@ -1,3 +1,17 @@
+/*
+Bullet Continuous Collision Detection and Physics Library
+Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
+
+This software is provided 'as-is', without any express or implied warranty.
+In no event will the authors be held liable for any damages arising from the use of this software.
+Permission is granted to anyone to use this software for any purpose, 
+including commercial applications, and to alter it and redistribute it freely, 
+subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+*/
 
 
 #include "LinearMath/btScalar.h"
@@ -25,7 +39,7 @@ void btSimulationIslandManager::initUnionFind(int n)
 }
 		
 
-void btSimulationIslandManager::findUnions(btDispatcher* dispatcher,btCollisionWorld* colWorld)
+void btSimulationIslandManager::findUnions(btDispatcher* /* dispatcher */,btCollisionWorld* colWorld)
 {
 	
 	{
@@ -129,17 +143,13 @@ class btPersistentManifoldSortPredicate
 };
 
 
-
-
-
-//
-// todo: this is random access, it can be walked 'cache friendly'!
-//
-void btSimulationIslandManager::buildAndProcessIslands(btDispatcher* dispatcher,btCollisionObjectArray& collisionObjects, IslandCallback* callback)
+void btSimulationIslandManager::buildIslands(btDispatcher* dispatcher,btCollisionObjectArray& collisionObjects)
 {
 
 	BT_PROFILE("islandUnionFindAndQuickSort");
 	
+	m_islandmanifold.resize(0);
+
 	//we are going to sort the unionfind array, and store the element id in the size
 	//afterwards, we clean unionfind, to make sure no-one uses it anymore
 	
@@ -273,6 +283,23 @@ void btSimulationIslandManager::buildAndProcessIslands(btDispatcher* dispatcher,
 #endif //SPLIT_ISLANDS
 		}
 	}
+}
+
+
+
+//
+// todo: this is random access, it can be walked 'cache friendly'!
+//
+void btSimulationIslandManager::buildAndProcessIslands(btDispatcher* dispatcher,btCollisionObjectArray& collisionObjects, IslandCallback* callback)
+{
+
+	buildIslands(dispatcher,collisionObjects);
+
+	int endIslandIndex=1;
+	int startIslandIndex;
+	int numElem = getUnionFind().getNumElements();
+
+	BT_PROFILE("processIslands");
 
 #ifndef SPLIT_ISLANDS
 	btPersistentManifold** manifold = dispatcher->getInternalManifoldPointer();
@@ -353,5 +380,5 @@ void btSimulationIslandManager::buildAndProcessIslands(btDispatcher* dispatcher,
 	}
 #endif //SPLIT_ISLANDS
 
-	m_islandmanifold.resize(0);
+
 }

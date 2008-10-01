@@ -40,21 +40,21 @@ if (TimeInterval - startTime)
 // Time in milliseconds since 1970
 // this is probably not very stable .. check out CFAbsoluteTimeGetCurrent() instead
 //
-unsigned long GetTimeInMsSince1970()
+U32 GetTimeInMsSince1970()
 {
 	timeval tv;
 	// The time is expressed in seconds and microseconds since midnight (0 hour), January 1, 1970.
 	gettimeofday(&tv,NULL);
 	// to receive milliseconds we transform the seconds to milliseconds and the microseconds to milliseconds
 	// and then add them
-	return (unsigned long)((tv.tv_sec*1000) + (tv.tv_usec/1000.0));
+	return (tv.tv_sec * 1000) + (U32)(tv.tv_usec / 1000.0f);
 }
 
 //
 // This is a replacement for QueryPerformanceFrequency / QueryPerformanceCounter
 // returns nanoseconds since system start
 //
-unsigned long GetTimeInNsSinceCPUStart()
+U32 GetTimeInNsSinceCPUStart()
 {
 	double time;
 	
@@ -71,7 +71,7 @@ unsigned long GetTimeInNsSinceCPUStart()
 //
 // returns Ticks since system start
 //
-unsigned long GetTimeInTicksSinceCPUStart()
+U32 GetTimeInTicksSinceCPUStart()
 {
 		// return value is nanoseconds
 		//result = gethrtime();

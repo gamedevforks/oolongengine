@@ -12,6 +12,8 @@
  2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
  3. This notice may not be removed or altered from any source distribution.
 */
-unsigned long GetTimeInMsSince1970();
-unsigned long GetTimeInNsSinceCPUStart();
-unsigned long GetTimeInTicksSinceCPUStart();
+#include "Types.h"
+
+U32 GetTimeInMsSince1970();
+U32 GetTimeInNsSinceCPUStart();
+U32 GetTimeInTicksSinceCPUStart();

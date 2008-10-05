@@ -19,7 +19,7 @@
 					20,
 					341,
 					20,
-					48.16259765625,
+					48,
 					43,
 					43,
 					20,
@@ -34,12 +34,13 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 244864501;
-			PBXWorkspaceStateSaveDate = 244864501;
+			PBXPerProjectTemplateStateSaveDate = 244868225;
+			PBXWorkspaceStateSaveDate = 244868225;
 		};
 		perUserProjectItems = {
 			D9F438EC0E9855B600982662 = D9F438EC0E9855B600982662 /* PBXTextBookmark */;
 			D9F438FB0E9855D900982662 = D9F438FB0E9855D900982662 /* PBXTextBookmark */;
+			D9F439AB0E98648F00982662 /* PBXTextBookmark */ = D9F439AB0E98648F00982662 /* PBXTextBookmark */;
 		};
 		sourceControlManager = D9F438F10E9855B600982662 /* Source Control */;
 		userBuildSettings = {
@@ -47,9 +48,9 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {810, 910}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1476, 1064}}";
 			sepNavSelRange = "{1406, 0}";
-			sepNavVisRange = "{0, 318}";
+			sepNavVisRange = "{0, 977}";
 		};
 	};
 	8DD76F620486A84900D96B5E /* ENetTestServer */ = {
@@ -65,12 +66,13 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -110,6 +112,16 @@
 		rLoc = 1406;
 		rType = 0;
 		vrLen = 346;
+		vrLoc = 0;
+	};
+	D9F439AB0E98648F00982662 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 38";
+		rLen = 0;
+		rLoc = 1406;
+		rType = 0;
+		vrLen = 977;
 		vrLoc = 0;
 	};
 }

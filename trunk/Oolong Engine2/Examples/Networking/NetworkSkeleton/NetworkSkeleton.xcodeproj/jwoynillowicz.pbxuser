@@ -89,8 +89,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 244865022;
-			PBXWorkspaceStateSaveDate = 244865022;
+			PBXPerProjectTemplateStateSaveDate = 244868239;
+			PBXWorkspaceStateSaveDate = 244868239;
 		};
 		perUserProjectItems = {
 			D91BEB9F0E65108500258B24 = D91BEB9F0E65108500258B24 /* PBXTextBookmark */;
@@ -127,14 +127,14 @@
 			D9F439570E98579900982662 = D9F439570E98579900982662 /* PBXTextBookmark */;
 			D9F439580E98579900982662 = D9F439580E98579900982662 /* PBXTextBookmark */;
 			D9F439590E98579900982662 = D9F439590E98579900982662 /* PBXTextBookmark */;
-			D9F439640E98581800982662 /* PBXTextBookmark */ = D9F439640E98581800982662 /* PBXTextBookmark */;
-			D9F439670E98581800982662 /* PBXTextBookmark */ = D9F439670E98581800982662 /* PBXTextBookmark */;
-			D9F439730E98584B00982662 /* PBXTextBookmark */ = D9F439730E98584B00982662 /* PBXTextBookmark */;
-			D9F439740E98584B00982662 /* PBXTextBookmark */ = D9F439740E98584B00982662 /* PBXTextBookmark */;
-			D9F4397B0E98597D00982662 /* PBXTextBookmark */ = D9F4397B0E98597D00982662 /* PBXTextBookmark */;
-			D9F4397C0E98597D00982662 /* PBXTextBookmark */ = D9F4397C0E98597D00982662 /* PBXTextBookmark */;
-			D9F439820E9859C500982662 /* PBXTextBookmark */ = D9F439820E9859C500982662 /* PBXTextBookmark */;
-			D9F439830E9859C500982662 /* PBXTextBookmark */ = D9F439830E9859C500982662 /* PBXTextBookmark */;
+			D9F439640E98581800982662 = D9F439640E98581800982662 /* PBXTextBookmark */;
+			D9F439670E98581800982662 = D9F439670E98581800982662 /* PBXTextBookmark */;
+			D9F439730E98584B00982662 = D9F439730E98584B00982662 /* PBXTextBookmark */;
+			D9F439740E98584B00982662 = D9F439740E98584B00982662 /* PBXTextBookmark */;
+			D9F4397B0E98597D00982662 = D9F4397B0E98597D00982662 /* PBXTextBookmark */;
+			D9F4397C0E98597D00982662 = D9F4397C0E98597D00982662 /* PBXTextBookmark */;
+			D9F439820E9859C500982662 = D9F439820E9859C500982662 /* PBXTextBookmark */;
+			D9F439830E9859C500982662 = D9F439830E9859C500982662 /* PBXTextBookmark */;
 			D9FB92EB0E83225A005D4945 = D9FB92EB0E83225A005D4945 /* PBXTextBookmark */;
 			D9FB92FE0E832484005D4945 = D9FB92FE0E832484005D4945 /* PBXTextBookmark */;
 			D9FB93010E832484005D4945 = D9FB93010E832484005D4945 /* PBXTextBookmark */;
@@ -729,6 +729,12 @@
 		vrLoc = 0;
 	};
 	D9FB92D20E8320FE005D4945 /* Network.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Network.h;
+		path = "/Users/jwoynillowicz/Documents/oolongengine/Oolong Engine2/Examples/Networking/NetworkSkeleton/Network.h";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1526, 1064}}";
 			sepNavSelRange = "{369, 0}";
@@ -737,6 +743,12 @@
 		};
 	};
 	D9FB92DA0E832210005D4945 /* Network.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = Network.cpp;
+		path = "/Users/jwoynillowicz/Documents/oolongengine/Oolong Engine2/Examples/Networking/NetworkSkeleton/Network.cpp";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1526, 1064}}";
 			sepNavSelRange = "{293, 0}";

@@ -42,7 +42,6 @@
 		D932CEF90E7DAF4C0075FE72 /* peer.c in Sources */ = {isa = PBXBuildFile; fileRef = D932CEEB0E7DAF4C0075FE72 /* peer.c */; };
 		D932CEFA0E7DAF4C0075FE72 /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = D932CEEC0E7DAF4C0075FE72 /* protocol.c */; };
 		D932CEFB0E7DAF4C0075FE72 /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = D932CEF00E7DAF4C0075FE72 /* unix.c */; };
-		D9FB92DB0E832210005D4945 /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9FB92DA0E832210005D4945 /* Network.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,8 +112,6 @@
 		D932CEF00E7DAF4C0075FE72 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
 		D932CEF10E7DAF4C0075FE72 /* unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unix.h; sourceTree = "<group>"; };
 		D932CEF20E7DAF4C0075FE72 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
-		D9FB92D20E8320FE005D4945 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
-		D9FB92DA0E832210005D4945 /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +142,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				D9FB92DA0E832210005D4945 /* Network.cpp */,
-				D9FB92D20E8320FE005D4945 /* Network.h */,
 				7914067A0DBAD8D100C9A379 /* Delegate.h */,
 				7914067B0DBAD8D100C9A379 /* Delegate.mm */,
 				79235D4F0DAD2BEA00F918F8 /* Application.mm */,
@@ -417,7 +412,6 @@
 				D932CEF90E7DAF4C0075FE72 /* peer.c in Sources */,
 				D932CEFA0E7DAF4C0075FE72 /* protocol.c in Sources */,
 				D932CEFB0E7DAF4C0075FE72 /* unix.c in Sources */,
-				D9FB92DB0E832210005D4945 /* Network.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

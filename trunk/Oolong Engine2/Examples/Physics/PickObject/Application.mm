@@ -452,7 +452,7 @@ bool CShell::RenderScene()
 							   m_cameraTargetPosition);
 				
 				sDynamicsWorld->rayTest(CameraPosition, Ray, rayCallback);
-				if (rayCallback.HasHit())
+				if (rayCallback.hasHit())
 				{
 					AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "RayHit!");
 					

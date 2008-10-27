@@ -321,7 +321,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Delegate.mm</string>
+								<string>Application.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,22 +329,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>Delegate.mm</string>
+										<string>Application.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>79E5F2090E331C4600C7BFD6</string>
+										<string>799FAE9A0EB571D900F75289</string>
 										<key>history</key>
 										<array>
 											<string>7999549F0DCCC4AE0020F76F</string>
 											<string>79AAEA7D0DD777F700CC242E</string>
-											<string>79AAEAC70DD7ED8300CC242E</string>
-											<string>79AAEAC90DD7ED8300CC242E</string>
 											<string>79A99EBA0DE90BFF00979729</string>
 											<string>79A99F190DE935F400979729</string>
 											<string>79A99F360DEE69C200979729</string>
-											<string>796AC11A0DEEE897005F8387</string>
-											<string>79E5F2080E331C4600C7BFD6</string>
+											<string>799FAE980EB571D900F75289</string>
+											<string>799FAE950EB571CD00F75289</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -354,6 +352,7 @@
 											<string>79A99F1C0DE935F400979729</string>
 											<string>79A99F1D0DE935F400979729</string>
 											<string>79A99F390DEE69C200979729</string>
+											<string>799FAE990EB571D900F75289</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -411,9 +410,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>79E5F20A0E331C4600C7BFD6</string>
+				<string>799FAE9B0EB571D900F75289</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>79E5F20B0E331C4600C7BFD6</string>
+				<string>799FAE9C0EB571D900F75289</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -549,6 +548,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>79235C150DAD062200F918F8</string>
 		<string>/Users/wolf/Desktop/Oolong/Oolong Engine2/Examples/Physics/PickObject/PickObject.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -573,7 +573,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>Application.mm</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -590,6 +590,8 @@
 							<string>338pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -629,7 +631,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>79A6FB440E291F10007820D8</string>
+				<string>799FAE970EB571CD00F75289</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

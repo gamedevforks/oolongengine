@@ -115,6 +115,7 @@
 		799953CC0DCAD14B0020F76F /* btConvexHull.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799953550DCAD14B0020F76F /* btConvexHull.cpp */; };
 		799953CD0DCAD14B0020F76F /* btGeometryUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799953580DCAD14B0020F76F /* btGeometryUtil.cpp */; };
 		799953CE0DCAD14B0020F76F /* btQuickprof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799953640DCAD14B0020F76F /* btQuickprof.cpp */; };
+		799FAEA50EB5720300F75289 /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 799FAEA40EB5720300F75289 /* Accelerometer.m */; };
 		79A6EF910DB5A18200B35A2C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A6EF900DB5A18200B35A2C /* Default.png */; };
 		79AAE95F0DD16BAC00CC242E /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79AAE95E0DD16BAC00CC242E /* Texture.mm */; };
 		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
@@ -129,7 +130,6 @@
 		79EA04A50DAFCC980038ED3D /* VertexLookup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04950DAFCC980038ED3D /* VertexLookup.cpp */; };
 		79EA04A60DAFCC980038ED3D /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04990DAFCC980038ED3D /* ResourceFile.cpp */; };
 		79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA049B0DAFCC980038ED3D /* Streaming.cpp */; };
-		7A226D950DF094DE00C63C53 /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A226D940DF094DE00C63C53 /* Accelerometer.m */; };
 		7A3C2C560E76569500010DC6 /* btDbvt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C2C520E76569500010DC6 /* btDbvt.cpp */; };
 		7A3C2C570E76569500010DC6 /* btDbvtBroadphase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C2C540E76569500010DC6 /* btDbvtBroadphase.cpp */; };
 		7A3C2C600E76571700010DC6 /* btQuantizedBvh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C2C5E0E76571700010DC6 /* btQuantizedBvh.cpp */; };
@@ -386,6 +386,8 @@
 		799953690DCAD14B0020F76F /* btTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btTransform.h; sourceTree = "<group>"; };
 		7999536A0DCAD14B0020F76F /* btTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btTransformUtil.h; sourceTree = "<group>"; };
 		7999536B0DCAD14B0020F76F /* btVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btVector3.h; sourceTree = "<group>"; };
+		799FAEA30EB5720300F75289 /* Accelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Accelerometer.h; path = ../../../Input/Accelerometer/Accelerometer.h; sourceTree = SOURCE_ROOT; };
+		799FAEA40EB5720300F75289 /* Accelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Accelerometer.m; path = ../../../Input/Accelerometer/Accelerometer.m; sourceTree = SOURCE_ROOT; };
 		79A6EF900DB5A18200B35A2C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		79AAE95E0DD16BAC00CC242E /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		79EA04400DAFC7950038ED3D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
@@ -414,8 +416,6 @@
 		79EA049A0DAFCC980038ED3D /* ResourceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceFile.h; sourceTree = "<group>"; };
 		79EA049B0DAFCC980038ED3D /* Streaming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Streaming.cpp; sourceTree = "<group>"; };
 		79EA049C0DAFCC980038ED3D /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Streaming.h; sourceTree = "<group>"; };
-		7A226D940DF094DE00C63C53 /* Accelerometer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Accelerometer.m; sourceTree = "<group>"; };
-		7A226D960DF094F700C63C53 /* Accelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Accelerometer.h; sourceTree = "<group>"; };
 		7A3C2C520E76569500010DC6 /* btDbvt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btDbvt.cpp; sourceTree = "<group>"; };
 		7A3C2C530E76569500010DC6 /* btDbvt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btDbvt.h; sourceTree = "<group>"; };
 		7A3C2C540E76569500010DC6 /* btDbvtBroadphase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btDbvtBroadphase.cpp; sourceTree = "<group>"; };
@@ -500,8 +500,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7A226D960DF094F700C63C53 /* Accelerometer.h */,
-				7A226D940DF094DE00C63C53 /* Accelerometer.m */,
+				799FAEA30EB5720300F75289 /* Accelerometer.h */,
+				799FAEA40EB5720300F75289 /* Accelerometer.m */,
 				7999526F0DCAD14B0020F76F /* Bullet */,
 				79EA043B0DAFC7950038ED3D /* Core */,
 				79235CD00DAD243A00F918F8 /* Application */,
@@ -1134,10 +1134,10 @@
 				799953CD0DCAD14B0020F76F /* btGeometryUtil.cpp in Sources */,
 				799953CE0DCAD14B0020F76F /* btQuickprof.cpp in Sources */,
 				79AAE95F0DD16BAC00CC242E /* Texture.mm in Sources */,
-				7A226D950DF094DE00C63C53 /* Accelerometer.m in Sources */,
 				7A3C2C560E76569500010DC6 /* btDbvt.cpp in Sources */,
 				7A3C2C570E76569500010DC6 /* btDbvtBroadphase.cpp in Sources */,
 				7A3C2C600E76571700010DC6 /* btQuantizedBvh.cpp in Sources */,
+				799FAEA50EB5720300F75289 /* Accelerometer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,7 +1148,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Erwin Coumans";
+				CODE_SIGN_IDENTITY = "Wolfgang Engel";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1175,6 +1175,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton;
+				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;

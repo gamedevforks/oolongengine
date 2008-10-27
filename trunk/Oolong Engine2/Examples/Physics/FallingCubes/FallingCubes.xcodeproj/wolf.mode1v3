@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -282,7 +284,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>5</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -319,8 +321,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -335,13 +335,8 @@
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>Delegate.mm</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>799120AD0E1C8C1300035EEA</string>
 										<key>history</key>
 										<array>
-											<string>7925D1480DC1B63500EC1BDC</string>
 											<string>799952310DCAC7380020F76F</string>
 											<string>7999549F0DCCC4AE0020F76F</string>
 											<string>79AAEA910DD7786400CC242E</string>
@@ -349,11 +344,9 @@
 											<string>798070940E04AE45002602F5</string>
 											<string>798070950E04AE45002602F5</string>
 											<string>79911F0A0E1BDB5700035EEA</string>
-											<string>79911F0E0E1BDB5700035EEA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
-											<string>7925D0B50DC1B1CD00EC1BDC</string>
 											<string>799952330DCAC7380020F76F</string>
 											<string>79AAE9640DD16BD600CC242E</string>
 											<string>79AAEA930DD7786400CC242E</string>
@@ -417,9 +410,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799120AF0E1C8C1300035EEA</string>
+				<string>799FAEAC0EB5723600F75289</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799120B00E1C8C1300035EEA</string>
+				<string>799FAEAD0EB5723600F75289</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -555,9 +548,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Physics/FallingCubes/FallingCubes.xcodeproj</string>
+		<string>/Users/wolf/Desktop/Oolong/Oolong Engine2/Examples/Physics/FallingCubes/FallingCubes.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>171 172 1125 690 0 0 1440 878 </string>
@@ -598,6 +590,8 @@
 							<string>338pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -637,7 +631,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799120B10E1C8C1300035EEA</string>
+				<string>799FAEA80EB5720C00F75289</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

@@ -248,7 +248,7 @@ bool CShell::RenderScene()
    m_AvgFramerate = ((m_AvgFramerate * (N - 1)) + (1000.0f / (float)iDeltaTime)) / N;
    
    // show text on the display
-	AppDisplayText->DisplayDefaultTitle("POD Scene", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("Matrix Palette", "", eDisplayTextLogoIMG);
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "framerate: %3.1f", m_AvgFramerate);
 	
 	AppDisplayText->Flush();	

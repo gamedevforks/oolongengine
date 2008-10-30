@@ -15,6 +15,7 @@ subject to the following restrictions:
 
 
 /**
+ * \if BULLET_SDK_ONLY
  * @mainpage Bullet Documentation
  *
  * @section intro_sec Introduction
@@ -57,6 +58,8 @@ subject to the following restrictions:
  * Special thanks to all visitors of the Bullet Physics forum, and in particular above contributors, Dave Eberle, Dirk Gregorius, Erin Catto, Dave Eberle, Adam Moravanszky,
  * Pierre Terdiman, Kenny Erleben, Russell Smith, Oliver Strunk, Jan Paul van Waveren, Marten Svanfeldt.
  * 
+ * \endif
+ *
  */
  
  

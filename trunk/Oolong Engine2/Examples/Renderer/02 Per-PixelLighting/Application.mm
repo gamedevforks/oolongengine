@@ -189,64 +189,41 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
+bool CShell::UpdateScene()
 {
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-//    glDisable(GL_CULL_FACE);
 	
-//	UpdatePolarCamera();
-
-	//Set the OpenGL projection matrix
+	// Set the OpenGL projection matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	
 	MATRIX	MyPerspMatrix;
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
 	myglMultMatrix(MyPerspMatrix.f);
-
-//	glOrthof(-40 / 2, 40 / 2, -60 / 2, 60 / 2, -1, 1);
 	
+	// do all the timing
 	static CFTimeInterval	startTime = 0;
-	CFTimeInterval			time;
+	CFTimeInterval			TimeInterval;
 	
-	//Calculate our local time
-	time = CFAbsoluteTimeGetCurrent();
+	// calculate our local time
+	TimeInterval = CFAbsoluteTimeGetCurrent();
 	if(startTime == 0)
-	startTime = time;
-	time = time - startTime;
+		startTime = TimeInterval;
+	TimeInterval = TimeInterval - startTime;
+	
+	frames++;
+	if (TimeInterval) 
+		frameRate = ((float)frames/(TimeInterval));
+	
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(0.0, 0.0, - 10.0f);
-	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
-
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
-bool CShell::UpdateScene()
-{
- 	static struct timeval time = {0,0};
-	struct timeval currTime = {0,0};
- 
- 	frames++;
-	gettimeofday(&currTime, NULL); // gets the current time passed since the last frame in seconds
+	glRotatef(50.0f * fmod(TimeInterval, 360.0), 0.0, 1.0, 1.0);
 	
-	if (currTime.tv_usec - time.tv_usec) 
-	{
-		frameRate = ((float)frames/((currTime.tv_usec - time.tv_usec) / 1000000.0f));
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-		time = currTime;
-		frames = 0;
-	}
-
 	return true;
 }
 

@@ -18,7 +18,7 @@
 #include "Camera.h"
 
 //CONSTANTS:
-#define kFPS			30.0
+#define kFPS			60.0
 #define kSpeed			10.0
 
 static CShell *shell = NULL;
@@ -27,10 +27,6 @@ static CShell *shell = NULL;
 
 - (void) update
 {
-	// renderer entry
-	if(!shell->InitView())
-		printf("InitView error\n");
-		
 	if(!shell->UpdateScene())
 		printf("UpdateScene error\n");
 	
@@ -38,9 +34,6 @@ static CShell *shell = NULL;
 		printf("RenderScene error\n");
 	
 	[_glView swapBuffers];
-	
-	if(!shell->ReleaseView())
-		printf("ReleaseView error\n");	
 }
 
 
@@ -52,7 +45,8 @@ static CShell *shell = NULL;
 	_window = [[UIWindow alloc] initWithFrame:rect];
 	
 	// create the OpenGL view and add it to the window
-	_glView = [[EAGLView alloc] initWithFrame:rect];
+	//_glView = [[EAGLView alloc] initWithFrame:rect];
+	_glView = [[EAGLView alloc] initWithFrame:rect pixelFormat:GL_RGB565_OES depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO];
 	
 	[_window addSubview:_glView];
 

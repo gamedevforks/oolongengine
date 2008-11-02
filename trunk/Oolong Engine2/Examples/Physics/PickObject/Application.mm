@@ -230,120 +230,6 @@ void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
 	
 }
 
-
-
-bool CShell::InitView()
-{
-    glEnable(GL_DEPTH_TEST);
-	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-//    glDisable(GL_CULL_FACE);
-	
-//	UpdatePolarCamera();
-/*
-	//Set the OpenGL projection matrix
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	
-	MATRIX	MyPerspMatrix;
-	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(1.0f), f2vt(10000.0f), 0);
-	myglMultMatrix(MyPerspMatrix.f);
-
-//	glOrthof(-40 / 2, 40 / 2, -60 / 2, 60 / 2, -1, 1);
-	
-	static CFTimeInterval	startTime = 0;
-	CFTimeInterval			time;
-	
-	//Calculate our local time
-	time = CFAbsoluteTimeGetCurrent();
-	if(startTime == 0)
-	startTime = time;
-	time = time - startTime;
-	
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0.0, 0.0, -30.0f);
-//	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
-*/
-	
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	float rele = m_ele * 0.01745329251994329547;// rads per deg
-	float razi = m_azi * 0.01745329251994329547;// rads per deg
-	
-	
-	btQuaternion rot(m_cameraUp,razi);
-	
-	
-	btVector3 eyePos(0,0,0);
-	eyePos[m_forwardAxis] = -m_cameraDistance;
-	
-	btVector3 forward(eyePos[0],eyePos[1],eyePos[2]);
-	if (forward.length2() < SIMD_EPSILON)
-	{
-		forward.setValue(1.f,0.f,0.f);
-	}
-	btVector3 right = m_cameraUp.cross(forward);
-	btQuaternion roll(right,-rele);
-	
-	eyePos = btMatrix3x3(rot) * btMatrix3x3(roll) * eyePos;
-	
-	m_cameraPosition[0] = eyePos.getX();
-	m_cameraPosition[1] = eyePos.getY();
-	m_cameraPosition[2] = eyePos.getZ();
-	
-	if (m_glutScreenWidth > m_glutScreenHeight) 
-	{
-		btScalar aspect = m_glutScreenWidth / (btScalar)m_glutScreenHeight;
-		myglFrustum (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
-	} else 
-	{
-		btScalar aspect = m_glutScreenHeight / (btScalar)m_glutScreenWidth;
-		myglFrustum (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
-	}
-	
-	
-    glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	lookAt(m_cameraPosition[0], m_cameraPosition[1], m_cameraPosition[2], 
-              m_cameraTargetPosition[0], m_cameraTargetPosition[1], m_cameraTargetPosition[2], 
-			  m_cameraUp.getX(),m_cameraUp.getY(),m_cameraUp.getZ());
-
-	
-	//
-	// Touch screen support
-	//
-	// touch screen coordinates go from 0, 0 in the upper left corner to
-	// 320, 480 in the lower right corner
-	TouchScreen = GetValuesTouchScreen();
-	
-	// the center of the ray coordinates are located in the middle of the 
-	// screen ... in the x direction the values range from -9875..9875 in x direction and
-	// 15.000..-15000 in the y direction
-	
-
-	
-	if(TouchScreen->TouchesEnd == false)
-	{
-		
-		AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "touchesBegan: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
-									TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, TouchScreen->CountTouchesBegan, TouchScreen->TapCountTouchesBegan);
-		AppDisplayText->DisplayText(0, 14, 0.4f, RGBA(255,255,255,255), "touchesMoved: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
-									TouchScreen->LocationXTouchesMoved, TouchScreen->LocationYTouchesMoved, TouchScreen->CountTouchesMoved, TouchScreen->TapCountTouchesMoved);
-		AppDisplayText->DisplayText(0, 18, 0.4f, RGBA(255,255,255,255), "Ray: X: %3.2f Y: %3.2f Z: %3.2f", Ray.getX(), Ray.getY(), Ray.getZ());
-
-	}
-	
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
 btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 cameraUp, btVector3 CameraPosition, btVector3 CameraTargetPosition)
 {
 	float top = 1.f;
@@ -395,6 +281,109 @@ btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 camer
 
 bool CShell::UpdateScene()
 {
+    glEnable(GL_DEPTH_TEST);
+	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	//    glDisable(GL_CULL_FACE);
+	
+	//	UpdatePolarCamera();
+	/*
+	 //Set the OpenGL projection matrix
+	 glMatrixMode(GL_PROJECTION);
+	 glLoadIdentity();
+	 
+	 MATRIX	MyPerspMatrix;
+	 MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(1.0f), f2vt(10000.0f), 0);
+	 myglMultMatrix(MyPerspMatrix.f);
+	 
+	 //	glOrthof(-40 / 2, 40 / 2, -60 / 2, 60 / 2, -1, 1);
+	 
+	 static CFTimeInterval	startTime = 0;
+	 CFTimeInterval			time;
+	 
+	 //Calculate our local time
+	 time = CFAbsoluteTimeGetCurrent();
+	 if(startTime == 0)
+	 startTime = time;
+	 time = time - startTime;
+	 
+	 glMatrixMode(GL_MODELVIEW);
+	 glLoadIdentity();
+	 glTranslatef(0.0, 0.0, -30.0f);
+	 //	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
+	 */
+	
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	float rele = m_ele * 0.01745329251994329547;// rads per deg
+	float razi = m_azi * 0.01745329251994329547;// rads per deg
+	
+	
+	btQuaternion rot(m_cameraUp,razi);
+	
+	
+	btVector3 eyePos(0,0,0);
+	eyePos[m_forwardAxis] = -m_cameraDistance;
+	
+	btVector3 forward(eyePos[0],eyePos[1],eyePos[2]);
+	if (forward.length2() < SIMD_EPSILON)
+	{
+		forward.setValue(1.f,0.f,0.f);
+	}
+	btVector3 right = m_cameraUp.cross(forward);
+	btQuaternion roll(right,-rele);
+	
+	eyePos = btMatrix3x3(rot) * btMatrix3x3(roll) * eyePos;
+	
+	m_cameraPosition[0] = eyePos.getX();
+	m_cameraPosition[1] = eyePos.getY();
+	m_cameraPosition[2] = eyePos.getZ();
+	
+	if (m_glutScreenWidth > m_glutScreenHeight) 
+	{
+		btScalar aspect = m_glutScreenWidth / (btScalar)m_glutScreenHeight;
+		myglFrustum (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
+	} else 
+	{
+		btScalar aspect = m_glutScreenHeight / (btScalar)m_glutScreenWidth;
+		myglFrustum (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
+	}
+	
+	
+    glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	lookAt(m_cameraPosition[0], m_cameraPosition[1], m_cameraPosition[2], 
+		   m_cameraTargetPosition[0], m_cameraTargetPosition[1], m_cameraTargetPosition[2], 
+		   m_cameraUp.getX(),m_cameraUp.getY(),m_cameraUp.getZ());
+	
+	
+	//
+	// Touch screen support
+	//
+	// touch screen coordinates go from 0, 0 in the upper left corner to
+	// 320, 480 in the lower right corner
+	TouchScreen = GetValuesTouchScreen();
+	
+	// the center of the ray coordinates are located in the middle of the 
+	// screen ... in the x direction the values range from -9875..9875 in x direction and
+	// 15.000..-15000 in the y direction
+	
+	
+	
+	if(TouchScreen->TouchesEnd == false)
+	{
+		
+		AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "touchesBegan: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
+									TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, TouchScreen->CountTouchesBegan, TouchScreen->TapCountTouchesBegan);
+		AppDisplayText->DisplayText(0, 14, 0.4f, RGBA(255,255,255,255), "touchesMoved: X: %3.2f Y: %3.2f Count: %3.2f Tab Count %3.2f", 
+									TouchScreen->LocationXTouchesMoved, TouchScreen->LocationYTouchesMoved, TouchScreen->CountTouchesMoved, TouchScreen->TapCountTouchesMoved);
+		AppDisplayText->DisplayText(0, 18, 0.4f, RGBA(255,255,255,255), "Ray: X: %3.2f Y: %3.2f Z: %3.2f", Ray.getX(), Ray.getY(), Ray.getZ());
+		
+	}
+	
+	return true;
  	static struct timeval time = {0,0};
 	struct timeval currTime = {0,0};
  

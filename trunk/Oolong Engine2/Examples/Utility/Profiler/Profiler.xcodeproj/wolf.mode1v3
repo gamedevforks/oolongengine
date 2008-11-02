@@ -341,11 +341,11 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7944B5D70E02479500E3797C</string>
+										<string>79A7C5B90EBE1DD400317ADA</string>
 										<key>history</key>
 										<array>
 											<string>79F920E80DF96A72003CD043</string>
-											<string>79F920EA0DF96A72003CD043</string>
+											<string>7944B5D70E02479500E3797C</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -408,9 +408,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7944B5D80E02479500E3797C</string>
+				<string>79A7C5BA0EBE1DD400317ADA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7944B5D90E02479500E3797C</string>
+				<string>79A7C5BB0EBE1DD400317ADA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -523,7 +523,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>79AAEA020DD4184E00CC242E</string>
+	<string>79A7C5B00EBD51A200317ADA</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -546,12 +546,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7944B5E20E02479500E3797C</string>
-		<string>7944B5E30E02479500E3797C</string>
+		<string>79A7C5C30EBE1DD400317ADA</string>
+		<string>79A7C5C40EBE1DD400317ADA</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Utility/Profiler/Profiler.xcodeproj</string>
+		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Utility/Profiler/Profiler.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>167 171 938 671 0 0 1440 878 </string>
@@ -592,6 +592,8 @@
 							<string>355pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -631,7 +633,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>7944B5DA0E02479500E3797C</string>
+				<string>79A7C5B30EBD51D200317ADA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -751,13 +753,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>7944B5DB0E02479500E3797C</string>
+				<string>79A7C5BC0EBE1DD400317ADA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>7944B5DC0E02479500E3797C</string>
-				<string>7944B5DD0E02479500E3797C</string>
-				<string>7944B5DE0E02479500E3797C</string>
-				<string>7944B5DF0E02479500E3797C</string>
-				<string>7944B5E00E02479500E3797C</string>
+				<string>79A7C5BD0EBE1DD400317ADA</string>
+				<string>79A7C5BE0EBE1DD400317ADA</string>
+				<string>79A7C5BF0EBE1DD400317ADA</string>
+				<string>79A7C5C00EBE1DD400317ADA</string>
+				<string>79A7C5C10EBE1DD400317ADA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -911,7 +913,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7944B5E10E02479500E3797C</string>
+				<string>79A7C5C20EBE1DD400317ADA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

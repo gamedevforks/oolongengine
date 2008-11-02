@@ -73,16 +73,6 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
-{
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
 bool CShell::UpdateScene()
 {
     glEnable(GL_DEPTH_TEST);

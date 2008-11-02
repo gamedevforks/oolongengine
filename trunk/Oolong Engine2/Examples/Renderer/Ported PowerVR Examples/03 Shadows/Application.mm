@@ -344,20 +344,6 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
-{
-    glEnable(GL_DEPTH_TEST);
-	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
 /*!****************************************************************************
  @Function		RenderToTexture
  @Return		bool		true if no error occured
@@ -501,6 +487,9 @@ bool RenderFromLightsView()
 
 bool CShell::UpdateScene()
 {
+    glEnable(GL_DEPTH_TEST);
+	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	return true;
 }

@@ -151,72 +151,44 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
+
+bool CShell::UpdateScene()
 {
+	
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-//    glDisable(GL_CULL_FACE);
 	
-//	UpdatePolarCamera();
-
-	//Set the OpenGL projection matrix
+	// Set the OpenGL projection matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	
 	MATRIX	MyPerspMatrix;
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
 	myglMultMatrix(MyPerspMatrix.f);
-
-//	glOrthof(-40 / 2, 40 / 2, -60 / 2, 60 / 2, -1, 1);
 	
+	// do all the timing
 	static CFTimeInterval	startTime = 0;
-	CFTimeInterval			time;
+	CFTimeInterval			TimeInterval;
 	
-	//Calculate our local time
-	time = CFAbsoluteTimeGetCurrent();
+	// calculate our local time
+	TimeInterval = CFAbsoluteTimeGetCurrent();
 	if(startTime == 0)
-	startTime = time;
-	time = time - startTime;
+		startTime = TimeInterval;
+	TimeInterval = TimeInterval - startTime;
+	
+	frames++;
+	if (TimeInterval) 
+		frameRate = ((float)frames/(TimeInterval));
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(0.0, -10.0, -30.0f);
-//	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
-
-
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
-bool CShell::UpdateScene()
-{
- 	static struct timeval time = {0,0};
-	struct timeval currTime = {0,0};
- 
- 	frames++;
-	gettimeofday(&currTime, NULL); // gets the current time passed since the last frame in seconds
-	
-	btScalar realDt = ((currTime.tv_usec - time.tv_usec) / 1000000.0f);
-	
-	if (currTime.tv_usec - time.tv_usec) 
-	{
-		frameRate = ((float)frames/realDt);
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-		time = currTime;
-		frames = 0;
-	}
 	
 	double AccelerometerVector[3];
 	[gAccel GetAccelerometerVector:(double *) AccelerometerVector];
 	
-	
-	AppDisplayText->DisplayText(0, 12, 0.4f, RGBA(255,255,255,255), "Accelerometer Vector: %3.2f, %3.2f, %3.2f, realDt=%f", AccelerometerVector[0], AccelerometerVector[1], AccelerometerVector[2],realDt);
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "Accelerometer Vector: %3.2f, %3.2f, %3.2f, frameRate=%f", AccelerometerVector[0], AccelerometerVector[1], AccelerometerVector[2],frameRate);
 	
 	float deltaTime = 1.f/60.f;
 	float scaling=20.f;
@@ -224,16 +196,14 @@ bool CShell::UpdateScene()
 	if (sDynamicsWorld)
 	{
 		
-		if (realDt < 0.f)
-			realDt = deltaTime;
-		if (realDt > 1.f)
-			realDt = deltaTime;
+		if (frameRate < 0.f)
+			frameRate = deltaTime;
+		if (frameRate > 1.f)
+			frameRate = deltaTime;
 		
 		sDynamicsWorld->setGravity(btVector3(AccelerometerVector[0]*scaling,AccelerometerVector[1]*scaling,AccelerometerVector[2]*scaling));
-		sDynamicsWorld->stepSimulation(realDt,2);//deltaTime);
+		sDynamicsWorld->stepSimulation(frameRate, 2);//deltaTime);
 	}
-	
-
 
 	return true;
 }

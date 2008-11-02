@@ -282,7 +282,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -333,58 +333,25 @@
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>Pathes.h</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>79E5F1700E330F3900C7BFD6</string>
 										<key>history</key>
 										<array>
-											<string>796AC2BB0DF27671005F8387</string>
 											<string>796AC2EA0DF2771C005F8387</string>
 											<string>796AC2EB0DF2771C005F8387</string>
 											<string>796AC2EC0DF2771C005F8387</string>
 											<string>791F46A40E174E8B00E927FE</string>
 											<string>791F470C0E1751CA00E927FE</string>
 											<string>7991216C0E1F3E7100035EEA</string>
-											<string>7991216D0E1F3E7100035EEA</string>
-											<string>7991216F0E1F3E7100035EEA</string>
-											<string>799121710E1F3E7100035EEA</string>
-											<string>799121730E1F3E7100035EEA</string>
-											<string>799121750E1F3E7100035EEA</string>
-											<string>799121770E1F3E7100035EEA</string>
-											<string>799121790E1F3E7100035EEA</string>
-											<string>7991217B0E1F3E7100035EEA</string>
-											<string>7991217D0E1F3E7100035EEA</string>
-											<string>7991217F0E1F3E7100035EEA</string>
-											<string>799121810E1F3E7100035EEA</string>
-											<string>799121830E1F3E7100035EEA</string>
-											<string>799121D50E1F420100035EEA</string>
 											<string>799121D60E1F420100035EEA</string>
-											<string>79E5F11E0E330B2300C7BFD6</string>
 										</array>
 										<key>prevStack</key>
 										<array>
 											<string>7976CA4D0DD160970043302E</string>
 											<string>796AC2B20DF27654005F8387</string>
-											<string>796AC2BF0DF27671005F8387</string>
 											<string>796AC2C00DF27671005F8387</string>
 											<string>796AC2C10DF27671005F8387</string>
 											<string>796AC2C20DF27671005F8387</string>
 											<string>791F470F0E1751CA00E927FE</string>
 											<string>799121870E1F3E7100035EEA</string>
-											<string>799121880E1F3E7100035EEA</string>
-											<string>7991218A0E1F3E7100035EEA</string>
-											<string>7991218C0E1F3E7100035EEA</string>
-											<string>7991218E0E1F3E7100035EEA</string>
-											<string>799121900E1F3E7100035EEA</string>
-											<string>799121920E1F3E7100035EEA</string>
-											<string>799121940E1F3E7100035EEA</string>
-											<string>799121960E1F3E7100035EEA</string>
-											<string>7991219A0E1F3E7100035EEA</string>
-											<string>7991219C0E1F3E7100035EEA</string>
-											<string>7991219E0E1F3E7100035EEA</string>
-											<string>799121A00E1F3E7100035EEA</string>
-											<string>799121D90E1F420100035EEA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -442,9 +409,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>79E5F1450E330BAF00C7BFD6</string>
+				<string>79A7C45D0EBD479000317ADA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>79E5F1460E330BAF00C7BFD6</string>
+				<string>79A7C45E0EBD479000317ADA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -557,7 +524,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>79E5F1430E330BA700C7BFD6</string>
+	<string>79A7C45C0EBD478600317ADA</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -580,7 +547,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/wolf/Desktop/Oolong/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/07 Skybox/Skybox.xcodeproj</string>
+		<string>79A7C45C0EBD478600317ADA</string>
+		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/07 Skybox/Skybox.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>380 259 918 569 0 0 1440 878 </string>
@@ -604,7 +572,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Application.mm</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -621,8 +589,6 @@
 							<string>177pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -662,7 +628,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799121CF0E1F41B600035EEA</string>
+				<string>79A7C4460EBD475D00317ADA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -782,13 +748,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>799121DF0E1F420100035EEA</string>
+				<string>79A7C4470EBD475D00317ADA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>799121E00E1F420100035EEA</string>
-				<string>799121E10E1F420100035EEA</string>
-				<string>799121E20E1F420100035EEA</string>
-				<string>799121E30E1F420100035EEA</string>
-				<string>799121E40E1F420100035EEA</string>
+				<string>79A7C4480EBD475D00317ADA</string>
+				<string>79A7C4490EBD475D00317ADA</string>
+				<string>79A7C44A0EBD475D00317ADA</string>
+				<string>79A7C44B0EBD475D00317ADA</string>
+				<string>79A7C44C0EBD475D00317ADA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -942,7 +908,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>799121E50E1F420100035EEA</string>
+				<string>79A7C44D0EBD475D00317ADA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

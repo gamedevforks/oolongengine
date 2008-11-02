@@ -338,18 +338,16 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>799123830E2002AF00035EEA</string>
+										<string>79A7C5830EBD50B400317ADA</string>
 										<key>history</key>
 										<array>
 											<string>7925D2D70DC3DAC400EC1BDC</string>
 											<string>7925D2D90DC3DAC400EC1BDC</string>
 											<string>7925D2DA0DC3DAC400EC1BDC</string>
 											<string>79AAEA130DD418B500CC242E</string>
-											<string>799EB4860E179AA30083AAC5</string>
-											<string>799EB5030E19617A0083AAC5</string>
 											<string>799EB54B0E1985770083AAC5</string>
 											<string>799EB54C0E1985770083AAC5</string>
-											<string>7991232C0E1FF3BF00035EEA</string>
+											<string>799123830E2002AF00035EEA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -359,7 +357,6 @@
 											<string>7925D2E10DC3DAC400EC1BDC</string>
 											<string>7925D2E20DC3DAC400EC1BDC</string>
 											<string>79AAEA140DD418B500CC242E</string>
-											<string>799EB5040E19617A0083AAC5</string>
 											<string>799EB5500E1985770083AAC5</string>
 										</array>
 									</dict>
@@ -418,9 +415,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799123840E2002AF00035EEA</string>
+				<string>79A7C5760EBD506F00317ADA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799123850E2002AF00035EEA</string>
+				<string>79A7C5770EBD506F00317ADA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -556,7 +553,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Demos/San Angeles/SanAngeles.xcodeproj</string>
+		<string>79A7C5840EBD50B400317ADA</string>
+		<string>79A7C5850EBD50B400317ADA</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>79235C150DAD062200F918F8</string>
 	</array>
 	<key>WindowString</key>
 	<string>122 161 1154 712 0 0 1440 878 </string>
@@ -636,7 +637,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799121430E1E8DEE00035EEA</string>
+				<string>79A7C5780EBD506F00317ADA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -756,13 +757,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>799121440E1E8DEE00035EEA</string>
+				<string>79A7C5790EBD506F00317ADA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>799121450E1E8DEE00035EEA</string>
-				<string>799121460E1E8DEE00035EEA</string>
-				<string>799121470E1E8DEE00035EEA</string>
-				<string>799121480E1E8DEE00035EEA</string>
-				<string>799121490E1E8DEE00035EEA</string>
+				<string>79A7C57A0EBD506F00317ADA</string>
+				<string>79A7C57B0EBD506F00317ADA</string>
+				<string>79A7C57C0EBD506F00317ADA</string>
+				<string>79A7C57D0EBD506F00317ADA</string>
+				<string>79A7C57E0EBD506F00317ADA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -916,7 +917,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>7991214A0E1E8DEE00035EEA</string>
+				<string>79A7C57F0EBD506F00317ADA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

@@ -108,22 +108,19 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
+bool CShell::UpdateScene()
 {
-
-	glEnable(GL_DEPTH_TEST);
-	
-	//Clear framebuffer
+    glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-//	MATRIX	MyPerspMatrix;
-//	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(60), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
-//	myglMultMatrix(MyPerspMatrix.f);
-
+	// Set the OpenGL projection matrix
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	
 	//Make the OpenGL modelview matrix the default
 	glMatrixMode(GL_MODELVIEW);
-
+	
 	// Setup model view matrix
 	glLoadIdentity();
 	glTranslatef(0.0, -0.1, -1.0);
@@ -131,24 +128,56 @@ bool CShell::InitView()
 	
 	GLfloat	matrix[16];
 	[gAccel GetAccelerometerMatrix:(GLfloat *) matrix];
-
+	
 	// Finally load matrix
 	glMultMatrixf((GLfloat*)matrix);
 	
+	// rotate teapot
+	glRotatef(90.0, 0.0, 0.0, 1.0);
+	
+	// do all the timing
+	static CFTimeInterval	startTime = 0;
+	CFTimeInterval			TimeInterval;
+	
+	// calculate our local time
+	TimeInterval = CFAbsoluteTimeGetCurrent();
+	if(startTime == 0)
+		startTime = TimeInterval;
+	TimeInterval = TimeInterval - startTime;
+	
+	frames++;
+	if (TimeInterval) 
+		frameRate = ((float)frames/(TimeInterval));
+	
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
+/*	
+	glEnable(GL_DEPTH_TEST);
+	
+	//Clear framebuffer
+	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	//	MATRIX	MyPerspMatrix;
+	//	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(60), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
+	//	myglMultMatrix(MyPerspMatrix.f);
+	
+	//Make the OpenGL modelview matrix the default
+	glMatrixMode(GL_MODELVIEW);
+	
+	// Setup model view matrix
+	glLoadIdentity();
+	glTranslatef(0.0, -0.1, -1.0);
+	glScalef(kTeapotScale, kTeapotScale, kTeapotScale);
+	
+	GLfloat	matrix[16];
+	[gAccel GetAccelerometerMatrix:(GLfloat *) matrix];
+	
+	// Finally load matrix
+	glMultMatrixf((GLfloat*)matrix);
 	
 	// rotate teapot
 	glRotatef(90.0, 0.0, 0.0, 1.0);
-
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
-bool CShell::UpdateScene()
-{
+	
  	static struct timeval time = {0,0};
 	struct timeval currTime = {0,0};
  
@@ -162,7 +191,7 @@ bool CShell::UpdateScene()
 		time = currTime;
 		frames = 0;
 	}
-	
+*/
 	double AccelerometerVector[3];
 	[gAccel GetAccelerometerVector:(double *) AccelerometerVector];
 	

@@ -201,26 +201,14 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
+bool CShell::UpdateScene()
 {
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+	
     glDisable(GL_CULL_FACE);
 	
-	//UpdatePolarCamera();
-	
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
-bool CShell::UpdateScene()
-{
 	return true;
 }
 

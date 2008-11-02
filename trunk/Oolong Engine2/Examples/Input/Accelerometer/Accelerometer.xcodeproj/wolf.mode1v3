@@ -197,7 +197,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>79A7C5470EBD4EE100317ADA</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>Application.mm</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>79A7C5480EBD4EE100317ADA</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>Application.mm</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>79A7C5490EBD4EE100317ADA</string>
+						<key>history</key>
+						<array>
+							<string>79A7C5430EBD4E5B00317ADA</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {883, 690}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>302 147 883 731 0 0 1440 878 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -291,7 +332,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -345,13 +386,13 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7991204D0E1C88A700035EEA</string>
+										<string>79A7C5460EBD4EE100317ADA</string>
 										<key>history</key>
 										<array>
 											<string>799954610DCCBCEF0020F76F</string>
 											<string>799954620DCCBCEF0020F76F</string>
 											<string>7991204B0E1C88A700035EEA</string>
-											<string>7925D2A60DC38C5E00EC1BDC</string>
+											<string>7991204D0E1C88A700035EEA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -359,7 +400,6 @@
 											<string>799954640DCCBCEF0020F76F</string>
 											<string>799954650DCCBCEF0020F76F</string>
 											<string>799954660DCCBCEF0020F76F</string>
-											<string>7991204C0E1C88A700035EEA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -417,9 +457,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7991204E0E1C88A700035EEA</string>
+				<string>79A7C52B0EBD4CAA00317ADA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7991204F0E1C88A700035EEA</string>
+				<string>79A7C52C0EBD4CAA00317ADA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -553,12 +593,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>799120580E1C88A700035EEA</string>
-		<string>799120590E1C88A700035EEA</string>
+		<string>79A7C5510EBD4EE100317ADA</string>
+		<string>79A7C5520EBD4EE100317ADA</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>79235C150DAD062200F918F8</string>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Input/Accelerometer/Accelerometer.xcodeproj</string>
+		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Input/Accelerometer/Accelerometer.xcodeproj</string>
+		<string>79A7C5470EBD4EE100317ADA</string>
 	</array>
 	<key>WindowString</key>
 	<string>189 181 953 667 0 0 1440 878 </string>
@@ -599,6 +640,8 @@
 							<string>354pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -638,7 +681,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>799120500E1C88A700035EEA</string>
+				<string>79A7C5300EBD4CE500317ADA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -758,13 +801,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>799120510E1C88A700035EEA</string>
+				<string>79A7C54A0EBD4EE100317ADA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>799120520E1C88A700035EEA</string>
-				<string>799120530E1C88A700035EEA</string>
-				<string>799120540E1C88A700035EEA</string>
-				<string>799120550E1C88A700035EEA</string>
-				<string>799120560E1C88A700035EEA</string>
+				<string>79A7C54B0EBD4EE100317ADA</string>
+				<string>79A7C54C0EBD4EE100317ADA</string>
+				<string>79A7C54D0EBD4EE100317ADA</string>
+				<string>79A7C54E0EBD4EE100317ADA</string>
+				<string>79A7C54F0EBD4EE100317ADA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -918,7 +961,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>799120570E1C88A700035EEA</string>
+				<string>79A7C5500EBD4EE100317ADA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

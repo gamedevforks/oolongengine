@@ -59,6 +59,8 @@ int				m_iTimePrev;
 VERTTYPE		m_fFrame;
 float       m_AvgFramerate;
 
+int frames = 0;
+
 #define DEMO_FRAME_RATE	(1.0f / 30.0f)
 
 // allocate in heap
@@ -69,8 +71,6 @@ CTexture * Textures;
 void CameraGetMatrix();
 void LoadMaterial(int index);
 void DrawModel();
-
-
 
 bool CShell::InitApplication()
 {
@@ -92,9 +92,7 @@ bool CShell::InitApplication()
 	// Initialize variables used for the animation
 	m_fFrame = 0;
 	m_iTimePrev = 0;
-   m_AvgFramerate = 0;
-   
-   // the PowerVR example's InitView() starts here.
+    m_AvgFramerate = 0;
    
    // loads the texture
    if(!Textures->LoadTextureFromPointer((void*)mallet, &m_ui32MalletTexture))
@@ -107,10 +105,10 @@ bool CShell::InitApplication()
 
    // Init DisplayText
 	if(!AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-   {
-		fprintf(stderr, "ERROR: Cannot initialise Print3D\n");
+	{
+		fprintf(stderr, "ERROR: Cannot initialise AppDisplayText\n");
       return false;
-   }
+	}
 
 	/* Model View Matrix */
 	CameraGetMatrix();
@@ -120,10 +118,7 @@ bool CShell::InitApplication()
 	glLoadIdentity();
 	myglMultMatrix(m_mProjection.f);
    
-   
-   /* GENERIC RENDER STATES */
-
-	/* Enables Depth Testing */
+  	/* Enables Depth Testing */
 	glEnable(GL_DEPTH_TEST);
 
 	/* Enables Smooth Colour Shading */
@@ -138,7 +133,6 @@ bool CShell::InitApplication()
 	/* Enables texture clamping */
 	myglTexParameter( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
 	myglTexParameter( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-   
    
    /* Reset the model view matrix to position the light */
 	glMatrixMode(GL_MODELVIEW);
@@ -184,26 +178,14 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
 bool CShell::UpdateScene()
 {
-	return true;
-}
-
-bool CShell::InitView()
-{
-   // Sets the clear color
+	// Sets the clear color
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
-   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-   // TODO: try backface culling
-   glDisable(GL_CULL_FACE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	//UpdatePolarCamera();
+	// TODO: try backface culling
+	glDisable(GL_CULL_FACE);
 	
 	return true;
 }
@@ -241,16 +223,25 @@ bool CShell::RenderScene()
    // Draw the model
    DrawModel();
 	
-   // calc framerate, avg over 100 frames.
-   float N = 20;
-   if(!m_AvgFramerate)
-      m_AvgFramerate = 30.0f;
-   m_AvgFramerate = ((m_AvgFramerate * (N - 1)) + (1000.0f / (float)iDeltaTime)) / N;
-   
-   // show text on the display
-	AppDisplayText->DisplayDefaultTitle("Matrix Palette", "", eDisplayTextLogoIMG);
-	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "framerate: %3.1f", m_AvgFramerate);
+	// do all the timing
+	static CFTimeInterval	startTime = 0;
+	CFTimeInterval			TimeInterval;
 	
+	// calculate our local time
+	TimeInterval = CFAbsoluteTimeGetCurrent();
+	if(startTime == 0)
+		startTime = TimeInterval;
+	TimeInterval = TimeInterval - startTime;
+	
+	frames++;
+	if (TimeInterval) 
+		m_AvgFramerate = ((float)frames/(TimeInterval));
+	
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", m_AvgFramerate);
+
+	// show text on the display
+	AppDisplayText->DisplayDefaultTitle("Matrix Palette", "", eDisplayTextLogoIMG);
+
 	AppDisplayText->Flush();	
 	
 	return true;

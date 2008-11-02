@@ -328,46 +328,27 @@ bool CShell::QuitApplication()
 	return true;
 }
 
-bool CShell::InitView()
+bool CShell::UpdateScene()
 {
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	
 	static CFTimeInterval	startTime = 0;
-	CFTimeInterval			time;
+	CFTimeInterval			TimeInterval;
 	
-	//Calculate our local time
-	time = CFAbsoluteTimeGetCurrent();
+	// calculate our local time
+	TimeInterval = CFAbsoluteTimeGetCurrent();
 	if(startTime == 0)
-	startTime = time;
-	time = time - startTime;
-
-	return true;
-}
-
-bool CShell::ReleaseView()
-{
-	return true;
-}
-
-bool CShell::UpdateScene()
-{
- 	static struct timeval time = {0,0};
-	struct timeval currTime = {0,0};
- 
- 	frames++;
-	gettimeofday(&currTime, NULL); // gets the current time passed since the last frame in seconds
+		startTime = TimeInterval;
+	TimeInterval = TimeInterval - startTime;
 	
-	if (currTime.tv_usec - time.tv_usec) 
-	{
-		frameRate = ((float)frames/((currTime.tv_usec - time.tv_usec) / 1000000.0f));
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-		time = currTime;
-		frames = 0;
-	}
-
+	frames++;
+	if (TimeInterval) 
+		frameRate = ((float)frames/(TimeInterval));
+	
+	AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
+	
 	return true;
 }
 

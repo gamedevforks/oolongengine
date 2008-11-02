@@ -43,7 +43,7 @@
 		1BF3A1350DA68E6200C48976 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* POD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = POD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Skeleton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skeleton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		287ABC9F0D7F541C00CE0163 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -115,7 +115,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* POD.app */,
+				1D6058910D05DD3D006BFB54 /* Skeleton.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 			);
 			name = POD;
 			productName = foo;
-			productReference = 1D6058910D05DD3D006BFB54 /* POD.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Skeleton.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

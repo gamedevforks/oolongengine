@@ -283,7 +283,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>13</integer>
+									<integer>3</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -337,7 +337,6 @@
 										<key>history</key>
 										<array>
 											<string>796AC2AF0DF27654005F8387</string>
-											<string>796AC2BB0DF27671005F8387</string>
 											<string>796AC2EA0DF2771C005F8387</string>
 											<string>796AC2EB0DF2771C005F8387</string>
 											<string>796AC2EC0DF2771C005F8387</string>
@@ -347,7 +346,6 @@
 										<array>
 											<string>7976CA4D0DD160970043302E</string>
 											<string>796AC2B20DF27654005F8387</string>
-											<string>796AC2BF0DF27671005F8387</string>
 											<string>796AC2C00DF27671005F8387</string>
 											<string>796AC2C10DF27671005F8387</string>
 											<string>796AC2C20DF27671005F8387</string>
@@ -408,9 +406,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>799120C40E1E345D00035EEA</string>
+				<string>79A7C4C00EBD48FC00317ADA</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>799120C50E1E345D00035EEA</string>
+				<string>79A7C4C10EBD48FC00317ADA</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -523,7 +521,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>798070B00E04B3C7002602F5</string>
+	<string>79A7C4BD0EBD48B600317ADA</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -546,7 +544,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/Ported PowerVR Examples/03 Shadows/Shadows.xcodeproj</string>
+		<string>79A7C4D90EBD496900317ADA</string>
+		<string>79A7C4DA0EBD496900317ADA</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>79235C150DAD062200F918F8</string>
+		<string>/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/03 Shadows/Shadows.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>209 201 918 569 0 0 1440 878 </string>
@@ -587,8 +590,6 @@
 							<string>399pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -628,7 +629,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>79235C150DAD062200F918F8</string>
-				<string>79911F7F0E1BDC8E00035EEA</string>
+				<string>79A7C4C20EBD48FC00317ADA</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -748,13 +749,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>79911F800E1BDC8E00035EEA</string>
+				<string>79A7C4D20EBD496900317ADA</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>79911F810E1BDC8E00035EEA</string>
-				<string>79911F820E1BDC8E00035EEA</string>
-				<string>79911F830E1BDC8E00035EEA</string>
-				<string>79911F840E1BDC8E00035EEA</string>
-				<string>79911F850E1BDC8E00035EEA</string>
+				<string>79A7C4D30EBD496900317ADA</string>
+				<string>79A7C4D40EBD496900317ADA</string>
+				<string>79A7C4D50EBD496900317ADA</string>
+				<string>79A7C4D60EBD496900317ADA</string>
+				<string>79A7C4D70EBD496900317ADA</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -908,7 +909,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>79911F860E1BDC8E00035EEA</string>
+				<string>79A7C4D80EBD496900317ADA</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

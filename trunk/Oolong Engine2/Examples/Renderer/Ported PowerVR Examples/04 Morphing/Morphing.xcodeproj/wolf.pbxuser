@@ -75,14 +75,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 236751212;
-			PBXWorkspaceStateSaveDate = 236751212;
+			PBXPerProjectTemplateStateSaveDate = 247285898;
+			PBXWorkspaceStateSaveDate = 247285898;
 		};
 		perUserProjectItems = {
 			796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = 796AC2AF0DF27654005F8387 /* PBXTextBookmark */;
 			796AC2B20DF27654005F8387 /* PBXTextBookmark */ = 796AC2B20DF27654005F8387 /* PBXTextBookmark */;
-			796AC2BB0DF27671005F8387 /* PBXTextBookmark */ = 796AC2BB0DF27671005F8387 /* PBXTextBookmark */;
-			796AC2BF0DF27671005F8387 /* PBXTextBookmark */ = 796AC2BF0DF27671005F8387 /* PBXTextBookmark */;
 			796AC2C00DF27671005F8387 /* PlistBookmark */ = 796AC2C00DF27671005F8387 /* PlistBookmark */;
 			796AC2C10DF27671005F8387 /* PBXBookmark */ = 796AC2C10DF27671005F8387 /* PBXBookmark */;
 			796AC2C20DF27671005F8387 /* PBXBookmark */ = 796AC2C20DF27671005F8387 /* PBXBookmark */;
@@ -90,9 +88,9 @@
 			796AC2EB0DF2771C005F8387 /* PBXBookmark */ = 796AC2EB0DF2771C005F8387 /* PBXBookmark */;
 			796AC2EC0DF2771C005F8387 /* PBXBookmark */ = 796AC2EC0DF2771C005F8387 /* PBXBookmark */;
 			7976CA4D0DD160970043302E /* PBXTextBookmark */ = 7976CA4D0DD160970043302E /* PBXTextBookmark */;
-			79F922750DFB9BD3003CD043 /* PBXTextBookmark */ = 79F922750DFB9BD3003CD043 /* PBXTextBookmark */;
+			79A7C4AF0EBD48AE00317ADA /* PBXBookmark */ = 79A7C4AF0EBD48AE00317ADA /* PBXBookmark */;
+			79A7C4CD0EBD494400317ADA /* PBXTextBookmark */ = 79A7C4CD0EBD494400317ADA /* PBXTextBookmark */;
 			79F922770DFB9BD3003CD043 /* PBXTextBookmark */ = 79F922770DFB9BD3003CD043 /* PBXTextBookmark */;
-			79F9227B0DFB9BD3003CD043 /* PBXTextBookmark */ = 79F9227B0DFB9BD3003CD043 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -100,9 +98,9 @@
 	};
 	7914067B0DBAD8D100C9A379 /* Delegate.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1102, 1036}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1102, 1050}}";
 			sepNavSelRange = "{897, 0}";
-			sepNavVisRange = "{351, 908}";
+			sepNavVisRange = "{313, 1061}";
 			sepNavWindowFrame = "{{84, 122}, {1161, 688}}";
 		};
 	};
@@ -148,9 +146,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 10108}}";
-			sepNavSelRange = "{14112, 0}";
-			sepNavVisRange = "{13259, 1657}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 10150}}";
+			sepNavSelRange = "{9666, 0}";
+			sepNavVisRange = "{9450, 900}";
 			sepNavWindowFrame = "{{586, 95}, {821, 781}}";
 		};
 	};
@@ -180,33 +178,6 @@
 		rType = 0;
 		vrLen = 124;
 		vrLoc = 3988;
-	};
-	796AC2B40DF27654005F8387 /* Prefix.pch */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = Prefix.pch;
-		path = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/01 Skeleton/Prefix.pch";
-		sourceTree = "<absolute>";
-	};
-	796AC2BB0DF27671005F8387 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 796AC2B40DF27654005F8387 /* Prefix.pch */;
-		name = "Prefix.pch: 3";
-		rLen = 0;
-		rLoc = 71;
-		rType = 0;
-		vrLen = 79;
-		vrLoc = 0;
-	};
-	796AC2BF0DF27671005F8387 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 796AC2B40DF27654005F8387 /* Prefix.pch */;
-		name = "Prefix.pch: 3";
-		rLen = 0;
-		rLoc = 71;
-		rType = 0;
-		vrLen = 79;
-		vrLoc = 0;
 	};
 	796AC2C00DF27671005F8387 /* PlistBookmark */ = {
 		isa = PlistBookmark;
@@ -256,22 +227,19 @@
 		vrLen = 534;
 		vrLoc = 201;
 	};
-	79F922750DFB9BD3003CD043 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79F922760DFB9BD3003CD043 /* OGLESEvilSkull.cpp */;
-		name = "OGLESEvilSkull.cpp: 6";
-		rLen = 2;
-		rLoc = 146;
-		rType = 0;
-		vrLen = 485;
-		vrLoc = 0;
+	79A7C4AF0EBD48AE00317ADA /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
 	};
-	79F922760DFB9BD3003CD043 /* OGLESEvilSkull.cpp */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = OGLESEvilSkull.cpp;
-		path = "/Users/wolf/Desktop/iPhone Development/SDKPackage ARM Linux/Demos/EvilSkull/OGLES/OGLESEvilSkull.cpp";
-		sourceTree = "<absolute>";
+	79A7C4CD0EBD494400317ADA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 331";
+		rLen = 0;
+		rLoc = 9666;
+		rType = 0;
+		vrLen = 900;
+		vrLoc = 9450;
 	};
 	79F922770DFB9BD3003CD043 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -282,22 +250,5 @@
 		rType = 0;
 		vrLen = 962;
 		vrLoc = 0;
-	};
-	79F9227B0DFB9BD3003CD043 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79F9227C0DFB9BD3003CD043 /* OGLESEvilSkull.cpp */;
-		name = "OGLESEvilSkull.cpp: 6";
-		rLen = 2;
-		rLoc = 146;
-		rType = 0;
-		vrLen = 485;
-		vrLoc = 0;
-	};
-	79F9227C0DFB9BD3003CD043 /* OGLESEvilSkull.cpp */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = OGLESEvilSkull.cpp;
-		path = "/Users/wolf/Desktop/iPhone Development/SDKPackage ARM Linux/Demos/EvilSkull/OGLES/OGLESEvilSkull.cpp";
-		sourceTree = "<absolute>";
 	};
 }

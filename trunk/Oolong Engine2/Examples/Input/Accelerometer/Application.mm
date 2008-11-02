@@ -78,8 +78,8 @@ bool CShell::InitApplication()
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition); 			
 	glShadeModel(GL_SMOOTH);
 	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
 	
 	//Set the OpenGL projection matrix
 	glMatrixMode(GL_PROJECTION);
@@ -89,11 +89,8 @@ bool CShell::InitApplication()
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
-//		LOG("Display text textures loaded", Logger::LOG_DATA);
-				printf("Display text textures loaded\n");
+		printf("Display text textures loaded\n");
 
-
-	
 	return true;
 }
 
@@ -112,11 +109,7 @@ bool CShell::UpdateScene()
 {
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// Set the OpenGL projection matrix
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
 	
 	//Make the OpenGL modelview matrix the default
 	glMatrixMode(GL_MODELVIEW);
@@ -150,53 +143,7 @@ bool CShell::UpdateScene()
 		frameRate = ((float)frames/(TimeInterval));
 	
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-/*	
-	glEnable(GL_DEPTH_TEST);
-	
-	//Clear framebuffer
-	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	//	MATRIX	MyPerspMatrix;
-	//	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(60), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
-	//	myglMultMatrix(MyPerspMatrix.f);
-	
-	//Make the OpenGL modelview matrix the default
-	glMatrixMode(GL_MODELVIEW);
-	
-	// Setup model view matrix
-	glLoadIdentity();
-	glTranslatef(0.0, -0.1, -1.0);
-	glScalef(kTeapotScale, kTeapotScale, kTeapotScale);
-	
-	GLfloat	matrix[16];
-	[gAccel GetAccelerometerMatrix:(GLfloat *) matrix];
-	
-	// Finally load matrix
-	glMultMatrixf((GLfloat*)matrix);
-	
-	// rotate teapot
-	glRotatef(90.0, 0.0, 0.0, 1.0);
-	
- 	static struct timeval time = {0,0};
-	struct timeval currTime = {0,0};
- 
- 	frames++;
-	gettimeofday(&currTime, NULL); // gets the current time passed since the last frame in seconds
-	
-	if (currTime.tv_usec - time.tv_usec) 
-	{
-		frameRate = ((float)frames/((currTime.tv_usec - time.tv_usec) / 1000000.0f));
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-		time = currTime;
-		frames = 0;
-	}
-*/
-	double AccelerometerVector[3];
-	[gAccel GetAccelerometerVector:(double *) AccelerometerVector];
-	
-	AppDisplayText->DisplayText(0, 12, 0.4f, RGBA(255,255,255,255), "Accelerometer Vector: %3.2f, %3.2f, %3.2f", AccelerometerVector[0], AccelerometerVector[1], AccelerometerVector[2]);
-	
+
 	return true;
 }
 
@@ -204,7 +151,13 @@ bool CShell::UpdateScene()
 bool CShell::RenderScene()
 {
 	int start = 0, i = 0;
-							
+	
+	// if I call this in UpdateScene it does not work ..
+	double AccelerometerVector[3];
+	[gAccel GetAccelerometerVector:(double *) AccelerometerVector];
+	
+	AppDisplayText->DisplayText(0, 12, 0.4f, RGBA(255,255,255,255), "Accelerometer Vector: %3.2f, %3.2f, %3.2f", AccelerometerVector[0], AccelerometerVector[1], AccelerometerVector[2]);
+	
 	//Configure OpenGL arrays
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);

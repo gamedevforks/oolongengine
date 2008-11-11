@@ -119,6 +119,8 @@ bool CShell::InitApplication()
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,boxShape,localInertia);
 		btRigidBody* boxBody=new btRigidBody(rbInfo);
 		sBoxBodies.push_back(boxBody);
+		
+		//most applications shouldn't disable deactivation, but for this demo it is better.
 		boxBody->setActivationState(DISABLE_DEACTIVATION);
 		//add the body to the dynamics world
 		sDynamicsWorld->addRigidBody(boxBody);

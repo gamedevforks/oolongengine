@@ -51,6 +51,9 @@ subject to the following restrictions:
 #include "BulletDynamics/Vehicle/btRaycastVehicle.h"
 #include "BulletDynamics/Vehicle/btVehicleRaycaster.h"
 #include "BulletDynamics/Vehicle/btWheelInfo.h"
+//character
+#include "BulletDynamics/Character/btCharacterControllerInterface.h"
+
 #include "LinearMath/btIDebugDraw.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btMotionState.h"
@@ -104,9 +107,9 @@ btDiscreteDynamicsWorld::~btDiscreteDynamicsWorld()
 void	btDiscreteDynamicsWorld::saveKinematicState(btScalar timeStep)
 {
 
-	for (int i=0;i<m_collisionObjects.size();i++)
+	for (int i=0;i<m_activeObjects.size();i++)
 	{
-		btCollisionObject* colObj = m_collisionObjects[i];
+		btCollisionObject* colObj = m_activeObjects[i];
 		btRigidBody* body = btRigidBody::upcast(colObj);
 		if (body)
 		{
@@ -125,6 +128,7 @@ void	btDiscreteDynamicsWorld::saveKinematicState(btScalar timeStep)
 
 void	btDiscreteDynamicsWorld::debugDrawWorld()
 {
+	BT_PROFILE("debugDrawWorld");
 
 	if (getDebugDrawer() && getDebugDrawer()->getDebugMode() & btIDebugDraw::DBG_DrawContactPoints)
 	{
@@ -150,7 +154,6 @@ void	btDiscreteDynamicsWorld::debugDrawWorld()
 	{
 		int i;
 
-		//todo: iterate over awake simulation islands!
 		for (  i=0;i<m_collisionObjects.size();i++)
 		{
 			btCollisionObject* colObj = m_collisionObjects[i];
@@ -179,7 +182,7 @@ void	btDiscreteDynamicsWorld::debugDrawWorld()
 			}
 			if (m_debugDrawer && (m_debugDrawer->getDebugMode() & btIDebugDraw::DBG_DrawAabb))
 			{
-				btPoint3 minAabb,maxAabb;
+				btVector3 minAabb,maxAabb;
 				btVector3 colorvec(1,0,0);
 				colObj->getCollisionShape()->getAabb(colObj->getWorldTransform(), minAabb,maxAabb);
 				m_debugDrawer->drawAabb(minAabb,maxAabb,colorvec);
@@ -220,10 +223,10 @@ void	btDiscreteDynamicsWorld::debugDrawWorld()
 
 void	btDiscreteDynamicsWorld::clearForces()
 {
-	//todo: iterate over awake simulation islands!
-	for ( int i=0;i<m_collisionObjects.size();i++)
+	///@todo: iterate over awake simulation islands!
+	for ( int i=0;i<m_activeObjects.size();i++)
 	{
-		btCollisionObject* colObj = m_collisionObjects[i];
+		btCollisionObject* colObj = m_activeObjects[i];
 		
 		btRigidBody* body = btRigidBody::upcast(colObj);
 		if (body)
@@ -236,10 +239,10 @@ void	btDiscreteDynamicsWorld::clearForces()
 ///apply gravity, call this once per timestep
 void	btDiscreteDynamicsWorld::applyGravity()
 {
-	//todo: iterate over awake simulation islands!
-	for ( int i=0;i<m_collisionObjects.size();i++)
+	///@todo: iterate over awake simulation islands!
+	for ( int i=0;i<m_activeObjects.size();i++)
 	{
-		btCollisionObject* colObj = m_collisionObjects[i];
+		btCollisionObject* colObj = m_activeObjects[i];
 		
 		btRigidBody* body = btRigidBody::upcast(colObj);
 		if (body && body->isActive())
@@ -250,29 +253,38 @@ void	btDiscreteDynamicsWorld::applyGravity()
 }
 
 
+void	btDiscreteDynamicsWorld::synchronizeSingleMotionState(btRigidBody* body)
+{
+	btAssert(body);
+
+	if (body->getMotionState() && !body->isStaticOrKinematicObject())
+	{
+		//we need to call the update at least once, even for sleeping objects
+		//otherwise the 'graphics' transform never updates properly
+		///@todo: add 'dirty' flag
+		//if (body->getActivationState() != ISLAND_SLEEPING)
+		{
+			btTransform interpolatedTransform;
+			btTransformUtil::integrateTransform(body->getInterpolationWorldTransform(),
+				body->getInterpolationLinearVelocity(),body->getInterpolationAngularVelocity(),m_localTime*body->getHitFraction(),interpolatedTransform);
+			body->getMotionState()->setWorldTransform(interpolatedTransform);
+		}
+	}
+}
+
 
 void	btDiscreteDynamicsWorld::synchronizeMotionStates()
 {
+	BT_PROFILE("synchronizeMotionStates");
 	{
 		//todo: iterate over awake simulation islands!
-		for ( int i=0;i<m_collisionObjects.size();i++)
+		for ( int i=0;i<m_activeObjects.size();i++)
 		{
-			btCollisionObject* colObj = m_collisionObjects[i];
+			btCollisionObject* colObj = m_activeObjects[i];
 			
 			btRigidBody* body = btRigidBody::upcast(colObj);
-			if (body && body->getMotionState() && !body->isStaticOrKinematicObject())
-			{
-				//we need to call the update at least once, even for sleeping objects
-				//otherwise the 'graphics' transform never updates properly
-				//so todo: add 'dirty' flag
-				//if (body->getActivationState() != ISLAND_SLEEPING)
-				{
-					btTransform interpolatedTransform;
-					btTransformUtil::integrateTransform(body->getInterpolationWorldTransform(),
-						body->getInterpolationLinearVelocity(),body->getInterpolationAngularVelocity(),m_localTime,interpolatedTransform);
-					body->getMotionState()->setWorldTransform(interpolatedTransform);
-				}
-			}
+			if (body)
+				synchronizeSingleMotionState(body);
 		}
 	}
 
@@ -332,6 +344,8 @@ int	btDiscreteDynamicsWorld::stepSimulation( btScalar timeStep,int maxSubSteps, 
 	if (numSimulationSubSteps)
 	{
 
+		findActiveObjects();
+
 		saveKinematicState(fixedTimeStep);
 
 		applyGravity();
@@ -363,6 +377,8 @@ void	btDiscreteDynamicsWorld::internalSingleStepSimulation(btScalar timeStep)
 	
 	BT_PROFILE("internalSingleStepSimulation");
 
+	findActiveObjects();
+	
 	///apply gravity, predict motion
 	predictUnconstraintMotion(timeStep);
 
@@ -392,7 +408,8 @@ void	btDiscreteDynamicsWorld::internalSingleStepSimulation(btScalar timeStep)
 
 	///update vehicle simulation
 	updateVehicles(timeStep);
-
+	
+	updateCharacters(timeStep);
 
 	updateActivationState( timeStep );
 
@@ -404,9 +421,9 @@ void	btDiscreteDynamicsWorld::internalSingleStepSimulation(btScalar timeStep)
 void	btDiscreteDynamicsWorld::setGravity(const btVector3& gravity)
 {
 	m_gravity = gravity;
-	for ( int i=0;i<m_collisionObjects.size();i++)
+	for ( int i=0;i<m_activeObjects.size();i++)
 	{
-		btCollisionObject* colObj = m_collisionObjects[i];
+		btCollisionObject* colObj = m_activeObjects[i];
 		btRigidBody* body = btRigidBody::upcast(colObj);
 		if (body)
 		{
@@ -468,6 +485,20 @@ void	btDiscreteDynamicsWorld::updateVehicles(btScalar timeStep)
 	}
 }
 
+void	btDiscreteDynamicsWorld::updateCharacters(btScalar timeStep)
+{
+	BT_PROFILE("updateCharacters");
+	
+	for ( int i=0;i<m_characters.size();i++)
+	{
+		btCharacterControllerInterface* character = m_characters[i];
+		character->preStep (this);
+		character->playerStep (this,timeStep);
+	}
+}
+
+	
+	
 void	btDiscreteDynamicsWorld::updateActivationState(btScalar timeStep)
 {
 	BT_PROFILE("updateActivationState");
@@ -531,6 +562,17 @@ void	btDiscreteDynamicsWorld::removeVehicle(btRaycastVehicle* vehicle)
 {
 	m_vehicles.remove(vehicle);
 }
+
+void	btDiscreteDynamicsWorld::addCharacter(btCharacterControllerInterface* character)
+{
+	m_characters.push_back(character);
+}
+
+void	btDiscreteDynamicsWorld::removeCharacter(btCharacterControllerInterface* character)
+{
+	m_characters.remove(character);
+}
+
 
 SIMD_FORCE_INLINE	int	btGetConstraintIslandId(const btTypedConstraint* lhs)
 {
@@ -664,7 +706,7 @@ void	btDiscreteDynamicsWorld::solveConstraints(btContactSolverInfo& solverInfo)
 	m_constraintSolver->prepareSolve(getCollisionWorld()->getNumCollisionObjects(), getCollisionWorld()->getDispatcher()->getNumManifolds());
 	
 	/// solve all the constraints for this island
-	m_islandManager->buildAndProcessIslands(getCollisionWorld()->getDispatcher(),getCollisionWorld()->getCollisionObjectArray(),&solverCallback);
+	m_islandManager->buildAndProcessIslands(getCollisionWorld()->getDispatcher(),getCollisionWorld(),&solverCallback);
 
 	m_constraintSolver->allSolved(solverInfo, m_debugDrawer, m_stackAlloc);
 }
@@ -688,8 +730,8 @@ void	btDiscreteDynamicsWorld::calculateSimulationIslands()
 			const btRigidBody* colObj0 = &constraint->getRigidBodyA();
 			const btRigidBody* colObj1 = &constraint->getRigidBodyB();
 
-			if (((colObj0) && ((colObj0)->mergesSimulationIslands())) &&
-				((colObj1) && ((colObj1)->mergesSimulationIslands())))
+			if (((colObj0) && (!(colObj0)->isStaticOrKinematicObject())) &&
+				((colObj1) && (!(colObj1)->isStaticOrKinematicObject())))
 			{
 				if (colObj0->isActive() || colObj1->isActive())
 				{
@@ -708,20 +750,124 @@ void	btDiscreteDynamicsWorld::calculateSimulationIslands()
 }
 
 
+#include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
 
+class btClosestNotMeConvexResultCallback : public btCollisionWorld::ClosestConvexResultCallback
+{
+	btCollisionObject* m_me;
+	btScalar m_allowedPenetration;
+	btOverlappingPairCache* m_pairCache;
+
+
+public:
+	btClosestNotMeConvexResultCallback (btCollisionObject* me,const btVector3& fromA,const btVector3& toA,btOverlappingPairCache* pairCache) : 
+	  btCollisionWorld::ClosestConvexResultCallback(fromA,toA),
+		m_allowedPenetration(0.0f),
+		m_me(me),
+		m_pairCache(pairCache)
+	{
+	}
+
+	virtual btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult,bool normalInWorldSpace)
+	{
+		if (convexResult.m_hitCollisionObject == m_me)
+			return 1.0f;
+
+		//ignore result if there is no contact response
+		if(!convexResult.m_hitCollisionObject->hasContactResponse())
+			return 1.0f;
+
+		btVector3 linVelA,linVelB;
+		linVelA = m_convexToWorld-m_convexFromWorld;
+		linVelB = btVector3(0,0,0);//toB.getOrigin()-fromB.getOrigin();
+
+		btVector3 relativeVelocity = (linVelA-linVelB);
+		//don't report time of impact for motion away from the contact normal (or causes minor penetration)
+		if (convexResult.m_hitNormalLocal.dot(relativeVelocity)>=-m_allowedPenetration)
+			return 1.f;
+
+		return ClosestConvexResultCallback::addSingleResult (convexResult, normalInWorldSpace);
+	}
+
+	virtual bool needsCollision(btBroadphaseProxy* proxy0) const
+	{
+		//don't collide with itself
+		if (proxy0->m_clientObject == m_me)
+			return false;
+
+		///don't do CCD when the collision filters are not matching
+		if (!btCollisionWorld::ClosestConvexResultCallback::needsCollision(proxy0))
+			return false;
+
+		///don't do CCD when there are already contact points (touching contact/penetration)
+		btAlignedObjectArray<btPersistentManifold*> manifoldArray;
+		btBroadphasePair* collisionPair = m_pairCache->findPair(m_me->getBroadphaseHandle(),proxy0);
+		if (collisionPair)
+		{
+			if (collisionPair->m_algorithm)
+			{
+				manifoldArray.resize(0);
+				collisionPair->m_algorithm->getAllContactManifolds(manifoldArray);
+				for (int j=0;j<manifoldArray.size();j++)
+				{
+					btPersistentManifold* manifold = manifoldArray[j];
+					if (manifold->getNumContacts()>0)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+
+
+};
+
+///internal debugging variable. this value shouldn't be too high
+int gNumClampedCcdMotions=0;
+
+//#include "stdio.h"
 void	btDiscreteDynamicsWorld::integrateTransforms(btScalar timeStep)
 {
 	BT_PROFILE("integrateTransforms");
 	btTransform predictedTrans;
-	for ( int i=0;i<m_collisionObjects.size();i++)
+	for ( int i=0;i<m_activeObjects.size();i++)
 	{
-		btCollisionObject* colObj = m_collisionObjects[i];
+		btCollisionObject* colObj = m_activeObjects[i];
 		btRigidBody* body = btRigidBody::upcast(colObj);
 		if (body)
 		{
+			body->setHitFraction(1.f);
+
 			if (body->isActive() && (!body->isStaticOrKinematicObject()))
 			{
 				body->predictIntegratedTransform(timeStep, predictedTrans);
+				btScalar squareMotion = (predictedTrans.getOrigin()-body->getWorldTransform().getOrigin()).length2();
+
+				if (body->getCcdSquareMotionThreshold() && body->getCcdSquareMotionThreshold() < squareMotion)
+				{
+					BT_PROFILE("CCD motion clamping");
+					if (body->getCollisionShape()->isConvex())
+					{
+						gNumClampedCcdMotions++;
+						
+						btClosestNotMeConvexResultCallback sweepResults(body,body->getWorldTransform().getOrigin(),predictedTrans.getOrigin(),getBroadphase()->getOverlappingPairCache());
+						btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
+						btSphereShape tmpSphere(body->getCcdSweptSphereRadius());//btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
+
+						sweepResults.m_collisionFilterGroup = body->getBroadphaseProxy()->m_collisionFilterGroup;
+						sweepResults.m_collisionFilterMask  = body->getBroadphaseProxy()->m_collisionFilterMask;
+
+						convexSweepTest(&tmpSphere,body->getWorldTransform(),predictedTrans,sweepResults);
+						if (sweepResults.hasHit() && (sweepResults.m_closestHitFraction < 1.f))
+						{
+							body->setHitFraction(sweepResults.m_closestHitFraction);
+							body->predictIntegratedTransform(timeStep*body->getHitFraction(), predictedTrans);
+							body->setHitFraction(0.f);
+//							printf("clamped integration to hit fraction = %f\n",fraction);
+						}
+					}
+				}
+				
 				body->proceedToTransform( predictedTrans);
 			}
 		}
@@ -730,25 +876,25 @@ void	btDiscreteDynamicsWorld::integrateTransforms(btScalar timeStep)
 
 
 
+
+
 void	btDiscreteDynamicsWorld::predictUnconstraintMotion(btScalar timeStep)
 {
 	BT_PROFILE("predictUnconstraintMotion");
-	for ( int i=0;i<m_collisionObjects.size();i++)
+	for ( int i=0;i<m_activeObjects.size();i++)
 	{
-		btCollisionObject* colObj = m_collisionObjects[i];
+		btCollisionObject* colObj = m_activeObjects[i];
 		btRigidBody* body = btRigidBody::upcast(colObj);
 		if (body)
 		{
 			if (!body->isStaticOrKinematicObject())
 			{
-				if (body->isActive())
-				{
-					body->integrateVelocities( timeStep);
-					//damping
-					body->applyDamping(timeStep);
+				
+				body->integrateVelocities( timeStep);
+				//damping
+				body->applyDamping(timeStep);
 
-					body->predictIntegratedTransform(timeStep,body->getInterpolationWorldTransform());
-				}
+				body->predictIntegratedTransform(timeStep,body->getInterpolationWorldTransform());
 			}
 		}
 	}
@@ -1000,7 +1146,7 @@ void btDiscreteDynamicsWorld::debugDrawObject(const btTransform& worldTransform,
 				{
 					btConcaveShape* concaveMesh = (btConcaveShape*) shape;
 					
-					//todo pass camera, for some culling
+					///@todo pass camera, for some culling? no -> we are not a graphics lib
 					btVector3 aabbMax(btScalar(1e30),btScalar(1e30),btScalar(1e30));
 					btVector3 aabbMin(btScalar(-1e30),btScalar(-1e30),btScalar(-1e30));
 
@@ -1029,7 +1175,7 @@ void btDiscreteDynamicsWorld::debugDrawObject(const btTransform& worldTransform,
 					int i;
 					for (i=0;i<polyshape->getNumEdges();i++)
 					{
-						btPoint3 a,b;
+						btVector3 a,b;
 						polyshape->getEdge(i,a,b);
 						btVector3 wa = worldTransform * a;
 						btVector3 wb = worldTransform * b;

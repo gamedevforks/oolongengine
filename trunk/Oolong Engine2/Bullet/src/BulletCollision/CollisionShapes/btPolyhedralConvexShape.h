@@ -16,8 +16,8 @@ subject to the following restrictions:
 #ifndef BU_SHAPE
 #define BU_SHAPE
 
-#include "LinearMath/btPoint3.h"
 #include "LinearMath/btMatrix3x3.h"
+#include "LinearMath/btAabbUtil2.h"
 #include "btConvexInternalShape.h"
 
 
@@ -35,39 +35,34 @@ public:
 	btPolyhedralConvexShape();
 
 	//brute force implementations
+
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
 	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+
 	
 	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
 
+
+	void setCachedLocalAabb (const btVector3& aabbMin, const btVector3& aabbMax)
+	{
+		m_isLocalAabbValid = true;
+		m_localAabbMin = aabbMin;
+		m_localAabbMax = aabbMax;
+	}
+
+	inline void getCachedLocalAabb (btVector3& aabbMin, btVector3& aabbMax) const
+	{
+		btAssert(m_isLocalAabbValid);
+		aabbMin = m_localAabbMin;
+		aabbMax = m_localAabbMax;
+	}
 
 	inline void getNonvirtualAabb(const btTransform& trans,btVector3& aabbMin,btVector3& aabbMax, btScalar margin) const
 	{
 
 		//lazy evaluation of local aabb
 		btAssert(m_isLocalAabbValid);
-
-		btAssert(m_localAabbMin.getX() <= m_localAabbMax.getX());
-		btAssert(m_localAabbMin.getY() <= m_localAabbMax.getY());
-		btAssert(m_localAabbMin.getZ() <= m_localAabbMax.getZ());
-
-
-		btVector3 localHalfExtents = btScalar(0.5)*(m_localAabbMax-m_localAabbMin);
-		localHalfExtents+= btVector3(margin,margin,margin);
-		btVector3 localCenter = btScalar(0.5)*(m_localAabbMax+m_localAabbMin);
-		
-		btMatrix3x3 abs_b = trans.getBasis().absolute();  
-
-		btPoint3 center = trans(localCenter);
-
-		btVector3 extent = btVector3(abs_b[0].dot(localHalfExtents),
-			   abs_b[1].dot(localHalfExtents),
-			  abs_b[2].dot(localHalfExtents));
-
-		aabbMin = center-extent;
-		aabbMax = center+extent;
-
-		
+		btTransformAabb(m_localAabbMin,m_localAabbMax,margin,trans,aabbMin,aabbMax);
 	}
 
 	
@@ -79,13 +74,13 @@ public:
 
 	virtual int	getNumVertices() const = 0 ;
 	virtual int getNumEdges() const = 0;
-	virtual void getEdge(int i,btPoint3& pa,btPoint3& pb) const = 0;
-	virtual void getVertex(int i,btPoint3& vtx) const = 0;
+	virtual void getEdge(int i,btVector3& pa,btVector3& pb) const = 0;
+	virtual void getVertex(int i,btVector3& vtx) const = 0;
 	virtual int	getNumPlanes() const = 0;
-	virtual void getPlane(btVector3& planeNormal,btPoint3& planeSupport,int i ) const = 0;
+	virtual void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i ) const = 0;
 //	virtual int getIndex(int i) const = 0 ; 
 
-	virtual	bool isInside(const btPoint3& pt,btScalar tolerance) const = 0;
+	virtual	bool isInside(const btVector3& pt,btScalar tolerance) const = 0;
 	
 	/// optional Hull is for optional Separating Axis Test Hull collision detection, see Hull.cpp
 	class	Hull*	m_optionalHull;

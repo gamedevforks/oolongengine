@@ -18,14 +18,18 @@ subject to the following restrictions:
 #include "LinearMath/btAabbUtil2.h"
 #include "LinearMath/btIDebugDraw.h"
 
+#define RAYAABB2
 
-btQuantizedBvh::btQuantizedBvh() : m_useQuantization(false), 
+btQuantizedBvh::btQuantizedBvh() : 
+					m_bulletVersion(BT_BULLET_VERSION),
+					m_useQuantization(false), 
 					//m_traversalMode(TRAVERSAL_STACKLESS_CACHE_FRIENDLY)
 					m_traversalMode(TRAVERSAL_STACKLESS)
 					//m_traversalMode(TRAVERSAL_RECURSIVE)
 					,m_subtreeHeaderCount(0) //PCK: add this line
-{ 
-
+{
+	m_bvhAabbMin.setValue(-SIMD_INFINITY,-SIMD_INFINITY,-SIMD_INFINITY);
+	m_bvhAabbMax.setValue(SIMD_INFINITY,SIMD_INFINITY,SIMD_INFINITY);
 }
 
 
@@ -119,7 +123,7 @@ void	btQuantizedBvh::buildTree	(int startIndex,int endIndex)
 	int numIndices =endIndex-startIndex;
 	int curIndex = m_curNodeIndex;
 
-	assert(numIndices>0);
+	btAssert(numIndices>0);
 
 	if (numIndices==1)
 	{
@@ -140,8 +144,11 @@ void	btQuantizedBvh::buildTree	(int startIndex,int endIndex)
 
 	int internalNodeIndex = m_curNodeIndex;
 	
-	setInternalNodeAabbMax(m_curNodeIndex,m_bvhAabbMin);
-	setInternalNodeAabbMin(m_curNodeIndex,m_bvhAabbMax);
+	//set the min aabb to 'inf' or a max value, and set the max aabb to a -inf/minimum value.
+	//the aabb will be expanded during buildTree/mergeInternalNodeAabb with actual node values
+	setInternalNodeAabbMin(m_curNodeIndex,m_bvhAabbMax);//can't use btVector3(SIMD_INFINITY,SIMD_INFINITY,SIMD_INFINITY)) because of quantization
+	setInternalNodeAabbMax(m_curNodeIndex,m_bvhAabbMin);//can't use btVector3(-SIMD_INFINITY,-SIMD_INFINITY,-SIMD_INFINITY)) because of quantization
+	
 	
 	for (i=startIndex;i<endIndex;i++)
 	{
@@ -177,6 +184,9 @@ void	btQuantizedBvh::buildTree	(int startIndex,int endIndex)
 		{
 			updateSubtreeHeaders(leftChildNodexIndex,rightChildNodexIndex);
 		}
+	} else
+	{
+
 	}
 
 	setInternalNodeEscapeIndex(internalNodeIndex,escapeIndex);
@@ -338,6 +348,7 @@ void	btQuantizedBvh::reportAabbOverlappingNodex(btNodeOverlapCallback* nodeCallb
 
 int maxIterations = 0;
 
+
 void	btQuantizedBvh::walkStacklessTree(btNodeOverlapCallback* nodeCallback,const btVector3& aabbMin,const btVector3& aabbMax) const
 {
 	btAssert(!m_useQuantization);
@@ -352,7 +363,7 @@ void	btQuantizedBvh::walkStacklessTree(btNodeOverlapCallback* nodeCallback,const
 	while (curIndex < m_curNodeIndex)
 	{
 		//catch bugs in tree data
-		assert (walkIterations < m_curNodeIndex);
+		btAssert (walkIterations < m_curNodeIndex);
 
 		walkIterations++;
 		aabbOverlap = TestAabbAgainstAabb2(aabbMin,aabbMax,rootNode->m_aabbMinOrg,rootNode->m_aabbMaxOrg);
@@ -434,6 +445,97 @@ void btQuantizedBvh::walkRecursiveQuantizedTreeAgainstQueryAabb(const btQuantize
 
 
 
+void	btQuantizedBvh::walkStacklessTreeAgainstRay(btNodeOverlapCallback* nodeCallback, const btVector3& raySource, const btVector3& rayTarget, const btVector3& aabbMin, const btVector3& aabbMax, int startNodeIndex,int endNodeIndex) const
+{
+	btAssert(!m_useQuantization);
+
+	const btOptimizedBvhNode* rootNode = &m_contiguousNodes[0];
+	int escapeIndex, curIndex = 0;
+	int walkIterations = 0;
+	bool isLeafNode;
+	//PCK: unsigned instead of bool
+	unsigned aabbOverlap=0;
+	unsigned rayBoxOverlap=0;
+	btScalar lambda_max = 1.0;
+	
+		/* Quick pruning by quantized box */
+	btVector3 rayAabbMin = raySource;
+	btVector3 rayAabbMax = raySource;
+	rayAabbMin.setMin(rayTarget);
+	rayAabbMax.setMax(rayTarget);
+
+	/* Add box cast extents to bounding box */
+	rayAabbMin += aabbMin;
+	rayAabbMax += aabbMax;
+
+#ifdef RAYAABB2
+	btVector3 rayFrom = raySource;
+	btVector3 rayDir = (rayTarget-raySource);
+	rayDir.normalize ();
+	lambda_max = rayDir.dot(rayTarget-raySource);
+	///what about division by zero? --> just set rayDirection[i] to 1.0
+	btVector3 rayDirectionInverse;
+	rayDirectionInverse[0] = rayDir[0] == btScalar(0.0) ? btScalar(1e30) : btScalar(1.0) / rayDir[0];
+	rayDirectionInverse[1] = rayDir[1] == btScalar(0.0) ? btScalar(1e30) : btScalar(1.0) / rayDir[1];
+	rayDirectionInverse[2] = rayDir[2] == btScalar(0.0) ? btScalar(1e30) : btScalar(1.0) / rayDir[2];
+	unsigned int sign[3] = { rayDirectionInverse[0] < 0.0, rayDirectionInverse[1] < 0.0, rayDirectionInverse[2] < 0.0};
+#endif
+
+	btVector3 bounds[2];
+
+	while (curIndex < m_curNodeIndex)
+	{
+		btScalar param = 1.0;
+		//catch bugs in tree data
+		btAssert (walkIterations < m_curNodeIndex);
+
+		walkIterations++;
+
+		bounds[0] = rootNode->m_aabbMinOrg;
+		bounds[1] = rootNode->m_aabbMaxOrg;
+		/* Add box cast extents */
+		bounds[0] += aabbMin;
+		bounds[1] += aabbMax;
+
+		aabbOverlap = TestAabbAgainstAabb2(rayAabbMin,rayAabbMax,rootNode->m_aabbMinOrg,rootNode->m_aabbMaxOrg);
+		//perhaps profile if it is worth doing the aabbOverlap test first
+
+#ifdef RAYAABB2
+			///careful with this check: need to check division by zero (above) and fix the unQuantize method
+			///thanks Joerg/hiker for the reproduction case!
+			///http://www.bulletphysics.com/Bullet/phpBB3/viewtopic.php?f=9&t=1858
+		rayBoxOverlap = aabbOverlap ? btRayAabb2 (raySource, rayDirectionInverse, sign, bounds, param, 0.0f, lambda_max) : false;
+
+#else
+		btVector3 normal;
+		rayBoxOverlap = btRayAabb(raySource, rayTarget,bounds[0],bounds[1],param, normal);
+#endif
+
+		isLeafNode = rootNode->m_escapeIndex == -1;
+		
+		//PCK: unsigned instead of bool
+		if (isLeafNode && (rayBoxOverlap != 0))
+		{
+			nodeCallback->processNode(rootNode->m_subPart,rootNode->m_triangleIndex);
+		} 
+		
+		//PCK: unsigned instead of bool
+		if ((rayBoxOverlap != 0) || isLeafNode)
+		{
+			rootNode++;
+			curIndex++;
+		} else
+		{
+			escapeIndex = rootNode->m_escapeIndex;
+			rootNode += escapeIndex;
+			curIndex += escapeIndex;
+		}
+	}
+	if (maxIterations < walkIterations)
+		maxIterations = walkIterations;
+
+}
+
 
 
 void	btQuantizedBvh::walkStacklessQuantizedTreeAgainstRay(btNodeOverlapCallback* nodeCallback, const btVector3& raySource, const btVector3& rayTarget, const btVector3& aabbMin, const btVector3& aabbMax, int startNodeIndex,int endNodeIndex) const
@@ -454,7 +556,7 @@ void	btQuantizedBvh::walkStacklessQuantizedTreeAgainstRay(btNodeOverlapCallback*
 	unsigned rayBoxOverlap = 0;
 
 	btScalar lambda_max = 1.0;
-#define RAYAABB2
+
 #ifdef RAYAABB2
 	btVector3 rayFrom = raySource;
 	btVector3 rayDirection = (rayTarget-raySource);
@@ -502,7 +604,7 @@ void	btQuantizedBvh::walkStacklessQuantizedTreeAgainstRay(btNodeOverlapCallback*
 #endif//VISUALLY_ANALYZE_BVH
 
 		//catch bugs in tree data
-		assert (walkIterations < subTreeSize);
+		btAssert (walkIterations < subTreeSize);
 
 		walkIterations++;
 		//PCK: unsigned instead of bool
@@ -533,7 +635,9 @@ void	btQuantizedBvh::walkStacklessQuantizedTreeAgainstRay(btNodeOverlapCallback*
 			///thanks Joerg/hiker for the reproduction case!
 			///http://www.bulletphysics.com/Bullet/phpBB3/viewtopic.php?f=9&t=1858
 
+			//BT_PROFILE("btRayAabb2");
 			rayBoxOverlap = btRayAabb2 (raySource, rayDirection, sign, bounds, param, 0.0f, lambda_max);
+			
 #else
 			rayBoxOverlap = true;//btRayAabb(raySource, rayTarget, bounds[0], bounds[1], param, normal);
 #endif
@@ -597,7 +701,7 @@ void	btQuantizedBvh::walkStacklessQuantizedTree(btNodeOverlapCallback* nodeCallb
 #endif//VISUALLY_ANALYZE_BVH
 
 		//catch bugs in tree data
-		assert (walkIterations < subTreeSize);
+		btAssert (walkIterations < subTreeSize);
 
 		walkIterations++;
 		//PCK: unsigned instead of bool
@@ -652,30 +756,25 @@ void	btQuantizedBvh::walkStacklessQuantizedTreeCacheFriendly(btNodeOverlapCallba
 
 void	btQuantizedBvh::reportRayOverlappingNodex (btNodeOverlapCallback* nodeCallback, const btVector3& raySource, const btVector3& rayTarget) const
 {
-	bool fast_path = m_useQuantization && m_traversalMode == TRAVERSAL_STACKLESS;
-	if (fast_path)
-	{
-		walkStacklessQuantizedTreeAgainstRay(nodeCallback, raySource, rayTarget, btVector3(0, 0, 0), btVector3(0, 0, 0), 0, m_curNodeIndex);
-	} else {
-		/* Otherwise fallback to AABB overlap test */
-		btVector3 aabbMin = raySource;
-		btVector3 aabbMax = raySource;
-		aabbMin.setMin(rayTarget);
-		aabbMax.setMax(rayTarget);
-		reportAabbOverlappingNodex(nodeCallback,aabbMin,aabbMax);
-	}
+	reportBoxCastOverlappingNodex(nodeCallback,raySource,rayTarget,btVector3(0,0,0),btVector3(0,0,0));
 }
 
 
 void	btQuantizedBvh::reportBoxCastOverlappingNodex(btNodeOverlapCallback* nodeCallback, const btVector3& raySource, const btVector3& rayTarget, const btVector3& aabbMin,const btVector3& aabbMax) const
 {
-	bool fast_path = m_useQuantization && m_traversalMode == TRAVERSAL_STACKLESS;
-	if (fast_path)
+	//always use stackless
+
+	if (m_useQuantization)
 	{
 		walkStacklessQuantizedTreeAgainstRay(nodeCallback, raySource, rayTarget, aabbMin, aabbMax, 0, m_curNodeIndex);
-	} else {
-		/* Slow path:
-		   Construct the bounding box for the entire box cast and send that down the tree */
+	}
+	else
+	{
+		walkStacklessTreeAgainstRay(nodeCallback, raySource, rayTarget, aabbMin, aabbMax, 0, m_curNodeIndex);
+	}
+	/*
+	{
+		//recursive traversal
 		btVector3 qaabbMin = raySource;
 		btVector3 qaabbMax = raySource;
 		qaabbMin.setMin(rayTarget);
@@ -684,6 +783,8 @@ void	btQuantizedBvh::reportBoxCastOverlappingNodex(btNodeOverlapCallback* nodeCa
 		qaabbMax += aabbMax;
 		reportAabbOverlappingNodex(nodeCallback,qaabbMin,qaabbMax);
 	}
+	*/
+
 }
 
 
@@ -726,7 +827,8 @@ static const unsigned BVH_ALIGNMENT_BLOCKS = 2;
 
 unsigned int btQuantizedBvh::getAlignmentSerializationPadding()
 {
-	return BVH_ALIGNMENT_BLOCKS * BVH_ALIGNMENT;
+	// I changed this to 0 since the extra padding is not needed or used.
+	return 0;//BVH_ALIGNMENT_BLOCKS * BVH_ALIGNMENT;
 }
 
 unsigned btQuantizedBvh::calculateSerializeBufferSize()
@@ -742,7 +844,7 @@ unsigned btQuantizedBvh::calculateSerializeBufferSize()
 
 bool btQuantizedBvh::serialize(void *o_alignedDataBuffer, unsigned /*i_dataBufferSize */, bool i_swapEndian)
 {
-	assert(m_subtreeHeaderCount == m_SubtreeHeaders.size());
+	btAssert(m_subtreeHeaderCount == m_SubtreeHeaders.size());
 	m_subtreeHeaderCount = m_SubtreeHeaders.size();
 
 /*	if (i_dataBufferSize < calculateSerializeBufferSize() || o_alignedDataBuffer == NULL || (((unsigned)o_alignedDataBuffer & BVH_ALIGNMENT_MASK) != 0))
@@ -829,6 +931,11 @@ bool btQuantizedBvh::serialize(void *o_alignedDataBuffer, unsigned /*i_dataBuffe
 			}
 		}
 		nodeData += sizeof(btQuantizedBvhNode) * nodeCount;
+
+		// this clears the pointer in the member variable it doesn't really do anything to the data
+		// it does call the destructor on the contained objects, but they are all classes with no destructor defined
+		// so the memory (which is not freed) is left alone
+		targetBvh->m_quantizedContiguousNodes.initializeFromBuffer(NULL, 0, 0);
 	}
 	else
 	{
@@ -859,6 +966,11 @@ bool btQuantizedBvh::serialize(void *o_alignedDataBuffer, unsigned /*i_dataBuffe
 			}
 		}
 		nodeData += sizeof(btOptimizedBvhNode) * nodeCount;
+
+		// this clears the pointer in the member variable it doesn't really do anything to the data
+		// it does call the destructor on the contained objects, but they are all classes with no destructor defined
+		// so the memory (which is not freed) is left alone
+		targetBvh->m_contiguousNodes.initializeFromBuffer(NULL, 0, 0);
 	}
 
 	sizeToAdd = 0;//(BVH_ALIGNMENT-((unsigned)nodeData & BVH_ALIGNMENT_MASK))&BVH_ALIGNMENT_MASK;
@@ -896,11 +1008,22 @@ bool btQuantizedBvh::serialize(void *o_alignedDataBuffer, unsigned /*i_dataBuffe
 
 			targetBvh->m_SubtreeHeaders[i].m_rootNodeIndex = (m_SubtreeHeaders[i].m_rootNodeIndex);
 			targetBvh->m_SubtreeHeaders[i].m_subtreeSize = (m_SubtreeHeaders[i].m_subtreeSize);
-			targetBvh->m_SubtreeHeaders[i] = m_SubtreeHeaders[i];
+
+			// need to clear padding in destination buffer
+			targetBvh->m_SubtreeHeaders[i].m_padding[0] = 0;
+			targetBvh->m_SubtreeHeaders[i].m_padding[1] = 0;
+			targetBvh->m_SubtreeHeaders[i].m_padding[2] = 0;
 		}
 	}
-
 	nodeData += sizeof(btBvhSubtreeInfo) * m_subtreeHeaderCount;
+
+	// this clears the pointer in the member variable it doesn't really do anything to the data
+	// it does call the destructor on the contained objects, but they are all classes with no destructor defined
+	// so the memory (which is not freed) is left alone
+	targetBvh->m_SubtreeHeaders.initializeFromBuffer(NULL, 0, 0);
+
+	// this wipes the virtual function table pointer at the start of the buffer for the class
+	*((void**)o_alignedDataBuffer) = NULL;
 
 	return true;
 }
@@ -1015,9 +1138,9 @@ btQuantizedBvh *btQuantizedBvh::deSerializeInPlace(void *i_alignedDataBuffer, un
 btQuantizedBvh::btQuantizedBvh(btQuantizedBvh &self, bool /* ownsMemory */) :
 m_bvhAabbMin(self.m_bvhAabbMin),
 m_bvhAabbMax(self.m_bvhAabbMax),
-m_bvhQuantization(self.m_bvhQuantization)
+m_bvhQuantization(self.m_bvhQuantization),
+m_bulletVersion(BT_BULLET_VERSION)
 {
-
 
 }
 

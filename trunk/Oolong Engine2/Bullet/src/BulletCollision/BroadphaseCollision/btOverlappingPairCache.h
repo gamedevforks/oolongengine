@@ -21,7 +21,6 @@ subject to the following restrictions:
 #include "btBroadphaseProxy.h"
 #include "btOverlappingPairCallback.h"
 
-#include "LinearMath/btPoint3.h"
 #include "LinearMath/btAlignedObjectArray.h"
 class btDispatcher;
 
@@ -82,6 +81,8 @@ public:
 	virtual btBroadphasePair* findPair(btBroadphaseProxy* proxy0, btBroadphaseProxy* proxy1) = 0;
 
 	virtual bool	hasDeferredRemoval() = 0;
+
+	virtual	void	setInternalGhostPairCallback(btOverlappingPairCallback* ghostPairCallback)=0;
 
 };
 
@@ -253,10 +254,16 @@ private:
 		return false;
 	}
 
+	virtual	void	setInternalGhostPairCallback(btOverlappingPairCallback* ghostPairCallback)
+	{
+		m_ghostPairCallback = ghostPairCallback;
+	}
+
 public:
 	
 	btAlignedObjectArray<int>	m_hashTable;
 	btAlignedObjectArray<int>	m_next;
+	btOverlappingPairCallback*	m_ghostPairCallback;
 	
 };
 
@@ -279,6 +286,8 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 		
 		//if set, use the callback instead of the built in filter in needBroadphaseCollision
 		btOverlapFilterCallback* m_overlapFilterCallback;
+
+		btOverlappingPairCallback*	m_ghostPairCallback;
 
 	public:
 			
@@ -355,12 +364,17 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 			return m_hasDeferredRemoval;
 		}
 
+		virtual	void	setInternalGhostPairCallback(btOverlappingPairCallback* ghostPairCallback)
+		{
+			m_ghostPairCallback = ghostPairCallback;
+		}
+
 
 };
 
 
 
-///btNullPairCache skips add/removal of overlapping pairs. Userful for benchmarking and testing.
+///btNullPairCache skips add/removal of overlapping pairs. Userful for benchmarking and unit testing.
 class btNullPairCache : public btOverlappingPairCache
 {
 
@@ -414,6 +428,11 @@ public:
 		return true;
 	}
 
+	virtual	void	setInternalGhostPairCallback(btOverlappingPairCallback* /* ghostPairCallback */)
+	{
+
+	}
+
 	virtual btBroadphasePair*	addOverlappingPair(btBroadphaseProxy* /*proxy0*/,btBroadphaseProxy* /*proxy1*/)
 	{
 		return 0;
@@ -427,6 +446,7 @@ public:
 	virtual void	removeOverlappingPairsContainingProxy(btBroadphaseProxy* /*proxy0*/,btDispatcher* /*dispatcher*/)
 	{
 	}
+	
 
 
 };

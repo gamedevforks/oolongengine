@@ -42,8 +42,14 @@ void	btCollisionShape::getBoundingSphere(btVector3& center,btScalar& radius) con
 	center = (aabbMin+aabbMax)*btScalar(0.5);
 }
 
+btScalar	btCollisionShape::getContactBreakingThreshold() const
+{
+	///@todo make this 0.1 configurable
+	return getAngularMotionDisc() * btScalar(0.1);
+}
 btScalar	btCollisionShape::getAngularMotionDisc() const
 {
+	///@todo cache this value, to improve performance
 	btVector3	center;
 	btScalar disc;
 	getBoundingSphere(center,disc);
@@ -65,7 +71,7 @@ void btCollisionShape::calculateTemporalAabb(const btTransform& curTrans,const b
 
 	// add linear motion
 	btVector3 linMotion = linvel*timeStep;
-	//todo: simd would have a vector max/min operation, instead of per-element access
+	///@todo: simd would have a vector max/min operation, instead of per-element access
 	if (linMotion.x() > btScalar(0.))
 		temporalAabbMaxx += linMotion.x(); 
 	else

@@ -24,7 +24,7 @@ subject to the following restrictions:
 
 struct btCollisionResult;
 
-///contact breaking and merging threshold
+///maximum contact breaking and merging threshold
 extern btScalar gContactBreakingThreshold;
 
 typedef bool (*ContactDestroyedCallback)(void* userPersistentData);
@@ -54,6 +54,8 @@ ATTRIBUTE_ALIGNED16( class) btPersistentManifold
 	void* m_body1;
 	int	m_cachedPoints;
 
+	btScalar	m_contactBreakingThreshold;
+
 	
 	/// sort cached points so most isolated points come first
 	int	sortCachedPoints(const btManifoldPoint& pt);
@@ -68,10 +70,11 @@ public:
 
 	btPersistentManifold();
 
-	btPersistentManifold(void* body0,void* body1,int bla)
-		: m_body0(body0),m_body1(body1),m_cachedPoints(0)
+	btPersistentManifold(void* body0,void* body1,int bla, btScalar contactBreakingThreshold)
+		: m_body0(body0),m_body1(body1),m_cachedPoints(0),
+		m_contactBreakingThreshold(contactBreakingThreshold)
 	{
-		(void)bla;
+		
 	}
 
 	SIMD_FORCE_INLINE void* getBody0() { return m_body0;}
@@ -106,7 +109,7 @@ public:
 		return m_pointCache[index];
 	}
 
-	/// todo: get this margin from the current physics / collision environment
+	///@todo: get this margin from the current physics / collision environment
 	btScalar	getContactBreakingThreshold() const;
 	
 	int getCacheEntry(const btManifoldPoint& newPoint) const;

@@ -38,7 +38,7 @@ subject to the following restrictions:
 
 #include "BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
 
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpa.h"
+#include "BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
 #include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
 
 
@@ -60,16 +60,19 @@ btConvexConvexAlgorithm::CreateFunc::~CreateFunc()
 }
 
 btConvexConvexAlgorithm::btConvexConvexAlgorithm(btPersistentManifold* mf,const btCollisionAlgorithmConstructionInfo& ci,btCollisionObject* body0,btCollisionObject* body1,btSimplexSolverInterface* simplexSolver, btConvexPenetrationDepthSolver* pdSolver)
-: btCollisionAlgorithm(ci),
-m_gjkPairDetector(0,0,simplexSolver,pdSolver),
+: btActivatingCollisionAlgorithm(ci,body0,body1),
+m_simplexSolver(simplexSolver),
+m_pdSolver(pdSolver),
 m_ownManifold (false),
 m_manifoldPtr(mf),
 m_lowLevelOfDetail(false)
+#ifdef USE_SEPDISTANCE_UTIL2
+,m_sepDistance((static_cast<btConvexShape*>(body0->getCollisionShape()))->getAngularMotionDisc(),
+			  (static_cast<btConvexShape*>(body1->getCollisionShape()))->getAngularMotionDisc())
+#endif
 {
 	(void)body0;
 	(void)body1;
-
-
 }
 
 
@@ -107,39 +110,54 @@ void btConvexConvexAlgorithm ::processCollision (btCollisionObject* body0,btColl
 	}
 	resultOut->setPersistentManifold(m_manifoldPtr);
 
-#ifdef USE_BT_GJKEPA
-	btConvexShape*				shape0(static_cast<btConvexShape*>(body0->getCollisionShape()));
-	btConvexShape*				shape1(static_cast<btConvexShape*>(body1->getCollisionShape()));
-	const btScalar				radialmargin(0/*shape0->getMargin()+shape1->getMargin()*/);
-	btGjkEpaSolver::sResults	results;
-	if(btGjkEpaSolver::Collide(	shape0,body0->getWorldTransform(),
-								shape1,body1->getWorldTransform(),
-								radialmargin,results))
-		{
-		dispatchInfo.m_debugDraw->drawLine(results.witnesses[1],results.witnesses[1]+results.normal,btVector3(255,0,0));
-		resultOut->addContactPoint(results.normal,results.witnesses[1],-results.depth);
-		}
-#else
+	
 
 	btConvexShape* min0 = static_cast<btConvexShape*>(body0->getCollisionShape());
 	btConvexShape* min1 = static_cast<btConvexShape*>(body1->getCollisionShape());
+
+#ifdef USE_SEPDISTANCE_UTIL2
+	m_sepDistance.updateSeparatingDistance(body0->getWorldTransform(),body1->getWorldTransform());
+	if (!dispatchInfo.m_useConvexConservativeDistanceUtil || m_sepDistance.getConservativeSeparatingDistance()<=0.f)
+#endif //USE_SEPDISTANCE_UTIL2
+
+	{
+
 	
 	btGjkPairDetector::ClosestPointInput input;
 
+	btGjkPairDetector	gjkPairDetector(min0,min1,m_simplexSolver,m_pdSolver);
 	//TODO: if (dispatchInfo.m_useContinuous)
-	m_gjkPairDetector.setMinkowskiA(min0);
-	m_gjkPairDetector.setMinkowskiB(min1);
-	input.m_maximumDistanceSquared = min0->getMargin() + min1->getMargin() + m_manifoldPtr->getContactBreakingThreshold();
-	input.m_maximumDistanceSquared*= input.m_maximumDistanceSquared;
-	input.m_stackAlloc = dispatchInfo.m_stackAllocator;
+	gjkPairDetector.setMinkowskiA(min0);
+	gjkPairDetector.setMinkowskiB(min1);
 
-//	input.m_maximumDistanceSquared = btScalar(1e30);
-	
+#ifdef USE_SEPDISTANCE_UTIL2
+	if (dispatchInfo.m_useConvexConservativeDistanceUtil)
+	{
+		input.m_maximumDistanceSquared = 1e30f;
+	} else
+#endif //USE_SEPDISTANCE_UTIL2
+	{
+		input.m_maximumDistanceSquared = min0->getMargin() + min1->getMargin() + m_manifoldPtr->getContactBreakingThreshold();
+		input.m_maximumDistanceSquared*= input.m_maximumDistanceSquared;
+	}
+
+	input.m_stackAlloc = dispatchInfo.m_stackAllocator;
 	input.m_transformA = body0->getWorldTransform();
 	input.m_transformB = body1->getWorldTransform();
-	
-	m_gjkPairDetector.getClosestPoints(input,*resultOut,dispatchInfo.m_debugDraw);
-#endif
+
+	gjkPairDetector.getClosestPoints(input,*resultOut,dispatchInfo.m_debugDraw);
+
+	btScalar sepDist = gjkPairDetector.getCachedSeparatingDistance()+dispatchInfo.m_convexConservativeDistanceThreshold;
+
+#ifdef USE_SEPDISTANCE_UTIL2
+	if (dispatchInfo.m_useConvexConservativeDistanceUtil)
+	{
+		m_sepDistance.initSeparatingDistance(gjkPairDetector.getCachedSeparatingAxis(),sepDist,body0->getWorldTransform(),body1->getWorldTransform());
+	}
+#endif //USE_SEPDISTANCE_UTIL2
+
+
+	}
 
 	if (m_ownManifold)
 	{

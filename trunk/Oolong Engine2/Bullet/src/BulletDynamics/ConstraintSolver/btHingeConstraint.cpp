@@ -75,26 +75,20 @@ btHingeConstraint::btHingeConstraint(btRigidBody& rbA,btRigidBody& rbB, const bt
 }
 
 
+
 btHingeConstraint::btHingeConstraint(btRigidBody& rbA,const btVector3& pivotInA,btVector3& axisInA)
 :btTypedConstraint(HINGE_CONSTRAINT_TYPE, rbA), m_angularOnly(false), m_enableAngularMotor(false)
 {
 
 	// since no frame is given, assume this to be zero angle and just pick rb transform axis
 	// fixed axis in worldspace
-	btVector3 rbAxisA1 = rbA.getCenterOfMassTransform().getBasis().getColumn(0);
-	btScalar projection = rbAxisA1.dot(axisInA);
-	if (projection > SIMD_EPSILON)
-		rbAxisA1 = rbAxisA1*projection - axisInA;
-	else
-		rbAxisA1 = rbA.getCenterOfMassTransform().getBasis().getColumn(1);
-
-	btVector3 rbAxisA2 = axisInA.cross(rbAxisA1);
+	btVector3 rbAxisA1, rbAxisA2;
+	btPlaneSpace1(axisInA, rbAxisA1, rbAxisA2);
 
 	m_rbAFrame.getOrigin() = pivotInA;
 	m_rbAFrame.getBasis().setValue( rbAxisA1.getX(),rbAxisA2.getX(),axisInA.getX(),
 									rbAxisA1.getY(),rbAxisA2.getY(),axisInA.getY(),
 									rbAxisA1.getZ(),rbAxisA2.getZ(),axisInA.getZ() );
-
 
 	btVector3 axisInB = rbA.getCenterOfMassTransform().getBasis() * -axisInA;
 
@@ -241,15 +235,18 @@ void	btHingeConstraint::buildJacobian()
 	m_solveLimit = false;
 	m_accLimitImpulse = btScalar(0.);
 
-	if (m_lowerLimit < m_upperLimit)
+//	if (m_lowerLimit < m_upperLimit)
+	if (m_lowerLimit <= m_upperLimit)
 	{
-		if (hingeAngle <= m_lowerLimit*m_limitSoftness)
+//		if (hingeAngle <= m_lowerLimit*m_limitSoftness)
+		if (hingeAngle <= m_lowerLimit)
 		{
 			m_correction = (m_lowerLimit - hingeAngle);
 			m_limitSign = 1.0f;
 			m_solveLimit = true;
 		} 
-		else if (hingeAngle >= m_upperLimit*m_limitSoftness)
+//		else if (hingeAngle >= m_upperLimit*m_limitSoftness)
+		else if (hingeAngle >= m_upperLimit)
 		{
 			m_correction = m_upperLimit - hingeAngle;
 			m_limitSign = -1.0f;
@@ -326,7 +323,6 @@ void	btHingeConstraint::solveConstraint(btScalar	timeStep)
 				btScalar denom = getRigidBodyA().computeAngularImpulseDenominator(normal) +
 					getRigidBodyB().computeAngularImpulseDenominator(normal);
 				// scale for mass and relaxation
-				//todo:  expose this 0.9 factor to developer
 				velrelOrthog *= (btScalar(1.)/denom) * m_relaxationFactor;
 			}
 

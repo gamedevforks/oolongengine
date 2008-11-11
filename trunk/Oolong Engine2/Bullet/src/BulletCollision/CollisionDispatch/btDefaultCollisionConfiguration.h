@@ -33,9 +33,9 @@ struct	btDefaultCollisionConstructionInfo
 		:m_stackAlloc(0),
 		m_persistentManifoldPool(0),
 		m_collisionAlgorithmPool(0),
-		m_defaultMaxPersistentManifoldPoolSize(65535),
-		m_defaultMaxCollisionAlgorithmPoolSize(65535),
-		m_defaultStackAllocatorSize(5*1024*1024)
+		m_defaultMaxPersistentManifoldPoolSize(4096),
+		m_defaultMaxCollisionAlgorithmPoolSize(4096),
+		m_defaultStackAllocatorSize(0)
 	{
 	}
 };
@@ -44,9 +44,11 @@ struct	btDefaultCollisionConstructionInfo
 
 ///btCollisionConfiguration allows to configure Bullet collision detection
 ///stack allocator, pool memory allocators
-///todo: describe the meaning
+///@todo: describe the meaning
 class	btDefaultCollisionConfiguration : public btCollisionConfiguration
 {
+
+protected:
 
 	int	m_persistentManifoldPoolSize;
 	
@@ -55,6 +57,7 @@ class	btDefaultCollisionConfiguration : public btCollisionConfiguration
 
 	btPoolAllocator*	m_persistentManifoldPool;
 	bool	m_ownsPersistentManifoldPool;
+
 
 	btPoolAllocator*	m_collisionAlgorithmPool;
 	bool	m_ownsCollisionAlgorithmPool;

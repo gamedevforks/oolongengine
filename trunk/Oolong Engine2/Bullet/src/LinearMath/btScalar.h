@@ -18,13 +18,14 @@ subject to the following restrictions:
 #define SIMD___SCALAR_H
 
 #include <math.h>
+
 #include <stdlib.h>//size_t for MSVC 6.0
 
 #include <cstdlib>
 #include <cfloat>
 #include <float.h>
 
-#define BT_BULLET_VERSION 271
+#define BT_BULLET_VERSION 273
 
 inline int	btGetVersion()
 {
@@ -65,7 +66,7 @@ inline int	btGetVersion()
 		#endif //__MINGW32__
 
 		#include <assert.h>
-#if defined(DEBUG) || defined (_DEBUG)
+#ifdef BT_DEBUG
 		#define btAssert assert
 #else
 		#define btAssert(x)
@@ -85,7 +86,11 @@ inline int	btGetVersion()
 		#ifndef assert
 		#include <assert.h>
 		#endif
+#ifdef BT_DEBUG
 		#define btAssert assert
+#else
+		#define btAssert(x)
+#endif
 		//btFullAssert is optional, slows down a lot
 		#define btFullAssert(x)
 
@@ -102,7 +107,11 @@ inline int	btGetVersion()
 		#ifndef assert
 		#include <assert.h>
 		#endif
+#ifdef BT_DEBUG
 		#define btAssert assert
+#else
+		#define btAssert(x)
+#endif
 		//btFullAssert is optional, slows down a lot
 		#define btFullAssert(x)
 

@@ -205,6 +205,14 @@ bool CShell::UpdateScene()
 		
 		sDynamicsWorld->setGravity(btVector3(AccelerometerVector[0]*scaling,AccelerometerVector[1]*scaling,AccelerometerVector[2]*scaling));
 		sDynamicsWorld->stepSimulation(frameRate, 2);//deltaTime);
+		{
+			static int i=0;
+			if (i<10)
+			{
+				i++;
+				CProfileManager::dumpAll();
+			}
+		}
 	}
 
 	return true;

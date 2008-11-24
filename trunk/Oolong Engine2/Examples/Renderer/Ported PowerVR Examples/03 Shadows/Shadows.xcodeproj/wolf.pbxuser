@@ -17,6 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Skeleton */;
+		activeSDKPreference = iphoneos2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Skeleton */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Skeleton */,
@@ -63,7 +64,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					399,
+					364,
 					20,
 					48,
 					43,
@@ -80,20 +81,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 247285939;
-			PBXWorkspaceStateSaveDate = 247285939;
-		};
-		perUserProjectItems = {
-			796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = 796AC2AF0DF27654005F8387 /* PBXTextBookmark */;
-			796AC2B20DF27654005F8387 /* PBXTextBookmark */ = 796AC2B20DF27654005F8387 /* PBXTextBookmark */;
-			796AC2C00DF27671005F8387 /* PlistBookmark */ = 796AC2C00DF27671005F8387 /* PlistBookmark */;
-			796AC2C10DF27671005F8387 /* PBXBookmark */ = 796AC2C10DF27671005F8387 /* PBXBookmark */;
-			796AC2C20DF27671005F8387 /* PBXBookmark */ = 796AC2C20DF27671005F8387 /* PBXBookmark */;
-			796AC2EA0DF2771C005F8387 /* PlistBookmark */ = 796AC2EA0DF2771C005F8387 /* PlistBookmark */;
-			796AC2EB0DF2771C005F8387 /* PBXBookmark */ = 796AC2EB0DF2771C005F8387 /* PBXBookmark */;
-			796AC2EC0DF2771C005F8387 /* PBXBookmark */ = 796AC2EC0DF2771C005F8387 /* PBXBookmark */;
-			7976CA4D0DD160970043302E /* PBXTextBookmark */ = 7976CA4D0DD160970043302E /* PBXTextBookmark */;
-			798070CC0E0FFB2B002602F5 /* PBXTextBookmark */ = 798070CC0E0FFB2B002602F5 /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 249188928;
+			PBXWorkspaceStateSaveDate = 249188928;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -105,6 +94,14 @@
 			sepNavSelRange = "{227, 0}";
 			sepNavVisRange = "{0, 693}";
 			sepNavWindowFrame = "{{84, 122}, {1161, 688}}";
+		};
+	};
+	791F48FE0E17553000E927FE /* MatrixF.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 12348}}";
+			sepNavSelRange = "{3716, 0}";
+			sepNavVisRange = "{0, 1626}";
+			sepNavWindowFrame = "{{61, 126}, {1043, 705}}";
 		};
 	};
 	79235BF70DAD051C00F918F8 /* Skeleton */ = {
@@ -149,96 +146,11 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 14266}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 14910}}";
 			sepNavSelRange = "{9742, 0}";
-			sepNavVisRange = "{9158, 1203}";
+			sepNavVisRange = "{17398, 835}";
 			sepNavWindowFrame = "{{268, 97}, {821, 781}}";
 		};
-	};
-	796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = NSObjCRuntime.h;
-		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObjCRuntime.h;
-		sourceTree = "<absolute>";
-	};
-	796AC2AF0DF27654005F8387 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */;
-		name = "NSObjCRuntime.h: 123";
-		rLen = 27;
-		rLoc = 4021;
-		rType = 0;
-		vrLen = 124;
-		vrLoc = 3988;
-	};
-	796AC2B20DF27654005F8387 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 796AC1890DEEE9B6005F8387 /* NSObjCRuntime.h */;
-		name = "NSObjCRuntime.h: 123";
-		rLen = 27;
-		rLoc = 4021;
-		rType = 0;
-		vrLen = 124;
-		vrLoc = 3988;
-	};
-	796AC2C00DF27671005F8387 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/01 Skeleton/Info.plist";
-		rLen = 0;
-		rLoc = 2147483647;
-	};
-	796AC2C10DF27671005F8387 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 1B26781D0DA2F9B000B24DA5 /* icon.png */;
-	};
-	796AC2C20DF27671005F8387 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 79EA070F0DAFF0550038ED3D /* Default.png */;
-	};
-	796AC2EA0DF2771C005F8387 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/wolf/Desktop/OolongEngine2SVN/Examples/Renderer/01 Skeleton/Info.plist";
-		rLen = 0;
-		rLoc = 2147483647;
-	};
-	796AC2EB0DF2771C005F8387 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 79EA070F0DAFF0550038ED3D /* Default.png */;
-	};
-	796AC2EC0DF2771C005F8387 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 1B26781D0DA2F9B000B24DA5 /* icon.png */;
-	};
-	7976CA4D0DD160970043302E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 8";
-		rLen = 22;
-		rLoc = 415;
-		rType = 0;
-		vrLen = 534;
-		vrLoc = 201;
-	};
-	798070CC0E0FFB2B002602F5 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 676";
-		rLen = 1;
-		rLoc = 17691;
-		rType = 0;
-		vrLen = 343;
-		vrLoc = 17634;
 	};
 	79F921D30DFA4F1D003CD043 /* Application.mm:632 */ = {
 		isa = PBXFileBreakpoint;
@@ -254,7 +166,7 @@
 		ignoreCount = 0;
 		lineNumber = 632;
 		location = Shadows;
-		modificationTime = 247286103.580664;
+		modificationTime = 249189371.171984;
 		state = 2;
 	};
 	79F921E80DFA52CF003CD043 /* Application.mm:617 */ = {
@@ -271,7 +183,7 @@
 		ignoreCount = 0;
 		lineNumber = 617;
 		location = Shadows;
-		modificationTime = 247286103.580682;
+		modificationTime = 249189371.172278;
 		state = 2;
 	};
 	79F921EA0DFA5331003CD043 /* Application.mm:643 */ = {
@@ -288,7 +200,7 @@
 		ignoreCount = 0;
 		lineNumber = 643;
 		location = Shadows;
-		modificationTime = 247286103.580689;
+		modificationTime = 249189371.172406;
 		state = 2;
 	};
 	79F921EC0DFA5349003CD043 /* Application.mm:638 */ = {
@@ -305,7 +217,7 @@
 		ignoreCount = 0;
 		lineNumber = 638;
 		location = Shadows;
-		modificationTime = 247286103.580694;
+		modificationTime = 249189371.172584;
 		state = 2;
 	};
 	79F921EE0DFA534A003CD043 /* Application.mm:635 */ = {
@@ -322,7 +234,7 @@
 		ignoreCount = 0;
 		lineNumber = 635;
 		location = Shadows;
-		modificationTime = 247286103.580699;
+		modificationTime = 249189371.172725;
 		state = 2;
 	};
 	79F921F00DFA5355003CD043 /* Application.mm:641 */ = {
@@ -339,7 +251,7 @@
 		ignoreCount = 0;
 		lineNumber = 641;
 		location = Shadows;
-		modificationTime = 247286103.580703;
+		modificationTime = 249189371.172857;
 		state = 2;
 	};
 }

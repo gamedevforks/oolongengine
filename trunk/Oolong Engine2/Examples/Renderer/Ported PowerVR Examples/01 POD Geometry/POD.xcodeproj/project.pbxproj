@@ -36,6 +36,8 @@
 		791F49D90E1755E800E927FE /* VertexLookup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F49C60E1755E800E927FE /* VertexLookup.cpp */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
+		7976BCA20EDA541C00106906 /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BC9E0EDA541C00106906 /* matrix_impl.cpp */; };
+		7976BCA30EDA541C00106906 /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BCA00EDA541C00106906 /* utility_impl.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +94,11 @@
 		791F49C70E1755E800E927FE /* VertexLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexLookup.h; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
+		7976BC9D0EDA541C00106906 /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
+		7976BC9E0EDA541C00106906 /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
+		7976BC9F0EDA541C00106906 /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
+		7976BCA00EDA541C00106906 /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
+		7976BCA10EDA541C00106906 /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +218,7 @@
 		791F49A10E1755E800E927FE /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				7976BC9C0EDA541C00106906 /* vfpmath */,
 				791F49A20E1755E800E927FE /* FixedPoint.cpp */,
 				791F49A30E1755E800E927FE /* FixedPoint.h */,
 				791F49A40E1755E800E927FE /* FixedPointAPI.h */,
@@ -289,6 +297,18 @@
 			path = ../../../../Renderer/Geometry;
 			sourceTree = SOURCE_ROOT;
 		};
+		7976BC9C0EDA541C00106906 /* vfpmath */ = {
+			isa = PBXGroup;
+			children = (
+				7976BC9D0EDA541C00106906 /* common_macros.h */,
+				7976BC9E0EDA541C00106906 /* matrix_impl.cpp */,
+				7976BC9F0EDA541C00106906 /* matrix_impl.h */,
+				7976BCA00EDA541C00106906 /* utility_impl.cpp */,
+				7976BCA10EDA541C00106906 /* utility_impl.h */,
+			);
+			path = vfpmath;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,6 +384,8 @@
 				791F49D70E1755E800E927FE /* TriStrip.cpp in Sources */,
 				791F49D80E1755E800E927FE /* Vertex.cpp in Sources */,
 				791F49D90E1755E800E927FE /* VertexLookup.cpp in Sources */,
+				7976BCA20EDA541C00106906 /* matrix_impl.cpp in Sources */,
+				7976BCA30EDA541C00106906 /* utility_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -389,6 +412,7 @@
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton;
+				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -397,7 +421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -411,6 +435,7 @@
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = POD;
+				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

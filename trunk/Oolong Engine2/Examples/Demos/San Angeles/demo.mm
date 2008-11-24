@@ -71,6 +71,7 @@ static unsigned long randomUInt()
     return sRandomSeed >> 16;
 }
 
+#ifdef FIXEDPOINTENABLE
 
 // Capped conversion from float to fixed.
 static long floatToFixed(float value)
@@ -79,6 +80,7 @@ static long floatToFixed(float value)
     if (value > 32767) value = 32767;
     return (long)(value * 65536);
 }
+#endif
 
 #ifdef FIXEDPOINTENABLE
 	#define FIXED(value) floatToFixed(value)
@@ -599,7 +601,7 @@ static GLOBJECT * createGroundPlane()
 	
     currentQuad = 0;
     currentVertex = 0;
-	DEMOVECTOR3 vec;
+//	DEMOVECTOR3 vec;
 
     for (y = yBegin; y < yEnd; ++y)
     {

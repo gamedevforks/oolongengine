@@ -25,8 +25,6 @@ not be misrepresented as being the original software.
 #ifndef MATRIX_IMPL_H__
 #define MATRIX_IMPL_H__
 
-namespace VFP {
-
 // Multiplies two 4x4 matrices saved in row-major format.
 void Matrix4Mul(const float* src_mat_1, const float* src_mat_2, float* dst_ptr);
 
@@ -44,7 +42,7 @@ void Matrix4Vector3ArrayMul(int num,                          // Number of Verti
                             const float* src_mat,             // Source matrix.
                             int src_stride,                   // Source vector stride.
                             const float* src_vec_array,       // Source vector array.
-                            int dst_stride                    // Dest. vector stride.
+                            int dst_stride,                    // Dest. vector stride.
                             float* dest_vec_array);           // Dest. vector array.
   
   
@@ -54,7 +52,7 @@ void Matrix4Vector3ArrayMul(int num,                          // Number of Verti
                             float w,                          // Last coordinate of vectors.
                             int src_stride,                   // Source vector stride.
                             const float* src_vec_array,       // Source vector array.
-                            int dst_stride                    // Dest. vector stride.
-                            float* dest_vec_array);           // Dest. vector array.}
+                            int dst_stride,                    // Dest. vector stride.
+                            float* dest_vec_array);           // Dest. vector array.
 
 #endif // MATRIX_IMPL_H__

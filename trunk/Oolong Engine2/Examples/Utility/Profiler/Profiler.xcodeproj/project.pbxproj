@@ -23,6 +23,8 @@
 		79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CE00DAD243A00F918F8 /* Transform.cpp */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
+		793179150EDA568D00247E3D /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793179110EDA568D00247E3D /* matrix_impl.cpp */; };
+		793179160EDA568D00247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793179130EDA568D00247E3D /* utility_impl.cpp */; };
 		79AAE9F30DD417EB00CC242E /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79AAE9F20DD417EB00CC242E /* Texture.mm */; };
 		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
 		79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA044E0DAFC7950038ED3D /* DisplayText.cpp */; };
@@ -71,6 +73,11 @@
 		79235CE20DAD243A00F918F8 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
+		793179100EDA568D00247E3D /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
+		793179110EDA568D00247E3D /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
+		793179120EDA568D00247E3D /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
+		793179130EDA568D00247E3D /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
+		793179140EDA568D00247E3D /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
 		79AAE9F20DD417EB00CC242E /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		79EA04400DAFC7950038ED3D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		79EA04410DAFC7950038ED3D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
@@ -216,6 +223,7 @@
 		79235CD70DAD243A00F918F8 /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				7931790F0EDA568D00247E3D /* vfpmath */,
 				79235CD80DAD243A00F918F8 /* FixedPoint.cpp */,
 				79235CD90DAD243A00F918F8 /* FixedPoint.h */,
 				79235CDA0DAD243A00F918F8 /* FixedPointAPI.h */,
@@ -231,6 +239,18 @@
 			name = Math;
 			path = ../../../Math;
 			sourceTree = SOURCE_ROOT;
+		};
+		7931790F0EDA568D00247E3D /* vfpmath */ = {
+			isa = PBXGroup;
+			children = (
+				793179100EDA568D00247E3D /* common_macros.h */,
+				793179110EDA568D00247E3D /* matrix_impl.cpp */,
+				793179120EDA568D00247E3D /* matrix_impl.h */,
+				793179130EDA568D00247E3D /* utility_impl.cpp */,
+				793179140EDA568D00247E3D /* utility_impl.h */,
+			);
+			path = vfpmath;
+			sourceTree = "<group>";
 		};
 		79EA043B0DAFC7950038ED3D /* Core */ = {
 			isa = PBXGroup;
@@ -417,6 +437,8 @@
 				79EA06960DAFEB050038ED3D /* Timer.cpp in Sources */,
 				791406E60DBAD9FB00C9A379 /* Delegate.mm in Sources */,
 				79AAE9F30DD417EB00CC242E /* Texture.mm in Sources */,
+				793179150EDA568D00247E3D /* matrix_impl.cpp in Sources */,
+				793179160EDA568D00247E3D /* utility_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

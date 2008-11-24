@@ -17,7 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Loadwav */;
-		activeSDKPreference = iphoneos2.0;
+		activeSDKPreference = iphoneos2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Loadwav */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Loadwav */,
@@ -101,8 +101,8 @@
 					PBXFindDataSource_LocationID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 248673528;
-			PBXWorkspaceStateSaveDate = 248673528;
+			PBXPerProjectTemplateStateSaveDate = 249190240;
+			PBXWorkspaceStateSaveDate = 249190240;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {

@@ -17,7 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* FallingCubes */;
-		activeSDKPreference = iphoneos2.0;
+		activeSDKPreference = iphoneos2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* FallingCubes */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* FallingCubes */,
@@ -58,7 +58,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					138,
 					20,
 					48,
 					43,
@@ -97,8 +97,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 248673793;
-			PBXWorkspaceStateSaveDate = 248673793;
+			PBXPerProjectTemplateStateSaveDate = 249190092;
+			PBXWorkspaceStateSaveDate = 249190092;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {

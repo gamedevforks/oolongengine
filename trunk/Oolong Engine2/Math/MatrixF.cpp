@@ -29,6 +29,7 @@ subject to the following restrictions:
 #include "Matrix.h"
 #include "Macros.h"
 
+#include "vfpmath/matrix_impl.h"
 
 static const MATRIXf	c_mIdentity = {
 	{
@@ -53,9 +54,15 @@ void MatrixMultiplyF(
 	const MATRIXf	&mA,
 	const MATRIXf	&mB)
 {
+//#if TARGET_CPU_ARM
+	Matrix4Mul(mA.f,
+				mB.f,
+				mOut.f);
+
+/*#else	
 	MATRIXf mRet;
 
-	/* Perform calculation on a dummy matrix (mRet) */
+	// Perform calculation on a dummy matrix (mRet)
 	mRet.f[ 0] = mA.f[ 0]*mB.f[ 0] + mA.f[ 1]*mB.f[ 4] + mA.f[ 2]*mB.f[ 8] + mA.f[ 3]*mB.f[12];
 	mRet.f[ 1] = mA.f[ 0]*mB.f[ 1] + mA.f[ 1]*mB.f[ 5] + mA.f[ 2]*mB.f[ 9] + mA.f[ 3]*mB.f[13];
 	mRet.f[ 2] = mA.f[ 0]*mB.f[ 2] + mA.f[ 1]*mB.f[ 6] + mA.f[ 2]*mB.f[10] + mA.f[ 3]*mB.f[14];
@@ -76,9 +83,11 @@ void MatrixMultiplyF(
 	mRet.f[14] = mA.f[12]*mB.f[ 2] + mA.f[13]*mB.f[ 6] + mA.f[14]*mB.f[10] + mA.f[15]*mB.f[14];
 	mRet.f[15] = mA.f[12]*mB.f[ 3] + mA.f[13]*mB.f[ 7] + mA.f[14]*mB.f[11] + mA.f[15]*mB.f[15];
 
-	/* Copy result in pResultMatrix */
+	// Copy result in pResultMatrix
 	mOut = mRet;
-}
+#endif
+ */
+ }
 
 
 void MatrixTranslationF(
@@ -941,6 +950,5 @@ void MatrixLinearEqSolveF(
 	}
 #endif
 }
-
 
 

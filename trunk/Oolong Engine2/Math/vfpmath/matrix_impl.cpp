@@ -25,8 +25,6 @@ not be misrepresented as being the original software.
 #include "matrix_impl.h"
 #include "common_macros.h"
 
-namespace VFP {
-
 void Matrix4Mul(const float* src_mat_1, const float* src_mat_2, float* dst_mat) {
   asm volatile (VFP_SWITCH_TO_ARM
                 VFP_VECTOR_LENGTH(3)
@@ -136,7 +134,7 @@ void Matrix4Vector4Mul(const float* src_mat, const float* src_vec, float* dst_ve
                 VFP_VECTOR_LENGTH_ZERO
                 VFP_SWITCH_TO_THUMB
                 : "=r" (src_mat)
-                : "r" (src_vec), "r" (dst_ptr), "0" (src_mat)
+                : "r" (src_vec), "r" (dst_vec), "0" (src_mat)
                 : "r0"
                 );  
 }
@@ -186,7 +184,7 @@ void Matrix4Vector3Mul(const float* src_mat, const float* src_vec, float* dst_ve
                 VFP_VECTOR_LENGTH_ZERO
                 VFP_SWITCH_TO_THUMB
                 : "=r" (src_mat)
-                : "r" (src_vec), "r" (dst_ptr), "0" (src_mat)
+                : "r" (src_vec), "r" (dst_vec), "0" (src_mat)
                 : "r0"
                 );  
 }
@@ -239,9 +237,8 @@ void Matrix4Vector3Mul(const float* src_mat, const float* src_vec, float w, floa
                   VFP_VECTOR_LENGTH_ZERO
                   VFP_SWITCH_TO_THUMB
                   : "=r" (src_mat)
-                  : "r" (src_vec), "r" (dst_ptr), "r" (w), "0" (src_mat)
+                  : "r" (src_vec), "r" (dst_vec), "r" (w), "0" (src_mat)
                   : "r0"
                   );  
 }
   
-}

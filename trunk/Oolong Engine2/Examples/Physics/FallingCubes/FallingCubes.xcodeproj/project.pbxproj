@@ -1304,7 +1304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Erwin Coumans";
+				CODE_SIGN_IDENTITY = "Wolfgang Engel";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1331,7 +1331,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = DefaultProfileUuid;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -1340,7 +1340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Erwin Coumans";
+				CODE_SIGN_IDENTITY = "Wolfgang Engel";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1365,6 +1365,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
+				PROVISIONING_PROFILE = DefaultProfileUuid;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

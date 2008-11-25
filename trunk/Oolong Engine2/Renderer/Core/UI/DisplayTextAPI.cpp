@@ -195,15 +195,15 @@ bool CDisplayText::APIUpLoadIcons(
 	/* PVR Icon */
 	glGenTextures(1, &m_pAPI->uTexturePVRLogo);
 	glBindTexture(GL_TEXTURE_2D, m_pAPI->uTexturePVRLogo);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, pPVR + (pPVR[0] / sizeof(unsigned long)));
 
 	/* IMG Icon */
 	glGenTextures(1, &m_pAPI->uTextureIGDKLogo);
 	glBindTexture(GL_TEXTURE_2D, m_pAPI->uTextureIGDKLogo);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, pIMG + (pIMG[0] / sizeof(unsigned long)));
 	return true;
 }
@@ -295,8 +295,8 @@ bool CDisplayText::APIUpLoad4444(unsigned int dwTexID, unsigned char *pSource, u
 	glBindTexture(GL_TEXTURE_2D, m_pAPI->uTexture[dwTexID]);
 
 	/* Default settings: bilinear */
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	/* Now load texture */
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, p8888);
@@ -436,7 +436,7 @@ void CDisplayText::APIRenderStates(int nAction)
 		glLoadIdentity();
 
 		glMatrixMode(GL_MODELVIEW);
-		myglLoadMatrix(Matrix.f);
+		glLoadMatrixf(Matrix.f);
 		glDisable(GL_LIGHTING);
 
 		/* Culling */
@@ -456,7 +456,7 @@ void CDisplayText::APIRenderStates(int nAction)
 		glDisable(GL_TEXTURE_2D);
 		glActiveTexture(GL_TEXTURE0);
 		glEnable(GL_TEXTURE_2D);
-		myglTexEnv(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+		glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 
 		/* Blending mode */
 		glEnable(GL_BLEND);
@@ -587,7 +587,7 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 	glLoadIdentity();
 	if(m_fScreenScale[0] * WindowWidth<m_fScreenScale[1] * WindowHeight)
 	{
-		myglRotate(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
+		glRotatef(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
 	}
 
 	// Render states

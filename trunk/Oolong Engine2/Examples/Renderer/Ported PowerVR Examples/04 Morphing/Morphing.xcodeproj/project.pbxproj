@@ -18,10 +18,6 @@
 		791F48BF0E17540B00E927FE /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48910E17540B00E927FE /* ResourceFile.cpp */; };
 		791F48C00E17540B00E927FE /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48930E17540B00E927FE /* Streaming.cpp */; };
 		791F48C10E17540B00E927FE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 791F48970E17540B00E927FE /* main.m */; };
-		791F48C20E17540B00E927FE /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48990E17540B00E927FE /* FixedPoint.cpp */; };
-		791F48C30E17540B00E927FE /* MatrixF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F489E0E17540B00E927FE /* MatrixF.cpp */; };
-		791F48C40E17540B00E927FE /* MatrixX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F489F0E17540B00E927FE /* MatrixX.cpp */; };
-		791F48C50E17540B00E927FE /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48A10E17540B00E927FE /* Transform.cpp */; };
 		791F48C60E17540B00E927FE /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 791F48A80E17540B00E927FE /* EAGLView.m */; };
 		791F48C70E17540B00E927FE /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 791F48AB0E17540B00E927FE /* Texture.mm */; };
 		791F48C80E17540B00E927FE /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48AD0E17540B00E927FE /* DisplayText.cpp */; };
@@ -35,8 +31,11 @@
 		791F48D00E17540B00E927FE /* VertexLookup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48BD0E17540B00E927FE /* VertexLookup.cpp */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
-		7976BCC40EDA547200106906 /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BCC00EDA547200106906 /* matrix_impl.cpp */; };
-		7976BCC50EDA547200106906 /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BCC20EDA547200106906 /* utility_impl.cpp */; };
+		79317B6F0EDBBC7100247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B610EDBBC7100247E3D /* Matrix.cpp */; };
+		79317B700EDBBC7100247E3D /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B640EDBBC7100247E3D /* Random.cpp */; };
+		79317B710EDBBC7100247E3D /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B660EDBBC7100247E3D /* Transform.cpp */; };
+		79317B720EDBBC7100247E3D /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B6B0EDBBC7100247E3D /* matrix_impl.cpp */; };
+		79317B730EDBBC7100247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B6D0EDBBC7100247E3D /* utility_impl.cpp */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -58,17 +57,6 @@
 		791F48940E17540B00E927FE /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Streaming.h; path = ../../../../Renderer/Resource/Streaming.h; sourceTree = SOURCE_ROOT; };
 		791F48960E17540B00E927FE /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		791F48970E17540B00E927FE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		791F48990E17540B00E927FE /* FixedPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedPoint.cpp; sourceTree = "<group>"; };
-		791F489A0E17540B00E927FE /* FixedPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPoint.h; sourceTree = "<group>"; };
-		791F489B0E17540B00E927FE /* FixedPointAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPointAPI.h; sourceTree = "<group>"; };
-		791F489C0E17540B00E927FE /* MathTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathTable.h; sourceTree = "<group>"; };
-		791F489D0E17540B00E927FE /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
-		791F489E0E17540B00E927FE /* MatrixF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixF.cpp; sourceTree = "<group>"; };
-		791F489F0E17540B00E927FE /* MatrixX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixX.cpp; sourceTree = "<group>"; };
-		791F48A00E17540B00E927FE /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
-		791F48A10E17540B00E927FE /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
-		791F48A20E17540B00E927FE /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
-		791F48A30E17540B00E927FE /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		791F48A70E17540B00E927FE /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		791F48A80E17540B00E927FE /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		791F48A90E17540B00E927FE /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
@@ -93,11 +81,19 @@
 		791F48BE0E17540B00E927FE /* VertexLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexLookup.h; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
-		7976BCBF0EDA547200106906 /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
-		7976BCC00EDA547200106906 /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
-		7976BCC10EDA547200106906 /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
-		7976BCC20EDA547200106906 /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
-		7976BCC30EDA547200106906 /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
+		79317B610EDBBC7100247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		79317B620EDBBC7100247E3D /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		79317B630EDBBC7100247E3D /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		79317B640EDBBC7100247E3D /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
+		79317B650EDBBC7100247E3D /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
+		79317B660EDBBC7100247E3D /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
+		79317B670EDBBC7100247E3D /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
+		79317B680EDBBC7100247E3D /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		79317B6A0EDBBC7100247E3D /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
+		79317B6B0EDBBC7100247E3D /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
+		79317B6C0EDBBC7100247E3D /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
+		79317B6D0EDBBC7100247E3D /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
+		79317B6E0EDBBC7100247E3D /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,8 +173,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79317B600EDBBC7100247E3D /* Math */,
 				791F48950E17540B00E927FE /* Application */,
-				791F48980E17540B00E927FE /* Math */,
 				791F48A40E17540B00E927FE /* Core */,
 				791F48B10E17540B00E927FE /* Geometry */,
 				791F488F0E17540B00E927FE /* Resources */,
@@ -213,26 +209,6 @@
 			);
 			name = Application;
 			path = ../../../../Application;
-			sourceTree = SOURCE_ROOT;
-		};
-		791F48980E17540B00E927FE /* Math */ = {
-			isa = PBXGroup;
-			children = (
-				7976BCBE0EDA547200106906 /* vfpmath */,
-				791F48990E17540B00E927FE /* FixedPoint.cpp */,
-				791F489A0E17540B00E927FE /* FixedPoint.h */,
-				791F489B0E17540B00E927FE /* FixedPointAPI.h */,
-				791F489C0E17540B00E927FE /* MathTable.h */,
-				791F489D0E17540B00E927FE /* Matrix.h */,
-				791F489E0E17540B00E927FE /* MatrixF.cpp */,
-				791F489F0E17540B00E927FE /* MatrixX.cpp */,
-				791F48A00E17540B00E927FE /* Quaternion.h */,
-				791F48A10E17540B00E927FE /* Transform.cpp */,
-				791F48A20E17540B00E927FE /* Transform.h */,
-				791F48A30E17540B00E927FE /* Vector.h */,
-			);
-			name = Math;
-			path = ../../../../Math;
 			sourceTree = SOURCE_ROOT;
 		};
 		791F48A40E17540B00E927FE /* Core */ = {
@@ -297,14 +273,31 @@
 			path = ../../../../Renderer/Geometry;
 			sourceTree = SOURCE_ROOT;
 		};
-		7976BCBE0EDA547200106906 /* vfpmath */ = {
+		79317B600EDBBC7100247E3D /* Math */ = {
 			isa = PBXGroup;
 			children = (
-				7976BCBF0EDA547200106906 /* common_macros.h */,
-				7976BCC00EDA547200106906 /* matrix_impl.cpp */,
-				7976BCC10EDA547200106906 /* matrix_impl.h */,
-				7976BCC20EDA547200106906 /* utility_impl.cpp */,
-				7976BCC30EDA547200106906 /* utility_impl.h */,
+				79317B610EDBBC7100247E3D /* Matrix.cpp */,
+				79317B620EDBBC7100247E3D /* Matrix.h */,
+				79317B630EDBBC7100247E3D /* Quaternion.h */,
+				79317B640EDBBC7100247E3D /* Random.cpp */,
+				79317B650EDBBC7100247E3D /* Random.h */,
+				79317B660EDBBC7100247E3D /* Transform.cpp */,
+				79317B670EDBBC7100247E3D /* Transform.h */,
+				79317B680EDBBC7100247E3D /* Vector.h */,
+				79317B690EDBBC7100247E3D /* vfpmath */,
+			);
+			name = Math;
+			path = ../../../../Math;
+			sourceTree = SOURCE_ROOT;
+		};
+		79317B690EDBBC7100247E3D /* vfpmath */ = {
+			isa = PBXGroup;
+			children = (
+				79317B6A0EDBBC7100247E3D /* common_macros.h */,
+				79317B6B0EDBBC7100247E3D /* matrix_impl.cpp */,
+				79317B6C0EDBBC7100247E3D /* matrix_impl.h */,
+				79317B6D0EDBBC7100247E3D /* utility_impl.cpp */,
+				79317B6E0EDBBC7100247E3D /* utility_impl.h */,
 			);
 			path = vfpmath;
 			sourceTree = "<group>";
@@ -369,10 +362,6 @@
 				791F48BF0E17540B00E927FE /* ResourceFile.cpp in Sources */,
 				791F48C00E17540B00E927FE /* Streaming.cpp in Sources */,
 				791F48C10E17540B00E927FE /* main.m in Sources */,
-				791F48C20E17540B00E927FE /* FixedPoint.cpp in Sources */,
-				791F48C30E17540B00E927FE /* MatrixF.cpp in Sources */,
-				791F48C40E17540B00E927FE /* MatrixX.cpp in Sources */,
-				791F48C50E17540B00E927FE /* Transform.cpp in Sources */,
 				791F48C60E17540B00E927FE /* EAGLView.m in Sources */,
 				791F48C70E17540B00E927FE /* Texture.mm in Sources */,
 				791F48C80E17540B00E927FE /* DisplayText.cpp in Sources */,
@@ -384,8 +373,11 @@
 				791F48CE0E17540B00E927FE /* TriStrip.cpp in Sources */,
 				791F48CF0E17540B00E927FE /* Vertex.cpp in Sources */,
 				791F48D00E17540B00E927FE /* VertexLookup.cpp in Sources */,
-				7976BCC40EDA547200106906 /* matrix_impl.cpp in Sources */,
-				7976BCC50EDA547200106906 /* utility_impl.cpp in Sources */,
+				79317B6F0EDBBC7100247E3D /* Matrix.cpp in Sources */,
+				79317B700EDBBC7100247E3D /* Random.cpp in Sources */,
+				79317B710EDBBC7100247E3D /* Transform.cpp in Sources */,
+				79317B720EDBBC7100247E3D /* matrix_impl.cpp in Sources */,
+				79317B730EDBBC7100247E3D /* utility_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

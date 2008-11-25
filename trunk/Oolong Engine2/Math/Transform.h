@@ -15,6 +15,9 @@ subject to the following restrictions:
 #ifndef TRANSFORM_H_
 #define TRANSFORM_H_
 
+#include "Vector.h"
+#include "Matrix.h"
+
 
 /*!***************************************************************************
  @Function Name		TransVec3TransformArray
@@ -54,7 +57,7 @@ void TransTransformArray(
 	const VECTOR3	* const pV,
 	const int			nNumberOfVertices,
 	const MATRIX	* const pMatrix,
-	const VERTTYPE		fW = f2vt(1.0f));
+	const float		fW = f2vt(1.0f));
 
 /*!***************************************************************************
  @Function			TransTransformArrayBack

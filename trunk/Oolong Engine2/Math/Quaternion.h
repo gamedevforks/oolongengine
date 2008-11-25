@@ -21,20 +21,6 @@ typedef struct
 	float y;	/*!< y coordinate */
 	float z;	/*!< z coordinate */
 	float w;	/*!< w coordinate */
-} QUATERNIONf;
-
-typedef struct
-{
-	int x;	/*!< x coordinate */
-	int y;	/*!< y coordinate */
-	int z;	/*!< z coordinate */
-	int w;	/*!< w coordinate */
-} QUATERNIONx;
-
-#ifdef FIXEDPOINTENABLE
-typedef QUATERNIONx		QUATERNION;
-#else
-typedef QUATERNIONf		QUATERNION;
-#endif
+} QUATERNION;
 
 #endif // QUATERNION_H_

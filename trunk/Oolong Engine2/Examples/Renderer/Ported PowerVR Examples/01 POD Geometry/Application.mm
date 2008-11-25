@@ -107,7 +107,7 @@ bool CShell::InitApplication()
 	//m_iTimePrev = GetTimeInMs();
 	
 	// Sets the clear color
-	myglClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));
+	glClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));
 
 	// Enables texturing
 	glEnable(GL_TEXTURE_2D);
@@ -121,16 +121,16 @@ bool CShell::InitApplication()
 //		LOG("Cannot load the texture", Logger::LOG_DATA);
 		return false;
 	}
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	if(!Textures->LoadTextureFromPointer((void*)tex_arm, &m_uiTex_arm))
 	{
 //		LOG("Cannot load the texture", Logger::LOG_DATA);
 		return false;
 	}
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// Enables lighting. See BasicTnL for a detailed explanation
 	glEnable(GL_LIGHTING);
@@ -328,12 +328,12 @@ bool CShell::RenderScene()
 
 		// Loads the projection matrix
 		glMatrixMode(GL_PROJECTION);
-		myglLoadMatrix(m_mProjection.f);
+		glLoadMatrixf(m_mProjection.f);
 	}
 
 	// Specify the view matrix to OpenGL ES so we can specify the light in world space
 	glMatrixMode(GL_MODELVIEW);
-	myglLoadMatrix(m_mView.f);
+	glLoadMatrixf(m_mView.f);
 
 	{
 		// Reads the light direction from the scene.
@@ -351,7 +351,7 @@ bool CShell::RenderScene()
 		vLightDirection.w = 0;
 
 		// Specify the light direction in world space
-		myglLightv(GL_LIGHT0, GL_POSITION, (VERTTYPE*)&vLightDirection);
+		glLightfv(GL_LIGHT0, GL_POSITION, (VERTTYPE*)&vLightDirection);
 	}
 
 	// Enables the vertices, normals and texture coordinates arrays
@@ -385,7 +385,7 @@ bool CShell::RenderScene()
 		// Multiply the view matrix by the model (mWorld) matrix to get the model-view matrix
 		MATRIX mModelView;
 		MatrixMultiply(mModelView, mWorld, m_mView);
-		myglLoadMatrix(mModelView.f);
+		glLoadMatrixf(mModelView.f);
 
 		// Loads the correct texture using our texture lookup table
 		if (pNode->nIdxMaterial == -1)

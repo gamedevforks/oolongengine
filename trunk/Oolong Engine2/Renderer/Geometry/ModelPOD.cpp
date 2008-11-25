@@ -1566,7 +1566,7 @@ size_t ModelPODDataStride(const CPODData &data)
 *****************************************************************************/
 void ModelPODDataConvert(CPODData &data, const unsigned int nCnt, const EDataType eNewType)
 {
-	 VECTOR4f	v;
+	 VECTOR4	v;
 	unsigned int	i;
 	CPODData		old;
 
@@ -1644,7 +1644,7 @@ static int BitCount(unsigned int n)
 void ModelPODDataShred(CPODData &data, const unsigned int nCnt, const unsigned int nMask)
 {
 	CPODData		old;
-	 VECTOR4f	v;
+	 VECTOR4	v;
 	unsigned int	i, j, nCh;
 
 	if(!data.pData)

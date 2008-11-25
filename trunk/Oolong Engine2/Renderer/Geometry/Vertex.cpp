@@ -60,7 +60,7 @@ subject to the following restrictions:
  @Description		Read a vector
 *****************************************************************************/
 void DataTypeRead(
-	VECTOR4f		* const pV,
+	VECTOR4		* const pV,
 	const void			* const pData,
 	const EDataType	eType,
 	const int			nCnt)
@@ -216,7 +216,7 @@ void DataTypeWrite(
 	void				* const pOut,
 	const EDataType	eType,
 	const int			nCnt,
-	const VECTOR4f	* const pV)
+	const VECTOR4	* const pV)
 {
 	int		i;
 	float	*pData = (float*)pV;
@@ -370,9 +370,9 @@ void DataTypeWrite(
 					coordinates (pfTexX).
 *****************************************************************************/
 void VertexTangentBinormal(
-	VECTOR3f		* const pvTan,
-	VECTOR3f		* const pvBin,
-	const VECTOR3f	* const pvNor,
+	VECTOR3		* const pvTan,
+	VECTOR3		* const pvBin,
+	const VECTOR3	* const pvNor,
 	const float			* const pfPosA,
 	const float			* const pfPosB,
 	const float			* const pfPosC,
@@ -380,9 +380,9 @@ void VertexTangentBinormal(
 	const float			* const pfTexB,
 	const float			* const pfTexC)
 {
-	VECTOR3f BaseVector1, BaseVector2, AlignedVector;
+	VECTOR3 BaseVector1, BaseVector2, AlignedVector;
 
-	if(MatrixVec3DotProductF(*pvNor, *pvNor) == 0)
+	if(MatrixVec3DotProduct(*pvNor, *pvNor) == 0)
 	{
 		pvTan->x = 0;
 		pvTan->y = 0;
@@ -447,16 +447,16 @@ void VertexTangentBinormal(
 			}
 		}
 
-		MatrixVec3NormalizeF(AlignedVector, AlignedVector);
+		MatrixVec3Normalize(AlignedVector, AlignedVector);
 
 		/* The Tangent vector is perpendicular to the plane defined by vAlignedVector and the Normal. */
-		MatrixVec3CrossProductF(*pvTan, *pvNor, AlignedVector);
+		MatrixVec3CrossProduct(*pvTan, *pvNor, AlignedVector);
 
 		/* The Binormal vector is the vector perpendicular to the Normal and Tangent (and
 		that follows the vAlignedVector direction) */
-		MatrixVec3CrossProductF(*pvBin, *pvTan, *pvNor);
+		MatrixVec3CrossProduct(*pvBin, *pvTan, *pvNor);
 
-		_ASSERT(MatrixVec3DotProductF(*pvBin, AlignedVector) > 0.0f);
+		_ASSERT(MatrixVec3DotProduct(*pvBin, AlignedVector) > 0.0f);
 
 		// Worry about wrapping; this is esentially a 2D cross product on texture coords
 		if((pfTexC[0]-pfTexA[0])*(pfTexB[1]-pfTexA[1]) < (pfTexC[1]-pfTexA[1])*(pfTexB[0]-pfTexA[0])) {
@@ -466,12 +466,12 @@ void VertexTangentBinormal(
 		}
 
 		/* Normalize results */
-		MatrixVec3NormalizeF(*pvTan, *pvTan);
-		MatrixVec3NormalizeF(*pvBin, *pvBin);
+		MatrixVec3Normalize(*pvTan, *pvTan);
+		MatrixVec3Normalize(*pvBin, *pvBin);
 
-		_ASSERT(MatrixVec3DotProductF(*pvNor, *pvNor) > 0.9f);
-		_ASSERT(MatrixVec3DotProductF(*pvTan, *pvTan) > 0.9f);
-		_ASSERT(MatrixVec3DotProductF(*pvBin, *pvBin) > 0.9f);
+		_ASSERT(MatrixVec3DotProduct(*pvNor, *pvNor) > 0.9f);
+		_ASSERT(MatrixVec3DotProduct(*pvTan, *pvTan) > 0.9f);
+		_ASSERT(MatrixVec3DotProduct(*pvBin, *pvBin) > 0.9f);
 	}
 }
 
@@ -530,8 +530,8 @@ bool VertexGenerateTangentSpace(
 	struct SVtxData
 	{
 		int				n;							// Number of items in following arrays, AKA number of tris using this vtx
-		VECTOR3f	pvTan[cnMaxSharedVtx];		// Tangent (one per triangle referencing this vtx)
-		VECTOR3f	pvBin[cnMaxSharedVtx];		// Binormal (one per triangle referencing this vtx)
+		VECTOR3	pvTan[cnMaxSharedVtx];		// Tangent (one per triangle referencing this vtx)
+		VECTOR3	pvBin[cnMaxSharedVtx];		// Binormal (one per triangle referencing this vtx)
 		int				pnTri[cnMaxSharedVtx];		// Triangle index (one per triangle referencing this vtx)
 	};
 	SVtxData		*psVtxData;		// Array of desired tangent spaces per vertex
@@ -588,36 +588,36 @@ bool VertexGenerateTangentSpace(
 			return false;
 		}
 
-		DataTypeRead((VECTOR4f*)pfPos0, (char*)&pVtx[nIdx0 * nStride] + nOffsetPos, eTypePos, 3);
-		DataTypeRead((VECTOR4f*)pfPos1, (char*)&pVtx[nIdx1 * nStride] + nOffsetPos, eTypePos, 3);
-		DataTypeRead((VECTOR4f*)pfPos2, (char*)&pVtx[nIdx2 * nStride] + nOffsetPos, eTypePos, 3);
+		DataTypeRead((VECTOR4*)pfPos0, (char*)&pVtx[nIdx0 * nStride] + nOffsetPos, eTypePos, 3);
+		DataTypeRead((VECTOR4*)pfPos1, (char*)&pVtx[nIdx1 * nStride] + nOffsetPos, eTypePos, 3);
+		DataTypeRead((VECTOR4*)pfPos2, (char*)&pVtx[nIdx2 * nStride] + nOffsetPos, eTypePos, 3);
 
-		DataTypeRead((VECTOR4f*)pfNor0, (char*)&pVtx[nIdx0 * nStride] + nOffsetNor, eTypeNor, 3);
-		DataTypeRead((VECTOR4f*)pfNor1, (char*)&pVtx[nIdx1 * nStride] + nOffsetNor, eTypeNor, 3);
-		DataTypeRead((VECTOR4f*)pfNor2, (char*)&pVtx[nIdx2 * nStride] + nOffsetNor, eTypeNor, 3);
+		DataTypeRead((VECTOR4*)pfNor0, (char*)&pVtx[nIdx0 * nStride] + nOffsetNor, eTypeNor, 3);
+		DataTypeRead((VECTOR4*)pfNor1, (char*)&pVtx[nIdx1 * nStride] + nOffsetNor, eTypeNor, 3);
+		DataTypeRead((VECTOR4*)pfNor2, (char*)&pVtx[nIdx2 * nStride] + nOffsetNor, eTypeNor, 3);
 
-		DataTypeRead((VECTOR4f*)pfTex0, (char*)&pVtx[nIdx0 * nStride] + nOffsetTex, eTypeTex, 3);
-		DataTypeRead((VECTOR4f*)pfTex1, (char*)&pVtx[nIdx1 * nStride] + nOffsetTex, eTypeTex, 3);
-		DataTypeRead((VECTOR4f*)pfTex2, (char*)&pVtx[nIdx2 * nStride] + nOffsetTex, eTypeTex, 3);
+		DataTypeRead((VECTOR4*)pfTex0, (char*)&pVtx[nIdx0 * nStride] + nOffsetTex, eTypeTex, 3);
+		DataTypeRead((VECTOR4*)pfTex1, (char*)&pVtx[nIdx1 * nStride] + nOffsetTex, eTypeTex, 3);
+		DataTypeRead((VECTOR4*)pfTex2, (char*)&pVtx[nIdx2 * nStride] + nOffsetTex, eTypeTex, 3);
 
 		VertexTangentBinormal(
 			&psVtxData[nIdx0].pvTan[psVtxData[nIdx0].n],
 			&psVtxData[nIdx0].pvBin[psVtxData[nIdx0].n],
-			(VECTOR3f*)pfNor0,
+			(VECTOR3*)pfNor0,
 			pfPos0, pfPos1, pfPos2,
 			pfTex0, pfTex1, pfTex2);
 
 		VertexTangentBinormal(
 			&psVtxData[nIdx1].pvTan[psVtxData[nIdx1].n],
 			&psVtxData[nIdx1].pvBin[psVtxData[nIdx1].n],
-			(VECTOR3f*)pfNor1,
+			(VECTOR3*)pfNor1,
 			pfPos1, pfPos2, pfPos0,
 			pfTex1, pfTex2, pfTex0);
 
 		VertexTangentBinormal(
 			&psVtxData[nIdx2].pvTan[psVtxData[nIdx2].n],
 			&psVtxData[nIdx2].pvBin[psVtxData[nIdx2].n],
-			(VECTOR3f*)pfNor2,
+			(VECTOR3*)pfNor2,
 			pfPos2, pfPos0, pfPos1,
 			pfTex2, pfTex0, pfTex1);
 
@@ -645,9 +645,9 @@ bool VertexGenerateTangentSpace(
 
 				// Check all the shared vertices which match
 				for(j = 0; j < psCmp->n; ++j) {
-					if(MatrixVec3DotProductF(psVtx->pvTan[nCurr], psCmp->pvTan[j]) < fSplitDifference)
+					if(MatrixVec3DotProduct(psVtx->pvTan[nCurr], psCmp->pvTan[j]) < fSplitDifference)
 						break;
-					if(MatrixVec3DotProductF(psVtx->pvBin[nCurr], psCmp->pvBin[j]) < fSplitDifference)
+					if(MatrixVec3DotProduct(psVtx->pvBin[nCurr], psCmp->pvBin[j]) < fSplitDifference)
 						break;
 				}
 
@@ -707,16 +707,16 @@ bool VertexGenerateTangentSpace(
 				}
 			}
 
-			MatrixVec3NormalizeF(*(VECTOR3f*)pfPos0, *(VECTOR3f*)pfPos0);
-			MatrixVec3NormalizeF(*(VECTOR3f*)pfPos1, *(VECTOR3f*)pfPos1);
+			MatrixVec3Normalize(*(VECTOR3*)pfPos0, *(VECTOR3*)pfPos0);
+			MatrixVec3Normalize(*(VECTOR3*)pfPos1, *(VECTOR3*)pfPos1);
 
 			if(*pnVtxNumOut >= MAX_VERTEX_OUT) {
 				_RPT0(_CRT_WARN,"VertexGenerateTangentSpace() ran out of working space! (Too many split vertices)\n");
 				return false;
 			}
 			memcpy(&(*pVtxOut)[(*pnVtxNumOut) * nStride], &pVtx[nVert*nStride], nStride);
-			DataTypeWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetTan, eTypeTan, 3, (VECTOR4f*)pfPos0);
-			DataTypeWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetBin, eTypeBin, 3, (VECTOR4f*)pfPos1);
+			DataTypeWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetTan, eTypeTan, 3, (VECTOR4*)pfPos0);
+			DataTypeWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetBin, eTypeBin, 3, (VECTOR4*)pfPos1);
 
 			++*pnVtxNumOut;
 		}

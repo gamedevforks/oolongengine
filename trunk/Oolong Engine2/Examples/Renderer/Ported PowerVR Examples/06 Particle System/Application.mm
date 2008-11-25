@@ -154,14 +154,14 @@ bool CShell::InitApplication()
 	{
 		return false;
 	}
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	if (!Textures->LoadTextureFromPointer((void*)FloorTex8, &floorTexName))
 	{
 		return false;
 	}
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/*
 	 Creates the projection matrix.
@@ -169,7 +169,7 @@ bool CShell::InitApplication()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(45.0f*(PIf/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	/*
 	 Calculates the attenuation coefficient for the points drawn.
@@ -186,7 +186,7 @@ bool CShell::InitApplication()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	MatrixLookAtRH(g_mView, vFrom, vTo, vUp);
-	myglLoadMatrix(g_mView.f);
+	glLoadMatrixf(g_mView.f);
 	
 	/*
 	 Pre-Set TexCoords since they never change.
@@ -331,7 +331,7 @@ bool CShell::RenderScene()
 	glViewport(0,0, WIDTH, HEIGHT);
 	
 	// Clear color and depth buffers
-	myglClearColor(f2vt(0), f2vt(0), f2vt(0), f2vt(0));
+	glClearColor(f2vt(0), f2vt(0), f2vt(0), f2vt(0));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	// Enables depth testing
@@ -340,7 +340,7 @@ bool CShell::RenderScene()
 	/*
 	 Modify per-frame variables controlling the particle mouvements.
 	 */
-	float speedctrl = (float) (FSIN(fRot*0.01f)+1.0f)/2.0f;
+	float speedctrl = (float) (sin(fRot*0.01f)+1.0f)/2.0f;
 	float stopnum = 0.8f;
 	float step = 0.1f;
 	if (speedctrl > stopnum)
@@ -516,7 +516,7 @@ bool CShell::RenderScene()
 	// Save modelview matrix
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	myglRotate(f2vt(-fRot), f2vt(0.0f), f2vt(1.0f), f2vt(0.0f));
+	glRotatef(f2vt(-fRot), f2vt(0.0f), f2vt(1.0f), f2vt(0.0f));
 	
 	// setup render states
 	glDisable(GL_LIGHTING);
@@ -526,7 +526,7 @@ bool CShell::RenderScene()
 	
 	// Set texture and texture environment
 	glBindTexture(GL_TEXTURE_2D, floorTexName);
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	
 	// Render floor
 	render_floor();
@@ -549,14 +549,14 @@ bool CShell::RenderScene()
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, texName);
 	
 	// Set model view matrix
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	myglScale(f2vt(1.0f), f2vt(-1.0f), f2vt(1.0f));
-	myglTranslate(f2vt(0.0f), f2vt(0.01f), f2vt(0.0f));
+	glScalef(f2vt(1.0f), f2vt(-1.0f), f2vt(1.0f));
+	glTranslatef(f2vt(0.0f), f2vt(0.01f), f2vt(0.0f));
 	
 #ifdef GL_OES_VERSION_1_1
 	glEnable(GL_POINT_SPRITE_OES);
@@ -586,7 +586,7 @@ bool CShell::RenderScene()
 #endif
 	
 	VECTOR3 Force = { f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
-	Force.x = f2vt(1000.0f*(float)FSIN(fRot*0.01f));
+	Force.x = f2vt(1000.0f*(float)sin(fRot*0.01f));
 	
 	for(i = 0; i < nNumParticles; i++)
 	{
@@ -792,7 +792,7 @@ void render_particle(int NmbrOfParticles, bool bReflect)
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3,VERTTYPEENUM,sizeof(SVtxPointSprite),0);
 		
-		myglTexEnv( GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE );
+		glTexEnvf( GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE );
 		
 		glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
 		glPointSizePointerOES(VERTTYPEENUM,sizeof(SVtxPointSprite),(GLvoid*) (sizeof(VERTTYPE)*3));
@@ -804,7 +804,7 @@ void render_particle(int NmbrOfParticles, bool bReflect)
 		// Note: point_attenuation_coef will be too small to represent as a fixed point number,
 		// So use an approximation to the attenuation (fixed attenuation of 0.01) instead.
 		VERTTYPE coefs[4] = { f2vt(0.01f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
-		myglPointParameterv(GL_POINT_DISTANCE_ATTENUATION,coefs);
+		glPointParametervf(GL_POINT_DISTANCE_ATTENUATION,coefs);
 #endif
 		glEnableClientState(GL_COLOR_ARRAY);
 		if(bReflect)
@@ -865,7 +865,7 @@ void render_floor()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2,VERTTYPEENUM,0,floor_quad_uvs);
 	
-	myglColor4(f2vt(1), f2vt(1), f2vt(1), f2vt(0.5));
+	glColor4f(f2vt(1), f2vt(1), f2vt(1), f2vt(0.5));
 	
 	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 	
@@ -882,7 +882,7 @@ void render_floor()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2,GL_BYTE,sizeof(SVtx),(const GLvoid*) (3*sizeof(VERTTYPE)));
 	
-	myglColor4(f2vt(1), f2vt(1), f2vt(1), f2vt(0.5));
+	glColor4f(f2vt(1), f2vt(1), f2vt(1), f2vt(0.5));
 	
 	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 	

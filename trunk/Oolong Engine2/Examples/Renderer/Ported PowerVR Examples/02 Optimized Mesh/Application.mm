@@ -152,7 +152,7 @@ bool CShell::InitApplication()
 	glLoadIdentity();
 	
 	// this is were the projection matrix calculated below in MatrixPerspectiveFovRH() in the CameraGetMatrix() call is applied
-	myglMultMatrix(m_mProj.f);
+	glMultMatrixf(m_mProj.f);
 	
 	/******************************
 	 ** GENERIC RENDER STATES     **
@@ -171,7 +171,7 @@ bool CShell::InitApplication()
 	glFrontFace(GL_CW);
 	
 	/* Sets the clear color */
-	myglClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));
+	glClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));
 	
 	/* Reset the model view matrix to position the light */
 	glMatrixMode(GL_MODELVIEW);
@@ -312,9 +312,9 @@ void ComputeViewMatrix()
 	VERTTYPE factor;
 	
 	/* Calculate the angle of the camera around the balloon */
-	vFrom.x = VERTTYPEMUL(VIEW_DISTANCE, COS(m_fViewAngle));
+	vFrom.x = VERTTYPEMUL(VIEW_DISTANCE, cos(m_fViewAngle));
 	vFrom.y = f2vt(0.0f);
-	vFrom.z = VERTTYPEMUL(VIEW_DISTANCE, SIN(m_fViewAngle));
+	vFrom.z = VERTTYPEMUL(VIEW_DISTANCE, sin(m_fViewAngle));
 	
 	// Increase the rotation
 	factor = f2vt(0.005f * (float)m_uiTimeDiff);
@@ -327,7 +327,7 @@ void ComputeViewMatrix()
 	/* Compute and set the matrix */
 	MatrixLookAtRH(m_mView, vFrom, c_vOrigin, c_vUp);
 	glMatrixMode(GL_MODELVIEW);
-	myglLoadMatrix(m_mView.f);
+	glLoadMatrixf(m_mView.f);
 }
 
 /*******************************************************************************
@@ -345,15 +345,15 @@ void DrawModel( int iOptim )
 	
 	MATRIX worldMatrix;
 	m_sModel.GetWorldMatrix(worldMatrix, m_sModel.pNode[0]);
-	myglMultMatrix(worldMatrix.f);
+	glMultMatrixf(worldMatrix.f);
 	
 	/* Enable back face culling */
 	//	glEnable(GL_CULL_FACE);
 	//	glCullFace(GL_FRONT);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_Texture);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/* Enable States */
 	glEnableClientState(GL_VERTEX_ARRAY);

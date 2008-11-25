@@ -145,8 +145,8 @@ bool CShell::InitApplication()
 		{
 			printf("**ERROR** Failed to load texture for skybox.\n");
 		}
-		myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-		myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 	
 	sprintf(filename, "%s/balloon.pvr", buffer);
@@ -154,8 +154,8 @@ bool CShell::InitApplication()
 	{
 		printf("**ERROR** Failed to load texture for Background.\n");
 	}
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	delete [] filename;
 	delete [] buffer;
@@ -174,7 +174,7 @@ bool CShell::InitApplication()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	
-	myglMultMatrix(g_mProj.f);
+	glMultMatrixf(g_mProj.f);
 	
 	/******************************
 	 ** GENERIC RENDER STATES     **
@@ -196,11 +196,11 @@ bool CShell::InitApplication()
 	glFrontFace(GL_CW);
 	
 	/* Enables texture clamping */
-	myglTexParameter( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	myglTexParameter( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 	
 	/* Sets the clear color */
-	myglClearColor(f2vt(0.5f), f2vt(0.5f), f2vt(0.5f), 0);
+	glClearColor(f2vt(0.5f), f2vt(0.5f), f2vt(0.5f), 0);
 	
 	/* Reset the model view matrix to position the light */
 	glMatrixMode(GL_MODELVIEW);
@@ -209,7 +209,7 @@ bool CShell::InitApplication()
 	/* Setup ambiant light */
     glEnable(GL_LIGHTING);
 	VERTTYPE lightGlobalAmbient[] = {f2vt(0.4f), f2vt(0.4f), f2vt(0.4f), f2vt(1.0f)};
-    myglLightModelv(GL_LIGHT_MODEL_AMBIENT, lightGlobalAmbient);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightGlobalAmbient);
 	
 	/* Setup a directional light source */
 	VERTTYPE lightPosition[] = {f2vt(+0.7f), f2vt(+1.0f), f2vt(-0.2f), f2vt(0.0f)};
@@ -218,18 +218,18 @@ bool CShell::InitApplication()
     VERTTYPE lightSpecular[] = {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f)};
 	
     glEnable(GL_LIGHT0);
-    myglLightv(GL_LIGHT0, GL_POSITION, lightPosition);
-    myglLightv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-    myglLightv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-    myglLightv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
 	
 	/* Setup the balloon material */
 	VERTTYPE objectMatAmb[] = {f2vt(0.7f), f2vt(0.7f), f2vt(0.7f), f2vt(1.0f)};
 	VERTTYPE objectMatDiff[] = {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f)};
 	VERTTYPE objectMatSpec[] = {f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f)};
-	myglMaterialv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
-	myglMaterialv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
-	myglMaterialv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
 	
 	
 	return true;
@@ -322,25 +322,25 @@ void ComputeViewMatrix()
 	VECTOR3 vFrom;
 	
 	/* Calculate the distance to balloon */
-	VERTTYPE distance = fViewDistance + VERTTYPEMUL(fViewAmplitude, SIN(fViewAmplitudeAngle));
+	VERTTYPE distance = fViewDistance + VERTTYPEMUL(fViewAmplitude, sin(fViewAmplitudeAngle));
 	distance = VERTTYPEDIV(distance, f2vt(5.0f));
 	fViewAmplitudeAngle += f2vt(.004f);
 	
 	/* Calculate the vertical position of the camera */
-	VERTTYPE updown = VERTTYPEMUL(fViewUpDownAmplitude, SIN(fViewUpDownAngle));
+	VERTTYPE updown = VERTTYPEMUL(fViewUpDownAmplitude, sin(fViewUpDownAngle));
 	updown = VERTTYPEDIV(updown, f2vt(5.0f));
 	fViewUpDownAngle += f2vt(0.005f);
 	
 	/* Calculate the angle of the camera around the balloon */
-	vFrom.x = VERTTYPEMUL(distance, COS(fViewAngle));
+	vFrom.x = VERTTYPEMUL(distance, cos(fViewAngle));
 	vFrom.y = updown;
-	vFrom.z = VERTTYPEMUL(distance, SIN(fViewAngle));
+	vFrom.z = VERTTYPEMUL(distance, sin(fViewAngle));
 	fViewAngle += f2vt(0.003f);
 	
 	/* Compute and set the matrix */
 	MatrixLookAtRH(g_mView, vFrom, vTo, vUp);
 	glMatrixMode(GL_MODELVIEW);
-	myglLoadMatrix(g_mView.f);
+	glLoadMatrixf(g_mView.f);
 	
 	/* Remember the camera position to draw the skybox around it */
 	vCameraPosition = vFrom;
@@ -353,12 +353,12 @@ void ComputeViewMatrix()
 void DrawSkybox()
 {
 	/* Only use the texture color */
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	
 	/* Draw the skybox around the camera position */
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	myglTranslate(-vCameraPosition.x, -vCameraPosition.y, -vCameraPosition.z);
+	glTranslatef(-vCameraPosition.x, -vCameraPosition.y, -vCameraPosition.z);
 	
 	/* Disable lighting */
 	glDisable(GL_LIGHTING);
@@ -399,10 +399,10 @@ void DrawBalloon()
 	
 	MATRIX worldMatrix;
 	g_sScene.GetWorldMatrix(worldMatrix, g_sScene.pNode[0]);
-	myglMultMatrix(worldMatrix.f);
+	glMultMatrixf(worldMatrix.f);
 	
 	/* Modulate with vertex color */
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	/* Enable lighting */
 	glEnable(GL_LIGHTING);

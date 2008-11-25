@@ -15,9 +15,6 @@ subject to the following restrictions:
 #ifndef MATH_H_
 #define MATH_H_
 
-#include "../Math/FixedPointAPI.h"
-#include "../Math/FixedPoint.h"
-#include "../Math/MathTable.h"
 #include "../Math/Matrix.h"
 #include "../Math/Quaternion.h"
 #include "../Math/Vector.h"

@@ -76,8 +76,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249189878;
-			PBXWorkspaceStateSaveDate = 249189878;
+			PBXPerProjectTemplateStateSaveDate = 249282880;
+			PBXWorkspaceStateSaveDate = 249282880;
+		};
+		perUserProjectItems = {
+			79317C640EDC4E8000247E3D /* PBXTextBookmark */ = 79317C640EDC4E8000247E3D /* PBXTextBookmark */;
+			79317C650EDC4E8000247E3D /* PBXTextBookmark */ = 79317C650EDC4E8000247E3D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -133,11 +137,29 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 5250}}";
-			sepNavSelRange = "{5240, 534}";
-			sepNavVisRange = "{5016, 864}";
+			sepNavIntBoundsRect = "{{0, 0}, {768, 5348}}";
+			sepNavSelRange = "{3119, 1}";
+			sepNavVisRange = "{3022, 316}";
 			sepNavWindowFrame = "{{411, 79}, {821, 781}}";
 		};
+	};
+	79317C640EDC4E8000247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'myglTexParameter' was not declared in this scope";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 118;
+		rType = 1;
+	};
+	79317C650EDC4E8000247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 117";
+		rLen = 1;
+		rLoc = 3119;
+		rType = 0;
+		vrLen = 316;
+		vrLoc = 3022;
 	};
 	79E81B040DFCDA4000592D01 /* Application.mm:324 */ = {
 		isa = PBXFileBreakpoint;
@@ -153,7 +175,7 @@
 		ignoreCount = 0;
 		lineNumber = 324;
 		location = ClipPlanes;
-		modificationTime = 249189927.167244;
+		modificationTime = 249318957.372094;
 		state = 2;
 	};
 }

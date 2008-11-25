@@ -50,6 +50,56 @@ int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 int frames;
 float frameRate;
 
+// Structure Definitions
+
+//
+// Defines the format of a header-object as exported by the MAX
+// plugin.
+//
+typedef struct {
+	unsigned int      nNumVertex;
+    unsigned int      nNumFaces;
+    unsigned int      nNumStrips;
+    unsigned int      nFlags;
+    unsigned int      nMaterial;
+    float             fCenter[3];
+    float             *pVertex;
+    float             *pUV;
+    float             *pNormals;
+    float             *pPackedVertex;
+    unsigned int      *pVertexColor;
+    unsigned int      *pVertexMaterial;
+    unsigned short    *pFaces;
+    unsigned short    *pStrips;
+    unsigned short    *pStripLength;
+    struct
+    {
+        unsigned int  nType;
+        unsigned int  nNumPatches;
+        unsigned int  nNumVertices;
+        unsigned int  nNumSubdivisions;
+        float         *pControlPoints;
+        float         *pUVs;
+    } Patch;
+}   HeaderStruct_Mesh;
+
+
+typedef HeaderStruct_Mesh HeaderStruct_Mesh_Type;
+
+//
+// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
+// Expects a pointer to the object structure in the header file
+// returns a directly usable geometry in fixed or float format
+// 
+HeaderStruct_Mesh_Type* LoadHeaderObject(const void *headerObj);
+
+//
+// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
+// expects a pointer returned by LoadHeaderObject
+// 
+void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj);
+
+
 /* Mesh pointers */
 HeaderStruct_Mesh_Type *glassMesh;
 HeaderStruct_Mesh_Type *silverMesh;
@@ -68,6 +118,27 @@ VERTTYPE				fXAng, fYAng;
 void RenderObject(HeaderStruct_Mesh_Type *mesh);
 void RenderReflectiveObject(HeaderStruct_Mesh_Type *mesh, MATRIX *pNormalTx);
 void RenderBackground();
+
+//
+// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
+// Expects a pointer to the object structure in the header file
+// returns a directly usable geometry in fixed or float format
+// 
+HeaderStruct_Mesh_Type *LoadHeaderObject(const void *headerObj)
+{
+	HeaderStruct_Mesh_Type *new_mesh = new HeaderStruct_Mesh_Type;
+	memcpy (new_mesh,headerObj,sizeof(HeaderStruct_Mesh_Type));
+	return (HeaderStruct_Mesh_Type*) new_mesh;
+}
+//
+// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
+// expects a pointer returned by LoadHeaderObject
+// 
+void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj)
+{
+	delete headerObj;
+}
+
 
 bool CShell::InitApplication()
 {
@@ -91,24 +162,24 @@ bool CShell::InitApplication()
 	/* Load textures */
 	if (!Textures->LoadTextureFromPointer((void*)BACK,&backTexName))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if (!Textures->LoadTextureFromPointer((void*)Flora,&floraTexName))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if (!Textures->LoadTextureFromPointer((void*)REFLECT,&reflectTexName))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/* Calculate projection matrix */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(35.0f*(3.14f/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	/* Enable texturing */
 	glEnable(GL_TEXTURE_2D);
@@ -179,7 +250,7 @@ bool CShell::RenderScene()
 	
 	/* Clear the buffers */
 	glEnable(GL_DEPTH_TEST);
-	myglClearColor(1,1,1,0);
+	glClearColor(1,1,1,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	/* Draw the scene */
@@ -203,7 +274,7 @@ bool CShell::RenderScene()
 	glBindTexture(GL_TEXTURE_2D, backTexName);
 	
 	/* Set texture environment mode: use texture directly */
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	
 	/* Render background */
 	RenderBackground();
@@ -221,8 +292,8 @@ bool CShell::RenderScene()
 	/* Modelview matrix */
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	myglTranslate(f2vt(0.0f), f2vt(0.0f), f2vt(-200.0f));
-	myglMultMatrix(RotationMatrix.f);
+	glTranslatef(f2vt(0.0f), f2vt(0.0f), f2vt(-200.0f));
+	glMultMatrixf(RotationMatrix.f);
 	
 	/* Projection matrix */
 	glMatrixMode(GL_PROJECTION);
@@ -236,7 +307,7 @@ bool CShell::RenderScene()
 	
 	/* Set texture and texture env mode */
 	glBindTexture(GL_TEXTURE_2D,reflectTexName);
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	
 	/* Render reflective object */
 	RenderReflectiveObject(silverMesh, &RotationMatrix);
@@ -255,7 +326,7 @@ bool CShell::RenderScene()
 	
 	/* Set texture and texture env mode */
 	glBindTexture(GL_TEXTURE_2D, floraTexName);
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	
 	/* Pass 1: only render back faces (model has reverse winding) */
 	glFrontFace(GL_CW);

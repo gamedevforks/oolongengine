@@ -42,6 +42,56 @@ CDisplayText * AppDisplayText;
 CTexture * Texture;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 
+// Structure Definitions
+
+//
+// Defines the format of a header-object as exported by the MAX
+// plugin.
+//
+typedef struct {
+	unsigned int      nNumVertex;
+    unsigned int      nNumFaces;
+    unsigned int      nNumStrips;
+    unsigned int      nFlags;
+    unsigned int      nMaterial;
+    float             fCenter[3];
+    float             *pVertex;
+    float             *pUV;
+    float             *pNormals;
+    float             *pPackedVertex;
+    unsigned int      *pVertexColor;
+    unsigned int      *pVertexMaterial;
+    unsigned short    *pFaces;
+    unsigned short    *pStrips;
+    unsigned short    *pStripLength;
+    struct
+    {
+        unsigned int  nType;
+        unsigned int  nNumPatches;
+        unsigned int  nNumVertices;
+        unsigned int  nNumSubdivisions;
+        float         *pControlPoints;
+        float         *pUVs;
+    } Patch;
+}   HeaderStruct_Mesh;
+
+
+typedef HeaderStruct_Mesh HeaderStruct_Mesh_Type;
+
+//
+// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
+// Expects a pointer to the object structure in the header file
+// returns a directly usable geometry in fixed or float format
+// 
+HeaderStruct_Mesh_Type* LoadHeaderObject(const void *headerObj);
+
+//
+// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
+// expects a pointer returned by LoadHeaderObject
+// 
+void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj);
+
+
 int frames;
 float frameRate;
 
@@ -94,7 +144,25 @@ void initLight(SLightVars *pLight);
 void stepLight(SLightVars *pLight);
 void renderLight(SLightVars *pLight);
 
-
+//
+// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
+// Expects a pointer to the object structure in the header file
+// returns a directly usable geometry in fixed or float format
+// 
+HeaderStruct_Mesh_Type *LoadHeaderObject(const void *headerObj)
+{
+	HeaderStruct_Mesh_Type *new_mesh = new HeaderStruct_Mesh_Type;
+	memcpy (new_mesh,headerObj,sizeof(HeaderStruct_Mesh_Type));
+	return (HeaderStruct_Mesh_Type*) new_mesh;
+}
+//
+// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
+// expects a pointer returned by LoadHeaderObject
+// 
+void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj)
+{
+	delete headerObj;
+}
 
 bool CShell::InitApplication()
 {
@@ -117,22 +185,22 @@ bool CShell::InitApplication()
 	/* Load textures */
 	if (!Texture->LoadTextureFromPointer((void*)GRANITE, &texNameObject))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if (!Texture->LoadTextureFromPointer((void*)LightTex, &texNameLight))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/* Setup all materials */
 	VERTTYPE objectMatAmb[]		= {f2vt(0.1f), f2vt(0.1f), f2vt(0.1f), f2vt(0.3f)};
 	VERTTYPE objectMatDiff[]	= {f2vt(0.5f), f2vt(0.5f), f2vt(0.5f), f2vt(0.3f)};
 	VERTTYPE objectMatSpec[]	= {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(0.3f)};
-	myglMaterialv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
-	myglMaterialv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
-	myglMaterialv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
-	myglMaterial(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(10));	// Nice and shiny so we don't get aliasing from the 1/2 angle
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(10));	// Nice and shiny so we don't get aliasing from the 1/2 angle
 	
 	/* Initialize all lights */
 	srand(0);
@@ -146,12 +214,12 @@ bool CShell::InitApplication()
 	glLoadIdentity();
 
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(20.0f*(PIf/180.0f)), f2vt((float)WIDTH / (float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	/* Modelview matrix */
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	myglTranslate(f2vt(0.0f), f2vt(0.0f), f2vt(-500.0f));
+	glTranslatef(f2vt(0.0f), f2vt(0.0f), f2vt(-500.0f));
 	
 	/* Setup culling */
 	glEnable(GL_CULL_FACE);
@@ -218,7 +286,7 @@ bool CShell::RenderScene()
 	
 	/* Clear the buffers */
 	glEnable(GL_DEPTH_TEST);
-	myglClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
+	glClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	/* Lighting */
@@ -241,10 +309,10 @@ bool CShell::RenderScene()
 			stepLight(&m_psLightData[i]);
 			
 			/* Set light properties */
-			myglLightv(GL_LIGHT0 + i, GL_POSITION, &m_psLightData[i].position.x);
-			myglLightv(GL_LIGHT0 + i, GL_AMBIENT, &m_psLightData[i].ambient.x);
-			myglLightv(GL_LIGHT0 + i, GL_DIFFUSE, &m_psLightData[i].diffuse.x);
-			myglLightv(GL_LIGHT0 + i, GL_SPECULAR, &m_psLightData[i].specular.x);
+			glLightfv(GL_LIGHT0 + i, GL_POSITION, &m_psLightData[i].position.x);
+			glLightfv(GL_LIGHT0 + i, GL_AMBIENT, &m_psLightData[i].ambient.x);
+			glLightfv(GL_LIGHT0 + i, GL_DIFFUSE, &m_psLightData[i].diffuse.x);
+			glLightfv(GL_LIGHT0 + i, GL_SPECULAR, &m_psLightData[i].specular.x);
 			
 			/* Enable light */
 			glEnable(GL_LIGHT0 + i);
@@ -261,7 +329,7 @@ bool CShell::RenderScene()
 	 *************/
 	
 	/* Set texture and texture environment */
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, texNameObject);
 	
 	/* Render geometry */
@@ -271,7 +339,7 @@ bool CShell::RenderScene()
 	glPushMatrix();
 	
 	/* Add a small Y rotation to the model */
-	myglMultMatrix(RotationMatrix.f);
+	glMultMatrixf(RotationMatrix.f);
 	
 	/* Loop through all meshes */
 	for (i = 0; i < NUM_MESHES; i++)
@@ -434,7 +502,7 @@ void renderLight(SLightVars *pLight)
 	quad_uvs[7]   = f2vt(1);
 	
 	/* Set texture and texture environment */
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, texNameLight);
 	
 	/* Set vertex data */
@@ -446,7 +514,7 @@ void renderLight(SLightVars *pLight)
 	glTexCoordPointer(2, VERTTYPEENUM, 0, quad_uvs);
 	
 	/* Set light colour 2x overbright for more contrast (will be modulated with texture) */
-	myglColor4(VERTTYPEMUL(pLight->diffuse.x,f2vt(2.0f)), VERTTYPEMUL(pLight->diffuse.y,f2vt(2.0f)), VERTTYPEMUL(pLight->diffuse.z,f2vt(2.0f)), f2vt(1));
+	glColor4f(VERTTYPEMUL(pLight->diffuse.x,f2vt(2.0f)), VERTTYPEMUL(pLight->diffuse.y,f2vt(2.0f)), VERTTYPEMUL(pLight->diffuse.z,f2vt(2.0f)), f2vt(1));
 	
 	/* Draw quad */
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

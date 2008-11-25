@@ -17,7 +17,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Accelerometer */;
-		activeSDKPreference = iphoneos2.0;
+		activeSDKPreference = iphoneos2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Accelerometer */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Accelerometer */,
@@ -75,8 +75,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249190188;
-			PBXWorkspaceStateSaveDate = 249190188;
+			PBXPerProjectTemplateStateSaveDate = 249320626;
+			PBXWorkspaceStateSaveDate = 249320626;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -146,20 +146,6 @@
 			sepNavWindowFrame = "{{15, 86}, {883, 792}}";
 		};
 	};
-	79235CDA0DAD243A00F918F8 /* FixedPointAPI.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {522, 1078}}";
-			sepNavSelRange = "{371, 0}";
-			sepNavVisRange = "{180, 333}";
-		};
-	};
-	79235CDD0DAD243A00F918F8 /* MatrixF.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {708, 5852}}";
-			sepNavSelRange = "{725, 20}";
-			sepNavVisRange = "{555, 271}";
-		};
-	};
 	79235D160DAD25E900F918F8 /* EAGLView.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1200, 1638}}";
@@ -186,9 +172,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 2660}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 2618}}";
 			sepNavSelRange = "{4392, 0}";
-			sepNavVisRange = "{4005, 1352}";
+			sepNavVisRange = "{3961, 1308}";
 			sepNavWindowFrame = "{{342, 91}, {883, 787}}";
 		};
 	};

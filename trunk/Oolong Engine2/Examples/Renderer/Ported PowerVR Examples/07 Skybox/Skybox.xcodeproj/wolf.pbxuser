@@ -94,8 +94,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249189806;
-			PBXWorkspaceStateSaveDate = 249189806;
+			PBXPerProjectTemplateStateSaveDate = 249282653;
+			PBXWorkspaceStateSaveDate = 249282653;
+		};
+		perUserProjectItems = {
+			79317C320EDBC07400247E3D /* PBXBookmark */ = 79317C320EDBC07400247E3D /* PBXBookmark */;
+			79317C710EDC4E8100247E3D /* PBXTextBookmark */ = 79317C710EDC4E8100247E3D /* PBXTextBookmark */;
+			79317C720EDC4E8100247E3D /* PBXTextBookmark */ = 79317C720EDC4E8100247E3D /* PBXTextBookmark */;
+			79317C7E0EDC4E8100247E3D /* PBXTextBookmark */ = 79317C7E0EDC4E8100247E3D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -158,11 +164,43 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 8526}}";
-			sepNavSelRange = "{7765, 533}";
-			sepNavVisRange = "{7458, 982}";
-			sepNavWindowFrame = "{{360, 73}, {1160, 759}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 8694}}";
+			sepNavSelRange = "{5905, 0}";
+			sepNavVisRange = "{5296, 1511}";
+			sepNavWindowFrame = "{{210, 98}, {1160, 759}}";
 		};
+	};
+	79317C320EDBC07400247E3D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+	};
+	79317C710EDC4E8100247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'SIN' was not declared in this scope";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 336;
+		rType = 1;
+	};
+	79317C720EDC4E8100247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 337";
+		rLen = 0;
+		rLoc = 9785;
+		rType = 0;
+		vrLen = 291;
+		vrLoc = 9617;
+	};
+	79317C7E0EDC4E8100247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 203";
+		rLen = 0;
+		rLoc = 5905;
+		rType = 0;
+		vrLen = 1511;
+		vrLoc = 5296;
 	};
 	799121BC0E1F410C00035EEA /* ResourcePath.h */ = {
 		uiCtxt = {

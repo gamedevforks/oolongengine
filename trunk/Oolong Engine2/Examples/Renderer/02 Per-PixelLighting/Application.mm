@@ -148,22 +148,22 @@ bool CShell::InitApplication()
   	if(Textures->LoadTextureFromPointer((void*)crate, &m_ui32Crate))
 		printf("Crate texture loaded");
 		
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	// load the red stamp texture
   	if(Textures->LoadTextureFromPointer((void*)stamp, &m_ui32Stamp))
 		printf("Red stamp texture loaded");
 		
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	// load the red stamp normal map texture
   	if(Textures->LoadTextureFromPointer((void*)stampnm, &m_ui32Stampnm))
 		printf("Normal map for red stamp texture loaded");
 		
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
 		printf("Display text textures loaded");
@@ -201,7 +201,7 @@ bool CShell::UpdateScene()
 	
 	MATRIX	MyPerspMatrix;
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	// do all the timing
 	static CFTimeInterval	startTime = 0;
@@ -272,9 +272,9 @@ bool CShell::RenderScene()
 	/*
 		Set up the light vector and rotate it round the cube.
 	*/
-	fLightVector.x = SIN(f2vt(m_fAngle * (PIf / 180.0f)));
+	fLightVector.x = sin(f2vt(m_fAngle * (PIf / 180.0f)));
 	fLightVector.y = f2vt(0.0f);
-	fLightVector.z = COS(f2vt(m_fAngle * (PIf / 180.0f)));
+	fLightVector.z = cos(f2vt(m_fAngle * (PIf / 180.0f)));
 
 	/* Half shifting to have a value between 0.0f and 1.0f */
 	fLightVector.x = VERTTYPEMUL(fLightVector.x, f2vt(0.5f)) + f2vt(0.5f);
@@ -284,7 +284,7 @@ bool CShell::RenderScene()
 	/* Set light direction as a colour
 	 * (the colour ordering depend on how the normal map has been computed)
 	 * red=y, green=z, blue=x */
-	myglColor4(fLightVector.y, fLightVector.z, fLightVector.x, 0);
+	glColor4f(fLightVector.y, fLightVector.z, fLightVector.x, 0);
 
 	/* 
 		Set up the First Texture (the normal map) and combine it with the texture
@@ -293,33 +293,33 @@ bool CShell::RenderScene()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_ui32Stampnm);
 
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-	myglTexEnv(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_DOT3_RGBA);
-	myglTexEnv(GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE);
-	myglTexEnv(GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PREVIOUS);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_DOT3_RGBA);
+	glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PREVIOUS);
 
 	/* Set up the Second Texture and combine it with the result of the Dot3 combination*/
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_ui32Crate);
 
 	/* Set the texture environment mode for this texture to combine */
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
 
 	/* Set the method we're going to combine the two textures by. */
-	myglTexEnv(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
 
 	/* Use the previous combine texture as source 0*/
-	myglTexEnv(GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_TEXTURE);
 
 	/* Use the current texture as source 1 */
-	myglTexEnv(GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PREVIOUS);
+	glTexEnvf(GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_PREVIOUS);
 
 	/*
 		Set what we will operate on, in this case we are going to use
 		just the texture colours.
 	*/
-	myglTexEnv(GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
-	myglTexEnv(GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
+	glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND0_RGB, GL_SRC_COLOR);
+	glTexEnvf(GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
 
 	/* Draw mesh */
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, &m_sCube.ui16Faces[0]);
@@ -329,7 +329,7 @@ bool CShell::RenderScene()
 
 
 	// Reset
-	myglColor4(f2vt(1.0),f2vt(1.0),f2vt(1.0),f2vt(1.0));
+	glColor4f(f2vt(1.0),f2vt(1.0),f2vt(1.0),f2vt(1.0));
 
 	/* Disable states */
 	/*Disable the vertex buffer. */

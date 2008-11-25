@@ -160,16 +160,16 @@ bool CShell::InitApplication()
 	 Load the textures from the headers.
 	 */
 	if(!Textures->LoadTextureFromPointer((void*)TableCover, &m_uiTableCover)) return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if(!Textures->LoadTextureFromPointer((void*)kettle, &m_uiKettle)) return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if(!Textures->LoadTextureFromPointer((void*)Blob, &m_uiBlobMap)) return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/*
 	 Generate a texture for the render to texture shadow.
@@ -182,11 +182,11 @@ bool CShell::InitApplication()
 	glEnable(GL_TEXTURE_2D);
 	
 	// If Tex Params are not set glCopyTexImage2D will fail !
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	
 	// Initialise the Texture
 	glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,TEXTURESIZE,TEXTURESIZE,0,GL_RGB,GL_UNSIGNED_BYTE,0);
@@ -231,7 +231,7 @@ bool CShell::InitApplication()
 	vLightDirection.w = f2vt(0.0f);
 	
 	// Specify the light direction in world space
-	myglLightv(GL_LIGHT0, GL_POSITION, (VERTTYPE*)&vLightDirection);
+	glLightfv(GL_LIGHT0, GL_POSITION, (VERTTYPE*)&vLightDirection);
 	
 	glShadeModel( GL_SMOOTH );
 	
@@ -283,7 +283,7 @@ bool CShell::InitApplication()
 	MatrixIdentity(m_mObjectRotation);
 	
 	// polygon offset for shadow to avoid ZFighting between the shadow and floor
-	myglPolygonOffset(f2vt(-10.0f),f2vt(-25.0f));
+	glPolygonOffset(f2vt(-10.0f),f2vt(-25.0f));
 
 	return true;
 }
@@ -359,7 +359,7 @@ bool RenderToTexture(SPODNode *pNode)
 	m_Scene.GetWorldMatrix(mWorld, *pNode);
 	
 	// Set the Shadow Color and Alpha
-	myglColor4(f2vt(0.25f), f2vt(0.25f), f2vt(0.25f), f2vt(0.0f));
+	glColor4f(f2vt(0.25f), f2vt(0.25f), f2vt(0.25f), f2vt(0.0f));
 	
 	MatrixMultiply(mWorld, mWorld, m_mObjectRotation);
 	
@@ -367,7 +367,7 @@ bool RenderToTexture(SPODNode *pNode)
 	glMatrixMode(GL_MODELVIEW);
 	
 	MatrixMultiply(mModelView, mWorld, m_mLightView);
-	myglLoadMatrix(mModelView.f);
+	glLoadMatrixf(mModelView.f);
 	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	
@@ -410,11 +410,11 @@ bool DrawShadowTexture()
 	if(1)
 	{
 		fScale = WIDTH / HEIGHT;
-		myglRotate(f2vt(90.0f), f2vt(0),f2vt(0),f2vt(1));
+		glRotatef(f2vt(90.0f), f2vt(0),f2vt(0),f2vt(1));
 	}
 	
-	myglTranslate(f2vt(-1), f2vt(-1), f2vt(0.5f));
-	myglScale(f2vt(fScale),f2vt(1) ,f2vt(1));
+	glTranslatef(f2vt(-1), f2vt(-1), f2vt(0.5f));
+	glScalef(f2vt(fScale),f2vt(1) ,f2vt(1));
 	
 	static VERTTYPE	VerticesLeft[] = {
 		f2vt(0.02f) , f2vt(0.6f) , f2vt(0.0f),
@@ -468,7 +468,7 @@ bool RenderFromLightsView()
 	glEnable(GL_DEPTH_TEST);
 	
 	glViewport(0, 0, TEXTURESIZE, TEXTURESIZE);
-	myglClearColor(f2vt(1), f2vt(1), f2vt(1), f2vt(1));
+	glClearColor(f2vt(1), f2vt(1), f2vt(1), f2vt(1));
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
@@ -477,7 +477,7 @@ bool RenderFromLightsView()
 	MatrixPerspectiveFovRH(proj, f2vt(45.0f), VERTTYPEDIV(TEXTURESIZE, TEXTURESIZE), f2vt(CAM_NEAR), f2vt(CAM_FAR), false);
 	
 	glMatrixMode(GL_PROJECTION);
-	myglLoadMatrix(proj.f);
+	glLoadMatrixf(proj.f);
 	
 	RenderToTexture(&m_Scene.pNode[SHADOW_CASTER]);
 	
@@ -577,7 +577,7 @@ bool CShell::RenderScene()
 		vLightDirection.w = f2vt(0.0f);
 		
 		// Specify the light direction in world space
-		myglLightv(GL_LIGHT0, GL_POSITION, &vLightDirection.x);
+		glLightfv(GL_LIGHT0, GL_POSITION, &vLightDirection.x);
 		
 		VECTOR3 MyUp, fPointOfInterest;
 		
@@ -605,16 +605,16 @@ bool CShell::RenderScene()
 	}
 	
 	glEnable(GL_DEPTH_TEST);
-	myglColor4(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
+	glColor4f(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
 	
 	glViewport(0,0,HEIGHT,WIDTH);
 	
-	myglClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));
+	glClearColor(f2vt(0.6f), f2vt(0.8f), f2vt(1.0f), f2vt(1.0f));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	// Loads the projection matrix
 	glMatrixMode(GL_PROJECTION);
-	myglLoadMatrix(m_mProjection.f);
+	glLoadMatrixf(m_mProjection.f);
 	
 	// Specify the view matrix to OpenGL ES
 	glMatrixMode(GL_MODELVIEW);
@@ -638,7 +638,7 @@ bool CShell::RenderScene()
 	MatrixRotationY(fTransform, m_fAngle);
 	MatrixMultiply(mWorld, mWorld, fTransform);
 	MatrixMultiply(mModelView, mWorld, m_mView);
-	myglLoadMatrix(mModelView.f);
+	glLoadMatrixf(mModelView.f);
 	
 	if (pNode->nIdxMaterial == -1)
 	{
@@ -662,7 +662,7 @@ bool CShell::RenderScene()
 	m_Scene.GetWorldMatrix(mWorld, *pNode);
 	
 	MatrixMultiply(mModelView, mWorld, m_mView);
-	myglLoadMatrix(mModelView.f);
+	glLoadMatrixf(mModelView.f);
 	
 	if (pNode->nIdxMaterial == -1)
 	{
@@ -711,7 +711,7 @@ bool CShell::RenderScene()
 	MatrixMultiply(fTransform, mWorld, m_mObjectRotation);
 	MatrixMultiply(mModelView, fTransform, m_mView);
 	
-	myglLoadMatrix(mModelView.f);
+	glLoadMatrixf(mModelView.f);
 	
 	if (pNode->nIdxMaterial == -1)
 	{
@@ -743,7 +743,7 @@ bool CShell::RenderScene()
 			
 			/* Set the modelview without the kettle rotation */
 			MatrixMultiply(mModelView, mWorld, m_mView);
-			myglLoadMatrix(mModelView.f);
+			glLoadMatrixf(mModelView.f);
 			
 			DrawBaseBlob(fCentre);
 			AppDisplayText->DisplayDefaultTitle("Shadow Techniques", "Base Blob", eDisplayTextLogoIMG);
@@ -751,13 +751,13 @@ bool CShell::RenderScene()
 		case ADVANCEDBLOBMODE:
 			/* Set the modelview without the kettle rotation */
 			MatrixMultiply(mModelView, mWorld, m_mView);
-			myglLoadMatrix(mModelView.f);
+			glLoadMatrixf(mModelView.f);
 			
 			DrawAdvancedBlobShadow();
 			AppDisplayText->DisplayDefaultTitle("Shadow Techniques", "Dynamic Blob", eDisplayTextLogoIMG);
 			break;
 		case PROJGEOMMODE:
-			myglLoadMatrix(m_mView.f);
+			glLoadMatrixf(m_mView.f);
 			DrawProjectedShadow(pNode);
 			AppDisplayText->DisplayDefaultTitle("Shadow Techniques", "Projected geometry", eDisplayTextLogoIMG);
 			break;
@@ -812,10 +812,10 @@ void DrawMesh(SPODNode* pNode, bool bProjectTexture)
 		
 		glLoadIdentity();
 		
-		myglTranslate(f2vt(0.5f), f2vt(0.5f), f2vt(0.0f));
-		myglScale(f2vt(0.003f), f2vt(0.003f), f2vt(1.0f));
+		glTranslatef(f2vt(0.5f), f2vt(0.5f), f2vt(0.0f));
+		glScalef(f2vt(0.003f), f2vt(0.003f), f2vt(1.0f));
 		
-		myglMultMatrix(m_mLightView.f);
+		glMultMatrixf(m_mLightView.f);
 	}
 	
 	// Indexed Triangle list
@@ -849,7 +849,7 @@ void DrawProjectedShadow(SPODNode* pNode)
 	vCurLightPos.w = f2vt(0.0f);
 	
 	shadowMatrix(m_mfloorShadow, m_fPlane, vCurLightPos);
-	myglMultMatrix(m_mfloorShadow.f);
+	glMultMatrixf(m_mfloorShadow.f);
 	
 	// Enable Polygon offset to avoid ZFighting between floor and shadow
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -861,7 +861,7 @@ void DrawProjectedShadow(SPODNode* pNode)
 	glDisable(GL_TEXTURE_2D);
 	
 	// Set the Shadow Color and Alpha
-	myglColor4(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.5f));
+	glColor4f(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.5f));
 	
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
@@ -870,7 +870,7 @@ void DrawProjectedShadow(SPODNode* pNode)
 	MATRIX fTransform, mWorld;
 	m_Scene.GetWorldMatrix(mWorld, *pNode);
 	MatrixMultiply(fTransform, mWorld, m_mObjectRotation);
-	myglMultMatrix(fTransform.f);
+	glMultMatrixf(fTransform.f);
 	
 	// Render the objects which will be slammed into the floor plane
 	DrawMesh(pNode);
@@ -955,7 +955,7 @@ void DrawBaseBlob(VECTOR3 fCentre)
 	glBindTexture(GL_TEXTURE_2D,m_uiBlobMap);
 	
 	// Set Base Blend color to influence how transparent the shadow is
-	myglColor4(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.7f));
+	glColor4f(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.7f));
 	
 	// Draw Blob - in this case the object is "static" so blob position is "static" as well
 	// In a Game the Blob position would be calculated from the Character Position.
@@ -973,7 +973,7 @@ void DrawBaseBlob(VECTOR3 fCentre)
 	/* Draw Geometry */
 	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 	
-	myglColor4(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
+	glColor4f(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
 	
 	// Disable blending
 	glDisable (GL_BLEND);

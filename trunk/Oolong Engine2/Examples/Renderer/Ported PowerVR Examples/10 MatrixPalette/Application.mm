@@ -100,8 +100,8 @@ bool CShell::InitApplication()
 		fprintf(stderr, "**ERROR** Failed to load texture for Mallet.\n");
       return false;
 	}
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
    // Init DisplayText
 	if(!AppDisplayText->SetTextures(WindowHeight, WindowWidth))
@@ -116,7 +116,7 @@ bool CShell::InitApplication()
 	/* Projection Matrix */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	myglMultMatrix(m_mProjection.f);
+	glMultMatrixf(m_mProjection.f);
    
   	/* Enables Depth Testing */
 	glEnable(GL_DEPTH_TEST);
@@ -131,8 +131,8 @@ bool CShell::InitApplication()
 	glFrontFace(GL_CW);
 
 	/* Enables texture clamping */
-	myglTexParameter( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	myglTexParameter( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
    
    /* Reset the model view matrix to position the light */
 	glMatrixMode(GL_MODELVIEW);
@@ -141,7 +141,7 @@ bool CShell::InitApplication()
    /* Setup ambiant light */
    glEnable(GL_LIGHTING);
    VERTTYPE lightGlobalAmbient[] = {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f)};
-   myglLightModelv(GL_LIGHT_MODEL_AMBIENT, lightGlobalAmbient);
+   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightGlobalAmbient);
 
    /* Setup a directional light source */
    VERTTYPE lightPosition[] = {f2vt(-0.7f), f2vt(-1.0f), f2vt(+0.2f), f2vt(0.0f)};
@@ -150,10 +150,10 @@ bool CShell::InitApplication()
    VERTTYPE lightSpecular[] = {f2vt(0.2f), f2vt(0.2f), f2vt(0.2f), f2vt(1.0f)};
 
    glEnable(GL_LIGHT0);
-   myglLightv(GL_LIGHT0, GL_POSITION, lightPosition);
-   myglLightv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-   myglLightv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-   myglLightv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
+   glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+   glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+   glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+   glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
    
    if(!m_iTimePrev)
       m_iTimePrev = GetTimeInMsSince1970();
@@ -218,7 +218,7 @@ bool CShell::RenderScene()
 
 	/* Calculate the model view matrix */
 	glMatrixMode(GL_MODELVIEW);
-	myglLoadMatrix(m_mView.f);
+	glLoadMatrixf(m_mView.f);
 
    // Draw the model
    DrawModel();
@@ -358,7 +358,7 @@ void DrawModel()
 				MatrixMultiply(mBoneWorld, mBoneWorld, m_mView);
 
 				// Load the bone matrix into the current palette matrix.
-				myglLoadMatrix(mBoneWorld.f);
+				glLoadMatrixf(mBoneWorld.f);
 			}
 		}
 		else
@@ -377,10 +377,10 @@ void DrawModel()
 		//Get the world matrix for the mesh and transform the model view matrix by it.
 		MATRIX worldMatrix;
 		m_Scene->GetWorldMatrix(worldMatrix, *pNode);
-		myglMultMatrix(worldMatrix.f);
+		glMultMatrixf(worldMatrix.f);
 
 		/* Modulate with vertex color */
-		myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 		/* Enable lighting */
 		glEnable(GL_LIGHTING);
@@ -517,16 +517,16 @@ void LoadMaterial(int index)
 	for (i=0; i<3; ++i)
 		prop[i] = mat->pfMatAmbient[i];
 
-	myglMaterialv(GL_FRONT_AND_BACK, GL_AMBIENT, prop);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, prop);
 
 	for (i=0; i<3; ++i)
 		prop[i] = mat->pfMatDiffuse[i];
 
-	myglMaterialv(GL_FRONT_AND_BACK, GL_DIFFUSE, prop);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, prop);
 
 	for (i=0; i<3; ++i)
 		prop[i] = mat->pfMatSpecular[i];
 
-	myglMaterialv(GL_FRONT_AND_BACK, GL_SPECULAR, prop);
-	myglMaterial(GL_FRONT_AND_BACK, GL_SHININESS, mat->fMatShininess);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, prop);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, mat->fMatShininess);
 }

@@ -69,7 +69,7 @@ void DataTypeWrite(
 					void				* const pOut,
 					const EDataType	eType,
 					const int			nCnt,
-					const  VECTOR4f	* const pV);
+					const  VECTOR4	* const pV);
 void DataTypeWrite(
 					void				* const pOut,
 					const EDataType	eType,

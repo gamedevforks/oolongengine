@@ -81,8 +81,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249188928;
-			PBXWorkspaceStateSaveDate = 249188928;
+			PBXPerProjectTemplateStateSaveDate = 249281207;
+			PBXWorkspaceStateSaveDate = 249281207;
+		};
+		perUserProjectItems = {
+			79317B4C0EDBBC4F00247E3D /* PBXTextBookmark */ = 79317B4C0EDBBC4F00247E3D /* PBXTextBookmark */;
+			79317B4D0EDBBC4F00247E3D /* PBXTextBookmark */ = 79317B4D0EDBBC4F00247E3D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -94,14 +98,6 @@
 			sepNavSelRange = "{227, 0}";
 			sepNavVisRange = "{0, 693}";
 			sepNavWindowFrame = "{{84, 122}, {1161, 688}}";
-		};
-	};
-	791F48FE0E17553000E927FE /* MatrixF.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 12348}}";
-			sepNavSelRange = "{3716, 0}";
-			sepNavVisRange = "{0, 1626}";
-			sepNavWindowFrame = "{{61, 126}, {1043, 705}}";
 		};
 	};
 	79235BF70DAD051C00F918F8 /* Skeleton */ = {
@@ -146,11 +142,29 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 14910}}";
-			sepNavSelRange = "{9742, 0}";
-			sepNavVisRange = "{17398, 835}";
+			sepNavIntBoundsRect = "{{0, 0}, {750, 14896}}";
+			sepNavSelRange = "{19575, 0}";
+			sepNavVisRange = "{19401, 350}";
 			sepNavWindowFrame = "{{268, 97}, {821, 781}}";
 		};
+	};
+	79317B4C0EDBBC4F00247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'myglLoadMatrix' was not declared in this scope";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 759;
+		rType = 1;
+	};
+	79317B4D0EDBBC4F00247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 760";
+		rLen = 0;
+		rLoc = 19575;
+		rType = 0;
+		vrLen = 350;
+		vrLoc = 19401;
 	};
 	79F921D30DFA4F1D003CD043 /* Application.mm:632 */ = {
 		isa = PBXFileBreakpoint;
@@ -166,7 +180,7 @@
 		ignoreCount = 0;
 		lineNumber = 632;
 		location = Shadows;
-		modificationTime = 249189371.171984;
+		modificationTime = 249281588.837462;
 		state = 2;
 	};
 	79F921E80DFA52CF003CD043 /* Application.mm:617 */ = {
@@ -183,7 +197,7 @@
 		ignoreCount = 0;
 		lineNumber = 617;
 		location = Shadows;
-		modificationTime = 249189371.172278;
+		modificationTime = 249281588.837966;
 		state = 2;
 	};
 	79F921EA0DFA5331003CD043 /* Application.mm:643 */ = {
@@ -200,7 +214,7 @@
 		ignoreCount = 0;
 		lineNumber = 643;
 		location = Shadows;
-		modificationTime = 249189371.172406;
+		modificationTime = 249281588.83822;
 		state = 2;
 	};
 	79F921EC0DFA5349003CD043 /* Application.mm:638 */ = {
@@ -217,7 +231,7 @@
 		ignoreCount = 0;
 		lineNumber = 638;
 		location = Shadows;
-		modificationTime = 249189371.172584;
+		modificationTime = 249281588.838476;
 		state = 2;
 	};
 	79F921EE0DFA534A003CD043 /* Application.mm:635 */ = {
@@ -234,7 +248,7 @@
 		ignoreCount = 0;
 		lineNumber = 635;
 		location = Shadows;
-		modificationTime = 249189371.172725;
+		modificationTime = 249281588.838714;
 		state = 2;
 	};
 	79F921F00DFA5355003CD043 /* Application.mm:641 */ = {
@@ -251,7 +265,7 @@
 		ignoreCount = 0;
 		lineNumber = 641;
 		location = Shadows;
-		modificationTime = 249189371.172857;
+		modificationTime = 249281588.838939;
 		state = 2;
 	};
 }

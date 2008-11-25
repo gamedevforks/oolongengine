@@ -58,7 +58,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					138,
 					20,
 					48,
 					43,
@@ -75,8 +75,16 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249189718;
-			PBXWorkspaceStateSaveDate = 249189718;
+			PBXPerProjectTemplateStateSaveDate = 249282411;
+			PBXWorkspaceStateSaveDate = 249282411;
+		};
+		perUserProjectItems = {
+			79317BBC0EDBBF2500247E3D /* PBXTextBookmark */ = 79317BBC0EDBBF2500247E3D /* PBXTextBookmark */;
+			79317BBF0EDBBF2500247E3D /* PBXTextBookmark */ = 79317BBF0EDBBF2500247E3D /* PBXTextBookmark */;
+			79317BD20EDBBF5B00247E3D /* PBXTextBookmark */ = 79317BD20EDBBF5B00247E3D /* PBXTextBookmark */;
+			79317C080EDBC04F00247E3D /* PBXTextBookmark */ = 79317C080EDBC04F00247E3D /* PBXTextBookmark */;
+			79317C090EDBC04F00247E3D /* PBXTextBookmark */ = 79317C090EDBC04F00247E3D /* PBXTextBookmark */;
+			79317C130EDBC04F00247E3D /* PBXTextBookmark */ = 79317C130EDBC04F00247E3D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -140,10 +148,84 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 7182}}";
-			sepNavSelRange = "{5425, 0}";
-			sepNavVisRange = "{5300, 1026}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 7840}}";
+			sepNavSelRange = "{5236, 0}";
+			sepNavVisRange = "{3973, 1478}";
 			sepNavWindowFrame = "{{436, 77}, {821, 781}}";
 		};
+	};
+	79317BBC0EDBBF2500247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79317BBD0EDBBF2500247E3D /* SimpleGeoTest.H */;
+		name = "SimpleGeoTest.H: 849";
+		rLen = 25;
+		rLoc = 138450;
+		rType = 0;
+		vrLen = 166;
+		vrLoc = 138309;
+	};
+	79317BBD0EDBBF2500247E3D /* SimpleGeoTest.H */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.h;
+		name = SimpleGeoTest.H;
+		path = "/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/05 Eight Point Lights/Media/SimpleGeoTest.H";
+		sourceTree = "<absolute>";
+	};
+	79317BBF0EDBBF2500247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79317BC00EDBBF2500247E3D /* SimpleGeoTest.H */;
+		name = "SimpleGeoTest.H: 849";
+		rLen = 25;
+		rLoc = 138450;
+		rType = 0;
+		vrLen = 166;
+		vrLoc = 138309;
+	};
+	79317BC00EDBBF2500247E3D /* SimpleGeoTest.H */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.h;
+		name = SimpleGeoTest.H;
+		path = "/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/05 Eight Point Lights/Media/SimpleGeoTest.H";
+		sourceTree = "<absolute>";
+	};
+	79317BD20EDBBF5B00247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 93";
+		rLen = 0;
+		rLoc = 3140;
+		rType = 0;
+		vrLen = 1450;
+		vrLoc = 2394;
+	};
+	79317C080EDBC04F00247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 289";
+		rLen = 0;
+		rLoc = 8354;
+		rType = 0;
+		vrLen = 226;
+		vrLoc = 8231;
+	};
+	79317C090EDBC04F00247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 289";
+		rLen = 0;
+		rLoc = 8354;
+		rType = 0;
+		vrLen = 244;
+		vrLoc = 8231;
+	};
+	79317C130EDBC04F00247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 166";
+		rLen = 0;
+		rLoc = 5236;
+		rType = 0;
+		vrLen = 1478;
+		vrLoc = 3973;
 	};
 }

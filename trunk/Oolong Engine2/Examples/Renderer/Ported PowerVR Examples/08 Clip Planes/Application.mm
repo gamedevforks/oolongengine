@@ -116,15 +116,15 @@ bool CShell::InitApplication()
 	
 	/* Load textures */
 	if (!Textures->LoadTextureFromPointer((void*)Granite, &texName)) return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/* Perspective matrix */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(20.0f*(PI/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	/* Modelview matrix */
 	glMatrixMode(GL_MODELVIEW);
@@ -139,24 +139,24 @@ bool CShell::InitApplication()
 	
 	/* Light 0 (White directional light) */
 	fValue[0]=f2vt(0.4f); fValue[1]=f2vt(0.4f); fValue[2]=f2vt(0.4f); fValue[3]=f2vt(1.0f);
-	myglLightv(GL_LIGHT0, GL_AMBIENT, fValue);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, fValue);
 	fValue[0]=f2vt(1.0f); fValue[1]=f2vt(1.0f); fValue[2]=f2vt(1.0f); fValue[3]=f2vt(1.0f);
-	myglLightv(GL_LIGHT0, GL_DIFFUSE, fValue);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, fValue);
 	fValue[0]=f2vt(1.0f); fValue[1]=f2vt(1.0f); fValue[2]=f2vt(1.0f); fValue[3]=f2vt(1.0f);
-	myglLightv(GL_LIGHT0, GL_SPECULAR, fValue);
-	myglLightv(GL_LIGHT0, GL_POSITION, LightPosition);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, fValue);
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 	glEnable(GL_LIGHT0);
 	VERTTYPE ambient_light[4] = {f2vt(0.8f), f2vt(0.8f), f2vt(0.8f), f2vt(1.0f)};
-	myglLightModelv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
 	
 	/* Setup all materials */
 	VERTTYPE objectMatAmb[] = {f2vt(0.1f), f2vt(0.1f), f2vt(0.1f), f2vt(0.3f)};
 	VERTTYPE objectMatDiff[] = {f2vt(0.5f), f2vt(0.5f), f2vt(0.5f), f2vt(0.3f)};
 	VERTTYPE objectMatSpec[] = {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(0.3f)};
-	myglMaterialv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
-	myglMaterialv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
-	myglMaterialv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
-	myglMaterial(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(10));	// Nice and shiny so we don't get aliasing from the 1/2 angle
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(10));	// Nice and shiny so we don't get aliasing from the 1/2 angle
 	
 	return true;
 }
@@ -210,7 +210,7 @@ bool CShell::RenderScene()
 	// Clear the buffers
 	glEnable(GL_DEPTH_TEST);
 	
-	myglClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
+	glClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	// Lighting
@@ -222,13 +222,13 @@ bool CShell::RenderScene()
 	glBindTexture(GL_TEXTURE_2D, texName);
 	glActiveTexture(GL_TEXTURE0);
 	glDisable(GL_BLEND);
-	myglTexEnv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	// Transformations
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	myglTranslate(f2vt(0.0f), f2vt(0.0f), f2vt(-500.0f));
-	myglRotate(f2vt((float)nFrame/5.0f),f2vt(0),f2vt(1),f2vt(0));
+	glTranslatef(f2vt(0.0f), f2vt(0.0f), f2vt(-500.0f));
+	glRotatef(f2vt((float)nFrame/5.0f),f2vt(0),f2vt(1),f2vt(0));
 	
 	// Draw sphere with user clip planes
 	SetupUserClipPlanes();

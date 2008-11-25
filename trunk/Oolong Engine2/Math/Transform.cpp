@@ -15,7 +15,7 @@ subject to the following restrictions:
 
 #include <string.h>
 
-#include "FixedPoint.h"
+//#include "FixedPoint.h"
 #include "Matrix.h"
 #include "Transform.h"
 

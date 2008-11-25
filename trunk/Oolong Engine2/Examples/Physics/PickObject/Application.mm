@@ -344,11 +344,11 @@ bool CShell::UpdateScene()
 	if (m_glutScreenWidth > m_glutScreenHeight) 
 	{
 		btScalar aspect = m_glutScreenWidth / (btScalar)m_glutScreenHeight;
-		myglFrustum (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
+		glFrustumf (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
 	} else 
 	{
 		btScalar aspect = m_glutScreenHeight / (btScalar)m_glutScreenWidth;
-		myglFrustum (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
+		glFrustumf (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
 	}
 	
 	

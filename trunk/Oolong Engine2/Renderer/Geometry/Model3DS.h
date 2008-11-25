@@ -234,7 +234,7 @@ class C3DSScene : public S3DSScene
 protected:
 	MATRIX GetHierarchyMatrix(short Node, VERTTYPE fFrameNumber, MATRIX CurrentMatrix);
 	void GetAbsoluteRotation(MATRIX * const pmRot, VERTTYPE fFrameNumber, S3DSNode *pNode);
-	VECTOR3f Normal(VERTTYPE *pV1, VERTTYPE *pV2, VERTTYPE *pV3);
+	VECTOR3 Normal(VERTTYPE *pV1, VERTTYPE *pV2, VERTTYPE *pV3);
 	void CalculateNormals(int nNumVertex, VERTTYPE *pVertex, int nNumFaces, unsigned short *pFaces, VERTTYPE *pNormals);
 	
 //private:

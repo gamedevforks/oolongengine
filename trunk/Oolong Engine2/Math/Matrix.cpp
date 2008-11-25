@@ -25,13 +25,13 @@ subject to the following restrictions:
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "FixedPoint.h"		// Only needed for trig function float lookups
+//#include "FixedPoint.h"		// Only needed for trig function float lookups
 #include "Matrix.h"
 #include "Macros.h"
 
 #include "vfpmath/matrix_impl.h"
 
-static const MATRIXf	c_mIdentity = {
+static const MATRIX	c_mIdentity = {
 	{
 	1, 0, 0, 0,
 	0, 1, 0, 0,
@@ -40,7 +40,7 @@ static const MATRIXf	c_mIdentity = {
 	}
 };
 
-void MatrixIdentityF(MATRIXf &mOut)
+void MatrixIdentity(MATRIX &mOut)
 {
 	mOut.f[ 0]=1.0f;	mOut.f[ 4]=0.0f;	mOut.f[ 8]=0.0f;	mOut.f[12]=0.0f;
 	mOut.f[ 1]=0.0f;	mOut.f[ 5]=1.0f;	mOut.f[ 9]=0.0f;	mOut.f[13]=0.0f;
@@ -49,10 +49,10 @@ void MatrixIdentityF(MATRIXf &mOut)
 }
 
 
-void MatrixMultiplyF(
-	MATRIXf			&mOut,
-	const MATRIXf	&mA,
-	const MATRIXf	&mB)
+void MatrixMultiply(
+	MATRIX			&mOut,
+	const MATRIX	&mA,
+	const MATRIX	&mB)
 {
 //#if TARGET_CPU_ARM
 	Matrix4Mul(mA.f,
@@ -90,8 +90,8 @@ void MatrixMultiplyF(
  }
 
 
-void MatrixTranslationF(
-	MATRIXf	&mOut,
+void MatrixTranslation(
+	MATRIX	&mOut,
 	const float fX,
 	const float fY,
 	const float fZ)
@@ -103,8 +103,8 @@ void MatrixTranslationF(
 }
 
 
-void MatrixScalingF(
-	MATRIXf	&mOut,
+void MatrixScaling(
+	MATRIX	&mOut,
 	const float fX,
 	const float fY,
 	const float fZ)
@@ -116,19 +116,19 @@ void MatrixScalingF(
 }
 
 
-void MatrixRotationXF(
-	MATRIXf	&mOut,
+void MatrixRotationX(
+	MATRIX	&mOut,
 	const float fAngle)
 {
 	float		fCosine, fSine;
 
     /* Precompute cos and sin */
 #if defined(BUILD_DX9) || defined(BUILD_D3DM)
-	fCosine	= (float)FCOS(-fAngle);
-    fSine	= (float)FSIN(-fAngle);
+	fCosine	= (float)cos(-fAngle);
+    fSine	= (float)sin(-fAngle);
 #else
-	fCosine	= (float)FCOS(fAngle);
-    fSine	= (float)FSIN(fAngle);
+	fCosine	= (float)cos(fAngle);
+    fSine	= (float)sin(fAngle);
 #endif
 
 	/* Create the trigonometric matrix corresponding to X Rotation */
@@ -139,19 +139,19 @@ void MatrixRotationXF(
 }
 
 
-void MatrixRotationYF(
-	MATRIXf	&mOut,
+void MatrixRotationY(
+	MATRIX	&mOut,
 	const float fAngle)
 {
 	float		fCosine, fSine;
 
 	/* Precompute cos and sin */
 #if defined(BUILD_DX9) || defined(BUILD_D3DM)
-	fCosine	= (float)FCOS(-fAngle);
-    fSine	= (float)FSIN(-fAngle);
+	fCosine	= (float)cos(-fAngle);
+    fSine	= (float)sin(-fAngle);
 #else
-	fCosine	= (float)FCOS(fAngle);
-    fSine	= (float)FSIN(fAngle);
+	fCosine	= (float)cos(fAngle);
+    fSine	= (float)sin(fAngle);
 #endif
 
 	/* Create the trigonometric matrix corresponding to Y Rotation */
@@ -162,19 +162,19 @@ void MatrixRotationYF(
 }
 
 
-void MatrixRotationZF(
-	MATRIXf	&mOut,
+void MatrixRotationZ(
+	MATRIX	&mOut,
 	const float fAngle)
 {
 	float		fCosine, fSine;
 
 	/* Precompute cos and sin */
 #if defined(BUILD_DX9) || defined(BUILD_D3DM)
-	fCosine =	(float)FCOS(-fAngle);
-    fSine =		(float)FSIN(-fAngle);
+	fCosine =	(float)cos(-fAngle);
+    fSine =		(float)sin(-fAngle);
 #else
-	fCosine =	(float)FCOS(fAngle);
-    fSine =		(float)FSIN(fAngle);
+	fCosine =	(float)cos(fAngle);
+    fSine =		(float)sin(fAngle);
 #endif
 
 	/* Create the trigonometric matrix corresponding to Z Rotation */
@@ -185,11 +185,11 @@ void MatrixRotationZF(
 }
 
 
-void MatrixTransposeF(
-	MATRIXf			&mOut,
-	const MATRIXf	&mIn)
+void MatrixTranspose(
+	MATRIX			&mOut,
+	const MATRIX	&mIn)
 {
-	MATRIXf	mTmp;
+	MATRIX	mTmp;
 
 	mTmp.f[ 0]=mIn.f[ 0];	mTmp.f[ 4]=mIn.f[ 1];	mTmp.f[ 8]=mIn.f[ 2];	mTmp.f[12]=mIn.f[ 3];
 	mTmp.f[ 1]=mIn.f[ 4];	mTmp.f[ 5]=mIn.f[ 5];	mTmp.f[ 9]=mIn.f[ 6];	mTmp.f[13]=mIn.f[ 7];
@@ -201,11 +201,11 @@ void MatrixTransposeF(
 
 
 
-void MatrixInverseF(
-	MATRIXf			&mOut,
-	const MATRIXf	&mIn)
+void MatrixInverse(
+	MATRIX			&mOut,
+	const MATRIX	&mIn)
 {
-	MATRIXf	mDummyMatrix;
+	MATRIX	mDummyMatrix;
 	double		det_1;
 	double		pos, neg, temp;
 
@@ -266,11 +266,11 @@ void MatrixInverseF(
 
 
 
-void MatrixInverseExF(
-	MATRIXf			&mOut,
-	const MATRIXf	&mIn)
+void MatrixInverseEx(
+	MATRIX			&mOut,
+	const MATRIX	&mIn)
 {
-	MATRIXf		mTmp;
+	MATRIX		mTmp;
 	float 			*ppfRows[4];
 	float 			pfRes[4];
 	float 			pfIn[20];
@@ -288,7 +288,7 @@ void MatrixInverseExF(
 			memcpy(&ppfRows[j][1], &mIn.f[j * 4], 4 * sizeof(float));
 		}
 
-		MatrixLinearEqSolveF(pfRes, (float**)ppfRows, 4);
+		MatrixLinearEqSolve(pfRes, (float**)ppfRows, 4);
 
 		for(j = 0; j < 4; ++j)
 		{
@@ -300,23 +300,23 @@ void MatrixInverseExF(
 }
 
 
-void MatrixLookAtLHF(
-	MATRIXf			&mOut,
-	const VECTOR3f	&vEye,
-	const VECTOR3f	&vAt,
-	const VECTOR3f	&vUp)
+void MatrixLookAtLH(
+	MATRIX			&mOut,
+	const VECTOR3	&vEye,
+	const VECTOR3	&vAt,
+	const VECTOR3	&vUp)
 {
-	VECTOR3f f, vUpActual, s, u;
-	MATRIXf	t;
+	VECTOR3 f, vUpActual, s, u;
+	MATRIX	t;
 
 	f.x = vEye.x - vAt.x;
 	f.y = vEye.y - vAt.y;
 	f.z = vEye.z - vAt.z;
 
-	MatrixVec3NormalizeF(f, f);
-	MatrixVec3NormalizeF(vUpActual, vUp);
-	MatrixVec3CrossProductF(s, f, vUpActual);
-	MatrixVec3CrossProductF(u, s, f);
+	MatrixVec3Normalize(f, f);
+	MatrixVec3Normalize(vUpActual, vUp);
+	MatrixVec3CrossProduct(s, f, vUpActual);
+	MatrixVec3CrossProduct(u, s, f);
 
 	mOut.f[ 0] = s.x;
 	mOut.f[ 1] = u.x;
@@ -338,28 +338,28 @@ void MatrixLookAtLHF(
 	mOut.f[14] = 0;
 	mOut.f[15] = 1;
 
-	MatrixTranslationF(t, -vEye.x, -vEye.y, -vEye.z);
-	MatrixMultiplyF(mOut, t, mOut);
+	MatrixTranslation(t, -vEye.x, -vEye.y, -vEye.z);
+	MatrixMultiply(mOut, t, mOut);
 }
 
 
-void MatrixLookAtRHF(
-	MATRIXf			&mOut,
-	const VECTOR3f	&vEye,
-	const VECTOR3f	&vAt,
-	const VECTOR3f	&vUp)
+void MatrixLookAtRH(
+	MATRIX			&mOut,
+	const VECTOR3	&vEye,
+	const VECTOR3	&vAt,
+	const VECTOR3	&vUp)
 {
-	VECTOR3f f, vUpActual, s, u;
-	MATRIXf	t;
+	VECTOR3 f, vUpActual, s, u;
+	MATRIX	t;
 
 	f.x = vAt.x - vEye.x;
 	f.y = vAt.y - vEye.y;
 	f.z = vAt.z - vEye.z;
 
-	MatrixVec3NormalizeF(f, f);
-	MatrixVec3NormalizeF(vUpActual, vUp);
-	MatrixVec3CrossProductF(s, f, vUpActual);
-	MatrixVec3CrossProductF(u, s, f);
+	MatrixVec3Normalize(f, f);
+	MatrixVec3Normalize(vUpActual, vUp);
+	MatrixVec3CrossProduct(s, f, vUpActual);
+	MatrixVec3CrossProduct(u, s, f);
 
 	mOut.f[ 0] = s.x;
 	mOut.f[ 1] = u.x;
@@ -381,13 +381,13 @@ void MatrixLookAtRHF(
 	mOut.f[14] = 0;
 	mOut.f[15] = 1;
 
-	MatrixTranslationF(t, -vEye.x, -vEye.y, -vEye.z);
-	MatrixMultiplyF(mOut, t, mOut);
+	MatrixTranslation(t, -vEye.x, -vEye.y, -vEye.z);
+	MatrixMultiply(mOut, t, mOut);
 }
 
 
-void MatrixPerspectiveFovLHF(
-	MATRIXf	&mOut,
+void MatrixPerspectiveFovLH(
+	MATRIX	&mOut,
 	const float	fFOVy,
 	const float	fAspect,
 	const float	fNear,
@@ -402,7 +402,7 @@ void MatrixPerspectiveFovLHF(
 		fRealAspect = fAspect;
 
 	// cotangent(a) == 1.0f / tan(a);
-	f = 1.0f / (float)FTAN(fFOVy * 0.5f);
+	f = 1.0f / (float)tan(fFOVy * 0.5f);
 	n = 1.0f / (fFar - fNear);
 
 	mOut.f[ 0] = f / fRealAspect;
@@ -427,15 +427,15 @@ void MatrixPerspectiveFovLHF(
 
 	if (bRotate)
 	{
-		MATRIXf mRotation, mTemp = mOut;
-		MatrixRotationZF(mRotation, 90.0f*PIf/180.0f);
-		MatrixMultiplyF(mOut, mTemp, mRotation);
+		MATRIX mRotation, mTemp = mOut;
+		MatrixRotationZ(mRotation, 90.0f*PIf/180.0f);
+		MatrixMultiply(mOut, mTemp, mRotation);
 	}
 }
 
 
-void MatrixPerspectiveFovRHF(
-	MATRIXf	&mOut,
+void MatrixPerspectiveFovRH(
+	MATRIX	&mOut,
 	const float	fFOVy,
 	const float	fAspect,
 	const float	fNear,
@@ -450,7 +450,7 @@ void MatrixPerspectiveFovRHF(
 		fRealAspect = fAspect;
 
 	// cotangent(a) == 1.0f / tan(a);
-	f = 1.0f / (float)FTAN(fFOVy * 0.5f);
+	f = 1.0f / (float)tan(fFOVy * 0.5f);
 	n = 1.0f / (fNear - fFar);
 
 	mOut.f[ 0] = f / fRealAspect;
@@ -475,15 +475,15 @@ void MatrixPerspectiveFovRHF(
 
 	if (bRotate)
 	{
-		MATRIXf mRotation, mTemp = mOut;
-		MatrixRotationZF(mRotation, -90.0f*PIf/180.0f);
-		MatrixMultiplyF(mOut, mTemp, mRotation);
+		MATRIX mRotation, mTemp = mOut;
+		MatrixRotationZ(mRotation, -90.0f*PIf/180.0f);
+		MatrixMultiply(mOut, mTemp, mRotation);
 	}
 }
 
 
-void MatrixOrthoLHF(
-	MATRIXf	&mOut,
+void MatrixOrthoLH(
+	MATRIX	&mOut,
 	const float w,
 	const float h,
 	const float zn,
@@ -512,15 +512,15 @@ void MatrixOrthoLHF(
 
 	if (bRotate)
 	{
-		MATRIXf mRotation, mTemp = mOut;
-		MatrixRotationZF(mRotation, -90.0f*PIf/180.0f);
-		MatrixMultiplyF(mOut, mRotation, mTemp);
+		MATRIX mRotation, mTemp = mOut;
+		MatrixRotationZ(mRotation, -90.0f*PIf/180.0f);
+		MatrixMultiply(mOut, mRotation, mTemp);
 	}
 }
 
 
-void MatrixOrthoRHF(
-	MATRIXf	&mOut,
+void MatrixOrthoRH(
+	MATRIX	&mOut,
 	const float w,
 	const float h,
 	const float zn,
@@ -549,17 +549,17 @@ void MatrixOrthoRHF(
 
 	if (bRotate)
 	{
-		MATRIXf mRotation, mTemp = mOut;
-		MatrixRotationZF(mRotation, -90.0f*PIf/180.0f);
-		MatrixMultiplyF(mOut, mRotation, mTemp);
+		MATRIX mRotation, mTemp = mOut;
+		MatrixRotationZ(mRotation, -90.0f*PIf/180.0f);
+		MatrixMultiply(mOut, mRotation, mTemp);
 	}
 }
 
 
-void MatrixVec3LerpF(
-	VECTOR3f		&vOut,
-	const VECTOR3f	&v1,
-	const VECTOR3f	&v2,
+void MatrixVec3Lerp(
+	VECTOR3		&vOut,
+	const VECTOR3	&v1,
+	const VECTOR3	&v2,
 	const float	s)
 {
 	vOut.x = v1.x + s * (v2.x - v1.x);
@@ -568,20 +568,20 @@ void MatrixVec3LerpF(
 }
 
 
-float MatrixVec3DotProductF(
-	const VECTOR3f	&v1,
-	const VECTOR3f	&v2)
+float MatrixVec3DotProduct(
+	const VECTOR3	&v1,
+	const VECTOR3	&v2)
 {
 	return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
 
-void MatrixVec3CrossProductF(
-	VECTOR3f		&vOut,
-	const VECTOR3f	&v1,
-	const VECTOR3f	&v2)
+void MatrixVec3CrossProduct(
+	VECTOR3		&vOut,
+	const VECTOR3	&v1,
+	const VECTOR3	&v2)
 {
-    VECTOR3f result;
+    VECTOR3 result;
 
 	/* Perform calculation on a dummy VECTOR (result) */
     result.x = v1.y * v2.z - v1.z * v2.y;
@@ -593,9 +593,9 @@ void MatrixVec3CrossProductF(
 }
 
 
-void MatrixVec3NormalizeF(
-	VECTOR3f		&vOut,
-	const VECTOR3f	&vIn)
+void MatrixVec3Normalize(
+	VECTOR3		&vOut,
+	const VECTOR3	&vIn)
 {
 	float	f;
 	double temp;
@@ -609,9 +609,9 @@ void MatrixVec3NormalizeF(
 	vOut.z = vIn.z * f;
 }
 
-void MatrixVec4NormalizeF(
-	VECTOR4f		&vOut,
-	const VECTOR4f	&vIn)
+void MatrixVec4Normalize(
+	VECTOR4		&vOut,
+	const VECTOR4	&vIn)
 {
 	float	f;
 	double temp;
@@ -628,8 +628,8 @@ void MatrixVec4NormalizeF(
 
 
 
-float MatrixVec3LengthF(
-	const VECTOR3f	&vIn)
+float MatrixVec3Length(
+	const VECTOR3	&vIn)
 {
 	double temp;
 
@@ -639,8 +639,8 @@ float MatrixVec3LengthF(
 
 
 
-void MatrixQuaternionIdentityF(
-	QUATERNIONf		&qOut)
+void MatrixQuaternionIdentity(
+	QUATERNION		&qOut)
 {
 	qOut.x = 0;
 	qOut.y = 0;
@@ -649,15 +649,15 @@ void MatrixQuaternionIdentityF(
 }
 
 
-void MatrixQuaternionRotationAxisF(
-	QUATERNIONf		&qOut,
-	const VECTOR3f	&vAxis,
+void MatrixQuaternionRotationAxis(
+	QUATERNION		&qOut,
+	const VECTOR3	&vAxis,
 	const float			fAngle)
 {
 	float	fSin, fCos;
 
-	fSin = (float)FSIN(fAngle * 0.5f);
-	fCos = (float)FCOS(fAngle * 0.5f);
+	fSin = (float)sin(fAngle * 0.5f);
+	fCos = (float)cos(fAngle * 0.5f);
 
 	/* Create quaternion */
 	qOut.x = vAxis.x * fSin;
@@ -666,13 +666,13 @@ void MatrixQuaternionRotationAxisF(
 	qOut.w = fCos;
 
 	/* Normalise it */
-	MatrixQuaternionNormalizeF(qOut);
+	MatrixQuaternionNormalize(qOut);
 }
 
 
-void MatrixQuaternionToAxisAngleF(
-	const QUATERNIONf	&qIn,
-	VECTOR3f			&vAxis,
+void MatrixQuaternionToAxisAngle(
+	const QUATERNION	&qIn,
+	VECTOR3			&vAxis,
 	float					&fAngle)
 {
 	float	fCosAngle, fSinAngle;
@@ -681,7 +681,7 @@ void MatrixQuaternionToAxisAngleF(
 	/* Compute some values */
 	fCosAngle	= qIn.w;
 	temp		= 1.0f - fCosAngle*fCosAngle;
-	fAngle		= (float)FACOS(fCosAngle)*2.0f;
+	fAngle		= (float)acos(fCosAngle)*2.0f;
 	fSinAngle	= (float)sqrt(temp);
 
 	/* This is to avoid a division by zero */
@@ -694,10 +694,10 @@ void MatrixQuaternionToAxisAngleF(
 	vAxis.z = qIn.z / fSinAngle;
 }
 
-void MatrixQuaternionSlerpF(
-	QUATERNIONf			&qOut,
-	const QUATERNIONf	&qA,
-	const QUATERNIONf	&qB,
+void MatrixQuaternionSlerp(
+	QUATERNION			&qOut,
+	const QUATERNION	&qA,
+	const QUATERNION	&qB,
 	const float				t)
 {
 	float		fCosine, fAngle, A, B;
@@ -718,7 +718,7 @@ void MatrixQuaternionSlerpF(
 
 	if (fCosine < 0)
 	{
-		QUATERNIONf qi;
+		QUATERNION qi;
 
 		/*
 			<http://www.magic-software.com/Documentation/Quaternions.pdf>
@@ -738,12 +738,12 @@ void MatrixQuaternionSlerpF(
 		qi.z = -qB.z;
 		qi.w = -qB.w;
 
-		MatrixQuaternionSlerpF(qOut, qA, qi, t);
+		MatrixQuaternionSlerp(qOut, qA, qi, t);
 		return;
 	}
 
 	fCosine = _MIN(fCosine, 1.0f);
-	fAngle = (float)FACOS(fCosine);
+	fAngle = (float)acos(fCosine);
 
 	/* Avoid a division by zero */
 	if (fAngle==0.0f)
@@ -753,8 +753,8 @@ void MatrixQuaternionSlerpF(
 	}
 
 	/* Precompute some values */
-	A = (float)(FSIN((1.0f-t)*fAngle) / FSIN(fAngle));
-	B = (float)(FSIN(t*fAngle) / FSIN(fAngle));
+	A = (float)(sin((1.0f-t)*fAngle) / sin(fAngle));
+	B = (float)(sin(t*fAngle) / sin(fAngle));
 
 	/* Compute resulting quaternion */
 	qOut.x = A * qA.x + B * qB.x;
@@ -763,12 +763,12 @@ void MatrixQuaternionSlerpF(
 	qOut.w = A * qA.w + B * qB.w;
 
 	/* Normalise result */
-	MatrixQuaternionNormalizeF(qOut);
+	MatrixQuaternionNormalize(qOut);
 }
 
 
 
-void MatrixQuaternionNormalizeF(QUATERNIONf &quat)
+void MatrixQuaternionNormalize(QUATERNION &quat)
 {
 	float	fMagnitude;
 	double	temp;
@@ -789,14 +789,14 @@ void MatrixQuaternionNormalizeF(QUATERNIONf &quat)
 }
 
 
-void MatrixRotationQuaternionF(
-	MATRIXf				&mOut,
-	const QUATERNIONf	&quat)
+void MatrixRotationQuaternion(
+	MATRIX				&mOut,
+	const QUATERNION	&quat)
 {
-	const QUATERNIONf *pQ;
+	const QUATERNION *pQ;
 
 #if defined(BUILD_DX9) || defined(BUILD_D3DM)
-	QUATERNIONf qInv;
+	QUATERNION qInv;
 
 	qInv.x = -quat.x;
 	qInv.y = -quat.y;
@@ -831,12 +831,12 @@ void MatrixRotationQuaternionF(
 }
 
 
-void MatrixQuaternionMultiplyF(
-	QUATERNIONf			&qOut,
-	const QUATERNIONf	&qA,
-	const QUATERNIONf	&qB)
+void MatrixQuaternionMultiply(
+	QUATERNION			&qOut,
+	const QUATERNION	&qA,
+	const QUATERNION	&qB)
 {
-	VECTOR3f	CrossProduct;
+	VECTOR3	CrossProduct;
 
 	/* Compute scalar component */
 	qOut.w = (qA.w*qB.w) - (qA.x*qB.x + qA.y*qB.y + qA.z*qB.z);
@@ -852,11 +852,11 @@ void MatrixQuaternionMultiplyF(
 	qOut.z = (qA.w * qB.z) + (qB.w * qA.z) + CrossProduct.z;
 
 	/* Normalize resulting quaternion */
-	MatrixQuaternionNormalizeF(qOut);
+	MatrixQuaternionNormalize(qOut);
 }
 
 
-void MatrixLinearEqSolveF(
+void MatrixLinearEqSolve(
 	float		* const pRes,
 	float		** const pSrc,	// 2D array of floats. 4 Eq linear problem is 5x4 matrix, constants in first column.
 	const int	nCnt)
@@ -923,7 +923,7 @@ void MatrixLinearEqSolveF(
 	}
 
 	// Solve the top-left sub matrix
-	MatrixLinearEqSolveF(pRes, pSrc, nCnt - 1);
+	MatrixLinearEqSolve(pRes, pSrc, nCnt - 1);
 
 	// Now calc the solution for the bottom row
 	f = pSrc[nCnt-1][0];

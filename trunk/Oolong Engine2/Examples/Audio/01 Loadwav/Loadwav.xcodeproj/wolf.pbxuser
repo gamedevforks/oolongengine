@@ -101,8 +101,12 @@
 					PBXFindDataSource_LocationID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249190240;
-			PBXWorkspaceStateSaveDate = 249190240;
+			PBXPerProjectTemplateStateSaveDate = 249321066;
+			PBXWorkspaceStateSaveDate = 249321066;
+		};
+		perUserProjectItems = {
+			79317E840EDC56D900247E3D /* PBXTextBookmark */ = 79317E840EDC56D900247E3D /* PBXTextBookmark */;
+			79317E850EDC56D900247E3D /* PBXTextBookmark */ = 79317E850EDC56D900247E3D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -172,27 +176,31 @@
 			sepNavWindowFrame = "{{38, 96}, {1160, 756}}";
 		};
 	};
-	79235CDA0DAD243A00F918F8 /* FixedPointAPI.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {522, 1078}}";
-			sepNavSelRange = "{371, 0}";
-			sepNavVisRange = "{180, 333}";
-		};
-	};
-	79235CDD0DAD243A00F918F8 /* MatrixF.cpp */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {708, 5852}}";
-			sepNavSelRange = "{725, 20}";
-			sepNavVisRange = "{555, 271}";
-		};
-	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 4522}}";
-			sepNavSelRange = "{7748, 0}";
-			sepNavVisRange = "{6826, 1354}";
+			sepNavIntBoundsRect = "{{0, 0}, {1062, 4522}}";
+			sepNavSelRange = "{3343, 0}";
+			sepNavVisRange = "{3684, 171}";
 			sepNavWindowFrame = "{{50, 236}, {1044, 642}}";
 		};
+	};
+	79317E840EDC56D900247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: 'myglMultMatrix' was not declared in this scope";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 121;
+		rType = 1;
+	};
+	79317E850EDC56D900247E3D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 119";
+		rLen = 0;
+		rLoc = 3343;
+		rType = 0;
+		vrLen = 171;
+		vrLoc = 3684;
 	};
 	799123CF0E20082200035EEA /* SoundEngine.cpp */ = {
 		uiCtxt = {

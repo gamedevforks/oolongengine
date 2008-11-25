@@ -15,31 +15,73 @@ subject to the following restrictions:
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
-typedef struct _VECTOR2F
+#include <OpenGLES/ES1/gl.h>
+
+
+#define VERTTYPE GLfloat
+#define VERTTYPEENUM GL_FLOAT
+
+// Floating-point operations
+#define VERTTYPEMUL(a,b)			( (VERTTYPE)((a)*(b)) )
+#define VERTTYPEDIV(a,b)			( (VERTTYPE)((a)/(b)) )
+#define VERTTYPEABS(a)				( (VERTTYPE)(fabs(a)) )
+
+#define f2vt(x)						(x)
+#define vt2f(x)						(x)
+
+#define PIOVERTWO				PIOVERTWOf
+#define PI						PIf
+#define TWOPI					TWOPIf
+#define ONE						ONEf
+
+#define X2F(x)		((float)(x)/65536.0f)
+#define XMUL(a,b)	( (int)( ((INT64BIT)(a)*(b)) / 65536 ) )
+#define XDIV(a,b)	( (int)( (((INT64BIT)(a))<<16)/(b) ) )
+#define _ABS(a)		((a) <= 0 ? -(a) : (a) )
+
+
+// Define a 64-bit type for various platforms
+#if defined(__int64) || defined(WIN32)
+#define INT64BIT __int64
+#elif defined(TInt64)
+#define INT64BIT TInt64
+#else
+#define INT64BIT long long int
+#endif
+
+typedef struct _LARGE_INTEGER
+	{
+		union
+		{
+			struct
+			{
+				unsigned long LowPart;
+				long HighPart;
+			};
+			INT64BIT QuadPart;
+		};
+	} LARGE_INTEGER, *PLARGE_INTEGER;
+
+
+typedef struct _VECTOR2
 {
 	float x;	/*!< x coordinate */
 	float y;	/*!< y coordinate */
    inline void set(float _x, float _y) { x = _x; y = _y; }
-} VECTOR2f;
+} VECTOR2;
 
 
-typedef struct
-{
-	int x;	/*!< x coordinate */
-	int y;	/*!< y coordinate */
-} VECTOR2x;
-
-typedef struct _VECTOR3f
+typedef struct _VECTOR3
 {
 	float x;	/*!< x coordinate */
 	float y;	/*!< y coordinate */
 	float z;	/*!< z coordinate */
    inline void set(float _x, float _y, float _z) { x = _x; y = _y; z = _z; }
-   inline const _VECTOR3f operator-(const _VECTOR3f& rhs) const{ _VECTOR3f tmp = { x - rhs.x, y - rhs.y, z - rhs.z }; return tmp; }
-   inline const _VECTOR3f operator+(const _VECTOR3f& rhs) const{ _VECTOR3f tmp = { x + rhs.x, y + rhs.y, z + rhs.z }; return tmp; }
-   inline const _VECTOR3f operator*(float rhs) const { _VECTOR3f tmp = { x * rhs, y * rhs, z * rhs }; return tmp; }
+   inline const _VECTOR3 operator-(const _VECTOR3& rhs) const{ _VECTOR3 tmp = { x - rhs.x, y - rhs.y, z - rhs.z }; return tmp; }
+   inline const _VECTOR3 operator+(const _VECTOR3& rhs) const{ _VECTOR3 tmp = { x + rhs.x, y + rhs.y, z + rhs.z }; return tmp; }
+   inline const _VECTOR3 operator*(float rhs) const { _VECTOR3 tmp = { x * rhs, y * rhs, z * rhs }; return tmp; }
    inline float lenSquared() const { return x*x + y*y + z*z; }
-} VECTOR3f;
+} VECTOR3;
 
 typedef struct
 {
@@ -55,27 +97,8 @@ typedef struct
 	float y;	/*!< y coordinate */
 	float z;	/*!< z coordinate */
 	float w;	/*!< w coordinate */
-} VECTOR4f;
+} VECTOR4;
 
-
-typedef struct
-{
-	int x;	/*!< x coordinate */
-	int y;	/*!< y coordinate */
-	int z;	/*!< z coordinate */
-	int w;	/*!< w coordinate */
-} VECTOR4x;
-
-
-#ifdef FIXEDPOINTENABLE
-typedef VECTOR2x     VECTOR2;
-typedef VECTOR3x     VECTOR3;
-typedef VECTOR4x     VECTOR4;
-#else
-typedef VECTOR2f     VECTOR2;
-typedef VECTOR3f     VECTOR3;
-typedef VECTOR4f     VECTOR4;
-#endif
 
 
 #endif // VECTOR_H_

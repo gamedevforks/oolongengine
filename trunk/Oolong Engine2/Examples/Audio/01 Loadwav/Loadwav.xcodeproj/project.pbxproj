@@ -16,14 +16,13 @@
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
 		7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914067B0DBAD8D100C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
-		79235CF30DAD243A00F918F8 /* FixedPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD80DAD243A00F918F8 /* FixedPoint.cpp */; };
-		79235CF40DAD243A00F918F8 /* MatrixF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CDD0DAD243A00F918F8 /* MatrixF.cpp */; };
-		79235CF50DAD243A00F918F8 /* MatrixX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CDE0DAD243A00F918F8 /* MatrixX.cpp */; };
-		79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CE00DAD243A00F918F8 /* Transform.cpp */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
-		793179B50EDA577100247E3D /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793179B10EDA577100247E3D /* matrix_impl.cpp */; };
-		793179B60EDA577100247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793179B30EDA577100247E3D /* utility_impl.cpp */; };
+		79317E6A0EDC568500247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E5C0EDC568500247E3D /* Matrix.cpp */; };
+		79317E6B0EDC568500247E3D /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E5F0EDC568500247E3D /* Random.cpp */; };
+		79317E6C0EDC568500247E3D /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E610EDC568500247E3D /* Transform.cpp */; };
+		79317E6D0EDC568500247E3D /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E660EDC568500247E3D /* matrix_impl.cpp */; };
+		79317E6E0EDC568500247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E680EDC568500247E3D /* utility_impl.cpp */; };
 		799121F70E1F462D00035EEA /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799121F60E1F462D00035EEA /* OpenAL.framework */; };
 		799123D10E20082200035EEA /* SoundEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799123CF0E20082200035EEA /* SoundEngine.cpp */; };
 		799123FB0E2373FC00035EEA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799123FA0E2373FC00035EEA /* CoreAudio.framework */; };
@@ -62,24 +61,21 @@
 		7914067B0DBAD8D100C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		79235CD40DAD243A00F918F8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		79235CD80DAD243A00F918F8 /* FixedPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedPoint.cpp; sourceTree = "<group>"; };
-		79235CD90DAD243A00F918F8 /* FixedPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPoint.h; sourceTree = "<group>"; };
-		79235CDA0DAD243A00F918F8 /* FixedPointAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedPointAPI.h; sourceTree = "<group>"; };
-		79235CDB0DAD243A00F918F8 /* MathTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathTable.h; sourceTree = "<group>"; };
-		79235CDC0DAD243A00F918F8 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
-		79235CDD0DAD243A00F918F8 /* MatrixF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixF.cpp; sourceTree = "<group>"; };
-		79235CDE0DAD243A00F918F8 /* MatrixX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixX.cpp; sourceTree = "<group>"; };
-		79235CDF0DAD243A00F918F8 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
-		79235CE00DAD243A00F918F8 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
-		79235CE10DAD243A00F918F8 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
-		79235CE20DAD243A00F918F8 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
-		793179B00EDA577100247E3D /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
-		793179B10EDA577100247E3D /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
-		793179B20EDA577100247E3D /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
-		793179B30EDA577100247E3D /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
-		793179B40EDA577100247E3D /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
+		79317E5C0EDC568500247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		79317E5D0EDC568500247E3D /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		79317E5E0EDC568500247E3D /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		79317E5F0EDC568500247E3D /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
+		79317E600EDC568500247E3D /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
+		79317E610EDC568500247E3D /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
+		79317E620EDC568500247E3D /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
+		79317E630EDC568500247E3D /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		79317E650EDC568500247E3D /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
+		79317E660EDC568500247E3D /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
+		79317E670EDC568500247E3D /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
+		79317E680EDC568500247E3D /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
+		79317E690EDC568500247E3D /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
 		799121F60E1F462D00035EEA /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		799123CF0E20082200035EEA /* SoundEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoundEngine.cpp; path = ../../../Audio/SoundEngine.cpp; sourceTree = SOURCE_ROOT; };
 		799123D00E20082200035EEA /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundEngine.h; path = ../../../Audio/SoundEngine.h; sourceTree = SOURCE_ROOT; };
@@ -207,6 +203,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79317E5B0EDC568500247E3D /* Math */,
 				79E5F1DC0E33180D00C7BFD6 /* TouchScreen.h */,
 				79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */,
 				79E5F15D0E330EFB00C7BFD6 /* Pathes */,
@@ -214,7 +211,6 @@
 				799123D00E20082200035EEA /* SoundEngine.h */,
 				79EA043B0DAFC7950038ED3D /* Core */,
 				79235CD00DAD243A00F918F8 /* Application */,
-				79235CD70DAD243A00F918F8 /* Math */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -236,34 +232,31 @@
 			path = ../../../Application;
 			sourceTree = SOURCE_ROOT;
 		};
-		79235CD70DAD243A00F918F8 /* Math */ = {
+		79317E5B0EDC568500247E3D /* Math */ = {
 			isa = PBXGroup;
 			children = (
-				793179AF0EDA577100247E3D /* vfpmath */,
-				79235CD80DAD243A00F918F8 /* FixedPoint.cpp */,
-				79235CD90DAD243A00F918F8 /* FixedPoint.h */,
-				79235CDA0DAD243A00F918F8 /* FixedPointAPI.h */,
-				79235CDB0DAD243A00F918F8 /* MathTable.h */,
-				79235CDC0DAD243A00F918F8 /* Matrix.h */,
-				79235CDD0DAD243A00F918F8 /* MatrixF.cpp */,
-				79235CDE0DAD243A00F918F8 /* MatrixX.cpp */,
-				79235CDF0DAD243A00F918F8 /* Quaternion.h */,
-				79235CE00DAD243A00F918F8 /* Transform.cpp */,
-				79235CE10DAD243A00F918F8 /* Transform.h */,
-				79235CE20DAD243A00F918F8 /* Vector.h */,
+				79317E5C0EDC568500247E3D /* Matrix.cpp */,
+				79317E5D0EDC568500247E3D /* Matrix.h */,
+				79317E5E0EDC568500247E3D /* Quaternion.h */,
+				79317E5F0EDC568500247E3D /* Random.cpp */,
+				79317E600EDC568500247E3D /* Random.h */,
+				79317E610EDC568500247E3D /* Transform.cpp */,
+				79317E620EDC568500247E3D /* Transform.h */,
+				79317E630EDC568500247E3D /* Vector.h */,
+				79317E640EDC568500247E3D /* vfpmath */,
 			);
 			name = Math;
 			path = ../../../Math;
 			sourceTree = SOURCE_ROOT;
 		};
-		793179AF0EDA577100247E3D /* vfpmath */ = {
+		79317E640EDC568500247E3D /* vfpmath */ = {
 			isa = PBXGroup;
 			children = (
-				793179B00EDA577100247E3D /* common_macros.h */,
-				793179B10EDA577100247E3D /* matrix_impl.cpp */,
-				793179B20EDA577100247E3D /* matrix_impl.h */,
-				793179B30EDA577100247E3D /* utility_impl.cpp */,
-				793179B40EDA577100247E3D /* utility_impl.h */,
+				79317E650EDC568500247E3D /* common_macros.h */,
+				79317E660EDC568500247E3D /* matrix_impl.cpp */,
+				79317E670EDC568500247E3D /* matrix_impl.h */,
+				79317E680EDC568500247E3D /* utility_impl.cpp */,
+				79317E690EDC568500247E3D /* utility_impl.h */,
 			);
 			path = vfpmath;
 			sourceTree = "<group>";
@@ -413,10 +406,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79235CF10DAD243A00F918F8 /* main.m in Sources */,
-				79235CF30DAD243A00F918F8 /* FixedPoint.cpp in Sources */,
-				79235CF40DAD243A00F918F8 /* MatrixF.cpp in Sources */,
-				79235CF50DAD243A00F918F8 /* MatrixX.cpp in Sources */,
-				79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */,
 				79235D500DAD2BEA00F918F8 /* Application.mm in Sources */,
 				79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */,
 				79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */,
@@ -434,8 +423,11 @@
 				799123D10E20082200035EEA /* SoundEngine.cpp in Sources */,
 				79E5F1600E330EFB00C7BFD6 /* ResourcePath.mm in Sources */,
 				79E5F1DE0E33180D00C7BFD6 /* TouchScreen.mm in Sources */,
-				793179B50EDA577100247E3D /* matrix_impl.cpp in Sources */,
-				793179B60EDA577100247E3D /* utility_impl.cpp in Sources */,
+				79317E6A0EDC568500247E3D /* Matrix.cpp in Sources */,
+				79317E6B0EDC568500247E3D /* Random.cpp in Sources */,
+				79317E6C0EDC568500247E3D /* Transform.cpp in Sources */,
+				79317E6D0EDC568500247E3D /* matrix_impl.cpp in Sources */,
+				79317E6E0EDC568500247E3D /* utility_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

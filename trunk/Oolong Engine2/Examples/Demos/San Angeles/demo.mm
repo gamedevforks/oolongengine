@@ -706,7 +706,7 @@ static void drawFadeQuad()
 	#else
         const VERTTYPE fadeColor = X2F(minFade << 6);
 	#endif
-        myglColor4(fadeColor, fadeColor, fadeColor, 0);
+        glColor4f(fadeColor, fadeColor, fadeColor, 0);
 		
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
@@ -792,7 +792,7 @@ static void gluPerspective(GLfloat fovy, GLfloat aspect,
     xmin = ymin * aspect;
     xmax = ymax * aspect;
 	
-    myglFrustum(f2vt(xmin), f2vt(xmax),
+    glFrustumf(f2vt(xmin), f2vt(xmax),
                 f2vt(ymin), f2vt(ymax),
                f2vt(zNear), f2vt(zFar));
 }
@@ -802,7 +802,7 @@ static void prepareFrame(int width, int height)
 {
     glViewport(0, 0, height, width);
 
-    myglClearColor(f2vt(0.1f),
+    glClearColor(f2vt(0.1f),
                   f2vt(0.2f),
                   f2vt(0.3f), f2vt(1.0f));
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -811,7 +811,7 @@ static void prepareFrame(int width, int height)
     glLoadIdentity();
     
 	gluPerspective(80, (float)height / width, 0.3f, 75.0f);
-	myglRotate(f2vt(90), 0, 0, f2vt(1));
+	glRotatef(f2vt(90), 0, 0, f2vt(1));
 	
 	MATRIX	PerspMatrix;
 	
@@ -852,15 +852,15 @@ void appConfigureLightAndMaterial()
     static VERTTYPE light2Diffuse[] = { X2F(0x11eb), X2F(0x2b85), X2F(0x23d7), X2F(0x10000) };
     static VERTTYPE materialSpecular[] = { X2F(0x10000), X2F(0x10000), X2F(0x10000), X2F(0x10000) };
 #endif
-    myglLightv(GL_LIGHT0, GL_POSITION, light0Position);
-    myglLightv(GL_LIGHT0, GL_DIFFUSE, light0Diffuse);
-    myglLightv(GL_LIGHT1, GL_POSITION, light1Position);
-    myglLightv(GL_LIGHT1, GL_DIFFUSE, light1Diffuse);
-    myglLightv(GL_LIGHT2, GL_POSITION, light2Position);
-    myglLightv(GL_LIGHT2, GL_DIFFUSE, light2Diffuse);
-    myglMaterialv(GL_FRONT_AND_BACK, GL_SPECULAR, materialSpecular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light0Position);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light0Diffuse);
+    glLightfv(GL_LIGHT1, GL_POSITION, light1Position);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diffuse);
+    glLightfv(GL_LIGHT2, GL_POSITION, light2Position);
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialSpecular);
 
-    myglMaterial(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(60));
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(60));
     glEnable(GL_COLOR_MATERIAL);
 }
 
@@ -872,7 +872,7 @@ static void drawModels(float zScale)
 
     seedRandom(9);
 
-    myglScale(f2vt(1), f2vt(1), f2vt(zScale));
+    glScalef(f2vt(1), f2vt(1), f2vt(zScale));
 
     for (y = -5; y <= 5; ++y)
     {
@@ -886,11 +886,11 @@ static void drawModels(float zScale)
             fixedScale = f2vt(buildingScale);
 
             glPushMatrix();
-            myglTranslate(f2vt(x * translationScale),
+            glTranslatef(f2vt(x * translationScale),
                          f2vt(y * translationScale),
                          0);
-            myglRotate(f2vt((randomUInt() % 360)), 0, 0, f2vt(1));
-            myglScale(fixedScale, fixedScale, fixedScale);
+            glRotatef(f2vt((randomUInt() % 360)), 0, 0, f2vt(1));
+            glScalef(fixedScale, fixedScale, fixedScale);
 
 			MATRIX	ViewMatrix;
 	
@@ -922,15 +922,15 @@ static void drawModels(float zScale)
         float offs = offs100 * 0.01f;
         VERTTYPE fixedOffs = f2vt(offs);
         glPushMatrix();
-        myglTranslate(fixedOffs, f2vt(-4), f2vt(2));
+        glTranslatef(fixedOffs, f2vt(-4), f2vt(2));
 		
 //		if(cullGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]))
 			drawGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]);
 
         glPopMatrix();
         glPushMatrix();
-        myglTranslate(f2vt(-4), fixedOffs, f2vt(4));
-        myglRotate(f2vt(90), 0, 0, f2vt(1));
+        glTranslatef(f2vt(-4), fixedOffs, f2vt(4));
+        glRotatef(f2vt(90), 0, 0, f2vt(1));
 		
 //		if(cullGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]))
 			drawGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]);
@@ -1020,11 +1020,11 @@ static void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
         VERTTYPE fixedM[16];
         for (a = 0; a < 16; ++a)
             fixedM[a] = f2vt(m[a]);
-        myglMultMatrix(fixedM);
+        glMultMatrixf(fixedM);
     }
 
     /* Translate Eye to Origin */
-    myglTranslate(f2vt(-eyex),
+    glTranslatef(f2vt(-eyex),
                  f2vt(-eyey),
                  f2vt(-eyez));
 }

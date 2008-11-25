@@ -2645,15 +2645,15 @@ void C3DSScene::GetAbsoluteRotation(MATRIX * const pmRot, VERTTYPE fFrameNumber,
  @Description		Compute the normal to the triangle defined by the vertices V1,
 					V2 and V3.
 *****************************************************************************/
-VECTOR3f C3DSScene::Normal(VERTTYPE *pV1, VERTTYPE *pV2, VERTTYPE *pV3)
+VECTOR3 C3DSScene::Normal(VERTTYPE *pV1, VERTTYPE *pV2, VERTTYPE *pV3)
 {
 	/*
 		The calculation of the normal will be done in floating point,
 		doesn't matter if we're using fixed point.
 	*/
-	VECTOR3f fNormal;
-	VECTOR3f fV1, fV2, fV3;
-	VECTOR3f Vect1, Vect2;
+	VECTOR3 fNormal;
+	VECTOR3 fV1, fV2, fV3;
+	VECTOR3 Vect1, Vect2;
 
 	fV1.x = vt2f(pV1[0]); fV1.y = vt2f(pV1[1]); fV1.z = vt2f(pV1[2]);
 	fV2.x = vt2f(pV2[0]); fV2.y = vt2f(pV2[1]); fV2.z = vt2f(pV2[2]);
@@ -2702,7 +2702,7 @@ void C3DSScene::CalculateNormals(int nNumVertex, VERTTYPE *pVertex,
 	int				nIdx;
 	int				j, k;
 
-	VECTOR3f fNormal;
+	VECTOR3 fNormal;
 
 	// Parameter checking
 	if (!pVertex || !pFaces || !pNormals)

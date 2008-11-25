@@ -125,7 +125,7 @@ static void graph_func(int id, int x0, int x1, float *values, void *data)
 	  VertexColor.a = 0;
    }
 
-	VECTOR2f Vertices[1024];
+	VECTOR2 Vertices[1024];
 	memset(Vertices, 0, (1024 * 2 * sizeof(float)));
 	int z = 0;
 		
@@ -189,10 +189,10 @@ Prof_extern_C void Prof_draw_graph_gl(float sx, float sy, float x_spacing, float
 	// Set matrix mode so that screen coordinates can be specified 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	myglRotate(90, 0, 0, 1);
+	glRotatef(90, 0, 0, 1);
 
 	glMatrixMode(GL_MODELVIEW);
-	myglLoadMatrix(Matrix.f);
+	glLoadMatrixf(Matrix.f);
 
 //	glDisable(GL_LIGHTING);
 

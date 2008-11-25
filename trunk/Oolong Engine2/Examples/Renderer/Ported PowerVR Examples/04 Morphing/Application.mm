@@ -45,6 +45,57 @@ CDisplayText * AppDisplayText;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 CTexture * Textures;
 
+// Structure Definitions
+
+//
+// Defines the format of a header-object as exported by the MAX
+// plugin.
+//
+typedef struct {
+	unsigned int      nNumVertex;
+    unsigned int      nNumFaces;
+    unsigned int      nNumStrips;
+    unsigned int      nFlags;
+    unsigned int      nMaterial;
+    float             fCenter[3];
+    float             *pVertex;
+    float             *pUV;
+    float             *pNormals;
+    float             *pPackedVertex;
+    unsigned int      *pVertexColor;
+    unsigned int      *pVertexMaterial;
+    unsigned short    *pFaces;
+    unsigned short    *pStrips;
+    unsigned short    *pStripLength;
+    struct
+    {
+        unsigned int  nType;
+        unsigned int  nNumPatches;
+        unsigned int  nNumVertices;
+        unsigned int  nNumSubdivisions;
+        float         *pControlPoints;
+        float         *pUVs;
+    } Patch;
+}   HeaderStruct_Mesh;
+
+
+typedef HeaderStruct_Mesh HeaderStruct_Mesh_Type;
+
+//
+// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
+// Expects a pointer to the object structure in the header file
+// returns a directly usable geometry in fixed or float format
+// 
+HeaderStruct_Mesh_Type* LoadHeaderObject(const void *headerObj);
+
+//
+// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
+// expects a pointer returned by LoadHeaderObject
+// 
+void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj);
+
+
+
 int frames;
 float frameRate;
 
@@ -125,6 +176,27 @@ void DrawQuad (float x,float y,float z,float Size, GLuint pTexture);
 void DrawDualTexQuad (float x,float y,float z,float Size, GLuint pTexture1, GLuint PTexture2);
 void doRenderScene();
 
+//
+// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
+// Expects a pointer to the object structure in the header file
+// returns a directly usable geometry in fixed or float format
+// 
+HeaderStruct_Mesh_Type *LoadHeaderObject(const void *headerObj)
+{
+	HeaderStruct_Mesh_Type *new_mesh = new HeaderStruct_Mesh_Type;
+	memcpy (new_mesh,headerObj,sizeof(HeaderStruct_Mesh_Type));
+	return (HeaderStruct_Mesh_Type*) new_mesh;
+}
+//
+// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
+// expects a pointer returned by LoadHeaderObject
+// 
+void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj)
+{
+	delete headerObj;
+}
+
+
 bool CShell::InitApplication()
 {
 	AppDisplayText = new CDisplayText;  
@@ -203,23 +275,23 @@ bool CShell::InitApplication()
 	 ***********************/
 	if(!Textures->LoadTextureFromPointer((void*)Iris, &pTexture[0]))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if(!Textures->LoadTextureFromPointer((void*)Metal, &pTexture[1]))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if(!Textures->LoadTextureFromPointer((void*)Fire02, &pTexture[2]))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	if(!Textures->LoadTextureFromPointer((void*)Fire03, &pTexture[3]))
 		return false;
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	myglTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	/******************************
 	 ** GENERIC RENDER STATES     **
@@ -247,13 +319,13 @@ bool CShell::InitApplication()
 	glCullFace(GL_BACK);
 	
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70.0f*(3.14f/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(10000.0f), true);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	/* Create viewing matrix */
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	MatrixLookAtRH(MyLookMatrix, Eye, At, Up);
-	myglMultMatrix(MyLookMatrix.f);
+	glMultMatrixf(MyLookMatrix.f);
 	
 	/* Enable texturing */
 	glEnable(GL_TEXTURE_2D);
@@ -263,15 +335,15 @@ bool CShell::InitApplication()
 	
 	/* Light 0 (White directional light) */
 	fVal[0]=f2vt(0.2f); fVal[1]=f2vt(0.2f); fVal[2]=f2vt(0.2f); fVal[3]=f2vt(1.0f);
-	myglLightv(GL_LIGHT0, GL_AMBIENT, fVal);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, fVal);
 	
 	fVal[0]=f2vt(1.0f); fVal[1]=f2vt(1.0f); fVal[2]=f2vt(1.0f); fVal[3]=f2vt(1.0f);
-	myglLightv(GL_LIGHT0, GL_DIFFUSE, fVal);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, fVal);
 	
 	fVal[0]=f2vt(1.0f); fVal[1]=f2vt(1.0f); fVal[2]=f2vt(1.0f); fVal[3]=f2vt(1.0f);
-	myglLightv(GL_LIGHT0, GL_SPECULAR, fVal);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, fVal);
 	
-	myglLightv(GL_LIGHT0, GL_POSITION, &vLightPosition.x);
+	glLightfv(GL_LIGHT0, GL_POSITION, &vLightPosition.x);
 	
 	glEnable(GL_LIGHT0);
 	
@@ -430,12 +502,12 @@ void doRenderScene()
 	
 	glLoadIdentity();
 	
-	myglMultMatrix(MyLookMatrix.f);
+	glMultMatrixf(MyLookMatrix.f);
 	
-	myglTranslate(f2vt(0),f2vt(-50.0f),f2vt(-50.0f));
+	glTranslatef(f2vt(0),f2vt(-50.0f),f2vt(-50.0f));
 	
-	myglRotate(f2vt(-fCurrentfJawRotation), f2vt(1.0f), f2vt(0.0f), f2vt(0.0f));
-	myglRotate(f2vt(fCurrentfJawRotation) - f2vt(30.0f), f2vt(0), f2vt(1.0f), f2vt(-1.0f));
+	glRotatef(f2vt(-fCurrentfJawRotation), f2vt(1.0f), f2vt(0.0f), f2vt(0.0f));
+	glRotatef(f2vt(fCurrentfJawRotation) - f2vt(30.0f), f2vt(0), f2vt(1.0f), f2vt(-1.0f));
 	
 	RenderJaw (pTexture[1]);
 	
@@ -445,7 +517,7 @@ void doRenderScene()
 	
 	glPushMatrix();
 	
-	myglRotate(f2vt(fCurrentfJawRotation) - f2vt(30.0f), f2vt(0), f2vt(1.0f), f2vt(-1.0f));
+	glRotatef(f2vt(fCurrentfJawRotation) - f2vt(30.0f), f2vt(0), f2vt(1.0f), f2vt(-1.0f));
 	
 	RenderSkull (pTexture[1]);
 	
@@ -465,17 +537,17 @@ void doRenderScene()
 	
 	glDisable(GL_BLEND);			// Disable Alpha Blending
 	
-	myglColor4(f2vt(0.7f+0.3f*((fSkull_Weight[0]))), f2vt(0.7f), f2vt(0.7f), f2vt(1.0f));	// Animated Base Color
-	myglTranslate(f2vt(10.0f), f2vt(-50.0f), f2vt(0.0f));
-	myglRotate(f2vt(fCurrentfBackRotation*4.0f),f2vt(0),f2vt(0),f2vt(-1.0f));	// Rotation of Quad
+	glColor4f(f2vt(0.7f+0.3f*((fSkull_Weight[0]))), f2vt(0.7f), f2vt(0.7f), f2vt(1.0f));	// Animated Base Color
+	glTranslatef(f2vt(10.0f), f2vt(-50.0f), f2vt(0.0f));
+	glRotatef(f2vt(fCurrentfBackRotation*4.0f),f2vt(0),f2vt(0),f2vt(-1.0f));	// Rotation of Quad
 	
 	/* Animated Texture Matrix */
 	glActiveTexture(GL_TEXTURE0);
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
-	myglTranslate(f2vt(-0.5f), f2vt(-0.5f), f2vt(0.0f));
-	myglRotate(f2vt(fCurrentfBackRotation*-8.0f), f2vt(0), f2vt(0), f2vt(-1.0f));
-	myglTranslate(f2vt(-0.5f), f2vt(-0.5f), f2vt(0.0f));
+	glTranslatef(f2vt(-0.5f), f2vt(-0.5f), f2vt(0.0f));
+	glRotatef(f2vt(fCurrentfBackRotation*-8.0f), f2vt(0), f2vt(0), f2vt(-1.0f));
+	glTranslatef(f2vt(-0.5f), f2vt(-0.5f), f2vt(0.0f));
 	
 	/* Draw Geometry */
 	DrawDualTexQuad (0.0f, 0.0f, -50.0f, 480.0f, pTexture[3], pTexture[2]);
@@ -489,7 +561,7 @@ void doRenderScene()
 	glPopMatrix();
 	
 	/* Reset Color */
-	myglColor4(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
+	glColor4f(f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f));
 }
 
 /*******************************************************************************

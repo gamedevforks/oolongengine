@@ -167,7 +167,7 @@ bool CShell::UpdateScene()
 	
 	MATRIX	MyPerspMatrix;
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
-	myglMultMatrix(MyPerspMatrix.f);
+	glMultMatrixf(MyPerspMatrix.f);
 	
 	// do all the timing
 	static CFTimeInterval	startTime = 0;

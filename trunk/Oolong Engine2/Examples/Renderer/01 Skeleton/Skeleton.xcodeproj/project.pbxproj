@@ -20,6 +20,7 @@
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
 		793179FB0EDA639E00247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793179FA0EDA639E00247E3D /* Matrix.cpp */; };
+		79317F2A0EDE50EB00247E3D /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317F260EDE50EB00247E3D /* mmgr.cpp */; };
 		7976BBB60EDA4E9B00106906 /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BBB20EDA4E9B00106906 /* matrix_impl.cpp */; };
 		7976BBB70EDA4E9B00106906 /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BBB40EDA4E9B00106906 /* utility_impl.cpp */; };
 		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
@@ -58,6 +59,10 @@
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		793179FA0EDA639E00247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		79317F260EDE50EB00247E3D /* mmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mmgr.cpp; sourceTree = "<group>"; };
+		79317F270EDE50EB00247E3D /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
+		79317F280EDE50EB00247E3D /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
+		79317F7A0EDE5DFA00247E3D /* MemoryTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryTemplates.h; sourceTree = "<group>"; };
 		7976BBB10EDA4E9B00106906 /* common_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_macros.h; sourceTree = "<group>"; };
 		7976BBB20EDA4E9B00106906 /* matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix_impl.cpp; sourceTree = "<group>"; };
 		7976BBB30EDA4E9B00106906 /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
@@ -167,6 +172,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79317F250EDE50EB00247E3D /* MemoryManager */,
 				79EA043B0DAFC7950038ED3D /* Core */,
 				79235CD00DAD243A00F918F8 /* Application */,
 				79235CD70DAD243A00F918F8 /* Math */,
@@ -204,6 +210,18 @@
 			);
 			name = Math;
 			path = ../../../Math;
+			sourceTree = SOURCE_ROOT;
+		};
+		79317F250EDE50EB00247E3D /* MemoryManager */ = {
+			isa = PBXGroup;
+			children = (
+				79317F7A0EDE5DFA00247E3D /* MemoryTemplates.h */,
+				79317F260EDE50EB00247E3D /* mmgr.cpp */,
+				79317F270EDE50EB00247E3D /* mmgr.h */,
+				79317F280EDE50EB00247E3D /* nommgr.h */,
+			);
+			name = MemoryManager;
+			path = ../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
 		7976BBB00EDA4E9B00106906 /* vfpmath */ = {
@@ -367,6 +385,7 @@
 				7976BBB60EDA4E9B00106906 /* matrix_impl.cpp in Sources */,
 				7976BBB70EDA4E9B00106906 /* utility_impl.cpp in Sources */,
 				793179FB0EDA639E00247E3D /* Matrix.cpp in Sources */,
+				79317F2A0EDE50EB00247E3D /* mmgr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

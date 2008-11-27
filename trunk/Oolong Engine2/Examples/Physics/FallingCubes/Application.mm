@@ -38,6 +38,7 @@ int numBodies = 10;
 #include "UI.h"
 #include "Macros.h"
 #include "Accelerometer.h"
+#include "Memory.h"
 
 #include <stdio.h>
 #include <sys/time.h>

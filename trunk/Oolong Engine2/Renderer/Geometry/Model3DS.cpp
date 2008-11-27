@@ -20,6 +20,8 @@ subject to the following restrictions:
 
 #include "Mathematics.h"
 #include "Geometry.h"
+
+#include "Memory.h"
 #include "Macros.h"
 
 #include "Model3DS.h"
@@ -407,7 +409,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 	*********************/
 
 	/* Allocate memory for each mesh structure in the object */
-	pMesh = (S3DSMesh *) calloc(nNumMesh, sizeof(S3DSMesh));
+	pMesh = new S3DSMesh[nNumMesh * sizeof(S3DSMesh)]; //(S3DSMesh *) calloc(nNumMesh, sizeof(S3DSMesh));
 
 	if (!pMesh)
 	{
@@ -638,7 +640,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 	**************/
 
 	/* Allocate memory for material structures in object */
-	pMaterial = (S3DSMaterial *)calloc(nNumMaterial, sizeof(S3DSMaterial));
+	pMaterial = new S3DSMaterial[nNumMaterial * sizeof(S3DSMaterial)];// (S3DSMaterial *)calloc(nNumMaterial, sizeof(S3DSMaterial));
 
 	/* Check that memory was correctly allocated */
 	if(!pMaterial)
@@ -831,7 +833,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 	if (nNumLight)
 	{
 		/* Allocate memory for all lights defined in object */
-		pLight=(S3DSLight *)calloc(nNumLight, sizeof(S3DSLight));
+		pLight= new S3DSLight[nNumLight * sizeof(S3DSLight)]; // (S3DSLight *)calloc(nNumLight, sizeof(S3DSLight));
 		if (!pLight)
 		{
 			_RPT0(_CRT_WARN,  "Model3DSRead : Not enough memory to allocate light structures\n");
@@ -890,7 +892,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 	if (nNumCamera)
 	{
 		/* Allocate memory for all cameras defined in object */
-		pCamera=(S3DSCamera *)calloc(nNumCamera, sizeof(S3DSCamera));
+		pCamera= new S3DSCamera[nNumCamera * sizeof(S3DSCamera)]; //(S3DSCamera *)calloc(nNumCamera, sizeof(S3DSCamera));
 		if (!pCamera)
 		{
 			_RPT0(_CRT_WARN,  "Model3DSRead : Not enough memory to allocate camera structures\n");
@@ -1032,7 +1034,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 		}
 
 		/* Allocate memory for nodes */
-		pNode = (S3DSNode *)calloc(nNumNodes, sizeof(S3DSNode));
+		pNode = new S3DSNode[nNumNodes * sizeof(S3DSNode)]; //(S3DSNode *)calloc(nNumNodes, sizeof(S3DSNode));
 		if (!pNode)
 		{
 			Destroy();
@@ -1240,7 +1242,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 															/* Allocate memory for these keys */
 															if (pNode[NodeId].PositionKeys)
 															{
-																pNode[NodeId].pPosition = (POSITIONKEY *)calloc(pNode[NodeId].PositionKeys, sizeof(POSITIONKEY));
+																pNode[NodeId].pPosition = new POSITIONKEY[pNode[NodeId].PositionKeys * sizeof(POSITIONKEY)]; //(POSITIONKEY *)calloc(pNode[NodeId].PositionKeys, sizeof(POSITIONKEY));
 															}
 
 															/* Read all keys */
@@ -1313,7 +1315,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 															/* Allocate memory for these keys */
 															if (pNode[NodeId].RotationKeys)
 															{
-																pNode[NodeId].pRotation= (ROTATIONKEY *)calloc(pNode[NodeId].RotationKeys, sizeof(ROTATIONKEY));
+																pNode[NodeId].pRotation= new ROTATIONKEY[pNode[NodeId].RotationKeys * sizeof(ROTATIONKEY)]; //(ROTATIONKEY *)calloc(pNode[NodeId].RotationKeys, sizeof(ROTATIONKEY));
 															}
 
 															/* Read all keys */
@@ -1386,7 +1388,7 @@ bool C3DSScene::ReadFromFile(const char * const pszFileName)
 															/* Allocate memory for these keys */
 															if (pNode[NodeId].ScalingKeys)
 															{
-																pNode[NodeId].pScaling= (SCALINGKEY *)calloc(pNode[NodeId].ScalingKeys, sizeof(SCALINGKEY));
+																pNode[NodeId].pScaling= new SCALINGKEY[pNode[NodeId].ScalingKeys * sizeof(SCALINGKEY)]; //(SCALINGKEY *)calloc(pNode[NodeId].ScalingKeys, sizeof(SCALINGKEY));
 															}
 
 															/* Read all keys */
@@ -1572,7 +1574,7 @@ OS_TRACK_TAG subchunk */
 															/* Allocate memory for these keys */
 															if (pNode[NodeId].PositionKeys)
 															{
-																pNode[NodeId].pPosition = (POSITIONKEY *)calloc(pNode[NodeId].PositionKeys, sizeof(POSITIONKEY));
+																pNode[NodeId].pPosition = new POSITIONKEY[pNode[NodeId].PositionKeys * sizeof(POSITIONKEY)]; //(POSITIONKEY *)calloc(pNode[NodeId].PositionKeys, sizeof(POSITIONKEY));
 															}
 
 															/* Read all keys */

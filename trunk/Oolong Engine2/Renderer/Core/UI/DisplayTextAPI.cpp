@@ -48,8 +48,8 @@ void CDisplayText::ReleaseTextures()
 	if (!m_bTexturesSet) return;
 
 	/* Release IndexBuffer */
-	delete(m_pwFacesFont);
-	delete(m_pPrint3dVtx);
+	free(m_pwFacesFont);
+	free(m_pPrint3dVtx);
 
 	/* Delete textures */
 	glDeleteTextures(5, m_pAPI->uTexture);
@@ -58,7 +58,7 @@ void CDisplayText::ReleaseTextures()
 
 	m_bTexturesSet = false;
 
-	delete(m_pVtxCache);
+	free(m_pVtxCache);
 
 	APIRelease();
 
@@ -233,7 +233,8 @@ bool CDisplayText::APIUpLoad4444(unsigned int dwTexID, unsigned char *pSource, u
 	if (nMode==0)
 	{
 		/* Allocate temporary memory */
-		p8888 = (unsigned short *)new unsigned short[nSize*nSize*sizeof(unsigned short)];
+		p8888 = (unsigned short *) malloc(nSize * nSize * sizeof(unsigned short));
+		memset(p8888, 0, nSize * nSize * sizeof(unsigned short));
 		pDestByte = p8888;
 
 		/* Set source pointer (after offset of 16) */
@@ -261,7 +262,8 @@ bool CDisplayText::APIUpLoad4444(unsigned int dwTexID, unsigned char *pSource, u
 		pSrcByte = pSource;
 
 		/* Allocate temporary memory */
-		p8888 = (unsigned short *)new unsigned short[nSize*nSize*sizeof(unsigned short)];
+		p8888 = (unsigned short *) malloc (nSize*nSize*sizeof(unsigned short));
+		memset(p8888, 0, nSize*nSize*sizeof(unsigned short));
 
 		if (!p8888)
 		{
@@ -304,12 +306,12 @@ bool CDisplayText::APIUpLoad4444(unsigned int dwTexID, unsigned char *pSource, u
 	if (glGetError())
 	{
 		_RPT0(_CRT_WARN,"glTexImage2D() failed\n");
-		delete(p8888);
+		free(p8888);
 		return false;
 	}
 
 	/* Destroy temporary data */
-	delete(p8888);
+	free(p8888);
 
 	/* Return status : OK */
 	return true;

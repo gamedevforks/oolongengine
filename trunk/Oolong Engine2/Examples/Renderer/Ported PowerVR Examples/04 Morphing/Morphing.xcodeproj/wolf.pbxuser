@@ -75,15 +75,15 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249319207;
-			PBXWorkspaceStateSaveDate = 249319207;
+			PBXPerProjectTemplateStateSaveDate = 249499451;
+			PBXWorkspaceStateSaveDate = 249499451;
 		};
 		perUserProjectItems = {
 			79317B780EDBBDB700247E3D /* PBXTextBookmark */ = 79317B780EDBBDB700247E3D /* PBXTextBookmark */;
 			79317B7B0EDBBDB700247E3D /* PBXTextBookmark */ = 79317B7B0EDBBDB700247E3D /* PBXTextBookmark */;
 			79317B7C0EDBBDB700247E3D /* PBXTextBookmark */ = 79317B7C0EDBBDB700247E3D /* PBXTextBookmark */;
-			79317BDA0EDBBF6900247E3D /* PBXTextBookmark */ = 79317BDA0EDBBF6900247E3D /* PBXTextBookmark */;
 			79317CD70EDC50AC00247E3D /* PBXTextBookmark */ = 79317CD70EDC50AC00247E3D /* PBXTextBookmark */;
+			795AC7BF0EDF0FA6004CF7D4 /* PBXTextBookmark */ = 795AC7BF0EDF0FA6004CF7D4 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -139,9 +139,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {600, 10892}}";
+			sepNavIntBoundsRect = "{{0, 0}, {542, 10990}}";
 			sepNavSelRange = "{8848, 1}";
-			sepNavVisRange = "{6203, 135}";
+			sepNavVisRange = "{6203, 179}";
 			sepNavWindowFrame = "{{586, 95}, {821, 781}}";
 		};
 	};
@@ -189,16 +189,6 @@
 		path = "/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/04 Morphing/Media/OGLESEvilSkull_low.H";
 		sourceTree = "<absolute>";
 	};
-	79317BDA0EDBBF6900247E3D /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 286";
-		rLen = 1;
-		rLoc = 8848;
-		rType = 0;
-		vrLen = 179;
-		vrLoc = 6203;
-	};
 	79317CD70EDC50AC00247E3D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
@@ -207,6 +197,16 @@
 		rLoc = 8848;
 		rType = 0;
 		vrLen = 135;
+		vrLoc = 6203;
+	};
+	795AC7BF0EDF0FA6004CF7D4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 286";
+		rLen = 1;
+		rLoc = 8848;
+		rType = 0;
+		vrLen = 179;
 		vrLoc = 6203;
 	};
 }

@@ -20,6 +20,7 @@ subject to the following restrictions:
 #include "Mathematics.h"
 #include "Geometry.h"
 #include "Macros.h"
+#include "Memory.h"
 
 #include "DisplayText.h"
 #include "DisplayTextdat.h"		// texture data
@@ -45,7 +46,7 @@ CDisplayText::CDisplayText()
 #if !defined(DISABLE_DISPLAYTEXT)
 
 	// Initialise all variables
-//	memset(this, 0, sizeof(*this));
+	memset(this, 0, sizeof(*this));
 
 #endif
 }
@@ -108,7 +109,8 @@ bool CDisplayText::SetTextures(
 	if (!bStatus) return false;
 
 	/* INDEX BUFFERS */
-	m_pwFacesFont = new unsigned short[DISPLAYTEXT_MAX_RENDERABLE_LETTERS * 2 * 3 * sizeof(unsigned short)];
+	m_pwFacesFont = (unsigned short*) malloc(DISPLAYTEXT_MAX_RENDERABLE_LETTERS * 2 * 3 * sizeof(unsigned short));
+	memset(m_pwFacesFont, 0, DISPLAYTEXT_MAX_RENDERABLE_LETTERS * 2 * 3 * sizeof(unsigned short));	
 
 	bStatus = APIUpLoadIcons(DisplayTextPVRLogo, iGDKLogo);
 	if (!bStatus) return false;
@@ -126,7 +128,8 @@ bool CDisplayText::SetTextures(
 	}
 
 	m_nVtxCacheMax = MIN_CACHED_VTX;
-	m_pVtxCache = (SDisplayTextAPIVertex*)new int[m_nVtxCacheMax * sizeof(*m_pVtxCache)];
+	m_pVtxCache = (SDisplayTextAPIVertex*)malloc(m_nVtxCacheMax * sizeof(*m_pVtxCache));
+	memset(m_pVtxCache, 0, m_nVtxCacheMax * sizeof(*m_pVtxCache));	
 	m_nVtxCache = 0;
 
 	/* Everything is OK */
@@ -205,7 +208,8 @@ void CDisplayText::DisplayText(float fPosX, float fPosY, const float fScale, uns
 		/* Create Vertex Buffer (only if it doesn't exist) */
 		if(m_pPrint3dVtx==0)
 		{
-			m_pPrint3dVtx = (SDisplayTextAPIVertex*)new int[MAX_LETTERS*4*sizeof(SDisplayTextAPIVertex)];
+			m_pPrint3dVtx = (SDisplayTextAPIVertex*) malloc(MAX_LETTERS*4*sizeof(SDisplayTextAPIVertex));
+			memset(m_pPrint3dVtx, 0, MAX_LETTERS*4*sizeof(SDisplayTextAPIVertex));
 		}
 
 		/* Fill up our buffer */
@@ -352,9 +356,12 @@ unsigned int CDisplayText::InitWindow(unsigned int dwBufferSizeX, unsigned int d
 	/* Text Buffer */
 	m_pWin[dwCurrentWin].dwBufferSizeX = dwBufferSizeX + 1;
 	m_pWin[dwCurrentWin].dwBufferSizeY = dwBufferSizeY;
-	m_pWin[dwCurrentWin].pTextBuffer  = (char *)calloc((dwBufferSizeX+2)*(dwBufferSizeY+2), sizeof(char));
-	m_pWin[dwCurrentWin].bTitleTextL  = (char *)calloc(MAX_LETTERS, sizeof(char));
-	m_pWin[dwCurrentWin].bTitleTextR  = (char *)calloc(MAX_LETTERS, sizeof(char));
+	m_pWin[dwCurrentWin].pTextBuffer  = (char*) malloc((dwBufferSizeX+2)*(dwBufferSizeY+2) * sizeof(char));// (char *)calloc((dwBufferSizeX+2)*(dwBufferSizeY+2), sizeof(char));
+	memset(m_pWin[dwCurrentWin].pTextBuffer, 0, sizeof((dwBufferSizeX+2)*(dwBufferSizeY+2) * sizeof(char)));
+	m_pWin[dwCurrentWin].bTitleTextL  = (char*) malloc(MAX_LETTERS * sizeof(char)); // (char *)calloc(MAX_LETTERS, sizeof(char));
+	memset(m_pWin[dwCurrentWin].bTitleTextL, 0, MAX_LETTERS * sizeof(char));
+	m_pWin[dwCurrentWin].bTitleTextR  = (char*) malloc(MAX_LETTERS * sizeof(char)); //(char *)calloc(MAX_LETTERS, sizeof(char));
+	memset(m_pWin[dwCurrentWin].bTitleTextR, 0, MAX_LETTERS * sizeof(char));
 
 	/* Memory allocation failed */
 	if (!m_pWin[dwCurrentWin].pTextBuffer || !m_pWin[dwCurrentWin].bTitleTextL || !m_pWin[dwCurrentWin].bTitleTextR)
@@ -403,19 +410,19 @@ void CDisplayText::DeleteWindow(unsigned int dwWin)
 	int i;
 
 	/* Release VertexBuffer */
-	delete(m_pWin[dwWin].pTitleVtxL);
-	delete(m_pWin[dwWin].pTitleVtxR);
-	delete(m_pWin[dwWin].pWindowVtxTitle);
-	delete(m_pWin[dwWin].pWindowVtxText);
+	free(m_pWin[dwWin].pTitleVtxL);
+	free(m_pWin[dwWin].pTitleVtxR);
+	free(m_pWin[dwWin].pWindowVtxTitle);
+	free(m_pWin[dwWin].pWindowVtxText);
 	for(i=0; i<255; i++)
-		delete(m_pWin[dwWin].pLineVtx[i]);
+		free(m_pWin[dwWin].pLineVtx[i]);
 
 	/* Only delete window if it exists */
 	if(m_pWin[dwWin].dwFlags & DisplayText_WIN_EXIST)
 	{
-		delete(m_pWin[dwWin].pTextBuffer);
-		delete(m_pWin[dwWin].bTitleTextL);
-		delete(m_pWin[dwWin].bTitleTextR);
+		free(m_pWin[dwWin].pTextBuffer);
+		free(m_pWin[dwWin].bTitleTextL);
+		free(m_pWin[dwWin].bTitleTextR);
 	}
 
 	/* Reset flags */
@@ -746,8 +753,8 @@ void CDisplayText::SetTitle(unsigned int dwWin, unsigned int dwBackgroundColor, 
 {
 #if !defined (DISABLE_DISPLAYTEXT)
 
-	delete(m_pWin[dwWin].pTitleVtxL);
-	delete(m_pWin[dwWin].pTitleVtxR);
+	free(m_pWin[dwWin].pTitleVtxL);
+	free(m_pWin[dwWin].pTitleVtxR);
 
 	if(sTitleLeft)  memcpy(m_pWin[dwWin].bTitleTextL, sTitleLeft , _MIN(MAX_LETTERS-1, strlen(sTitleLeft )+1));
 	if(sTitleRight) memcpy(m_pWin[dwWin].bTitleTextR, sTitleRight, _MIN(MAX_LETTERS-1, strlen(sTitleRight)+1));
@@ -981,7 +988,8 @@ bool CDisplayText::UpdateBackgroundWindow(unsigned int dwWin, unsigned int Color
 	/* Create our vertex buffers */
 	if(*ppVtx==0)
 	{
-		*ppVtx = (SDisplayTextAPIVertex*)new int[16*sizeof(SDisplayTextAPIVertex)];
+		*ppVtx = (SDisplayTextAPIVertex*) malloc(16*sizeof(SDisplayTextAPIVertex));
+		memset(*ppVtx, 0, 16*sizeof(SDisplayTextAPIVertex));
 	}
 	vBox = *ppVtx;
 
@@ -1301,14 +1309,21 @@ void CDisplayText::UpdateTitleVertexBuffer(unsigned int dwWin)
 	if(m_pWin[dwWin].pTitleVtxL==0 || m_pWin[dwWin].pTitleVtxR==0)
 	{
 		dwLenL = (unsigned int)strlen(m_pWin[dwWin].bTitleTextL);
-		delete(m_pWin[dwWin].pTitleVtxL);
+		free(m_pWin[dwWin].pTitleVtxL);
 		if(dwLenL)
-			m_pWin[dwWin].pTitleVtxL = (SDisplayTextAPIVertex*)new int[dwLenL*4*sizeof(SDisplayTextAPIVertex)];
+		{
+			m_pWin[dwWin].pTitleVtxL = (SDisplayTextAPIVertex*) malloc(dwLenL*4*sizeof(SDisplayTextAPIVertex));
+			memset(m_pWin[dwWin].pTitleVtxL, 0, dwLenL*4*sizeof(SDisplayTextAPIVertex));
+		}
 
 		dwLenR = m_pWin[dwWin].bTitleTextR ? (unsigned int)strlen(m_pWin[dwWin].bTitleTextR) : 0;
-		delete(m_pWin[dwWin].pTitleVtxR);
+		free(m_pWin[dwWin].pTitleVtxR);
 		if(dwLenR)
-			m_pWin[dwWin].pTitleVtxR = (SDisplayTextAPIVertex*)new int[dwLenR*4*sizeof(SDisplayTextAPIVertex)];
+		{
+			m_pWin[dwWin].pTitleVtxR = (SDisplayTextAPIVertex*) malloc(dwLenR*4*sizeof(SDisplayTextAPIVertex));
+			memset(m_pWin[dwWin].pTitleVtxR, 0, dwLenR*4*sizeof(SDisplayTextAPIVertex));
+		}
+
 	}
 
 	/* Left title */
@@ -1386,8 +1401,10 @@ void CDisplayText::UpdateMainTextVertexBuffer(unsigned int dwWin)
 		{
 			/* Create Vertex Buffer (one per line) */
 			if (m_pWin[dwWin].pLineVtx[i]==0)
-				m_pWin[dwWin].pLineVtx[i] = (SDisplayTextAPIVertex*)new int[m_pWin[dwWin].dwBufferSizeX *4*sizeof(SDisplayTextAPIVertex)];
-
+			{
+				m_pWin[dwWin].pLineVtx[i] = (SDisplayTextAPIVertex*) malloc(m_pWin[dwWin].dwBufferSizeX *4*sizeof(SDisplayTextAPIVertex));
+				memset(m_pWin[dwWin].pLineVtx[i], 0, m_pWin[dwWin].dwBufferSizeX *4*sizeof(SDisplayTextAPIVertex));
+			}
 
 			/* Compute new text position */
 			fTitleSize = 0.0f;

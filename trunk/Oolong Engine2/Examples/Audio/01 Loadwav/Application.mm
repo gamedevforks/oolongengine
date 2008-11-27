@@ -65,10 +65,13 @@ bool CShell::InitApplication()
 	SoundEngine_SetListenerPosition(0.0, 0.0, 0.0f);
 	
 	// keeps the file name
-	char *filename = new char[2048];
+	char *filename = (char*)malloc(2048 * sizeof(char));
+	memset(filename, 0, 2048 * sizeof(char));
 
 	// keeps the path to the sound data
-	char *buffer = new char[2048];
+	char *buffer = (char*) malloc(2048 * sizeof(char));
+	memset(buffer, 0, 2048 * sizeof(char));
+	
 	GetResourcePathASCII(buffer, 2048);
 	
 	// Load each of the four sounds used here
@@ -85,8 +88,8 @@ bool CShell::InitApplication()
 	if(SoundEngine_LoadLoopingEffect(filename, NULL, NULL, &Sounds[kSound_Thrust]))
 		printf("**ERROR** Failed to load sound file.\n");
 	
-	delete buffer;
-	delete filename;
+	free(buffer);
+	free(filename);
 	
 	IsSoundRunning[kSound_Thrust] = true;
 	SoundEngine_StartEffect( Sounds[kSound_Thrust]);

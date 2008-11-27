@@ -329,7 +329,7 @@ bool CBoneBatches::Create(
 		Allocate some working space
 	*/
 	//ppBatch		= (CBatch**)malloc(nTriNum * sizeof(*ppBatch));
-	ppBatch		=  (CBatch**)new CBatch[nTriNum * sizeof(*ppBatch)];
+	ppBatch		=  new CBatch*[nTriNum * sizeof(*ppBatch)];
 	// pwIdxNew	= (unsigned short*)malloc(nTriNum * 3 * sizeof(*pwIdxNew));
 	pwIdxNew	= new unsigned short[nTriNum * 3 * sizeof(*pwIdxNew)];
 	pvDup		= new std::vector<int>[nVtxNum];

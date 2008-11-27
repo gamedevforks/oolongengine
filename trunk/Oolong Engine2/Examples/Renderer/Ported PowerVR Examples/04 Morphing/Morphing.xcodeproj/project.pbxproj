@@ -36,6 +36,8 @@
 		79317B710EDBBC7100247E3D /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B660EDBBC7100247E3D /* Transform.cpp */; };
 		79317B720EDBBC7100247E3D /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B6B0EDBBC7100247E3D /* matrix_impl.cpp */; };
 		79317B730EDBBC7100247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B6D0EDBBC7100247E3D /* utility_impl.cpp */; };
+		795AC7A90EDF0F4F004CF7D4 /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 795AC7A50EDF0F4F004CF7D4 /* mmgr.cpp */; };
+		795AC7AA0EDF0F4F004CF7D4 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795AC7A80EDF0F4F004CF7D4 /* readme.txt */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +96,11 @@
 		79317B6C0EDBBC7100247E3D /* matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_impl.h; sourceTree = "<group>"; };
 		79317B6D0EDBBC7100247E3D /* utility_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility_impl.cpp; sourceTree = "<group>"; };
 		79317B6E0EDBBC7100247E3D /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
+		795AC7A40EDF0F4F004CF7D4 /* MemoryTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryTemplates.h; sourceTree = "<group>"; };
+		795AC7A50EDF0F4F004CF7D4 /* mmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mmgr.cpp; sourceTree = "<group>"; };
+		795AC7A60EDF0F4F004CF7D4 /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
+		795AC7A70EDF0F4F004CF7D4 /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
+		795AC7A80EDF0F4F004CF7D4 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +180,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				795AC7A30EDF0F4F004CF7D4 /* MemoryManager */,
 				79317B600EDBBC7100247E3D /* Math */,
 				791F48950E17540B00E927FE /* Application */,
 				791F48A40E17540B00E927FE /* Core */,
@@ -302,6 +310,19 @@
 			path = vfpmath;
 			sourceTree = "<group>";
 		};
+		795AC7A30EDF0F4F004CF7D4 /* MemoryManager */ = {
+			isa = PBXGroup;
+			children = (
+				795AC7A40EDF0F4F004CF7D4 /* MemoryTemplates.h */,
+				795AC7A50EDF0F4F004CF7D4 /* mmgr.cpp */,
+				795AC7A60EDF0F4F004CF7D4 /* mmgr.h */,
+				795AC7A70EDF0F4F004CF7D4 /* nommgr.h */,
+				795AC7A80EDF0F4F004CF7D4 /* readme.txt */,
+			);
+			name = MemoryManager;
+			path = ../../../../Utility/MemoryManager;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -347,6 +368,7 @@
 				1B26781E0DA2F9B000B24DA5 /* icon.png in Resources */,
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				79EA07100DAFF0550038ED3D /* Default.png in Resources */,
+				795AC7AA0EDF0F4F004CF7D4 /* readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +400,7 @@
 				79317B710EDBBC7100247E3D /* Transform.cpp in Sources */,
 				79317B720EDBBC7100247E3D /* matrix_impl.cpp in Sources */,
 				79317B730EDBBC7100247E3D /* utility_impl.cpp in Sources */,
+				795AC7A90EDF0F4F004CF7D4 /* mmgr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

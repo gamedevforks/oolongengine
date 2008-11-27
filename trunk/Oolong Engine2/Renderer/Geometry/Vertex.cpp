@@ -18,6 +18,7 @@ subject to the following restrictions:
 
 #include "Mathematics.h"
 #include "Geometry.h"
+#include "Memory.h"
 #include "Macros.h"
 
 
@@ -556,9 +557,9 @@ bool VertexGenerateTangentSpace(
 	// Allocate some work space
 	pwIdxNew		= (unsigned short*)malloc(nTriNum * 3 * sizeof(*pwIdxNew));
 	_ASSERT(pwIdxNew);
-	psVtxData		= (SVtxData*)calloc(nVtxNum, sizeof(*psVtxData));
+	psVtxData		= new SVtxData[nVtxNum * sizeof(*psVtxData)]; //(SVtxData*)calloc(nVtxNum, sizeof(*psVtxData));
 	_ASSERT(psVtxData);
-	psTSpass		= (SVtxData*)calloc(cnMaxSharedVtx, sizeof(*psTSpass));
+	psTSpass		= new SVtxData[cnMaxSharedVtx * sizeof(*psTSpass)]; //(SVtxData*)calloc(cnMaxSharedVtx, sizeof(*psTSpass));
 	_ASSERT(psTSpass);
 	if(!pwIdxNew || !psVtxData || !psTSpass)
 	{

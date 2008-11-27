@@ -149,7 +149,8 @@ unsigned int  CTexture::LoadDecompressedPartialTextureFromPointer(const void *po
 		return  LoadPartialTextureFromPointer(pointer, 0, 0, texName, psTextureHeader);
 	}
 
-	PVR_Texture_Header *newHeader = (PVR_Texture_Header*)new int[sizeof(PVR_Texture_Header)];
+	PVR_Texture_Header *newHeader = (PVR_Texture_Header*) malloc(sizeof(PVR_Texture_Header));
+	memset(newHeader, 0, sizeof(PVR_Texture_Header));
 	memcpy(newHeader,pointer,sizeof(PVR_Texture_Header));
 
 	//Change the decompressed texture header's format to be RGBA8888, drop top mip level
@@ -172,7 +173,8 @@ unsigned int  CTexture::LoadDecompressedPartialTextureFromPointer(const void *po
 		nMips++;
 	}
 
-	unsigned char *newTexture = new unsigned char[newSize];
+	unsigned char *newTexture = (unsigned char*) malloc(newSize * sizeof(unsigned char));
+	memset(newTexture, 0, newSize * sizeof(unsigned char));
 
 	//Decompress each texture layer into the new memory
 	szx = newHeader->dwWidth;
@@ -199,8 +201,8 @@ unsigned int  CTexture::LoadDecompressedPartialTextureFromPointer(const void *po
 	*(PVR_Texture_Header*)(psTextureHeader) = *newHeader;
 
 	//Bin the temporary header and memory
-	delete(newHeader); 
-	delete(newTexture);
+	free(newHeader); 
+	free(newTexture);
 
 	return result;
 }
@@ -428,7 +430,9 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 					else
 					{
 						// Convert PVRTC to 32-bit
-						unsigned char *u8TempTexture = (unsigned char*) new unsigned char[nSizeX*nSizeY*4]; 
+						unsigned char *u8TempTexture = (unsigned char*) malloc(nSizeX*nSizeY*4 * sizeof(unsigned char));
+						memset(u8TempTexture, 0, nSizeX*nSizeY*4 * sizeof(unsigned char));
+						
 						if ((psPVRHeader->dwpfFlags & PVRTEX_PIXELTYPE)==OGL_PVRTC2)
 						{
 							PVRTCDecompress(theTextureToLoad, 1, nSizeX, nSizeY, u8TempTexture);
@@ -451,7 +455,7 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 							// Upload the texture as 32-bits
 							glTexImage2D(GL_TEXTURE_2D,nMIPMapLevel-nLoadFromLevel,GL_RGBA,
 								nSizeX,nSizeY,0, GL_RGBA,GL_UNSIGNED_BYTE,u8TempTexture);
-							delete(u8TempTexture);
+							free(u8TempTexture);
 						}
 					}
 				}
@@ -1452,14 +1456,16 @@ int ETCDecompress(const void * const pSrcData,
 	int i32read;
 	if(x<ETC_MIN_TEXWIDTH || y<ETC_MIN_TEXHEIGHT)
 	{	// decompress into a buffer big enought to take the minimum size
-		char* pTempBuffer =	(char*)new char[_MAX(x,ETC_MIN_TEXWIDTH)*_MAX(y,ETC_MIN_TEXHEIGHT)*4];
+		char* pTempBuffer =	(char*) malloc(_MAX(x,ETC_MIN_TEXWIDTH)*_MAX(y,ETC_MIN_TEXHEIGHT)*4 * sizeof(char));
+		memset(pTempBuffer, 0, _MAX(x,ETC_MIN_TEXWIDTH)*_MAX(y,ETC_MIN_TEXHEIGHT)*4 * sizeof(char));
+		
 		i32read = ETCTextureDecompress(pSrcData,_MAX(x,ETC_MIN_TEXWIDTH),_MAX(y,ETC_MIN_TEXHEIGHT),pTempBuffer,nMode);
 		for(unsigned int i=0;i<y;i++)
 		{	// copy from larger temp buffer to output data
 			memcpy((char*)(pDestData)+i*x*4,pTempBuffer+_MAX(x,ETC_MIN_TEXWIDTH)*4*i,x*4);
 		}
 		if(pTempBuffer) 
-		   delete(pTempBuffer);
+		   free(pTempBuffer);
 	}
 	else	// decompress larger MIP levels straight into the output data
 		i32read = ETCTextureDecompress(pSrcData,x,y,pDestData,nMode);

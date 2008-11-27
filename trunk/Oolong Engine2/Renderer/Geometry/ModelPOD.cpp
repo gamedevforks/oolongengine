@@ -515,7 +515,7 @@ static bool ReadMesh(
 
 		case ePODFileMeshNumVtx:			if(!src.Read(s.nNumVertex)) return false;													break;
 		case ePODFileMeshNumFaces:			if(!src.Read(s.nNumFaces)) return false;													break;
-		case ePODFileMeshNumUVW:			if(!src.Read(s.nNumUVW)) return false;	if(!SafeAlloc(s.psUVW, s.nNumUVW)) return false;	break;
+		case ePODFileMeshNumUVW:			if(!src.Read(s.nNumUVW)) return false;	if(!(s.psUVW = new CPODData[s.nNumUVW * sizeof(CPODData)])) return false;	break;
 		case ePODFileMeshStripLength:		if(!src.ReadAfterAlloc(s.pnStripLength, nLen)) return false;								break;
 		case ePODFileMeshNumStrips:			if(!src.Read(s.nNumStrips)) return false;													break;
 		case ePODFileMeshInterleaved:		if(!src.ReadAfterAlloc(s.pInterleaved, nLen)) return false;									break;
@@ -615,13 +615,13 @@ static bool ReadScene(
 
 		case ePODFileColourBackground:	if(!src.Read(s.pfColourBackground)) return false;	break;
 		case ePODFileColourAmbient:		if(!src.Read(s.pfColourAmbient)) return false;		break;
-		case ePODFileNumCamera:			if(!src.Read(s.nNumCamera)) return false;			if(!SafeAlloc(s.pCamera, s.nNumCamera)) return false;		break;
-		case ePODFileNumLight:			if(!src.Read(s.nNumLight)) return false;			if(!SafeAlloc(s.pLight, s.nNumLight)) return false;			break;
-		case ePODFileNumMesh:			if(!src.Read(s.nNumMesh)) return false;				if(!SafeAlloc(s.pMesh, s.nNumMesh)) return false;			break;
-		case ePODFileNumNode:			if(!src.Read(s.nNumNode)) return false;				if(!SafeAlloc(s.pNode, s.nNumNode)) return false;			break;
+		case ePODFileNumCamera:			if(!src.Read(s.nNumCamera)) return false;			if(!(s.pCamera = new SPODCamera[s.nNumCamera * sizeof(SPODCamera)])) return false;		break;
+		case ePODFileNumLight:			if(!src.Read(s.nNumLight)) return false;			if(!(s.pLight = new SPODLight[s.nNumLight * sizeof(SPODLight)])) return false;			break;
+		case ePODFileNumMesh:			if(!src.Read(s.nNumMesh)) return false;				if(!(s.pMesh = new SPODMesh[s.nNumMesh * sizeof(SPODMesh)])) return false;			break;
+		case ePODFileNumNode:			if(!src.Read(s.nNumNode)) return false;				if(!(s.pNode = new SPODNode[s.nNumNode * sizeof(SPODNode)])) return false;			break;
 		case ePODFileNumMeshNode:		if(!src.Read(s.nNumMeshNode)) return false;			break;
-		case ePODFileNumTexture:		if(!src.Read(s.nNumTexture)) return false;			if(!SafeAlloc(s.pTexture, s.nNumTexture)) return false;		break;
-		case ePODFileNumMaterial:		if(!src.Read(s.nNumMaterial)) return false;			if(!SafeAlloc(s.pMaterial, s.nNumMaterial)) return false;	break;
+		case ePODFileNumTexture:		if(!src.Read(s.nNumTexture)) return false;			if(!(s.pTexture = new SPODTexture[s.nNumTexture * sizeof(SPODTexture)])) return false;		break;
+		case ePODFileNumMaterial:		if(!src.Read(s.nNumMaterial)) return false;			if(!(s.pMaterial = new SPODMaterial[s.nNumMaterial * sizeof(SPODMaterial)])) return false;	break;
 		case ePODFileNumFrame:			if(!src.Read(s.nNumFrame)) return false;			break;
 		case ePODFileFlags:				if(!src.Read(s.nFlags)) return false;				break;
 
@@ -668,7 +668,7 @@ static bool Read(
 			{
 				char *pszVersion = NULL;
 				if(nLen != strlen(MODELPOD_VERSION)+1) return false;
-				if(!SafeAlloc(pszVersion, nLen)) return false;
+				if(!(pszVersion = new char[nLen * sizeof(char)])) return false;
 				if(!src.Read(pszVersion, nLen)) return false;
 				if(strcmp(pszVersion, MODELPOD_VERSION) != 0) return false;
 				bVersionOK = true;
@@ -1732,7 +1732,7 @@ static void DeinterleaveArray(
 		return;
 
 	data.pData = 0;
-	SafeAlloc(data.pData, nDestStride * nNumVertex);
+	data.pData = new unsigned char[nDestStride * nNumVertex]; // SafeAlloc(data.pData, nDestStride * nNumVertex);
 	data.nStride	= nDestStride;
 
 	for(int i = 0; i < nNumVertex; ++i)
@@ -1791,7 +1791,7 @@ void ModelPODToggleInterleaved(SPODMesh &mesh)
 		nStride += ModelPODDataStride(mesh.sBoneWeight);
 
 		// Allocate interleaved array
-		SafeAlloc(mesh.pInterleaved, mesh.nNumVertex * nStride);
+		mesh.pInterleaved = new unsigned char[mesh.nNumVertex * nStride]; //SafeAlloc(mesh.pInterleaved, mesh.nNumVertex * nStride);
 
 		// Interleave the data
 		nOffset = 0;
@@ -1826,7 +1826,7 @@ void ModelPODDeIndex(SPODMesh &mesh)
 
 	// Create a new vertex list
 	mesh.nNumVertex = ModelPODCountIndices(mesh);
-	SafeAlloc(pNew, mesh.sVertex.nStride * mesh.nNumVertex);
+	pNew = new unsigned char[mesh.sVertex.nStride * mesh.nNumVertex];// SafeAlloc(pNew, mesh.sVertex.nStride * mesh.nNumVertex);
 
 	// Deindex the vertices
 	for(unsigned int i = 0; i < mesh.nNumVertex; ++i)
@@ -1861,7 +1861,7 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 
 	old					= mesh.sFaces;
 	mesh.sFaces.pData	= 0;
-	SafeAlloc(mesh.sFaces.pData, nTriStride * mesh.nNumFaces);
+	mesh.sFaces.pData = new unsigned char[nTriStride * mesh.nNumFaces]; //SafeAlloc(mesh.sFaces.pData, nTriStride * mesh.nNumFaces);
 
 	if(mesh.nNumStrips)
 	{
@@ -1926,7 +1926,7 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 		/*
 			Convert to strips
 		*/
-		mesh.pnStripLength	= (unsigned int*)calloc(mesh.nNumFaces, sizeof(*mesh.pnStripLength));
+		mesh.pnStripLength	= new unsigned int[mesh.nNumFaces * sizeof(*mesh.pnStripLength)]; //(unsigned int*)calloc(mesh.nNumFaces, sizeof(*mesh.pnStripLength));
 		mesh.nNumStrips		= 0;
 		nIdxCnt				= 0;
 

@@ -136,6 +136,7 @@ typedef struct {
     float x, y, z;
 } DEMOVECTOR3;
 
+DEMOVECTOR3 vec;
 
 static void freeGLObject(GLOBJECT *object)
 {

@@ -75,14 +75,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249515338;
-			PBXWorkspaceStateSaveDate = 249515338;
+			PBXPerProjectTemplateStateSaveDate = 249598358;
+			PBXWorkspaceStateSaveDate = 249598358;
 		};
 		perUserProjectItems = {
 			793180EF0EDF0D4F00247E3D /* PBXTextBookmark */ = 793180EF0EDF0D4F00247E3D /* PBXTextBookmark */;
 			793180F10EDF0D4F00247E3D /* PBXTextBookmark */ = 793180F10EDF0D4F00247E3D /* PBXTextBookmark */;
 			793180F20EDF0D4F00247E3D /* PBXTextBookmark */ = 793180F20EDF0D4F00247E3D /* PBXTextBookmark */;
-			79F0FF310EDF4DDA00102B0B /* PBXTextBookmark */ = 79F0FF310EDF4DDA00102B0B /* PBXTextBookmark */;
+			796E14420EE0919A007BB71F /* PBXTextBookmark */ = 796E14420EE0919A007BB71F /* PBXTextBookmark */;
 			79F0FF320EDF4DDA00102B0B /* PBXTextBookmark */ = 79F0FF320EDF4DDA00102B0B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
@@ -147,9 +147,9 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 4998}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 5026}}";
 			sepNavSelRange = "{1426, 0}";
-			sepNavVisRange = "{1301, 321}";
+			sepNavVisRange = "{1301, 299}";
 			sepNavWindowFrame = "{{101, 97}, {821, 781}}";
 		};
 	};
@@ -196,6 +196,16 @@
 		rType = 0;
 		vrLen = 284;
 		vrLoc = 6396;
+	};
+	796E14420EE0919A007BB71F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 28";
+		rLen = 0;
+		rLoc = 1426;
+		rType = 0;
+		vrLen = 299;
+		vrLoc = 1301;
 	};
 	79AAE9190DD16A3700CC242E /* Texture.mm */ = {
 		uiCtxt = {
@@ -273,14 +283,6 @@
 			sepNavSelRange = "{223, 2}";
 			sepNavVisRange = "{0, 589}";
 		};
-	};
-	79F0FF310EDF4DDA00102B0B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "error: 'GetFps' was not declared in this scope";
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		rLen = 1;
-		rLoc = 210;
-		rType = 1;
 	};
 	79F0FF320EDF4DDA00102B0B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

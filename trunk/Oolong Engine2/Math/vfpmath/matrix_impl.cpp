@@ -22,6 +22,10 @@ not be misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+
 #include "matrix_impl.h"
 #include "common_macros.h"
 
@@ -242,3 +246,5 @@ void Matrix4Vector3Mul(const float* src_mat, const float* src_vec, float w, floa
                   );  
 }
   
+#endif
+#endif

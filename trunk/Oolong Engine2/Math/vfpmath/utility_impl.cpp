@@ -22,8 +22,15 @@ not be misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+
+
 #include "utility_impl.h"
 #include "common_macros.h"
+
+
 
 void memcpy_64byte_aligned_float(float *dst_ptr, const float *scr_ptr, int n) {
   asm volatile (VFP_SWITCH_TO_ARM
@@ -42,3 +49,6 @@ void memcpy_64byte_aligned_float(float *dst_ptr, const float *scr_ptr, int n) {
                 );
 
 }
+
+#endif
+#endif

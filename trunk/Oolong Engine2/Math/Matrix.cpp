@@ -29,7 +29,12 @@ subject to the following restrictions:
 #include "Matrix.h"
 #include "Macros.h"
 
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
 #include "vfpmath/matrix_impl.h"
+#endif
+#endif
 
 static const MATRIX	c_mIdentity = {
 	{
@@ -54,13 +59,13 @@ void MatrixMultiply(
 	const MATRIX	&mA,
 	const MATRIX	&mB)
 {
-//#if TARGET_CPU_ARM
+#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
 	Matrix4Mul(mA.f,
 				mB.f,
 				mOut.f);
 
-/*#else	
-	MATRIXf mRet;
+#else	
+	MATRIX mRet;
 
 	// Perform calculation on a dummy matrix (mRet)
 	mRet.f[ 0] = mA.f[ 0]*mB.f[ 0] + mA.f[ 1]*mB.f[ 4] + mA.f[ 2]*mB.f[ 8] + mA.f[ 3]*mB.f[12];
@@ -86,7 +91,6 @@ void MatrixMultiply(
 	// Copy result in pResultMatrix
 	mOut = mRet;
 #endif
- */
  }
 
 

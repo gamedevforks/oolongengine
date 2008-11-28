@@ -1,13 +1,16 @@
 #ifndef MEMORY_H_
 #define MEMORY_H_
 
-#define USEMEMORYMANAGER 1
-#include "../Utility/MemoryManager/MemoryTemplates.h"
+#ifdef __APPLE__
+#include <TargetConditionals.h>
 
-#ifdef USEMEMORYMANAGER
+#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1))
 #include "../Utility/MemoryManager/mmgr.h"
 #else
 #include "../Utility/MemoryManager/nommgr.h"
 #endif
 
+#include "../Utility/MemoryManager/MemoryTemplates.h"
+
+#endif
 #endif

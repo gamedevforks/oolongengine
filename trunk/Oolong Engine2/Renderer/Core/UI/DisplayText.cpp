@@ -20,7 +20,7 @@ subject to the following restrictions:
 #include "Mathematics.h"
 #include "Geometry.h"
 #include "Macros.h"
-#include "Memory.h"
+#include "MemoryManager.h"
 
 #include "DisplayText.h"
 #include "DisplayTextdat.h"		// texture data

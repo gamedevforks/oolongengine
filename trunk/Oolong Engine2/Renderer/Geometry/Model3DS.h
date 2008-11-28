@@ -16,7 +16,7 @@ subject to the following restrictions:
 #define _MODEL3DS_H_
 
 #include "Mathematics.h"
-#include "Memory.h"
+#include "MemoryManager.h"
 
 /*!***************************************************************************
  Mesh structure

@@ -18,7 +18,7 @@ subject to the following restrictions:
 #include "Mathematics.h"
 #include "Geometry.h"
 #include "Macros.h"
-#include "Memory.h"
+#include "MemoryManager.h"
 
 #include "BoneBatch.h"
 

@@ -6,7 +6,7 @@
 #include "prof.h"
 #include "prof_internal.h"
 
-#include "Memory.h"
+#include "MemoryManager.h"
 
 
 // whether zone-self-data is kept to allow the history graph

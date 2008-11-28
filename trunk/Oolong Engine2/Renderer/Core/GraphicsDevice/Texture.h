@@ -19,7 +19,7 @@ subject to the following restrictions:
 #import <OpenGLES/ES1/gl.h>
 #include <stdio.h>
 
-#include "Memory.h"
+#include "MemoryManager.h"
 
 
 //#include "String.h"

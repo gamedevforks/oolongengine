@@ -26,7 +26,7 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "UI.h"
 #include "App.h"
-#include "Memory.h"
+#include "MemoryManager.h"
 #include "Macros.h"
 
 #include <stdio.h>

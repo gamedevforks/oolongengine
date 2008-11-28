@@ -27,7 +27,7 @@ subject to the following restrictions:
 #include "UI.h"
 #include "Macros.h"
 #include "Geometry.h"
-#include "Memory.h"
+#include "MemoryManager.h"
 #include "Macros.h"
 
 #include <stdio.h>

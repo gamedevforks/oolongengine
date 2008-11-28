@@ -38,7 +38,6 @@ int numBodies = 25;
 #include "UI.h"
 #include "Macros.h"
 #include "TouchScreen.h"
-#include "Memory.h"
 
 #include <stdio.h>
 #include <sys/time.h>

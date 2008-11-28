@@ -22,7 +22,7 @@ subject to the following restrictions:
 #include "UI.h"
 #include "Macros.h"
 #include "Profile.h"
-#include "Memory.h"
+#include "MemoryManager.h"
 
 
 #include <stdio.h>

@@ -15,7 +15,7 @@ subject to the following restrictions:
 #ifndef DISPLAYTEXT_H_
 #define DISPLAYTEXT_H_
 
-#include "Memory.h"
+#include "MemoryManager.h"
 
 #define DISPLAYTEXT_MAX_WINDOWS				(512)
 #define DISPLAYTEXT_MAX_RENDERABLE_LETTERS	(0xFFFF >> 2)

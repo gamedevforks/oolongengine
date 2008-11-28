@@ -15,7 +15,7 @@ public:
 	
 	//! \brief release any memory/resources acquired by InitApplication()
 	bool QuitApplication();
-
+/*
 	//! \brief called to initialise the view.
         //!
         //! It is called any time the rendering API is initialised,
@@ -36,7 +36,7 @@ public:
 	//! shutting down the render API. It enables the application
 	//! to release any memory/resources acquired in InitView().
 	bool ReleaseView();
-
+*/
 	//! \brief update the camera matrix and other things that need to be done to setup rendering
 	bool UpdateScene();
 

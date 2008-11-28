@@ -668,11 +668,11 @@ static bool Read(
 			{
 				char *pszVersion = NULL;
 				if(nLen != strlen(MODELPOD_VERSION)+1) return false;
-				if(!(pszVersion = new char[nLen * sizeof(char)])) return false;
+				if(!(pszVersion = (char*)malloc(nLen * sizeof(char)))) return false;
 				if(!src.Read(pszVersion, nLen)) return false;
 				if(strcmp(pszVersion, MODELPOD_VERSION) != 0) return false;
 				bVersionOK = true;
-				delete(pszVersion);
+				free(pszVersion);
 			}
 			continue;
 

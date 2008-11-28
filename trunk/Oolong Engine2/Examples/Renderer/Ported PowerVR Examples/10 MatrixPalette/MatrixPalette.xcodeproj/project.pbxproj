@@ -37,9 +37,9 @@
 		79317CC10EDC4FA500247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317CBB0EDC4FA500247E3D /* utility_impl.cpp */; };
 		795AC8550EDF1043004CF7D4 /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 795AC8510EDF1043004CF7D4 /* mmgr.cpp */; };
 		795AC8560EDF1043004CF7D4 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795AC8540EDF1043004CF7D4 /* readme.txt */; };
+		79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FF470EDF4DF500102B0B /* Timer.mm */; };
 		D246B7480E92F769000E72AE /* model_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = D246B7460E92F769000E72AE /* model_float.pod */; };
 		D24A57640E92AFA70009339C /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = D24A57630E92AFA70009339C /* Application.mm */; };
-		D27DF6A30E910AC600D92F8E /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27DF6A10E910AC600D92F8E /* Timer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,14 +101,12 @@
 		795AC8520EDF1043004CF7D4 /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
 		795AC8530EDF1043004CF7D4 /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		795AC8540EDF1043004CF7D4 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		79F0FF460EDF4DF500102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		79F0FF470EDF4DF500102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D246B6570E92ED1F000E72AE /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
-		D246B6790E92ED1F000E72AE /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		D246B7460E92F769000E72AE /* model_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_float.pod; sourceTree = "<group>"; };
 		D246B7470E92F769000E72AE /* mallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mallet.h; sourceTree = "<group>"; };
 		D24A57630E92AFA70009339C /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
-		D27DF6A10E910AC600D92F8E /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
-		D27DF6A20E910AC600D92F8E /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,9 +137,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				D24A57630E92AFA70009339C /* Application.mm */,
 				791406D60DBAD99A00C9A379 /* Delegate.h */,
 				791406D70DBAD99A00C9A379 /* Delegate.mm */,
-				D24A57630E92AFA70009339C /* Application.mm */,
 				2D500B1D0D5A766B00DBA0E3 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -186,9 +184,9 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79F0FF450EDF4DF500102B0B /* Timing */,
 				795AC84F0EDF1043004CF7D4 /* MemoryManager */,
 				79317CAE0EDC4FA500247E3D /* Math */,
-				D246B6530E92ED1F000E72AE /* Utility */,
 				791F499E0E1755E800E927FE /* Application */,
 				791F49AD0E1755E800E927FE /* Core */,
 				791F49BA0E1755E800E927FE /* Geometry */,
@@ -323,25 +321,15 @@
 			path = ../../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
-		D246B6530E92ED1F000E72AE /* Utility */ = {
+		79F0FF450EDF4DF500102B0B /* Timing */ = {
 			isa = PBXGroup;
 			children = (
-				D27DF6A00E910AC600D92F8E /* Timing */,
-				D246B6570E92ED1F000E72AE /* Macros.h */,
-				D246B6790E92ED1F000E72AE /* Types.h */,
+				79F0FF460EDF4DF500102B0B /* Timer.h */,
+				79F0FF470EDF4DF500102B0B /* Timer.mm */,
 			);
-			name = Utility;
-			path = ../../../../Utility;
+			name = Timing;
+			path = ../../../../Utility/Timing;
 			sourceTree = SOURCE_ROOT;
-		};
-		D27DF6A00E910AC600D92F8E /* Timing */ = {
-			isa = PBXGroup;
-			children = (
-				D27DF6A10E910AC600D92F8E /* Timer.cpp */,
-				D27DF6A20E910AC600D92F8E /* Timer.h */,
-			);
-			path = Timing;
-			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -414,7 +402,6 @@
 				791F49D70E1755E800E927FE /* TriStrip.cpp in Sources */,
 				791F49D80E1755E800E927FE /* Vertex.cpp in Sources */,
 				791F49D90E1755E800E927FE /* VertexLookup.cpp in Sources */,
-				D27DF6A30E910AC600D92F8E /* Timer.cpp in Sources */,
 				D24A57640E92AFA70009339C /* Application.mm in Sources */,
 				79317CBD0EDC4FA500247E3D /* Matrix.cpp in Sources */,
 				79317CBE0EDC4FA500247E3D /* Random.cpp in Sources */,
@@ -422,6 +409,7 @@
 				79317CC00EDC4FA500247E3D /* matrix_impl.cpp in Sources */,
 				79317CC10EDC4FA500247E3D /* utility_impl.cpp in Sources */,
 				795AC8550EDF1043004CF7D4 /* mmgr.cpp in Sources */,
+				79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -101,14 +101,15 @@
 					PBXFindDataSource_LocationID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249500407;
-			PBXWorkspaceStateSaveDate = 249500407;
+			PBXPerProjectTemplateStateSaveDate = 249587558;
+			PBXWorkspaceStateSaveDate = 249587558;
 		};
 		perUserProjectItems = {
-			795AC9780EDF1366004CF7D4 /* PBXTextBookmark */ = 795AC9780EDF1366004CF7D4 /* PBXTextBookmark */;
-			795AC9790EDF1366004CF7D4 /* PBXTextBookmark */ = 795AC9790EDF1366004CF7D4 /* PBXTextBookmark */;
-			795AC97F0EDF1401004CF7D4 /* PBXTextBookmark */ = 795AC97F0EDF1401004CF7D4 /* PBXTextBookmark */;
-			795AC9800EDF1401004CF7D4 /* PBXTextBookmark */ = 795AC9800EDF1401004CF7D4 /* PBXTextBookmark */;
+			795AC9780EDF1366004CF7D4 = 795AC9780EDF1366004CF7D4 /* PBXTextBookmark */;
+			795AC9790EDF1366004CF7D4 = 795AC9790EDF1366004CF7D4 /* PBXTextBookmark */;
+			795AC97F0EDF1401004CF7D4 = 795AC97F0EDF1401004CF7D4 /* PBXTextBookmark */;
+			795AC9800EDF1401004CF7D4 = 795AC9800EDF1401004CF7D4 /* PBXTextBookmark */;
+			796E14110EE06777007BB71F /* PBXTextBookmark */ = 796E14110EE06777007BB71F /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -180,17 +181,17 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1470, 4648}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 4760}}";
 			sepNavSelRange = "{2929, 0}";
-			sepNavVisRange = "{1761, 1274}";
+			sepNavVisRange = "{125, 1299}";
 			sepNavWindowFrame = "{{50, 236}, {1044, 642}}";
 		};
 	};
 	795AC95D0EDF1307004CF7D4 /* mmgr.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1398, 24248}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1002, 24178}}";
 			sepNavSelRange = "{40801, 0}";
-			sepNavVisRange = "{57812, 696}";
+			sepNavVisRange = "{57756, 788}";
 		};
 	};
 	795AC9780EDF1366004CF7D4 /* PBXTextBookmark */ = {
@@ -232,6 +233,16 @@
 		rType = 0;
 		vrLen = 696;
 		vrLoc = 57812;
+	};
+	796E14110EE06777007BB71F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 795AC95D0EDF1307004CF7D4 /* mmgr.cpp */;
+		name = "mmgr.cpp: 1008";
+		rLen = 0;
+		rLoc = 40801;
+		rType = 0;
+		vrLen = 788;
+		vrLoc = 57756;
 	};
 	799123CF0E20082200035EEA /* SoundEngine.cpp */ = {
 		uiCtxt = {

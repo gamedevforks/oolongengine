@@ -128,13 +128,13 @@
 // cluttered and hard to read.
 // ---------------------------------------------------------------------------------------------------------------------------------
 
-//#define	TEST_MEMORY_MANAGER
+#define	TEST_MEMORY_MANAGER
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 // -DOC- Enable this sucker if you really want to stress-test your app's memory usage, or to help find hard-to-find bugs
 // ---------------------------------------------------------------------------------------------------------------------------------
 
-//#define	STRESS_TEST
+#define	STRESS_TEST
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 // -DOC- Enable this sucker if you want to stress-test your app's error-handling. Set RANDOM_FAIL to the percentage of failures you
@@ -251,8 +251,8 @@ static		unsigned int	sourceLine             = 0;
 static		bool		staticDeinitTime       = false;
 static		sAllocUnit	**reservoirBuffer      = NULL;
 static		unsigned int	reservoirBufferSize    = 0;
-static const	char		*memoryLogFile         = "memory.log";
-static const	char		*memoryLeakLogFile     = "memleaks.log";
+//static const	char		*memoryLogFile         = "memory.log";
+//static const	char		*memoryLeakLogFile     = "memleaks.log";
 static		void		doCleanupLogOnFirstRun();
 
 // ---------------------------------------------------------------------------------------------------------------------------------
@@ -285,7 +285,7 @@ static	void	log(const char *format, ...)
 
 	// Spit out the data to the log
 
-	//fprintf(fp, "%s\r\n", buffer);
+	//printf(fp, "%s\r\n", buffer);
 	// can't use a log file easily
 	printf("%s\r\n", buffer);
 
@@ -298,15 +298,15 @@ static	void	doCleanupLogOnFirstRun()
 {
 	if (cleanupLogOnFirstRun)
 	{
-		unlink(memoryLogFile);
+//		unlink(memoryLogFile);
 		cleanupLogOnFirstRun = false;
 
 		// Print a header for the log
 
-		time_t	t = time(NULL);
+//		time_t	t = time(NULL);
 		log("--------------------------------------------------------------------------------");
 		log("");
-		log("      %s - Memory logging file created on %s", memoryLogFile, asctime(localtime(&t)));
+//		log("      %s - Memory logging file created on %s", memoryLogFile, asctime(localtime(&t)));
 		log("--------------------------------------------------------------------------------");
 		log("");
 		log("This file contains a log of all memory operations performed during the last run.");
@@ -509,11 +509,11 @@ static	void	wipeWithPattern(sAllocUnit *allocUnit, unsigned long pattern, const 
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 
-static	void	dumpAllocations(FILE *fp)
+static	void	dumpAllocations()
 {
-	fprintf(fp, "Alloc.   Addr       Size       Addr       Size                        BreakOn BreakOn              \r\n");
-	fprintf(fp, "Number Reported   Reported    Actual     Actual     Unused    Method  Dealloc Realloc Allocated by \r\n");
-	fprintf(fp, "------ ---------- ---------- ---------- ---------- ---------- -------- ------- ------- --------------------------------------------------- \r\n");
+	printf("Alloc.   Addr       Size       Addr       Size                        BreakOn BreakOn              \r\n");
+	printf("Number Reported   Reported    Actual     Actual     Unused    Method  Dealloc Realloc Allocated by \r\n");
+	printf("------ ---------- ---------- ---------- ---------- ---------- -------- ------- ------- --------------------------------------------------- \r\n");
 
 
 	for (unsigned int i = 0; i < hashSize; i++)
@@ -521,7 +521,7 @@ static	void	dumpAllocations(FILE *fp)
 		sAllocUnit *ptr = hashTable[i];
 		while(ptr)
 		{
-			fprintf(fp, "%06d 0x%08X 0x%08X 0x%08X 0x%08X 0x%08X %-8s    %c       %c    %s\r\n",
+			printf("%06d 0x%08X 0x%08X 0x%08X 0x%08X 0x%08X %-8s    %c       %c    %s\r\n",
 				ptr->allocationNumber,
 				reinterpret_cast<unsigned int>(ptr->reportedAddress), ptr->reportedSize,
 				reinterpret_cast<unsigned int>(ptr->actualAddress), ptr->actualSize,
@@ -541,12 +541,12 @@ static	void	dumpLeakReport()
 {
 	// Open the report file
 
-	FILE	*fp = fopen(memoryLeakLogFile, "w+b");
+//	FILE	*fp = fopen(memoryLeakLogFile, "w+b");
 
 	// If you hit this assert, then the memory report generator is unable to log information to a file (can't open the file for
 	// some reason.)
-	m_assert(fp);
-	if (!fp) return;
+//	m_assert(fp);
+//	if (!fp) return;
 
 	// Any leaks?
 
@@ -556,18 +556,18 @@ static	void	dumpLeakReport()
 	memset(timeString, 0, sizeof(timeString));
 	time_t  t = time(NULL);
 	struct  tm *tme = localtime(&t);
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "|                                          Memory leak report for:  %02d/%02d/%04d %02d:%02d:%02d                                            |\r\n", tme->tm_mon + 1, tme->tm_mday, tme->tm_year + 1900, tme->tm_hour, tme->tm_min, tme->tm_sec);
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "\r\n");
-	fprintf(fp, "\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("|                                          Memory leak report for:  %02d/%02d/%04d %02d:%02d:%02d                                            |\r\n", tme->tm_mon + 1, tme->tm_mday, tme->tm_year + 1900, tme->tm_hour, tme->tm_min, tme->tm_sec);
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("\r\n");
+	printf("\r\n");
 	if (stats.totalAllocUnitCount)
 	{
-		fprintf(fp, "%d memory leak%s found:\r\n", stats.totalAllocUnitCount, stats.totalAllocUnitCount == 1 ? "":"s");
+		printf("%d memory leak%s found:\r\n", stats.totalAllocUnitCount, stats.totalAllocUnitCount == 1 ? "":"s");
 	}
 	else
 	{
-		fprintf(fp, "Congratulations! No memory leaks found!\r\n");
+		printf("Congratulations! No memory leaks found!\r\n");
 
 		// We can finally free up our own memory allocations
 
@@ -583,14 +583,14 @@ static	void	dumpLeakReport()
 			reservoir = NULL;
 		}
 	}
-	fprintf(fp, "\r\n");
+	printf("\r\n");
 
 	if (stats.totalAllocUnitCount)
 	{
-		dumpAllocations(fp);
+		dumpAllocations();
 	}
 
-	fclose(fp);
+//	fclose(fp);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------
@@ -1690,15 +1690,15 @@ void	m_dumpMemoryReport(const char *filename, const bool overwrite)
 {
 	// Open the report file
 
-	FILE	*fp = NULL;
+//	FILE	*fp = NULL;
 	
-	if (overwrite)	fp = fopen(filename, "w+b");
-	else		fp = fopen(filename, "ab");
+//	if (overwrite)	fp = fopen(filename, "w+b");
+//	else		fp = fopen(filename, "ab");
 
 	// If you hit this assert, then the memory report generator is unable to log information to a file (can't open the file for
 	// some reason.)
-	m_assert(fp);
-	if (!fp) return;
+//	m_assert(fp);
+//	if (!fp) return;
 
         // Header
 
@@ -1706,49 +1706,49 @@ void	m_dumpMemoryReport(const char *filename, const bool overwrite)
         memset(timeString, 0, sizeof(timeString));
         time_t  t = time(NULL);
         struct  tm *tme = localtime(&t);
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-        fprintf(fp, "|                                             Memory report for: %02d/%02d/%04d %02d:%02d:%02d                                               |\r\n", tme->tm_mon + 1, tme->tm_mday, tme->tm_year + 1900, tme->tm_hour, tme->tm_min, tme->tm_sec);
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "\r\n");
-	fprintf(fp, "\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+        printf("|                                             Memory report for: %02d/%02d/%04d %02d:%02d:%02d                                               |\r\n", tme->tm_mon + 1, tme->tm_mday, tme->tm_year + 1900, tme->tm_hour, tme->tm_min, tme->tm_sec);
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("\r\n");
+	printf("\r\n");
 
 	// Report summary
 
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "|                                                           T O T A L S                                                            |\r\n");
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "              Allocation unit count: %10s\r\n", insertCommas(stats.totalAllocUnitCount));
-	fprintf(fp, "            Reported to application: %s\r\n", memorySizeString(stats.totalReportedMemory));
-	fprintf(fp, "         Actual total memory in use: %s\r\n", memorySizeString(stats.totalActualMemory));
-	fprintf(fp, "           Memory tracking overhead: %s\r\n", memorySizeString(stats.totalActualMemory - stats.totalReportedMemory));
-	fprintf(fp, "\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("|                                                           T O T A L S                                                            |\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("              Allocation unit count: %10s\r\n", insertCommas(stats.totalAllocUnitCount));
+	printf("            Reported to application: %s\r\n", memorySizeString(stats.totalReportedMemory));
+	printf("         Actual total memory in use: %s\r\n", memorySizeString(stats.totalActualMemory));
+	printf("           Memory tracking overhead: %s\r\n", memorySizeString(stats.totalActualMemory - stats.totalReportedMemory));
+	printf("\r\n");
 
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "|                                                            P E A K S                                                             |\r\n");
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "              Allocation unit count: %10s\r\n", insertCommas(stats.peakAllocUnitCount));
-	fprintf(fp, "            Reported to application: %s\r\n", memorySizeString(stats.peakReportedMemory));
-	fprintf(fp, "                             Actual: %s\r\n", memorySizeString(stats.peakActualMemory));
-	fprintf(fp, "           Memory tracking overhead: %s\r\n", memorySizeString(stats.peakActualMemory - stats.peakReportedMemory));
-	fprintf(fp, "\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("|                                                            P E A K S                                                             |\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("              Allocation unit count: %10s\r\n", insertCommas(stats.peakAllocUnitCount));
+	printf("            Reported to application: %s\r\n", memorySizeString(stats.peakReportedMemory));
+	printf("                             Actual: %s\r\n", memorySizeString(stats.peakActualMemory));
+	printf("           Memory tracking overhead: %s\r\n", memorySizeString(stats.peakActualMemory - stats.peakReportedMemory));
+	printf("\r\n");
 
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "|                                                      A C C U M U L A T E D                                                       |\r\n");
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "              Allocation unit count: %s\r\n", memorySizeString(stats.accumulatedAllocUnitCount));
-	fprintf(fp, "            Reported to application: %s\r\n", memorySizeString(stats.accumulatedReportedMemory));
-	fprintf(fp, "                             Actual: %s\r\n", memorySizeString(stats.accumulatedActualMemory));
-	fprintf(fp, "\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("|                                                      A C C U M U L A T E D                                                       |\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("              Allocation unit count: %s\r\n", memorySizeString(stats.accumulatedAllocUnitCount));
+	printf("            Reported to application: %s\r\n", memorySizeString(stats.accumulatedReportedMemory));
+	printf("                             Actual: %s\r\n", memorySizeString(stats.accumulatedActualMemory));
+	printf("\r\n");
 
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "|                                                           U N U S E D                                                            |\r\n");
-	fprintf(fp, " ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
-	fprintf(fp, "    Memory allocated but not in use: %s\r\n", memorySizeString(m_calcAllUnused()));
-	fprintf(fp, "\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("|                                                           U N U S E D                                                            |\r\n");
+	printf(" ---------------------------------------------------------------------------------------------------------------------------------- \r\n");
+	printf("    Memory allocated but not in use: %s\r\n", memorySizeString(m_calcAllUnused()));
+	printf("\r\n");
 
-	dumpAllocations(fp);
+	dumpAllocations();
 
-	fclose(fp);
+//	fclose(fp);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------

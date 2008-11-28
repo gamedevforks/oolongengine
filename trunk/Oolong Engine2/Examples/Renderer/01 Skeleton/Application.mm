@@ -22,6 +22,7 @@ subject to the following restrictions:
 #include "GraphicsDevice.h"
 #include "UI.h"
 #include "Macros.h"
+#include "Timing.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -65,20 +66,12 @@ bool CShell::UpdateScene()
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
 	glMultMatrixf(MyPerspMatrix.f);
 	
-	// do all the timing
-	static CFTimeInterval	startTime = 0;
+	++frames;
+
 	CFTimeInterval			TimeInterval;
-	
-	// calculate our local time
-	TimeInterval = CFAbsoluteTimeGetCurrent();
-	if(startTime == 0)
-		startTime = TimeInterval;
-	TimeInterval = TimeInterval - startTime;
-	
-	frames++;
-	if (TimeInterval) 
-		frameRate = ((float)frames/(TimeInterval));
-	
+
+	frameRate = GetFps(frames, TimeInterval);
+
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
 	
 	glMatrixMode(GL_MODELVIEW);

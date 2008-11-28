@@ -14,10 +14,34 @@
 */
 #include "Timer.h"
 #include <sys/time.h>
+
+#include <stdio.h>
+#include <sys/time.h>
+
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 #include <Mathematics.h>
 
+int GetFps(int frame, CFTimeInterval &TimeInterval)
+{
+	// do all the timing
+	static CFTimeInterval	startTime = 0;
+	
+	int frameRate = 0;
+
+	// calculate our local time
+	TimeInterval = CFAbsoluteTimeGetCurrent();
+	
+	if(startTime == 0)
+		startTime = TimeInterval;
+
+		TimeInterval = TimeInterval - startTime;
+
+	if (TimeInterval) 
+		frameRate = ((float)frame/(TimeInterval)) + 1.0f;
+
+	return frameRate;
+}
 
 /*
 static CFTimeInterval	startTime = 0;

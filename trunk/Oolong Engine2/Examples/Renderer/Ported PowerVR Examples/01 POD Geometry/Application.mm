@@ -74,11 +74,12 @@ bool CShell::InitApplication()
 //	LOGFUNC("InitApplication()");
 //	bookmark = HeapFactory::GetMemoryBookmark ();
 	
-	AppDisplayText = new CDisplayText;    
-	
-	Textures = new CTexture;
-	
-	m_Scene = new CPODScene;
+	AppDisplayText = (CDisplayText*)malloc(sizeof(CDisplayText));    
+	memset(AppDisplayText, 0, sizeof(CDisplayText));
+	Textures = (CTexture*)malloc(sizeof(CTexture));
+	memset(Textures, 0, sizeof(CTexture));
+	m_Scene = (CPODScene*)malloc(sizeof(CPODScene));
+	memset(m_Scene, 0, sizeof(CPODScene));
 
 	/*
 		Loads the scene from the .h file into a CPVRTPODScene object.
@@ -190,9 +191,9 @@ bool CShell::QuitApplication()
 	
 	AppDisplayText->ReleaseTextures();
 	
-	delete AppDisplayText;
-	delete Textures;
-	delete m_Scene;
+	free(AppDisplayText);
+	free(Textures);
+	free(m_Scene);
 	
 //    HeapFactory::PrintInfo ();
 

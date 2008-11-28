@@ -1,9 +1,8 @@
 #ifndef MEMORY_H_
 #define MEMORY_H_
 
-#define USEMEMORYMANAGER
+#define USEMEMORYMANAGER 1
 #include "../Utility/MemoryManager/MemoryTemplates.h"
-//#include "../Utility/MemoryManager/HeapFactory.h"
 
 #ifdef USEMEMORYMANAGER
 #include "../Utility/MemoryManager/mmgr.h"

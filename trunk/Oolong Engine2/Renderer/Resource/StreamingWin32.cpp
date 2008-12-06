@@ -13,7 +13,7 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "StreamingWin32.cpp"
+#include "StreamingWin32.h"
 
 bool CSourceResource::Init(const TCHAR * const pszName)
 {

@@ -46,7 +46,7 @@ public:
 	bool ReadAfterAlloc(T* &lpBuffer, const unsigned int dwNumberOfBytesToRead)
 	{
 		//if(!SafeAlloc(lpBuffer, dwNumberOfBytesToRead))
-		if(!(lpBuffer = new T[dwNumberOfBytesToRead])); //SafeAlloc(lpBuffer, dwNumberOfBytesToRead))	
+		if(!(lpBuffer = new T[dwNumberOfBytesToRead])) //SafeAlloc(lpBuffer, dwNumberOfBytesToRead))	
 			return false;
 		return Read(lpBuffer, dwNumberOfBytesToRead);
 	}

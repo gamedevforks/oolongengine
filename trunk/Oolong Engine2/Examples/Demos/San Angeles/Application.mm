@@ -15,6 +15,9 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
+#include <stdio.h>
+#include <sys/time.h>
+
 //#include "Log.h"
 #include "App.h"
 #include "Mathematics.h"
@@ -22,11 +25,9 @@ subject to the following restrictions:
 #include "UI.h"
 #include "Macros.h"
 #include "Timing.h"
+#include "MemoryManager.h"
 
 #include "demo.h"
-
-#include <stdio.h>
-#include <sys/time.h>
 
 
 //#define FIXEDPOINTENABLE

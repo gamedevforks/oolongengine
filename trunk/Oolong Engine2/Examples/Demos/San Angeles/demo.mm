@@ -33,6 +33,7 @@
 #include "App.h"
 #include "Macros.h"
 #include "Camera.h"
+#include "MemoryManager.h"
 
 #include "Geometry.h"
 

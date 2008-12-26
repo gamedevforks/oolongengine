@@ -28,29 +28,21 @@ subject to the following restrictions:
 #include "App.h"
 #include "MemoryManager.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
 
 
-#include "Media/tex_base.h"
-#include "Media/tex_arm.h"
-
-/*
-	We exported the scene from 3DSMax into two .h files.
-	One for the Common (floating point) profile, the other one for CommonLite (fixed point) profile.
-*/
-#ifdef OGLESLITE
-#include "Media/scene_fixed.h"
-#else
-#include "Media/scene_float.h"
-#endif
-
 // Texture handle
 GLuint			m_uiTex_base, m_uiTex_arm;
 
+// Vertex Buffer Object (VBO) handles
+GLuint*	m_puiVbo;
+GLuint*	m_puiIndexVbo;
+
 // 3D Model
-CPODScene	* m_Scene;
+CPVRTModelPOD	*m_Scene;
 
 // Projection and Model View matrices
 MATRIX		m_mProjection, m_mView;
@@ -69,29 +61,39 @@ CDisplayText * AppDisplayText;
 CTexture * Textures;
 int bookmark;
 
+void LoadVbos();
+
 bool CShell::InitApplication()
 {
-//	LOGFUNC("InitApplication()");
-//	bookmark = HeapFactory::GetMemoryBookmark ();
-	
 	AppDisplayText = (CDisplayText*)malloc(sizeof(CDisplayText));    
 	memset(AppDisplayText, 0, sizeof(CDisplayText));
 	Textures = (CTexture*)malloc(sizeof(CTexture));
 	memset(Textures, 0, sizeof(CTexture));
-	m_Scene = (CPODScene*)malloc(sizeof(CPODScene));
-	memset(m_Scene, 0, sizeof(CPODScene));
+	
+	m_Scene = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
+	memset(m_Scene, 0, sizeof(CPVRTModelPOD));
 
 	/*
-		Loads the scene from the .h file into a CPVRTPODScene object.
-		We could also export the scene into a binary .pod file and
-		load it with ReadFromFile().
+		Loads the scene from the .pod file into a CPVRTModelPOD object.
+		We could also export the scene as a header file and
+		load it with ReadFromMemory().
 	*/
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
+
+	/* Gets the Data Path */
+	char		*filename = new char[2048];
+	sprintf(filename, "%s/IntroducingPOD_float.pod", buffer);
+	m_Scene->ReadFromFile(filename);
+	
+
+/*
 #ifdef OGLESLITE
 	m_Scene->ReadFromMemory(c_SCENE_FIXED_H);
 #else
 	m_Scene->ReadFromMemory(c_SCENE_FLOAT_H);
 #endif
-
+*/
 	// The cameras are stored in the file. We check it contains at least one.
 	if (m_Scene->nNumCamera == 0)
 	{
@@ -117,19 +119,34 @@ bool CShell::InitApplication()
 		Loads the texture.
 		For a more detailed explanation, see Texturing and IntroducingPVRTools
 	*/
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/tex_base.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiTex_base))
+	{
+		return false;
+	}
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/tex_arm.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiTex_arm))
+	{
+		return false;
+	}
+/*	
 	if(!Textures->LoadTextureFromPointer((void*)tex_base, &m_uiTex_base))
 	{
 //		LOG("Cannot load the texture", Logger::LOG_DATA);
 		return false;
 	}
+*/
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+/*
 	if(!Textures->LoadTextureFromPointer((void*)tex_arm, &m_uiTex_arm))
 	{
 //		LOG("Cannot load the texture", Logger::LOG_DATA);
 		return false;
 	}
+*/
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -147,6 +164,9 @@ bool CShell::InitApplication()
 		return false;
 	}
 
+	//	Initialize VBO data
+	LoadVbos();
+
 	/*
 		Initializes an array to lookup the textures
 		for each materials in the scene.
@@ -161,7 +181,7 @@ bool CShell::InitApplication()
 		{
 			m_puiTextures[i] = m_uiTex_base;
 		}
-		if (!strcmp(pMaterial->pszName, "Mat_Arm"))
+		else if (!strcmp(pMaterial->pszName, "Mat_Arm"))
 		{
 			m_puiTextures[i] = m_uiTex_arm;
 		}
@@ -170,9 +190,8 @@ bool CShell::InitApplication()
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
 		printf("Display text textures loaded");
 		
-#ifdef DEBUG
-//		LOG("Debug Build", Logger::LOG_DATA);
-#endif
+	delete [] filename;
+	delete [] buffer;
 
 	return true;
 }
@@ -195,6 +214,9 @@ bool CShell::QuitApplication()
 	free(Textures);
 	free(m_Scene);
 	
+	delete[] m_puiVbo;
+	delete[] m_puiIndexVbo;
+	
 //    HeapFactory::PrintInfo ();
 
 //    HeapFactory::ReportMemoryLeaks (bookmark);
@@ -213,68 +235,107 @@ bool CShell::UpdateScene()
 	return true;
 }
 
-
-/*!****************************************************************************
- @Function		DrawMesh
- @Input			mesh		The mesh to draw
- @Description	Draws a SPODMesh after the model view matrix has been set and
-				the meterial prepared.
-******************************************************************************/
-void DrawMesh(SPODMesh* pMesh)
+void LoadVbos()
 {
+	if(!m_puiVbo)
+		m_puiVbo = new GLuint[m_Scene->nNumMesh];
+
+	if(!m_puiIndexVbo)
+		m_puiIndexVbo = new GLuint[m_Scene->nNumMesh];
+
 	/*
-		Now we give the vertex and texture coordinates data to OpenGL ES.
-		The pMesh has been exported with the "Interleave Vectors" check box on,
-		so all the data starts at the address pMesh->pInterleaved but with a different offset.
-		Interleaved data makes better use of the cache and thus is faster on embedded devices.
+		Load vertex data of all meshes in the scene into VBOs
+
+		The meshes have been exported with the "Interleave Vectors" option,
+		so all data is interleaved in the buffer at pMesh->pInterleaved.
+		Interleaving data improves the memory access pattern and cache efficiency,
+		thus it can be read faster by the hardware.
 	*/
-	glVertexPointer(3, VERTTYPEENUM, pMesh->sVertex.nStride, pMesh->pInterleaved + (size_t)pMesh->sVertex.pData);
-	glNormalPointer(VERTTYPEENUM, pMesh->sNormals.nStride, pMesh->pInterleaved + (size_t)pMesh->sNormals.pData);
-	glTexCoordPointer(2, VERTTYPEENUM, pMesh->psUVW[0].nStride, pMesh->pInterleaved + (size_t)pMesh->psUVW[0].pData);
+
+	glGenBuffers(m_Scene->nNumMesh, m_puiVbo);
+
+	for(unsigned int i = 0; i < m_Scene->nNumMesh; ++i)
+	{
+		// Load vertex data into buffer object
+		SPODMesh& Mesh = m_Scene->pMesh[i];
+		unsigned int uiSize = Mesh.nNumVertex * Mesh.sVertex.nStride;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[i]);
+		glBufferData(GL_ARRAY_BUFFER, uiSize, Mesh.pInterleaved, GL_STATIC_DRAW);
+
+		// Load index data into buffer object if available
+		m_puiIndexVbo[i] = 0;
+
+		if(Mesh.sFaces.pData)
+		{
+			glGenBuffers(1, &m_puiIndexVbo[i]);
+			uiSize = PVRTModelPODCountIndices(Mesh) * sizeof(GLshort);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[i]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, Mesh.sFaces.pData, GL_STATIC_DRAW);
+		}
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+
+void DrawMesh(unsigned int ui32MeshID)
+{
+	SPODMesh& Mesh = m_Scene->pMesh[ui32MeshID];
+
+	// bind the VBO for the mesh
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[ui32MeshID]);
+	// bind the index buffer, won't hurt if the handle is 0
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[ui32MeshID]);
+
+	// Setup pointers
+	glVertexPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride, Mesh.sVertex.pData);
+	glTexCoordPointer(2, VERTTYPEENUM, Mesh.psUVW[0].nStride, Mesh.psUVW[0].pData);
+	glNormalPointer(VERTTYPEENUM, Mesh.sNormals.nStride, Mesh.sNormals.pData);
 
 	/*
 		The geometry can be exported in 4 ways:
-		- Non-Indexed Triangle list
 		- Indexed Triangle list
-		- Non-Indexed Triangle strips
+		- Non-Indexed Triangle list
 		- Indexed Triangle strips
+		- Non-Indexed Triangle strips
 	*/
-	if(!pMesh->nNumStrips)
+	if(Mesh.nNumStrips == 0)
 	{
-		if(pMesh->sFaces.pData)
+		if(m_puiIndexVbo[ui32MeshID])
 		{
 			// Indexed Triangle list
-			glDrawElements(GL_TRIANGLES, pMesh->nNumFaces*3, GL_UNSIGNED_SHORT, pMesh->sFaces.pData);
+			glDrawElements(GL_TRIANGLES, Mesh.nNumFaces * 3, GL_UNSIGNED_SHORT, 0);
 		}
 		else
 		{
 			// Non-Indexed Triangle list
-			glDrawArrays(GL_TRIANGLES, 0, pMesh->nNumFaces*3);
+			glDrawArrays(GL_TRIANGLES, 0, Mesh.nNumFaces * 3);
 		}
 	}
 	else
 	{
-		if(pMesh->sFaces.pData)
+		for(int i = 0; i < (int) Mesh.nNumStrips; ++i)
 		{
-			// Indexed Triangle strips
 			int offset = 0;
-			for(int i = 0; i < (int)pMesh->nNumStrips; i++)
+			if(m_puiIndexVbo[ui32MeshID])
 			{
-				glDrawElements(GL_TRIANGLE_STRIP, pMesh->pnStripLength[i]+2, GL_UNSIGNED_SHORT, pMesh->sFaces.pData + offset*2);
-				offset += pMesh->pnStripLength[i]+2;
+				// Indexed Triangle strips
+				glDrawElements(GL_TRIANGLE_STRIP, Mesh.pnStripLength[i]+2, GL_UNSIGNED_SHORT, &((GLshort*)0)[offset]);
 			}
-		}
-		else
-		{
-			// Non-Indexed Triangle strips
-			int offset = 0;
-			for(int i = 0; i < (int)pMesh->nNumStrips; i++)
+			else
 			{
-				glDrawArrays(GL_TRIANGLE_STRIP, offset, pMesh->pnStripLength[i]+2);
-				offset += pMesh->pnStripLength[i]+2;
+				// Non-Indexed Triangle strips
+				glDrawArrays(GL_TRIANGLE_STRIP, offset, Mesh.pnStripLength[i]+2);
 			}
+			offset += Mesh.pnStripLength[i]+2;
 		}
 	}
+
+	// unbind the vertex buffers as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 
@@ -297,8 +358,11 @@ bool CShell::RenderScene()
 	m_iTimePrev	= iTime;
 	m_fFrame	+= VERTTYPEMUL(f2vt(iDeltaTime), f2vt(DEMO_FRAME_RATE));
 
-	if (m_fFrame > f2vt(m_Scene->nNumFrame-1))
-		m_fFrame = 0;
+//	if (m_fFrame > f2vt(m_Scene->nNumFrame-1))
+//		m_fFrame = 0;
+		
+	while(m_fFrame > f2vt(m_Scene->nNumFrame-1))
+		m_fFrame -= f2vt(m_Scene->nNumFrame-1);
 		
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "frame: %3.f", m_fFrame);
 
@@ -377,7 +441,7 @@ bool CShell::RenderScene()
 		SPODNode* pNode = &m_Scene->pNode[i];
 
 		// Gets pMesh referenced by the pNode
-		SPODMesh* pMesh = &m_Scene->pMesh[pNode->nIdx];
+//		SPODMesh* pMesh = &m_Scene->pMesh[pNode->nIdx];
 
 		// Gets the node model matrix
 		MATRIX mWorld;
@@ -403,7 +467,7 @@ bool CShell::RenderScene()
 			Now that the model-view matrix is set and the materials ready,
 			call another function to actually draw the mesh.
 		*/
-		DrawMesh(pMesh);
+		DrawMesh(pNode->nIdx);
 	}
 	
 		// show text on the display

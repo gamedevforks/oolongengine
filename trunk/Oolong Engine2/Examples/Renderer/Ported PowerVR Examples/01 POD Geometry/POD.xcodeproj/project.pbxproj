@@ -39,6 +39,10 @@
 		79317AD80EDB153800247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317AD20EDB153800247E3D /* utility_impl.cpp */; };
 		7931810B0EDF0E0500247E3D /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793181070EDF0E0500247E3D /* mmgr.cpp */; };
 		7931810C0EDF0E0500247E3D /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7931810A0EDF0E0500247E3D /* readme.txt */; };
+		79616DDF0EECF2C300802AED /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79616DDE0EECF2C300802AED /* ResourcePath.mm */; };
+		79616E850EECFA4800802AED /* IntroducingPOD_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79616E820EECFA4800802AED /* IntroducingPOD_float.pod */; };
+		79616E860EECFA4800802AED /* tex_arm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E830EECFA4800802AED /* tex_arm.pvr */; };
+		79616E870EECFA4800802AED /* tex_base.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E840EECFA4800802AED /* tex_base.pvr */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +50,7 @@
 		1BF3A1350DA68E6200C48976 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* Skeleton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skeleton.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* POD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = POD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		287ABC9F0D7F541C00CE0163 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -102,6 +106,11 @@
 		793181080EDF0E0500247E3D /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
 		793181090EDF0E0500247E3D /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		7931810A0EDF0E0500247E3D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		79616DDD0EECF2C300802AED /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		79616DDE0EECF2C300802AED /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		79616E820EECFA4800802AED /* IntroducingPOD_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = IntroducingPOD_float.pod; path = Media/IntroducingPOD_float.pod; sourceTree = "<group>"; };
+		79616E830EECFA4800802AED /* tex_arm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_arm.pvr; path = Media/tex_arm.pvr; sourceTree = "<group>"; };
+		79616E840EECFA4800802AED /* tex_base.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_base.pvr; path = Media/tex_base.pvr; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,7 +134,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Skeleton.app */,
+				1D6058910D05DD3D006BFB54 /* POD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +166,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79616E820EECFA4800802AED /* IntroducingPOD_float.pod */,
+				79616E830EECFA4800802AED /* tex_arm.pvr */,
+				79616E840EECFA4800802AED /* tex_base.pvr */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				287ABC9F0D7F541C00CE0163 /* Default.png */,
@@ -180,6 +192,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79616DDC0EECF2C300802AED /* Pathes */,
 				793181050EDF0E0500247E3D /* MemoryManager */,
 				79317AC50EDB153800247E3D /* Math */,
 				791F499E0E1755E800E927FE /* Application */,
@@ -323,6 +336,16 @@
 			path = ../../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
+		79616DDC0EECF2C300802AED /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				79616DDD0EECF2C300802AED /* ResourcePath.h */,
+				79616DDE0EECF2C300802AED /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,7 +363,7 @@
 			);
 			name = POD;
 			productName = foo;
-			productReference = 1D6058910D05DD3D006BFB54 /* Skeleton.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* POD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -369,6 +392,9 @@
 				1B26781E0DA2F9B000B24DA5 /* icon.png in Resources */,
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				7931810C0EDF0E0500247E3D /* readme.txt in Resources */,
+				79616E850EECFA4800802AED /* IntroducingPOD_float.pod in Resources */,
+				79616E860EECFA4800802AED /* tex_arm.pvr in Resources */,
+				79616E870EECFA4800802AED /* tex_base.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +427,7 @@
 				79317AD70EDB153800247E3D /* matrix_impl.cpp in Sources */,
 				79317AD80EDB153800247E3D /* utility_impl.cpp in Sources */,
 				7931810B0EDF0E0500247E3D /* mmgr.cpp in Sources */,
+				79616DDF0EECF2C300802AED /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +453,7 @@
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = Skeleton;
+				PRODUCT_NAME = POD;
 				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
 				WARNING_CFLAGS = "-Wall";
 			};

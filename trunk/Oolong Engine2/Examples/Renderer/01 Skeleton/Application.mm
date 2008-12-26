@@ -20,6 +20,7 @@ subject to the following restrictions:
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
+#include "MemoryManager.h"
 #include "UI.h"
 #include "Macros.h"
 #include "Timing.h"

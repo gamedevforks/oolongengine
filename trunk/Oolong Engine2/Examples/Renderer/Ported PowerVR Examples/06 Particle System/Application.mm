@@ -19,12 +19,15 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
-//#include "Log.h"
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
+#include "Geometry.h"
 #include "UI.h"
+#include "App.h"
+#include "MemoryManager.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
@@ -39,10 +42,6 @@ float frameRate;
 // Contains the partice utility class
 #include "Particle.h"
 
-// Textures
-#include "Media/LightTex.h"
-#include "Media/FloorTex8.h"
-
 #define WIDTH 320
 #define HEIGHT 480
 
@@ -50,9 +49,11 @@ float frameRate;
  Defines
  ******************************************************************************/
 
-#define MAX_PARTICLES 600											// Maximum number of particles
-#define FACTOR f2vt(0.25f)											// Brightness of the reflected particles
-const VECTOR3 vUp = { f2vt(0.0f), f2vt(1.0f), f2vt(0.0f) };		// Up direction. Used for creating the camera
+const unsigned int g_ui32MaxParticles = 1000;					// Maximum number of m_Particles
+const VERTTYPE g_fFactor = f2vt(0.25f);							// Brightness of the reflected m_Particles
+const Vec3 g_fUp(f2vt(0.0f), f2vt(1.0f), f2vt(0.0f));		// Up direction. Used for creating the camera
+
+MATRIX mProjection, m_mView;
 
 /******************************************************************************
  Structure definitions
@@ -64,12 +65,10 @@ struct SVtx
 	unsigned char 	u, v;						// TexCoord
 };
 
-#ifdef GL_OES_VERSION_1_1
 struct SVtxPointSprite
 {
-	VERTTYPE	x, y, z, size;
+	VERTTYPE	x, y, z, fSize;
 };
-#endif
 
 struct SColors
 {
@@ -77,50 +76,44 @@ struct SColors
 };
 
 // Texture names
-GLuint 			texName;
-GLuint 			floorTexName;
+	GLuint 			m_ui32TexName;
+	GLuint 			m_ui32FloorTexName;
 
 // Particle instance pointers
-particle particles[MAX_PARTICLES];
-
-// View matrix
-MATRIX	g_mView;
+	CParticle m_Particles[g_ui32MaxParticles];
 
 // Vectors for calculating the view matrix and saving the camera position
-VECTOR3 vFrom, vTo;
+Vec3 m_fFrom, m_fTo;
 
 // Particle geometry buffers
-SVtx ParticleVTXBuf[MAX_PARTICLES*4]; // 4 Vertices per Particle - 2 triangles
-SColors NormalColor[MAX_PARTICLES*4];
-SColors ReflectColor[MAX_PARTICLES*4];
-unsigned short ParticleINDXBuf[MAX_PARTICLES*6]; // 3 indices per triangle
+SVtx	m_sParticleVTXBuf[g_ui32MaxParticles*4]; // 4 Vertices per Particle - 2 triangles
+SColors m_sNormalColour[g_ui32MaxParticles*4];
+SColors m_sReflectColour[g_ui32MaxParticles*4];
+unsigned short m_ui16ParticleINDXBuf[g_ui32MaxParticles * 6]; // 3 indices per triangle
 
-#ifdef GL_OES_VERSION_1_1
-SVtxPointSprite	ParticleVTXPSBuf[MAX_PARTICLES]; // When using point sprites
-GLuint iVertVboID;
-GLuint iColAVboID;
-GLuint iColBVboID;
-GLuint iQuadVboID;
-#endif
+SVtxPointSprite	m_sParticleVTXPSBuf[g_ui32MaxParticles]; // When using point sprites
+GLuint m_i32VertVboID;
+GLuint m_i32ColAVboID;
+GLuint m_i32ColBVboID;
+GLuint m_i32QuadVboID;
 
-VERTTYPE floor_quad_verts[4*4];
-VERTTYPE floor_quad_uvs[2*4];
-SVtx	 quadVTXBuf[4];
+VERTTYPE m_fFloorQuadVerts[4*4];
+VERTTYPE m_fFloorQuadUVs[2*4];
+SVtx	 m_sQuadVTXBuf[4];
 
 // Dynamic state
-int		nNumParticles;
-float	fRot, fRot2;
-bool	bUsePointSprites;
-float	point_attenuation_coef;
+int		m_i32NumParticles;
+float	m_fRot, m_fRot2;
+float	m_fPointAttenuationCoef;
 
 
-float rand_positive_float();
-float rand_float();
-void render_floor();
-void spawn_particle(particle *the_particle);
-void render_particle(int NmbrOfParticles, bool reflect);
-VERTTYPE clamp(VERTTYPE input);
 
+float RandPositiveFloat();
+float RandFloat();
+void  RenderFloor();
+void  SpawnParticle(CParticle *pParticle);
+void  RenderParticle(int i32ParticleNo, bool bReflect);
+VERTTYPE Clamp(VERTTYPE input);
 
 bool CShell::InitApplication()
 {
@@ -133,33 +126,38 @@ bool CShell::InitApplication()
 	/*
 	 Initializes variables.
 	 */
-	nNumParticles = 0;
-	fRot = 0;
-	fRot2 = 0;
-	vFrom.x	= f2vt(0.0f); vFrom.y	= f2vt(45.0f); vFrom.z	= f2vt(120.0f);
-	vTo.x	= f2vt(0.0f); vTo.y		= f2vt(20.0f); vTo.z	= f2vt(-1.0f);
+        m_i32NumParticles = 0;
+	m_fRot = 0;
+	m_fRot2 = 0;
+	m_fFrom = Vec3(f2vt(0.0f), f2vt(45.0f), f2vt(120.0f));
+	m_fTo	= Vec3(f2vt(0.0f), f2vt(20.0f), f2vt(-1.0f));
+		
+	Textures = (CTexture*)malloc(sizeof(CTexture));
+	memset(Textures, 0, sizeof(CTexture));
 	
-	MATRIX		MyPerspMatrix;
-
-#ifdef GL_OES_VERSION_1_1
-	bUsePointSprites = 1;
-#else
-	bUsePointSprites = 0;
-#endif
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
 	
+/*
+// PVR texture files
+const char c_szLightTexFile[] = "LightTex.pvr";
+const char c_szFloorTexFile[] = "FloorTex8.pvr";
+*/
 	/*
 	 Load textures.
 	 */
-	if (!Textures->LoadTextureFromPointer((void*)LightTex, &texName))
-	{
+	char *filename = new char[2048];
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/LightTex.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_ui32TexName))
 		return false;
-	}
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	if (!Textures->LoadTextureFromPointer((void*)FloorTex8, &floorTexName))
-	{
+
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/FloorTex8.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_ui32FloorTexName))
 		return false;
-	}
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
@@ -168,115 +166,106 @@ bool CShell::InitApplication()
 	 */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(45.0f*(PIf/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
-	glMultMatrixf(MyPerspMatrix.f);
+	MatrixPerspectiveFovRH(mProjection, f2vt(45.0f*(PIf/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
+	glMultMatrixf(mProjection.f);
 	
 	/*
 	 Calculates the attenuation coefficient for the points drawn.
 	 */
 	double H = HEIGHT;
-	double h = 2.0/MyPerspMatrix.f[5];
+	double h = 2.0/mProjection.f[5];
 	double D0 = sqrt(2.0)*H/h;
-	double k = 1.0/(1.0 + 2.0 * (1/MyPerspMatrix.f[5])*(1/MyPerspMatrix.f[5]));
-	point_attenuation_coef = (float)(1.0/(D0*D0)*k);
+	double k = 1.0/(1.0 + 2.0 * (1/mProjection.f[5])*(1/mProjection.f[5]));
+	m_fPointAttenuationCoef = (float)(1.0/(D0*D0)*k);
 	
 	/*
 	 Creates the model view matrix.
 	 */
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	MatrixLookAtRH(g_mView, vFrom, vTo, vUp);
-	glLoadMatrixf(g_mView.f);
+	MatrixLookAtRH(m_mView, m_fFrom, m_fTo, g_fUp);
+	glLoadMatrixf(m_mView.f);
 	
 	/*
 	 Pre-Set TexCoords since they never change.
 	 Pre-Set the Index Buffer.
 	 */
-	for (int i=0; i<MAX_PARTICLES;i++)
+
+	for(unsigned int i = 0; i < g_ui32MaxParticles; ++i)
 	{
-		ParticleVTXBuf[i*4+0].u=0;
-		ParticleVTXBuf[i*4+0].v=0;
+		m_sParticleVTXBuf[i*4+0].u = 0;
+		m_sParticleVTXBuf[i*4+0].v = 0;
 		
-		ParticleVTXBuf[i*4+1].u=1;
-		ParticleVTXBuf[i*4+1].v=0;
+		m_sParticleVTXBuf[i*4+1].u = 1;
+		m_sParticleVTXBuf[i*4+1].v = 0;
 		
-		ParticleVTXBuf[i*4+2].u=0;
-		ParticleVTXBuf[i*4+2].v=1;
+		m_sParticleVTXBuf[i*4+2].u = 0;
+		m_sParticleVTXBuf[i*4+2].v = 1;
 		
-		ParticleVTXBuf[i*4+3].u=1;
-		ParticleVTXBuf[i*4+3].v=1;
+		m_sParticleVTXBuf[i*4+3].u = 1;
+		m_sParticleVTXBuf[i*4+3].v = 1;
 		
-		ParticleINDXBuf[i*6+0]=(i*4)+0;
-		ParticleINDXBuf[i*6+1]=(i*4)+1;
-		ParticleINDXBuf[i*6+2]=(i*4)+2;
-		ParticleINDXBuf[i*6+3]=(i*4)+2;
-		ParticleINDXBuf[i*6+4]=(i*4)+1;
-		ParticleINDXBuf[i*6+5]=(i*4)+3;
+		m_ui16ParticleINDXBuf[i*6+0] = (i*4) + 0;
+		m_ui16ParticleINDXBuf[i*6+1] = (i*4) + 1;
+		m_ui16ParticleINDXBuf[i*6+2] = (i*4) + 2;
+		m_ui16ParticleINDXBuf[i*6+3] = (i*4) + 2;
+		m_ui16ParticleINDXBuf[i*6+4] = (i*4) + 1;
+		m_ui16ParticleINDXBuf[i*6+5] = (i*4) + 3;
 	}
 	
-	/*
-	 If we run OpenGL ES 1.1, then use vertex buffers.
-	 */
-#ifdef GL_OES_VERSION_1_1
-	iVertVboID=0;
-	iColAVboID=0;
-	iColBVboID=0;
-	iQuadVboID=0;
-	glGenBuffers(1, &iVertVboID);
-	glGenBuffers(1, &iColAVboID);
-	glGenBuffers(1, &iColBVboID);
-	glGenBuffers(1, &iQuadVboID);
-#endif
 	
-	/*
-	 Preset the floor uvs and vertices as they never change.
-	 */
-	VECTOR3	pos = { 0, 0, 0 };
+	//	Create vertex buffers.
+	glGenBuffers(1, &m_i32VertVboID);
+	glGenBuffers(1, &m_i32ColAVboID);
+	glGenBuffers(1, &m_i32ColBVboID);
+	glGenBuffers(1, &m_i32QuadVboID);
+	
+	//	Preset the floor uvs and vertices as they never change.
+	Vec3 pos(0, 0, 0);
 	
 	float szby2 = 100;
-	quadVTXBuf[0].x = floor_quad_verts[0]  = pos.x - f2vt(szby2);
-	quadVTXBuf[0].y = floor_quad_verts[1]  = pos.y;
-	quadVTXBuf[0].z = floor_quad_verts[2]  = pos.z - f2vt(szby2);
 	
-	quadVTXBuf[1].x = floor_quad_verts[3]  = pos.x + f2vt(szby2);
-	quadVTXBuf[1].y = floor_quad_verts[4]  = pos.y;
-	quadVTXBuf[1].z = floor_quad_verts[5]  = pos.z - f2vt(szby2);
+	m_sQuadVTXBuf[0].x = m_fFloorQuadVerts[0]  = pos.x - f2vt(szby2);
+	m_sQuadVTXBuf[0].y = m_fFloorQuadVerts[1]  = pos.y;
+	m_sQuadVTXBuf[0].z = m_fFloorQuadVerts[2]  = pos.z - f2vt(szby2);
 	
-	quadVTXBuf[2].x = floor_quad_verts[6]  = pos.x - f2vt(szby2);
-	quadVTXBuf[2].y = floor_quad_verts[7]  = pos.y;
-	quadVTXBuf[2].z = floor_quad_verts[8]  = pos.z + f2vt(szby2);
+	m_sQuadVTXBuf[1].x = m_fFloorQuadVerts[3]  = pos.x + f2vt(szby2);
+	m_sQuadVTXBuf[1].y = m_fFloorQuadVerts[4]  = pos.y;
+	m_sQuadVTXBuf[1].z = m_fFloorQuadVerts[5]  = pos.z - f2vt(szby2);
 	
-	quadVTXBuf[3].x = floor_quad_verts[9]  = pos.x + f2vt(szby2);
-	quadVTXBuf[3].y = floor_quad_verts[10] = pos.y;
-	quadVTXBuf[3].z = floor_quad_verts[11] = pos.z + f2vt(szby2);
+	m_sQuadVTXBuf[2].x = m_fFloorQuadVerts[6]  = pos.x - f2vt(szby2);
+	m_sQuadVTXBuf[2].y = m_fFloorQuadVerts[7]  = pos.y;
+	m_sQuadVTXBuf[2].z = m_fFloorQuadVerts[8]  = pos.z + f2vt(szby2);
 	
-	floor_quad_uvs[0] = f2vt(0);
-	floor_quad_uvs[1] = f2vt(0);
-	quadVTXBuf[0].u = 0;
-	quadVTXBuf[0].v = 0;
+	m_sQuadVTXBuf[3].x = m_fFloorQuadVerts[9]  = pos.x + f2vt(szby2);
+	m_sQuadVTXBuf[3].y = m_fFloorQuadVerts[10] = pos.y;
+	m_sQuadVTXBuf[3].z = m_fFloorQuadVerts[11] = pos.z + f2vt(szby2);
 	
-	floor_quad_uvs[2] = f2vt(1);
-	floor_quad_uvs[3] = f2vt(0);
-	quadVTXBuf[1].u = 255;
-	quadVTXBuf[1].v = 0;
+	m_fFloorQuadUVs[0] = f2vt(0);
+	m_fFloorQuadUVs[1] = f2vt(0);
+	m_sQuadVTXBuf[0].u = 0;
+	m_sQuadVTXBuf[0].v = 0;
+
+	m_fFloorQuadUVs[2] = f2vt(1);
+	m_fFloorQuadUVs[3] = f2vt(0);
+	m_sQuadVTXBuf[1].u = 255;
+	m_sQuadVTXBuf[1].v = 0;
 	
-	floor_quad_uvs[4] = f2vt(0);
-	floor_quad_uvs[5] = f2vt(1);
-	quadVTXBuf[2].u = 0;
-	quadVTXBuf[2].v = 255;
+	m_fFloorQuadUVs[4] = f2vt(0);
+	m_fFloorQuadUVs[5] = f2vt(1);
+	m_sQuadVTXBuf[2].u = 0;
+	m_sQuadVTXBuf[2].v = 255;
+
+	m_fFloorQuadUVs[6] = f2vt(1);
+	m_fFloorQuadUVs[7] = f2vt(1);
+	m_sQuadVTXBuf[3].u = 255;
+	m_sQuadVTXBuf[3].v = 255;
 	
-	floor_quad_uvs[6] = f2vt(1);
-	floor_quad_uvs[7] = f2vt(1);
-	quadVTXBuf[3].u = 255;
-	quadVTXBuf[3].v = 255;
+	glBindBuffer(GL_ARRAY_BUFFER, m_i32QuadVboID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SVtx) * 4, m_sQuadVTXBuf, GL_STATIC_DRAW);
 	
-	/*
-	 If we run OpenGL ES 1.1, then use vertex buffers.
-	 */
-#ifdef GL_OES_VERSION_1_1
-	glBindBuffer(GL_ARRAY_BUFFER, iQuadVboID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SVtx)*4, quadVTXBuf,GL_STATIC_DRAW);
-#endif
+	delete [] filename;
+	delete [] buffer;
 	
 	return true;
 }
@@ -288,8 +277,8 @@ bool CShell::QuitApplication()
 	delete AppDisplayText;
 
 	// Release textures
-	Textures->ReleaseTexture(texName);
-	Textures->ReleaseTexture(floorTexName);
+	Textures->ReleaseTexture(m_ui32TexName);
+	Textures->ReleaseTexture(m_ui32FloorTexName);
 	
 	delete Textures;
 	
@@ -324,280 +313,162 @@ bool CShell::UpdateScene()
 bool CShell::RenderScene()
 {
 	int				i;
-	VECTOR3		TPos;
-	MATRIX		RotationMatrixY;
+	MATRIX mRotY;
 	
-	// Set up the viewport
-	glViewport(0,0, WIDTH, HEIGHT);
-	
-	// Clear color and depth buffers
-	glClearColor(f2vt(0), f2vt(0), f2vt(0), f2vt(0));
+	// Clear colour and depth buffers
+	glClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(1.0f));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	// Enables depth testing
 	glEnable(GL_DEPTH_TEST);
 	
-	/*
-	 Modify per-frame variables controlling the particle mouvements.
-	 */
-	float speedctrl = (float) (sin(fRot*0.01f)+1.0f)/2.0f;
-	float stopnum = 0.8f;
-	float step = 0.1f;
-	if (speedctrl > stopnum)
-	{
-		step = 0.0f;
-	}
+	//	Modify per-frame variables controlling the particle mouvements.
+	float fSpeedCtrl = (float) (sinf(m_fRot*0.01f)+1.0f)/2.0f;
+	float fStopNo = 0.8f;
+	float fStep = 0.1f;
 	
-	/*
-	 Generate particles as needed.
-	 */
-	if ((nNumParticles < MAX_PARTICLES) && (speedctrl <= stopnum))
+	if(fSpeedCtrl > fStopNo)
+		fStep = 0.0f;
+
+	// Generate particles as needed.
+	if((m_i32NumParticles < (int) g_ui32MaxParticles) && (fSpeedCtrl <= fStopNo))
 	{
-		int num_to_gen = (int) (rand_positive_float()*(MAX_PARTICLES/100.0));
+		int num_to_gen = (int) (RandPositiveFloat()*(g_ui32MaxParticles/100.0));
 		
 		if (num_to_gen==0)
-		{
 			num_to_gen=1;
-		}
 		
-		for (i = 0; (i < num_to_gen) && (nNumParticles < MAX_PARTICLES); i++)
-		{
-			spawn_particle(&particles[nNumParticles++]);
-		}
+		for(i = 0; (i < num_to_gen) && (m_i32NumParticles < (int) g_ui32MaxParticles); ++i)
+			SpawnParticle(&m_Particles[m_i32NumParticles++]);
 	}
 	
-	/*
-	 Build rotation matrix around axis Y.
-	 */
-	MatrixRotationY(RotationMatrixY, f2vt((fRot2*PIf)/180.0f));
-	VERTTYPE pMatrix[16];
-	for(i=0; i<16;i++)
+	// Build rotation matrix around axis Y.
+	MatrixRotationY(mRotY, f2vt((m_fRot2 * PIf)/180.0f));
+//	mRotY = MatrixRotationY(f2vt((m_fRot2 * PIf)/180.0f));
+	
+	for(i = 0; i < m_i32NumParticles; ++i)
 	{
-		pMatrix[i] = RotationMatrixY.f[i];
+		// Transform particle with rotation matrix
+		m_sParticleVTXPSBuf[i].x =	VERTTYPEMUL(mRotY.f[ 0], m_Particles[i].m_fPosition.x) +
+								VERTTYPEMUL(mRotY.f[ 4], m_Particles[i].m_fPosition.y) +
+								VERTTYPEMUL(mRotY.f[ 8], m_Particles[i].m_fPosition.z) +
+											mRotY.f[12];
+		m_sParticleVTXPSBuf[i].y =	VERTTYPEMUL(mRotY.f[ 1], m_Particles[i].m_fPosition.x) +
+								VERTTYPEMUL(mRotY.f[ 5], m_Particles[i].m_fPosition.y) +
+								VERTTYPEMUL(mRotY.f[ 9], m_Particles[i].m_fPosition.z) +
+											mRotY.f[13];
+		m_sParticleVTXPSBuf[i].z =	VERTTYPEMUL(mRotY.f[ 2], m_Particles[i].m_fPosition.x) +
+								VERTTYPEMUL(mRotY.f[ 6], m_Particles[i].m_fPosition.y) +
+								VERTTYPEMUL(mRotY.f[10], m_Particles[i].m_fPosition.z) +
+											mRotY.f[14];
+			
+		m_sParticleVTXPSBuf[i].fSize = m_Particles[i].m_fSize;
+			
+		m_sNormalColour[i].r  = vt2b(m_Particles[i].m_fColour.x);
+		m_sNormalColour[i].g  = vt2b(m_Particles[i].m_fColour.y);
+		m_sNormalColour[i].b  = vt2b(m_Particles[i].m_fColour.z);
+		m_sNormalColour[i].a  = (unsigned char)255;
+			
+		m_sReflectColour[i].r  = vt2b(VERTTYPEMUL(m_Particles[i].m_fColour.x, g_fFactor));
+		m_sReflectColour[i].g  = vt2b(VERTTYPEMUL(m_Particles[i].m_fColour.y, g_fFactor));
+		m_sReflectColour[i].b  = vt2b(VERTTYPEMUL(m_Particles[i].m_fColour.z, g_fFactor));
+		m_sReflectColour[i].a  = (unsigned char)255;
 	}
-	
-	
-	if(!bUsePointSprites)
-	{
-		for(i = 0; i < nNumParticles; i++)
-		{
-			/*
-			 Transform particle with rotation matrix.
-			 */
-			TPos.x =		VERTTYPEMUL(pMatrix[ 0],particles[i].Position.x) +
-			VERTTYPEMUL(pMatrix[ 4],particles[i].Position.y) +
-			VERTTYPEMUL(pMatrix[ 8],particles[i].Position.z) +
-			pMatrix[12];
-			TPos.y =		VERTTYPEMUL(pMatrix[ 1],particles[i].Position.x) +
-			VERTTYPEMUL(pMatrix[ 5],particles[i].Position.y) +
-			VERTTYPEMUL(pMatrix[ 9],particles[i].Position.z) +
-			pMatrix[13];
-			TPos.z =		VERTTYPEMUL(pMatrix[ 2],particles[i].Position.x) +
-			VERTTYPEMUL(pMatrix[ 6],particles[i].Position.y) +
-			VERTTYPEMUL(pMatrix[10],particles[i].Position.z) +
-			pMatrix[14];
 			
-			/*
-			 Creates the particle geometry.
-			 */
-			VERTTYPE szby2 = particles[i].size;
+	glBindBuffer(GL_ARRAY_BUFFER, m_i32VertVboID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SVtxPointSprite)*m_i32NumParticles, m_sParticleVTXPSBuf,GL_DYNAMIC_DRAW);
 			
-			ParticleVTXBuf[i*4+0].x  = TPos.x - szby2;
-			ParticleVTXBuf[i*4+0].y  = TPos.y - szby2;
-			ParticleVTXBuf[i*4+0].z  = TPos.z;
+	glBindBuffer(GL_ARRAY_BUFFER, m_i32ColAVboID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SColors)*m_i32NumParticles, m_sNormalColour,GL_DYNAMIC_DRAW);
 			
-			ParticleVTXBuf[i*4+1].x  = TPos.x + szby2;
-			ParticleVTXBuf[i*4+1].y  = TPos.y - szby2;
-			ParticleVTXBuf[i*4+1].z  = TPos.z;
-			
-			ParticleVTXBuf[i*4+2].x  = TPos.x - szby2;
-			ParticleVTXBuf[i*4+2].y  = TPos.y + szby2;
-			ParticleVTXBuf[i*4+2].z  = TPos.z;
-			
-			ParticleVTXBuf[i*4+3].x  = TPos.x + szby2;
-			ParticleVTXBuf[i*4+3].y  = TPos.y + szby2;
-			ParticleVTXBuf[i*4+3].z  = TPos.z;
-			
-			NormalColor[i*4+0].r  = vt2b(particles[i].Color.x);
-			NormalColor[i*4+0].g  = vt2b(particles[i].Color.y);
-			NormalColor[i*4+0].b  = vt2b(particles[i].Color.z);
-			NormalColor[i*4+0].a  = (unsigned char)255;
-			
-			NormalColor[i*4+1].r  = vt2b(particles[i].Color.x);
-			NormalColor[i*4+1].g  = vt2b(particles[i].Color.y);
-			NormalColor[i*4+1].b  = vt2b(particles[i].Color.z);
-			NormalColor[i*4+1].a  = (unsigned char)(255);
-			
-			NormalColor[i*4+2].r  = vt2b(particles[i].Color.x);
-			NormalColor[i*4+2].g  = vt2b(particles[i].Color.y);
-			NormalColor[i*4+2].b  = vt2b(particles[i].Color.z);
-			NormalColor[i*4+2].a  = (unsigned char)(255);
-			
-			NormalColor[i*4+3].r  = vt2b(particles[i].Color.x);
-			NormalColor[i*4+3].g  = vt2b(particles[i].Color.y);
-			NormalColor[i*4+3].b  = vt2b(particles[i].Color.z);
-			NormalColor[i*4+3].a  = (unsigned char)(255);
-			
-			ReflectColor[i*4+0].r  = vt2b(VERTTYPEMUL(particles[i].Color.x,FACTOR));
-			ReflectColor[i*4+0].g  = vt2b(VERTTYPEMUL(particles[i].Color.y,FACTOR));
-			ReflectColor[i*4+0].b  = vt2b(VERTTYPEMUL(particles[i].Color.z,FACTOR));
-			ReflectColor[i*4+0].a  = (unsigned char)(255);
-			
-			ReflectColor[i*4+1].r  = vt2b(VERTTYPEMUL(particles[i].Color.x,FACTOR));
-			ReflectColor[i*4+1].g  = vt2b(VERTTYPEMUL(particles[i].Color.y,FACTOR));
-			ReflectColor[i*4+1].b  = vt2b(VERTTYPEMUL(particles[i].Color.z,FACTOR));
-			ReflectColor[i*4+1].a  = (unsigned char)(255);
-			
-			ReflectColor[i*4+2].r  = vt2b(VERTTYPEMUL(particles[i].Color.x,FACTOR));
-			ReflectColor[i*4+2].g  = vt2b(VERTTYPEMUL(particles[i].Color.y,FACTOR));
-			ReflectColor[i*4+2].b  = vt2b(VERTTYPEMUL(particles[i].Color.z,FACTOR));
-			ReflectColor[i*4+2].a  = (unsigned char)(255);
-			
-			ReflectColor[i*4+3].r  = vt2b(VERTTYPEMUL(particles[i].Color.x,FACTOR));
-			ReflectColor[i*4+3].g  = vt2b(VERTTYPEMUL(particles[i].Color.y,FACTOR));
-			ReflectColor[i*4+3].b  = vt2b(VERTTYPEMUL(particles[i].Color.z,FACTOR));
-			ReflectColor[i*4+3].a  = (unsigned char)(255);
-		}
-	}
-	
-	/*
-	 Setup VertexBuffer for particles if we are using OpenGL ES 1.1.
-	 */
-#ifdef GL_OES_VERSION_1_1
-	else
-	{
-		for(i = 0; i < nNumParticles; i++)
-		{
-			/* Transform particle with rotation matrix */
-			
-			ParticleVTXPSBuf[i].x =		VERTTYPEMUL(pMatrix[ 0],particles[i].Position.x) +
-			VERTTYPEMUL(pMatrix[ 4],particles[i].Position.y) +
-			VERTTYPEMUL(pMatrix[ 8],particles[i].Position.z) +
-			pMatrix[12];
-			ParticleVTXPSBuf[i].y =		VERTTYPEMUL(pMatrix[ 1],particles[i].Position.x) +
-			VERTTYPEMUL(pMatrix[ 5],particles[i].Position.y) +
-			VERTTYPEMUL(pMatrix[ 9],particles[i].Position.z) +
-			pMatrix[13];
-			ParticleVTXPSBuf[i].z =		VERTTYPEMUL(pMatrix[ 2],particles[i].Position.x) +
-			VERTTYPEMUL(pMatrix[ 6],particles[i].Position.y) +
-			VERTTYPEMUL(pMatrix[10],particles[i].Position.z) +
-			pMatrix[14];
-			
-			ParticleVTXPSBuf[i].size = particles[i].size;
-			
-			NormalColor[i].r  = vt2b(particles[i].Color.x);
-			NormalColor[i].g  = vt2b(particles[i].Color.y);
-			NormalColor[i].b  = vt2b(particles[i].Color.z);
-			NormalColor[i].a  = (unsigned char)255;
-			
-			ReflectColor[i].r  = vt2b(VERTTYPEMUL(particles[i].Color.x,FACTOR));
-			ReflectColor[i].g  = vt2b(VERTTYPEMUL(particles[i].Color.y,FACTOR));
-			ReflectColor[i].b  = vt2b(VERTTYPEMUL(particles[i].Color.z,FACTOR));
-			ReflectColor[i].a  = (unsigned char)255;
-		}
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, iVertVboID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SVtxPointSprite)*nNumParticles, ParticleVTXPSBuf,GL_DYNAMIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, iColAVboID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SColors)*nNumParticles, NormalColor,GL_DYNAMIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, iColBVboID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SColors)*nNumParticles, ReflectColor,GL_DYNAMIC_DRAW);
-#endif
+	glBindBuffer(GL_ARRAY_BUFFER, m_i32ColBVboID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SColors)*m_i32NumParticles, m_sReflectColour,GL_DYNAMIC_DRAW);
 	
 	// clean up render states
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
 	
-	/*
-	 Draw floor.
-	 */
+	//	Draw floor.
 	
 	// Save modelview matrix
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glRotatef(f2vt(-fRot), f2vt(0.0f), f2vt(1.0f), f2vt(0.0f));
+	glRotatef(f2vt(-m_fRot), f2vt(0.0f), f2vt(1.0f), f2vt(0.0f));
 	
 	// setup render states
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
 	
 	// Set texture and texture environment
-	glBindTexture(GL_TEXTURE_2D, floorTexName);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glBindTexture(GL_TEXTURE_2D, m_ui32FloorTexName);
+	glBlendFunc(GL_ONE, GL_ONE);
 	
 	// Render floor
-	render_floor();
+	RenderFloor();
 	
 	// clean up render states
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
+	
 	glPopMatrix();
 	
-	
-	/*
-	 Render particles reflections.
-	 */
+	//	Render particles reflections.
 	
 	// set up render states
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
+
 	glDepthFunc(GL_ALWAYS);
 	glDisable(GL_CULL_FACE);
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
+
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glBindTexture(GL_TEXTURE_2D, texName);
+	glBindTexture(GL_TEXTURE_2D, m_ui32TexName);
 	
 	// Set model view matrix
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	
 	glScalef(f2vt(1.0f), f2vt(-1.0f), f2vt(1.0f));
 	glTranslatef(f2vt(0.0f), f2vt(0.01f), f2vt(0.0f));
-	
-#ifdef GL_OES_VERSION_1_1
+
 	glEnable(GL_POINT_SPRITE_OES);
-#endif
-	if (((int)(nNumParticles*0.5f))>0)
-	{
-		render_particle(((int)(nNumParticles*0.5f)),true);
-	}
+
+	if(((int)(m_i32NumParticles * 0.5f)) > 0)
+       RenderParticle(((int)(m_i32NumParticles*0.5f)),true);
+
 	glPopMatrix();
 	
-	/*
-	 Render particles.
-	 */
+	//	Render particles.
 	
 	// Sets the model view matrix
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	
-	if (nNumParticles>0)
-	{
-        render_particle(nNumParticles,false);
-	}
+	if(m_i32NumParticles > 0)
+        RenderParticle(m_i32NumParticles,false);
 	
 	glPopMatrix();
-#ifdef GL_OES_VERSION_1_1
+
 	glDisable(GL_POINT_SPRITE_OES);
-#endif
 	
-	VECTOR3 Force = { f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
-	Force.x = f2vt(1000.0f*(float)sin(fRot*0.01f));
+	Vec3 Force = Vec3(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
+	Force.x = f2vt(1000.0f*(float)sinf(m_fRot*0.01f));
 	
-	for(i = 0; i < nNumParticles; i++)
+	for(i = 0; i < m_i32NumParticles; ++i)
 	{
 		/*
 		 Move the particle.
 		 If the particle exceeds its lifetime, create a new one in its place.
 		 */
-		if(particles[i].step(f2vt(step), Force))
-		{
-			spawn_particle(&particles[i]);
-		}
+		if(m_Particles[i].Step(f2vt(fStep), Force))
+			SpawnParticle(&m_Particles[i]);
 	}
 	
 	// clean up render states
@@ -606,27 +477,15 @@ bool CShell::RenderScene()
 	glEnable(GL_LIGHTING);
 	
 	// Increase rotation angles
-	fRot += 1;
-	fRot2 = fRot + 36;
+	m_fRot += 1;
+	m_fRot2 = m_fRot + 36;
 	
 	// Unbinds the vertex buffer if we are using OpenGL ES 1.1
-#ifdef GL_OES_VERSION_1_1
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-#endif
 	
-	
-	if(!bUsePointSprites)
-	{
-		// show text on the display
-		AppDisplayText->DisplayDefaultTitle("Particle System", "", eDisplayTextLogoIMG);
-	}
-#ifdef GL_OES_VERSION_1_1
-	else
-	{
-		// show text on the display
-		AppDisplayText->DisplayDefaultTitle("Particles", "(using point sprites with buffer objects)", eDisplayTextLogoIMG);
-	}
-#endif
+	// show text on the display
+	AppDisplayText->DisplayDefaultTitle("Particles", "(using point sprites with buffer objects)", eDisplayTextLogoIMG);
+
 
 	AppDisplayText->Flush();	
 	
@@ -638,7 +497,7 @@ bool CShell::RenderScene()
  @Return		float		random float from -1 to 1
  @Description	returns a random float in range -1 to 1.
  ******************************************************************************/
-float rand_float()
+float RandFloat()
 {
 	return (rand()/(float)RAND_MAX) * 2.0f - 1.0f;
 }
@@ -648,7 +507,7 @@ float rand_float()
  @Return		float		random float from 0 to 1
  @Description	returns a random float in range 0 to 1.
  ******************************************************************************/
-float rand_positive_float()
+float RandPositiveFloat()
 {
 	return rand()/(float)RAND_MAX;
 }
@@ -658,89 +517,78 @@ float rand_positive_float()
  @Output		the_particle	particle to initialize
  @Description	initializes the specified particle with randomly chosen parameters.
  ******************************************************************************/
-void spawn_particle(particle *the_particle)
+void SpawnParticle(CParticle *pParticle)
 {
-	VECTOR3	ParticleSource = { f2vt(0), f2vt(0), f2vt(0) };
-	VECTOR3	ParticleSourceVariability = { f2vt(1), f2vt(0), f2vt(1) };
-	VECTOR3	ParticleVelocity = { f2vt(0), f2vt(30), f2vt(0) };
-	VECTOR3	ParticleVelocityVariability = { f2vt(4), f2vt(15), f2vt(4) };
-	VERTTYPE particle_lifetime = f2vt(8);
-	VERTTYPE particle_lifetime_variability = f2vt(1.0);
-	float particle_mass = 100;
-	float particle_mass_variability = 0;
-	float t;
+	Vec3 fParticleSource(f2vt(0), f2vt(0), f2vt(0));
+	Vec3 fParticleSourceVariability(f2vt(1), f2vt(0), f2vt(1));
+	Vec3 fParticleVelocity(f2vt(0), f2vt(30), f2vt(0));
+	Vec3 fParticleVelocityVariability(f2vt(4), f2vt(15), f2vt(4));
+	VERTTYPE fParticleLifeTime = f2vt(8);
+	VERTTYPE fParticleLifeTimeVariability = f2vt(1.0);
 	
-	/*
-	 Creates the particle position.
-	 */
-	VECTOR3 Pos;
-	t = rand_float();
-	Pos.x = ParticleSource.x + VERTTYPEMUL(f2vt(t),ParticleSourceVariability.x);
-	t = rand_float();
-	Pos.y = ParticleSource.y + VERTTYPEMUL(f2vt(t),ParticleSourceVariability.y);
-	t = rand_float();
-	Pos.z = ParticleSource.z + VERTTYPEMUL(f2vt(t),ParticleSourceVariability.z);
+	float fParticleMass = 100;
+	float fParticleMassVariability = 0;
+	float fRndFloat;
 	
-	/*
-	 Creates the particle velocity.
-	 */
-	VECTOR3 Vel;
-	t = rand_float();
-	Vel.x = ParticleVelocity.x + VERTTYPEMUL(f2vt(t),ParticleVelocityVariability.x);
-	t = rand_float();
-	Vel.y = ParticleVelocity.y + VERTTYPEMUL(f2vt(t),ParticleVelocityVariability.y);
-	t = rand_float();
-	Vel.z = ParticleVelocity.z + VERTTYPEMUL(f2vt(t),ParticleVelocityVariability.z);
+	// Creates the particle position.
+	Vec3 fPos;
+	fRndFloat = RandFloat();
+	fPos.x = fParticleSource.x + VERTTYPEMUL(f2vt(fRndFloat),fParticleSourceVariability.x);
+	fRndFloat = RandFloat();
+	fPos.y = fParticleSource.y + VERTTYPEMUL(f2vt(fRndFloat),fParticleSourceVariability.y);
+	fRndFloat = RandFloat();
+	fPos.z = fParticleSource.z + VERTTYPEMUL(f2vt(fRndFloat),fParticleSourceVariability.z);
 	
-	/*
-	 Creates the particle lifetime and mass.
-	 */
-	VERTTYPE life = particle_lifetime + VERTTYPEMUL(f2vt(rand_float()), particle_lifetime_variability);
-	float mass = particle_mass + rand_float() * particle_mass_variability;
+	// Creates the particle velocity.
+	Vec3 fVel;
+	fRndFloat = RandFloat();
+	fVel.x = fParticleVelocity.x + VERTTYPEMUL(f2vt(fRndFloat),fParticleVelocityVariability.x);
+	fRndFloat = RandFloat();
+	fVel.y = fParticleVelocity.y + VERTTYPEMUL(f2vt(fRndFloat),fParticleVelocityVariability.y);
+	fRndFloat = RandFloat();
+	fVel.z = fParticleVelocity.z + VERTTYPEMUL(f2vt(fRndFloat),fParticleVelocityVariability.z);
 	
-	/*
-	 Creates the particle from these characteristics.
-	 */
-	*the_particle = particle(Pos,Vel,mass,life);
+	// Creates the particle lifetime and fMass.
+	VERTTYPE fLife = fParticleLifeTime + VERTTYPEMUL(f2vt(RandFloat()), fParticleLifeTimeVariability);
+	float fMass = fParticleMass + RandFloat() * fParticleMassVariability;
 	
-	/*
-	 Creates the particle colors.
-	 */
-	VECTOR3 ParticleInitialColor = { f2vt(0.6f*255.0f), f2vt(0.5f*255.0f), f2vt(0.5f*255.0f) };
-	VECTOR3 ParticleInitialColorVariability = { f2vt(0.2f*255.0f), f2vt(0.2f*255.0f), f2vt(0.2f*255.0f) };
+	// Creates the particle from these characteristics.
+	*pParticle = CParticle(fPos,fVel,fMass,fLife);
 	
-	VECTOR3 ParticleHalfwayColor = { f2vt(1.0f*255.0f), f2vt(0.0f), f2vt(0.0f) };
-	VECTOR3 ParticleHalfwayColorVariability = { f2vt(0.8f*255.0f), f2vt(0.0f), f2vt(0.3f*255.0f) };
+	// Creates the particle colors.
+	Vec3 fParticleInitialColour(f2vt(0.6f*255.0f), f2vt(0.5f*255.0f), f2vt(0.5f*255.0f));
+	Vec3 fParticleInitialColourVariability(f2vt(0.2f*255.0f), f2vt(0.2f*255.0f), f2vt(0.2f*255.0f));
 	
-	VECTOR3 ParticleEndColor = { f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
-	VECTOR3 ParticleEndColorVariability = { f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
+	Vec3 fParticleHalfwayColour(f2vt(1.0f*255.0f), f2vt(0.0f), f2vt(0.0f));
+	Vec3 fParticleHalfwayColourVariability(f2vt(0.8f*255.0f), f2vt(0.0f), f2vt(0.3f*255.0f));
 	
-	VERTTYPE randomvalue = f2vt(rand_float());
-	the_particle->Color.x = the_particle->Initial_Color.x = clamp(ParticleInitialColor.x + VERTTYPEMUL(ParticleInitialColorVariability.x,randomvalue));
-	the_particle->Color.y = the_particle->Initial_Color.y = clamp(ParticleInitialColor.y + VERTTYPEMUL(ParticleInitialColorVariability.y,randomvalue));
-	the_particle->Color.z = the_particle->Initial_Color.z = clamp(ParticleInitialColor.z + VERTTYPEMUL(ParticleInitialColorVariability.z,randomvalue));
+	Vec3 fParticleEndColour(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
+	Vec3 fParticleEndColourVariability(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
 	
-	t = rand_float();
-	the_particle->Halfway_Color.x = clamp(ParticleHalfwayColor.x + VERTTYPEMUL(f2vt(t),ParticleHalfwayColorVariability.x));
-	t = rand_float();
-	the_particle->Halfway_Color.y = clamp(ParticleHalfwayColor.y + VERTTYPEMUL(f2vt(t),ParticleHalfwayColorVariability.y));
-	t = rand_float();
-	the_particle->Halfway_Color.z = clamp(ParticleHalfwayColor.z + VERTTYPEMUL(f2vt(t),ParticleHalfwayColorVariability.z));
+	VERTTYPE fRndValue = f2vt(RandFloat());
+	pParticle->m_fColour.x = pParticle->m_fInitialColour.x = Clamp(fParticleInitialColour.x + VERTTYPEMUL(fParticleInitialColourVariability.x,fRndValue));
+	pParticle->m_fColour.y = pParticle->m_fInitialColour.y = Clamp(fParticleInitialColour.y + VERTTYPEMUL(fParticleInitialColourVariability.y,fRndValue));
+	pParticle->m_fColour.z = pParticle->m_fInitialColour.z = Clamp(fParticleInitialColour.z + VERTTYPEMUL(fParticleInitialColourVariability.z,fRndValue));
+
+	fRndFloat = RandFloat();
+	pParticle->m_fHalfwayColour.x = Clamp(fParticleHalfwayColour.x + VERTTYPEMUL(f2vt(fRndFloat), fParticleHalfwayColourVariability.x));
+	fRndFloat = RandFloat();
+	pParticle->m_fHalfwayColour.y = Clamp(fParticleHalfwayColour.y + VERTTYPEMUL(f2vt(fRndFloat), fParticleHalfwayColourVariability.y));
+	fRndFloat = RandFloat();
+	pParticle->m_fHalfwayColour.z = Clamp(fParticleHalfwayColour.z + VERTTYPEMUL(f2vt(fRndFloat), fParticleHalfwayColourVariability.z));
 	
-	t = rand_float();
-	the_particle->End_Color.x = clamp(ParticleEndColor.x + VERTTYPEMUL(f2vt(t),ParticleEndColorVariability.x));
-	t = rand_float();
-	the_particle->End_Color.y = clamp(ParticleEndColor.y + VERTTYPEMUL(f2vt(t),ParticleEndColorVariability.y));
-	t = rand_float();
-	the_particle->End_Color.z = clamp(ParticleEndColor.z + VERTTYPEMUL(f2vt(t),ParticleEndColorVariability.z));
+	fRndFloat = RandFloat();
+	pParticle->m_fEndColor.x = Clamp(fParticleEndColour.x + VERTTYPEMUL(f2vt(fRndFloat), fParticleEndColourVariability.x));
+	fRndFloat = RandFloat();
+	pParticle->m_fEndColor.y = Clamp(fParticleEndColour.y + VERTTYPEMUL(f2vt(fRndFloat), fParticleEndColourVariability.y));
+	fRndFloat = RandFloat();
+	pParticle->m_fEndColor.z = Clamp(fParticleEndColour.z + VERTTYPEMUL(f2vt(fRndFloat), fParticleEndColourVariability.z));
 	
-	/*
-	 Creates the particle size using a perturbation.
-	 */
-	VERTTYPE particle_size = f2vt(2.0f);
-	VERTTYPE particle_size_variation = f2vt(1.5f);
-	t = rand_float();
-	the_particle->size = particle_size + VERTTYPEMUL(f2vt(t),particle_size_variation);
+	// Creates the particle size using a perturbation.
+	VERTTYPE fParticleSize = f2vt(2.0f);
+	VERTTYPE fParticleSizeVariation = f2vt(1.5f);
+	fRndFloat = RandFloat();
+	pParticle->m_fSize = fParticleSize + VERTTYPEMUL(f2vt(fRndFloat), fParticleSizeVariation);
 }
 
 /*!****************************************************************************
@@ -750,82 +598,41 @@ void spawn_particle(particle *the_particle)
  @Description	Renders the specified set of particles, optionally using the
  reflection color.
  ******************************************************************************/
-void render_particle(int NmbrOfParticles, bool bReflect)
+void RenderParticle(int i32ParticleNo, bool bReflect)
 {
-	if(!bUsePointSprites)
-	{
-		/*
-		 If we are not using point sprites,
-		 draw the regular particles geometry.
-		 */
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3,VERTTYPEENUM,sizeof(SVtx),&ParticleVTXBuf[0].x);
-		
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2,GL_BYTE,sizeof(SVtx),&ParticleVTXBuf[0].u);
-		
-		glEnableClientState(GL_COLOR_ARRAY);
-		if(bReflect)
-		{
-	        glColorPointer(4,GL_UNSIGNED_BYTE,sizeof(SColors),&ReflectColor[0].r);
-		}
-		else
-		{
-			glColorPointer(4,GL_UNSIGNED_BYTE,sizeof(SColors),&NormalColor[0].r);
-		}
-		
-		glDrawElements(GL_TRIANGLES, NmbrOfParticles*6, GL_UNSIGNED_SHORT, &ParticleINDXBuf[0] );
-		
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
-	}
-#ifdef GL_OES_VERSION_1_1
-	else
-	{
-		/*
-		 If point sprites are availables,
-		 use them to draw the particles.
-		 */
-		glBindBuffer(GL_ARRAY_BUFFER, iVertVboID);
+	//	If point sprites are availables, use them to draw the particles.
+	glBindBuffer(GL_ARRAY_BUFFER, m_i32VertVboID);
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3,VERTTYPEENUM,sizeof(SVtxPointSprite),0);
 		
-		glTexEnvf( GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE );
+	glTexEnvf( GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE );
 		
 		glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
 		glPointSizePointerOES(VERTTYPEENUM,sizeof(SVtxPointSprite),(GLvoid*) (sizeof(VERTTYPE)*3));
 		
-#ifndef PVRTFIXEDPOINTENABLE
-		float coefs[4] = { 0, 0, point_attenuation_coef, 0 };
-		glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION,coefs);
+#ifndef PVRT_FIXED_POINT_ENABLE
+	float fCoefs[4] = { 0, 0, m_fPointAttenuationCoef, 0 };
 #else
-		// Note: point_attenuation_coef will be too small to represent as a fixed point number,
+	// Note: m_fPointAttenuationCoef will be too small to represent as a fixed point number,
 		// So use an approximation to the attenuation (fixed attenuation of 0.01) instead.
-		VERTTYPE coefs[4] = { f2vt(0.01f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
-		glPointParametervf(GL_POINT_DISTANCE_ATTENUATION,coefs);
+	VERTTYPE fCoefs[4] = { f2vt(0.01f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f) };
 #endif
-		glEnableClientState(GL_COLOR_ARRAY);
-		if(bReflect)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, iColBVboID);
-			glColorPointer(4,GL_UNSIGNED_BYTE,0,0);
-		}
-		else
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, iColAVboID);
-			glColorPointer(4,GL_UNSIGNED_BYTE,0,0);
-		}
+
+	glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, fCoefs);
+
+	glEnableClientState(GL_COLOR_ARRAY);
+
+	glBindBuffer(GL_ARRAY_BUFFER, bReflect ? m_i32ColBVboID : m_i32ColAVboID);
+
+	glColorPointer(4,GL_UNSIGNED_BYTE,0,0);
 		
-		glDrawArrays(GL_POINTS, 0, NmbrOfParticles);
+	glDrawArrays(GL_POINTS, 0, i32ParticleNo);
 		
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
-		glDisableClientState(GL_COLOR_ARRAY);
-	}
-#endif
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
+	glDisableClientState(GL_COLOR_ARRAY);
 }
 
 /*!****************************************************************************
@@ -834,16 +641,12 @@ void render_particle(int NmbrOfParticles, bool bReflect)
  @Return		VERTTYPE	clamped number
  @Description	Clamps the argument to 0-255.
  ******************************************************************************/
-VERTTYPE clamp(VERTTYPE X)
+VERTTYPE Clamp(VERTTYPE X)
 {
 	if (X<f2vt(0.0f))
-	{
 		X=f2vt(0.0f);
-	}
 	else if(X>f2vt(255.0f))
-	{
 		X=f2vt(255.0f);
-	}
 	
 	return X;
 }
@@ -852,43 +655,21 @@ VERTTYPE clamp(VERTTYPE X)
  @Function		render_floor
  @Description	Renders the floor as a quad.
  ******************************************************************************/
-void render_floor()
+void RenderFloor()
 {
-#ifndef GL_OES_VERSION_1_1
-	/*
-	 If we run OpenGL ES 1.1,
-	 draw the floor using vertex buffers.
-	 */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3,VERTTYPEENUM,0,floor_quad_verts);
+	// Draw the floor using regular geometry for the quad.
+	glBindBuffer(GL_ARRAY_BUFFER, m_i32QuadVboID);
 	
+	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2,VERTTYPEENUM,0,floor_quad_uvs);
 	
-	glColor4f(f2vt(1), f2vt(1), f2vt(1), f2vt(0.5));
-	
-	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
-	
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-#else
-	/*
-	 Draw the floor using regular geometry for the quad.
-	 */
-	glBindBuffer(GL_ARRAY_BUFFER, iQuadVboID);
-	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3,VERTTYPEENUM,sizeof(SVtx),0);
-	
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2,GL_BYTE,sizeof(SVtx),(const GLvoid*) (3*sizeof(VERTTYPE)));
 	
-	glColor4f(f2vt(1), f2vt(1), f2vt(1), f2vt(0.5));
-	
 	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-#endif
 }
 
 

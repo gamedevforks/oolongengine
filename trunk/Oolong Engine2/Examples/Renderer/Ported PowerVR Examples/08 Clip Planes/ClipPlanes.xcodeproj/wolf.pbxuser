@@ -23,7 +23,7 @@
 			1D6058900D05DD3D006BFB54 /* Skeleton */,
 		);
 		breakpoints = (
-			79E81B040DFCDA4000592D01 /* Application.mm:324 */,
+			79E81B040DFCDA4000592D01 /* Application.mm:318 */,
 		);
 		codeSenseManager = 79235BFD0DAD053A00F918F8 /* Code sense */;
 		executables = (
@@ -59,7 +59,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					994,
 					20,
 					48,
 					43,
@@ -76,12 +76,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249499636;
-			PBXWorkspaceStateSaveDate = 249499636;
+			PBXPerProjectTemplateStateSaveDate = 251962471;
+			PBXWorkspaceStateSaveDate = 251962471;
 		};
 		perUserProjectItems = {
-			79317C650EDC4E8000247E3D /* PBXTextBookmark */ = 79317C650EDC4E8000247E3D /* PBXTextBookmark */;
-			795AC83B0EDF102C004CF7D4 /* PBXTextBookmark */ = 795AC83B0EDF102C004CF7D4 /* PBXTextBookmark */;
+			79832DBA0F04A6F9000F58D6 /* PBXTextBookmark */ = 79832DBA0F04A6F9000F58D6 /* PBXTextBookmark */;
+			79832DBB0F04A6F9000F58D6 /* PBXTextBookmark */ = 79832DBB0F04A6F9000F58D6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -137,33 +137,31 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {600, 5082}}";
-			sepNavSelRange = "{3119, 1}";
-			sepNavVisRange = "{3022, 314}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 6146}}";
+			sepNavSelRange = "{2529, 0}";
+			sepNavVisRange = "{2662, 969}";
 			sepNavWindowFrame = "{{411, 79}, {821, 781}}";
 		};
 	};
-	79317C650EDC4E8000247E3D /* PBXTextBookmark */ = {
+	79832DBA0F04A6F9000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: request for member 'ptr' in 'LightPosition', which is of non-class type 'GLfloat [4]'";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 160;
+		rType = 1;
+	};
+	79832DBB0F04A6F9000F58D6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 117";
-		rLen = 1;
-		rLoc = 3119;
+		name = "Application.mm: 93";
+		rLen = 0;
+		rLoc = 2529;
 		rType = 0;
-		vrLen = 316;
-		vrLoc = 3022;
+		vrLen = 969;
+		vrLoc = 2662;
 	};
-	795AC83B0EDF102C004CF7D4 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 117";
-		rLen = 1;
-		rLoc = 3119;
-		rType = 0;
-		vrLen = 314;
-		vrLoc = 3022;
-	};
-	79E81B040DFCDA4000592D01 /* Application.mm:324 */ = {
+	79E81B040DFCDA4000592D01 /* Application.mm:318 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -175,9 +173,9 @@
 		functionName = "SetupUserClipPlanes()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 324;
+		lineNumber = 318;
 		location = ClipPlanes;
-		modificationTime = 249499679.149747;
+		modificationTime = 251963094.770569;
 		state = 2;
 	};
 }

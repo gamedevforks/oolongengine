@@ -33,10 +33,6 @@ subject to the following restrictions:
 #include <stdio.h>
 #include <sys/time.h>
 
-#include "Media/balloon.h"
-
-
-
 CDisplayText * AppDisplayText;
 CTexture * Textures;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
@@ -62,27 +58,30 @@ float frameRate;
 #define PI 3.14159f
 #endif
 
-/* Texture IDs */
-GLuint balloonTex;
-GLuint skyboxTex[6];
+// OpenGL handles for textures and VBOs
+GLuint m_ui32BalloonTex;
+GLuint m_ui32SkyboxTex[6];
+
+GLuint*	m_puiVbo;
+GLuint*	m_puiIndexVbo;
 
 /* Print3D, Extension and POD Class Objects */
-CPODScene		g_sScene;
+CPVRTModelPOD *m_Scene;
 
 /* View and Projection Matrices */
-MATRIX	g_mView, g_mProj;
+MATRIX	m_mView, m_mProj;
 
 /* Skybox */
 VERTTYPE* g_skyboxVertices;
 VERTTYPE* g_skyboxUVs;
 
 /* View Variables */
-VERTTYPE fViewAngle;
-VERTTYPE fViewDistance, fViewAmplitude, fViewAmplitudeAngle;
-VERTTYPE fViewUpDownAmplitude, fViewUpDownAngle;
+VERTTYPE m_fViewAngle;
+VERTTYPE m_fViewDistance, m_fViewAmplitude, m_fViewAmplitudeAngle;
+VERTTYPE m_fViewUpDownAmplitude, m_fViewUpDownAngle;
 
 /* Vectors for calculating the view matrix and saving the camera position*/
-VECTOR3 vTo, vUp, vCameraPosition;
+VECTOR3 m_fCameraTo, m_fCameraUp, m_fCameraPos;
 
 /****************************************************************************
  ** Function Definitions
@@ -93,6 +92,7 @@ void DrawSkybox();
 void DrawBalloon();
 void CreateSkybox(float scale, bool adjustUV, int textureSize, VERTTYPE** Vertices, VERTTYPE** UVs);
 void DestroySkybox(VERTTYPE* Vertices, VERTTYPE* UVs);
+void LoadVbos();
 
 
 bool CShell::InitApplication()
@@ -104,53 +104,62 @@ bool CShell::InitApplication()
 		printf("Display text textures loaded\n");
 
 	/* Init values to defaults */
-	fViewAngle = PIOVERTWO;
+	m_fViewAngle = PIOVERTWO;
 	
-	fViewDistance = f2vt(100.0f);
-	fViewAmplitude = f2vt(60.0f);
-	fViewAmplitudeAngle = f2vt(0.0f);
+	m_fViewDistance = f2vt(100.0f);
+	m_fViewAmplitude = f2vt(60.0f);
+	m_fViewAmplitudeAngle = f2vt(0.0f);
 	
-	fViewUpDownAmplitude = f2vt(50.0f);
-	fViewUpDownAngle = f2vt(0.0f);
+	m_fViewUpDownAmplitude = f2vt(50.0f);
+	m_fViewUpDownAngle = f2vt(0.0f);
 	
-	vTo.x = f2vt(0);
-	vTo.y = f2vt(0);
-	vTo.z = f2vt(0);
+        m_puiVbo = 0;
+	m_puiIndexVbo = 0;
 	
-	vUp.x = f2vt(0);
-	vUp.y = f2vt(1);
-	vUp.z = f2vt(0);
+	m_fCameraTo.x = f2vt(0);
+	m_fCameraTo.y = f2vt(0);
+	m_fCameraTo.z = f2vt(0);
 	
-	g_sScene.ReadFromMemory(c_BALLOON_H);
+	m_fCameraUp.x = f2vt(0);
+	m_fCameraUp.y = f2vt(1);
+	m_fCameraUp.z = f2vt(0);
 	
+	m_Scene = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
+
+	/*
+		Loads the scene from the .pod file into a CPVRTModelPOD object.
+		We could also export the scene as a header file and
+		load it with ReadFromMemory().
+	*/
 	char *buffer = new char[2048];
-	
 	GetResourcePathASCII(buffer, 2048);
 
-//	NSString* readPath = [[NSBundle mainBundle] resourcePath];
-//	[readPath getCString:buffer maxLength:2048 encoding:NSASCIIStringEncoding];
-	
-	int		i;
-	
 	/* Gets the Data Path */
 	char		*filename = new char[2048];
+	sprintf(filename, "%s/Balloon_float.pod", buffer);
+	if(!m_Scene->ReadFromFile(filename))
+	   return false;
+
+	int		i;
 	
 	/******************************
 	 ** Create Textures           **
 	 *******************************/
 	for (i=0; i<6; i++)
 	{
+		memset(filename, 0, 2048 * sizeof(char));
 		sprintf(filename, "%s/skybox%d.pvr", buffer, (i+1));
-		if(!Textures->LoadTextureFromPVR(filename, &skyboxTex[i]))
+		if(!Textures->LoadTextureFromPVR(filename, &m_ui32SkyboxTex[i]))
 		{
 			printf("**ERROR** Failed to load texture for skybox.\n");
 		}
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
-	
+
+	memset(filename, 0, 2048 * sizeof(char));
 	sprintf(filename, "%s/balloon.pvr", buffer);
-	if(!Textures->LoadTextureFromPVR(filename, &balloonTex))
+	if(!Textures->LoadTextureFromPVR(filename, &m_ui32BalloonTex))
 	{
 		printf("**ERROR** Failed to load texture for Background.\n");
 	}
@@ -159,6 +168,10 @@ bool CShell::InitApplication()
 	
 	delete [] filename;
 	delete [] buffer;
+	
+	//	Initialize VBO data
+	LoadVbos();
+
 	
 	/*********************/
 	/* Create the skybox */
@@ -170,11 +183,11 @@ bool CShell::InitApplication()
 	 **********************/
 	
 	/* Projection */
-	MatrixPerspectiveFovRH(g_mProj, f2vt(PI / 6), f2vt(CAM_ASPECT), f2vt(CAM_NEAR), f2vt(CAM_FAR), true);
+	MatrixPerspectiveFovRH(m_mProj, f2vt(PI / 6), f2vt(CAM_ASPECT), f2vt(CAM_NEAR), f2vt(CAM_FAR), true);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	
-	glMultMatrixf(g_mProj.f);
+	glMultMatrixf(m_mProj.f);
 	
 	/******************************
 	 ** GENERIC RENDER STATES     **
@@ -194,7 +207,10 @@ bool CShell::InitApplication()
 	
 	/* Define front faces */
 	glFrontFace(GL_CW);
-	
+
+	// Disable Blending
+	glDisable(GL_BLEND);
+		
 	/* Enables texture clamping */
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
@@ -231,9 +247,56 @@ bool CShell::InitApplication()
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
 	
+	delete [] filename;
+	delete [] buffer;
 	
 	return true;
 }
+
+void LoadVbos()
+{
+	if(!m_puiVbo)
+		m_puiVbo = new GLuint[m_Scene->nNumMesh];
+
+	if(!m_puiIndexVbo)
+		m_puiIndexVbo = new GLuint[m_Scene->nNumMesh];
+
+	/*
+		Load vertex data of all meshes in the scene into VBOs
+
+		The meshes have been exported with the "Interleave Vectors" option,
+		so all data is interleaved in the buffer at pMesh->pInterleaved.
+		Interleaving data improves the memory access pattern and cache efficiency,
+		thus it can be read faster by the hardware.
+	*/
+
+	glGenBuffers(m_Scene->nNumMesh, m_puiVbo);
+
+	for(unsigned int i = 0; i < m_Scene->nNumMesh; ++i)
+	{
+		// Load vertex data into buffer object
+		SPODMesh& Mesh = m_Scene->pMesh[i];
+		unsigned int uiSize = Mesh.nNumVertex * Mesh.sVertex.nStride;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[i]);
+		glBufferData(GL_ARRAY_BUFFER, uiSize, Mesh.pInterleaved, GL_STATIC_DRAW);
+
+		// Load index data into buffer object if available
+		m_puiIndexVbo[i] = 0;
+
+		if(Mesh.sFaces.pData)
+		{
+			glGenBuffers(1, &m_puiIndexVbo[i]);
+			uiSize = PVRTModelPODCountIndices(Mesh) * sizeof(GLshort);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[i]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, Mesh.sFaces.pData, GL_STATIC_DRAW);
+		}
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
 
 bool CShell::QuitApplication()
 {
@@ -243,11 +306,15 @@ bool CShell::QuitApplication()
 	
 	int i;
 	
+	delete[] m_puiVbo;
+	delete[] m_puiIndexVbo;
+	
 	/* Release all Textures */
-	Textures->ReleaseTexture(balloonTex);
-	for (i = 0; i < 6; i++)
+	Textures->ReleaseTexture(m_ui32BalloonTex);
+
+		for (i = 0; i < 6; i++)
 	{
-		Textures->ReleaseTexture(skyboxTex[i]);
+		Textures->ReleaseTexture(m_ui32SkyboxTex[i]);
 	}
 	
 	/* Destroy the skybox */
@@ -255,7 +322,7 @@ bool CShell::QuitApplication()
 	
 	delete Textures;
 	
-	g_sScene.Destroy();
+	m_Scene->Destroy();
 
 	return true;
 }
@@ -299,11 +366,23 @@ bool CShell::RenderScene()
 	/* Calculate the model view matrix turning around the balloon */
 	ComputeViewMatrix();
 	
-	/* Draw the skybox */
+	// Enable States
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	// Draw the skybox
 	DrawSkybox();
 	
-	/* Draw the balloon */
+	// The balloon has normals
+	glEnableClientState(GL_NORMAL_ARRAY);
+
+	// Draw the balloon
 	DrawBalloon();
+	
+	// Enable States
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("Skybox", "Skybox with PVRTC", eDisplayTextLogoIMG);
@@ -319,31 +398,27 @@ bool CShell::RenderScene()
  *******************************************************************************/
 void ComputeViewMatrix()
 {
-	VECTOR3 vFrom;
+	// Calculate the distance to balloon
+	VERTTYPE fDistance = m_fViewDistance + VERTTYPEMUL(m_fViewAmplitude, f2vt(sin(m_fViewAmplitudeAngle)));
+	fDistance = VERTTYPEMUL(fDistance, f2vt(0.2f));
+	m_fViewAmplitudeAngle += 0.004f;
 	
-	/* Calculate the distance to balloon */
-	VERTTYPE distance = fViewDistance + VERTTYPEMUL(fViewAmplitude, sin(fViewAmplitudeAngle));
-	distance = VERTTYPEDIV(distance, f2vt(5.0f));
-	fViewAmplitudeAngle += f2vt(.004f);
+	// Calculate the vertical position of the camera
+	VERTTYPE fUpdown = VERTTYPEMUL(m_fViewUpDownAmplitude, f2vt(sin(m_fViewUpDownAngle)));
+	fUpdown = VERTTYPEMUL(fUpdown, f2vt(0.2f));
+	m_fViewUpDownAngle += 0.005f;
 	
-	/* Calculate the vertical position of the camera */
-	VERTTYPE updown = VERTTYPEMUL(fViewUpDownAmplitude, sin(fViewUpDownAngle));
-	updown = VERTTYPEDIV(updown, f2vt(5.0f));
-	fViewUpDownAngle += f2vt(0.005f);
+	// Calculate the angle of the camera around the balloon
+	m_fCameraPos.x = VERTTYPEMUL(fDistance, f2vt(cos(m_fViewAngle)));
+	m_fCameraPos.y = fUpdown;
+	m_fCameraPos.z = VERTTYPEMUL(fDistance, f2vt(sin(m_fViewAngle)));
 	
-	/* Calculate the angle of the camera around the balloon */
-	vFrom.x = VERTTYPEMUL(distance, cos(fViewAngle));
-	vFrom.y = updown;
-	vFrom.z = VERTTYPEMUL(distance, sin(fViewAngle));
-	fViewAngle += f2vt(0.003f);
+	m_fViewAngle += 0.003f;
 	
 	/* Compute and set the matrix */
-	MatrixLookAtRH(g_mView, vFrom, vTo, vUp);
+	MatrixLookAtRH(m_mView, m_fCameraPos, m_fCameraTo, m_fCameraUp);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(g_mView.f);
-	
-	/* Remember the camera position to draw the skybox around it */
-	vCameraPosition = vFrom;
+	glLoadMatrixf(m_mView.f);
 }
 
 /*******************************************************************************
@@ -358,32 +433,24 @@ void DrawSkybox()
 	/* Draw the skybox around the camera position */
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glTranslatef(-vCameraPosition.x, -vCameraPosition.y, -vCameraPosition.z);
-	
-	/* Disable lighting */
+	glTranslatef(-m_fCameraPos.x, -m_fCameraPos.y, -m_fCameraPos.z);
+
+	// Disable lighting
 	glDisable(GL_LIGHTING);
 	
 	/* Enable backface culling for skybox; need to ensure skybox faces are set up properly */
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	
-	/* Enable States */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	
-	for (int i = 0; i<6; i++)
+	for(int i = 0; i < 6; ++i)
 	{
 		/* Set Data Pointers */
-		glBindTexture(GL_TEXTURE_2D, skyboxTex[i]);
+		glBindTexture(GL_TEXTURE_2D, m_ui32SkyboxTex[i]);
 		glVertexPointer(3, VERTTYPEENUM, sizeof(VERTTYPE)*3, &g_skyboxVertices[i*4*3]);
 		glTexCoordPointer(2, VERTTYPEENUM, sizeof(VERTTYPE)*2, &g_skyboxUVs[i*4*2]);
 		/* Draw */
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
-	
-	/* Disable States */
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	glPopMatrix();
 }
@@ -398,7 +465,7 @@ void DrawBalloon()
 	glPushMatrix();
 	
 	MATRIX worldMatrix;
-	g_sScene.GetWorldMatrix(worldMatrix, g_sScene.pNode[0]);
+	m_Scene->GetWorldMatrix(worldMatrix, m_Scene->pNode[0]);
 	glMultMatrixf(worldMatrix.f);
 	
 	/* Modulate with vertex color */
@@ -408,32 +475,28 @@ void DrawBalloon()
 	glEnable(GL_LIGHTING);
 	
 	/* Bind the Texture */
-	glBindTexture(GL_TEXTURE_2D, balloonTex);
+	glBindTexture(GL_TEXTURE_2D, m_ui32BalloonTex);
 	
 	/* Enable back face culling */
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 	
-	/* Enable States */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	SPODMesh& Mesh = m_Scene->pMesh[0];
 	
-	/* Set Data Pointers */
-	SPODMesh* mesh = g_sScene.pMesh;
+	// Bind the vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[0]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[0]);
 	
-	// Used to display interleaved geometry
-	glVertexPointer(3, VERTTYPEENUM, mesh->sVertex.nStride, mesh->pInterleaved + (long)mesh->sVertex.pData);
-	glNormalPointer(VERTTYPEENUM, mesh->sNormals.nStride, mesh->pInterleaved + (long)mesh->sNormals.pData);
-	glTexCoordPointer(2, VERTTYPEENUM, mesh->psUVW[0].nStride, mesh->pInterleaved + (long)mesh->psUVW[0].pData);
+	// Setup pointers
+	glVertexPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride, Mesh.sVertex.pData);
+	glTexCoordPointer(2, VERTTYPEENUM, Mesh.psUVW[0].nStride, Mesh.psUVW[0].pData);
+	glNormalPointer(VERTTYPEENUM, Mesh.sNormals.nStride, Mesh.sNormals.pData);
 	
-	/* Draw */
-	glDrawElements(GL_TRIANGLES, mesh->nNumFaces*3, GL_UNSIGNED_SHORT, mesh->sFaces.pData);
+	glDrawElements(GL_TRIANGLES, Mesh.nNumFaces * 3, GL_UNSIGNED_SHORT, 0);
 	
-	/* Disable States */
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	// unbind the vertex buffers as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
 	glPopMatrix();
 }
@@ -454,10 +517,10 @@ void CameraGetMatrix()
 	vUp.y = f2vt(1.0f);
 	vUp.z = f2vt(0.0f);
 	
-	if(g_sScene.nNumCamera)
+	if(m_Scene->nNumCamera)
 	{
 		/* Get Camera data from POD Geometry File */
-		fFOV = g_sScene.GetCameraPos(vFrom, vTo, 0);
+		fFOV = m_Scene->GetCameraPos(vFrom, vTo, 0);
 		fFOV = VERTTYPEMUL(fFOV, f2vt(0.75f));		// Convert from horizontal FOV to vertical FOV (0.75 assumes a 4:3 aspect ratio)
 	}
 	else
@@ -466,10 +529,10 @@ void CameraGetMatrix()
 	}
 	
 	/* View */
-	MatrixLookAtRH(g_mView, vFrom, vTo, vUp);
+	MatrixLookAtRH(m_mView, vFrom, vTo, vUp);
 	
 	/* Projection */
-	MatrixPerspectiveFovRH(g_mProj, fFOV, f2vt(CAM_ASPECT), f2vt(CAM_NEAR), f2vt(CAM_FAR), true);
+	MatrixPerspectiveFovRH(m_mProj, fFOV, f2vt(CAM_ASPECT), f2vt(CAM_NEAR), f2vt(CAM_FAR), true);
 }
 
 /*!***************************************************************************

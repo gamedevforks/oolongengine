@@ -58,7 +58,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					994,
 					20,
 					48,
 					43,
@@ -75,14 +75,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249499498;
-			PBXWorkspaceStateSaveDate = 249499498;
+			PBXPerProjectTemplateStateSaveDate = 251933308;
+			PBXWorkspaceStateSaveDate = 251933308;
 		};
 		perUserProjectItems = {
-			79317BBC0EDBBF2500247E3D /* PBXTextBookmark */ = 79317BBC0EDBBF2500247E3D /* PBXTextBookmark */;
-			79317BBF0EDBBF2500247E3D /* PBXTextBookmark */ = 79317BBF0EDBBF2500247E3D /* PBXTextBookmark */;
-			79317C090EDBC04F00247E3D /* PBXTextBookmark */ = 79317C090EDBC04F00247E3D /* PBXTextBookmark */;
-			795AC7DD0EDF0FCA004CF7D4 /* PBXTextBookmark */ = 795AC7DD0EDF0FCA004CF7D4 /* PBXTextBookmark */;
+			79832CA70F043A80000F58D6 /* PBXTextBookmark */ = 79832CA70F043A80000F58D6 /* PBXTextBookmark */;
+			79832CA80F043A80000F58D6 /* PBXTextBookmark */ = 79832CA80F043A80000F58D6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -146,64 +144,28 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {768, 8036}}";
-			sepNavSelRange = "{8354, 0}";
-			sepNavVisRange = "{8231, 228}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 7994}}";
+			sepNavSelRange = "{8291, 0}";
+			sepNavVisRange = "{7816, 711}";
 			sepNavWindowFrame = "{{436, 77}, {821, 781}}";
 		};
 	};
-	79317BBC0EDBBF2500247E3D /* PBXTextBookmark */ = {
+	79832CA70F043A80000F58D6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 79317BBD0EDBBF2500247E3D /* SimpleGeoTest.H */;
-		name = "SimpleGeoTest.H: 849";
-		rLen = 25;
-		rLoc = 138450;
-		rType = 0;
-		vrLen = 166;
-		vrLoc = 138309;
+		comments = "error: base operand of '->' has non-pointer type 'SLightVars'";
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 1;
+		rLoc = 422;
+		rType = 1;
 	};
-	79317BBD0EDBBF2500247E3D /* SimpleGeoTest.H */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.h;
-		name = SimpleGeoTest.H;
-		path = "/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/05 Eight Point Lights/Media/SimpleGeoTest.H";
-		sourceTree = "<absolute>";
-	};
-	79317BBF0EDBBF2500247E3D /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79317BC00EDBBF2500247E3D /* SimpleGeoTest.H */;
-		name = "SimpleGeoTest.H: 849";
-		rLen = 25;
-		rLoc = 138450;
-		rType = 0;
-		vrLen = 166;
-		vrLoc = 138309;
-	};
-	79317BC00EDBBF2500247E3D /* SimpleGeoTest.H */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.h;
-		name = SimpleGeoTest.H;
-		path = "/Users/wolf/Desktop/Oolong Engine2/Examples/Renderer/Ported PowerVR Examples/05 Eight Point Lights/Media/SimpleGeoTest.H";
-		sourceTree = "<absolute>";
-	};
-	79317C090EDBC04F00247E3D /* PBXTextBookmark */ = {
+	79832CA80F043A80000F58D6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 289";
+		name = "Application.mm: 292";
 		rLen = 0;
-		rLoc = 8354;
+		rLoc = 8291;
 		rType = 0;
-		vrLen = 244;
-		vrLoc = 8231;
-	};
-	795AC7DD0EDF0FCA004CF7D4 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 289";
-		rLen = 0;
-		rLoc = 8354;
-		rType = 0;
-		vrLen = 228;
-		vrLoc = 8231;
+		vrLen = 711;
+		vrLoc = 7816;
 	};
 }

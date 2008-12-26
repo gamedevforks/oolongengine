@@ -27,17 +27,10 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "MemoryManager.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
-
-/* Textures */
-#include "Media/BACK.h"
-#include "Media/Flora.h"
-#include "Media/REFLECT.h"
-
-/* Geometry */
-#include "Media/Vase.h"
 
 #define WIDTH 320
 #define HEIGHT 480
@@ -50,94 +43,52 @@ int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 int frames;
 float frameRate;
 
-// Structure Definitions
+enum EMesh
+{
+	eGlass,
+	eVase
+};
 
-//
-// Defines the format of a header-object as exported by the MAX
-// plugin.
-//
-typedef struct {
-	unsigned int      nNumVertex;
-    unsigned int      nNumFaces;
-    unsigned int      nNumStrips;
-    unsigned int      nFlags;
-    unsigned int      nMaterial;
-    float             fCenter[3];
-    float             *pVertex;
-    float             *pUV;
-    float             *pNormals;
-    float             *pPackedVertex;
-    unsigned int      *pVertexColor;
-    unsigned int      *pVertexMaterial;
-    unsigned short    *pFaces;
-    unsigned short    *pStrips;
-    unsigned short    *pStripLength;
-    struct
-    {
-        unsigned int  nType;
-        unsigned int  nNumPatches;
-        unsigned int  nNumVertices;
-        unsigned int  nNumSubdivisions;
-        float         *pControlPoints;
-        float         *pUVs;
-    } Patch;
-}   HeaderStruct_Mesh;
+// 3D Model
+CPVRTModelPOD	*m_Scene;
 
+// OpenGL handles for textures and VBOs
+GLuint	m_uiBackTex;
+GLuint	m_uiFloraTex;
+GLuint	m_uiReflectTex;
 
-typedef HeaderStruct_Mesh HeaderStruct_Mesh_Type;
+GLuint*	m_puiVbo;
+GLuint*	m_puiIndexVbo;
 
-//
-// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
-// Expects a pointer to the object structure in the header file
-// returns a directly usable geometry in fixed or float format
-// 
-HeaderStruct_Mesh_Type* LoadHeaderObject(const void *headerObj);
+// Array to lookup the textures for each material in the scene
+GLuint*	m_pui32Textures;
 
-//
-// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
-// expects a pointer returned by LoadHeaderObject
-// 
-void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj);
+// Rotation variables
+VERTTYPE m_fAngleX, m_fAngleY;
 
+MATRIX m_mProjection;
+MATRIX m_mView;
 
-/* Mesh pointers */
-HeaderStruct_Mesh_Type *glassMesh;
-HeaderStruct_Mesh_Type *silverMesh;
+// Class for drawing the background
+GLuint	m_uiBackground32Vbo;
+GLsizei m_i32BackgroundStride;
+unsigned char* m_pBackgroundVertexOffset;
+unsigned char* m_pBackgroundTextureOffset;
 
-/* Texture names */
-GLuint					backTexName;
-GLuint					floraTexName;
-GLuint					reflectTexName;
+bool m_bInit;
 
-/* Rotation variables */
-VERTTYPE				fXAng, fYAng;
+VERTTYPE *m_pUVs;
 
 /****************************************************************************
  ** Function Definitions
  ****************************************************************************/
-void RenderObject(HeaderStruct_Mesh_Type *mesh);
-void RenderReflectiveObject(HeaderStruct_Mesh_Type *mesh, MATRIX *pNormalTx);
-void RenderBackground();
+void LoadVbos();
+void DrawMesh(unsigned int ui32MeshID);
+void DrawReflectiveMesh(unsigned int ui32MeshID, MATRIX *pNormalTx);
 
-//
-// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
-// Expects a pointer to the object structure in the header file
-// returns a directly usable geometry in fixed or float format
-// 
-HeaderStruct_Mesh_Type *LoadHeaderObject(const void *headerObj)
-{
-	HeaderStruct_Mesh_Type *new_mesh = new HeaderStruct_Mesh_Type;
-	memcpy (new_mesh,headerObj,sizeof(HeaderStruct_Mesh_Type));
-	return (HeaderStruct_Mesh_Type*) new_mesh;
-}
-//
-// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
-// expects a pointer returned by LoadHeaderObject
-// 
-void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj)
-{
-	delete headerObj;
-}
+void BackGroundDestroy();
+bool BackgroundDraw(const GLuint ui32Texture);
+bool BackgroundInit(bool bRotate);
 
 
 bool CShell::InitApplication()
@@ -148,32 +99,91 @@ bool CShell::InitApplication()
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
 				printf("Display text textures loaded\n");
 
-	/* Init values to defaults */
-	fXAng = 0;
-	fYAng = 0;
+	m_puiVbo = 0;
+	m_puiIndexVbo = 0;
+	m_fAngleX = 0;
+	m_fAngleY = 0;
+
+	m_Scene = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
+	memset(m_Scene, 0, sizeof(CPVRTModelPOD));
+
+	/*
+		Loads the scene from the .pod file into a CPVRTModelPOD object.
+		We could also export the scene as a header file and
+		load it with ReadFromMemory().
+	*/
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
+
+	/* Gets the Data Path */
+	char		*filename = new char[2048];
+	sprintf(filename, "%s/Vase_float.pod", buffer);
+	if(!m_Scene->ReadFromFile(filename))
+	    return false;
+
 	
-	/* Allocate header data */
-	glassMesh	= LoadHeaderObject(&Mesh[M_GLASS]);
-	silverMesh	= LoadHeaderObject(&Mesh[M_SILVER]);
+	MATRIX MyPerspMatrix;
 	
-	MATRIX		MyPerspMatrix;
-	
-	
-	/* Load textures */
-	if (!Textures->LoadTextureFromPointer((void*)BACK,&backTexName))
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/Backgrnd.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiBackTex))
 		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	if (!Textures->LoadTextureFromPointer((void*)Flora,&floraTexName))
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/Flora.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiFloraTex))
 		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	if (!Textures->LoadTextureFromPointer((void*)REFLECT,&reflectTexName))
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/Reflection.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiReflectTex))
 		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	
+	//	Initialize VBO data
+	LoadVbos();
+	
+	m_bInit = false;
+	
+	// Initialize Background
+	if(BackgroundInit(1) != true)
+		return false;
+
+
+	/*
+		Build an array to map the textures within the pod file
+		to the textures we loaded earlier.
+	*/
+
+	m_pui32Textures = new GLuint[m_Scene->nNumMaterial];
+
+	for(unsigned int i = 0; i < m_Scene->nNumMaterial; ++i)
+	{
+		m_pui32Textures[i] = 0;
+		SPODMaterial* pMaterial = &m_Scene->pMaterial[i];
+
+		if(!strcmp(pMaterial->pszName, "Flora"))
+			m_pui32Textures[i] = m_uiFloraTex;
+		else if(!strcmp(pMaterial->pszName, "Reflection"))
+			m_pui32Textures[i] = m_uiReflectTex;
+	}
+	
+	// pre-allocate memory for the vase for UVs of meshes
+	// this is used in the ReflectiveMesh drawcall
+	// moved it up here because it slowed down the app substantially
+	unsigned int ui32MeshID = m_Scene->pNode[eVase].nIdx;
+	
+	// 
+	SPODMesh& Mesh = m_Scene->pMesh[ui32MeshID];
+	
+	// 	
+	m_pUVs = new VERTTYPE[2 * Mesh.nNumVertex];
 	
 	/* Calculate projection matrix */
 	glMatrixMode(GL_PROJECTION);
@@ -184,24 +194,91 @@ bool CShell::InitApplication()
 	/* Enable texturing */
 	glEnable(GL_TEXTURE_2D);
 	
+	// Setup clear colour
+	glClearColor(f2vt(1.0f),f2vt(1.0f),f2vt(1.0f),f2vt(1.0f));
+
+	// Set blend mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	delete [] filename;
+	delete [] buffer;
+
 	return true;
+}
+
+/*!****************************************************************************
+ @Function		LoadVbos
+ @Description	Loads the mesh data required for this training course into
+				vertex buffer objects
+******************************************************************************/
+void LoadVbos()
+{
+	if(!m_puiVbo)
+		m_puiVbo = new GLuint[m_Scene->nNumMesh];
+
+	if(!m_puiIndexVbo)
+		m_puiIndexVbo = new GLuint[m_Scene->nNumMesh];
+
+	/*
+		Load vertex data of all meshes in the scene into VBOs
+
+		The meshes have been exported with the "Interleave Vectors" option,
+		so all data is interleaved in the buffer at pMesh->pInterleaved.
+		Interleaving data improves the memory access pattern and cache efficiency,
+		thus it can be read faster by the hardware.
+	*/
+
+	glGenBuffers(m_Scene->nNumMesh, m_puiVbo);
+
+	for(unsigned int i = 0; i < m_Scene->nNumMesh; ++i)
+	{
+		// Load vertex data into buffer object
+		SPODMesh& Mesh = m_Scene->pMesh[i];
+		unsigned int uiSize = Mesh.nNumVertex * Mesh.sVertex.nStride;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[i]);
+		glBufferData(GL_ARRAY_BUFFER, uiSize, Mesh.pInterleaved, GL_STATIC_DRAW);
+
+		// Load index data into buffer object if available
+		m_puiIndexVbo[i] = 0;
+
+		if(Mesh.sFaces.pData)
+		{
+			glGenBuffers(1, &m_puiIndexVbo[i]);
+			uiSize = PVRTModelPODCountIndices(Mesh) * sizeof(GLshort);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[i]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, Mesh.sFaces.pData, GL_STATIC_DRAW);
+		}
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 bool CShell::QuitApplication()
 {
-    /* Release header data */
-	UnloadHeaderObject(glassMesh);
-	UnloadHeaderObject(silverMesh);
+
 	
 	/* Release textures */
-	Textures->ReleaseTexture(backTexName);
-	Textures->ReleaseTexture(floraTexName);
-	Textures->ReleaseTexture(reflectTexName);
+	Textures->ReleaseTexture(m_uiBackTex);
+	Textures->ReleaseTexture(m_uiFloraTex);
+	Textures->ReleaseTexture(m_uiReflectTex);
+	
+	delete[] m_pui32Textures;
+	m_pui32Textures = 0;
+	
+	delete[] m_puiVbo;
+	delete[] m_puiIndexVbo;
+	delete[] m_pUVs;
 	
 	AppDisplayText->ReleaseTextures();
 	
 	delete AppDisplayText;
 	delete Textures;
+	
+	// Frees the memory allocated for the scene
+	m_Scene->Destroy();
+	free(m_Scene);
 
 	return true;
 }
@@ -225,7 +302,7 @@ bool CShell::UpdateScene()
 	if (TimeInterval) 
 		frameRate = ((float)frames/(TimeInterval));
 	
-	AppDisplayText->DisplayText(0, 12, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
+	AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
 
 	return true;
 }
@@ -239,111 +316,70 @@ bool CShell::RenderScene()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	
 	/* Increase rotation angles */
-	fXAng += VERTTYPEDIV(PI, f2vt(100.0f));
-	fYAng += VERTTYPEDIV(PI, f2vt(150.0f));
+	m_fAngleX += VERTTYPEDIV(PI, f2vt(100.0f));
+	m_fAngleY += VERTTYPEDIV(PI, f2vt(150.0f));
 	
-	if(fXAng >= PI)
-		fXAng -= TWOPI;
+	if(m_fAngleX >= PI)
+		m_fAngleX -= TWOPI;
 	
-	if(fYAng >= PI)
-		fYAng -= TWOPI;
+	if(m_fAngleY >= PI)
+		m_fAngleY -= TWOPI;
 	
-	/* Clear the buffers */
-	glEnable(GL_DEPTH_TEST);
-	glClearColor(1,1,1,0);
+	// Clear the buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	/* Draw the scene */
-	
-	/***************
-	 ** Background **
-	 ***************/
-	/* No need for Z test */
-	glDisable(GL_DEPTH_TEST);
-	
-	/* Set projection matrix to identity (with or without display rotation) for background */
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	
-	/* Set modelview matrix to identity for background */
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	
-	/* Set background texture */
-	glBindTexture(GL_TEXTURE_2D, backTexName);
-	
-	/* Set texture environment mode: use texture directly */
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	
-	/* Render background */
-	RenderBackground();
-	
-	
-	/**********************
-	 ** Reflective silver **
-	 **********************/
+	// Setup the vase rotation
 	
 	/* Calculate rotation matrix */
-	MatrixRotationX(TmpX, fXAng);
-	MatrixRotationY(TmpY, fYAng);
+	MatrixRotationX(TmpX, m_fAngleX);
+	MatrixRotationY(TmpY, m_fAngleY);
 	MatrixMultiply(RotationMatrix, TmpX, TmpY);
 	
-	/* Modelview matrix */
+	// Modelview matrix
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	
 	glTranslatef(f2vt(0.0f), f2vt(0.0f), f2vt(-200.0f));
 	glMultMatrixf(RotationMatrix.f);
 	
-	/* Projection matrix */
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
+	// Draw the scene
 	
-	/* Enable depth test */
+	// draw a background image
+	BackgroundDraw(m_uiBackTex);
+	
+	// Enable client states
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	
-	/* Render front faces only (model has reverse winding) */
-	glCullFace(GL_FRONT);
+	// Draw vase outer
+	glBindTexture(GL_TEXTURE_2D, m_pui32Textures[m_Scene->pNode[eVase].nIdxMaterial]);
+	DrawReflectiveMesh(m_Scene->pNode[eVase].nIdx, &RotationMatrix);
 	
-	/* Set texture and texture env mode */
-	glBindTexture(GL_TEXTURE_2D,reflectTexName);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	
-	/* Render reflective object */
-	RenderReflectiveObject(silverMesh, &RotationMatrix);
-	
-	
-	/*******************
-	 ** See-thru glass **
-	 *******************/
-	
-	/* Don't update Z-buffer */
-	glDepthMask(GL_FALSE);
-	
-	/* Enable alpha blending */
+	// Draw glass
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	
-	/* Set texture and texture env mode */
-	glBindTexture(GL_TEXTURE_2D, floraTexName);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glBindTexture(GL_TEXTURE_2D, m_pui32Textures[m_Scene->pNode[eGlass].nIdxMaterial]);
 	
-	/* Pass 1: only render back faces (model has reverse winding) */
+	// Pass 1: only render back faces (model has reverse winding)
 	glFrontFace(GL_CW);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	RenderObject(glassMesh);
 	
-	/* Pass 2: only render front faces (model has reverse winding) */
+	DrawMesh(m_Scene->pNode[eGlass].nIdx);
+	
+	// Pass 2: only render front faces (model has reverse winding)
 	glCullFace(GL_FRONT);
-	RenderObject(glassMesh);
+	DrawMesh(m_Scene->pNode[eGlass].nIdx);
 	
-	/* Restore Z-writes */
-	glDepthMask(GL_TRUE);
-	
-	/* Disable alpha blending */
+	// Disable blending as it isn't needed
 	glDisable(GL_BLEND);
 	
+	// Disable client states
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("Vase", "Translucency and reflections", eDisplayTextLogoIMG);
@@ -353,111 +389,205 @@ bool CShell::RenderScene()
 	return true;
 }
 
-
-/*******************************************************************************
- * Function Name  : RenderReflectiveObject
- * Inputs		  : *mesh, *pNormalTx
- * Description    : Code to render the reflective parts of the object
- *******************************************************************************/
-void RenderReflectiveObject(HeaderStruct_Mesh_Type *mesh, MATRIX *pNormalTx)
+/*!****************************************************************************
+ @Function		DrawReflectiveMesh
+ @Input			ui32MeshID ID of mesh to draw
+ @Input			pNormalTx Rotation matrix
+ @Description	Draws a mesh with the reflection
+******************************************************************************/
+void DrawReflectiveMesh(unsigned int ui32MeshID, MATRIX *pNormalTx)
 {
-	VERTTYPE		*uv_transformed = new VERTTYPE[2 * mesh->nNumVertex];
-	VERTTYPE		EnvMapMatrix[16];
+	SPODMesh& Mesh = m_Scene->pMesh[ui32MeshID];
+	
+	// this is so wrong ...	
+//	VERTTYPE		*pUVs = new VERTTYPE[2 * Mesh.nNumVertex];
+	MATRIX		EnvMapMatrix;
 	unsigned int	i;
 	
-	/* Calculate matrix for environment mapping: simple multiply by 0.5 */
-	for (i=0; i<16; i++)
-	{
-		/* Convert matrix to fixed point */
-		EnvMapMatrix[i] = VERTTYPEMUL(pNormalTx->f[i], f2vt(0.5f));
-	}
+	// Calculate matrix for environment mapping: simple multiply by 0.5
+	for(i = 0; i < 16; ++i)
+		EnvMapMatrix.f[i] = VERTTYPEMUL(pNormalTx->f[i], f2vt(0.5f));
+
+	unsigned char* pNormals = Mesh.pInterleaved + (size_t) Mesh.sNormals.pData;
 	
 	/* Calculate UVs for environment mapping */
-	for (i = 0; i < mesh->nNumVertex; i++)
+	for(i = 0; i < Mesh.nNumVertex; ++i)
 	{
-		uv_transformed[2*i] =	VERTTYPEMUL(mesh->pNormals[3*i+0], EnvMapMatrix[0]) +
-		VERTTYPEMUL(mesh->pNormals[3*i+1], EnvMapMatrix[4]) +
-		VERTTYPEMUL(mesh->pNormals[3*i+2], EnvMapMatrix[8]) +
+		VERTTYPE *pVTNormals = (VERTTYPE*) pNormals;
+
+		m_pUVs[2*i] =	VERTTYPEMUL(pVTNormals[0], EnvMapMatrix.f[0]) +
+								VERTTYPEMUL(pVTNormals[1], EnvMapMatrix.f[4]) +
+								VERTTYPEMUL(pVTNormals[2], EnvMapMatrix.f[8]) +
 		f2vt(0.5f);
 		
-		uv_transformed[2*i+1] =	VERTTYPEMUL(mesh->pNormals[3*i+0], EnvMapMatrix[1]) +
-		VERTTYPEMUL(mesh->pNormals[3*i+1], EnvMapMatrix[5]) +
-		VERTTYPEMUL(mesh->pNormals[3*i+2], EnvMapMatrix[9]) +
+		m_pUVs[2*i+1] =	VERTTYPEMUL(pVTNormals[0], EnvMapMatrix.f[1]) +
+								VERTTYPEMUL(pVTNormals[1], EnvMapMatrix.f[5]) +
+								VERTTYPEMUL(pVTNormals[2], EnvMapMatrix.f[9]) +
 		f2vt(0.5f);
+
+		pNormals += Mesh.sNormals.nStride;
 	}
 	
-	/* Set vertex pointer */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, VERTTYPEENUM, 0, mesh->pVertex);
+	// Bind the vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[ui32MeshID]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[ui32MeshID]);
 	
-	/* Set texcoord pointer */
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, VERTTYPEENUM, 0, uv_transformed);
+	// Setup pointers
+	glVertexPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride, Mesh.sVertex.pData);
 	
-	/* Draw object */
-	glDrawElements(GL_TRIANGLES, mesh->nNumFaces*3, GL_UNSIGNED_SHORT, mesh->pFaces);
+	// unbind the vertex buffer as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	
-	/* Restore client states */
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, VERTTYPEENUM, 0, m_pUVs);
 	
-	/* Delete memory */
-	delete[] uv_transformed;
+	glDrawElements(GL_TRIANGLES, Mesh.nNumFaces * 3, GL_UNSIGNED_SHORT, 0);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+//	delete[] pUVs;
+}
+
+/*!****************************************************************************
+ @Function		DrawMesh
+ @Input			ID of mesh to draw
+ @Description	Draws a mesh.
+******************************************************************************/
+void DrawMesh(unsigned int ui32MeshID)
+{
+	SPODMesh& Mesh = m_Scene->pMesh[ui32MeshID];
+	
+	// Bind the vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[ui32MeshID]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[ui32MeshID]);
+	
+	// Setup pointers
+	glVertexPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride, Mesh.sVertex.pData);
+	glTexCoordPointer(2, VERTTYPEENUM, Mesh.psUVW[0].nStride, Mesh.psUVW[0].pData);
+	
+	glDrawElements(GL_TRIANGLES, Mesh.nNumFaces * 3, GL_UNSIGNED_SHORT, 0);
+
+	// unbind the vertex buffers as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 
-/*******************************************************************************
- * Function Name  : RenderObject
- * Inputs		  : *mesh
- * Description    : Code to render an object
- *******************************************************************************/
-void RenderObject(HeaderStruct_Mesh_Type *mesh)
+
+
+void BackgroundDestroy()
 {
-	/* Set vertex pointer */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, VERTTYPEENUM, 0, mesh->pVertex);
-	
-	/* Set texcoord pointer */
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, VERTTYPEENUM, 0, mesh->pUV);
-	
-	/* Draw object */
-	glDrawElements(GL_TRIANGLES, mesh->nNumFaces*3, GL_UNSIGNED_SHORT, mesh->pFaces);
-	
-	/* Restore client states */
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	m_bInit = false;
 }
 
 
-/*******************************************************************************
- * Function Name  : RenderBackground
- * Description    : Code to render a quad background
- *******************************************************************************/
-void RenderBackground()
+bool BackgroundInit(bool bRotate)
 {
-	VERTTYPE BkndVerts[] = {f2vt(-1),f2vt(-1),f2vt(1),
-		f2vt(1),f2vt(-1),f2vt(1),
-		f2vt(-1),f2vt(1),f2vt(1),
-	f2vt(1),f2vt(1),f2vt(1)};
-	VERTTYPE BkndUV[] =	   {f2vt(0.5f/256.0f),		f2vt(0.5f/256.0f),
-		f2vt(1-0.5f/256.0f),	f2vt(0.5f/256.0f),
-		f2vt(0.5f/256.0f),		f2vt(1-0.5f/256.0f),
-	f2vt(1-0.5f/256.0f),	f2vt(1-0.5f/256.0f)};
+	BackgroundDestroy();
+
+	// The vertex data for non-rotated
+	VERTTYPE afVertexData[20] = {f2vt(-1.0f), f2vt(-1.0f), f2vt(1.0f),  // Position
+		f2vt( 0.0f), f2vt( 0.0f),				// Texture coordinates
+		f2vt( 1.0f), f2vt(-1.0f), f2vt(1.0f),
+		f2vt( 1.0f), f2vt( 0.0f),
+		f2vt(-1.0f), f2vt( 1.0f), f2vt(1.0f),
+		f2vt( 0.0f), f2vt( 1.0f),
+		f2vt( 1.0f), f2vt( 1.0f), f2vt(1.0f),
+	f2vt( 1.0f), f2vt( 1.0f)};
 	
-	/* Set vertex pointer */
+	// The vertex data for rotated
+	VERTTYPE afVertexDataRotated[20] = {f2vt(-1.0f), f2vt( 1.0f), f2vt(1.0f),
+		f2vt( 1.0f), f2vt( 1.0f),
+		f2vt(-1.0f), f2vt(-1.0f), f2vt(1.0f),
+		f2vt( 0.0f), f2vt( 1.0f),
+		f2vt( 1.0f), f2vt( 1.0f), f2vt(1.0f),
+		f2vt( 1.0f), f2vt( 0.0f),
+		f2vt( 1.0f), f2vt(-1.0f), f2vt(1.0f),
+	f2vt( 0.0f), f2vt( 0.0f)};
+	
+	
+	glGenBuffers(1, &m_uiBackground32Vbo);
+	
+	unsigned int uiSize = 4 * (sizeof(VERTTYPE) * 5); // 4 vertices * stride (5 verttypes per vertex (3 pos + 2 uv))
+	
+	// Bind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, m_uiBackground32Vbo);
+	
+	// Set the buffer's data
+	glBufferData(GL_ARRAY_BUFFER, uiSize, bRotate ? afVertexDataRotated : afVertexData, GL_STATIC_DRAW);
+	
+	// Setup the vertex and texture data pointers for conveniece
+	m_pBackgroundVertexOffset  = 0;
+	m_pBackgroundTextureOffset = (unsigned char*) (sizeof(VERTTYPE) * 3);
+	
+	// Setup the stride variable
+	m_i32BackgroundStride = sizeof(VERTTYPE) * 5;
+	
+	// All initialised
+	m_bInit = true;
+	
+	// Unbind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	return true;
+}
+
+
+/*!***************************************************************************
+ @Function		Draw
+ @Input			ui32Texture	Texture to use
+ @Return 		PVR_SUCCESS on success
+ @Description	Draws a texture on a quad covering the whole screen.
+ *****************************************************************************/
+bool BackgroundDraw(const GLuint ui32Texture)
+{
+	if(!m_bInit)
+		return false;
+	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, ui32Texture);
+	
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+	
+	// Store matrices and set them to Identity
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	
+	glDisableClientState(GL_COLOR_ARRAY);
+	
+	// Set state
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, VERTTYPEENUM, 0, BkndVerts);
-	
-	/* Set texcoord pointer */
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, VERTTYPEENUM, 0, BkndUV);
 	
-	/* Draw object */
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	// Bind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, m_uiBackground32Vbo);
 	
-	/* Restore client states */
+	// set pointers
+	glVertexPointer(3  ,VERTTYPEENUM,m_i32BackgroundStride, m_pBackgroundTextureOffset);
+	glTexCoordPointer(2,VERTTYPEENUM,m_i32BackgroundStride, m_pBackgroundTextureOffset);
+	
+	// Render geometry
+	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+	
+	// Disable client states
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	// Unbind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	// Recover matrices
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	
+	return true;
 }
 

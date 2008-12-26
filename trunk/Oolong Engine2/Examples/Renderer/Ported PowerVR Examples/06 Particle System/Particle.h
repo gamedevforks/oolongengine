@@ -4,7 +4,7 @@
 
  @Title        Particle class for OGLESParticles.cpp
 
- @Copyright    Copyright (C) 2005 - 2007 by Imagination Technologies Limited.
+ @Copyright    Copyright (C) 2005 - 2008 by Imagination Technologies Limited.
 
  @Platform     Independant
 
@@ -13,82 +13,83 @@
 ******************************************************************************/
 //#include "OGLESTools.h"
 
-#ifndef PVRTFIXEDPOINTENABLE
+#ifndef PVRT_FIXED_POINT_ENABLE
 	#define vt2b(a) (unsigned char) (a)
 #else
 	#define vt2b(a) (unsigned char) (a>>16)
 #endif
 
-
-class particle
+class CParticle
 {
 public:
-	// dynamic properties
-	VECTOR3		Position;
-	VECTOR3		Velocity;
-	VECTOR3		Color;
-	VERTTYPE	age;
+	// Dynamic properties
+	Vec3	m_fPosition;
+	Vec3	m_fVelocity;
+	Vec3	m_fColour;
+	VERTTYPE	m_fAge;
 
-// inherent properties
-	VERTTYPE	lifetime;
-	float		mass;
+	// Inherent properties
+	VERTTYPE	m_fLifeTime;
+	float		m_fMass;
 
-	VERTTYPE	size;
-	
-	VECTOR3		Initial_Color;
-	VECTOR3		Halfway_Color;
-	VECTOR3		End_Color;
+	VERTTYPE	m_fSize;
+
+	Vec3	m_fInitialColour;
+	Vec3	m_fHalfwayColour;
+	Vec3	m_fEndColor;
 
 public:
-	particle() { }		// allow default construct
-	  particle(const VECTOR3 &Pos, const VECTOR3 &Vel, float m, VERTTYPE life) :
-	  Position(Pos), Velocity(Vel), age(f2vt(0)), lifetime(life), mass(m), size(f2vt(0))  { }
+	CParticle() { }	// Allow default construct
+	CParticle(const Vec3 &fPos, const Vec3 &fVel, float fM, VERTTYPE fLife) :  m_fPosition(fPos), 
+																					m_fVelocity(fVel), 
+																					m_fAge(f2vt(0)), 
+																					m_fLifeTime(fLife), 
+																					m_fMass(fM), 
+																					m_fSize(f2vt(0))  { }
 
-	bool step(VERTTYPE delta_t, VECTOR3 &aForce)
+	bool Step(VERTTYPE fDelta_t, Vec3 &aForce)
 	{
-		VECTOR3 Accel;
-		VECTOR3 Force = aForce;
-	
-		if (Position.y < f2vt(0))
+		Vec3 fAccel;
+		Vec3 fForce = aForce;
+
+		if (m_fPosition.y < f2vt(0))
 		{
-			if(delta_t != f2vt(0.0))
+			if(fDelta_t != f2vt(0.0))
 			{
-				//Force.x += f2vt(0.0f);
-				Force.y += VERTTYPEMUL(VERTTYPEMUL(VERTTYPEMUL(f2vt(0.5f),Velocity.y),Velocity.y),f2vt(mass)) + f2vt(9.8f*mass);
-				//Force.z += f2vt(0.0f);
+				fForce.y += VERTTYPEMUL(VERTTYPEMUL(VERTTYPEMUL(f2vt(0.5f),m_fVelocity.y),m_fVelocity.y),f2vt(m_fMass)) + f2vt(9.8f*m_fMass);
 			}
 		}
 
-		VERTTYPE inv_mass = f2vt(1.0f/mass);
-		Accel.x = f2vt(0.0f) + VERTTYPEMUL(Force.x,inv_mass);
-		Accel.y = f2vt(-9.8f) + VERTTYPEMUL(Force.y,inv_mass);
-		Accel.z = f2vt(0.0f) + VERTTYPEMUL(Force.z,inv_mass);
+		VERTTYPE fInvMass = f2vt(1.0f/m_fMass);
+		fAccel.x = f2vt(0.0f) + VERTTYPEMUL(fForce.x,fInvMass);
+		fAccel.y = f2vt(-9.8f) + VERTTYPEMUL(fForce.y,fInvMass);
+		fAccel.z = f2vt(0.0f) + VERTTYPEMUL(fForce.z,fInvMass);
 
-		Velocity.x += VERTTYPEMUL(delta_t,Accel.x);
-		Velocity.y += VERTTYPEMUL(delta_t,Accel.y);
-		Velocity.z += VERTTYPEMUL(delta_t,Accel.z);
-		
-		Position.x += VERTTYPEMUL(delta_t,Velocity.x);
-		Position.y += VERTTYPEMUL(delta_t,Velocity.y);
-		Position.z += VERTTYPEMUL(delta_t,Velocity.z);
-		age += delta_t;
+		m_fVelocity.x += VERTTYPEMUL(fDelta_t,fAccel.x);
+		m_fVelocity.y += VERTTYPEMUL(fDelta_t,fAccel.y);
+		m_fVelocity.z += VERTTYPEMUL(fDelta_t,fAccel.z);
 
-		if(age <= lifetime/2)
+		m_fPosition.x += VERTTYPEMUL(fDelta_t,m_fVelocity.x);
+		m_fPosition.y += VERTTYPEMUL(fDelta_t,m_fVelocity.y);
+		m_fPosition.z += VERTTYPEMUL(fDelta_t,m_fVelocity.z);
+		m_fAge += fDelta_t;
+
+		if(m_fAge <= m_fLifeTime / 2)
 		{
-			VERTTYPE mu = f2vt(vt2f(age) / (vt2f(lifetime)/2.0f));
-			Color.x = VERTTYPEMUL((f2vt(1)-mu),Initial_Color.x) + VERTTYPEMUL(mu,Halfway_Color.x);
-			Color.y = VERTTYPEMUL((f2vt(1)-mu),Initial_Color.y) + VERTTYPEMUL(mu,Halfway_Color.y);
-			Color.z = VERTTYPEMUL((f2vt(1)-mu),Initial_Color.z) + VERTTYPEMUL(mu,Halfway_Color.z);
+			VERTTYPE mu = f2vt(vt2f(m_fAge) / (vt2f(m_fLifeTime)/2.0f));
+			m_fColour.x = VERTTYPEMUL((f2vt(1)-mu),m_fInitialColour.x) + VERTTYPEMUL(mu,m_fHalfwayColour.x);
+			m_fColour.y = VERTTYPEMUL((f2vt(1)-mu),m_fInitialColour.y) + VERTTYPEMUL(mu,m_fHalfwayColour.y);
+			m_fColour.z = VERTTYPEMUL((f2vt(1)-mu),m_fInitialColour.z) + VERTTYPEMUL(mu,m_fHalfwayColour.z);
 		}
 		else
 		{
-			VERTTYPE mu = f2vt((vt2f(age-lifetime)/2.0f) / (vt2f(lifetime)/2.0f));
-			Color.x = VERTTYPEMUL((f2vt(1)-mu),Halfway_Color.x) + VERTTYPEMUL(mu,End_Color.x);
-			Color.y = VERTTYPEMUL((f2vt(1)-mu),Halfway_Color.y) + VERTTYPEMUL(mu,End_Color.y);
-			Color.z = VERTTYPEMUL((f2vt(1)-mu),Halfway_Color.z) + VERTTYPEMUL(mu,End_Color.z);
+			VERTTYPE mu = f2vt((vt2f(m_fAge-m_fLifeTime)/2.0f) / (vt2f(m_fLifeTime)/2.0f));
+			m_fColour.x = VERTTYPEMUL((f2vt(1)-mu),m_fHalfwayColour.x) + VERTTYPEMUL(mu,m_fEndColor.x);
+			m_fColour.y = VERTTYPEMUL((f2vt(1)-mu),m_fHalfwayColour.y) + VERTTYPEMUL(mu,m_fEndColor.y);
+			m_fColour.z = VERTTYPEMUL((f2vt(1)-mu),m_fHalfwayColour.z) + VERTTYPEMUL(mu,m_fEndColor.z);
 		}
 
-		return (age >= lifetime);
+		return (m_fAge >= m_fLifeTime);
 	}
 };
 

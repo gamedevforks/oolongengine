@@ -37,8 +37,10 @@
 		79317CC10EDC4FA500247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317CBB0EDC4FA500247E3D /* utility_impl.cpp */; };
 		795AC8550EDF1043004CF7D4 /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 795AC8510EDF1043004CF7D4 /* mmgr.cpp */; };
 		795AC8560EDF1043004CF7D4 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795AC8540EDF1043004CF7D4 /* readme.txt */; };
+		79832E330F054E87000F58D6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79832E320F054E87000F58D6 /* ResourcePath.mm */; };
+		79832E360F054E9B000F58D6 /* Mallet.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832E340F054E9B000F58D6 /* Mallet.pvr */; };
+		79832E720F05508D000F58D6 /* model_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832E710F05508D000F58D6 /* model_float.pod */; };
 		79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FF470EDF4DF500102B0B /* Timer.mm */; };
-		D246B7480E92F769000E72AE /* model_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = D246B7460E92F769000E72AE /* model_float.pod */; };
 		D24A57640E92AFA70009339C /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = D24A57630E92AFA70009339C /* Application.mm */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +103,10 @@
 		795AC8520EDF1043004CF7D4 /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
 		795AC8530EDF1043004CF7D4 /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		795AC8540EDF1043004CF7D4 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		79832E310F054E87000F58D6 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		79832E320F054E87000F58D6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		79832E340F054E9B000F58D6 /* Mallet.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = Mallet.pvr; path = Media/Mallet.pvr; sourceTree = "<group>"; };
+		79832E710F05508D000F58D6 /* model_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_float.pod; path = Media/model_float.pod; sourceTree = "<group>"; };
 		79F0FF460EDF4DF500102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		79F0FF470EDF4DF500102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,6 +167,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79832E710F05508D000F58D6 /* model_float.pod */,
+				79832E340F054E9B000F58D6 /* Mallet.pvr */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				287ABC9F0D7F541C00CE0163 /* Default.png */,
@@ -184,6 +192,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79832E300F054E87000F58D6 /* Pathes */,
 				79F0FF450EDF4DF500102B0B /* Timing */,
 				795AC84F0EDF1043004CF7D4 /* MemoryManager */,
 				79317CAE0EDC4FA500247E3D /* Math */,
@@ -321,6 +330,16 @@
 			path = ../../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
+		79832E300F054E87000F58D6 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				79832E310F054E87000F58D6 /* ResourcePath.h */,
+				79832E320F054E87000F58D6 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
 		79F0FF450EDF4DF500102B0B /* Timing */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,8 +394,9 @@
 			files = (
 				287ABCA00D7F541C00CE0163 /* Default.png in Resources */,
 				1B26781E0DA2F9B000B24DA5 /* icon.png in Resources */,
-				D246B7480E92F769000E72AE /* model_float.pod in Resources */,
 				795AC8560EDF1043004CF7D4 /* readme.txt in Resources */,
+				79832E360F054E9B000F58D6 /* Mallet.pvr in Resources */,
+				79832E720F05508D000F58D6 /* model_float.pod in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +430,7 @@
 				79317CC10EDC4FA500247E3D /* utility_impl.cpp in Sources */,
 				795AC8550EDF1043004CF7D4 /* mmgr.cpp in Sources */,
 				79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */,
+				79832E330F054E87000F58D6 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,77 +20,24 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
-//#include "Log.h"
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
+#include "Geometry.h"
 #include "UI.h"
+#include "App.h"
+#include "MemoryManager.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
 
-/* Textures */
-#include "Media/LightTex.h"
-#include "Media/GRANITE.h"
-
-/* Geometry */
-#include "Media/SimpleGeoTest.H"
 
 
 CDisplayText * AppDisplayText;
 CTexture * Texture;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
-
-// Structure Definitions
-
-//
-// Defines the format of a header-object as exported by the MAX
-// plugin.
-//
-typedef struct {
-	unsigned int      nNumVertex;
-    unsigned int      nNumFaces;
-    unsigned int      nNumStrips;
-    unsigned int      nFlags;
-    unsigned int      nMaterial;
-    float             fCenter[3];
-    float             *pVertex;
-    float             *pUV;
-    float             *pNormals;
-    float             *pPackedVertex;
-    unsigned int      *pVertexColor;
-    unsigned int      *pVertexMaterial;
-    unsigned short    *pFaces;
-    unsigned short    *pStrips;
-    unsigned short    *pStripLength;
-    struct
-    {
-        unsigned int  nType;
-        unsigned int  nNumPatches;
-        unsigned int  nNumVertices;
-        unsigned int  nNumSubdivisions;
-        float         *pControlPoints;
-        float         *pUVs;
-    } Patch;
-}   HeaderStruct_Mesh;
-
-
-typedef HeaderStruct_Mesh HeaderStruct_Mesh_Type;
-
-//
-// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
-// Expects a pointer to the object structure in the header file
-// returns a directly usable geometry in fixed or float format
-// 
-HeaderStruct_Mesh_Type* LoadHeaderObject(const void *headerObj);
-
-//
-// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
-// expects a pointer returned by LoadHeaderObject
-// 
-void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj);
-
 
 int frames;
 float frameRate;
@@ -98,116 +45,122 @@ float frameRate;
 /****************************************************************************
  ** Defines
  ****************************************************************************/
-#define NUM_LIGHTS_IN_USE	(8)
+const unsigned int g_ui32LightNo = 8;
 
 /****************************************************************************
  ** Structures
  ****************************************************************************/
 struct SLightVars
 {
-	VECTOR4		position;	// GL_LIGHT_POSITION
-	VECTOR4		direction;	// GL_SPOT_DIRECTION
-	VECTOR4		ambient;	// GL_AMBIENT
-	VECTOR4		diffuse;	// GL_DIFFUSE
-	VECTOR4		specular;	// GL_SPECULAR
+	Vec4	Position;	// GL_LIGHT_POSITION
+	Vec4	Direction;	// GL_SPOT_DIRECTION
+	Vec4	Ambient;	// GL_AMBIENT
+	Vec4	Diffuse;	// GL_DIFFUSE
+	Vec4	Specular;	// GL_SPECULAR
 	
-	VECTOR3		vRotationStep;
-	VECTOR3		vRotation;
-	VECTOR3		vRotationCentre;
-	VECTOR3		vPosition;
+	Vec3	vRotationStep;
+	Vec3	vRotationCentre;
+	Vec3	vRotation;
+	Vec3	vPosition;
 };
 
 
-/* Mesh data */
-HeaderStruct_Mesh_Type* Meshes[NUM_MESHES];
-
-/* Texture names */
-GLuint texNameObject;
-GLuint texNameLight;
 
 /* Light properties */
 SLightVars m_psLightData[8];
 #define WIDTH 320
 #define HEIGHT 480
 
+// 3D Model
+CPVRTModelPOD	*m_Scene;
+CTexture * Textures;
+
+// OpenGL handles for textures and VBOs
+GLuint m_ui32Stone;
+GLuint m_ui32Light;
+
+GLuint*	m_puiVbo;
+GLuint*	m_puiIndexVbo;
+
 /* Number of frames */
 long m_nNumFrames;
-
-
+GLuint*	m_pui32Textures;
 
 
 /****************************************************************************
  ** Function Definitions
  ****************************************************************************/
-void RenderPrimitive(VERTTYPE *pVertex, VERTTYPE *pNormals, VERTTYPE *pUVs, int nNumIndex, unsigned short *pIDX, GLenum mode);
-void initLight(SLightVars *pLight);
-void stepLight(SLightVars *pLight);
-void renderLight(SLightVars *pLight);
+void InitLight(SLightVars &Light);
+void StepLight(SLightVars &Light);
+void DrawLight(SLightVars &Light);
+void LoadVbos();
+//bool LoadTextures(String* const pErrorStr);
+void DrawMesh(unsigned int ui32MeshID);
 
-//
-// Converts the data exported by MAX to fixed point when used in OpenGL ES common-lit profile == fixed-point
-// Expects a pointer to the object structure in the header file
-// returns a directly usable geometry in fixed or float format
-// 
-HeaderStruct_Mesh_Type *LoadHeaderObject(const void *headerObj)
-{
-	HeaderStruct_Mesh_Type *new_mesh = new HeaderStruct_Mesh_Type;
-	memcpy (new_mesh,headerObj,sizeof(HeaderStruct_Mesh_Type));
-	return (HeaderStruct_Mesh_Type*) new_mesh;
-}
-//
-// Releases memory allocated by LoadHeaderObject when the geometry is no longer needed
-// expects a pointer returned by LoadHeaderObject
-// 
-void UnloadHeaderObject(HeaderStruct_Mesh_Type* headerObj)
-{
-	delete headerObj;
-}
+
 
 bool CShell::InitApplication()
 {
-//	LOGFUNC("InitApplication()");
-	
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
 				printf("Display text textures loaded\n");
-
-	/* Load all header objects */
-	for(int i = 0; i < NUM_MESHES; i++)
-	{
-		Meshes[i] = LoadHeaderObject(&Mesh[i]);
-	}
+				
+	m_Scene = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
+	memset(m_Scene, 0, sizeof(CPVRTModelPOD));
 	
+	Textures = (CTexture*)malloc(sizeof(CTexture));
+	memset(Textures, 0, sizeof(CTexture));
+
+	
+	/*
+	 Loads the scene from the .pod file into a CPVRTModelPOD object.
+	 We could also export the scene as a header file and
+	 load it with ReadFromMemory().
+	 */
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
+	
+	/* Gets the Data Path */
+	char		*filename = new char[2048];
+	sprintf(filename, "%s/LightingScene_float.pod", buffer);
+	if(m_Scene->ReadFromFile(filename)!= TRUE)
+		return false;
+
 	MATRIX	MyPerspMatrix;
 	int			i;
 	
-	/* Load textures */
-	if (!Texture->LoadTextureFromPointer((void*)GRANITE, &texNameObject))
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/Stone.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_ui32Stone))
 		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	if (!Texture->LoadTextureFromPointer((void*)LightTex, &texNameLight))
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/LightTex.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_ui32Light))
 		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	/* Setup all materials */
-	VERTTYPE objectMatAmb[]		= {f2vt(0.1f), f2vt(0.1f), f2vt(0.1f), f2vt(0.3f)};
-	VERTTYPE objectMatDiff[]	= {f2vt(0.5f), f2vt(0.5f), f2vt(0.5f), f2vt(0.3f)};
-	VERTTYPE objectMatSpec[]	= {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(0.3f)};
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, objectMatAmb);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(10));	// Nice and shiny so we don't get aliasing from the 1/2 angle
+	//	Initialize VBO data
+	LoadVbos();
 	
-	/* Initialize all lights */
+	// Setup all materials
+	VERTTYPE Ambient[]	= {f2vt(0.1f), f2vt(0.1f), f2vt(0.1f), f2vt(1.0f)};
+	VERTTYPE Diffuse[]	= {f2vt(0.5f), f2vt(0.5f), f2vt(0.5f), f2vt(1.0f)};
+	VERTTYPE Specular[]	= {f2vt(1.0f), f2vt(1.0f), f2vt(1.0f), f2vt(1.0f)};
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, Ambient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, Diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, Specular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, f2vt(10.0f));	// Nice and shiny so we don't get aliasing from the 1/2 angle
+
+	// Initialize all lights
 	srand(0);
 	for(i = 0; i < 8; ++i)
-	{
-		initLight(&m_psLightData[i]);
-	}
+		InitLight(m_psLightData[i]);
 	
 	/* Perspective matrix */
 	glMatrixMode(GL_PROJECTION);
@@ -229,8 +182,73 @@ bool CShell::InitApplication()
 	/* Enable texturing */
 	glEnable(GL_TEXTURE_2D);
 	
+	/*
+		Build an array to map the textures within the pod file
+		to the textures we loaded earlier.
+	*/
 
+	m_pui32Textures = new GLuint[m_Scene->nNumMaterial];
+
+	for(i = 0; i < (int) m_Scene->nNumMaterial; ++i)
+	{
+		m_pui32Textures[i] = 0;
+		SPODMaterial* pMaterial = &m_Scene->pMaterial[i];
+
+		if(!strcmp(pMaterial->pszName, "Stone"))
+			m_pui32Textures[i] = m_ui32Stone;
+	}
+
+	// Set the clear colour
+	glClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(1.0f));
+	
+	delete [] filename;
+	delete [] buffer;
+	
 	return true;
+}
+
+void LoadVbos()
+{
+	if(!m_puiVbo)
+		m_puiVbo = new GLuint[m_Scene->nNumMesh];
+
+	if(!m_puiIndexVbo)
+		m_puiIndexVbo = new GLuint[m_Scene->nNumMesh];
+
+	/*
+		Load vertex data of all meshes in the scene into VBOs
+
+		The meshes have been exported with the "Interleave Vectors" option,
+		so all data is interleaved in the buffer at pMesh->pInterleaved.
+		Interleaving data improves the memory access pattern and cache efficiency,
+		thus it can be read faster by the hardware.
+	*/
+
+	glGenBuffers(m_Scene->nNumMesh, m_puiVbo);
+
+	for(unsigned int i = 0; i < m_Scene->nNumMesh; ++i)
+	{
+		// Load vertex data into buffer object
+		SPODMesh& Mesh = m_Scene->pMesh[i];
+		unsigned int uiSize = Mesh.nNumVertex * Mesh.sVertex.nStride;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[i]);
+		glBufferData(GL_ARRAY_BUFFER, uiSize, Mesh.pInterleaved, GL_STATIC_DRAW);
+
+		// Load index data into buffer object if available
+		m_puiIndexVbo[i] = 0;
+
+		if(Mesh.sFaces.pData)
+		{
+			glGenBuffers(1, &m_puiIndexVbo[i]);
+			uiSize = PVRTModelPODCountIndices(Mesh) * sizeof(GLshort);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[i]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, Mesh.sFaces.pData, GL_STATIC_DRAW);
+		}
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 bool CShell::QuitApplication()
@@ -239,14 +257,18 @@ bool CShell::QuitApplication()
 	
 	delete AppDisplayText;
 	
-	for(int i = 0; i < NUM_MESHES; i++)
-	{
-		UnloadHeaderObject(Meshes[i]);
-	}
+	// Free the memory allocated for the scene
+	m_Scene->Destroy();
+
+	delete[] m_puiVbo;
+	delete[] m_puiIndexVbo;
 	
-	/* Release textures */
-	Texture->ReleaseTexture(texNameObject);
-	Texture->ReleaseTexture(texNameLight);
+	// Frees the texture
+	Textures->ReleaseTexture(m_ui32Stone);
+	Textures->ReleaseTexture(m_ui32Light);
+	
+	free(Textures);
+	free(m_Scene);
 
 	return true;
 }
@@ -270,7 +292,7 @@ bool CShell::UpdateScene()
 	if (TimeInterval) 
 		frameRate = ((float)frames/(TimeInterval));
 	
-	AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
 	
 	return true;
 }
@@ -282,11 +304,10 @@ bool CShell::RenderScene()
 	MATRIX		RotationMatrix;
 	
 	/* Set up viewport */
-	glViewport(0, 0, WIDTH, HEIGHT);
+//	glViewport(0, 0, WIDTH, HEIGHT);
 	
 	/* Clear the buffers */
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.0f));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	/* Lighting */
@@ -302,17 +323,17 @@ bool CShell::RenderScene()
 	/* Loop through all lights */
 	for(i = 0; i < 8; ++i)
 	{
-		/* Only process lights that we are actually using */
-		if (i < NUM_LIGHTS_IN_USE)
+		// Only process lights that we are actually using
+		if(i < g_ui32LightNo)
 		{
 			/* Transform light */
-			stepLight(&m_psLightData[i]);
+			StepLight(m_psLightData[i]);
 			
 			/* Set light properties */
-			glLightfv(GL_LIGHT0 + i, GL_POSITION, &m_psLightData[i].position.x);
-			glLightfv(GL_LIGHT0 + i, GL_AMBIENT, &m_psLightData[i].ambient.x);
-			glLightfv(GL_LIGHT0 + i, GL_DIFFUSE, &m_psLightData[i].diffuse.x);
-			glLightfv(GL_LIGHT0 + i, GL_SPECULAR, &m_psLightData[i].specular.x);
+			glLightfv(GL_LIGHT0 + i, GL_POSITION, &m_psLightData[i].Position.x);
+			glLightfv(GL_LIGHT0 + i, GL_AMBIENT, &m_psLightData[i].Ambient.x);
+			glLightfv(GL_LIGHT0 + i, GL_DIFFUSE, &m_psLightData[i].Diffuse.x);
+			glLightfv(GL_LIGHT0 + i, GL_SPECULAR, &m_psLightData[i].Specular.x);
 			
 			/* Enable light */
 			glEnable(GL_LIGHT0 + i);
@@ -328,32 +349,38 @@ bool CShell::RenderScene()
 	 * Begin Scene
 	 *************/
 	
-	/* Set texture and texture environment */
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glBindTexture(GL_TEXTURE_2D, texNameObject);
-	
-	/* Render geometry */
-	
-	/* Save matrix by pushing it on the stack */
+	// Enable client states
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		
+	// Save matrix by pushing it on the stack
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	
 	/* Add a small Y rotation to the model */
 	glMultMatrixf(RotationMatrix.f);
 	
-	/* Loop through all meshes */
-	for (i = 0; i < NUM_MESHES; i++)
+	// Loop through and draw all meshes
+	for(i = 0; i < m_Scene->nNumMeshNode; ++i)
 	{
-		/* Render mesh */
-		RenderPrimitive(Meshes[i]->pVertex, Meshes[i]->pNormals, Meshes[i]->pUV, Meshes[i]->nNumFaces*3,
-						Meshes[i]->pFaces, GL_TRIANGLES);
+		SPODNode& Node = m_Scene->pNode[i];
+
+		// Loads the correct texture using our texture lookup table
+		glBindTexture(GL_TEXTURE_2D, m_pui32Textures[Node.nIdxMaterial]);
+
+		DrawMesh(Node.nIdx);
 	}
 	
-	/* Restore matrix */
+	// Disable normals as the light quads do not have any
+	glDisableClientState(GL_NORMAL_ARRAY);
+
+	// Restore matrix
 	glPopMatrix();
 	
 	// draw lights
-	/* No lighting for lights */
+
+	// No lighting for lights
 	glDisable(GL_LIGHTING);
 	
 	/* Disable Z writes */
@@ -363,11 +390,12 @@ bool CShell::RenderScene()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE,GL_ONE);
 	
-	/* Render all lights in use */
-	for(i = 0; i < NUM_LIGHTS_IN_USE; ++i)
-	{
-		renderLight(&m_psLightData[i]);
-	}
+	// Set texture and texture environment
+	glBindTexture(GL_TEXTURE_2D, m_ui32Light);
+
+	// Render all lights in use
+	for(i = 0; i < g_ui32LightNo; ++i)
+		DrawLight(m_psLightData[i]);
 	
 	/* Disable blending */
 	glDisable(GL_BLEND);
@@ -375,6 +403,9 @@ bool CShell::RenderScene()
 	/* Restore Z writes */
 	glDepthMask(GL_TRUE);
 	
+	// Disable client states
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("Eight Point Lights", "", eDisplayTextLogoIMG);
@@ -389,46 +420,46 @@ bool CShell::RenderScene()
  * Inputs		  : *pLight
  * Description    : Initialize light structure
  *******************************************************************************/
-void initLight(SLightVars *pLight)
+void InitLight(SLightVars &pLight)
 {
 	/* Light ambient colour */
-	pLight->ambient.x = f2vt(0.0);
-	pLight->ambient.y = f2vt(0.0);
-	pLight->ambient.z = f2vt(0.0);
-	pLight->ambient.w = f2vt(1.0);
+	pLight.Ambient.x = f2vt(0.0);
+	pLight.Ambient.y = f2vt(0.0);
+	pLight.Ambient.z = f2vt(0.0);
+	pLight.Ambient.w = f2vt(1.0);
 	
 	/* Light Diffuse colour */
 	double difFac = 0.4;
-	pLight->diffuse.x = f2vt((float)( difFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
-	pLight->diffuse.y = f2vt((float)( difFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
-	pLight->diffuse.z = f2vt((float)( difFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
-	pLight->diffuse.w = f2vt((float)( 1.0 ));
+	pLight.Diffuse.x = f2vt((float)( difFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
+	pLight.Diffuse.y = f2vt((float)( difFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
+	pLight.Diffuse.z = f2vt((float)( difFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
+	pLight.Diffuse.w = f2vt((float)( 1.0 ));
 	
 	/* Light Specular colour */
 	double specFac = 0.1;
-	pLight->specular.x = f2vt((float)( specFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
-	pLight->specular.y = f2vt((float)( specFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
-	pLight->specular.z = f2vt((float)( specFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
-	pLight->specular.w = f2vt((float)( 1.0 ));
+	pLight.Specular.x = f2vt((float)( specFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
+	pLight.Specular.y = f2vt((float)( specFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
+	pLight.Specular.z = f2vt((float)( specFac * (rand()/(double)RAND_MAX) ) * 2.0f); //1.0;
+	pLight.Specular.w = f2vt((float)( 1.0 ));
 	
 	/* Randomize some of the other parameters */
 	float lightDist = 80.0f;
-	pLight->vPosition.x = f2vt((float)((rand()/(double)RAND_MAX) * lightDist/2.0f ) + lightDist/2.0f);
-	pLight->vPosition.y = f2vt((float)((rand()/(double)RAND_MAX) * lightDist/2.0f ) + lightDist/2.0f);
-	pLight->vPosition.z = f2vt((float)((rand()/(double)RAND_MAX) * lightDist/2.0f ) + lightDist/2.0f);
+	pLight.vPosition.x = f2vt((float)((rand()/(double)RAND_MAX) * lightDist/2.0f ) + lightDist/2.0f);
+	pLight.vPosition.y = f2vt((float)((rand()/(double)RAND_MAX) * lightDist/2.0f ) + lightDist/2.0f);
+	pLight.vPosition.z = f2vt((float)((rand()/(double)RAND_MAX) * lightDist/2.0f ) + lightDist/2.0f);
 	
 	float rStep = 2;
-	pLight->vRotationStep.x = f2vt((float)( rStep/2.0 - (rand()/(double)RAND_MAX) * rStep ));
-	pLight->vRotationStep.y = f2vt((float)( rStep/2.0 - (rand()/(double)RAND_MAX) * rStep ));
-	pLight->vRotationStep.z = f2vt((float)( rStep/2.0 - (rand()/(double)RAND_MAX) * rStep ));
+	pLight.vRotationStep.x = f2vt((float)( rStep/2.0 - (rand()/(double)RAND_MAX) * rStep ));
+	pLight.vRotationStep.y = f2vt((float)( rStep/2.0 - (rand()/(double)RAND_MAX) * rStep ));
+	pLight.vRotationStep.z = f2vt((float)( rStep/2.0 - (rand()/(double)RAND_MAX) * rStep ));
 	
-	pLight->vRotation.x = f2vt(0.0f);
-	pLight->vRotation.y = f2vt(0.0f);
-	pLight->vRotation.z = f2vt(0.0f);
+	pLight.vRotation.x = f2vt(0.0f);
+	pLight.vRotation.y = f2vt(0.0f);
+	pLight.vRotation.z = f2vt(0.0f);
 	
-	pLight->vRotationCentre.x = f2vt(0.0f);
-	pLight->vRotationCentre.y = f2vt(0.0f);
-	pLight->vRotationCentre.z = f2vt(0.0f);
+	pLight.vRotationCentre.x = f2vt(0.0f);
+	pLight.vRotationCentre.y = f2vt(0.0f);
+	pLight.vRotationCentre.z = f2vt(0.0f);
 }
 
 /*******************************************************************************
@@ -436,31 +467,31 @@ void initLight(SLightVars *pLight)
  * Inputs		  : *pLight
  * Description    : Advance one step in the light rotation.
  *******************************************************************************/
-void stepLight(SLightVars *pLight)
+void StepLight(SLightVars &pLight)
 {
 	MATRIX RotationMatrix, RotationMatrixX, RotationMatrixY, RotationMatrixZ;
 	
 	/* Increase rotation angles */
-	pLight->vRotation.x += pLight->vRotationStep.x;
-	pLight->vRotation.y += pLight->vRotationStep.y;
-	pLight->vRotation.z += pLight->vRotationStep.z;
+	pLight.vRotation.x += pLight.vRotationStep.x;
+	pLight.vRotation.y += pLight.vRotationStep.y;
+	pLight.vRotation.z += pLight.vRotationStep.z;
 	
-	while(pLight->vRotation.x > f2vt(360.0f)) pLight->vRotation.x -= f2vt(360.0f);
-	while(pLight->vRotation.y > f2vt(360.0f)) pLight->vRotation.y -= f2vt(360.0f);
-	while(pLight->vRotation.z > f2vt(360.0f)) pLight->vRotation.z -= f2vt(360.0f);
+	while(pLight.vRotation.x > f2vt(360.0f)) pLight.vRotation.x -= f2vt(360.0f);
+	while(pLight.vRotation.y > f2vt(360.0f)) pLight.vRotation.y -= f2vt(360.0f);
+	while(pLight.vRotation.z > f2vt(360.0f)) pLight.vRotation.z -= f2vt(360.0f);
 	
 	/* Create three rotations from rotation angles */
-	MatrixRotationX(RotationMatrixX, VERTTYPEMUL(pLight->vRotation.x, f2vt(PIf/180.0f)));
-	MatrixRotationY(RotationMatrixY, VERTTYPEMUL(pLight->vRotation.y, f2vt(PIf/180.0f)));
-	MatrixRotationZ(RotationMatrixZ, VERTTYPEMUL(pLight->vRotation.z, f2vt(PIf/180.0f)));
+	MatrixRotationX(RotationMatrixX, VERTTYPEMUL(pLight.vRotation.x, f2vt(PIf/180.0f)));
+	MatrixRotationY(RotationMatrixY, VERTTYPEMUL(pLight.vRotation.y, f2vt(PIf/180.0f)));
+	MatrixRotationZ(RotationMatrixZ, VERTTYPEMUL(pLight.vRotation.z, f2vt(PIf/180.0f)));
 	
 	/* Build transformation matrix by concatenating all rotations */
 	MatrixMultiply(RotationMatrix, RotationMatrixY, RotationMatrixZ);
 	MatrixMultiply(RotationMatrix, RotationMatrixX, RotationMatrix);
 	
 	/* Transform light with transformation matrix, setting w to 1 to indicate point light */
-	TransTransformArray((VECTOR3*)&pLight->position, &pLight->vPosition, 1, &RotationMatrix);
-	pLight->position.w = f2vt(1.0f);
+	TransTransformArray((VECTOR3*)&pLight.Position, &pLight.vPosition, 1, &RotationMatrix);
+	pLight.Position.w = f2vt(1.0f);
 }
 
 /*******************************************************************************
@@ -468,88 +499,67 @@ void stepLight(SLightVars *pLight)
  * Inputs		  : *pLight
  * Description    : Draw every light as a quad.
  *******************************************************************************/
-void renderLight(SLightVars *pLight)
+void DrawLight(SLightVars &Light)
 {
-	VERTTYPE	quad_verts[4*5];
-	VERTTYPE	quad_uvs[2*5];
+	VERTTYPE	quad_verts[4 * 4];
+	
+	// Set Quad UVs
+	VERTTYPE	quad_uvs[2 * 4] = {f2vt(0), f2vt(0),
+								   f2vt(1), f2vt(0),
+								   f2vt(0), f2vt(1),
+								   f2vt(1), f2vt(1)};
+	
 	VERTTYPE	fLightSize = f2vt(5.0f);
 	
-	/* Set quad vertices */
-	quad_verts[0]  = pLight->position.x - fLightSize;
-	quad_verts[1]  = pLight->position.y - fLightSize;
-	quad_verts[2]  = pLight->position.z;
+	// Set quad vertices
+	quad_verts[0]  = Light.Position.x - fLightSize;
+	quad_verts[1]  = Light.Position.y - fLightSize;
+	quad_verts[2]  = Light.Position.z;
 	
-	quad_verts[3]  = pLight->position.x + fLightSize;
-	quad_verts[4]  = pLight->position.y - fLightSize;
-	quad_verts[5]  = pLight->position.z;
+	quad_verts[3]  = Light.Position.x + fLightSize;
+	quad_verts[4]  = Light.Position.y - fLightSize;
+	quad_verts[5]  = Light.Position.z;
 	
-	quad_verts[6]  = pLight->position.x - fLightSize;
-	quad_verts[7]  = pLight->position.y + fLightSize;
-	quad_verts[8]  = pLight->position.z;
+	quad_verts[6]  = Light.Position.x - fLightSize;
+	quad_verts[7]  = Light.Position.y + fLightSize;
+	quad_verts[8]  = Light.Position.z;
 	
-	quad_verts[9]  = pLight->position.x + fLightSize;
-	quad_verts[10] = pLight->position.y + fLightSize;
-	quad_verts[11] = pLight->position.z;
+	quad_verts[9]  = Light.Position.x + fLightSize;
+	quad_verts[10] = Light.Position.y + fLightSize;
+	quad_verts[11] = Light.Position.z;
 	
-	/* Set Quad UVs */
-	quad_uvs[0]   = f2vt(0);
-	quad_uvs[1]   = f2vt(0);
-	quad_uvs[2]   = f2vt(1);
-	quad_uvs[3]   = f2vt(0);
-	quad_uvs[4]   = f2vt(0);
-	quad_uvs[5]   = f2vt(1);
-	quad_uvs[6]   = f2vt(1);
-	quad_uvs[7]   = f2vt(1);
-	
-	/* Set texture and texture environment */
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glBindTexture(GL_TEXTURE_2D, texNameLight);
-	
-	/* Set vertex data */
-	glEnableClientState(GL_VERTEX_ARRAY);
+	// Set data
 	glVertexPointer(3, VERTTYPEENUM, 0, quad_verts);
-	
-	/* Set texture coordinates data */
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2, VERTTYPEENUM, 0, quad_uvs);
 	
-	/* Set light colour 2x overbright for more contrast (will be modulated with texture) */
-	glColor4f(VERTTYPEMUL(pLight->diffuse.x,f2vt(2.0f)), VERTTYPEMUL(pLight->diffuse.y,f2vt(2.0f)), VERTTYPEMUL(pLight->diffuse.z,f2vt(2.0f)), f2vt(1));
+	// Set light colour 2x overbright for more contrast (will be modulated with texture)
+	glColor4f(VERTTYPEMUL(Light.Diffuse.x, f2vt(2.0f)), VERTTYPEMUL(Light.Diffuse.y,f2vt(2.0f)), VERTTYPEMUL(Light.Diffuse.z,f2vt(2.0f)), f2vt(1));
 	
 	/* Draw quad */
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	
-	/* Disable client states */
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-/*******************************************************************************
- * Function Name  : RenderPrimitive
- * Inputs		  : pVertex, pNormals, pUVs, nFirst, nStripLength, mode
- * Description    : Code to render an object
- *******************************************************************************/
-void RenderPrimitive(VERTTYPE *pVertex, VERTTYPE *pNormals, VERTTYPE *pUVs,
-							  int nNumIndex, unsigned short *pIDX, GLenum mode)
+/*!****************************************************************************
+ @Function		DrawMesh
+ @Input			ID of mesh to draw
+ @Description	Draws a mesh.
+******************************************************************************/
+void DrawMesh(unsigned int ui32MeshID)
 {
-	/* Set vertex data */
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3,VERTTYPEENUM,0,pVertex);
+	SPODMesh& Mesh = m_Scene->pMesh[ui32MeshID];
 	
-	/* Set normal data */
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(VERTTYPEENUM,0,pNormals);
+	// Bind the vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[ui32MeshID]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[ui32MeshID]);
 	
-	/* Set texture coordinates data */
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2,VERTTYPEENUM,0,pUVs);
+	// Setup pointers
+	glVertexPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride, Mesh.sVertex.pData);
+	glNormalPointer(VERTTYPEENUM, Mesh.sNormals.nStride, Mesh.sNormals.pData);
+	glTexCoordPointer(2, VERTTYPEENUM, Mesh.psUVW[0].nStride, Mesh.psUVW[0].pData);
 	
-	/* Draw as indexed data */
-	glDrawElements(mode, nNumIndex, GL_UNSIGNED_SHORT, pIDX);
+	glDrawElements(GL_TRIANGLES, Mesh.nNumFaces * 3, GL_UNSIGNED_SHORT, 0);
 	
-	/* Disable client states */
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	// unbind the vertex buffers as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
-

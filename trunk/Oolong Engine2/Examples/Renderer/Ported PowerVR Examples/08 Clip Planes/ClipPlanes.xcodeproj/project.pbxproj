@@ -38,6 +38,9 @@
 		79317C600EDBC15400247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317C5A0EDBC15400247E3D /* utility_impl.cpp */; };
 		795AC8170EDF1006004CF7D4 /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 795AC8130EDF1006004CF7D4 /* mmgr.cpp */; };
 		795AC8180EDF1006004CF7D4 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795AC8160EDF1006004CF7D4 /* readme.txt */; };
+		79832D970F04A4B9000F58D6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79832D960F04A4B9000F58D6 /* ResourcePath.mm */; };
+		79832DB60F04A6BE000F58D6 /* Granite.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832DB40F04A6BE000F58D6 /* Granite.pvr */; };
+		79832DB70F04A6BE000F58D6 /* Mesh_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832DB50F04A6BE000F58D6 /* Mesh_float.pod */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +104,10 @@
 		795AC8140EDF1006004CF7D4 /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
 		795AC8150EDF1006004CF7D4 /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		795AC8160EDF1006004CF7D4 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		79832D950F04A4B9000F58D6 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		79832D960F04A4B9000F58D6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		79832DB40F04A6BE000F58D6 /* Granite.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = Granite.pvr; path = Media/Granite.pvr; sourceTree = "<group>"; };
+		79832DB50F04A6BE000F58D6 /* Mesh_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = Mesh_float.pod; path = Media/Mesh_float.pod; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +164,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79832DB40F04A6BE000F58D6 /* Granite.pvr */,
+				79832DB50F04A6BE000F58D6 /* Mesh_float.pod */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				79EA070F0DAFF0550038ED3D /* Default.png */,
@@ -180,6 +189,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79832D940F04A4B9000F58D6 /* Pathes */,
 				795AC8110EDF1006004CF7D4 /* MemoryManager */,
 				79317C4D0EDBC15400247E3D /* Math */,
 				791F47200E17521600E927FE /* Application */,
@@ -323,6 +333,16 @@
 			path = ../../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
+		79832D940F04A4B9000F58D6 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				79832D950F04A4B9000F58D6 /* ResourcePath.h */,
+				79832D960F04A4B9000F58D6 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -369,6 +389,8 @@
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				79EA07100DAFF0550038ED3D /* Default.png in Resources */,
 				795AC8180EDF1006004CF7D4 /* readme.txt in Resources */,
+				79832DB60F04A6BE000F58D6 /* Granite.pvr in Resources */,
+				79832DB70F04A6BE000F58D6 /* Mesh_float.pod in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +423,7 @@
 				79317C5F0EDBC15400247E3D /* matrix_impl.cpp in Sources */,
 				79317C600EDBC15400247E3D /* utility_impl.cpp in Sources */,
 				795AC8170EDF1006004CF7D4 /* mmgr.cpp in Sources */,
+				79832D970F04A4B9000F58D6 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

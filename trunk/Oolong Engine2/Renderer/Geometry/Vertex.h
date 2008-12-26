@@ -20,7 +20,7 @@ subject to the following restrictions:
 /****************************************************************************
 ** Enumerations
 ****************************************************************************/
-enum EDataType 
+enum EPVRTDataType 
 {
 	EPODDataNone,
 	EPODDataFloat,
@@ -47,32 +47,48 @@ enum EDataType
  @Input				nCnt
  @Description		Read a vector
 *****************************************************************************/
-void  DataTypeRead(
-					VECTOR4		* const pV,
+void PVRTVertexRead(
+	VECTOR4		* const pV,
 					const void			* const pData,
-					const EDataType	eType,
+					const EPVRTDataType	eType,
 					const int			nCnt);
-void  DataTypeRead(
-					unsigned int		* const pV,
-					const void			* const pData,
-					const EDataType	eType);
 
 /*!***************************************************************************
- @Function			DataTypeWrite
+ @Function			PVRTVertexRead
+ @Output			pV
+ @Input				pData
+ @Input				eType
+ @Description		Read an int
+*****************************************************************************/
+void PVRTVertexRead(
+					unsigned int		* const pV,
+					const void			* const pData,
+					const EPVRTDataType	eType);
+
+/*!***************************************************************************
+ @Function			PVRTVertexWrite
  @Output			pOut
  @Input				eType
  @Input				nCnt
  @Input				pV
  @Description		Write a vector
 *****************************************************************************/
-void DataTypeWrite(
+void PVRTVertexWrite(
 					void				* const pOut,
-					const EDataType	eType,
+					const EPVRTDataType	eType,
 					const int			nCnt,
-					const  VECTOR4	* const pV);
-void DataTypeWrite(
+	const VECTOR4	* const pV);
+
+/*!***************************************************************************
+ @Function			PVRTVertexWrite
+ @Output			pOut
+ @Input				eType
+ @Input				V
+ @Description		Write an int
+*****************************************************************************/
+void PVRTVertexWrite(
 					void				* const pOut,
-					const EDataType	eType,
+					const EPVRTDataType	eType,
 					const unsigned int	V);
 
 /*!***************************************************************************
@@ -141,15 +157,15 @@ bool VertexGenerateTangentSpace(
 								const char		* const pVtx,
 								const int		nStride,
 								const int		nOffsetPos,
-								EDataType		eTypePos,
+								EPVRTDataType		eTypePos,
 								const int		nOffsetNor,
-								EDataType		eTypeNor,
+								EPVRTDataType		eTypeNor,
 								const int		nOffsetTex,
-								EDataType		eTypeTex,
+								EPVRTDataType		eTypeTex,
 								const int		nOffsetTan,
-								EDataType		eTypeTan,
+								EPVRTDataType		eTypeTan,
 								const int		nOffsetBin,
-								EDataType		eTypeBin,
+								EPVRTDataType		eTypeBin,
 								const int		nTriNum,
 								const float		fSplitDifference);
 

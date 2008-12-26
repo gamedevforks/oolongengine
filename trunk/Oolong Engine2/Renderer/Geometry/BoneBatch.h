@@ -20,7 +20,7 @@ subject to the following restrictions:
 /*!***************************************************************************
  Handles a batch of bones
 *****************************************************************************/
-class CBoneBatches
+class CPVRTBoneBatches
 {
 public:
 	int	*pnBatches;			/*!< Space for nBatchBoneMax bone indices, per batch */
@@ -56,9 +56,9 @@ public:
 		const char			* const pVtx,
 		const int			nStride,
 		const int			nOffsetWeight,
-		const EDataType	eTypeWeight,
+		const EPVRTDataType	eTypeWeight,
 		const int			nOffsetIdx,
-		const EDataType	eTypeIdx,
+		const EPVRTDataType	eTypeIdx,
 		const int			nTriNum,
 		const int			nBatchBoneMax,
 		const int			nVertexBones);

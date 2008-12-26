@@ -1,4 +1,19 @@
+/******************************************************************************
+
+ @File         PVRTModelPOD.cpp
+
+ @Title        
+
+ @Copyright    Copyright (C) 2003 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Code to load POD files - models exported from MAX.
+
+******************************************************************************/
+
 /*
+All changes:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 
@@ -17,12 +32,14 @@ subject to the following restrictions:
 /*!***************************************************************************
  Class: CSource
 *****************************************************************************/
-class CStreamResource
+class CSource
 {
 public:
-	//CSource();
-	virtual ~CStreamResource() { }
-	
+	/*!***************************************************************************
+	@Function			~CSource
+	@Description		Destructor
+	*****************************************************************************/
+	virtual ~CSource() {};
 	virtual bool Read(void* lpBuffer, const unsigned int dwNumberOfBytesToRead) = 0;
 	virtual bool Skip(const unsigned int nBytes) = 0;
 	
@@ -32,21 +49,12 @@ public:
 		return Read(&n, sizeof(T));
 	}
 
-	bool ReadMarker(unsigned int &nName, unsigned int &nLen)
-	{
-		if(!Read(&nName, sizeof(nName)))
-			return false;
-		if(!Read(&nLen, sizeof(nLen)))
-			return false;
-		return true;
-	}
-
+	bool ReadMarker(unsigned int &nName, unsigned int &nLen);
 
 	template <typename T>
 	bool ReadAfterAlloc(T* &lpBuffer, const unsigned int dwNumberOfBytesToRead)
 	{
-		//if(!SafeAlloc(lpBuffer, dwNumberOfBytesToRead))
-		if(!(lpBuffer = new T[dwNumberOfBytesToRead])) //SafeAlloc(lpBuffer, dwNumberOfBytesToRead))	
+		if(!SafeAlloc(lpBuffer, dwNumberOfBytesToRead))
 			return false;
 		return Read(lpBuffer, dwNumberOfBytesToRead);
 	}
@@ -56,14 +64,23 @@ public:
 /*!***************************************************************************
  Class: CSourceStream
 *****************************************************************************/
-class CSourceStream : public CStreamResource
+class CSourceStream : public CSource
 {
 protected:
-	CResourceFile* m_pFile;
+	CPVRTResourceFile* m_pFile;
 	size_t m_BytesReadCount;
 
 public:
+	/*!***************************************************************************
+	@Function			CSourceStream
+	@Description		Constructor
+	*****************************************************************************/
 	CSourceStream() : m_pFile(0), m_BytesReadCount(0) {}
+
+	/*!***************************************************************************
+	@Function			~CSourceStream
+	@Description		Destructor
+	*****************************************************************************/
 	virtual ~CSourceStream();
 
 	bool Init(const char * const pszFileName);

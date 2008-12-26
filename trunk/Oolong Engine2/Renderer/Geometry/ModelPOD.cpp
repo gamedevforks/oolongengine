@@ -1,4 +1,18 @@
+/******************************************************************************
+
+ @File         PVRTModelPOD.cpp
+
+ @Title        
+
+ @Copyright    Copyright (C) 2003 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Code to load POD files - models exported from MAX.
+
+******************************************************************************/
 /*
+Changes to this file:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 
@@ -24,23 +38,25 @@ subject to the following restrictions:
 /****************************************************************************
 ** Defines
 ****************************************************************************/
-#define MODELPOD_TAG_MASK			(0x80000000)
-#define MODELPOD_TAG_START			(0x00000000)
-#define MODELPOD_TAG_END			(0x80000000)
+#define PVRTMODELPOD_TAG_MASK			(0x80000000)
+#define PVRTMODELPOD_TAG_START			(0x00000000)
+#define PVRTMODELPOD_TAG_END			(0x80000000)
 
 #define CFAH		(1024)
-
-//DEFINE_HEAP(CPODScene, "Model POD");
-
 
 /****************************************************************************
 ** Enumerations
 ****************************************************************************/
+/*!****************************************************************************
+ @Struct      EPODFileName
+ @Brief       Enum for the binary pod blocks
+******************************************************************************/
 enum EPODFileName
 {
 	ePODFileVersion				= 1000,
 	ePODFileScene,
 	ePODFileExpOpt,
+	ePODFileEndiannessMisMatch  = -402456576,
 
 	ePODFileColourBackground	= 2000,
 	ePODFileColourAmbient,
@@ -82,6 +98,9 @@ enum EPODFileName
 	ePODFileNodeAnimPos,
 	ePODFileNodeAnimRot,
 	ePODFileNodeAnimScale,
+	ePODFileNodeMatrix,
+	ePODFileNodeAnimMatrix,
+	ePODFileNodeAnimFlags,
 
 	ePODFileMeshNumVtx			= 6000,
 	ePODFileMeshNumFaces,
@@ -123,7 +142,7 @@ enum EPODFileName
 /****************************************************************************
 ** Structures
 ****************************************************************************/
-struct SPODImpl
+struct SPVRTPODImpl
 {
 	VERTTYPE	fFrame;		/*!< Frame number */
 	VERTTYPE	fBlend;		/*!< Frame blend	(AKA fractional part of animation frame number) */
@@ -140,6 +159,7 @@ struct SPODImpl
 	float	fHitPerc, fHitPercZero;
 #endif
 };
+
 
 
 /****************************************************************************
@@ -178,13 +198,20 @@ static bool WriteMarker(
 	FILE				* const pFile,
 	const unsigned int	nName,
 	const bool			bEnd,
+	const bool			bChangeEndian,
 	const unsigned int	nLen = 0)
 {
 	unsigned int pnData[2];
 
-	_ASSERT((nName & ~MODELPOD_TAG_MASK) == nName);
-	pnData[0] = nName | (bEnd ? MODELPOD_TAG_END : MODELPOD_TAG_START);
+	_ASSERT((nName & ~PVRTMODELPOD_TAG_MASK) == nName);
+	pnData[0] = nName | (bEnd ? PVRTMODELPOD_TAG_END : PVRTMODELPOD_TAG_START);
 	pnData[1] = nLen;
+
+	if(bChangeEndian)
+	{
+		PVRTByteSwap((unsigned char*) &pnData[0], sizeof(pnData[0]));
+		PVRTByteSwap((unsigned char*) &pnData[1], sizeof(pnData[1]));
+	}
 
 	return WriteFileSafe(pFile, pnData, sizeof(pnData));
 }
@@ -203,14 +230,15 @@ static bool WriteData(
 	FILE				* const pFile,
 	const unsigned int	nName,
 	const void			* const pData,
+	const bool			bChangeEndian,
 	const unsigned int	nLen)
 {
 	if(pData)
 	{
 		_ASSERT(nLen);
-		if(!WriteMarker(pFile, nName, false, nLen)) return false;
+		if(!WriteMarker(pFile, nName, false, bChangeEndian, nLen)) return false;
 		if(!WriteFileSafe(pFile, pData, nLen)) return false;
-		if(!WriteMarker(pFile, nName, true, 0)) return false;
+		if(!WriteMarker(pFile, nName, true, bChangeEndian, 0)) return false;
 	}
 	return true;
 }
@@ -227,38 +255,62 @@ template <typename T>
 static bool WriteData(
 	FILE				* const pFile,
 	const unsigned int	nName,
+	const bool			bChangeEndian,
 	const T				&n)
 {
-	return WriteData(pFile, nName, (void*)&n, (unsigned int)sizeof(T));
+	int nSize = sizeof(T);
+
+	if(bChangeEndian)
+		PVRTByteSwap((unsigned char*) &n, (int) nSize);
+
+	bool bRet = WriteData(pFile, nName, (void*)&n, bChangeEndian, (unsigned int) nSize);
+
+	if(bChangeEndian)
+		PVRTByteSwap((unsigned char*) &n, (int) nSize);
+
+	return bRet;
 }
+
+/*!***************************************************************************
+ @Function			WriteCPODData
+ @Input				pFile
+ @Input				nName
+ @Input				n
+ @Input				nEntries
+ @Input				bValidData
+ @Input				bChangeEndian
+ @Return			true if successful
+ @Description		Write the value n, bracketed by an nName begin/end markers.
+*****************************************************************************/
 static bool WriteCPODData(
 	FILE				* const pFile,
 	const unsigned int	nName,
 	const CPODData		&n,
 	const unsigned int	nEntries,
-	const bool			bValidData)
+	const bool			bValidData,
+	const bool			bChangeEndian)
 {
-	if(!WriteMarker(pFile, nName, false)) return false;
-	if(!WriteData(pFile, ePODFileDataType, n.eType)) return false;
-	if(!WriteData(pFile, ePODFileN, n.n)) return false;
-	if(!WriteData(pFile, ePODFileStride, n.nStride)) return false;
+	if(!WriteMarker(pFile, nName, false, bChangeEndian)) return false;
+	if(!WriteData(pFile, ePODFileDataType, bChangeEndian, n.eType)) return false;
+	if(!WriteData(pFile, ePODFileN, bChangeEndian, n.n)) return false;
+	if(!WriteData(pFile, ePODFileStride, bChangeEndian, n.nStride)) return false;
 	if(bValidData)
 	{
-		if(!WriteData(pFile, ePODFileData, n.pData, nEntries * n.nStride)) return false;
+		if(!WriteData(pFile, ePODFileData, n.pData, bChangeEndian, nEntries * n.nStride)) return false;
 	}
 	else
 	{
-		if(!WriteData(pFile, ePODFileData, n.pData)) return false;
+		if(!WriteData(pFile, ePODFileData, bChangeEndian, n.pData)) return false;
 	}
-	if(!WriteMarker(pFile, nName, true)) return false;
+	if(!WriteMarker(pFile, nName, true, bChangeEndian)) return false;
 	return true;
 }
 
 /*!***************************************************************************
  @Function			WritePOD
  @Output			The file referenced by pFile
- @Input				s
- @Input				pszExpOpt
+ @Input				s The POD Scene to write
+ @Input				pszExpOpt Exporter options
  @Return			true if successful
  @Description		Write a POD file
 *****************************************************************************/
@@ -268,125 +320,144 @@ static bool WritePOD(
 	const SPODScene	&s)
 {
 	unsigned int i, j;
+	bool bChangeEndian = s.bBigEndian == PVRTIsLittleEndian();
 
 	// Save: file version
 	{
-		char *pszVersion = MODELPOD_VERSION;
+		char *pszVersion = PVRTMODELPOD_VERSION;
 
-		if(!WriteData(pFile, ePODFileVersion, pszVersion, (unsigned int)strlen(pszVersion) + 1)) return false;
+		if(!WriteData(pFile, ePODFileVersion, pszVersion, bChangeEndian, (unsigned int)strlen(pszVersion) + 1)) return false;
 	}
 
 	// Save: exporter options
 	if(pszExpOpt && *pszExpOpt)
 	{
-		if(!WriteData(pFile, ePODFileExpOpt, pszExpOpt, (unsigned int)strlen(pszExpOpt) + 1)) return false;
+		if(!WriteData(pFile, ePODFileExpOpt, pszExpOpt, bChangeEndian, (unsigned int)strlen(pszExpOpt) + 1)) return false;
 	}
 
 	// Save: scene descriptor
-	if(!WriteMarker(pFile, ePODFileScene, false)) return false;
+	if(!WriteMarker(pFile, ePODFileScene, false, bChangeEndian)) return false;
 
 	{
-		if(!WriteData(pFile, ePODFileColourBackground,	s.pfColourBackground)) return false;
-		if(!WriteData(pFile, ePODFileColourAmbient,		s.pfColourAmbient)) return false;
-		if(!WriteData(pFile, ePODFileNumCamera,			s.nNumCamera)) return false;
-		if(!WriteData(pFile, ePODFileNumLight,			s.nNumLight)) return false;
-		if(!WriteData(pFile, ePODFileNumMesh,			s.nNumMesh)) return false;
-		if(!WriteData(pFile, ePODFileNumNode,			s.nNumNode)) return false;
-		if(!WriteData(pFile, ePODFileNumMeshNode,		s.nNumMeshNode)) return false;
-		if(!WriteData(pFile, ePODFileNumTexture,		s.nNumTexture)) return false;
-		if(!WriteData(pFile, ePODFileNumMaterial,		s.nNumMaterial)) return false;
-		if(!WriteData(pFile, ePODFileNumFrame,			s.nNumFrame)) return false;
-		if(!WriteData(pFile, ePODFileFlags,				s.nFlags)) return false;
-
+		if(!WriteData(pFile, ePODFileColourBackground,	bChangeEndian, s.pfColourBackground)) return false;
+		if(!WriteData(pFile, ePODFileColourAmbient,		bChangeEndian, s.pfColourAmbient)) return false;
+		if(!WriteData(pFile, ePODFileNumCamera,			bChangeEndian, s.nNumCamera)) return false;
+		if(!WriteData(pFile, ePODFileNumLight,			bChangeEndian, s.nNumLight)) return false;
+		if(!WriteData(pFile, ePODFileNumMesh,			bChangeEndian, s.nNumMesh)) return false;
+		if(!WriteData(pFile, ePODFileNumNode,			bChangeEndian, s.nNumNode)) return false;
+		if(!WriteData(pFile, ePODFileNumMeshNode,		bChangeEndian, s.nNumMeshNode)) return false;
+		if(!WriteData(pFile, ePODFileNumTexture,		bChangeEndian, s.nNumTexture)) return false;
+		if(!WriteData(pFile, ePODFileNumMaterial,		bChangeEndian, s.nNumMaterial)) return false;
+		if(!WriteData(pFile, ePODFileNumFrame,			bChangeEndian, s.nNumFrame)) return false;
+		if(!WriteData(pFile, ePODFileFlags,				bChangeEndian, s.nFlags)) return false;
 		// Save: cameras
-		for(i = 0; i < s.nNumCamera; ++i) {
-			if(!WriteMarker(pFile, ePODFileCamera, false)) return false;
-			if(!WriteData(pFile, ePODFileCamIdxTgt,		s.pCamera[i].nIdxTarget)) return false;
-			if(!WriteData(pFile, ePODFileCamFOV,		s.pCamera[i].fFOV)) return false;
-			if(!WriteData(pFile, ePODFileCamFar,		s.pCamera[i].fFar)) return false;
-			if(!WriteData(pFile, ePODFileCamNear,		s.pCamera[i].fNear)) return false;
-			if(!WriteData(pFile, ePODFileCamAnimFOV,	s.pCamera[i].pfAnimFOV, s.nNumFrame * sizeof(*s.pCamera[i].pfAnimFOV))) return false;
-			if(!WriteMarker(pFile, ePODFileCamera, true)) return false;
+		for(i = 0; i < s.nNumCamera; ++i)
+		{
+			if(!WriteMarker(pFile, ePODFileCamera, false, bChangeEndian)) return false;
+			if(!WriteData(pFile, ePODFileCamIdxTgt,		bChangeEndian, s.pCamera[i].nIdxTarget)) return false;
+			if(!WriteData(pFile, ePODFileCamFOV,		bChangeEndian, s.pCamera[i].fFOV)) return false;
+			if(!WriteData(pFile, ePODFileCamFar,		bChangeEndian, s.pCamera[i].fFar)) return false;
+			if(!WriteData(pFile, ePODFileCamNear,		bChangeEndian, s.pCamera[i].fNear)) return false;
+			if(!WriteData(pFile, ePODFileCamAnimFOV,	s.pCamera[i].pfAnimFOV, bChangeEndian, s.nNumFrame * sizeof(*s.pCamera[i].pfAnimFOV))) return false;
+			if(!WriteMarker(pFile, ePODFileCamera, true, bChangeEndian)) return false;
 		}
-
 		// Save: lights
-		for(i = 0; i < s.nNumLight; ++i) {
-			if(!WriteMarker(pFile, ePODFileLight, false)) return false;
-			if(!WriteData(pFile, ePODFileLightIdxTgt,	s.pLight[i].nIdxTarget)) return false;
-			if(!WriteData(pFile, ePODFileLightColour,	s.pLight[i].pfColour)) return false;
-			if(!WriteData(pFile, ePODFileLightType,		s.pLight[i].eType)) return false;
-			if(!WriteMarker(pFile, ePODFileLight, true)) return false;
+		for(i = 0; i < s.nNumLight; ++i)
+		{
+			if(!WriteMarker(pFile, ePODFileLight, false, bChangeEndian)) return false;
+			if(!WriteData(pFile, ePODFileLightIdxTgt,	bChangeEndian, s.pLight[i].nIdxTarget)) return false;
+			if(!WriteData(pFile, ePODFileLightColour,	bChangeEndian, s.pLight[i].pfColour)) return false;
+			if(!WriteData(pFile, ePODFileLightType,		bChangeEndian, s.pLight[i].eType)) return false;
+			if(!WriteMarker(pFile, ePODFileLight, true, bChangeEndian)) return false;
 		}
 
 		// Save: materials
-		for(i = 0; i < s.nNumMaterial; ++i) {
-			if(!WriteMarker(pFile, ePODFileMaterial, false)) return false;
-			if(!WriteData(pFile, ePODFileMatName,			s.pMaterial[i].pszName, (unsigned int)strlen(s.pMaterial[i].pszName)+1)) return false;
-			if(!WriteData(pFile, ePODFileMatIdxTexDiffuse,	s.pMaterial[i].nIdxTexDiffuse)) return false;
-			if(!WriteData(pFile, ePODFileMatOpacity,		s.pMaterial[i].fMatOpacity)) return false;
-			if(!WriteData(pFile, ePODFileMatAmbient,		s.pMaterial[i].pfMatAmbient)) return false;
-			if(!WriteData(pFile, ePODFileMatDiffuse,		s.pMaterial[i].pfMatDiffuse)) return false;
-			if(!WriteData(pFile, ePODFileMatSpecular,		s.pMaterial[i].pfMatSpecular)) return false;
-			if(!WriteData(pFile, ePODFileMatShininess,		s.pMaterial[i].fMatShininess)) return false;
-			if(!WriteData(pFile, ePODFileMatEffectFile,		s.pMaterial[i].pszEffectFile, s.pMaterial[i].pszEffectFile ? ((unsigned int)strlen(s.pMaterial[i].pszEffectFile)+1) : 0)) return false;
-			if(!WriteData(pFile, ePODFileMatEffectName,		s.pMaterial[i].pszEffectName, s.pMaterial[i].pszEffectName ? ((unsigned int)strlen(s.pMaterial[i].pszEffectName)+1) : 0)) return false;
-			if(!WriteMarker(pFile, ePODFileMaterial, true)) return false;
+		for(i = 0; i < s.nNumMaterial; ++i)
+		{
+			if(!WriteMarker(pFile, ePODFileMaterial, false, bChangeEndian)) return false;
+			if(!WriteData(pFile, ePODFileMatName,			s.pMaterial[i].pszName, bChangeEndian, (unsigned int)strlen(s.pMaterial[i].pszName)+1)) return false;
+			if(!WriteData(pFile, ePODFileMatIdxTexDiffuse,	bChangeEndian, s.pMaterial[i].nIdxTexDiffuse)) return false;
+			if(!WriteData(pFile, ePODFileMatOpacity,		bChangeEndian, s.pMaterial[i].fMatOpacity)) return false;
+			if(!WriteData(pFile, ePODFileMatAmbient,		bChangeEndian, s.pMaterial[i].pfMatAmbient)) return false;
+			if(!WriteData(pFile, ePODFileMatDiffuse,		bChangeEndian, s.pMaterial[i].pfMatDiffuse)) return false;
+			if(!WriteData(pFile, ePODFileMatSpecular,		bChangeEndian, s.pMaterial[i].pfMatSpecular)) return false;
+			if(!WriteData(pFile, ePODFileMatShininess,		bChangeEndian, s.pMaterial[i].fMatShininess)) return false;
+			if(!WriteData(pFile, ePODFileMatEffectFile,		s.pMaterial[i].pszEffectFile, bChangeEndian, s.pMaterial[i].pszEffectFile ? ((unsigned int)strlen(s.pMaterial[i].pszEffectFile)+1) : 0)) return false;
+			if(!WriteData(pFile, ePODFileMatEffectName,		s.pMaterial[i].pszEffectName, bChangeEndian, s.pMaterial[i].pszEffectName ? ((unsigned int)strlen(s.pMaterial[i].pszEffectName)+1) : 0)) return false;
+			if(!WriteMarker(pFile, ePODFileMaterial, true, bChangeEndian)) return false;
 		}
 
 		// Save: meshes
-		for(i = 0; i < s.nNumMesh; ++i) {
-			if(!WriteMarker(pFile, ePODFileMesh, false)) return false;
+		for(i = 0; i < s.nNumMesh; ++i)
+		{
+			if(!WriteMarker(pFile, ePODFileMesh, false, bChangeEndian)) return false;
 
-			if(!WriteData(pFile, ePODFileMeshNumVtx,			s.pMesh[i].nNumVertex)) return false;
-			if(!WriteData(pFile, ePODFileMeshNumFaces,			s.pMesh[i].nNumFaces)) return false;
-			if(!WriteData(pFile, ePODFileMeshNumUVW,			s.pMesh[i].nNumUVW)) return false;
-			if(!WriteData(pFile, ePODFileMeshStripLength,		s.pMesh[i].pnStripLength, s.pMesh[i].nNumStrips * sizeof(*s.pMesh[i].pnStripLength))) return false;
-			if(!WriteData(pFile, ePODFileMeshNumStrips,			s.pMesh[i].nNumStrips)) return false;
-			if(!WriteData(pFile, ePODFileMeshInterleaved,		s.pMesh[i].pInterleaved, s.pMesh[i].nNumVertex * s.pMesh[i].sVertex.nStride)) return false;
-			if(!WriteData(pFile, ePODFileMeshBoneBatchBoneMax,	s.pMesh[i].sBoneBatches.nBatchBoneMax)) return false;
-			if(!WriteData(pFile, ePODFileMeshBoneBatchCnt,		s.pMesh[i].sBoneBatches.nBatchCnt)) return false;
-			if(!WriteData(pFile, ePODFileMeshBoneBatches,		s.pMesh[i].sBoneBatches.pnBatches, s.pMesh[i].sBoneBatches.nBatchBoneMax * s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatches))) return false;
-			if(!WriteData(pFile, ePODFileMeshBoneBatchBoneCnts,	s.pMesh[i].sBoneBatches.pnBatchBoneCnt, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchBoneCnt))) return false;
-			if(!WriteData(pFile, ePODFileMeshBoneBatchOffsets,	s.pMesh[i].sBoneBatches.pnBatchOffset, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchOffset))) return false;
+			if(!WriteData(pFile, ePODFileMeshNumVtx,			bChangeEndian, s.pMesh[i].nNumVertex)) return false;
+			if(!WriteData(pFile, ePODFileMeshNumFaces,			bChangeEndian, s.pMesh[i].nNumFaces)) return false;
+			if(!WriteData(pFile, ePODFileMeshNumUVW,			bChangeEndian, s.pMesh[i].nNumUVW)) return false;
+			if(!WriteData(pFile, ePODFileMeshStripLength,		s.pMesh[i].pnStripLength, bChangeEndian, s.pMesh[i].nNumStrips * sizeof(*s.pMesh[i].pnStripLength))) return false;
+			if(!WriteData(pFile, ePODFileMeshNumStrips,			bChangeEndian, s.pMesh[i].nNumStrips)) return false;
+			if(!WriteData(pFile, ePODFileMeshInterleaved,		s.pMesh[i].pInterleaved, bChangeEndian, s.pMesh[i].nNumVertex * s.pMesh[i].sVertex.nStride)) return false;
+			if(!WriteData(pFile, ePODFileMeshBoneBatchBoneMax,	bChangeEndian, s.pMesh[i].sBoneBatches.nBatchBoneMax)) return false;
+			if(!WriteData(pFile, ePODFileMeshBoneBatchCnt,		bChangeEndian, s.pMesh[i].sBoneBatches.nBatchCnt)) return false;
+			if(!WriteData(pFile, ePODFileMeshBoneBatches,		s.pMesh[i].sBoneBatches.pnBatches, bChangeEndian, s.pMesh[i].sBoneBatches.nBatchBoneMax * s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatches))) return false;
+			if(!WriteData(pFile, ePODFileMeshBoneBatchBoneCnts,	s.pMesh[i].sBoneBatches.pnBatchBoneCnt, bChangeEndian, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchBoneCnt))) return false;
+			if(!WriteData(pFile, ePODFileMeshBoneBatchOffsets,	s.pMesh[i].sBoneBatches.pnBatchOffset, bChangeEndian, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchOffset))) return false;
 
-			if(!WriteCPODData(pFile, ePODFileMeshFaces,			s.pMesh[i].sFaces,		ModelPODCountIndices(s.pMesh[i]), true)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshVtx,			s.pMesh[i].sVertex,		s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshNor,			s.pMesh[i].sNormals,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshTan,			s.pMesh[i].sTangents,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshBin,			s.pMesh[i].sBinormals,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshFaces,			s.pMesh[i].sFaces,		PVRTModelPODCountIndices(s.pMesh[i]), true, bChangeEndian)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshVtx,			s.pMesh[i].sVertex,		s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshNor,			s.pMesh[i].sNormals,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshTan,			s.pMesh[i].sTangents,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshBin,			 s.pMesh[i].sBinormals,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+
 			for(j = 0; j < s.pMesh[i].nNumUVW; ++j)
-				if(!WriteCPODData(pFile, ePODFileMeshUVW,		s.pMesh[i].psUVW[j],	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshVtxCol,		s.pMesh[i].sVtxColours, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshBoneIdx,		s.pMesh[i].sBoneIdx,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
-			if(!WriteCPODData(pFile, ePODFileMeshBoneWeight,	s.pMesh[i].sBoneWeight,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0)) return false;
+				if(!WriteCPODData(pFile, ePODFileMeshUVW,		s.pMesh[i].psUVW[j],	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
 
-			if(!WriteMarker(pFile, ePODFileMesh, true)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshVtxCol,		s.pMesh[i].sVtxColours, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshBoneIdx,		s.pMesh[i].sBoneIdx,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+			if(!WriteCPODData(pFile, ePODFileMeshBoneWeight,	s.pMesh[i].sBoneWeight,	s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian)) return false;
+
+			if(!WriteMarker(pFile, ePODFileMesh, true, bChangeEndian)) return false;
 		}
 
+		int iTransformationNo;
 		// Save: node
-		for(i = 0; i < s.nNumNode; ++i) {
-			if(!WriteMarker(pFile, ePODFileNode, false)) return false;
-			if(!WriteData(pFile, ePODFileNodeIdx,		s.pNode[i].nIdx)) return false;
-			if(!WriteData(pFile, ePODFileNodeName,		s.pNode[i].pszName, (unsigned int)strlen(s.pNode[i].pszName)+1)) return false;
-			if(!WriteData(pFile, ePODFileNodeIdxMat,	s.pNode[i].nIdxMaterial)) return false;
-			if(!WriteData(pFile, ePODFileNodeIdxParent,	s.pNode[i].nIdxParent)) return false;
-			if(!WriteData(pFile, ePODFileNodePos,		s.pNode[i].pfPosition)) return false;
-			if(!WriteData(pFile, ePODFileNodeRot,		s.pNode[i].pfRotation)) return false;
-			if(!WriteData(pFile, ePODFileNodeScale,		s.pNode[i].pfScale)) return false;
-			if(!WriteData(pFile, ePODFileNodeAnimPos,	s.pNode[i].pfAnimPosition,	s.nNumFrame * 3 * sizeof(*s.pNode[i].pfAnimPosition))) return false;
-			if(!WriteData(pFile, ePODFileNodeAnimRot,	s.pNode[i].pfAnimRotation,	s.nNumFrame * 4 * sizeof(*s.pNode[i].pfAnimRotation))) return false;
-			if(!WriteData(pFile, ePODFileNodeAnimScale,	s.pNode[i].pfAnimScale,		s.nNumFrame * 7 * sizeof(*s.pNode[i].pfAnimScale))) return false;
-			if(!WriteMarker(pFile, ePODFileNode, true)) return false;
+		for(i = 0; i < s.nNumNode; ++i)
+		{
+			if(!WriteMarker(pFile, ePODFileNode, false, bChangeEndian)) return false;
+
+			{
+				if(!WriteData(pFile, ePODFileNodeIdx,		bChangeEndian, s.pNode[i].nIdx)) return false;
+				if(!WriteData(pFile, ePODFileNodeName,		s.pNode[i].pszName, bChangeEndian, (unsigned int)strlen(s.pNode[i].pszName)+1)) return false;
+				if(!WriteData(pFile, ePODFileNodeIdxMat,	bChangeEndian, s.pNode[i].nIdxMaterial)) return false;
+				if(!WriteData(pFile, ePODFileNodeIdxParent,	bChangeEndian, s.pNode[i].nIdxParent)) return false;
+				if(!WriteData(pFile, ePODFileNodeAnimFlags, bChangeEndian, s.pNode[i].nAnimFlags)) return false;
+
+				iTransformationNo = s.pNode[i].nAnimFlags & ePODHasPositionAni ? s.nNumFrame : 1;
+				if(!WriteData(pFile, ePODFileNodeAnimPos,	s.pNode[i].pfAnimPosition,	bChangeEndian, iTransformationNo * 3  * sizeof(*s.pNode[i].pfAnimPosition))) return false;
+
+				iTransformationNo = s.pNode[i].nAnimFlags & ePODHasRotationAni ? s.nNumFrame : 1;
+				if(!WriteData(pFile, ePODFileNodeAnimRot,	s.pNode[i].pfAnimRotation,	bChangeEndian, iTransformationNo * 4  * sizeof(*s.pNode[i].pfAnimRotation))) return false;
+
+				iTransformationNo = s.pNode[i].nAnimFlags & ePODHasScaleAni ? s.nNumFrame : 1;
+				if(!WriteData(pFile, ePODFileNodeAnimScale,	s.pNode[i].pfAnimScale,		bChangeEndian, iTransformationNo * 7  * sizeof(*s.pNode[i].pfAnimScale)))    return false;
+
+				iTransformationNo = s.pNode[i].nAnimFlags & ePODHasMatrixAni ? s.nNumFrame : 1;
+				if(!WriteData(pFile, ePODFileNodeAnimMatrix,s.pNode[i].pfAnimMatrix,	bChangeEndian, iTransformationNo * 16 * sizeof(*s.pNode[i].pfAnimMatrix)))   return false;
+			}
+
+			if(!WriteMarker(pFile, ePODFileNode, true, bChangeEndian)) return false;
 		}
 
 		// Save: texture
-		for(i = 0; i < s.nNumTexture; ++i) {
-			if(!WriteMarker(pFile, ePODFileTexture, false)) return false;
-			if(!WriteData(pFile, ePODFileTexName,		s.pTexture[i].pszName, (unsigned int)strlen(s.pTexture[i].pszName)+1)) return false;
-			if(!WriteMarker(pFile, ePODFileTexture, true)) return false;
+		for(i = 0; i < s.nNumTexture; ++i)
+		{
+			if(!WriteMarker(pFile, ePODFileTexture, false, bChangeEndian)) return false;
+			if(!WriteData(pFile, ePODFileTexName, s.pTexture[i].pszName, bChangeEndian, (unsigned int)strlen(s.pTexture[i].pszName)+1)) return false;
+			if(!WriteMarker(pFile, ePODFileTexture, true, bChangeEndian)) return false;
 		}
 	}
-	if(!WriteMarker(pFile, ePODFileScene, true)) return false;
+	if(!WriteMarker(pFile, ePODFileScene, true, bChangeEndian)) return false;
 
 	return true;
 }
@@ -394,9 +465,18 @@ static bool WritePOD(
 /****************************************************************************
 ** Local code: File reading
 ****************************************************************************/
+/*!***************************************************************************
+ @Function			ReadCPODData
+ @Modified			s The CPODData to read into
+ @Input				src CSource object to read data from.
+ @Input				nSpec
+ @Input				bValidData
+ @Return			true if successful
+ @Description		Read a CPODData block in  from a pod file
+*****************************************************************************/
 static bool ReadCPODData(
 	CPODData			&s,
-	CStreamResource				&src,
+	CSource				&src,
 	const unsigned int	nSpec,
 	const bool			bValidData)
 {
@@ -404,7 +484,7 @@ static bool ReadCPODData(
 
 	while(src.ReadMarker(nName, nLen))
 	{
-		if(nName == (nSpec | MODELPOD_TAG_END))
+		if(nName == (nSpec | PVRTMODELPOD_TAG_END))
 			return true;
 
 		switch(nName)
@@ -421,9 +501,16 @@ static bool ReadCPODData(
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadCamera
+ @Modified			s The SPODCamera to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a camera block in from a pod file
+*****************************************************************************/
 static bool ReadCamera(
 	SPODCamera	&s,
-	CStreamResource		&src)
+	CSource		&src)
 {
 	unsigned int nName, nLen;
 
@@ -431,7 +518,7 @@ static bool ReadCamera(
 	{
 		switch(nName)
 		{
-		case ePODFileCamera | MODELPOD_TAG_END:			return true;
+		case ePODFileCamera | PVRTMODELPOD_TAG_END:			return true;
 
 		case ePODFileCamIdxTgt:		if(!src.Read(s.nIdxTarget)) return false;					break;
 		case ePODFileCamFOV:		if(!src.Read(s.fFOV)) return false;							break;
@@ -446,9 +533,16 @@ static bool ReadCamera(
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadLight
+ @Modified			s The SPODLight to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a light block in from a pod file
+*****************************************************************************/
 static bool ReadLight(
 	SPODLight	&s,
-	CStreamResource		&src)
+	CSource		&src)
 {
 	unsigned int nName, nLen;
 
@@ -456,7 +550,7 @@ static bool ReadLight(
 	{
 		switch(nName)
 		{
-		case ePODFileLight | MODELPOD_TAG_END:			return true;
+		case ePODFileLight | PVRTMODELPOD_TAG_END:			return true;
 
 		case ePODFileLightIdxTgt:	if(!src.Read(s.nIdxTarget)) return false;	break;
 		case ePODFileLightColour:	if(!src.Read(s.pfColour)) return false;		break;
@@ -469,9 +563,16 @@ static bool ReadLight(
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadMaterial
+ @Modified			s The SPODMaterial to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a material block in from a pod file
+*****************************************************************************/
 static bool ReadMaterial(
 	SPODMaterial	&s,
-	CStreamResource			&src)
+	CSource			&src)
 {
 	unsigned int nName, nLen;
 
@@ -479,7 +580,7 @@ static bool ReadMaterial(
 	{
 		switch(nName)
 		{
-		case ePODFileMaterial | MODELPOD_TAG_END:			return true;
+		case ePODFileMaterial | PVRTMODELPOD_TAG_END:			return true;
 
 		case ePODFileMatName:			if(!src.ReadAfterAlloc(s.pszName, nLen)) return false;			break;
 		case ePODFileMatIdxTexDiffuse:	if(!src.Read(s.nIdxTexDiffuse)) return false;					break;
@@ -498,9 +599,16 @@ static bool ReadMaterial(
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadMesh
+ @Modified			s The SPODMesh to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a mesh block in from a pod file
+*****************************************************************************/
 static bool ReadMesh(
 	SPODMesh	&s,
-	CStreamResource		&src)
+	CSource		&src)
 {
 	unsigned int	nName, nLen;
 	unsigned int	nUVWs=0;
@@ -509,13 +617,13 @@ static bool ReadMesh(
 	{
 		switch(nName)
 		{
-		case ePODFileMesh | MODELPOD_TAG_END:
+		case ePODFileMesh | PVRTMODELPOD_TAG_END:
 			if(nUVWs != s.nNumUVW) return false;
 			return true;
 
 		case ePODFileMeshNumVtx:			if(!src.Read(s.nNumVertex)) return false;													break;
 		case ePODFileMeshNumFaces:			if(!src.Read(s.nNumFaces)) return false;													break;
-		case ePODFileMeshNumUVW:			if(!src.Read(s.nNumUVW)) return false;	if(!(s.psUVW = new CPODData[s.nNumUVW * sizeof(CPODData)])) return false;	break;
+		case ePODFileMeshNumUVW:			if(!src.Read(s.nNumUVW)) return false;	if(!SafeAlloc(s.psUVW, s.nNumUVW)) return false;	break;
 		case ePODFileMeshStripLength:		if(!src.ReadAfterAlloc(s.pnStripLength, nLen)) return false;								break;
 		case ePODFileMeshNumStrips:			if(!src.Read(s.nNumStrips)) return false;													break;
 		case ePODFileMeshInterleaved:		if(!src.ReadAfterAlloc(s.pInterleaved, nLen)) return false;									break;
@@ -542,39 +650,90 @@ static bool ReadMesh(
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadNode
+ @Modified			s The SPODNode to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a node block in from a pod file
+*****************************************************************************/
 static bool ReadNode(
 	SPODNode	&s,
-	CStreamResource		&src)
+	CSource		&src)
 {
 	unsigned int nName, nLen;
+	bool bOldNodeFormat = false;
+	VERTTYPE fPos[3]   = {0,0,0};
+	VERTTYPE fQuat[4]  = {0,0,0,f2vt(1)};
+	VERTTYPE fScale[7] = {f2vt(1),f2vt(1),f2vt(1),0,0,0,0};
+	unsigned int nSizeOfOldScale = sizeof(VERTTYPE) * 3;
 
 	while(src.ReadMarker(nName, nLen))
 	{
 		switch(nName)
 		{
-		case ePODFileNode | MODELPOD_TAG_END:			return true;
+		case ePODFileNode | PVRTMODELPOD_TAG_END:
+			if(bOldNodeFormat)
+			{
+				if(s.pfAnimPosition)
+					s.nAnimFlags |= ePODHasPositionAni;
+				else
+				{
+					s.pfAnimPosition = (VERTTYPE*) malloc(sizeof(fPos));
+					memcpy(s.pfAnimPosition, fPos, sizeof(fPos));
+				}
+
+				if(s.pfAnimRotation)
+					s.nAnimFlags |= ePODHasRotationAni;
+				else
+				{
+					s.pfAnimRotation = (VERTTYPE*) malloc(sizeof(fQuat));
+					memcpy(s.pfAnimRotation, fQuat, sizeof(fQuat));
+				}
+
+				if(s.pfAnimScale)
+					s.nAnimFlags |= ePODHasScaleAni;
+				else
+				{
+					s.pfAnimScale = (VERTTYPE*) malloc(sizeof(fScale));
+					memcpy(s.pfAnimScale, fScale, sizeof(fScale));
+				}
+			}
+			return true;
 
 		case ePODFileNodeIdx:		if(!src.Read(s.nIdx)) return false;								break;
 		case ePODFileNodeName:		if(!src.ReadAfterAlloc(s.pszName, nLen)) return false;			break;
 		case ePODFileNodeIdxMat:	if(!src.Read(s.nIdxMaterial)) return false;						break;
 		case ePODFileNodeIdxParent:	if(!src.Read(s.nIdxParent)) return false;						break;
-		case ePODFileNodePos:		if(!src.Read(s.pfPosition)) return false;						break;
-		case ePODFileNodeRot:		if(!src.Read(s.pfRotation)) return false;						break;
-		case ePODFileNodeScale:		if(!src.Read(s.pfScale)) return false;							break;
+		case ePODFileNodeAnimFlags:if(!src.Read(s.nAnimFlags))return false;							break;
 		case ePODFileNodeAnimPos:	if(!src.ReadAfterAlloc(s.pfAnimPosition, nLen)) return false;	break;
 		case ePODFileNodeAnimRot:	if(!src.ReadAfterAlloc(s.pfAnimRotation, nLen)) return false;	break;
 		case ePODFileNodeAnimScale:	if(!src.ReadAfterAlloc(s.pfAnimScale, nLen)) return false;		break;
+		case ePODFileNodeAnimMatrix:if(!src.ReadAfterAlloc(s.pfAnimMatrix, nLen)) return false;	break;
+
+		// Parameters from the older pod format
+		case ePODFileNodePos:		if(!src.Read(fPos))   return false;		bOldNodeFormat = true;		break;
+		case ePODFileNodeRot:		if(!src.Read(fQuat))  return false;		bOldNodeFormat = true;		break;
+		case ePODFileNodeScale:		if(!src.Read(fScale,nSizeOfOldScale)) return false;		bOldNodeFormat = true;		break;
 
 		default:
 			if(!src.Skip(nLen)) return false;
 		}
 	}
+
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadTexture
+ @Modified			s The SPODTexture to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a texture block in from a pod file
+*****************************************************************************/
 static bool ReadTexture(
 	SPODTexture	&s,
-	CStreamResource		&src)
+	CSource		&src)
 {
 	unsigned int nName, nLen;
 
@@ -582,7 +741,7 @@ static bool ReadTexture(
 	{
 		switch(nName)
 		{
-		case ePODFileTexture | MODELPOD_TAG_END:			return true;
+		case ePODFileTexture | PVRTMODELPOD_TAG_END:			return true;
 
 		case ePODFileTexName:		if(!src.ReadAfterAlloc(s.pszName, nLen)) return false;			break;
 
@@ -593,9 +752,16 @@ static bool ReadTexture(
 	return false;
 }
 
+/*!***************************************************************************
+ @Function			ReadScene
+ @Modified			s The SPODScene to read into
+ @Input				src	CSource object to read data from.
+ @Return			true if successful
+ @Description		Read a scene block in from a pod file
+*****************************************************************************/
 static bool ReadScene(
 	SPODScene	&s,
-	CStreamResource		&src)
+	CSource		&src)
 {
 	unsigned int nName, nLen;
 	unsigned int nCameras=0, nLights=0, nMaterials=0, nMeshes=0, nTextures=0, nNodes=0;
@@ -604,7 +770,7 @@ static bool ReadScene(
 	{
 		switch(nName)
 		{
-		case ePODFileScene | MODELPOD_TAG_END:
+		case ePODFileScene | PVRTMODELPOD_TAG_END:
 			if(nCameras		!= s.nNumCamera) return false;
 			if(nLights		!= s.nNumLight) return false;
 			if(nMaterials	!= s.nNumMaterial) return false;
@@ -615,13 +781,13 @@ static bool ReadScene(
 
 		case ePODFileColourBackground:	if(!src.Read(s.pfColourBackground)) return false;	break;
 		case ePODFileColourAmbient:		if(!src.Read(s.pfColourAmbient)) return false;		break;
-		case ePODFileNumCamera:			if(!src.Read(s.nNumCamera)) return false;			if(!(s.pCamera = new SPODCamera[s.nNumCamera * sizeof(SPODCamera)])) return false;		break;
-		case ePODFileNumLight:			if(!src.Read(s.nNumLight)) return false;			if(!(s.pLight = new SPODLight[s.nNumLight * sizeof(SPODLight)])) return false;			break;
-		case ePODFileNumMesh:			if(!src.Read(s.nNumMesh)) return false;				if(!(s.pMesh = new SPODMesh[s.nNumMesh * sizeof(SPODMesh)])) return false;			break;
-		case ePODFileNumNode:			if(!src.Read(s.nNumNode)) return false;				if(!(s.pNode = new SPODNode[s.nNumNode * sizeof(SPODNode)])) return false;			break;
+		case ePODFileNumCamera:			if(!src.Read(s.nNumCamera)) return false;			if(!SafeAlloc(s.pCamera, s.nNumCamera)) return false;		break;
+		case ePODFileNumLight:			if(!src.Read(s.nNumLight)) return false;			if(!SafeAlloc(s.pLight, s.nNumLight)) return false;			break;
+		case ePODFileNumMesh:			if(!src.Read(s.nNumMesh)) return false;				if(!SafeAlloc(s.pMesh, s.nNumMesh)) return false;			break;
+		case ePODFileNumNode:			if(!src.Read(s.nNumNode)) return false;				if(!SafeAlloc(s.pNode, s.nNumNode)) return false;			break;
 		case ePODFileNumMeshNode:		if(!src.Read(s.nNumMeshNode)) return false;			break;
-		case ePODFileNumTexture:		if(!src.Read(s.nNumTexture)) return false;			if(!(s.pTexture = new SPODTexture[s.nNumTexture * sizeof(SPODTexture)])) return false;		break;
-		case ePODFileNumMaterial:		if(!src.Read(s.nNumMaterial)) return false;			if(!(s.pMaterial = new SPODMaterial[s.nNumMaterial * sizeof(SPODMaterial)])) return false;	break;
+		case ePODFileNumTexture:		if(!src.Read(s.nNumTexture)) return false;			if(!SafeAlloc(s.pTexture, s.nNumTexture)) return false;		break;
+		case ePODFileNumMaterial:		if(!src.Read(s.nNumMaterial)) return false;			if(!SafeAlloc(s.pMaterial, s.nNumMaterial)) return false;	break;
 		case ePODFileNumFrame:			if(!src.Read(s.nNumFrame)) return false;			break;
 		case ePODFileFlags:				if(!src.Read(s.nFlags)) return false;				break;
 
@@ -641,24 +807,28 @@ static bool ReadScene(
 
 /*!***************************************************************************
  @Function			Read
- @Output			pS
- @Input				src
- @Output			pszExpOpt
- @Input				count
+ @Output			pS				SPODScene data. May be NULL.
+ @Input				src				CSource object to read data from.
+ @Output			pszExpOpt		Export options.
+ @Input				count			Data size.
  @Description		Loads the specified ".POD" file; returns the scene in
 					pScene. This structure must later be destroyed with
-					ModelPODDestroy() to prevent memory leaks.
+					PVRTModelPODDestroy() to prevent memory leaks.
 					".POD" files are exported from 3D Studio MAX using a
-					PowerVR plugin.
+					PowerVR plugin. pS may be NULL if only the export options
+					are required.
 *****************************************************************************/
 static bool Read(
 	SPODScene		* const pS,
-	CStreamResource			&src,
+	CSource			&src,
 	char			* const pszExpOpt,
 	const size_t	count)
 {
 	unsigned int	nName, nLen;
 	bool			bVersionOK = false, bDone = false;
+
+	if(pS)
+		pS->bBigEndian = !PVRTIsLittleEndian();
 
 	while(src.ReadMarker(nName, nLen))
 	{
@@ -667,12 +837,12 @@ static bool Read(
 		case ePODFileVersion:
 			{
 				char *pszVersion = NULL;
-				if(nLen != strlen(MODELPOD_VERSION)+1) return false;
-				if(!(pszVersion = (char*)malloc(nLen * sizeof(char)))) return false;
+				if(nLen != strlen(PVRTMODELPOD_VERSION)+1) return false;
+				if(!SafeAlloc(pszVersion, nLen)) return false;
 				if(!src.Read(pszVersion, nLen)) return false;
-				if(strcmp(pszVersion, MODELPOD_VERSION) != 0) return false;
+				if(strcmp(pszVersion, PVRTMODELPOD_VERSION) != 0) return false;
 				bVersionOK = true;
-				free(pszVersion);
+				delete [] pszVersion;
 			}
 			continue;
 
@@ -688,13 +858,18 @@ static bool Read(
 		case ePODFileExpOpt:
 			if(pszExpOpt)
 			{
-				if(!src.Read(pszExpOpt, _MIN(nLen, count))) return false;
+				if(!src.Read(pszExpOpt, min(nLen, (unsigned int) count))) return false;
 				return true;
 			}
 			break;
 
-		case ePODFileScene | MODELPOD_TAG_END:
+		case ePODFileScene | PVRTMODELPOD_TAG_END:
 			return bVersionOK == true && bDone == true;
+
+		case (unsigned int) ePODFileEndiannessMisMatch:
+			//PVRTErrorOutputDebug("Error: Endianness mismatch between the .pod file and the platform.\n");
+			return false;
+
 		}
 
 		// Unhandled data, skip it
@@ -705,19 +880,19 @@ static bool Read(
 	/*
 		Convert data to fixed or float point as this build desires
 	*/
-#ifdef  FIXEDPOINTENABLE
-	if(!(pS->nFlags & MODELPODSF_FIXED))
-		ModelPODToggleFixedPoint(*pS);
+#ifdef PVRT_FIXED_POINT_ENABLE
+	if(!(pS->nFlags & PVRTMODELPODSF_FIXED))
+		PVRTModelPODToggleFixedPoint(*pS);
 #else
-	if(pS->nFlags & MODELPODSF_FIXED)
-		ModelPODToggleFixedPoint(*pS);
+	if(pS->nFlags & PVRTMODELPODSF_FIXED)
+		PVRTModelPODToggleFixedPoint(*pS);
 #endif
 
 	return bVersionOK == true && bDone == true;
 }
 
 /****************************************************************************
-** Class: CPODScene
+** Class: CPVRTModelPOD
 ****************************************************************************/
 
 /*!***************************************************************************
@@ -725,16 +900,16 @@ static bool Read(
  @Input				pszFileName		Filename to load
  @Output			pszExpOpt		String in which to place exporter options
  @Input				count			Maximum number of characters to store.
- @Return			TRUE if successful, FALSE if not
+ @Return			PVR_SUCCESS if successful, PVR_FAIL if not
  @Description		Loads the specified ".POD" file; returns the scene in
 					pScene. This structure must later be destroyed with
-					ModelPODDestroy() to prevent memory leaks.
+					PVRTModelPODDestroy() to prevent memory leaks.
 					".POD" files are exported from 3D Studio MAX using a
 					PowerVR plugin.
 					If pszExpOpt is NULL, the scene is loaded; otherwise the
 					scene is not loaded and pszExpOpt is filled in.
 *****************************************************************************/
-bool CPODScene::ReadFromFile(
+bool CPVRTModelPOD::ReadFromFile(
 	const char		* const pszFileName,
 	char			* const pszExpOpt,
 	const size_t	count)
@@ -747,7 +922,7 @@ bool CPODScene::ReadFromFile(
 	memset(this, 0, sizeof(*this));
 	if(!Read(pszExpOpt ? NULL : this, src, pszExpOpt, count))
 		return false;
-	if(!InitImpl())
+	if(InitImpl() != true)
 		return false;
 	return true;
 }
@@ -755,19 +930,291 @@ bool CPODScene::ReadFromFile(
 /*!***************************************************************************
  @Function			ReadFromMemory
  @Input				scene			Scene data from the header file
- @Return			TRUE if successful, FALSE if not
+ @Return			PVR_SUCCESS if successful, PVR_FAIL if not
  @Description		Sets the scene data from the supplied data structure. Use
 					when loading from .H files.
 *****************************************************************************/
-bool CPODScene::ReadFromMemory(
+bool CPVRTModelPOD::ReadFromMemory(
 	const SPODScene &scene)
 {
+	Destroy();
+
 	memset(this, 0, sizeof(*this));
+
 	*(SPODScene*)this = scene;
 
-	if(!InitImpl())
+	if(InitImpl() != true)
 		return false;
+
 	m_pImpl->bFromMemory = true;
+
+	return true;
+}
+
+/*!***************************************************************************
+ @Function			CopyCPODData
+ @Input				Target
+ @Input				Source
+ @Input				ui32No
+ @Input				bInterleaved
+ @Description		Used by CopyFromMemory to copy the CPODData
+*****************************************************************************/
+void CopyCPODData(CPODData &Target, CPODData &Source, unsigned int ui32No, bool bInterleaved)
+{
+	free(Target.pData);
+
+	Target.eType	= Source.eType;
+	Target.n		= Source.n;
+	Target.nStride  = Source.nStride;
+
+	if(bInterleaved)
+	{
+		Target.pData = Source.pData;
+	}
+	else if(Source.pData)
+	{
+		size_t ui32Size = PVRTModelPODDataStride(Target) * ui32No;
+
+		if(SafeAlloc(Target.pData, ui32Size))
+			memcpy(Target.pData, Source.pData, ui32Size);
+	}
+}
+
+/*!***************************************************************************
+ @Function			CopyFromMemory
+ @Input				scene			Scene data
+ @Return			PVR_SUCCESS if successful, PVR_FAIL if not
+ @Description		Sets the scene data from the supplied data structure.
+*****************************************************************************/
+bool CPVRTModelPOD::CopyFromMemory(const SPODScene &scene)
+{
+	Destroy();
+
+	unsigned int i,j;
+
+	// SPODScene
+	nNumFrame	= scene.nNumFrame;
+	nFlags		= scene.nFlags;
+	bBigEndian	= scene.bBigEndian;
+
+	for(i = 0; i < 3; ++i)
+	{
+		pfColourBackground[i] = scene.pfColourBackground[i];
+		pfColourAmbient[i]	  = scene.pfColourAmbient[i];
+	}
+
+	// Nodes
+	if(scene.nNumNode && SafeAlloc(pNode, sizeof(SPODNode) * scene.nNumNode))
+	{
+		nNumNode     = scene.nNumNode;
+		nNumMeshNode = scene.nNumMeshNode;
+
+		for(i = 0; i < nNumNode; ++i)
+		{
+			pNode[i].nIdx = scene.pNode[i].nIdx;
+			pNode[i].nIdxMaterial = scene.pNode[i].nIdxMaterial;
+			pNode[i].nIdxParent = scene.pNode[i].nIdxParent;
+			pNode[i].nAnimFlags = scene.pNode[i].nAnimFlags;
+
+			if(scene.pNode[i].pszName && SafeAlloc(pNode[i].pszName, strlen(scene.pNode[i].pszName) + 1))
+				memcpy(pNode[i].pszName, scene.pNode[i].pszName, strlen(scene.pNode[i].pszName) + 1);
+
+			int i32Size;
+
+			i32Size = scene.pNode[i].nAnimFlags & ePODHasPositionAni ? scene.nNumFrame : 1;
+
+			if(scene.pNode[i].pfAnimPosition && SafeAlloc(pNode[i].pfAnimPosition, sizeof(*pNode[i].pfAnimPosition) * i32Size * 3))
+				memcpy(pNode[i].pfAnimPosition, scene.pNode[i].pfAnimPosition, sizeof(*pNode[i].pfAnimPosition) * i32Size * 3);
+
+			i32Size = scene.pNode[i].nAnimFlags & ePODHasRotationAni ? scene.nNumFrame : 1;
+
+			if(scene.pNode[i].pfAnimRotation && SafeAlloc(pNode[i].pfAnimRotation, sizeof(*pNode[i].pfAnimRotation) * i32Size * 4))
+				memcpy(pNode[i].pfAnimRotation, scene.pNode[i].pfAnimRotation, sizeof(*pNode[i].pfAnimRotation) * i32Size * 4);
+
+			i32Size = scene.pNode[i].nAnimFlags & ePODHasScaleAni ? scene.nNumFrame : 1;
+
+			if(scene.pNode[i].pfAnimScale && SafeAlloc(pNode[i].pfAnimScale, sizeof(*pNode[i].pfAnimScale) * i32Size * 7))
+				memcpy(pNode[i].pfAnimScale, scene.pNode[i].pfAnimScale, sizeof(*pNode[i].pfAnimScale) * i32Size * 7);
+
+			i32Size = scene.pNode[i].nAnimFlags & ePODHasMatrixAni ? scene.nNumFrame : 1;
+
+			if(scene.pNode[i].pfAnimMatrix && SafeAlloc(pNode[i].pfAnimMatrix, sizeof(*pNode[i].pfAnimMatrix) * i32Size * 16))
+				memcpy(pNode[i].pfAnimMatrix, scene.pNode[i].pfAnimMatrix, sizeof(*pNode[i].pfAnimMatrix) * i32Size * 16);
+		}
+	}
+
+	// Meshes
+	if(scene.nNumMesh && SafeAlloc(pMesh, sizeof(SPODMesh) * scene.nNumMesh))
+	{
+		nNumMesh = scene.nNumMesh;
+
+		for(i = 0; i < nNumMesh; ++i)
+		{
+			size_t  i32Stride = 0;
+			bool bInterleaved = scene.pMesh[i].pInterleaved != 0;
+			pMesh[i].nNumVertex = scene.pMesh[i].nNumVertex;
+			pMesh[i].nNumFaces  = scene.pMesh[i].nNumFaces;
+
+			// Face data
+			CopyCPODData(pMesh[i].sFaces	 , scene.pMesh[i].sFaces	 , pMesh[i].nNumFaces * 3, false);
+
+			// Vertex data
+			CopyCPODData(pMesh[i].sVertex	 , scene.pMesh[i].sVertex	 , pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sVertex);
+
+			CopyCPODData(pMesh[i].sNormals	 , scene.pMesh[i].sNormals	 , pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sNormals);
+
+			CopyCPODData(pMesh[i].sTangents	 , scene.pMesh[i].sTangents	 , pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sTangents);
+
+			CopyCPODData(pMesh[i].sBinormals , scene.pMesh[i].sBinormals , pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sBinormals);
+
+			CopyCPODData(pMesh[i].sVtxColours, scene.pMesh[i].sVtxColours, pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sVtxColours);
+
+			CopyCPODData(pMesh[i].sBoneIdx	 , scene.pMesh[i].sBoneIdx	 , pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sBoneIdx);
+
+			CopyCPODData(pMesh[i].sBoneWeight, scene.pMesh[i].sBoneWeight, pMesh[i].nNumVertex, bInterleaved);
+			i32Stride += PVRTModelPODDataStride(pMesh[i].sBoneWeight);
+
+			if(scene.pMesh[i].nNumUVW && SafeAlloc(pMesh[i].psUVW, sizeof(CPODData) * scene.pMesh[i].nNumUVW))
+			{
+				pMesh[i].nNumUVW = scene.pMesh[i].nNumUVW;
+
+				for(j = 0; j < pMesh[i].nNumUVW; ++j)
+				{
+					CopyCPODData(pMesh[i].psUVW[j], scene.pMesh[i].psUVW[j], pMesh[i].nNumVertex, bInterleaved);
+					i32Stride += PVRTModelPODDataStride(pMesh[i].psUVW[j]);
+				}
+			}
+
+			// Allocate and copy interleaved array
+			if(bInterleaved && SafeAlloc(pMesh[i].pInterleaved, pMesh[i].nNumVertex * i32Stride))
+				memcpy(pMesh[i].pInterleaved, scene.pMesh[i].pInterleaved, pMesh[i].nNumVertex * i32Stride);
+
+			if(scene.pMesh[i].pnStripLength && SafeAlloc(pMesh[i].pnStripLength, sizeof(*pMesh[i].pnStripLength) * pMesh[i].nNumFaces))
+			{
+				memcpy(pMesh[i].pnStripLength, scene.pMesh[i].pnStripLength, sizeof(*pMesh[i].pnStripLength) * pMesh[i].nNumFaces);
+				pMesh[i].nNumStrips = scene.pMesh[i].nNumStrips;
+			}
+
+			if(scene.pMesh[i].sBoneBatches.nBatchCnt)
+			{
+				pMesh[i].sBoneBatches.Release();
+
+				pMesh[i].sBoneBatches.nBatchBoneMax = scene.pMesh[i].sBoneBatches.nBatchBoneMax;
+				pMesh[i].sBoneBatches.nBatchCnt     = scene.pMesh[i].sBoneBatches.nBatchCnt;
+
+				if(scene.pMesh[i].sBoneBatches.pnBatches)
+				{
+					pMesh[i].sBoneBatches.pnBatches = new int[pMesh[i].sBoneBatches.nBatchCnt * pMesh[i].sBoneBatches.nBatchBoneMax];
+
+					if(pMesh[i].sBoneBatches.pnBatches)
+						memcpy(pMesh[i].sBoneBatches.pnBatches, scene.pMesh[i].sBoneBatches.pnBatches, pMesh[i].sBoneBatches.nBatchCnt * pMesh[i].sBoneBatches.nBatchBoneMax * sizeof(*pMesh[i].sBoneBatches.pnBatches));
+				}
+
+				if(scene.pMesh[i].sBoneBatches.pnBatchBoneCnt)
+				{
+					pMesh[i].sBoneBatches.pnBatchBoneCnt = new int[pMesh[i].sBoneBatches.nBatchCnt];
+
+					if(pMesh[i].sBoneBatches.pnBatchBoneCnt)
+						memcpy(pMesh[i].sBoneBatches.pnBatchBoneCnt, scene.pMesh[i].sBoneBatches.pnBatchBoneCnt, pMesh[i].sBoneBatches.nBatchCnt * sizeof(*pMesh[i].sBoneBatches.pnBatchBoneCnt));
+				}
+
+				if(scene.pMesh[i].sBoneBatches.pnBatchOffset)
+				{
+					pMesh[i].sBoneBatches.pnBatchOffset = new int[pMesh[i].sBoneBatches.nBatchCnt];
+
+					if(pMesh[i].sBoneBatches.pnBatchOffset)
+						memcpy(pMesh[i].sBoneBatches.pnBatchOffset, scene.pMesh[i].sBoneBatches.pnBatchOffset, pMesh[i].sBoneBatches.nBatchCnt * sizeof(*pMesh[i].sBoneBatches.pnBatchOffset));
+				}
+			}
+
+			pMesh[i].ePrimitiveType = scene.pMesh[i].ePrimitiveType;
+		}
+	}
+
+	// Cameras
+	if(scene.nNumCamera && SafeAlloc(pCamera, sizeof(SPODCamera) * scene.nNumCamera))
+	{
+		nNumCamera = scene.nNumCamera;
+
+		for(i = 0; i < nNumCamera; ++i)
+		{
+			pCamera[i].nIdxTarget = scene.pCamera[i].nIdxTarget;
+			pCamera[i].fNear = scene.pCamera[i].fNear;
+			pCamera[i].fFar  = scene.pCamera[i].fFar;
+			pCamera[i].fFOV  = scene.pCamera[i].fFOV;
+
+			if(scene.pCamera[i].pfAnimFOV && SafeAlloc(pCamera[i].pfAnimFOV, sizeof(*pCamera[i].pfAnimFOV) * scene.nNumFrame))
+				memcpy(pCamera[i].pfAnimFOV, scene.pCamera[i].pfAnimFOV, sizeof(*pCamera[i].pfAnimFOV) * scene.nNumFrame);
+		}
+	}
+
+	// Lights
+	if(scene.nNumLight && SafeAlloc(pLight, sizeof(SPODLight) * scene.nNumLight))
+	{
+		nNumLight = scene.nNumLight;
+
+		for(i = 0; i < nNumLight; ++i)
+		{
+			pLight[i].nIdxTarget = scene.pLight[i].nIdxTarget;
+
+			for(j = 0; j < 3; ++j)
+				pLight[i].pfColour[j] = scene.pLight[i].pfColour[j];
+
+			pLight[i].eType = scene.pLight[i].eType;
+		}
+	}
+
+	// Textures
+	if(scene.nNumTexture && SafeAlloc(pTexture, sizeof(SPODTexture) * scene.nNumTexture))
+	{
+		nNumTexture = scene.nNumTexture;
+
+		for(i = 0; i < nNumTexture; ++i)
+		{
+			if(scene.pTexture[i].pszName && SafeAlloc(pTexture[i].pszName, strlen(scene.pTexture[i].pszName) + 1))
+				memcpy(pTexture[i].pszName, scene.pTexture[i].pszName, strlen(scene.pTexture[i].pszName) + 1);
+		}
+	}
+
+	// Materials
+	if(scene.nNumMaterial && SafeAlloc(pMaterial, sizeof(SPODMaterial) * scene.nNumMaterial))
+	{
+		nNumMaterial = scene.nNumMaterial;
+
+		for(i = 0; i < nNumMaterial; ++i)
+		{
+			if(scene.pMaterial[i].pszName && SafeAlloc(pMaterial[i].pszName, strlen(scene.pMaterial[i].pszName) + 1))
+				memcpy(pMaterial[i].pszName, scene.pMaterial[i].pszName, strlen(scene.pMaterial[i].pszName) + 1);
+
+			pMaterial[i].nIdxTexDiffuse = scene.pMaterial[i].nIdxTexDiffuse;
+			pMaterial[i].fMatOpacity = scene.pMaterial[i].fMatOpacity;
+
+			for(j = 0; j < 3; ++j)
+			{
+				pMaterial[i].pfMatAmbient[j]  = scene.pMaterial[i].pfMatAmbient[j];
+				pMaterial[i].pfMatDiffuse[j]  = scene.pMaterial[i].pfMatDiffuse[j];
+				pMaterial[i].pfMatSpecular[j] = scene.pMaterial[i].pfMatSpecular[j];
+			}
+
+			pMaterial[i].fMatShininess = scene.pMaterial[i].fMatShininess;
+
+			if(scene.pMaterial[i].pszEffectFile && SafeAlloc(pMaterial[i].pszEffectFile, strlen(scene.pMaterial[i].pszEffectFile) + 1))
+				memcpy(pMaterial[i].pszEffectFile, scene.pMaterial[i].pszEffectFile, strlen(scene.pMaterial[i].pszEffectFile) + 1);
+
+			if(scene.pMaterial[i].pszEffectName && SafeAlloc(pMaterial[i].pszEffectName, strlen(scene.pMaterial[i].pszEffectName) + 1))
+				memcpy(pMaterial[i].pszEffectName, scene.pMaterial[i].pszEffectName, strlen(scene.pMaterial[i].pszEffectName) + 1);
+		}
+	}
+
+	if(InitImpl() != true)
+		return false;
+
 	return true;
 }
 
@@ -778,11 +1225,11 @@ bool CPODScene::ReadFromMemory(
  @Return			TRUE if successful, FALSE if not
  @Description		Loads the specified ".POD" file; returns the scene in
 					pScene. This structure must later be destroyed with
-					ModelPODDestroy() to prevent memory leaks.
+					PVRTModelPODDestroy() to prevent memory leaks.
 					".POD" files are exported from 3D Studio MAX using a
 					PowerVR plugin.
 *****************************************************************************/
-bool CPODScene::ReadFromResource(
+EPVRTError CPVRTModelPOD::ReadFromResource(
 	const TCHAR * const pszName)
 {
 	CSourceResource src;
@@ -807,10 +1254,10 @@ bool CPODScene::ReadFromResource(
 				in this case call it after the data has been created.
 				Otherwise, do not call this function.
 *************************************************************************/
-bool CPODScene::InitImpl()
+bool CPVRTModelPOD::InitImpl()
 {
 	// Allocate space for implementation data
-	m_pImpl = new SPODImpl;
+	m_pImpl = new SPVRTPODImpl;
 	if(!m_pImpl)
 		return false;
 
@@ -835,7 +1282,7 @@ bool CPODScene::InitImpl()
  @Description	Clears the matrix cache; use this if necessary when you
 				edit the position or animation of a node.
 *************************************************************************/
-void CPODScene::FlushCache()
+void CPVRTModelPOD::FlushCache()
 {
 	// Pre-calc frame zero matrices
 	SetFrame(0);
@@ -851,14 +1298,14 @@ void CPODScene::FlushCache()
  @Function			Constructor
  @Description		Initializes the pointer to scene data to NULL
 *****************************************************************************/
-CPODScene::CPODScene() : m_pImpl(NULL)
+CPVRTModelPOD::CPVRTModelPOD() : m_pImpl(NULL)
 {}
 
 /*!***************************************************************************
  @Function			Destructor
  @Description		Frees the memory allocated to store the scene in pScene.
 *****************************************************************************/
-CPODScene::~CPODScene()
+CPVRTModelPOD::~CPVRTModelPOD()
 {
 	Destroy();
 }
@@ -867,7 +1314,7 @@ CPODScene::~CPODScene()
  @Function			Destroy
  @Description		Frees the memory allocated to store the scene in pScene.
 *****************************************************************************/
-void CPODScene::Destroy()
+void CPVRTModelPOD::Destroy()
 {
 	unsigned int	i;
 
@@ -881,54 +1328,57 @@ void CPODScene::Destroy()
 		{
 
 			for(i = 0; i < nNumCamera; ++i)
-				delete(pCamera[i].pfAnimFOV);
-			delete(pCamera);
+				free(pCamera[i].pfAnimFOV);
+			free(pCamera);
 
-			delete(pLight);
+			free(pLight);
 
 			for(i = 0; i < nNumMaterial; ++i)
 			{
-				delete(pMaterial[i].pszName);
-				delete(pMaterial[i].pszEffectFile);
-				delete(pMaterial[i].pszEffectName);
+				free(pMaterial[i].pszName);
+				free(pMaterial[i].pszEffectFile);
+				free(pMaterial[i].pszEffectName);
 			}
-			delete(pMaterial);
+			free(pMaterial);
 
 			for(i = 0; i < nNumMesh; ++i) {
-				delete(pMesh[i].sFaces.pData);
-				delete(pMesh[i].pnStripLength);
+				free(pMesh[i].sFaces.pData);
+				free(pMesh[i].pnStripLength);
 				if(pMesh[i].pInterleaved)
 				{
-					delete(pMesh[i].pInterleaved);
+					free(pMesh[i].pInterleaved);
 				}
 				else
 				{
-					delete(pMesh[i].sVertex.pData);
-					delete(pMesh[i].sNormals.pData);
-					delete(pMesh[i].sTangents.pData);
-					delete(pMesh[i].sBinormals.pData);
+					free(pMesh[i].sVertex.pData);
+					free(pMesh[i].sNormals.pData);
+					free(pMesh[i].sTangents.pData);
+					free(pMesh[i].sBinormals.pData);
 					for(unsigned int j = 0; j < pMesh[i].nNumUVW; ++j)
-						delete(pMesh[i].psUVW[j].pData);
-					delete(pMesh[i].sVtxColours.pData);
-					delete(pMesh[i].sBoneIdx.pData);
-					delete(pMesh[i].sBoneWeight.pData);
+						free(pMesh[i].psUVW[j].pData);
+					free(pMesh[i].sVtxColours.pData);
+					free(pMesh[i].sBoneIdx.pData);
+					free(pMesh[i].sBoneWeight.pData);
 				}
-				delete(pMesh[i].psUVW);
+				free(pMesh[i].psUVW);
 				pMesh[i].sBoneBatches.Release();
 			}
-			delete(pMesh);
+			free(pMesh);
 
 			for(i = 0; i < nNumNode; ++i) {
-				delete(pNode[i].pszName);
-				delete(pNode[i].pfAnimPosition);
-				delete(pNode[i].pfAnimRotation);
-				delete(pNode[i].pfAnimScale);
+				free(pNode[i].pszName);
+				free(pNode[i].pfAnimPosition);
+				free(pNode[i].pfAnimRotation);
+				free(pNode[i].pfAnimScale);
+				free(pNode[i].pfAnimMatrix);
+				pNode[i].nAnimFlags = 0;
 			}
-			delete(pNode);
+
+			free(pNode);
 
 			for(i = 0; i < nNumTexture; ++i)
-				delete(pTexture[i].pszName);
-			delete(pTexture);
+				free(pTexture[i].pszName);
+			free(pTexture);
 		}
 
 		// Free the working space used by the implementation
@@ -947,8 +1397,7 @@ void CPODScene::Destroy()
  @Description		Set the animation frame for which subsequent Get*() calls
 					should return data.
 *****************************************************************************/
-void CPODScene::SetFrame(
-	const VERTTYPE fFrame)
+void CPVRTModelPOD::SetFrame(const VERTTYPE fFrame)
 {
 	if(nNumFrame) {
 		/*
@@ -978,24 +1427,45 @@ void CPODScene::SetFrame(
  @Description		Generates the world matrix for the given Mesh Instance;
 					applies the parent's transform too. Uses animation data.
 *****************************************************************************/
-void CPODScene::GetRotationMatrix(
-	 MATRIX		&mOut,
+void CPVRTModelPOD::GetRotationMatrix(
+	MATRIX		&mOut,
 	const SPODNode	&node) const
 {
 	 QUATERNION	q;
 
 	if(node.pfAnimRotation)
 	{
-		 MatrixQuaternionSlerp(
+		if(node.nAnimFlags & ePODHasRotationAni)
+		{
+			MatrixQuaternionSlerp(
 			q,
-			( QUATERNION&)node.pfAnimRotation[4*m_pImpl->nFrame],
-			( QUATERNION&)node.pfAnimRotation[4*(m_pImpl->nFrame+1)], m_pImpl->fBlend);
-		 MatrixRotationQuaternion(mOut, q);
+				(QUATERNION&)node.pfAnimRotation[4*m_pImpl->nFrame],
+				(QUATERNION&)node.pfAnimRotation[4*(m_pImpl->nFrame+1)], m_pImpl->fBlend);
+			MatrixRotationQuaternion(mOut, q);
+		}
+		else
+		{
+			MatrixRotationQuaternion(mOut, *(QUATERNION*)node.pfAnimRotation);
+		}
 	}
 	else
 	{
-		 MatrixRotationQuaternion(mOut, *( QUATERNION*)node.pfRotation);
+		MatrixIdentity(mOut);
 	}
+}
+
+/*!***************************************************************************
+ @Function		GetRotationMatrix
+ @Input			node			Node to get the rotation matrix from
+ @Returns		Rotation matrix
+ @Description	Generates the world matrix for the given Mesh Instance;
+				applies the parent's transform too. Uses animation data.
+*****************************************************************************/
+MATRIX CPVRTModelPOD::GetRotationMatrix(const SPODNode &node) const
+{
+	MATRIX mOut;
+	GetRotationMatrix(mOut,node);
+	return mOut;
 }
 
 /*!***************************************************************************
@@ -1005,24 +1475,45 @@ void CPODScene::GetRotationMatrix(
  @Description		Generates the world matrix for the given Mesh Instance;
 					applies the parent's transform too. Uses animation data.
 *****************************************************************************/
-void CPODScene::GetScalingMatrix(
-	 MATRIX		&mOut,
+void CPVRTModelPOD::GetScalingMatrix(
+	MATRIX		&mOut,
 	const SPODNode	&node) const
 {
 	 VECTOR3 v;
 
 	if(node.pfAnimScale)
 	{
-		 MatrixVec3Lerp(
+		if(node.nAnimFlags & ePODHasScaleAni)
+		{
+			MatrixVec3Lerp(
 			v,
-			( VECTOR3&)node.pfAnimScale[7*(m_pImpl->nFrame+0)],
-			( VECTOR3&)node.pfAnimScale[7*(m_pImpl->nFrame+1)], m_pImpl->fBlend);
-		 MatrixScaling(mOut, v.x, v.y, v.z);
+				(VECTOR3&)node.pfAnimScale[7*(m_pImpl->nFrame+0)],
+				(VECTOR3&)node.pfAnimScale[7*(m_pImpl->nFrame+1)], m_pImpl->fBlend);
+			MatrixScaling(mOut, v.x, v.y, v.z);
 	}
 	else
 	{
-		 MatrixScaling(mOut, node.pfScale[0], node.pfScale[1], node.pfScale[2]);
+			MatrixScaling(mOut, node.pfAnimScale[0], node.pfAnimScale[1], node.pfAnimScale[2]);
+		}
 	}
+	else
+	{
+		MatrixIdentity(mOut);
+	}
+}
+
+/*!***************************************************************************
+ @Function		GetScalingMatrix
+ @Input			node			Node to get the rotation matrix from
+ @Returns		Scaling matrix
+ @Description	Generates the world matrix for the given Mesh Instance;
+				applies the parent's transform too. Uses animation data.
+*****************************************************************************/
+MATRIX CPVRTModelPOD::GetScalingMatrix(const SPODNode &node) const
+{
+	MATRIX mOut;
+	GetScalingMatrix(mOut, node);
+	return mOut;
 }
 
 /*!***************************************************************************
@@ -1032,18 +1523,42 @@ void CPODScene::GetScalingMatrix(
  @Description		Generates the translation vector for the given Mesh
 					Instance. Uses animation data.
 *****************************************************************************/
-void CPODScene::GetTranslation(
-	 VECTOR3		&V,
+void CPVRTModelPOD::GetTranslation(
+	VECTOR3		&V,
 	const SPODNode	&node) const
 {
-	if(node.pfAnimPosition) {
-		 MatrixVec3Lerp(
+	if(node.pfAnimPosition)
+	{
+		if(node.nAnimFlags & ePODHasPositionAni)
+		{
+			MatrixVec3Lerp(
 			V,
-			( VECTOR3&)node.pfAnimPosition[3 * (m_pImpl->nFrame+0)],
-			( VECTOR3&)node.pfAnimPosition[3 * (m_pImpl->nFrame+1)], m_pImpl->fBlend);
-	} else {
-		V = *( VECTOR3*)node.pfPosition;
+				(VECTOR3&)node.pfAnimPosition[3 * (m_pImpl->nFrame+0)],
+				(VECTOR3&)node.pfAnimPosition[3 * (m_pImpl->nFrame+1)], m_pImpl->fBlend);
+		}
+		else
+		{
+			V = *(VECTOR3*) node.pfAnimPosition;
+		}
 	}
+	else
+	{
+		_ASSERT(false);
+	}
+}
+
+/*!***************************************************************************
+ @Function		GetTranslation
+ @Input			node			Node to get the translation vector from
+ @Returns		Translation vector
+ @Description	Generates the translation vector for the given Mesh
+				Instance. Uses animation data.
+*****************************************************************************/
+VECTOR3 CPVRTModelPOD::GetTranslation(const SPODNode &node) const
+{
+	VECTOR3 vOut;
+	GetTranslation(vOut, node);
+	return vOut;
 }
 
 /*!***************************************************************************
@@ -1053,29 +1568,71 @@ void CPODScene::GetTranslation(
  @Description		Generates the world matrix for the given Mesh Instance;
 					applies the parent's transform too. Uses animation data.
 *****************************************************************************/
-void CPODScene::GetTranslationMatrix(
-	 MATRIX		&mOut,
+void CPVRTModelPOD::GetTranslationMatrix(
+	MATRIX		&mOut,
 	const SPODNode	&node) const
 {
 	 VECTOR3 v;
 
 	if(node.pfAnimPosition)
 	{
-		 MatrixVec3Lerp(
-			v,
-			( VECTOR3&)node.pfAnimPosition[3*(m_pImpl->nFrame+0)],
-			( VECTOR3&)node.pfAnimPosition[3*(m_pImpl->nFrame+1)], m_pImpl->fBlend);
-		 MatrixTranslation(mOut, v.x, v.y, v.z);
+		if(node.nAnimFlags & ePODHasPositionAni)
+		{
+			MatrixVec3Lerp(v,
+				(VECTOR3&)node.pfAnimPosition[3*(m_pImpl->nFrame+0)],
+				(VECTOR3&)node.pfAnimPosition[3*(m_pImpl->nFrame+1)], m_pImpl->fBlend);
+			MatrixTranslation(mOut, v.x, v.y, v.z);
+		}
+		else
+		{
+			MatrixTranslation(mOut, node.pfAnimPosition[0], node.pfAnimPosition[1], node.pfAnimPosition[2]);
+		}
 	}
 	else
 	{
-		 MatrixTranslation(mOut,
-			node.pfPosition[0],
-			node.pfPosition[1],
-			node.pfPosition[2]);
+		MatrixIdentity(mOut);
 	}
 }
 
+/*!***************************************************************************
+ @Function		GetTranslationMatrix
+ @Input			node			Node to get the translation matrix from
+ @Returns		Translation matrix
+ @Description	Generates the world matrix for the given Mesh Instance;
+				applies the parent's transform too. Uses animation data.
+*****************************************************************************/
+MATRIX CPVRTModelPOD::GetTranslationMatrix(const SPODNode &node) const
+{
+	MATRIX mOut;
+	GetTranslationMatrix(mOut, node);
+	return mOut;
+}
+
+/*!***************************************************************************
+ @Function		GetTransformationMatrix
+ @Output		mOut			Transformation matrix
+ @Input			node			Node to get the transformation matrix from
+ @Description	Generates the world matrix for the given Mesh Instance;
+				applies the parent's transform too. Uses animation data.
+*****************************************************************************/
+void CPVRTModelPOD::GetTransformationMatrix(MATRIX &mOut, const SPODNode &node) const
+{
+	if(node.pfAnimMatrix)
+	{
+		if(node.nAnimFlags & ePODHasMatrixAni)
+		{
+			mOut = *((MATRIX*) &node.pfAnimMatrix[16*m_pImpl->nFrame]);
+		}
+		else
+		{
+			mOut = *((MATRIX*) node.pfAnimMatrix);
+		}
+	}
+	else
+	{
+		MatrixIdentity(mOut);
+	}
+}
 /*!***************************************************************************
  @Function			GetWorldMatrixNoCache
  @Output			mOut			World matrix
@@ -1083,12 +1640,16 @@ void CPODScene::GetTranslationMatrix(
  @Description		Generates the world matrix for the given Mesh Instance;
 					applies the parent's transform too. Uses animation data.
 *****************************************************************************/
-void CPODScene::GetWorldMatrixNoCache(
-	 MATRIX		&mOut,
+void CPVRTModelPOD::GetWorldMatrixNoCache(
+	MATRIX		&mOut,
 	const SPODNode	&node) const
 {
 	 MATRIX mTmp;
 
+	if(node.pfAnimMatrix) // The transformations are stored as matrices
+		GetTransformationMatrix(mOut, node);
+	else
+	{
 	// Scale
 	GetScalingMatrix(mOut, node);
 
@@ -1099,6 +1660,7 @@ void CPODScene::GetWorldMatrixNoCache(
 	// Translation
 	GetTranslationMatrix(mTmp, node);
 	 MatrixMultiply(mOut, mOut, mTmp);
+	 }
 
 	// Do we have to worry about a parent?
 	if(node.nIdxParent < 0)
@@ -1106,7 +1668,21 @@ void CPODScene::GetWorldMatrixNoCache(
 
 	// Apply parent's transform too.
 	GetWorldMatrixNoCache(mTmp, pNode[node.nIdxParent]);
-	 MatrixMultiply(mOut, mOut, mTmp);
+	MatrixMultiply(mOut, mOut, mTmp);
+}
+
+/*!***************************************************************************
+ @Function		GetWorldMatrixNoCache
+ @Input			node			Node to get the world matrix from
+ @Returns		World matrix
+ @Description	Generates the world matrix for the given Mesh Instance;
+				applies the parent's transform too. Uses animation data.
+*****************************************************************************/
+MATRIX CPVRTModelPOD::GetWorldMatrixNoCache(const SPODNode& node) const
+{
+	MATRIX mWorld;
+	GetWorldMatrixNoCache(mWorld,node);
+	return mWorld;
 }
 
 /*!***************************************************************************
@@ -1116,8 +1692,8 @@ void CPODScene::GetWorldMatrixNoCache(
  @Description		Generates the world matrix for the given Mesh Instance;
 					applies the parent's transform too. Uses animation data.
 *****************************************************************************/
-void CPODScene::GetWorldMatrix(
-	 MATRIX		&mOut,
+void CPVRTModelPOD::GetWorldMatrix(
+	MATRIX		&mOut,
 	const SPODNode	&node) const
 {
 	unsigned int nIdx;
@@ -1159,14 +1735,28 @@ void CPODScene::GetWorldMatrix(
 }
 
 /*!***************************************************************************
+ @Function		GetWorldMatrix
+ @Input			node			Node to get the world matrix from
+ @Returns		World matrix
+ @Description	Generates the world matrix for the given Mesh Instance;
+				applies the parent's transform too. Uses animation data.
+*****************************************************************************/
+MATRIX CPVRTModelPOD::GetWorldMatrix(const SPODNode& node) const
+{
+	MATRIX mWorld;
+	GetWorldMatrix(mWorld,node);
+	return mWorld;
+}
+
+/*!***************************************************************************
  @Function			GetBoneWorldMatrix
  @Output			mOut			Bone world matrix
  @Input				NodeMesh		Mesh to take the bone matrix from
  @Input				NodeBone		Bone to take the matrix from
  @Description		Generates the world matrix for the given bone.
 *****************************************************************************/
-void CPODScene::GetBoneWorldMatrix(
-	 MATRIX		&mOut,
+void CPVRTModelPOD::GetBoneWorldMatrix(
+	MATRIX		&mOut,
 	const SPODNode	&NodeMesh,
 	const SPODNode	&NodeBone)
 {
@@ -1191,7 +1781,23 @@ void CPODScene::GetBoneWorldMatrix(
 
 	// Transform bone into frame fFrame position
 	GetWorldMatrix(mTmp, NodeBone);
-	 MatrixMultiply(mOut, mOut, mTmp);
+	MatrixMultiply(mOut, mOut, mTmp);
+}
+
+/*!***************************************************************************
+ @Function		GetBoneWorldMatrix
+ @Input			NodeMesh		Mesh to take the bone matrix from
+ @Input			NodeBone		Bone to take the matrix from
+ @Returns		Bone world matrix
+ @Description	Generates the world matrix for the given bone.
+*****************************************************************************/
+MATRIX CPVRTModelPOD::GetBoneWorldMatrix(
+	const SPODNode	&NodeMesh,
+	const SPODNode	&NodeBone)
+{
+	MATRIX mOut;
+	GetBoneWorldMatrix(mOut,NodeMesh,NodeBone);
+	return mOut;
 }
 
 /*!***************************************************************************
@@ -1208,10 +1814,10 @@ void CPODScene::GetBoneWorldMatrix(
 					correct direction of the target, one unit away from the
 					camera.
 *****************************************************************************/
-VERTTYPE CPODScene::GetCamera(
-	 VECTOR3			&vFrom,
-	 VECTOR3			&vTo,
-	 VECTOR3			&vUp,
+VERTTYPE CPVRTModelPOD::GetCamera(
+	VECTOR3			&vFrom,
+	VECTOR3			&vTo,
+	VECTOR3			&vUp,
 	const unsigned int	nIdx) const
 {
 	 MATRIX		mTmp;
@@ -1238,7 +1844,7 @@ VERTTYPE CPODScene::GetCamera(
 	vTo.y = -mTmp.f[5] + mTmp.f[13];
 	vTo.z = -mTmp.f[6] + mTmp.f[14];
 
-#ifdef BUILD_DX9
+#if defined(BUILD_DX9) || defined(BUILD_DX10)
 	/*
 		When you rotate the camera from "straight forward" to "straight down", in
 		D3D the UP vector will be [0, 0, 1]
@@ -1281,9 +1887,9 @@ VERTTYPE CPODScene::GetCamera(
 					If the queried camera does not have a target, *pvTo is
 					not changed.
 *****************************************************************************/
-VERTTYPE CPODScene::GetCameraPos(
-	 VECTOR3			&vFrom,
-	 VECTOR3			&vTo,
+VERTTYPE CPVRTModelPOD::GetCameraPos(
+	VECTOR3			&vFrom,
+	VECTOR3			&vTo,
 	const unsigned int	nIdx) const
 {
 	 MATRIX		mTmp;
@@ -1332,9 +1938,9 @@ VERTTYPE CPODScene::GetCameraPos(
  @Description		Calculate the position and direction of the given Light.
 					Uses animation data.
 *****************************************************************************/
-void CPODScene::GetLight(
-	 VECTOR3			&vPos,
-	 VECTOR3			&vDir,
+void CPVRTModelPOD::GetLight(
+	VECTOR3			&vPos,
+	VECTOR3			&vDir,
 	const unsigned int	nIdx) const
 {
 	 MATRIX		mTmp;
@@ -1359,6 +1965,39 @@ void CPODScene::GetLight(
 }
 
 /*!***************************************************************************
+ @Function		GetLight
+ @Input			nIdx			Light number
+ @Return		VECTOR4 position/direction of light with w set correctly
+ @Description	Calculate the position or direction of the given Light.
+				Uses animation data.
+*****************************************************************************/
+Vec4 CPVRTModelPOD::GetLightPosition(const unsigned int u32Idx) const
+{	// TODO: make this a real function instead of just wrapping GetLight()
+	Vec3 vPos, vDir;
+	GetLight(vPos,vDir,u32Idx);
+
+	_ASSERT(u32Idx < nNumLight);
+	_ASSERT(pLight[u32Idx].eType==ePODPoint);
+	return Vec4(vPos,1);
+}
+
+/*!***************************************************************************
+ @Function		GetLightDirection
+ @Input			u32Idx			Light number
+ @Return		VECTOR4 direction of light with w set correctly
+ @Description	Calculate the direction of the given Light. Uses animation data.
+*****************************************************************************/
+Vec4 CPVRTModelPOD::GetLightDirection(const unsigned int u32Idx) const
+{	// TODO: make this a real function instead of just wrapping GetLight()
+	Vec3 vPos, vDir;
+	GetLight(vPos,vDir,u32Idx);
+
+	_ASSERT(u32Idx < nNumLight);
+	_ASSERT(pLight[u32Idx].eType==ePODDirectional);
+	return Vec4(vDir,1);
+}
+
+/*!***************************************************************************
  @Function			CreateSkinIdxWeight
  @Output			pIdx				Four bytes containing matrix indices for vertex (0..255) (D3D: use UBYTE4)
  @Output			pWeight				Four bytes containing blend weights for vertex (0.0 .. 1.0) (D3D: use D3DCOLOR)
@@ -1368,7 +2007,7 @@ void CPODScene::GetLight(
  @Description		Creates the matrix indices and blend weights for a boned
 					vertex. Call once per vertex of a boned mesh.
 *****************************************************************************/
-bool CPODScene::CreateSkinIdxWeight(
+bool CPVRTModelPOD::CreateSkinIdxWeight(
 	char			* const pIdx,			// Four bytes containing matrix indices for vertex (0..255) (D3D: use UBYTE4)
 	char			* const pWeight,		// Four bytes containing blend weights for vertex (0.0 .. 1.0) (D3D: use D3DCOLOR)
 	const int		nVertexBones,			// Number of bones this vertex uses
@@ -1427,9 +2066,13 @@ bool CPODScene::CreateSkinIdxWeight(
 		_ASSERT(nSum == 255);
 	}
 
-#ifdef BUILD_DX9
+#if defined(BUILD_DX9)
 	*(unsigned int*)pIdx = D3DCOLOR_ARGB(nIdx[3], nIdx[2], nIdx[1], nIdx[0]);					// UBYTE4 is WZYX
 	*(unsigned int*)pWeight = D3DCOLOR_RGBA(nWeight[0], nWeight[1], nWeight[2], nWeight[3]);	// D3DCOLORs are WXYZ
+#endif
+#if defined(BUILD_DX10)
+	*(unsigned int*)pIdx = D3DXCOLOR((float)nIdx[3], (float)nIdx[2],(float) nIdx[1], (float)nIdx[0]);					//
+	*(unsigned int*)pWeight = D3DXCOLOR((float)nWeight[0], (float)nWeight[1], (float)nWeight[2], (float)nWeight[3]);	//
 #endif
 
 #if defined(BUILD_OGL) || defined(BUILD_OGLES) || defined(BUILD_OGLES2)
@@ -1450,7 +2093,7 @@ bool CPODScene::CreateSkinIdxWeight(
  @Input				pszExpOpt		A string containing the options used by the exporter
  @Description		Save a binary POD file (.POD).
 *****************************************************************************/
-bool CPODScene::SavePOD(const char * const pszFilename, const char * const pszExpOpt)
+bool CPVRTModelPOD::SavePOD(const char * const pszFilename, const char * const pszExpOpt)
 {
 	FILE	*pFile;
 	bool	bRet;
@@ -1463,7 +2106,7 @@ bool CPODScene::SavePOD(const char * const pszFilename, const char * const pszEx
 
 	// Done
 	fclose(pFile);
-	return bRet;
+	return bRet ? true : false;
 }
 
 /****************************************************************************
@@ -1476,7 +2119,7 @@ bool CPODScene::SavePOD(const char * const pszFilename, const char * const pszEx
  @Return			Size of the data element
  @Description		Returns the size of each data element.
 *****************************************************************************/
-size_t ModelPODDataTypeSize(const EDataType type)
+size_t PVRTModelPODDataTypeSize(const EPVRTDataType type)
 {
 	switch(type)
 	{
@@ -1516,7 +2159,7 @@ size_t ModelPODDataTypeSize(const EDataType type)
 @Return				number of components in the data element
 @Description		Returns the number of components in a data element.
 *****************************************************************************/
-size_t ModelPODDataTypeComponentCount(const EDataType type)
+size_t PVRTModelPODDataTypeComponentCount(const EPVRTDataType type)
 {
 	switch(type)
 	{
@@ -1547,24 +2190,24 @@ size_t ModelPODDataTypeComponentCount(const EDataType type)
 }
 
 /*!***************************************************************************
- @Function			ModelPODDataStride
+ @Function			PVRTModelPODDataStride
  @Input				data		Data elements
  @Return			Size of the vector elements
  @Description		Returns the size of the vector of data elements.
 *****************************************************************************/
-size_t ModelPODDataStride(const CPODData &data)
+size_t PVRTModelPODDataStride(const CPODData &data)
 {
-	return ModelPODDataTypeSize(data.eType) * data.n;
+	return PVRTModelPODDataTypeSize(data.eType) * data.n;
 }
 
 /*!***************************************************************************
- @Function			ModelPODDataConvert
+ @Function			PVRTModelPODDataConvert
  @Modified			data		Data elements to convert
  @Input				eNewType	New type of elements
  @Input				nCnt		Number of elements
  @Description		Convert the format of the array of vectors.
 *****************************************************************************/
-void ModelPODDataConvert(CPODData &data, const unsigned int nCnt, const EDataType eNewType)
+void PVRTModelPODDataConvert(CPODData &data, const unsigned int nCnt, const EPVRTDataType eNewType)
 {
 	 VECTOR4	v;
 	unsigned int	i;
@@ -1586,7 +2229,7 @@ void ModelPODDataConvert(CPODData &data, const unsigned int nCnt, const EDataTyp
 	case EPODDataShortNorm:
 	case EPODDataByte:
 	case EPODDataByteNorm:
-		data.n = old.n * ModelPODDataTypeComponentCount(old.eType);
+		data.n = old.n * PVRTModelPODDataTypeComponentCount(old.eType);
 		break;
 	case EPODDataRGBA:
 	case EPODDataARGB:
@@ -1600,23 +2243,23 @@ void ModelPODDataConvert(CPODData &data, const unsigned int nCnt, const EDataTyp
 	}
 
 	data.eType = eNewType;
-	data.nStride = (unsigned int)ModelPODDataStride(data);
+	data.nStride = (unsigned int)PVRTModelPODDataStride(data);
 
 	// If the old & new strides are identical, we can convert it in place
 	if(old.nStride != data.nStride)
 	{
-		data.pData = new unsigned char[data.nStride * nCnt];
+		data.pData = (unsigned char*)malloc(data.nStride * nCnt);
 	}
 
 	for(i = 0; i < nCnt; ++i)
 	{
-		DataTypeRead(&v, old.pData + i * old.nStride, old.eType, old.n);
-		DataTypeWrite(data.pData + i * data.nStride, eNewType, data.n * ModelPODDataTypeComponentCount(data.eType), &v);
+		PVRTVertexRead(&v, old.pData + i * old.nStride, old.eType, old.n);
+		PVRTVertexWrite(data.pData + i * data.nStride, eNewType, data.n * PVRTModelPODDataTypeComponentCount(data.eType), &v);
 	}
 
 	if(old.nStride != data.nStride)
 	{
-		delete(old.pData);
+		free(old.pData);
 	}
 }
 
@@ -1634,14 +2277,14 @@ static int BitCount(unsigned int n)
 }
 
 /*!***************************************************************************
- @Function			ModelPODDataShred
+ @Function			PVRTModelPODDataShred
  @Modified			data		Data elements to modify
  @Input				nCnt		Number of elements
  @Input				nMask		Channel masks
  @Description		Reduce the number of dimensions in 'data' using the channel
 					masks in 'nMask'.
 *****************************************************************************/
-void ModelPODDataShred(CPODData &data, const unsigned int nCnt, const unsigned int nMask)
+void PVRTModelPODDataShred(CPODData &data, const unsigned int nCnt, const unsigned int nMask)
 {
 	CPODData		old;
 	 VECTOR4	v;
@@ -1658,13 +2301,13 @@ void ModelPODDataShred(CPODData &data, const unsigned int nCnt, const unsigned i
 		data.n = old.n;
 
 	// Allocate output memory
-	data.nStride = (unsigned int)ModelPODDataStride(data);
-	data.pData = new unsigned char[data.nStride * nCnt];
+	data.nStride = (unsigned int)PVRTModelPODDataStride(data);
+	data.pData = (unsigned char*)malloc(data.nStride * nCnt);
 
 	for(i = 0; i < nCnt; ++i)
 	{
 		// Read the vector
-		DataTypeRead(&v, old.pData + i * old.nStride, old.eType, old.n);
+		PVRTVertexRead(&v, old.pData + i * old.nStride, old.eType, old.n);
 
 		// Shred the vector
 		nCh = 0;
@@ -1681,18 +2324,20 @@ void ModelPODDataShred(CPODData &data, const unsigned int nCnt, const unsigned i
 			((unsigned int*)&v)[nCh] = 0;
 
 		// Write the vector
-		DataTypeWrite((char*)data.pData + i * data.nStride, data.eType, data.n * ModelPODDataTypeComponentCount(data.eType), &v);
+		PVRTVertexWrite((char*)data.pData + i * data.nStride, data.eType, data.n * PVRTModelPODDataTypeComponentCount(data.eType), &v);
 	}
 
-	delete(old.pData);
+	free(old.pData);
 }
 
 /*!***************************************************************************
  @Function			InterleaveArray
- @Output
- @Modified
- @Input
- @Description
+ @Modified			pInterleaved
+ @Modified			data
+ @Input				nNumVertex
+ @Input				nStride
+ @Input				nOffset
+ @Description		Interleaves the pod data
 *****************************************************************************/
 static void InterleaveArray(
 	char			* const pInterleaved,
@@ -1706,18 +2351,18 @@ static void InterleaveArray(
 
 	for(int i = 0; i < nNumVertex; ++i)
 		memcpy(pInterleaved + i * nStride + nOffset, (char*)data.pData + i * data.nStride, data.nStride);
-	delete(data.pData);
+	free(data.pData);
 	data.nStride	= (unsigned int)nStride;
 	data.pData		= (unsigned char*)nOffset;
-	nOffset += (int)ModelPODDataStride(data);
+	nOffset += (int)PVRTModelPODDataStride(data);
 }
 
 /*!***************************************************************************
  @Function			DeinterleaveArray
- @Output
- @Modified
- @Input
- @Description
+ @Input				data
+ @Input				pInter
+ @Input				nNumVertex
+ @Description		DeInterleaves the pod data
 *****************************************************************************/
 static void DeinterleaveArray(
 	CPODData			&data,
@@ -1725,14 +2370,14 @@ static void DeinterleaveArray(
 	const int			nNumVertex)
 {
 	unsigned int	nSrcStride	= data.nStride;
-	unsigned int	nDestStride	= (unsigned int)ModelPODDataStride(data);
+	unsigned int	nDestStride	= (unsigned int)PVRTModelPODDataStride(data);
 	const char		*pSrc		= (char*)pInter + (size_t)data.pData;
 
 	if(!nSrcStride)
 		return;
 
 	data.pData = 0;
-	data.pData = new unsigned char[nDestStride * nNumVertex]; // SafeAlloc(data.pData, nDestStride * nNumVertex);
+	SafeAlloc(data.pData, nDestStride * nNumVertex);
 	data.nStride	= nDestStride;
 
 	for(int i = 0; i < nNumVertex; ++i)
@@ -1740,11 +2385,11 @@ static void DeinterleaveArray(
 }
 
 /*!***************************************************************************
- @Function		ModelPODToggleInterleaved
+ @Function		PVRTModelPODToggleInterleaved
  @Modified		mesh		Mesh to modify
  @Description	Switches the supplied mesh to or from interleaved data format.
 *****************************************************************************/
-void ModelPODToggleInterleaved(SPODMesh &mesh)
+void PVRTModelPODToggleInterleaved(SPODMesh &mesh)
 {
 	unsigned int i;
 
@@ -1767,7 +2412,7 @@ void ModelPODToggleInterleaved(SPODMesh &mesh)
 		DeinterleaveArray(mesh.sVtxColours, mesh.pInterleaved, mesh.nNumVertex);
 		DeinterleaveArray(mesh.sBoneIdx, mesh.pInterleaved, mesh.nNumVertex);
 		DeinterleaveArray(mesh.sBoneWeight, mesh.pInterleaved, mesh.nNumVertex);
-		delete(mesh.pInterleaved);
+		free(mesh.pInterleaved);
 	}
 	else
 	{
@@ -1778,20 +2423,20 @@ void ModelPODToggleInterleaved(SPODMesh &mesh)
 		*/
 
 		// Calculate how much data the interleaved array must store
-		nStride = ModelPODDataStride(mesh.sVertex);
-		nStride += ModelPODDataStride(mesh.sNormals);
-		nStride += ModelPODDataStride(mesh.sTangents);
-		nStride += ModelPODDataStride(mesh.sBinormals);
+		nStride = PVRTModelPODDataStride(mesh.sVertex);
+		nStride += PVRTModelPODDataStride(mesh.sNormals);
+		nStride += PVRTModelPODDataStride(mesh.sTangents);
+		nStride += PVRTModelPODDataStride(mesh.sBinormals);
 
 		for(i = 0; i < mesh.nNumUVW; ++i)
-			nStride += ModelPODDataStride(mesh.psUVW[i]);
+			nStride += PVRTModelPODDataStride(mesh.psUVW[i]);
 
-		nStride += ModelPODDataStride(mesh.sVtxColours);
-		nStride += ModelPODDataStride(mesh.sBoneIdx);
-		nStride += ModelPODDataStride(mesh.sBoneWeight);
+		nStride += PVRTModelPODDataStride(mesh.sVtxColours);
+		nStride += PVRTModelPODDataStride(mesh.sBoneIdx);
+		nStride += PVRTModelPODDataStride(mesh.sBoneWeight);
 
 		// Allocate interleaved array
-		mesh.pInterleaved = new unsigned char[mesh.nNumVertex * nStride]; //SafeAlloc(mesh.pInterleaved, mesh.nNumVertex * nStride);
+		SafeAlloc(mesh.pInterleaved, mesh.nNumVertex * nStride);
 
 		// Interleave the data
 		nOffset = 0;
@@ -1810,12 +2455,12 @@ void ModelPODToggleInterleaved(SPODMesh &mesh)
 }
 
 /*!***************************************************************************
- @Function			ModelPODDeIndex
+ @Function			PVRTModelPODDeIndex
  @Modified			mesh		Mesh to modify
  @Description		De-indexes the supplied mesh. The mesh must be
 					Interleaved before calling this function.
 *****************************************************************************/
-void ModelPODDeIndex(SPODMesh &mesh)
+void PVRTModelPODDeIndex(SPODMesh &mesh)
 {
 	unsigned char *pNew = 0;
 
@@ -1825,29 +2470,29 @@ void ModelPODDeIndex(SPODMesh &mesh)
 	_ASSERT(mesh.nNumVertex && mesh.nNumFaces);
 
 	// Create a new vertex list
-	mesh.nNumVertex = ModelPODCountIndices(mesh);
-	pNew = new unsigned char[mesh.sVertex.nStride * mesh.nNumVertex];// SafeAlloc(pNew, mesh.sVertex.nStride * mesh.nNumVertex);
+	mesh.nNumVertex = PVRTModelPODCountIndices(mesh);
+	SafeAlloc(pNew, mesh.sVertex.nStride * mesh.nNumVertex);
 
 	// Deindex the vertices
 	for(unsigned int i = 0; i < mesh.nNumVertex; ++i)
 		memcpy(pNew + i * mesh.sVertex.nStride, (char*)mesh.pInterleaved + ((unsigned short*)mesh.sFaces.pData)[i] * mesh.sVertex.nStride, mesh.sVertex.nStride);
 
 	// Replace the old vertex list
-	delete(mesh.pInterleaved);
+	free(mesh.pInterleaved);
 	mesh.pInterleaved = pNew;
 
 	// Get rid of the index list
-	delete(mesh.sFaces.pData);
+	free(mesh.sFaces.pData);
 	mesh.sFaces.n		= 0;
 	mesh.sFaces.nStride	= 0;
 }
 
 /*!***************************************************************************
- @Function			ModelPODToggleStrips
+ @Function			PVRTModelPODToggleStrips
  @Modified			mesh		Mesh to modify
  @Description		Converts the supplied mesh to or from strips.
 *****************************************************************************/
-void ModelPODToggleStrips(SPODMesh &mesh)
+void PVRTModelPODToggleStrips(SPODMesh &mesh)
 {
 	CPODData	old;
 	size_t	nIdxSize, nTriStride;
@@ -1856,12 +2501,12 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 		return;
 
 	_ASSERT(mesh.sFaces.n == 1);
-	nIdxSize	= ModelPODDataTypeSize(mesh.sFaces.eType);
-	nTriStride	= ModelPODDataStride(mesh.sFaces) * 3;
+	nIdxSize	= PVRTModelPODDataTypeSize(mesh.sFaces.eType);
+	nTriStride	= PVRTModelPODDataStride(mesh.sFaces) * 3;
 
 	old					= mesh.sFaces;
 	mesh.sFaces.pData	= 0;
-	mesh.sFaces.pData = new unsigned char[nTriStride * mesh.nNumFaces]; //SafeAlloc(mesh.sFaces.pData, nTriStride * mesh.nNumFaces);
+	SafeAlloc(mesh.sFaces.pData, nTriStride * mesh.nNumFaces);
 
 	if(mesh.nNumStrips)
 	{
@@ -1914,7 +2559,7 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 		}
 
 		_ASSERT(nListIdxCnt == mesh.nNumFaces*3);
-		delete(mesh.pnStripLength);
+		free(mesh.pnStripLength);
 		mesh.nNumStrips = 0;
 	}
 	else
@@ -1926,7 +2571,9 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 		/*
 			Convert to strips
 		*/
-		mesh.pnStripLength	= new unsigned int[mesh.nNumFaces * sizeof(*mesh.pnStripLength)]; //(unsigned int*)calloc(mesh.nNumFaces, sizeof(*mesh.pnStripLength));
+		//mesh.pnStripLength	= (unsigned int*)calloc(mesh.nNumFaces, sizeof(*mesh.pnStripLength));
+		mesh.pnStripLength	= (unsigned int*)malloc(mesh.nNumFaces * sizeof(*mesh.pnStripLength));
+		memset(mesh.pnStripLength, 0 , mesh.nNumFaces * sizeof(*mesh.pnStripLength));
 		mesh.nNumStrips		= 0;
 		nIdxCnt				= 0;
 
@@ -1940,9 +2587,9 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 			p1 = n1;
 			p2 = n2;
 
-			DataTypeRead(&n0, (char*)old.pData + (3 * i + 0) * old.nStride, old.eType);
-			DataTypeRead(&n1, (char*)old.pData + (3 * i + 1) * old.nStride, old.eType);
-			DataTypeRead(&n2, (char*)old.pData + (3 * i + 2) * old.nStride, old.eType);
+			PVRTVertexRead(&n0, (char*)old.pData + (3 * i + 0) * old.nStride, old.eType);
+			PVRTVertexRead(&n1, (char*)old.pData + (3 * i + 1) * old.nStride, old.eType);
+			PVRTVertexRead(&n2, (char*)old.pData + (3 * i + 2) * old.nStride, old.eType);
 
 			if(mesh.pnStripLength[mesh.nNumStrips])
 			{
@@ -1950,7 +2597,7 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 				{
 					if(p1 == n1 && p2 == n0)
 					{
-						DataTypeWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n2);
+						PVRTVertexWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n2);
 						++nIdxCnt;
 						mesh.pnStripLength[mesh.nNumStrips] += 1;
 						continue;
@@ -1960,7 +2607,7 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 				{
 					if(p2 == n1 && p0 == n0)
 					{
-						DataTypeWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n2);
+						PVRTVertexWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n2);
 						++nIdxCnt;
 						mesh.pnStripLength[mesh.nNumStrips] += 1;
 						continue;
@@ -1973,11 +2620,11 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 			/*
 				Start of strip, copy entire triangle
 			*/
-			DataTypeWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n0);
+			PVRTVertexWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n0);
 			++nIdxCnt;
-			DataTypeWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n1);
+			PVRTVertexWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n1);
 			++nIdxCnt;
-			DataTypeWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n2);
+			PVRTVertexWrite((char*)mesh.sFaces.pData + nIdxCnt * mesh.sFaces.nStride, mesh.sFaces.eType, n2);
 			++nIdxCnt;
 
 			mesh.pnStripLength[mesh.nNumStrips] += 1;
@@ -1987,19 +2634,19 @@ void ModelPODToggleStrips(SPODMesh &mesh)
 			++mesh.nNumStrips;
 
 		SafeRealloc(mesh.sFaces.pData, nIdxCnt * nIdxSize);
-		mesh.pnStripLength	= (unsigned int*)reallocEM(mesh.pnStripLength, sizeof(mesh.pnStripLength), sizeof(*mesh.pnStripLength) * mesh.nNumStrips);
+		mesh.pnStripLength	= (unsigned int*)realloc(mesh.pnStripLength, sizeof(*mesh.pnStripLength) * mesh.nNumStrips);
 	}
 
-	delete(old.pData);
+	free(old.pData);
 }
 
 /*!***************************************************************************
- @Function		ModelPODCountIndices
+ @Function		PVRTModelPODCountIndices
  @Input			mesh		Mesh
  @Return		Number of indices used by mesh
  @Description	Counts the number of indices of a mesh
 *****************************************************************************/
-unsigned int ModelPODCountIndices(const SPODMesh &mesh)
+unsigned int PVRTModelPODCountIndices(const SPODMesh &mesh)
 {
 	if(mesh.nNumStrips)
 	{
@@ -2034,16 +2681,17 @@ static void FixedToFloat(float * const pf, const int * const pn, unsigned int n)
 }
 
 /*!***************************************************************************
- @Function		ModelPODToggleFixedPoint
+ @Function		PVRTModelPODToggleFixedPoint
  @Modified		s		Scene to modify
  @Description	Switch all non-vertex data between fixed-point and
 				floating-point.
 *****************************************************************************/
-void ModelPODToggleFixedPoint(SPODScene &s)
+void PVRTModelPODToggleFixedPoint(SPODScene &s)
 {
 	unsigned int i;
+	int i32TransformNo;
 
-	if(s.nFlags & MODELPODSF_FIXED)
+	if(s.nFlags & PVRTMODELPODSF_FIXED)
 	{
 		/*
 			Convert to floating-point
@@ -2063,12 +2711,17 @@ void ModelPODToggleFixedPoint(SPODScene &s)
 
 		for(i = 0; i < s.nNumNode; ++i)
 		{
-			FixedToFloat((float*)s.pNode[i].pfPosition,		(int*)s.pNode[i].pfPosition,	3);
-			FixedToFloat((float*)s.pNode[i].pfRotation,		(int*)s.pNode[i].pfRotation,	4);
-			FixedToFloat((float*)s.pNode[i].pfScale,		(int*)s.pNode[i].pfScale,		3);
-			FixedToFloat((float*)s.pNode[i].pfAnimPosition,	(int*)s.pNode[i].pfAnimPosition,	3 * s.nNumFrame);
-			FixedToFloat((float*)s.pNode[i].pfAnimRotation,	(int*)s.pNode[i].pfAnimRotation,	4 * s.nNumFrame);
-			FixedToFloat((float*)s.pNode[i].pfAnimScale,	(int*)s.pNode[i].pfAnimScale,		7 * s.nNumFrame);
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasPositionAni ? s.nNumFrame : 1;
+			FixedToFloat((float*)s.pNode[i].pfAnimPosition,	(int*)s.pNode[i].pfAnimPosition,	3  * i32TransformNo);
+
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasRotationAni ? s.nNumFrame : 1;
+			FixedToFloat((float*)s.pNode[i].pfAnimRotation,	(int*)s.pNode[i].pfAnimRotation,	4  * i32TransformNo);
+
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasScaleAni ? s.nNumFrame : 1;
+			FixedToFloat((float*)s.pNode[i].pfAnimScale,	(int*)s.pNode[i].pfAnimScale,		7  * i32TransformNo);
+
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasMatrixAni ? s.nNumFrame : 1;
+			FixedToFloat((float*)s.pNode[i].pfAnimMatrix,	(int*)s.pNode[i].pfAnimMatrix,		16 * i32TransformNo);
 		}
 
 		for(i = 0; i < s.nNumMaterial; ++i)
@@ -2103,12 +2756,17 @@ void ModelPODToggleFixedPoint(SPODScene &s)
 
 		for(i = 0; i < s.nNumNode; ++i)
 		{
-			FloatToFixed((int*)s.pNode[i].pfPosition,		(float*)s.pNode[i].pfPosition,	3);
-			FloatToFixed((int*)s.pNode[i].pfRotation,		(float*)s.pNode[i].pfRotation,	4);
-			FloatToFixed((int*)s.pNode[i].pfScale,		(float*)s.pNode[i].pfScale,		3);
-			FloatToFixed((int*)s.pNode[i].pfAnimPosition,	(float*)s.pNode[i].pfAnimPosition,	3 * s.nNumFrame);
-			FloatToFixed((int*)s.pNode[i].pfAnimRotation,	(float*)s.pNode[i].pfAnimRotation,	4 * s.nNumFrame);
-			FloatToFixed((int*)s.pNode[i].pfAnimScale,	(float*)s.pNode[i].pfAnimScale,		7 * s.nNumFrame);
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasPositionAni ? s.nNumFrame : 1;
+			FloatToFixed((int*)s.pNode[i].pfAnimPosition,	(float*)s.pNode[i].pfAnimPosition,	3 * i32TransformNo);
+
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasRotationAni ? s.nNumFrame : 1;
+			FloatToFixed((int*)s.pNode[i].pfAnimRotation,	(float*)s.pNode[i].pfAnimRotation,	4 * i32TransformNo);
+
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasScaleAni ? s.nNumFrame : 1;
+			FloatToFixed((int*)s.pNode[i].pfAnimScale,	(float*)s.pNode[i].pfAnimScale,		7 * i32TransformNo);
+
+			i32TransformNo = s.pNode[i].nAnimFlags & ePODHasMatrixAni ? s.nNumFrame : 1;
+			FloatToFixed((int*)s.pNode[i].pfAnimMatrix,	(float*)s.pNode[i].pfAnimMatrix,		16 * i32TransformNo);
 		}
 
 		for(i = 0; i < s.nNumMaterial; ++i)
@@ -2125,7 +2783,140 @@ void ModelPODToggleFixedPoint(SPODScene &s)
 	}
 
 	// Done
-	s.nFlags ^= MODELPODSF_FIXED;
+	s.nFlags ^= PVRTMODELPODSF_FIXED;
+}
+
+/*!***************************************************************************
+ @Function		ToggleCPODDataEndianness
+ @Modified		Target The pod data
+ @Input			ui32No Number of vertices
+ @Modified		pInterleaved The pod scenes interleaved data
+ @Description	Modify the endianness of Target and pInterleaved
+*****************************************************************************/
+void ToggleCPODDataEndianness(CPODData &Target, unsigned int ui32No, unsigned char* pInterleaved)
+{
+	size_t ui32Size = PVRTModelPODDataTypeSize(Target.eType);
+
+	if(Target.n > 0 && ui32Size > 1)
+	{
+		if(!pInterleaved && Target.pData)
+		{
+
+			for(unsigned int i = 0; i < ui32Size * Target.n * ui32No; i += (unsigned int) ui32Size)
+				PVRTByteSwap(&Target.pData[i], (int) ui32Size);
+
+		}
+		else if(pInterleaved) // Toggle data in array
+		{
+			unsigned char* pData = pInterleaved + (size_t) Target.pData;
+
+			while(ui32No > 0)
+			{
+				for(unsigned int i = 0; i < ui32Size * Target.n; i += (unsigned int) ui32Size)
+				{
+					PVRTByteSwap(&pData[i], (int) ui32Size);
+				}
+
+				pData += Target.nStride;
+
+				--ui32No;
+			}
+		}
+	}
+}
+
+/*!***************************************************************************
+ @Function		PVRTModelPODToggleEndianness
+ @Modified		scene
+ @Description	Modify the endianness of the scene
+*****************************************************************************/
+void PVRTModelPODToggleEndianness(SPODScene &scene)
+{
+	unsigned int i,j;
+
+	// Nodes
+	for(i = 0; i < scene.nNumNode; ++i)
+	{
+		unsigned int i32Size;
+
+		i32Size = scene.pNode[i].nAnimFlags & ePODHasPositionAni ? scene.nNumFrame : 1;
+
+		if(scene.pNode[i].pfAnimPosition)
+		{
+			for(j = 0; j < i32Size * 3; ++j)
+				PVRTByteSwap((unsigned char*) &scene.pNode[i].pfAnimPosition[j], sizeof(*scene.pNode[i].pfAnimPosition));
+		}
+
+		i32Size = scene.pNode[i].nAnimFlags & ePODHasRotationAni ? scene.nNumFrame : 1;
+
+		if(scene.pNode[i].pfAnimRotation)
+		{
+			for(j = 0; j < i32Size * 4; ++j)
+				PVRTByteSwap((unsigned char*) &scene.pNode[i].pfAnimRotation[j], sizeof(*scene.pNode[i].pfAnimRotation));
+		}
+
+		i32Size = scene.pNode[i].nAnimFlags & ePODHasScaleAni ? scene.nNumFrame : 1;
+
+		if(scene.pNode[i].pfAnimScale)
+		{
+			for(j = 0; j < i32Size * 7; ++j)
+				PVRTByteSwap((unsigned char*) &scene.pNode[i].pfAnimScale[j], sizeof(*scene.pNode[i].pfAnimScale));
+		}
+
+		i32Size = scene.pNode[i].nAnimFlags & ePODHasMatrixAni ? scene.nNumFrame : 1;
+
+		if(scene.pNode[i].pfAnimMatrix)
+		{
+			for(j = 0; j < i32Size * 16; ++j)
+				PVRTByteSwap((unsigned char*) &scene.pNode[i].pfAnimMatrix[j], sizeof(*scene.pNode[i].pfAnimMatrix));
+		}
+	}
+
+	// Meshes
+	for(i = 0; i < scene.nNumMesh; ++i)
+	{
+		// Face data
+		ToggleCPODDataEndianness(scene.pMesh[i].sFaces, scene.pMesh[i].nNumFaces * 3, 0);
+
+		// Vertex data
+		ToggleCPODDataEndianness(scene.pMesh[i].sVertex	    , scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+		ToggleCPODDataEndianness(scene.pMesh[i].sNormals	, scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+		ToggleCPODDataEndianness(scene.pMesh[i].sTangents	, scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+		ToggleCPODDataEndianness(scene.pMesh[i].sBinormals  , scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+		ToggleCPODDataEndianness(scene.pMesh[i].sVtxColours	, scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+		ToggleCPODDataEndianness(scene.pMesh[i].sBoneIdx	, scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+		ToggleCPODDataEndianness(scene.pMesh[i].sBoneWeight	, scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+
+		for(j = 0; j < scene.pMesh[i].nNumUVW; ++j)
+			ToggleCPODDataEndianness(scene.pMesh[i].psUVW[j], scene.pMesh[i].nNumVertex, scene.pMesh[i].pInterleaved);
+
+		if(scene.pMesh[i].pnStripLength)
+		{
+			for(j = 0; j < scene.pMesh[i].nNumFaces; ++j)
+				PVRTByteSwap((unsigned char*) &scene.pMesh[i].pnStripLength[j], sizeof(*scene.pMesh[i].pnStripLength));
+		}
+
+		for(j = 0; j < (unsigned int) scene.pMesh[i].sBoneBatches.nBatchCnt; ++j)
+		{
+			PVRTByteSwap((unsigned char*) &scene.pMesh[i].sBoneBatches.pnBatchBoneCnt[j], sizeof(*scene.pMesh[i].sBoneBatches.pnBatchBoneCnt));
+			PVRTByteSwap((unsigned char*) &scene.pMesh[i].sBoneBatches.pnBatchOffset[j], sizeof(*scene.pMesh[i].sBoneBatches.pnBatchOffset));
+		}
+
+		for(j = 0; j < (unsigned int) scene.pMesh[i].sBoneBatches.nBatchCnt * scene.pMesh[i].sBoneBatches.nBatchBoneMax; ++j)
+			PVRTByteSwap((unsigned char*) &scene.pMesh[i].sBoneBatches.pnBatches[j], sizeof(*scene.pMesh[i].sBoneBatches.pnBatches));
+	}
+
+	// Cameras
+	for(i = 0; i < scene.nNumCamera; ++i)
+	{
+		if(scene.pCamera[i].pfAnimFOV)
+		{
+			for(j = 0; j < sizeof(*scene.pCamera[i].pfAnimFOV) * scene.nNumFrame; ++i)
+				PVRTByteSwap((unsigned char*) &scene.pCamera[i].pfAnimFOV[i], sizeof(*scene.pCamera[i].pfAnimFOV));
+		}
+	}
+
+	scene.bBigEndian = !scene.bBigEndian;
 }
 
 /*****************************************************************************

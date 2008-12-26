@@ -1,4 +1,18 @@
+/******************************************************************************
+
+ @File         PVRTMemoryFileSystem.h
+
+ @Title        
+
+ @Copyright    Copyright (C) 2007 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Memory file system for resource files
+
+******************************************************************************/
 /*
+All changes:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 
@@ -17,57 +31,61 @@ subject to the following restrictions:
 
 #include <stddef.h>
 
-class CMemoryFileSystem
+class CPVRTMemoryFileSystem
 {
 public:	
-	CMemoryFileSystem(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy = false);
-
+	CPVRTMemoryFileSystem(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy = false);
 	
-	//
-	// pszFilename		Name of file to register
-	// pBuffer			Pointer to file data
-	// Size			File size
-	// bCopy			Name and data should be copied?
-	// Registers a block of memory as a file that can be looked up
-	// by name. 
-	//
+	/*!***************************************************************************
+	 @Function		RegisterMemoryFile
+	 @Input			pszFilename		Name of file to register
+	 @Input			pBuffer			Pointer to file data
+	 @Input			Size			File size
+	 @Input			bCopy			Name and data should be copied?
+	 @Description	Registers a block of memory as a file that can be looked up
+	                by name.
+	*****************************************************************************/
 	static void RegisterMemoryFile(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy = false);
 	
-	// 
-	// pszFilename		Name of file to open
-	// ppBuffer			Pointer to file data
-	// pSize			File size
-	// true if the file was found in memory, false otherwise
-	// Looks up a file in the memory file system by name. Returns a
-	// pointer to the file data as well as its size on success.
-	// 
+	/*!***************************************************************************
+	 @Function		GetFile
+	 @Input			pszFilename		Name of file to open
+	 @Output		ppBuffer		Pointer to file data
+	 @Output		pSize			File size
+	 @Return		true if the file was found in memory, false otherwise
+	 @Description	Looks up a file in the memory file system by name. Returns a
+	                pointer to the file data as well as its size on success.
+	*****************************************************************************/
 	static bool GetFile(const char* pszFilename, const void** ppBuffer, size_t* pSize);
 
-	//
-	// The number of registered files
-	//
+	//static std::string DebugOut();
+
+	/*!***************************************************************************
+	 @Function		GetNumFiles
+	 @Return		The number of registered files
+	 @Description	Getter for the number of registered files
+	*****************************************************************************/
 	static int GetNumFiles();
 
-	//
-	// i32Index		Index of file
-	// A pointer to the filename of the requested file
-	// Looks up a file in the memory file system by name. Returns a
-	// pointer to the file data as well as its size on success.
-	//
+	/*!***************************************************************************
+	 @Function		GetFilename
+	 @Input			i32Index		Index of file
+	 @Return		A pointer to the filename of the requested file
+	 @Description	Looks up a file in the memory file system by name. Returns a
+	                pointer to the file data as well as its size on success.
+	*****************************************************************************/
 	static const char* GetFilename(int i32Index);
 	
-	// needs to be implemented
-	// std::string DebugOut();
-
 protected:	
 	class CAtExit
 	{
 	public:
-		//
-		// Workaround for platforms that
-		// don't support the atexit() function. This deletes any memory
-		// file system data.
-		//
+		/*!***************************************************************************
+		@Function		Destructor
+		@Description	Destructor of CAtExit class. Workaround for platforms that
+		                don't support the atexit() function. This deletes any memory
+						file system data.
+		*****************************************************************************/
 		~CAtExit();
 	};
 	static CAtExit s_AtExit;

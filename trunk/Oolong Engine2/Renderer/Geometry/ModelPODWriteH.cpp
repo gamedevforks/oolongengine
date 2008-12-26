@@ -1,4 +1,20 @@
+/******************************************************************************
+
+ @File         PVRTModelPODWriteH.cpp
+
+ @Title        
+
+ @Copyright    Copyright (C) 2003 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Code to load POD files - models exported from MAX.
+
+******************************************************************************/
+
+
 /*
+All changes:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 
@@ -78,7 +94,8 @@ static void WriteHData(
 	FILE				* const pFile,
 	const unsigned long	* const p,
 	const unsigned int	nBytes,
-	const char			* const sName)
+	const char			* const sName,
+	const bool bChangeEndian)
 {
 	unsigned int i, j;
 	unsigned int n = (nBytes + 3) / 4;
@@ -102,7 +119,7 @@ static void WriteHData(
 		fprintf(pFile, "	");
 		for(j = 0; j < 128 && i < n; ++i, ++j)
 		{
-			fprintf(pFile, "0x%08x,", (unsigned int) pTmp[i]);
+			fprintf(pFile, "0x%08x,", bChangeEndian ? PVRTByteSwap32(pTmp[i]) : pTmp[i]);
 		}
 		fprintf(pFile, "\n");
 	}
@@ -118,7 +135,8 @@ static void WriteHData(
 static void WriteHCameras(
 	FILE			* const pFile,
 	const SPODScene	&s,
-	const char		* const sName)
+	const char		* const sName,
+	const bool		bChangeEndian)
 {
 	char			*pStr;
 	unsigned int	i;
@@ -135,14 +153,14 @@ static void WriteHCameras(
 		else
 		{
 			sprintf(&pStr[i * CFAH], "%s%dAnimFOV", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pCamera[i].pfAnimFOV, s.nNumFrame * sizeof(*s.pCamera[i].pfAnimFOV), &pStr[i * CFAH]);
+			WriteHData(pFile, (unsigned long*)s.pCamera[i].pfAnimFOV, s.nNumFrame * sizeof(*s.pCamera[i].pfAnimFOV), &pStr[i * CFAH], bChangeEndian);
 		}
 	}
 
 	fprintf(pFile, "const SPODCamera %s[%d] =\n{\n", sName, s.nNumCamera);
 	for(i = 0; i < s.nNumCamera; ++i)
 	{
-		if(s.nFlags & MODELPODSF_FIXED)
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
 			fprintf(pFile, "	{ %d, 0x%08x, 0x%08x, 0x%08x, (int*)%s },\n", s.pCamera[i].nIdxTarget, (int&)s.pCamera[i].fFOV, (int&)s.pCamera[i].fFar, (int&)s.pCamera[i].fNear, &pStr[i * CFAH]);
 		else
 			fprintf(pFile, "	{ %d, %ff, %ff, %ff, (float*)%s },\n", s.pCamera[i].nIdxTarget, s.pCamera[i].fFOV, s.pCamera[i].fFar, s.pCamera[i].fNear, &pStr[i * CFAH]);
@@ -159,7 +177,7 @@ static void WriteHLights(
 	fprintf(pFile, "const SPODLight %s[%d] =\n{\n", sName, s.nNumLight);
 	for(unsigned int i = 0; i < s.nNumLight; ++i)
 	{
-		if(s.nFlags & MODELPODSF_FIXED)
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
 			fprintf(pFile, "	{ %d, { 0x%08x, 0x%08x, 0x%08x }, (EPODLight)%08x },\n", s.pLight[i].nIdxTarget, (int&)s.pLight[i].pfColour[0], (int&)s.pLight[i].pfColour[1], (int&)s.pLight[i].pfColour[2], s.pLight[i].eType);
 		else
 			fprintf(pFile, "	{ %d, { %ff, %ff, %ff }, (EPODLight)%08x },\n", s.pLight[i].nIdxTarget, s.pLight[i].pfColour[0], s.pLight[i].pfColour[1], s.pLight[i].pfColour[2], s.pLight[i].eType);
@@ -173,6 +191,7 @@ static void WriteHCPODData(
 	const CPODData		&s,
 	const unsigned int	n,
 	const bool			bValidData,
+	const bool			bChangeEndian,
 	const char			* const sName,
 	const char			* const sNamePost)
 {
@@ -180,10 +199,10 @@ static void WriteHCPODData(
 
 	if(bValidData && n && s.nStride) {
 		sprintf(buf, "%s%s", sName, sNamePost);
-		WriteHData(pFile, (unsigned long*)s.pData, n * s.nStride, buf);
-		sprintf(pStr, "%s		{ (EDataType)0x%08x, %d, %d, (unsigned char*)%s },\n", pStr, s.eType, s.n, s.nStride, buf);
+		WriteHData(pFile, (unsigned long*)s.pData, n * s.nStride, buf, bChangeEndian);
+		sprintf(pStr, "%s		{ (EPVRTDataType)0x%08x, %d, %d, (unsigned char*)%s },\n", pStr, s.eType, s.n, s.nStride, buf);
 	} else {
-		sprintf(pStr, "%s		{ (EDataType)0x%08x, %d, %d, (unsigned char*)0x%08x },\n", pStr, s.eType, s.n, s.nStride, (unsigned int)s.pData);
+		sprintf(pStr, "%s		{ (EPVRTDataType)0x%08x, %d, %d, (unsigned char*)0x%08x },\n", pStr, s.eType, s.n, s.nStride, (INT64BIT)s.pData);
 	}
 }
 
@@ -191,6 +210,7 @@ static void WriteHUVW(
 	FILE			* const pFile,
 	const SPODMesh	&s,
 	const bool		bValidData,
+	const bool		bBigEndian,
 	const char		* const sName)
 {
 	char *pStr, buf[CFAH];
@@ -203,7 +223,7 @@ static void WriteHUVW(
 	for(unsigned int i = 0; i < s.nNumUVW; ++i)
 	{
 		sprintf(buf, "%d", i);
-		WriteHCPODData(pFile, pStr, s.psUVW[i], s.nNumVertex, bValidData, sName, buf);
+		WriteHCPODData(pFile, pStr, s.psUVW[i], s.nNumVertex, bValidData, bBigEndian, sName, buf);
 	}
 
 	fprintf(pFile, "const CPODData %s[%d] =\n{\n", sName, s.nNumUVW);
@@ -215,7 +235,8 @@ static void WriteHUVW(
 static void WriteHMeshes(
 	FILE			* const pFile,
 	const SPODScene	&s,
-	const char		* const sName)
+	const char		* const sName,
+	const bool		bChangeEndian)
 {
 	char *pStr, buf[CFAH];
 
@@ -232,12 +253,12 @@ static void WriteHMeshes(
 		sprintf(pStr, "%s		%d,\n", pStr, s.pMesh[i].nNumUVW);
 
 		sprintf(buf, "%s%d", sName, i);
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sFaces, ModelPODCountIndices(s.pMesh[i]), true, buf, "sFaces");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sFaces, PVRTModelPODCountIndices(s.pMesh[i]), true, bChangeEndian, buf, "sFaces");
 
 		if(s.pMesh[i].nNumStrips)
 		{
 			sprintf(buf, "%s%dpnStripLength", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMesh[i].pnStripLength, s.pMesh[i].nNumStrips * sizeof(*s.pMesh[i].pnStripLength), buf);
+			WriteHData(pFile, (unsigned long*)s.pMesh[i].pnStripLength, s.pMesh[i].nNumStrips * sizeof(*s.pMesh[i].pnStripLength), buf, bChangeEndian);
 			sprintf(pStr, "%s		(unsigned int*)%s, %d,\n", pStr, buf, s.pMesh[i].nNumStrips);
 		}
 		else
@@ -246,14 +267,14 @@ static void WriteHMeshes(
 		}
 
 		sprintf(buf, "%s%d", sName, i);
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sVertex, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sVertex");
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sNormals, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sNormals");
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sTangents, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sTangents");
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sBinormals, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sBinormals");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sVertex, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sVertex");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sNormals, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sNormals");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sTangents, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sTangents");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sBinormals, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sBinormals");
 		if(s.pMesh[i].nNumUVW)
 		{
 			sprintf(buf, "%s%dpsUVW", sName, i);
-			WriteHUVW(pFile, s.pMesh[i], s.pMesh[i].pInterleaved == 0, buf);
+			WriteHUVW(pFile, s.pMesh[i], s.pMesh[i].pInterleaved == 0, bChangeEndian, buf);
 			sprintf(pStr, "%s		(CPODData*)%s,\n", pStr, buf);
 		}
 		else
@@ -261,14 +282,14 @@ static void WriteHMeshes(
 			sprintf(pStr, "%s		(CPODData*)0,\n", pStr);
 		}
 		sprintf(buf, "%s%d", sName, i);
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sVtxColours, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sVtxColours");
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sBoneIdx, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sBoneIdx");
-		WriteHCPODData(pFile, pStr, s.pMesh[i].sBoneWeight, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, buf, "sBoneWeight");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sVtxColours, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sVtxColours");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sBoneIdx, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sBoneIdx");
+		WriteHCPODData(pFile, pStr, s.pMesh[i].sBoneWeight, s.pMesh[i].nNumVertex, s.pMesh[i].pInterleaved == 0, bChangeEndian, buf, "sBoneWeight");
 
 		if(s.pMesh[i].pInterleaved)
 		{
 			sprintf(buf, "%s%dpInterleaved", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMesh[i].pInterleaved, s.pMesh[i].nNumVertex * s.pMesh[i].sVertex.nStride, buf);
+			WriteHData(pFile, (unsigned long*)s.pMesh[i].pInterleaved, s.pMesh[i].nNumVertex * s.pMesh[i].sVertex.nStride, buf, bChangeEndian);
 			sprintf(pStr, "%s		(unsigned char*)%s,\n", pStr, buf);
 		}
 		else
@@ -281,15 +302,15 @@ static void WriteHMeshes(
 			sprintf(pStr, "%s		{\n", pStr);
 
 			sprintf(buf, "%s%dpnBatches", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMesh[i].sBoneBatches.pnBatches, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatches) * s.pMesh[i].sBoneBatches.nBatchBoneMax, buf);
+			WriteHData(pFile, (unsigned long*)s.pMesh[i].sBoneBatches.pnBatches, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatches) * s.pMesh[i].sBoneBatches.nBatchBoneMax, buf, bChangeEndian);
 			sprintf(pStr, "%s			(int*)%s,\n", pStr, buf);
 
 			sprintf(buf, "%s%dpnBatchBoneCnt", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMesh[i].sBoneBatches.pnBatchBoneCnt, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchBoneCnt), buf);
+			WriteHData(pFile, (unsigned long*)s.pMesh[i].sBoneBatches.pnBatchBoneCnt, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchBoneCnt), buf, bChangeEndian);
 			sprintf(pStr, "%s			(int*)%s,\n", pStr, buf);
 
 			sprintf(buf, "%s%dpnBatchOffset", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMesh[i].sBoneBatches.pnBatchOffset, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchOffset), buf);
+			WriteHData(pFile, (unsigned long*)s.pMesh[i].sBoneBatches.pnBatchOffset, s.pMesh[i].sBoneBatches.nBatchCnt * sizeof(*s.pMesh[i].sBoneBatches.pnBatchOffset), buf, bChangeEndian);
 			sprintf(pStr, "%s			(int*)%s,\n", pStr, buf);
 
 			sprintf(pStr, "%s			%d,\n", pStr, s.pMesh[i].sBoneBatches.nBatchBoneMax);
@@ -313,9 +334,11 @@ static void WriteHMeshes(
 static void WriteHNodes(
 	FILE			* const pFile,
 	const SPODScene	&s,
-	const char		* const sName)
+	const char		* const sName,
+	const bool bChangeEndian)
 {
 	char *pStr, buf[CFAH];
+	int i32TransformNo;
 
 	pStr = new char[s.nNumNode * CFAH];
 	_ASSERT(pStr);
@@ -331,32 +354,31 @@ static void WriteHNodes(
 		if(s.pNode[i].pszName)
 		{
 			sprintf(buf, "%s%dpszName", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pNode[i].pszName, (unsigned int)strlen(s.pNode[i].pszName) + 1, buf);
+			WriteHData(pFile, (unsigned long*)s.pNode[i].pszName, (unsigned int)strlen(s.pNode[i].pszName) + 1, buf, bChangeEndian);
 		}
-		sprintf(pStr, "%s		(char*)%s,\n", pStr, buf);
+		sprintf(pStr, "%s		(char*)%s, /* %s */\n", pStr, buf, s.pNode[i].pszName ? s.pNode[i].pszName : "");
 
 		sprintf(pStr, "%s		%d,\n", pStr, s.pNode[i].nIdxMaterial);
 		sprintf(pStr, "%s		%d,\n", pStr, s.pNode[i].nIdxParent);
-		if(s.nFlags & MODELPODSF_FIXED)
-		{
-			sprintf(pStr, "%s		{ 0x%08x, 0x%08x, 0x%08x },\n", pStr, (int&)s.pNode[i].pfPosition[0], (int&)s.pNode[i].pfPosition[1], (int&)s.pNode[i].pfPosition[2]);
-			sprintf(pStr, "%s		{ 0x%08x, 0x%08x, 0x%08x, 0x%08x },\n", pStr, (int&)s.pNode[i].pfRotation[0], (int&)s.pNode[i].pfRotation[1], (int&)s.pNode[i].pfRotation[2], (int&)s.pNode[i].pfRotation[3]);
-			sprintf(pStr, "%s		{ 0x%08x, 0x%08x, 0x%08x },\n", pStr, (int&)s.pNode[i].pfScale[0], (int&)s.pNode[i].pfScale[1], (int&)s.pNode[i].pfScale[2]);
-		}
-		else
-		{
-			sprintf(pStr, "%s		{ %ff, %ff, %ff },\n", pStr, s.pNode[i].pfPosition[0], s.pNode[i].pfPosition[1], s.pNode[i].pfPosition[2]);
-			sprintf(pStr, "%s		{ %ff, %ff, %ff, %ff },\n", pStr, s.pNode[i].pfRotation[0], s.pNode[i].pfRotation[1], s.pNode[i].pfRotation[2], s.pNode[i].pfRotation[3]);
-			sprintf(pStr, "%s		{ %ff, %ff, %ff },\n", pStr, s.pNode[i].pfScale[0], s.pNode[i].pfScale[1], s.pNode[i].pfScale[2]);
-		}
+		sprintf(pStr, "%s		%d,\n", pStr, s.pNode[i].nAnimFlags);
 
 		strcpy(buf, "0");
 		if(s.pNode[i].pfAnimPosition)
 		{
-			sprintf(buf, "%s%dpfAnimPosition", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimPosition, s.nNumFrame * 3 * sizeof(*s.pNode[i].pfAnimPosition), buf);
+			if(s.pNode[i].nAnimFlags & ePODHasPositionAni)
+			{
+				sprintf(buf, "%s%dpfAnimPosition", sName, i);
+				i32TransformNo = s.nNumFrame;
 		}
-		if(s.nFlags & MODELPODSF_FIXED)
+		else
+		{
+				sprintf(buf, "%s%dpfPosition", sName, i);
+				i32TransformNo = 1;
+		}
+
+			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimPosition, i32TransformNo * 3 * sizeof(*s.pNode[i].pfAnimPosition), buf, bChangeEndian);
+		}
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
 			sprintf(pStr, "%s		(int*)%s,\n", pStr, buf);
 		else
 			sprintf(pStr, "%s		(float*)%s,\n", pStr, buf);
@@ -364,10 +386,20 @@ static void WriteHNodes(
 		strcpy(buf, "0");
 		if(s.pNode[i].pfAnimRotation)
 		{
+			if(s.pNode[i].nAnimFlags & ePODHasRotationAni)
+			{
 			sprintf(buf, "%s%dpfAnimRotation", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimRotation, s.nNumFrame * 4 * sizeof(*s.pNode[i].pfAnimRotation), buf);
+				i32TransformNo = s.nNumFrame;
 		}
-		if(s.nFlags & MODELPODSF_FIXED)
+			else
+			{
+				sprintf(buf, "%s%dpfRotation", sName, i);
+				i32TransformNo = 1;
+			}
+
+			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimRotation, i32TransformNo * 4 * sizeof(*s.pNode[i].pfAnimRotation), buf, bChangeEndian);
+		}
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
 			sprintf(pStr, "%s		(int*)%s,\n", pStr, buf);
 		else
 			sprintf(pStr, "%s		(float*)%s,\n", pStr, buf);
@@ -375,10 +407,41 @@ static void WriteHNodes(
 		strcpy(buf, "0");
 		if(s.pNode[i].pfAnimScale)
 		{
+			if(s.pNode[i].nAnimFlags & ePODHasScaleAni)
+			{
 			sprintf(buf, "%s%dpfAnimScale", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimScale, s.nNumFrame * 7 * sizeof(*s.pNode[i].pfAnimScale), buf);
+				i32TransformNo = s.nNumFrame;
+			}
+			else
+			{
+				sprintf(buf, "%s%dpfScale", sName, i);
+				i32TransformNo = 1;
 		}
-		if(s.nFlags & MODELPODSF_FIXED)
+
+			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimScale, i32TransformNo * 7 * sizeof(*s.pNode[i].pfAnimScale), buf, bChangeEndian);
+		}
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
+			sprintf(pStr, "%s		(int*)%s,\n", pStr, buf);
+		else
+			sprintf(pStr, "%s		(float*)%s,\n", pStr, buf);
+
+		strcpy(buf, "0");
+		if(s.pNode[i].pfAnimMatrix)
+		{
+			if(s.pNode[i].nAnimFlags & ePODHasMatrixAni)
+			{
+				sprintf(buf, "%s%dpfAnimMatrix", sName, i);
+				i32TransformNo = s.nNumFrame;
+			}
+			else
+			{
+				sprintf(buf, "%s%dpfMatrix", sName, i);
+				i32TransformNo = 1;
+			}
+
+			WriteHData(pFile, (unsigned long*)s.pNode[i].pfAnimMatrix, i32TransformNo * 16 * sizeof(*s.pNode[i].pfAnimMatrix), buf, bChangeEndian);
+		}
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
 			sprintf(pStr, "%s		(int*)%s,\n", pStr, buf);
 		else
 			sprintf(pStr, "%s		(float*)%s,\n", pStr, buf);
@@ -395,7 +458,8 @@ static void WriteHNodes(
 static void WriteHTextures(
 	FILE			* const pFile,
 	const SPODScene	&s,
-	const char		* const sName)
+	const char		* const sName,
+	const bool		bChangeEndian)
 {
 	char *pStr, buf[CFAH];
 
@@ -412,7 +476,7 @@ static void WriteHTextures(
 		if(s.pTexture[i].pszName)
 		{
 			sprintf(buf, "%s%dpszName", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pTexture[i].pszName, (unsigned int)strlen(s.pTexture[i].pszName) + 1, buf);
+			WriteHData(pFile, (unsigned long*)s.pTexture[i].pszName, (unsigned int)strlen(s.pTexture[i].pszName) + 1, buf, bChangeEndian);
 		}
 		sprintf(pStr, "%s		(char*)%s,\n", pStr, buf);
 
@@ -428,7 +492,8 @@ static void WriteHTextures(
 static void WriteHMaterials(
 	FILE			* const pFile,
 	const SPODScene	&s,
-	const char		* const sName)
+	const char		* const sName,
+	const bool		bChangeEndian)
 {
 	char *pStr, buf[CFAH];
 
@@ -445,12 +510,12 @@ static void WriteHMaterials(
 		if(s.pMaterial[i].pszName)
 		{
 			sprintf(buf, "%s%dpszName", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMaterial[i].pszName, (unsigned int)strlen(s.pMaterial[i].pszName) + 1, buf);
+			WriteHData(pFile, (unsigned long*)s.pMaterial[i].pszName, (unsigned int)strlen(s.pMaterial[i].pszName) + 1, buf, bChangeEndian);
 		}
-		sprintf(pStr, "%s		(char*)%s,\n", pStr, buf);
+		sprintf(pStr, "%s		(char*)%s, /* %s */\n", pStr, buf, s.pMaterial[i].pszName ? s.pMaterial[i].pszName : "");
 
 		sprintf(pStr, "%s		%d,\n", pStr, s.pMaterial[i].nIdxTexDiffuse);
-		if(s.nFlags & MODELPODSF_FIXED)
+		if(s.nFlags & PVRTMODELPODSF_FIXED)
 		{
 			sprintf(pStr, "%s		0x%08x,\n", pStr, (int&)s.pMaterial[i].fMatOpacity);
 			sprintf(pStr, "%s		{ 0x%08x, 0x%08x, 0x%08x },\n", pStr, (int&)s.pMaterial[i].pfMatAmbient[0], (int&)s.pMaterial[i].pfMatAmbient[1], (int&)s.pMaterial[i].pfMatAmbient[2]);
@@ -471,7 +536,7 @@ static void WriteHMaterials(
 		if(s.pMaterial[i].pszEffectFile)
 		{
 			sprintf(buf, "%s%dpszEffectFile", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMaterial[i].pszEffectFile, (unsigned int)strlen(s.pMaterial[i].pszEffectFile) + 1, buf);
+			WriteHData(pFile, (unsigned long*)s.pMaterial[i].pszEffectFile, (unsigned int)strlen(s.pMaterial[i].pszEffectFile) + 1, buf, bChangeEndian);
 		}
 		sprintf(pStr, "%s		(char*)%s,\n", pStr, buf);
 
@@ -479,7 +544,7 @@ static void WriteHMaterials(
 		if(s.pMaterial[i].pszEffectName)
 		{
 			sprintf(buf, "%s%dpszEffectName", sName, i);
-			WriteHData(pFile, (unsigned long*)s.pMaterial[i].pszEffectName, (unsigned int)strlen(s.pMaterial[i].pszEffectName) + 1, buf);
+			WriteHData(pFile, (unsigned long*)s.pMaterial[i].pszEffectName, (unsigned int)strlen(s.pMaterial[i].pszEffectName) + 1, buf, bChangeEndian);
 		}
 		sprintf(pStr, "%s		(char*)%s,\n", pStr, buf);
 
@@ -504,10 +569,12 @@ static void WriteHScene(
 	char sTexture[CFAH] = "0";
 	char sMaterial[CFAH] = "0";
 
+	bool bChangeEndian = s.bBigEndian == PVRTIsLittleEndian();
+
 	if(s.nNumCamera)
 	{
 		sprintf(sCamera, "%sCamera", sName);
-		WriteHCameras(pFile, s, sCamera);
+		WriteHCameras(pFile, s, sCamera, bChangeEndian);
 	}
 
 	if(s.nNumLight)
@@ -519,30 +586,30 @@ static void WriteHScene(
 	if(s.nNumMesh)
 	{
 		sprintf(sMesh, "%sMesh", sName);
-		WriteHMeshes(pFile, s, sMesh);
+		WriteHMeshes(pFile, s, sMesh, bChangeEndian);
 	}
 
 	if(s.nNumNode)
 	{
 		sprintf(sNode, "%sNode", sName);
-		WriteHNodes(pFile, s, sNode);
+		WriteHNodes(pFile, s, sNode, bChangeEndian);
 	}
 
 	if(s.nNumTexture)
 	{
 		sprintf(sTexture, "%sTexture", sName);
-		WriteHTextures(pFile, s, sTexture);
+		WriteHTextures(pFile, s, sTexture, bChangeEndian);
 	}
 
 	if(s.nNumMaterial)
 	{
 		sprintf(sMaterial, "%sMaterial", sName);
-		WriteHMaterials(pFile, s, sMaterial);
+		WriteHMaterials(pFile, s, sMaterial, bChangeEndian);
 	}
 
 	fprintf(pFile, "const SPODScene %s =\n", sName);
 	fprintf(pFile, "{\n");
-	if(s.nFlags & MODELPODSF_FIXED)
+	if(s.nFlags & PVRTMODELPODSF_FIXED)
 	{
 		fprintf(pFile, "	{ 0x%08x, 0x%08x, 0x%08x },\n", (int&)s.pfColourBackground[0], (int&)s.pfColourBackground[1], (int&)s.pfColourBackground[2]);
 		fprintf(pFile, "	{ 0x%08x, 0x%08x, 0x%08x },\n", (int&)s.pfColourAmbient[0], (int&)s.pfColourAmbient[1], (int&)s.pfColourAmbient[2]);
@@ -598,8 +665,8 @@ static bool WriteH(
 		ptr = pszFilename;
 
 	fprintf(pFile, "/*\n");
-	fprintf(pFile, "	POD header-file, as from ModelPOD and thereby PVRMAXExport.\n");
-	fprintf(pFile, "	File-format version string: \"%s\"\n", MODELPOD_VERSION);
+	fprintf(pFile, "	POD header-file, as from PVRTModelPOD and thereby PVRGeoPOD.\n");
+	fprintf(pFile, "	File-format version string: \"%s\"\n", PVRTMODELPOD_VERSION);
 	fprintf(pFile, "	This code was compiled: %s %s\n", __TIME__, __DATE__);
 	fprintf(pFile, "\n");
 	fprintf(pFile, "	Export name: \"%s\"\n", ptr);
@@ -614,7 +681,7 @@ static bool WriteH(
 	fprintf(pFile, "#define _%s_\n", tmp);
 	fprintf(pFile, "\n");
 	fprintf(pFile, "\n");
-	fprintf(pFile, "#if !defined(_MODELPOD_H_) && !defined(_D3DMTOOLS_H_) && !defined(_DX9TOOLS_H_) && !defined(_OGLTOOLS_H_) && !defined(_OGLESTOOLS_H_)\n");
+	fprintf(pFile, "#if !defined(_PVRTMODELPOD_H_)\n");
 	fprintf(pFile, "#error Before including this file, you must include a header to define the POD structures.\n");
 	fprintf(pFile, "#endif\n");
 	fprintf(pFile, "\n");
@@ -632,7 +699,7 @@ static bool WriteH(
 }
 
 /****************************************************************************
-** Class: CPODScene
+** Class: CPVRTModelPOD
 ****************************************************************************/
 
 /*!***********************************************************************
@@ -640,7 +707,7 @@ static bool WriteH(
  @Input				pszFilename		Filename to save to
  @Description		Save a header file (.H).
 *************************************************************************/
-bool CPODScene::SaveH(const char * const pszFilename, const char * const pszExpOpt)
+bool CPVRTModelPOD::SaveH(const char * const pszFilename, const char * const pszExpOpt)
 {
 	FILE	*pFile;
 	bool	bRet;
@@ -653,7 +720,7 @@ bool CPODScene::SaveH(const char * const pszFilename, const char * const pszExpO
 
 	// Done
 	fclose(pFile);
-	return bRet;
+	return bRet ? true : false;
 }
 
 /****************************************************************************
@@ -661,5 +728,5 @@ bool CPODScene::SaveH(const char * const pszFilename, const char * const pszExpO
 ****************************************************************************/
 
 /*****************************************************************************
- End of file (ModelPODWriteH.cpp)
+ End of file (PVRTModelPODWriteH.cpp)
 *****************************************************************************/

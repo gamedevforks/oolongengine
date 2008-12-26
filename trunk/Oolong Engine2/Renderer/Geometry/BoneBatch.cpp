@@ -251,9 +251,9 @@ static void FillBatch(
 	const char				* const pVtx,	// Input vertices
 	const int				nStride,		// Size of a vertex (in bytes)
 	const int				nOffsetWeight,	// Offset in bytes to the vertex bone-weights
-	EDataType			eTypeWeight,	// Data type of the vertex bone-weights
+	EPVRTDataType			eTypeWeight,	// Data type of the vertex bone-weights
 	const int				nOffsetIdx,		// Offset in bytes to the vertex bone-indices
-	EDataType			eTypeIdx,		// Data type of the vertex bone-indices
+	EPVRTDataType			eTypeIdx,		// Data type of the vertex bone-indices
 	const int				nVertexBones);	// Number of bones affecting each vertex
 
 static bool BonesMatch(
@@ -282,7 +282,7 @@ static bool BonesMatch(
  @Returns		true if successful
  @Description	Fills the bone batch structure
 *****************************************************************************/
-bool CBoneBatches::Create(
+bool CPVRTBoneBatches::Create(
 	int					* const pnVtxNumOut,
 	char				** const pVtxOut,
 	unsigned short		* const pwIdx,
@@ -290,9 +290,9 @@ bool CBoneBatches::Create(
 	const char			* const pVtx,
 	const int			nStride,
 	const int			nOffsetWeight,
-	const EDataType	eTypeWeight,
+	const EPVRTDataType	eTypeWeight,
 	const int			nOffsetIdx,
-	const EDataType	eTypeIdx,
+	const EPVRTDataType	eTypeIdx,
 	const int			nTriNum,
 	const int			nBatchBoneMax,
 	const int			nVertexBones)
@@ -433,7 +433,7 @@ bool CBoneBatches::Create(
 	/*
 		Now that we know how many batches there are, we can allocate the output arrays
 	*/
-	CBoneBatches::nBatchBoneMax = nBatchBoneMax;
+	CPVRTBoneBatches::nBatchBoneMax = nBatchBoneMax;
 	pnBatches		= new int[lBatch.size() * nBatchBoneMax];
 	pnBatchBoneCnt	= new int[lBatch.size()];
 	pnBatchOffset	= new int[lBatch.size()];
@@ -472,8 +472,8 @@ bool CBoneBatches::Create(
 				*/
 				pV = &pVtx[wSrcIdx * nStride];
 
-				DataTypeRead(&vWeight, &pV[nOffsetWeight], eTypeWeight, nVertexBones);
-				DataTypeRead(&vIdx, &pV[nOffsetIdx], eTypeIdx, nVertexBones);
+				PVRTVertexRead(&vWeight, &pV[nOffsetWeight], eTypeWeight, nVertexBones);
+				PVRTVertexRead(&vIdx, &pV[nOffsetIdx], eTypeIdx, nVertexBones);
 
 				iBatch->GetVertexBoneIndices(&vIdx.x, &vWeight.x, nVertexBones);
 				_ASSERT(vIdx.x == 0 || vIdx.x != vIdx.y);
@@ -485,8 +485,8 @@ bool CBoneBatches::Create(
 				{
 					pV2 = pVtxBuf->at(pvDup[wSrcIdx][k]);
 
-					DataTypeRead(&vWeight2, &pV2[nOffsetWeight], eTypeWeight, nVertexBones);
-					DataTypeRead(&vIdx2, &pV2[nOffsetIdx], eTypeIdx, nVertexBones);
+					PVRTVertexRead(&vWeight2, &pV2[nOffsetWeight], eTypeWeight, nVertexBones);
+					PVRTVertexRead(&vIdx2, &pV2[nOffsetIdx], eTypeIdx, nVertexBones);
 
 					if(BonesMatch(&vIdx2.x, &vIdx.x))
 					{
@@ -504,7 +504,7 @@ bool CBoneBatches::Create(
 				pVtxBuf->Append(pV, 1);
 				pvDup[wSrcIdx].push_back(pVtxBuf->size() - 1);
 
-				DataTypeWrite(&pVtxBuf->last()[nOffsetIdx], eTypeIdx, nVertexBones, &vIdx);
+				PVRTVertexWrite(&pVtxBuf->last()[nOffsetIdx], eTypeIdx, nVertexBones, &vIdx);
 
 				pwIdxNew[3 * nTriCnt + j] = pVtxBuf->size() - 1;
 			}
@@ -550,9 +550,9 @@ static void FillBatch(
 	const char				* const pVtx,	// Input vertices
 	const int				nStride,		// Size of a vertex (in bytes)
 	const int				nOffsetWeight,	// Offset in bytes to the vertex bone-weights
-	EDataType			eTypeWeight,	// Data type of the vertex bone-weights
+	EPVRTDataType			eTypeWeight,	// Data type of the vertex bone-weights
 	const int				nOffsetIdx,		// Offset in bytes to the vertex bone-indices
-	EDataType			eTypeIdx,		// Data type of the vertex bone-indices
+	EPVRTDataType			eTypeIdx,		// Data type of the vertex bone-indices
 	const int				nVertexBones)	// Number of bones affecting each vertex
 {
 	VECTOR4	vWeight, vIdx;
@@ -565,8 +565,8 @@ static void FillBatch(
 		pV = &pVtx[pwIdx[i] * nStride];
 
 		memset(&vWeight, 0, sizeof(vWeight));
-		DataTypeRead(&vWeight, &pV[nOffsetWeight], eTypeWeight, nVertexBones);
-		DataTypeRead(&vIdx, &pV[nOffsetIdx], eTypeIdx, nVertexBones);
+		PVRTVertexRead(&vWeight, &pV[nOffsetWeight], eTypeWeight, nVertexBones);
+		PVRTVertexRead(&vIdx, &pV[nOffsetIdx], eTypeIdx, nVertexBones);
 
 		if(nVertexBones >= 1 && vWeight.x != 0)	batch.Add((int)vIdx.x);
 		if(nVertexBones >= 2 && vWeight.y != 0)	batch.Add((int)vIdx.y);

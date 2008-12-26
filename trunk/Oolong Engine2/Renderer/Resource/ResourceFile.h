@@ -1,4 +1,18 @@
+/******************************************************************************
+
+ @File         PVRTResourceFile.h
+
+ @Title        
+
+ @Copyright    Copyright (C) 2007 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Simple resource file wrapper
+
+******************************************************************************/
 /*
+All changes:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 
@@ -20,24 +34,80 @@ subject to the following restrictions:
 using namespace std;
 
 
-class CResourceFile
+/*!***************************************************************************
+ @Class CPVRTResourceFile
+ @Brief Simple resource file wrapper
+*****************************************************************************/
+class CPVRTResourceFile
 {
 public:
-	static void SetDataPath(const char* pszDataPath);
-	static string GetDataPath();
+	/*!***************************************************************************
+	@Function			SetReadPath
+	@Input				pszReadPath The path where you would like to read from
+	@Description		Sets the read path
+	*****************************************************************************/
+	static void SetReadPath(const char* pszReadPath);
 
-	CResourceFile(const char* pszFilename);
-	virtual ~CResourceFile();
+	/*!***************************************************************************
+	@Function			GetReadPath
+	@Returns			The currently set read path
+	@Description		Returns the currently set read path
+	*****************************************************************************/
+	static string GetReadPath();
 
+	/*!***************************************************************************
+	@Function			CPVRTResourceFile
+	@Input				pszFilename Name of the file you would like to open
+	@Description		Constructor
+	*****************************************************************************/
+	CPVRTResourceFile(const char* pszFilename);
+
+	/*!***************************************************************************
+	@Function			~CPVRTResourceFile
+	@Description		Destructor
+	*****************************************************************************/
+	virtual ~CPVRTResourceFile();
+
+	/*!***************************************************************************
+	@Function			IsOpen
+	@Returns			true if the file is open
+	@Description		Is the file open
+	*****************************************************************************/
 	bool IsOpen() const;
+
+	/*!***************************************************************************
+	@Function			IsMemoryFile
+	@Returns			true if the file was opened from memory
+	@Description		Was the file opened from memory
+	*****************************************************************************/
 	bool IsMemoryFile() const;
+
+	/*!***************************************************************************
+	@Function			Size
+	@Returns			The size of the opened file
+	@Description		Returns the size of the opened file
+	*****************************************************************************/
 	size_t Size() const;
 
+	/*!***************************************************************************
+	@Function			DataPtr
+	@Returns			A pointer to the file data
+	@Description		Returns a pointer to the file data
+	*****************************************************************************/
 	const void* DataPtr() const;
 	
-	// returns a null-terminated buffer.
+	/*!***************************************************************************
+	@Function			StringPtr
+	@Returns			The file data as a string
+	@Description		Returns the file as a null-terminated string
+	*****************************************************************************/
+	// convenience getter. Also makes it clear that you get a null-terminated buffer.
 	const char* StringPtr() const;
 
+	/*!***************************************************************************
+	@Function			Close
+	@Description		Closes the file
+	*****************************************************************************/
 	void Close();
 
 protected:
@@ -46,7 +116,11 @@ protected:
 	size_t m_Size;
 	const char* m_pData;
 
-	static string s_DataPath;
+	static string s_ReadPath;
 };
 
-#endif // RESOURCEFILE_H_
+#endif // _PVRTRESOURCEFILE_H_
+
+/*****************************************************************************
+ End of file (PVRTResourceFile.h)
+*****************************************************************************/

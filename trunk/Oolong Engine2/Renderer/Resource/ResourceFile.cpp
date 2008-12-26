@@ -1,4 +1,18 @@
+/******************************************************************************
+
+ @File         PVRTResourceFile.cpp
+
+ @Title        
+
+ @Copyright    Copyright (C) 2007 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Simple resource file wrapper
+
+******************************************************************************/
 /*
+All changes:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 
@@ -17,25 +31,40 @@ subject to the following restrictions:
 
 #include "MemoryFile.h"
 
-string CResourceFile::s_DataPath;
+string CPVRTResourceFile::s_ReadPath;
 
-void CResourceFile::SetDataPath(const char* const pszDataPath)
+/*!***************************************************************************
+@Function			SetReadPath
+@Input				pszReadPath The path where you would like to read from
+@Description		Sets the read path
+*****************************************************************************/
+void CPVRTResourceFile::SetReadPath(const char* const pszReadPath)
 {
-	s_DataPath = (pszDataPath) ? pszDataPath : "";
+	s_ReadPath = (pszReadPath) ? pszReadPath : "";
 }
 
-string CResourceFile::GetDataPath()
+/*!***************************************************************************
+@Function			GetReadPath
+@Returns			The currently set read path
+@Description		Returns the currently set read path
+*****************************************************************************/
+string CPVRTResourceFile::GetReadPath()
 {
-	return string(s_DataPath);
+	return string(s_ReadPath);
 }
 
-CResourceFile::CResourceFile(const char* const pszFilename) :
+/*!***************************************************************************
+@Function			CPVRTResourceFile
+@Input				pszFilename Name of the file you would like to open
+@Description		Constructor
+*****************************************************************************/
+CPVRTResourceFile::CPVRTResourceFile(const char* const pszFilename) :
 	m_bOpen(false),
 	m_bMemoryFile(false),
 	m_Size(0),
 	m_pData(0)
 {
-	string Path(s_DataPath);
+	string Path(s_ReadPath);
 	Path += pszFilename;
 
 	FILE* pFile = fopen(Path.c_str(), "rb");
@@ -64,45 +93,78 @@ CResourceFile::CResourceFile(const char* const pszFilename) :
 		fclose(pFile);
 	}
 
-#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL)
+#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL) || defined(BUILD_OVG) || defined(BUILD_DX9) || defined(BUILD_DX10)
 	if (!m_bOpen)
 	{
-		m_bOpen = m_bMemoryFile = CMemoryFileSystem::GetFile(pszFilename, (const void**)(&m_pData), &m_Size);
+		m_bOpen = m_bMemoryFile = CPVRTMemoryFileSystem::GetFile(pszFilename, (const void**)(&m_pData), &m_Size);
 	}
 #endif
 }
 
-CResourceFile::~CResourceFile()
+/*!***************************************************************************
+@Function			~CPVRTResourceFile
+@Description		Destructor
+*****************************************************************************/
+CPVRTResourceFile::~CPVRTResourceFile()
 {
 	Close();
 }
 
-bool CResourceFile::IsOpen() const
+/*!***************************************************************************
+@Function			IsOpen
+@Returns			true if the file is open
+@Description		Is the file open
+*****************************************************************************/
+bool CPVRTResourceFile::IsOpen() const
 {
 	return m_bOpen;
 }
 
-bool CResourceFile::IsMemoryFile() const
+/*!***************************************************************************
+@Function			IsMemoryFile
+@Returns			true if the file was opened from memory
+@Description		Was the file opened from memory
+*****************************************************************************/
+bool CPVRTResourceFile::IsMemoryFile() const
 {
 	return m_bMemoryFile;
 }
 
-size_t CResourceFile::Size() const
+/*!***************************************************************************
+@Function			Size
+@Returns			The size of the opened file
+@Description		Returns the size of the opened file
+*****************************************************************************/
+size_t CPVRTResourceFile::Size() const
 {
 	return m_Size;
 }
 
-const void* CResourceFile::DataPtr() const
+/*!***************************************************************************
+@Function			DataPtr
+@Returns			A pointer to the file data
+@Description		Returns a pointer to the file data
+*****************************************************************************/
+const void* CPVRTResourceFile::DataPtr() const
 {
 	return m_pData;
 }
 
-const char* CResourceFile::StringPtr() const
+/*!***************************************************************************
+@Function			StringPtr
+@Returns			The file data as a string
+@Description		Returns the file as a null-terminated string
+*****************************************************************************/
+const char* CPVRTResourceFile::StringPtr() const
 {
 	return m_pData;
 }
 
-void CResourceFile::Close()
+/*!***************************************************************************
+@Function			Close
+@Description		Closes the file
+*****************************************************************************/
+void CPVRTResourceFile::Close()
 {
 	if (m_bOpen)
 	{
@@ -117,50 +179,50 @@ void CResourceFile::Close()
 	}
 }
 
-#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL)
+#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL) || defined(BUILD_OVG) || defined(BUILD_DX9) || defined(BUILD_DX10)
 
+/****************************************************************************
+** class CPVRTMemoryFileSystem
+****************************************************************************/
+CPVRTMemoryFileSystem::CAtExit CPVRTMemoryFileSystem::s_AtExit;
+CPVRTMemoryFileSystem::SFileInfo* CPVRTMemoryFileSystem::s_pFileInfo = 0;
+int CPVRTMemoryFileSystem::s_i32Capacity = 0;
+int CPVRTMemoryFileSystem::s_i32NumFiles = 0;
 
-
-//
-// class CMemoryFileSystem
-//
-CMemoryFileSystem::CAtExit CMemoryFileSystem::s_AtExit;
-CMemoryFileSystem::SFileInfo* CMemoryFileSystem::s_pFileInfo = 0;
-int CMemoryFileSystem::s_i32Capacity = 0;
-int CMemoryFileSystem::s_i32NumFiles = 0;
-
-//
-// Workaround for platforms that
-// don't support the atexit() function. This deletes any memory
-// file system data.
-//
-CMemoryFileSystem::CAtExit::~CAtExit()
+/*!***************************************************************************
+@Function		Destructor
+@Description	Destructor of CAtExit class. Workaround for platforms that
+		        don't support the atexit() function. This deletes any memory
+				file system data.
+*****************************************************************************/
+CPVRTMemoryFileSystem::CAtExit::~CAtExit()
 {
-	for (int i = 0; i < CMemoryFileSystem::s_i32NumFiles; ++i)
+	for (int i = 0; i < CPVRTMemoryFileSystem::s_i32NumFiles; ++i)
 	{
-		if (CMemoryFileSystem::s_pFileInfo[i].bAllocated)
+		if (CPVRTMemoryFileSystem::s_pFileInfo[i].bAllocated)
 		{
-			delete [] (char*)CMemoryFileSystem::s_pFileInfo[i].pszFilename;
-			delete [] (char*)CMemoryFileSystem::s_pFileInfo[i].pBuffer;
+			delete [] (char*)CPVRTMemoryFileSystem::s_pFileInfo[i].pszFilename;
+			delete [] (char*)CPVRTMemoryFileSystem::s_pFileInfo[i].pBuffer;
 		}
 	}
-	delete [] CMemoryFileSystem::s_pFileInfo;
+	delete [] CPVRTMemoryFileSystem::s_pFileInfo;
 }
 
-CMemoryFileSystem::CMemoryFileSystem(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy)
+CPVRTMemoryFileSystem::CPVRTMemoryFileSystem(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy)
 {
 	RegisterMemoryFile(pszFilename, pBuffer, Size, bCopy);
 }
 
-//
-// pszFilename		Name of file to register
-// pBuffer			Pointer to file data
-// Size			File size
-// bCopy			Name and data should be copied?
-// Registers a block of memory as a file that can be looked up
-// by name. 
-//
-void CMemoryFileSystem::RegisterMemoryFile(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy)
+/*!***************************************************************************
+@Function		RegisterMemoryFile
+@Input			pszFilename		Name of file to register
+@Input			pBuffer			Pointer to file data
+@Input			Size			File size
+@Input			bCopy			Name and data should be copied?
+@Description	Registers a block of memory as a file that can be looked up
+				by name.
+*****************************************************************************/
+void CPVRTMemoryFileSystem::RegisterMemoryFile(const char* pszFilename, const void* pBuffer, size_t Size, bool bCopy)
 {
 	if (s_i32NumFiles == s_i32Capacity)
 	{
@@ -188,15 +250,16 @@ void CMemoryFileSystem::RegisterMemoryFile(const char* pszFilename, const void* 
 	++s_i32NumFiles;
 }
 
-// 
-// pszFilename		Name of file to open
-// ppBuffer			Pointer to file data
-// pSize			File size
-// true if the file was found in memory, false otherwise
-// Looks up a file in the memory file system by name. Returns a
-// pointer to the file data as well as its size on success.
-// 
-bool CMemoryFileSystem::GetFile(const char* pszFilename, const void** ppBuffer, size_t* pSize)
+/*!***************************************************************************
+@Function		GetFile
+@Input			pszFilename		Name of file to open
+@Output			ppBuffer		Pointer to file data
+@Output			pSize			File size
+@Return			true if the file was found in memory, false otherwise
+@Description	Looks up a file in the memory file system by name. Returns a
+				pointer to the file data as well as its size on success.
+*****************************************************************************/
+bool CPVRTMemoryFileSystem::GetFile(const char* pszFilename, const void** ppBuffer, size_t* pSize)
 {
 	for (int i = 0; i < s_i32NumFiles; ++i)
 	{
@@ -210,32 +273,35 @@ bool CMemoryFileSystem::GetFile(const char* pszFilename, const void** ppBuffer, 
 	return false;
 }
 
-//
-// The number of registered files
-//
-int CMemoryFileSystem::GetNumFiles()
+/*!***************************************************************************
+@Function		GetNumFiles
+@Return			The number of registered files
+@Description	Getter for the number of registered files
+*****************************************************************************/
+int CPVRTMemoryFileSystem::GetNumFiles()
 {
 	return s_i32NumFiles;
 }
 
-//
-// i32Index		Index of file
-// A pointer to the filename of the requested file
-// Looks up a file in the memory file system by name. Returns a
-// pointer to the file data as well as its size on success.
-//
-const char* CMemoryFileSystem::GetFilename(int i32Index)
+/*!***************************************************************************
+@Function		GetFilename
+@Input			i32Index		Index of file
+@Return			A pointer to the filename of the requested file
+@Description	Looks up a file in the memory file system by name. Returns a
+				pointer to the file data as well as its size on success.
+*****************************************************************************/
+const char* CPVRTMemoryFileSystem::GetFilename(int i32Index)
 {
 	if (i32Index < 0 || i32Index > s_i32NumFiles) return 0;
 
 	return s_pFileInfo[i32Index].pszFilename;
 }
 
-//std::string CMemoryFileSystem::DebugOut()
+//std::string CPVRTMemoryFileSystem::DebugOut()
 //{
 //	std::stringstream Out;
 //
-//	Out << "MemoryFileSystem Info: Files - " << s_i32NumFiles << "\n";
+//	Out << "PVRTMemoryFileSystem Info: Files - " << s_i32NumFiles << "\n";
 //	for (int i = 0; i < s_i32NumFiles; ++i)
 //	{
 //		Out << "\t" << i << " " << s_pFileInfo[i].pszFilename << " (" 

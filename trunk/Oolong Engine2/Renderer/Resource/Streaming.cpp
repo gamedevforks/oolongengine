@@ -17,7 +17,19 @@ subject to the following restrictions:
 
 #include "Streaming.h"
 
+bool CSource::ReadMarker(unsigned int &nName, unsigned int &nLen)
+{
+	if(!Read(&nName, sizeof(nName)))
+		return false;
+	if(!Read(&nLen, sizeof(nLen)))
+		return false;
+	return true;
+}
 
+/*!***************************************************************************
+@Function			~CSourceStream
+@Description		Destructor
+*****************************************************************************/
 CSourceStream::~CSourceStream()
 {
 	delete m_pFile;
@@ -28,7 +40,7 @@ bool CSourceStream::Init(const char * const pszFileName)
 	m_BytesReadCount = 0;
 	if (m_pFile) delete m_pFile;
 
-	m_pFile = new CResourceFile(pszFileName);
+	m_pFile = new CPVRTResourceFile(pszFileName);
 	if (!m_pFile->IsOpen())
 	{
 		delete m_pFile;

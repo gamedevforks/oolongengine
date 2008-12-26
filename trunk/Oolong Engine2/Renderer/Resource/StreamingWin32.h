@@ -1,4 +1,19 @@
+/******************************************************************************
+
+ @File         PVRTModelPOD.cpp
+
+ @Title        
+
+ @Copyright    Copyright (C) 2003 - 2008 by Imagination Technologies Limited.
+
+ @Platform     ANSI compatible
+
+ @Description  Code to load POD files - models exported from MAX.
+
+******************************************************************************/
+
 /*
+All changes:
 Oolong Engine for the iPhone / iPod touch
 Copyright (c) 2007-2008 Wolfgang Engel  http://code.google.com/p/oolongengine/
 

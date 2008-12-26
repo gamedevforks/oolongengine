@@ -22,6 +22,7 @@ subject to the following restrictions:
 #include "Macros.h"
 #include "MemoryManager.h"
 
+
 #include "DisplayText.h"
 #include "DisplayTextdat.h"		// texture data
 

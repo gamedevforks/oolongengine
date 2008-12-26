@@ -52,7 +52,7 @@ unsigned int  CTexture::LoadPartialTextureFromPVR(const char * const filename,
 										   GLuint * const texName,
 										   const void *psTextureHeader)
 {
-	CResourceFile TexFile(filename);
+	CPVRTResourceFile TexFile(filename);
 	if (!TexFile.IsOpen()) return 0;
 
 	return  LoadPartialTextureFromPointer(TexFile.DataPtr(),
@@ -89,7 +89,7 @@ unsigned int  CTexture::LoadTextureFromPVR(const char * const filename, GLuint *
 // 
 unsigned int  CTexture::LoadDecompressedPartialTextureFromPVR(const char* const filename, unsigned int nLoadFromLevel, GLuint *const texName, const void *psTextureHeader)
 {
-	CResourceFile TexFile(filename);
+	CPVRTResourceFile TexFile(filename);
 	if (!TexFile.IsOpen()) return 0;
 
 	return  LoadDecompressedPartialTextureFromPointer(TexFile.DataPtr(),
@@ -448,7 +448,7 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 						//	// Upload the texture as 32-bits
 						//	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,nMIPMapLevel-nLoadFromLevel,GL_RGBA,
 						//		nSizeX,nSizeY,0, GL_RGBA,GL_UNSIGNED_BYTE,u8TempTexture);
-						//	FREE(u8TempTexture);
+						//	free(u8TempTexture);
 						//}
 						//else
 						{// Load compressed 2D data at selected MIP level

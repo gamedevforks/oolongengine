@@ -60,10 +60,10 @@ subject to the following restrictions:
  @Input				nCnt
  @Description		Read a vector
 *****************************************************************************/
-void DataTypeRead(
+void PVRTVertexRead(
 	VECTOR4		* const pV,
 	const void			* const pData,
-	const EDataType	eType,
+	const EPVRTDataType	eType,
 	const int			nCnt)
 {
 	int		i;
@@ -188,10 +188,17 @@ void DataTypeRead(
 	}
 }
 
-void DataTypeRead(
+/*!***************************************************************************
+ @Function			PVRTVertexRead
+ @Output			pV
+ @Input				pData
+ @Input				eType
+ @Description		Read an int
+*****************************************************************************/
+void PVRTVertexRead(
 	unsigned int		* const pV,
 	const void			* const pData,
-	const EDataType	eType)
+	const EPVRTDataType	eType)
 {
 	switch(eType)
 	{
@@ -206,16 +213,16 @@ void DataTypeRead(
 }
 
 /*!***************************************************************************
- @Function			DataTypeWrite
+ @Function			PVRTVertexWrite
  @Output			pOut
  @Input				eType
  @Input				nCnt
  @Input				pV
  @Description		Write a vector
 *****************************************************************************/
-void DataTypeWrite(
+void PVRTVertexWrite(
 	void				* const pOut,
-	const EDataType	eType,
+	const EPVRTDataType	eType,
 	const int			nCnt,
 	const VECTOR4	* const pV)
 {
@@ -338,9 +345,16 @@ void DataTypeWrite(
 	}
 }
 
-void DataTypeWrite(
+/*!***************************************************************************
+ @Function			PVRTVertexWrite
+ @Output			pOut
+ @Input				eType
+ @Input				V
+ @Description		Write an int
+*****************************************************************************/
+void PVRTVertexWrite(
 	void				* const pOut,
-	const EDataType	eType,
+	const EPVRTDataType	eType,
 	const unsigned int	V)
 {
 	switch(eType)
@@ -515,15 +529,15 @@ bool VertexGenerateTangentSpace(
 	const char		* const pVtx,
 	const int		nStride,
 	const int		nOffsetPos,
-	EDataType	eTypePos,
+	EPVRTDataType	eTypePos,
 	const int		nOffsetNor,
-	EDataType	eTypeNor,
+	EPVRTDataType	eTypeNor,
 	const int		nOffsetTex,
-	EDataType	eTypeTex,
+	EPVRTDataType	eTypeTex,
 	const int		nOffsetTan,
-	EDataType	eTypeTan,
+	EPVRTDataType	eTypeTan,
 	const int		nOffsetBin,
-	EDataType	eTypeBin,
+	EPVRTDataType	eTypeBin,
 	const int		nTriNum,
 	const float		fSplitDifference)
 {
@@ -589,17 +603,17 @@ bool VertexGenerateTangentSpace(
 			return false;
 		}
 
-		DataTypeRead((VECTOR4*)pfPos0, (char*)&pVtx[nIdx0 * nStride] + nOffsetPos, eTypePos, 3);
-		DataTypeRead((VECTOR4*)pfPos1, (char*)&pVtx[nIdx1 * nStride] + nOffsetPos, eTypePos, 3);
-		DataTypeRead((VECTOR4*)pfPos2, (char*)&pVtx[nIdx2 * nStride] + nOffsetPos, eTypePos, 3);
+		PVRTVertexRead((VECTOR4*)pfPos0, (char*)&pVtx[nIdx0 * nStride] + nOffsetPos, eTypePos, 3);
+		PVRTVertexRead((VECTOR4*)pfPos1, (char*)&pVtx[nIdx1 * nStride] + nOffsetPos, eTypePos, 3);
+		PVRTVertexRead((VECTOR4*)pfPos2, (char*)&pVtx[nIdx2 * nStride] + nOffsetPos, eTypePos, 3);
 
-		DataTypeRead((VECTOR4*)pfNor0, (char*)&pVtx[nIdx0 * nStride] + nOffsetNor, eTypeNor, 3);
-		DataTypeRead((VECTOR4*)pfNor1, (char*)&pVtx[nIdx1 * nStride] + nOffsetNor, eTypeNor, 3);
-		DataTypeRead((VECTOR4*)pfNor2, (char*)&pVtx[nIdx2 * nStride] + nOffsetNor, eTypeNor, 3);
+		PVRTVertexRead((VECTOR4*)pfNor0, (char*)&pVtx[nIdx0 * nStride] + nOffsetNor, eTypeNor, 3);
+		PVRTVertexRead((VECTOR4*)pfNor1, (char*)&pVtx[nIdx1 * nStride] + nOffsetNor, eTypeNor, 3);
+		PVRTVertexRead((VECTOR4*)pfNor2, (char*)&pVtx[nIdx2 * nStride] + nOffsetNor, eTypeNor, 3);
 
-		DataTypeRead((VECTOR4*)pfTex0, (char*)&pVtx[nIdx0 * nStride] + nOffsetTex, eTypeTex, 3);
-		DataTypeRead((VECTOR4*)pfTex1, (char*)&pVtx[nIdx1 * nStride] + nOffsetTex, eTypeTex, 3);
-		DataTypeRead((VECTOR4*)pfTex2, (char*)&pVtx[nIdx2 * nStride] + nOffsetTex, eTypeTex, 3);
+		PVRTVertexRead((VECTOR4*)pfTex0, (char*)&pVtx[nIdx0 * nStride] + nOffsetTex, eTypeTex, 3);
+		PVRTVertexRead((VECTOR4*)pfTex1, (char*)&pVtx[nIdx1 * nStride] + nOffsetTex, eTypeTex, 3);
+		PVRTVertexRead((VECTOR4*)pfTex2, (char*)&pVtx[nIdx2 * nStride] + nOffsetTex, eTypeTex, 3);
 
 		VertexTangentBinormal(
 			&psVtxData[nIdx0].pvTan[psVtxData[nIdx0].n],
@@ -716,8 +730,8 @@ bool VertexGenerateTangentSpace(
 				return false;
 			}
 			memcpy(&(*pVtxOut)[(*pnVtxNumOut) * nStride], &pVtx[nVert*nStride], nStride);
-			DataTypeWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetTan, eTypeTan, 3, (VECTOR4*)pfPos0);
-			DataTypeWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetBin, eTypeBin, 3, (VECTOR4*)pfPos1);
+			PVRTVertexWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetTan, eTypeTan, 3, (VECTOR4*)pfPos0);
+			PVRTVertexWrite((char*)&(*pVtxOut)[(*pnVtxNumOut) * nStride] + nOffsetBin, eTypeBin, 3, (VECTOR4*)pfPos1);
 
 			++*pnVtxNumOut;
 		}

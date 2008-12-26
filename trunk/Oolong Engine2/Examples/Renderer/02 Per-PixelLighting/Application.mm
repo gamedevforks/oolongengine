@@ -16,6 +16,7 @@ subject to the following restrictions:
  This example uses art assets from the PowerVR SDK. Imagination Technologies / PowerVR allowed us to use those art assets and we are thankful for this. 
  Having art assets that are optimized for the underlying hardware allows us to show off the capabilties of the graphics chip better.
 */
+
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
@@ -23,12 +24,15 @@ subject to the following restrictions:
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
+#include "MemoryManager.h"
 #include "UI.h"
 #include "Macros.h"
 #include "Timing.h"
 
 #include <stdio.h>
 #include <sys/time.h>
+
+
 
 // textures
 #include "Media/crate.h"

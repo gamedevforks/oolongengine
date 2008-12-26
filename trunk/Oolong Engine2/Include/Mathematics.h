@@ -19,5 +19,6 @@ subject to the following restrictions:
 #include "../Math/Quaternion.h"
 #include "../Math/Vector.h"
 #include "../Math/Transform.h"
+#include "../Math/Endian.h"
 
 #endif

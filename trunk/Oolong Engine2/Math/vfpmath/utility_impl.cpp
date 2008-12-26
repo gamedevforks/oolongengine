@@ -31,7 +31,7 @@ not be misrepresented as being the original software.
 #include "common_macros.h"
 
 
-
+// not tested ... probably not working
 void memcpy_64byte_aligned_float(float *dst_ptr, const float *scr_ptr, int n) {
   asm volatile (VFP_SWITCH_TO_ARM
                 VFP_VECTOR_LENGTH(3)

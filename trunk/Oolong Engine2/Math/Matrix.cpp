@@ -579,6 +579,21 @@ float MatrixVec3DotProduct(
 	return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
+void MatrixVec3Multiply(VECTOR3		&vOut,
+						const VECTOR3	&vIn,
+						const MATRIX	&mIn)
+{
+	    VECTOR3 result;
+	
+		/* Perform calculation on a dummy VECTOR (result) */
+		result.x = mIn.f[_11] * vIn.x + mIn.f[_21] * vIn.y + mIn.f[_31] * vIn.z;
+		result.y = mIn.f[_12] * vIn.x + mIn.f[_22] * vIn.y + mIn.f[_32] * vIn.z;
+		result.z = mIn.f[_13] * vIn.x + mIn.f[_23] * vIn.y + mIn.f[_33] * vIn.z;
+	    
+	    vOut = result;
+}
+
+
 
 void MatrixVec3CrossProduct(
 	VECTOR3		&vOut,

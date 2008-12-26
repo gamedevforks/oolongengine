@@ -241,6 +241,9 @@ void MatrixOrthoRH(
 	const float zf,
 	const bool  bRotate = false);
 
+void MatrixVec3Multiply(VECTOR3		&vOut,
+						const VECTOR3	&vIn,
+						const MATRIX	&mIn);
 
 void MatrixVec3Lerp(
 	VECTOR3		&vOut,

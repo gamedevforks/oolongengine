@@ -97,6 +97,8 @@
 
 #include "mmgr.h"
 
+#define MEMSETALLMEMORYALLOCATIONS
+
 // ---------------------------------------------------------------------------------------------------------------------------------
 // -DOC- If you're like me, it's hard to gain trust in foreign code. This memory manager will try to INDUCE your code to crash (for
 // very good reasons... like making bugs obvious as early as possible.) Some people may be inclined to remove this memory tracking
@@ -1186,11 +1188,12 @@ void	*m_allocator(const char *sourceFile, const unsigned int sourceLine, const c
 		wipeWithPattern(au, unusedPattern);
 
 		// calloc() expects the reported memory address range to be filled with 0's
-
+		
+		// memset for all allocations
+#ifndef MEMSETALLMEMORYALLOCATIONS
 		if (allocationType == m_alloc_calloc)
-		{
+#endif
 			memset(au->reportedAddress, 0, au->reportedSize);
-		}
 
 		// Validate every single allocated unit in memory
 

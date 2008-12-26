@@ -38,6 +38,11 @@
 		79317B3D0EDBBAD300247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B370EDBBAD300247E3D /* utility_impl.cpp */; };
 		79782B840EDF0EF9001C0CE6 /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79782B800EDF0EF9001C0CE6 /* mmgr.cpp */; };
 		79782B850EDF0EF9001C0CE6 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79782B830EDF0EF9001C0CE6 /* readme.txt */; };
+		79832B640F040C5A000F58D6 /* Blob.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832B600F040C5A000F58D6 /* Blob.pvr */; };
+		79832B650F040C5A000F58D6 /* Kettle.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832B610F040C5A000F58D6 /* Kettle.pvr */; };
+		79832B660F040C5A000F58D6 /* Scene_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832B620F040C5A000F58D6 /* Scene_float.pod */; };
+		79832B670F040C5A000F58D6 /* TableCover.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832B630F040C5A000F58D6 /* TableCover.pvr */; };
+		79832B7E0F040E1F000F58D6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79832B7D0F040E1F000F58D6 /* ResourcePath.mm */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +106,12 @@
 		79782B810EDF0EF9001C0CE6 /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
 		79782B820EDF0EF9001C0CE6 /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		79782B830EDF0EF9001C0CE6 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		79832B600F040C5A000F58D6 /* Blob.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = Blob.pvr; path = Media/Blob.pvr; sourceTree = "<group>"; };
+		79832B610F040C5A000F58D6 /* Kettle.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kettle.pvr; path = Media/Kettle.pvr; sourceTree = "<group>"; };
+		79832B620F040C5A000F58D6 /* Scene_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = Scene_float.pod; path = Media/Scene_float.pod; sourceTree = "<group>"; };
+		79832B630F040C5A000F58D6 /* TableCover.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = TableCover.pvr; path = Media/TableCover.pvr; sourceTree = "<group>"; };
+		79832B7C0F040E1F000F58D6 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		79832B7D0F040E1F000F58D6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +168,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79832B600F040C5A000F58D6 /* Blob.pvr */,
+				79832B610F040C5A000F58D6 /* Kettle.pvr */,
+				79832B620F040C5A000F58D6 /* Scene_float.pod */,
+				79832B630F040C5A000F58D6 /* TableCover.pvr */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				79EA070F0DAFF0550038ED3D /* Default.png */,
@@ -180,6 +195,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79832B7B0F040E1F000F58D6 /* Pathes */,
 				79782B7E0EDF0EF9001C0CE6 /* MemoryManager */,
 				79317B2A0EDBBAD300247E3D /* Math */,
 				791F48F50E17553000E927FE /* Application */,
@@ -323,6 +339,16 @@
 			path = ../../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
+		79832B7B0F040E1F000F58D6 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				79832B7C0F040E1F000F58D6 /* ResourcePath.h */,
+				79832B7D0F040E1F000F58D6 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -369,6 +395,10 @@
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				79EA07100DAFF0550038ED3D /* Default.png in Resources */,
 				79782B850EDF0EF9001C0CE6 /* readme.txt in Resources */,
+				79832B640F040C5A000F58D6 /* Blob.pvr in Resources */,
+				79832B650F040C5A000F58D6 /* Kettle.pvr in Resources */,
+				79832B660F040C5A000F58D6 /* Scene_float.pod in Resources */,
+				79832B670F040C5A000F58D6 /* TableCover.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +431,7 @@
 				79317B3C0EDBBAD300247E3D /* matrix_impl.cpp in Sources */,
 				79317B3D0EDBBAD300247E3D /* utility_impl.cpp in Sources */,
 				79782B840EDF0EF9001C0CE6 /* mmgr.cpp in Sources */,
+				79832B7E0F040E1F000F58D6 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

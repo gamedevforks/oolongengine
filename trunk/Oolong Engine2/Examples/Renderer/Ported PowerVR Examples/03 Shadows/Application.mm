@@ -29,22 +29,16 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "MemoryManager.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
 
-// scene file
-#include "Media/scene_float.h"
-
-// textures
-#include "Media/kettle.h"
-#include "Media/TableCover.h"
-#include "Media/Blob.h"
 
 /******************************************************************************
  Defines
  ******************************************************************************/
-#define	CHARWIDTH	150.0f	// Used to draw the basic blob shadow
+#define	CHARWIDTH	45.0f	// Used to draw the basic blob shadow
 #define FLOORHEIGHT 0.5f
 #define FLOORSIZE 800
 
@@ -52,15 +46,19 @@ subject to the following restrictions:
 #define CAM_NEAR	10.0f
 #define CAM_FAR		1000.0f
 
-#define TEXTURESIZE 128
-#define SHADOW_CASTER 0
-#define GROUND 1
-#define LIGHT 2
+#define TEXTURESIZE 256
 
 #define WIDTH 480
 #define HEIGHT 320
 
 #define TIME_FPS_UPDATE		(1)
+
+enum ESceneObjects
+{
+	eGround,
+	eLight,
+	eShadowCaster
+};
 
 enum ShadowModes
 {
@@ -71,18 +69,22 @@ enum ShadowModes
 };
 
 // Texture handle
-GLuint			m_uiTableCover, m_uiKettle, m_uiBlobMap, m_uiShadow;
+GLuint m_uiTableCover, m_uiKettle, m_uiBlobMap, m_uiShadow;
+
+// VBO Handles
+GLuint*	m_puiVbo;
+GLuint*	m_puiIndexVbo;
 
 // 3D Model
-CPODScene	m_Scene;
+CPVRTModelPOD *m_Scene;
 
 // Projection and Model View matrices
-MATRIX		m_mProjection, m_mView;
+MATRIX m_mProjection, m_mView;
 
 // Array to lookup the textures for each material in the scene
-GLuint*			m_puiTextures;
+GLuint*	m_puiTextures;
 
-VECTOR3		m_vLightPos;
+VECTOR3 m_vLightPos;
 
 MATRIX	m_mfloorShadow;
 MATRIX  m_mLightView;
@@ -91,13 +93,12 @@ MATRIX	m_mObjectRotation;
 VECTOR4 m_fPlane;
 VECTOR3 m_fObjectCentre;
 unsigned int m_ui32Mode;
-bool m_bUsePBuffer;
 
 VERTTYPE m_fAngle;
 VERTTYPE m_fObjectAngle;
 
 // FPS variables
-float			m_fFPS;
+float m_fFPS;
 
 CDisplayText * AppDisplayText;
 CTexture * Textures;
@@ -113,6 +114,7 @@ void findPlane(VECTOR4 &plane, const VECTOR3 &v0, const VECTOR3 &v1, const VECTO
 void DrawProjectedShadow(SPODNode* pNode);
 bool RenderToTexture(SPODNode *pNode);
 bool RenderFromLightsView();
+void LoadVbos();
 
 bool CShell::InitApplication()
 {
@@ -122,31 +124,33 @@ bool CShell::InitApplication()
 		printf("Display text textures loaded\n");
 
 	Textures = new CTexture;
-
+	
+	m_Scene = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
+	memset(m_Scene, 0, sizeof(CPVRTModelPOD));
+	
 	/*
-	 Loads the scene from the .h file into a CPVRTPODScene object.
-	 We could also export the scene into a binary .pod file and
-	 load it with ReadFromFile().
+	 Loads the scene from the .pod file into a CPVRTModelPOD object.
+	 We could also export the scene as a header file and
+	 load it with ReadFromMemory().
 	 */
-	m_Scene.ReadFromMemory(c_SCENE_FLOAT_H);
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
 	
-	// The cameras are stored in the file. We check it contains at least one.
-	if (m_Scene.nNumCamera == 0)
-	{
-		printf("ERROR: The scene does not contain a camera\n");
+	/* Gets the Data Path */
+	char		*filename = new char[2048];
+	sprintf(filename, "%s/Scene_float.pod", buffer);
+	if(m_Scene->ReadFromFile(filename) != true)
 		return false;
-	}
-	
+
+	// The cameras are stored in the file. We check it contains at least one.
+	if(m_Scene->nNumCamera == 0)
+		return false;
+
 	m_fAngle = f2vt(0);
 	m_fFPS = 0;
 	
-	
-	/*
-	 Using out attribute list and our egl configuration then set up the
-	 required PBuffer.
-	 */
-	m_bUsePBuffer = false;
-
+        m_puiVbo = 0;
+        m_puiIndexVbo = 0;
 	
 	/*
 	 Start the demo with the advanced blob
@@ -156,20 +160,34 @@ bool CShell::InitApplication()
 	// Enables texturing
 	glEnable(GL_TEXTURE_2D);
 	
+        //	Initialize VBO data 
+	LoadVbos();
+	
 	/*
 	 Load the textures from the headers.
 	 */
-	if(!Textures->LoadTextureFromPointer((void*)TableCover, &m_uiTableCover)) return false;
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/TableCover.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiTableCover))
+		return false;
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/Kettle.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiKettle))
+		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	if(!Textures->LoadTextureFromPointer((void*)kettle, &m_uiKettle)) return false;
+	memset(filename, 0, 2048 * sizeof(char));
+	sprintf(filename, "%s/Blob.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_uiBlobMap))
+		return false;
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	if(!Textures->LoadTextureFromPointer((void*)Blob, &m_uiBlobMap)) return false;
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 	
 	/*
 	 Generate a texture for the render to texture shadow.
@@ -202,7 +220,7 @@ bool CShell::InitApplication()
 	vUp.z = f2vt(0.0f);
 	
 	// We can get the camera position, target and field of view (fov) with GetCameraPos()
-	m_Scene.GetCameraPos( vFrom, vTo, 0);
+	m_Scene->GetCameraPos( vFrom, vTo, 0);
 	
 	MatrixLookAtRH(m_mView, vFrom, vTo, vUp);
 	
@@ -218,8 +236,8 @@ bool CShell::InitApplication()
 	 */
 	SPODNode* pNode;
 	
-	pNode = &m_Scene.pNode[LIGHT];
-	m_Scene.GetWorldMatrix(mWorld, *pNode);
+	pNode = &m_Scene->pNode[eLight];
+	m_Scene->GetWorldMatrix(mWorld, *pNode);
 	
 	MATRIX fRot;
 	MatrixRotationY(fRot, m_fAngle);
@@ -239,16 +257,16 @@ bool CShell::InitApplication()
 	 Build an array to map the textures within the pod header files
 	 to the textures we loaded a bit further up.
 	 */
-	m_puiTextures = new GLuint[m_Scene.nNumMaterial];
+	m_puiTextures = new GLuint[m_Scene->nNumMaterial];
 	
-	for(int i = 0; i < (int) m_Scene.nNumMaterial; ++i)
+	for(unsigned int i = 0; i < m_Scene->nNumMaterial; ++i)
 	{
 		m_puiTextures[i] = 0;
-		SPODMaterial* pMaterial = &m_Scene.pMaterial[i];
+		SPODMaterial* pMaterial = &m_Scene->pMaterial[i];
 		
 		if(!strcmp(pMaterial->pszName, "Material #1"))
 			m_puiTextures[i] = m_uiTableCover;
-		if(!strcmp(pMaterial->pszName, "Material #2"))
+		else if(!strcmp(pMaterial->pszName, "Material #2"))
 			m_puiTextures[i] = m_uiKettle;
 	}
 	
@@ -258,21 +276,21 @@ bool CShell::InitApplication()
 	 Get the centre of the mesh that I have called the shadow caster.
 	 This is used for the advanced blob.
 	 */
-	pNode = &m_Scene.pNode[SHADOW_CASTER];
-	SPODMesh* pMesh = &m_Scene.pMesh[pNode->nIdx];
+	pNode = &m_Scene->pNode[eShadowCaster];
+	SPODMesh* pMesh = &m_Scene->pMesh[pNode->nIdx];
 	
 	m_fObjectCentre.x = f2vt(0.0f);
-	m_fObjectCentre.y = f2vt(15.0f);
+	m_fObjectCentre.y = f2vt(5.0f);
 	m_fObjectCentre.z = f2vt(0.0f);
 	
 	/*
 	 Get the plane for the ground mesh. Obviously this relys on the
 	 ground being flat.
 	 */
-	pNode = &m_Scene.pNode[GROUND];
-	pMesh = &m_Scene.pMesh[pNode->nIdx];
+	pNode = &m_Scene->pNode[eGround];
+	pMesh = &m_Scene->pMesh[pNode->nIdx];
 	
-	VECTOR3* pVertices = (VECTOR3*) pMesh->sVertex.pData;
+	VECTOR3* pVertices = (VECTOR3*) (pMesh->pInterleaved + (size_t) pMesh->sVertex.pData);
 	
 	/* Setup floor plane for projected shadow calculations. */
 	findPlane(m_fPlane, pVertices[0] , pVertices[1], pVertices[2]);
@@ -284,8 +302,55 @@ bool CShell::InitApplication()
 	
 	// polygon offset for shadow to avoid ZFighting between the shadow and floor
 	glPolygonOffset(f2vt(-10.0f),f2vt(-25.0f));
+	
+	delete [] filename;
+	delete [] buffer;
 
 	return true;
+}
+
+void LoadVbos()
+{
+	if(!m_puiVbo)
+		m_puiVbo = new GLuint[m_Scene->nNumMesh];
+
+	if(!m_puiIndexVbo)
+		m_puiIndexVbo = new GLuint[m_Scene->nNumMesh];
+
+	/*
+		Load vertex data of all meshes in the scene into VBOs
+
+		The meshes have been exported with the "Interleave Vectors" option,
+		so all data is interleaved in the buffer at pMesh->pInterleaved.
+		Interleaving data improves the memory access pattern and cache efficiency,
+		thus it can be read faster by the hardware.
+	*/
+
+	glGenBuffers(m_Scene->nNumMesh, m_puiVbo);
+
+	for(unsigned int i = 0; i < m_Scene->nNumMesh; ++i)
+	{
+		// Load vertex data into buffer object
+		SPODMesh& Mesh = m_Scene->pMesh[i];
+		unsigned int uiSize = Mesh.nNumVertex * Mesh.sVertex.nStride;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[i]);
+		glBufferData(GL_ARRAY_BUFFER, uiSize, Mesh.pInterleaved, GL_STATIC_DRAW);
+
+		// Load index data into buffer object if available
+		m_puiIndexVbo[i] = 0;
+
+		if(Mesh.sFaces.pData)
+		{
+			glGenBuffers(1, &m_puiIndexVbo[i]);
+			uiSize = PVRTModelPODCountIndices(Mesh) * sizeof(GLshort);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[i]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, Mesh.sFaces.pData, GL_STATIC_DRAW);
+		}
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 /*******************************************************************************
@@ -335,9 +400,12 @@ bool CShell::QuitApplication()
 	Textures->ReleaseTexture(m_uiTableCover);
 		
 	glDeleteTextures(1, &m_uiShadow);
+	
+	delete[] m_puiVbo;
+	delete[] m_puiIndexVbo;
 
 	// Frees the memory allocated for the scene
-	m_Scene.Destroy();
+	m_Scene->Destroy();
 	
 	delete Textures;
 
@@ -356,7 +424,7 @@ bool RenderToTexture(SPODNode *pNode)
 	MATRIX mModelView;
 	
 	// Gets the node model matrix
-	m_Scene.GetWorldMatrix(mWorld, *pNode);
+	m_Scene->GetWorldMatrix(mWorld, *pNode);
 	
 	// Set the Shadow Color and Alpha
 	glColor4f(f2vt(0.25f), f2vt(0.25f), f2vt(0.25f), f2vt(0.0f));
@@ -380,11 +448,8 @@ bool RenderToTexture(SPODNode *pNode)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_uiShadow);
 	
-	if(!m_bUsePBuffer)
-	{
-		/* If we are not using PBuffers copy the backbuffer into the texture. */
-		glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, TEXTURESIZE, TEXTURESIZE, 0);
-	}
+	/* If we are not using PBuffers copy the backbuffer into the texture. */
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, TEXTURESIZE, TEXTURESIZE, 0);
 	
 	glEnable(GL_CULL_FACE);
 	return true;
@@ -479,7 +544,7 @@ bool RenderFromLightsView()
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(proj.f);
 	
-	RenderToTexture(&m_Scene.pNode[SHADOW_CASTER]);
+	RenderToTexture(&m_Scene->pNode[eShadowCaster]);
 	
 	return true;
 }
@@ -564,9 +629,9 @@ bool CShell::RenderScene()
 		//Update light position
 		VECTOR4 vLightDirection;
 		
-		pNode = &m_Scene.pNode[LIGHT];
+		pNode = &m_Scene->pNode[eLight];
 		
-		m_Scene.GetWorldMatrix(mWorld, *pNode);
+		m_Scene->GetWorldMatrix(mWorld, *pNode);
 		
 		MatrixRotationY(fTransform, m_fAngle);
 		MatrixMultiply(mWorld, mWorld, fTransform);
@@ -592,7 +657,6 @@ bool CShell::RenderScene()
 		
 		/* Model View Matrix */
 		MatrixLookAtRH(m_mLightView, m_vLightPos, fPointOfInterest, MyUp);
-		bUpdateTexture = true;
 	}
 	
 	/*
@@ -632,9 +696,9 @@ bool CShell::RenderScene()
 	 */
 	glDisable(GL_LIGHTING);
 	
-	pNode = &m_Scene.pNode[LIGHT];
+	pNode = &m_Scene->pNode[eLight];
 	
-	m_Scene.GetWorldMatrix(mWorld, *pNode);
+	m_Scene->GetWorldMatrix(mWorld, *pNode);
 	MatrixRotationY(fTransform, m_fAngle);
 	MatrixMultiply(mWorld, mWorld, fTransform);
 	MatrixMultiply(mModelView, mWorld, m_mView);
@@ -657,9 +721,9 @@ bool CShell::RenderScene()
 	 Draw the ground
 	 */
 	
-	pNode = &m_Scene.pNode[GROUND];
+	pNode = &m_Scene->pNode[eGround];
 	
-	m_Scene.GetWorldMatrix(mWorld, *pNode);
+	m_Scene->GetWorldMatrix(mWorld, *pNode);
 	
 	MatrixMultiply(mModelView, mWorld, m_mView);
 	glLoadMatrixf(mModelView.f);
@@ -704,9 +768,9 @@ bool CShell::RenderScene()
 	glPushMatrix();
 	glEnable(GL_LIGHTING);
 	
-	pNode = &m_Scene.pNode[SHADOW_CASTER];
+	pNode = &m_Scene->pNode[eShadowCaster];
 	
-	m_Scene.GetWorldMatrix(mWorld, *pNode);
+	m_Scene->GetWorldMatrix(mWorld, *pNode);
 	
 	MatrixMultiply(fTransform, mWorld, m_mObjectRotation);
 	MatrixMultiply(mModelView, fTransform, m_mView);
@@ -763,11 +827,7 @@ bool CShell::RenderScene()
 			break;
 		case R2TEXMODE:
 			// This shadow is drawn when the ground is drawn.
-			
-			if(m_bUsePBuffer)
-				AppDisplayText->DisplayDefaultTitle("Shadow Techniques", "Projected render (Using PBuffer)", eDisplayTextLogoIMG);
-			else
-				AppDisplayText->DisplayDefaultTitle("Shadow Techniques", "Projected render (Using copy to texture)", eDisplayTextLogoIMG);
+			AppDisplayText->DisplayDefaultTitle("Shadow Techniques", "Projected render (Using copy to texture)", eDisplayTextLogoIMG);
 			
 			DrawShadowTexture();
 			break;
@@ -791,14 +851,20 @@ bool CShell::RenderScene()
  ******************************************************************************/
 void DrawMesh(SPODNode* pNode, bool bProjectTexture)
 {
-	// Gets pMesh referenced by the pNode
-	SPODMesh *pMesh = &m_Scene.pMesh[pNode->nIdx];
+	unsigned int ui32MeshID = pNode->nIdx;
+
+	// Get Mesh referenced by the pNode
+	SPODMesh& Mesh = m_Scene->pMesh[ui32MeshID];
 	
-	glVertexPointer(3, VERTTYPEENUM, pMesh->sVertex.nStride , pMesh->sVertex.pData);
-	glNormalPointer(VERTTYPEENUM   , pMesh->sNormals.nStride, pMesh->sNormals.pData);
+	// Bind the vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[ui32MeshID]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[ui32MeshID]);
+
+	glVertexPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride, Mesh.sVertex.pData);
+	glNormalPointer(VERTTYPEENUM   , Mesh.sNormals.nStride, Mesh.sNormals.pData);
 	
 	glClientActiveTexture(GL_TEXTURE0);
-	glTexCoordPointer(2, VERTTYPEENUM, pMesh->psUVW[0].nStride, pMesh->psUVW[0].pData);
+	glTexCoordPointer(2, VERTTYPEENUM, Mesh.psUVW[0].nStride, Mesh.psUVW[0].pData);
 	
 	if(bProjectTexture)
 	{
@@ -808,7 +874,7 @@ void DrawMesh(SPODNode* pNode, bool bProjectTexture)
 		
 		glClientActiveTexture(GL_TEXTURE1);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(3, VERTTYPEENUM, pMesh->sVertex.nStride , pMesh->sVertex.pData);
+		glTexCoordPointer(3, VERTTYPEENUM, Mesh.sVertex.nStride , Mesh.sVertex.pData);
 		
 		glLoadIdentity();
 		
@@ -819,7 +885,7 @@ void DrawMesh(SPODNode* pNode, bool bProjectTexture)
 	}
 	
 	// Indexed Triangle list
-	glDrawElements(GL_TRIANGLES, pMesh->nNumFaces*3, GL_UNSIGNED_SHORT, pMesh->sFaces.pData);
+	glDrawElements(GL_TRIANGLES, Mesh.nNumFaces*3, GL_UNSIGNED_SHORT, 0);
 	
 	if(bProjectTexture)
 	{
@@ -829,6 +895,10 @@ void DrawMesh(SPODNode* pNode, bool bProjectTexture)
 		
 		glMatrixMode(GL_MODELVIEW);
 	}
+
+	// unbind the vertex buffers as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 /*!****************************************************************************
@@ -868,7 +938,7 @@ void DrawProjectedShadow(SPODNode* pNode)
 	
 	/* Set the transformation of the kettle */
 	MATRIX fTransform, mWorld;
-	m_Scene.GetWorldMatrix(mWorld, *pNode);
+	m_Scene->GetWorldMatrix(mWorld, *pNode);
 	MatrixMultiply(fTransform, mWorld, m_mObjectRotation);
 	glMultMatrixf(fTransform.f);
 	
@@ -948,14 +1018,14 @@ void DrawBaseBlob(VECTOR3 fCentre)
 	
 	// Enable Blending for Transparent Blob
 	glEnable (GL_BLEND);
-	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_DST_COLOR, GL_ZERO);
 	
 	// Bind Blob Texture
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D,m_uiBlobMap);
 	
 	// Set Base Blend color to influence how transparent the shadow is
-	glColor4f(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.7f));
+//	glColor4f(f2vt(0.0f), f2vt(0.0f), f2vt(0.0f), f2vt(0.7f));
 	
 	// Draw Blob - in this case the object is "static" so blob position is "static" as well
 	// In a Game the Blob position would be calculated from the Character Position.
@@ -967,7 +1037,6 @@ void DrawBaseBlob(VECTOR3 fCentre)
 	glVertexPointer(3,VERTTYPEENUM,0,pVertices);
 	
 	glClientActiveTexture(GL_TEXTURE0);
-	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2,VERTTYPEENUM,0,pUV);
 	
 	/* Draw Geometry */

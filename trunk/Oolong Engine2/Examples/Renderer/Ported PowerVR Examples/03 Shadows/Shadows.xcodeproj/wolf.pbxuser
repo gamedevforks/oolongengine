@@ -15,7 +15,7 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeBuildConfigurationName = Release;
+		activeBuildConfigurationName = Debug;
 		activeExecutable = 79235BF70DAD051C00F918F8 /* Skeleton */;
 		activeSDKPreference = iphoneos2.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Skeleton */;
@@ -23,12 +23,17 @@
 			1D6058900D05DD3D006BFB54 /* Skeleton */,
 		);
 		breakpoints = (
-			79F921D30DFA4F1D003CD043 /* Application.mm:632 */,
-			79F921E80DFA52CF003CD043 /* Application.mm:617 */,
-			79F921EA0DFA5331003CD043 /* Application.mm:643 */,
-			79F921EC0DFA5349003CD043 /* Application.mm:638 */,
-			79F921EE0DFA534A003CD043 /* Application.mm:635 */,
-			79F921F00DFA5355003CD043 /* Application.mm:641 */,
+			79F921D30DFA4F1D003CD043 /* Application.mm:637 */,
+			79F921E80DFA52CF003CD043 /* Application.mm:622 */,
+			79F921EA0DFA5331003CD043 /* Application.mm:648 */,
+			79F921EC0DFA5349003CD043 /* Application.mm:643 */,
+			79F921EE0DFA534A003CD043 /* Application.mm:640 */,
+			79F921F00DFA5355003CD043 /* Application.mm:646 */,
+			79832B860F040EF6000F58D6 /* Application.mm:139 */,
+			79832B880F040EF8000F58D6 /* Application.mm:143 */,
+			79832B8A0F040EFC000F58D6 /* Application.mm:162 */,
+			79832B8C0F040EFF000F58D6 /* Application.mm:169 */,
+			79832B8E0F040F02000F58D6 /* Application.mm:176 */,
 		);
 		codeSenseManager = 79235BFD0DAD053A00F918F8 /* Code sense */;
 		executables = (
@@ -64,7 +69,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					994,
 					20,
 					48,
 					43,
@@ -81,12 +86,19 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249499367;
-			PBXWorkspaceStateSaveDate = 249499367;
+			PBXPerProjectTemplateStateSaveDate = 251836046;
+			PBXWorkspaceStateSaveDate = 251836046;
 		};
 		perUserProjectItems = {
-			79317B4C0EDBBC4F00247E3D = 79317B4C0EDBBC4F00247E3D /* PBXTextBookmark */;
-			79317B4D0EDBBC4F00247E3D = 79317B4D0EDBBC4F00247E3D /* PBXTextBookmark */;
+			79832B9A0F040F79000F58D6 /* PBXTextBookmark */ = 79832B9A0F040F79000F58D6 /* PBXTextBookmark */;
+			79832B9B0F040F79000F58D6 /* PBXTextBookmark */ = 79832B9B0F040F79000F58D6 /* PBXTextBookmark */;
+			79832BC40F041C86000F58D6 /* PBXTextBookmark */ = 79832BC40F041C86000F58D6 /* PBXTextBookmark */;
+			79832BC50F041C86000F58D6 /* PBXTextBookmark */ = 79832BC50F041C86000F58D6 /* PBXTextBookmark */;
+			79832BC60F041C86000F58D6 /* PBXTextBookmark */ = 79832BC60F041C86000F58D6 /* PBXTextBookmark */;
+			79832BC70F041C86000F58D6 /* PBXTextBookmark */ = 79832BC70F041C86000F58D6 /* PBXTextBookmark */;
+			79832BC80F041C86000F58D6 /* PBXTextBookmark */ = 79832BC80F041C86000F58D6 /* PBXTextBookmark */;
+			79832BC90F041C86000F58D6 /* PBXTextBookmark */ = 79832BC90F041C86000F58D6 /* PBXTextBookmark */;
+			79832BCA0F041C86000F58D6 /* PBXTextBookmark */ = 79832BCA0F041C86000F58D6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -142,31 +154,193 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {750, 14896}}";
-			sepNavSelRange = "{19575, 0}";
-			sepNavVisRange = "{19401, 350}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 15624}}";
+			sepNavSelRange = "{17791, 0}";
+			sepNavVisRange = "{17298, 981}";
 			sepNavWindowFrame = "{{268, 97}, {821, 781}}";
 		};
 	};
-	79317B4C0EDBBC4F00247E3D /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "error: 'myglLoadMatrix' was not declared in this scope";
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		rLen = 1;
-		rLoc = 759;
-		rType = 1;
+	79782B800EDF0EF9001C0CE6 /* mmgr.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1172, 24402}}";
+			sepNavSelRange = "{4722, 0}";
+			sepNavVisRange = "{4363, 1938}";
+			sepNavWindowFrame = "{{15, 86}, {1043, 787}}";
+		};
 	};
-	79317B4D0EDBBC4F00247E3D /* PBXTextBookmark */ = {
+	79832B860F040EF6000F58D6 /* Application.mm:139 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		functionName = "CShell::InitApplication()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 139;
+		location = Shadows;
+		modificationTime = 251927523.453523;
+		state = 1;
+	};
+	79832B880F040EF8000F58D6 /* Application.mm:143 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		functionName = "CShell::InitApplication()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 143;
+		location = Shadows;
+		modificationTime = 251927523.45385;
+		state = 1;
+	};
+	79832B8A0F040EFC000F58D6 /* Application.mm:162 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		functionName = "CShell::InitApplication()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 162;
+		location = Shadows;
+		modificationTime = 251927523.454111;
+		state = 1;
+	};
+	79832B8C0F040EFF000F58D6 /* Application.mm:169 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		functionName = "CShell::InitApplication()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 169;
+		location = Shadows;
+		modificationTime = 251927523.454344;
+		state = 1;
+	};
+	79832B8E0F040F02000F58D6 /* Application.mm:176 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		functionName = "CShell::InitApplication()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 176;
+		location = Shadows;
+		modificationTime = 251927523.454605;
+		state = 1;
+	};
+	79832B9A0F040F79000F58D6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 760";
+		name = "Application.mm: 890";
 		rLen = 0;
-		rLoc = 19575;
+		rLoc = 23285;
 		rType = 0;
-		vrLen = 350;
-		vrLoc = 19401;
+		vrLen = 1182;
+		vrLoc = 6302;
 	};
-	79F921D30DFA4F1D003CD043 /* Application.mm:632 */ = {
+	79832B9B0F040F79000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79782B800EDF0EF9001C0CE6 /* mmgr.cpp */;
+		name = "mmgr.cpp: 539";
+		rLen = 69;
+		rLoc = 24333;
+		rType = 0;
+		vrLen = 1418;
+		vrLoc = 23413;
+	};
+	79832BC40F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79782B800EDF0EF9001C0CE6 /* mmgr.cpp */;
+		name = "mmgr.cpp: 100";
+		rLen = 0;
+		rLoc = 4722;
+		rType = 0;
+		vrLen = 1938;
+		vrLoc = 4363;
+	};
+	79832BC50F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		rLen = 0;
+		rLoc = 17791;
+		rType = 0;
+	};
+	79832BC60F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 829";
+		rLen = 0;
+		rLoc = 21667;
+		rType = 0;
+		vrLen = 1365;
+		vrLoc = 20871;
+	};
+	79832BC70F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79782B800EDF0EF9001C0CE6 /* mmgr.cpp */;
+		name = "mmgr.cpp: 100";
+		rLen = 0;
+		rLoc = 4696;
+		rType = 0;
+		vrLen = 1938;
+		vrLoc = 4363;
+	};
+	79832BC80F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 101";
+		rLen = 0;
+		rLoc = 2726;
+		rType = 0;
+		vrLen = 966;
+		vrLoc = 2277;
+	};
+	79832BC90F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79782B800EDF0EF9001C0CE6 /* mmgr.cpp */;
+		name = "mmgr.cpp: 100";
+		rLen = 0;
+		rLoc = 4722;
+		rType = 0;
+		vrLen = 1938;
+		vrLoc = 4363;
+	};
+	79832BCA0F041C86000F58D6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 657";
+		rLen = 0;
+		rLoc = 17791;
+		rType = 0;
+		vrLen = 981;
+		vrLoc = 17298;
+	};
+	79F921D30DFA4F1D003CD043 /* Application.mm:637 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -178,12 +352,12 @@
 		functionName = "CShell::RenderScene()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 632;
+		lineNumber = 637;
 		location = Shadows;
-		modificationTime = 249281588.837462;
+		modificationTime = 251927523.451773;
 		state = 2;
 	};
-	79F921E80DFA52CF003CD043 /* Application.mm:617 */ = {
+	79F921E80DFA52CF003CD043 /* Application.mm:622 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -195,12 +369,29 @@
 		functionName = "CShell::RenderScene()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 617;
+		lineNumber = 622;
 		location = Shadows;
-		modificationTime = 249281588.837966;
+		modificationTime = 251927523.452277;
 		state = 2;
 	};
-	79F921EA0DFA5331003CD043 /* Application.mm:643 */ = {
+	79F921EA0DFA5331003CD043 /* Application.mm:648 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		functionName = "CShell::RenderScene()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 648;
+		location = Shadows;
+		modificationTime = 251927523.452521;
+		state = 2;
+	};
+	79F921EC0DFA5349003CD043 /* Application.mm:643 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -214,10 +405,10 @@
 		ignoreCount = 0;
 		lineNumber = 643;
 		location = Shadows;
-		modificationTime = 249281588.83822;
+		modificationTime = 251927523.452798;
 		state = 2;
 	};
-	79F921EC0DFA5349003CD043 /* Application.mm:638 */ = {
+	79F921EE0DFA534A003CD043 /* Application.mm:640 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -229,12 +420,12 @@
 		functionName = "CShell::RenderScene()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 638;
+		lineNumber = 640;
 		location = Shadows;
-		modificationTime = 249281588.838476;
+		modificationTime = 251927523.453047;
 		state = 2;
 	};
-	79F921EE0DFA534A003CD043 /* Application.mm:635 */ = {
+	79F921F00DFA5355003CD043 /* Application.mm:646 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -246,26 +437,9 @@
 		functionName = "CShell::RenderScene()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 635;
+		lineNumber = 646;
 		location = Shadows;
-		modificationTime = 249281588.8387139;
-		state = 2;
-	};
-	79F921F00DFA5355003CD043 /* Application.mm:641 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		functionName = "CShell::RenderScene()";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 641;
-		location = Shadows;
-		modificationTime = 249281588.838939;
+		modificationTime = 251927523.453305;
 		state = 2;
 	};
 }

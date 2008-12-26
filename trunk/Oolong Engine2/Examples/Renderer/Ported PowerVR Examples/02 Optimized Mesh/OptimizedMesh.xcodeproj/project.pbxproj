@@ -38,6 +38,10 @@
 		79317B090EDB167800247E3D /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317B030EDB167800247E3D /* utility_impl.cpp */; };
 		793181270EDF0E5800247E3D /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793181230EDF0E5800247E3D /* mmgr.cpp */; };
 		793181280EDF0E5800247E3D /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 793181260EDF0E5800247E3D /* readme.txt */; };
+		79832AC30F02AF64000F58D6 /* model_texture.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832AC00F02AF64000F58D6 /* model_texture.pvr */; };
+		79832AC40F02AF64000F58D6 /* Sphere_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832AC10F02AF64000F58D6 /* Sphere_float.pod */; };
+		79832AC50F02AF64000F58D6 /* SphereOpt_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832AC20F02AF64000F58D6 /* SphereOpt_float.pod */; };
+		79832AFB0F02B1F2000F58D6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79832AFA0F02B1F2000F58D6 /* ResourcePath.mm */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +105,11 @@
 		793181240EDF0E5800247E3D /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
 		793181250EDF0E5800247E3D /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		793181260EDF0E5800247E3D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		79832AC00F02AF64000F58D6 /* model_texture.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = model_texture.pvr; path = Media/model_texture.pvr; sourceTree = "<group>"; };
+		79832AC10F02AF64000F58D6 /* Sphere_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sphere_float.pod; path = Media/Sphere_float.pod; sourceTree = "<group>"; };
+		79832AC20F02AF64000F58D6 /* SphereOpt_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = SphereOpt_float.pod; path = Media/SphereOpt_float.pod; sourceTree = "<group>"; };
+		79832AF90F02B1F2000F58D6 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		79832AFA0F02B1F2000F58D6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +166,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79832AC00F02AF64000F58D6 /* model_texture.pvr */,
+				79832AC10F02AF64000F58D6 /* Sphere_float.pod */,
+				79832AC20F02AF64000F58D6 /* SphereOpt_float.pod */,
 				1B26781D0DA2F9B000B24DA5 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				79EA070F0DAFF0550038ED3D /* Default.png */,
@@ -180,6 +192,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79832AF80F02B1F2000F58D6 /* Pathes */,
 				793181210EDF0E5800247E3D /* MemoryManager */,
 				79317AF60EDB167800247E3D /* Math */,
 				791F494E0E17558F00E927FE /* Application */,
@@ -323,12 +336,22 @@
 			path = ../../../../Utility/MemoryManager;
 			sourceTree = SOURCE_ROOT;
 		};
+		79832AF80F02B1F2000F58D6 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				79832AF90F02B1F2000F58D6 /* ResourcePath.h */,
+				79832AFA0F02B1F2000F58D6 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Skeleton */ = {
+		1D6058900D05DD3D006BFB54 /* OptimizedMesh */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Skeleton" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OptimizedMesh" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -338,7 +361,7 @@
 			);
 			dependencies = (
 			);
-			name = Skeleton;
+			name = OptimizedMesh;
 			productName = foo;
 			productReference = 1D6058910D05DD3D006BFB54 /* OptimizedMesh.app */;
 			productType = "com.apple.product-type.application";
@@ -355,7 +378,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Skeleton */,
+				1D6058900D05DD3D006BFB54 /* OptimizedMesh */,
 			);
 		};
 /* End PBXProject section */
@@ -369,6 +392,9 @@
 				1BF3A1360DA68E6200C48976 /* ReadMe.txt in Resources */,
 				79EA07100DAFF0550038ED3D /* Default.png in Resources */,
 				793181280EDF0E5800247E3D /* readme.txt in Resources */,
+				79832AC30F02AF64000F58D6 /* model_texture.pvr in Resources */,
+				79832AC40F02AF64000F58D6 /* Sphere_float.pod in Resources */,
+				79832AC50F02AF64000F58D6 /* SphereOpt_float.pod in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +427,7 @@
 				79317B080EDB167800247E3D /* matrix_impl.cpp in Sources */,
 				79317B090EDB167800247E3D /* utility_impl.cpp in Sources */,
 				793181270EDF0E5800247E3D /* mmgr.cpp in Sources */,
+				79832AFB0F02B1F2000F58D6 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +501,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Skeleton" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OptimizedMesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,

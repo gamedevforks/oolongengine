@@ -8,25 +8,25 @@
 			sepNavWindowFrame = "{{38, 96}, {1160, 756}}";
 		};
 	};
-	1D6058900D05DD3D006BFB54 /* Skeleton */ = {
+	1D6058900D05DD3D006BFB54 /* OptimizedMesh */ = {
 		activeExec = 0;
 		executables = (
-			79235BF70DAD051C00F918F8 /* Skeleton */,
+			79235BF70DAD051C00F918F8 /* OptimizedMesh */,
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Release;
-		activeExecutable = 79235BF70DAD051C00F918F8 /* Skeleton */;
+		activeExecutable = 79235BF70DAD051C00F918F8 /* OptimizedMesh */;
 		activeSDKPreference = iphoneos2.2;
-		activeTarget = 1D6058900D05DD3D006BFB54 /* Skeleton */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* OptimizedMesh */;
 		addToTargets = (
-			1D6058900D05DD3D006BFB54 /* Skeleton */,
+			1D6058900D05DD3D006BFB54 /* OptimizedMesh */,
 		);
 		breakpoints = (
 		);
 		codeSenseManager = 79235BFD0DAD053A00F918F8 /* Code sense */;
 		executables = (
-			79235BF70DAD051C00F918F8 /* Skeleton */,
+			79235BF70DAD051C00F918F8 /* OptimizedMesh */,
 		);
 		perUserDictionary = {
 			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
@@ -58,7 +58,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					364,
+					836,
 					20,
 					48,
 					43,
@@ -75,12 +75,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249587393;
-			PBXWorkspaceStateSaveDate = 249587393;
+			PBXPerProjectTemplateStateSaveDate = 251833482;
+			PBXWorkspaceStateSaveDate = 251833482;
 		};
 		perUserProjectItems = {
-			79317B1D0EDBBABA00247E3D /* PBXTextBookmark */ = 79317B1D0EDBBABA00247E3D /* PBXTextBookmark */;
-			796E13FE0EE06749007BB71F /* PBXTextBookmark */ = 796E13FE0EE06749007BB71F /* PBXTextBookmark */;
+			79832B060F02B24A000F58D6 /* PBXTextBookmark */ = 79832B060F02B24A000F58D6 /* PBXTextBookmark */;
+			79832B070F02B24A000F58D6 /* PBXTextBookmark */ = 79832B070F02B24A000F58D6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79235BFC0DAD053A00F918F8 /* Source Control */;
 		userBuildSettings = {
@@ -102,7 +102,7 @@
 			sepNavWindowFrame = "{{84, 168}, {894, 642}}";
 		};
 	};
-	79235BF70DAD051C00F918F8 /* Skeleton */ = {
+	79235BF70DAD051C00F918F8 /* OptimizedMesh */ = {
 		isa = PBXExecutable;
 		activeArgIndices = (
 		);
@@ -122,7 +122,7 @@
 		executableSystemSymbolLevel = 0;
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
-		name = Skeleton;
+		name = OptimizedMesh;
 		savedGlobals = {
 		};
 		sourceDirectories = (
@@ -144,30 +144,28 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {600, 6664}}";
-			sepNavSelRange = "{4907, 0}";
-			sepNavVisRange = "{4817, 228}";
+			sepNavIntBoundsRect = "{{0, 0}, {1470, 7742}}";
+			sepNavSelRange = "{13525, 0}";
+			sepNavVisRange = "{13026, 849}";
 			sepNavWindowFrame = "{{84, 168}, {894, 642}}";
 		};
 	};
-	79317B1D0EDBBABA00247E3D /* PBXTextBookmark */ = {
+	79832B060F02B24A000F58D6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
+		comments = "error: 'm_sModel' was not declared in this scope";
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 174";
-		rLen = 0;
-		rLoc = 4907;
-		rType = 0;
-		vrLen = 247;
-		vrLoc = 4817;
+		rLen = 1;
+		rLoc = 497;
+		rType = 1;
 	};
-	796E13FE0EE06749007BB71F /* PBXTextBookmark */ = {
+	79832B070F02B24A000F58D6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 174";
+		name = "Application.mm: 501";
 		rLen = 0;
-		rLoc = 4907;
+		rLoc = 13525;
 		rType = 0;
-		vrLen = 228;
-		vrLoc = 4817;
+		vrLen = 849;
+		vrLoc = 13026;
 	};
 }

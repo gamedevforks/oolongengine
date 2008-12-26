@@ -29,13 +29,10 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "MemoryManager.h"
 #include "Macros.h"
+#include "Pathes.h"
 
 #include <stdio.h>
 #include <sys/time.h>
-
-#include "Media/Sphere_float.h"
-#include "Media/SphereOpt_float.h"
-#include "Media/model_texture.h"
 
 CDisplayText * AppDisplayText;
 CTexture * Textures;
@@ -44,9 +41,19 @@ int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 int frames;
 float frameRate;
 
+
 /*****************************************************************************
  ** DEFINES
  *****************************************************************************/
+const unsigned int m_ui32VBONo = 2;
+
+#ifdef ENABLE_LOAD_TIME_STRIP
+const unsigned int m_ui32IndexVBONo = 3;
+const unsigned int m_ui32PageNo		= 3;
+#else
+const unsigned int m_ui32IndexVBONo = 2;
+const unsigned int m_ui32PageNo		= 2;
+#endif
 
 #define VIEW_DISTANCE		f2vt(35)
 
@@ -59,18 +66,23 @@ float frameRate;
 #define CAM_NEAR	f2vt(0.1f)
 #define CAM_FAR		f2vt(1000.0f)
 
-CPODScene		m_sModel;		// Model
-CPODScene		m_sModelOpt;	// Triangle optimized model
-
+CPVRTModelPOD		*m_Model;	// Model
+CPVRTModelPOD		*m_ModelOpt;	// Triangle optimized model
+	
 // not working hangs in TriStripList
 //#define ENABLE_LOAD_TIME_STRIP
 
 #ifdef ENABLE_LOAD_TIME_STRIP
 unsigned short		*m_pNewIdx;		// Optimized model's indices
+
+// There is some processing to be done once only; this flags marks whether it has been done.
+int				m_nInit;
 #endif
 
-// Model texture
-GLuint		m_Texture;
+// OpenGL handles for textures and VBOs
+GLuint*	m_puiVbo;
+GLuint*	m_puiIndexVbo;
+GLuint	m_Texture;
 
 // View and Projection Matrices
 MATRIX	m_mView, m_mProj;
@@ -87,10 +99,6 @@ unsigned long	m_uiLastTime, m_uiTimeDiff;
 unsigned long	m_uiFPSTimeDiff, m_uiFPSFrameCnt;
 float			m_fFPS;
 
-#ifdef ENABLE_LOAD_TIME_STRIP
-// There is some processing to be done once only; this flags marks whether it has been done.
-int				m_nInit;
-#endif
 
 
 
@@ -106,6 +114,8 @@ void CameraGetMatrix();
 void ComputeViewMatrix();
 void DrawModel( int iOptim );
 void CalculateAndDisplayFrameRate();
+void LoadVbos();
+
 #ifdef ENABLE_LOAD_TIME_STRIP
 void StripMesh();
 #endif
@@ -120,9 +130,28 @@ bool CShell::InitApplication()
 	Textures = new CTexture;
 
 	
-	m_sModel.ReadFromMemory(c_SPHERE_FLOAT_H);
-	m_sModelOpt.ReadFromMemory(c_SPHEREOPT_FLOAT_H);
+	// Load POD File Data
+	m_Model = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
+	m_ModelOpt = (CPVRTModelPOD*)malloc(sizeof(CPVRTModelPOD));
 	
+	/*
+	 Loads the scene from the .pod file into a CPVRTModelPOD object.
+	 We could also export the scene as a header file and
+	 load it with ReadFromMemory().
+	 */
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
+	
+	/* Gets the Data Path */
+	char		*filename = new char[2048];
+	sprintf(filename, "%s/Sphere_float.pod", buffer);
+	if(m_Model->ReadFromFile(filename) != true)
+		return false;
+	
+	sprintf(filename, "%s/SphereOpt_float.pod", buffer);
+	if(m_ModelOpt->ReadFromFile(filename) != true)
+		return false;
+
 #ifdef ENABLE_LOAD_TIME_STRIP
 	// Create a stripped version of the mesh at load time
 	m_nInit = 2;
@@ -135,9 +164,9 @@ bool CShell::InitApplication()
 	/******************************
 	 ** Create Textures           **
 	 *******************************/
-	if(!Textures->LoadTextureFromPointer((void*)model_texture, &m_Texture))
+	sprintf(filename, "%s/model_texture.pvr", buffer);
+	if(!Textures->LoadTextureFromPVR(filename, &m_Texture))
 	{
-		printf("**ERROR** Failed to load texture for Background.\n");
 		return false;
 	}
 	
@@ -186,15 +215,80 @@ bool CShell::InitApplication()
 	m_fFPS = 0;
 	m_fViewAngle = f2vt(0.0f);
 	m_uiSwitchTimeDiff = 0;
+	
+#ifndef ENABLE_LOAD_TIME_STRIP
+	LoadVbos();
+#endif
+	
+	delete [] filename;
+	delete [] buffer;
+
 
 	return true;
+}
+
+/*!****************************************************************************
+ @Function		LoadVbos
+ @Description	Loads the mesh data required for this training course into
+				vertex buffer objects
+******************************************************************************/
+void LoadVbos()
+{
+	if(!m_puiVbo)
+		m_puiVbo = new GLuint[m_ui32VBONo];
+
+	if(!m_puiIndexVbo)
+		m_puiIndexVbo = new GLuint[m_ui32IndexVBONo];
+
+	glGenBuffers(m_ui32VBONo, m_puiVbo);
+	glGenBuffers(m_ui32IndexVBONo, m_puiIndexVbo);
+
+	// Create vertex buffer for Model
+
+	// Load vertex data into buffer object
+	unsigned int uiSize = m_Model->pMesh[0].nNumVertex * m_Model->pMesh[0].sVertex.nStride;
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[0]);
+	glBufferData(GL_ARRAY_BUFFER, uiSize, m_Model->pMesh[0].pInterleaved, GL_STATIC_DRAW);
+
+	// Load index data into buffer object if available
+	uiSize = PVRTModelPODCountIndices(m_Model->pMesh[0]) * sizeof(GLshort);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[0]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, m_Model->pMesh[0].sFaces.pData, GL_STATIC_DRAW);
+	
+	// Create vertex buffer for ModelOpt
+
+	// Load vertex data into buffer object
+	uiSize = m_ModelOpt->pMesh[0].nNumVertex * m_ModelOpt->pMesh[0].sVertex.nStride;
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[1]);
+	glBufferData(GL_ARRAY_BUFFER, uiSize, m_ModelOpt->pMesh[0].pInterleaved, GL_STATIC_DRAW);
+
+	// Load index data into buffer object if available
+	uiSize = PVRTModelPODCountIndices(m_ModelOpt->pMesh[0]) * sizeof(GLshort);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, m_ModelOpt->pMesh[0].sFaces.pData, GL_STATIC_DRAW);
+
+#ifdef ENABLE_LOAD_TIME_STRIP
+	// Creat index data for the load time stripping
+	uiSize = PVRTModelPODCountIndices(m_Model->pMesh[0]) * sizeof(GLshort);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[2]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, uiSize, m_pNewIdx, GL_STATIC_DRAW);
+#endif
+
+	// Unbind buffers
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 bool CShell::QuitApplication()
 {
 
-	m_sModel.Destroy();
-	m_sModelOpt.Destroy();
+	m_Model->Destroy();
+	m_ModelOpt->Destroy();
+	
+	delete[] m_puiVbo;
+	delete[] m_puiIndexVbo;
 	
 #ifdef ENABLE_LOAD_TIME_STRIP
 	free(m_pNewIdx);
@@ -249,6 +343,7 @@ bool CShell::RenderScene()
 		}
 		
 		StripMesh();
+		LoadVbos();
 	}
 #endif
 	
@@ -279,15 +374,9 @@ bool CShell::RenderScene()
 	{
 		m_uiSwitchTimeDiff = 0;
 		++m_nPage;
-		
-#ifdef ENABLE_LOAD_TIME_STRIP
-		if(m_nPage > 2)
-#else
-			if(m_nPage > 1)
-#endif
-			{
-				m_nPage = 0;
-			}
+
+		if(m_nPage >= (int) m_ui32PageNo)
+			m_nPage = 0;
 	}
 	
 	/* Calculate the model view matrix turning around the balloon */
@@ -337,58 +426,64 @@ void ComputeViewMatrix()
  *******************************************************************************/
 void DrawModel( int iOptim )
 {
-	SPODMesh		*mesh;
-	unsigned short	*indices;
+	SPODMesh *pMesh;
 	
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	
+
 	MATRIX worldMatrix;
-	m_sModel.GetWorldMatrix(worldMatrix, m_sModel.pNode[0]);
+	m_Model->GetWorldMatrix(worldMatrix, m_Model->pNode[0]);
 	glMultMatrixf(worldMatrix.f);
-	
-	/* Enable back face culling */
-	//	glEnable(GL_CULL_FACE);
-	//	glCullFace(GL_FRONT);
+
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_Texture);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	
-	/* Enable States */
+
+	// Enable States
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	
-	/* Set Data Pointers */
+
+	// Set Data Pointers and bing the VBOs
 	switch(iOptim)
 	{
-		default:
-			mesh	= m_sModel.pMesh;
-			indices	= (unsigned short*) mesh->sFaces.pData;
-			break;
-		case 1:
-			mesh	= m_sModelOpt.pMesh;
-			indices	= (unsigned short*) mesh->sFaces.pData;
-			break;
+	default:
+		pMesh = m_Model->pMesh;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[0]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[0]);
+		break;
+	case 1:
+		pMesh = m_ModelOpt->pMesh;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[1]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[1]);
+		break;
 #ifdef ENABLE_LOAD_TIME_STRIP
-		case 2:
-			mesh	= m_sModel.pMesh;
-			indices	= m_pNewIdx;
-			break;
+	case 2:
+		pMesh = m_Model->pMesh;
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_puiVbo[0]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_puiIndexVbo[2]);
+		break;
 #endif
 	}
-	
+
 	// Used to display interleaved geometry
-	glVertexPointer(3, VERTTYPEENUM, mesh->sVertex.nStride, mesh->pInterleaved + (long)mesh->sVertex.pData);
-	glTexCoordPointer(2, VERTTYPEENUM, mesh->psUVW->nStride, mesh->pInterleaved + (long)mesh->psUVW->pData);
-	
-	/* Draw */
-	glDrawElements(GL_TRIANGLES, mesh->nNumFaces*3, GL_UNSIGNED_SHORT, indices);
-	
-	/* Disable States */
+	glVertexPointer(3, VERTTYPEENUM, pMesh->sVertex.nStride, pMesh->sVertex.pData);
+	glTexCoordPointer(2, VERTTYPEENUM, pMesh->psUVW[0].nStride, pMesh->psUVW[0].pData);
+
+	// Draw
+	glDrawElements(GL_TRIANGLES, pMesh->nNumFaces * 3, GL_UNSIGNED_SHORT, 0);
+
+	// Disable States
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	
+
+	// unbind the vertex buffers as we don't need them bound anymore
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 	glPopMatrix();
 }
 
@@ -404,10 +499,10 @@ void CameraGetMatrix()
 	
 	vUp.x = f2vt(0.0f);	vUp.y = f2vt(1.0f);	vUp.z = f2vt(0.0f);
 	
-	if(m_sModel.nNumCamera)
+	if(m_Model->nNumCamera)
 	{
 		/* Get Camera data from POD Geometry File */
-		fFOV = m_sModel.GetCameraPos(vFrom, vTo, 0);
+		fFOV = m_Model->GetCameraPos(vFrom, vTo, 0);
 		fFOV = VERTTYPEMUL(fFOV, CAM_ASPECT);		// Convert from horizontal FOV to vertical FOV (0.75 assumes a 4:3 aspect ratio)
 	}
 	else
@@ -464,11 +559,11 @@ void CalculateAndDisplayFrameRate()
  *******************************************************************************/
 void StripMesh()
 {
-	// Make a copy of the indices (we can't edit the constants in the header)
-	m_pNewIdx = (unsigned short*)malloc(sizeof(unsigned short)*m_sModel.pMesh->nNumFaces*3);
-	memcpy(m_pNewIdx, m_sModel.pMesh->sFaces.pData, sizeof(unsigned short)*m_sModel.pMesh->nNumFaces*3);
-	
-	TriStripList(m_pNewIdx, m_sModel.pMesh->nNumFaces);
+	// Make a copy of the indices as we want to keep the original
+	m_pNewIdx = (unsigned short*)malloc(sizeof(unsigned short)*m_Model.pMesh->nNumFaces*3);
+	memcpy(m_pNewIdx, m_Model.pMesh->sFaces.pData, sizeof(unsigned short)*m_Model.pMesh->nNumFaces*3);
+
+	TriStripList(m_pNewIdx, m_Model.pMesh->nNumFaces);
 }
 #endif
 

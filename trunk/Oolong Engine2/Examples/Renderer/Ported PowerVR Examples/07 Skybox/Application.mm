@@ -247,9 +247,6 @@ bool CShell::InitApplication()
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objectMatDiff);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objectMatSpec);
 	
-	delete [] filename;
-	delete [] buffer;
-	
 	return true;
 }
 

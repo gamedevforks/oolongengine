@@ -45,6 +45,8 @@ bool SafeAlloc(T* &ptr, size_t cnt)
             "Memory", (int)cnt);
 //	LOG(string(strData), Logger::LOG_BLOK);
 #endif
+	
+	memset(ptr, 0, cnt *sizeof(T));
 
 	return true;
 }

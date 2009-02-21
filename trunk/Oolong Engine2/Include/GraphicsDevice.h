@@ -21,7 +21,7 @@ subject to the following restrictions:
 #include "../Renderer/Core/GraphicsDevice/OS1x/UIGLView.h"
 #else
 #include "../Renderer/Core/GraphicsDevice/OS2x/EAGLView.h"
-#include "../Renderer/Core/GraphicsDevice/OS2x/OpenGL_internal.h"
+#include "../Renderer/Core/GraphicsDevice/OS2x/OpenGL_Internal.h"
 #include "../Renderer/Core/GraphicsDevice/Texture.h"
 #include "../Renderer/Core/GraphicsDevice/OpenGLESExt.h"
 

@@ -25,7 +25,7 @@ subject to the following restrictions:
 #include <cfloat>
 #include <float.h>
 
-#define BT_BULLET_VERSION 273
+#define BT_BULLET_VERSION 274
 
 inline int	btGetVersion()
 {
@@ -45,7 +45,7 @@ inline int	btGetVersion()
 			#define ATTRIBUTE_ALIGNED16(a) a
 			#define ATTRIBUTE_ALIGNED128(a) a
 		#else
-			#define BT_HAS_ALIGNED_ALLOCATOR
+			//#define BT_HAS_ALIGNED_ALLOCATOR
 			#pragma warning(disable : 4324) // disable padding warning
 //			#pragma warning(disable:4530) // Disable the exception disable but used in MSCV Stl warning.
 //			#pragma warning(disable:4996) //Turn off warnings about deprecated C routines
@@ -61,8 +61,14 @@ inline int	btGetVersion()
  			#define BT_HAVE_NATIVE_FSEL
  			#define btFsel(a,b,c) __fsel((a),(b),(c))
 		#else
+
+#if (defined (WIN32) && (_MSC_VER) && _MSC_VER >= 1400) && (!defined (BT_USE_DOUBLE_PRECISION))
 			#define BT_USE_SSE
-		#endif
+			#include <emmintrin.h>
+#endif
+
+		#endif//_XBOX
+
 		#endif //__MINGW32__
 
 		#include <assert.h>
@@ -124,6 +130,9 @@ inline int	btGetVersion()
 	//non-windows systems
 
 		#define SIMD_FORCE_INLINE inline
+		///@todo: check out alignment methods for other platforms/compilers
+		///#define ATTRIBUTE_ALIGNED16(a) a __attribute__ ((aligned (16)))
+		///#define ATTRIBUTE_ALIGNED128(a) a __attribute__ ((aligned (128)))
 		#define ATTRIBUTE_ALIGNED16(a) a
 		#define ATTRIBUTE_ALIGNED128(a) a
 		#ifndef assert

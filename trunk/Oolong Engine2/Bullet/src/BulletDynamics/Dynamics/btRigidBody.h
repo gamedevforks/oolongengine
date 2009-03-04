@@ -48,6 +48,7 @@ class btRigidBody  : public btCollisionObject
 	btScalar		m_angularFactor;
 
 	btVector3		m_gravity;	
+	btVector3		m_gravity_acceleration;
 	btVector3		m_invInertiaLocal;
 	btVector3		m_totalForce;
 	btVector3		m_totalTorque;
@@ -181,7 +182,7 @@ public:
 
 	const btVector3&	getGravity() const
 	{
-		return m_gravity;
+		return m_gravity_acceleration;
 	}
 
 	void			setDamping(btScalar lin_damping, btScalar ang_damping);
@@ -231,8 +232,18 @@ public:
 	{
 		m_totalForce += force;
 	}
+
+	const btVector3& getTotalForce()
+	{
+		return m_totalForce;
+	};
+
+	const btVector3& getTotalTorque()
+	{
+		return m_totalTorque;
+	};
     
-	const btVector3& getInvInertiaDiagLocal()
+	const btVector3& getInvInertiaDiagLocal() const
 	{
 		return m_invInertiaLocal;
 	};

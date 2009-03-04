@@ -393,12 +393,13 @@ static DBVT_INLINE btDbvtNode*	sort(btDbvtNode* n,btDbvtNode*& r)
 	return(n);
 }
 
-//
+#if 0
 static DBVT_INLINE btDbvtNode*	walkup(btDbvtNode* n,int count)
 {
 	while(n&&(count--)) n=n->parent;
 	return(n);
 }
+#endif
 
 //
 // Api
@@ -423,9 +424,14 @@ btDbvt::~btDbvt()
 //
 void			btDbvt::clear()
 {
-	if(m_root)	recursedeletenode(this,m_root);
+	if(m_root)	
+		recursedeletenode(this,m_root);
 	btAlignedFree(m_free);
 	m_free=0;
+	m_lkhd		=	-1;
+	m_stkStack.clear();
+	m_opath		=	0;
+	
 }
 
 //

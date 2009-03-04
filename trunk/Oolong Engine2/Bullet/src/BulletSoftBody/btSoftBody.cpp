@@ -87,7 +87,7 @@ btSoftBody::btSoftBody(btSoftBodyWorldInfo*	worldInfo,int node_count,  const btV
 	}
 	updateBounds();	
 
-
+	m_initialWorldTransform.setIdentity();
 }
 
 //
@@ -306,8 +306,16 @@ void			btSoftBody::appendFace(int node0,int node1,int node2,Material* mat)
 }
 
 //
-void			btSoftBody::appendAnchor(int node,btRigidBody* body)
+void			btSoftBody::appendAnchor(int node,btRigidBody* body, bool disableCollisionBetweenLinkedBodies)
 {
+	if (disableCollisionBetweenLinkedBodies)
+	{
+		if (m_collisionDisabledObjects.findLinearSearch(body)==m_collisionDisabledObjects.size())
+		{
+			m_collisionDisabledObjects.push_back(body);
+		}
+	}
+
 	Anchor	a;
 	a.m_node			=	&m_nodes[node];
 	a.m_body			=	body;
@@ -501,6 +509,7 @@ void			btSoftBody::transform(const btTransform& trs)
 	updateNormals();
 	updateBounds();
 	updateConstants();
+	m_initialWorldTransform = trs;
 }
 
 //
@@ -911,6 +920,35 @@ int				btSoftBody::generateClusters(int k,int maxiterations)
 
 		initializeClusters();
 		updateClusters();
+
+		//for self-collision
+		m_clusterConnectivity.resize(m_clusters.size()*m_clusters.size());
+		{
+			for (int c0=0;c0<m_clusters.size();c0++)
+			{
+				m_clusters[c0]->m_clusterIndex=c0;
+				for (int c1=0;c1<m_clusters.size();c1++)
+				{
+					
+					bool connected=false;
+					Cluster* cla = m_clusters[c0];
+					Cluster* clb = m_clusters[c1];
+					for (int i=0;!connected&&i<cla->m_nodes.size();i++)
+					{
+						for (int j=0;j<clb->m_nodes.size();j++)
+						{
+							if (cla->m_nodes[i] == clb->m_nodes[j])
+							{
+								connected=true;
+								break;
+							}
+						}
+					}
+					m_clusterConnectivity[c0+c1*m_clusters.size()]=connected;
+				}
+			}
+		}
+	
 		return(m_clusters.size());
 	}
 	return(0);
@@ -2059,7 +2097,12 @@ void					btSoftBody::updateClusters()
 			}
 		}
 	}
+
+
 }
+
+
+
 
 //
 void					btSoftBody::cleanupClusters()
@@ -2319,6 +2362,7 @@ void				btSoftBody::CJoint::Terminate(btScalar dt)
 //
 void				btSoftBody::applyForces()
 {
+
 	BT_PROFILE("SoftBody applyForces");
 	const btScalar					dt=m_sst.sdt;
 	const btScalar					kLF=m_cfg.kLF;
@@ -2627,22 +2671,26 @@ void			btSoftBody::defaultCollisionHandler(btSoftBody* psb)
 		break;
 	case	fCollision::VF_SS:
 		{
-			btSoftColliders::CollideVF_SS	docollide;
-			/* common					*/ 
-			docollide.mrg=	getCollisionShape()->getMargin()+
-				psb->getCollisionShape()->getMargin();
-			/* psb0 nodes vs psb1 faces	*/ 
-			docollide.psb[0]=this;
-			docollide.psb[1]=psb;
-			docollide.psb[0]->m_ndbvt.collideTT(	docollide.psb[0]->m_ndbvt.m_root,
-				docollide.psb[1]->m_fdbvt.m_root,
-				docollide);
-			/* psb1 nodes vs psb0 faces	*/ 
-			docollide.psb[0]=psb;
-			docollide.psb[1]=this;
-			docollide.psb[0]->m_ndbvt.collideTT(	docollide.psb[0]->m_ndbvt.m_root,
-				docollide.psb[1]->m_fdbvt.m_root,
-				docollide);
+			//only self-collision for Cluster, not Vertex-Face yet
+			if (this!=psb)
+			{
+				btSoftColliders::CollideVF_SS	docollide;
+				/* common					*/ 
+				docollide.mrg=	getCollisionShape()->getMargin()+
+					psb->getCollisionShape()->getMargin();
+				/* psb0 nodes vs psb1 faces	*/ 
+				docollide.psb[0]=this;
+				docollide.psb[1]=psb;
+				docollide.psb[0]->m_ndbvt.collideTT(	docollide.psb[0]->m_ndbvt.m_root,
+					docollide.psb[1]->m_fdbvt.m_root,
+					docollide);
+				/* psb1 nodes vs psb0 faces	*/ 
+				docollide.psb[0]=psb;
+				docollide.psb[1]=this;
+				docollide.psb[0]->m_ndbvt.collideTT(	docollide.psb[0]->m_ndbvt.m_root,
+					docollide.psb[1]->m_fdbvt.m_root,
+					docollide);
+			}
 		}
 		break;
 	}

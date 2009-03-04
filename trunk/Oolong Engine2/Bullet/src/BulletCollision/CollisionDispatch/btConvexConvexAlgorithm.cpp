@@ -51,6 +51,8 @@ subject to the following restrictions:
 
 btConvexConvexAlgorithm::CreateFunc::CreateFunc(btSimplexSolverInterface*			simplexSolver, btConvexPenetrationDepthSolver* pdSolver)
 {
+	m_numPerturbationIterations = 0;
+	m_minimumPointsPerturbationThreshold = 3;
 	m_simplexSolver = simplexSolver;
 	m_pdSolver = pdSolver;
 }
@@ -59,17 +61,19 @@ btConvexConvexAlgorithm::CreateFunc::~CreateFunc()
 { 
 }
 
-btConvexConvexAlgorithm::btConvexConvexAlgorithm(btPersistentManifold* mf,const btCollisionAlgorithmConstructionInfo& ci,btCollisionObject* body0,btCollisionObject* body1,btSimplexSolverInterface* simplexSolver, btConvexPenetrationDepthSolver* pdSolver)
+btConvexConvexAlgorithm::btConvexConvexAlgorithm(btPersistentManifold* mf,const btCollisionAlgorithmConstructionInfo& ci,btCollisionObject* body0,btCollisionObject* body1,btSimplexSolverInterface* simplexSolver, btConvexPenetrationDepthSolver* pdSolver,int numPerturbationIterations, int minimumPointsPerturbationThreshold)
 : btActivatingCollisionAlgorithm(ci,body0,body1),
 m_simplexSolver(simplexSolver),
 m_pdSolver(pdSolver),
 m_ownManifold (false),
 m_manifoldPtr(mf),
-m_lowLevelOfDetail(false)
+m_lowLevelOfDetail(false),
 #ifdef USE_SEPDISTANCE_UTIL2
 ,m_sepDistance((static_cast<btConvexShape*>(body0->getCollisionShape()))->getAngularMotionDisc(),
-			  (static_cast<btConvexShape*>(body1->getCollisionShape()))->getAngularMotionDisc())
+			  (static_cast<btConvexShape*>(body1->getCollisionShape()))->getAngularMotionDisc()),
 #endif
+m_numPerturbationIterations(numPerturbationIterations),
+m_minimumPointsPerturbationThreshold(minimumPointsPerturbationThreshold)
 {
 	(void)body0;
 	(void)body1;
@@ -93,8 +97,63 @@ void	btConvexConvexAlgorithm ::setLowLevelOfDetail(bool useLowLevel)
 }
 
 
+struct btPerturbedContactResult : public btManifoldResult
+{
+	btManifoldResult* m_originalManifoldResult;
+	btTransform m_transformA;
+	btTransform m_transformB;
+	btTransform	m_unPerturbedTransform;
+	bool	m_perturbA;
+	btIDebugDraw*	m_debugDrawer;
 
 
+	btPerturbedContactResult(btManifoldResult* originalResult,const btTransform& transformA,const btTransform& transformB,const btTransform& unPerturbedTransform,bool perturbA,btIDebugDraw* debugDrawer)
+		:m_originalManifoldResult(originalResult),
+		m_transformA(transformA),
+		m_transformB(transformB),
+		m_perturbA(perturbA),
+		m_unPerturbedTransform(unPerturbedTransform),
+		m_debugDrawer(debugDrawer)
+	{
+	}
+	virtual ~ btPerturbedContactResult()
+	{
+	}
+
+	virtual void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar orgDepth)
+	{
+		btVector3 endPt,startPt;
+		btScalar newDepth;
+		btVector3 newNormal;
+
+		if (m_perturbA)
+		{
+			btVector3 endPtOrg = pointInWorld + normalOnBInWorld*orgDepth;
+			endPt = (m_unPerturbedTransform*m_transformA.inverse())(endPtOrg);
+			newDepth = (endPt -  pointInWorld).dot(normalOnBInWorld);
+			startPt = endPt+normalOnBInWorld*newDepth;
+		} else
+		{
+			endPt = pointInWorld + normalOnBInWorld*orgDepth;
+			startPt = (m_unPerturbedTransform*m_transformB.inverse())(pointInWorld);
+			newDepth = (endPt -  startPt).dot(normalOnBInWorld);
+			
+		}
+
+//#define DEBUG_CONTACTS 1
+#ifdef DEBUG_CONTACTS
+		m_debugDrawer->drawLine(startPt,endPt,btVector3(1,0,0));
+		m_debugDrawer->drawSphere(startPt,0.05,btVector3(0,1,0));
+		m_debugDrawer->drawSphere(endPt,0.05,btVector3(0,0,1));
+#endif //DEBUG_CONTACTS
+
+		
+		m_originalManifoldResult->addContactPoint(normalOnBInWorld,startPt,newDepth);
+	}
+
+};
+
+extern btScalar gContactBreakingThreshold;
 
 //
 // Convex-Convex collision algorithm
@@ -110,6 +169,8 @@ void btConvexConvexAlgorithm ::processCollision (btCollisionObject* body0,btColl
 	}
 	resultOut->setPersistentManifold(m_manifoldPtr);
 
+	//comment-out next line to test multi-contact generation
+	//resultOut->getPersistentManifold()->clearManifold();
 	
 
 	btConvexShape* min0 = static_cast<btConvexShape*>(body0->getCollisionShape());
@@ -146,8 +207,77 @@ void btConvexConvexAlgorithm ::processCollision (btCollisionObject* body0,btColl
 	input.m_transformB = body1->getWorldTransform();
 
 	gjkPairDetector.getClosestPoints(input,*resultOut,dispatchInfo.m_debugDraw);
-
 	btScalar sepDist = gjkPairDetector.getCachedSeparatingDistance()+dispatchInfo.m_convexConservativeDistanceThreshold;
+
+	//now perturbe directions to get multiple contact points
+	btVector3 v0,v1;
+	btVector3 sepNormalWorldSpace = gjkPairDetector.getCachedSeparatingAxis().normalized();
+	btPlaneSpace1(sepNormalWorldSpace,v0,v1);
+	//now perform 'm_numPerturbationIterations' collision queries with the perturbated collision objects
+	
+	//perform perturbation when more then 'm_minimumPointsPerturbationThreshold' points
+	if (resultOut->getPersistentManifold()->getNumContacts() < m_minimumPointsPerturbationThreshold)
+	{
+		
+		int i;
+
+		bool perturbeA = true;
+		const btScalar angleLimit = 0.125f * SIMD_PI;
+		btScalar perturbeAngle;
+		btScalar radiusA = min0->getAngularMotionDisc();
+		btScalar radiusB = min1->getAngularMotionDisc();
+		if (radiusA < radiusB)
+		{
+			perturbeAngle = gContactBreakingThreshold /radiusA;
+			perturbeA = true;
+		} else
+		{
+			perturbeAngle = gContactBreakingThreshold / radiusB;
+			perturbeA = false;
+		}
+		if ( perturbeAngle > angleLimit ) 
+				perturbeAngle = angleLimit;
+
+		btTransform unPerturbedTransform;
+		if (perturbeA)
+		{
+			unPerturbedTransform = input.m_transformA;
+		} else
+		{
+			unPerturbedTransform = input.m_transformB;
+		}
+		
+		for ( i=0;i<m_numPerturbationIterations;i++)
+		{
+			btQuaternion perturbeRot(v0,perturbeAngle);
+			btScalar iterationAngle = i*(SIMD_2_PI/btScalar(m_numPerturbationIterations));
+			btQuaternion rotq(sepNormalWorldSpace,iterationAngle);
+			
+			
+			if (perturbeA)
+			{
+				input.m_transformA.setBasis(  btMatrix3x3(rotq.inverse()*perturbeRot*rotq)*body0->getWorldTransform().getBasis());
+				input.m_transformB = body1->getWorldTransform();
+#ifdef DEBUG_CONTACTS
+				dispatchInfo.m_debugDraw->drawTransform(input.m_transformA,10.0);
+#endif //DEBUG_CONTACTS
+			} else
+			{
+				input.m_transformA = body0->getWorldTransform();
+				input.m_transformB.setBasis( btMatrix3x3(rotq.inverse()*perturbeRot*rotq)*body1->getWorldTransform().getBasis());
+#ifdef DEBUG_CONTACTS
+				dispatchInfo.m_debugDraw->drawTransform(input.m_transformB,10.0);
+#endif
+			}
+			
+			btPerturbedContactResult perturbedResultOut(resultOut,input.m_transformA,input.m_transformB,unPerturbedTransform,perturbeA,dispatchInfo.m_debugDraw);
+			gjkPairDetector.getClosestPoints(input,perturbedResultOut,dispatchInfo.m_debugDraw);
+			
+			
+		}
+	}
+
+	
 
 #ifdef USE_SEPDISTANCE_UTIL2
 	if (dispatchInfo.m_useConvexConservativeDistanceUtil)

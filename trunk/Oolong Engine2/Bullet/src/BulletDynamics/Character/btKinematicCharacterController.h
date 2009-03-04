@@ -62,20 +62,42 @@ protected:
 	btVector3 m_touchingNormal;
 
 	bool	m_useGhostObjectSweepTest;
+
+	int m_upAxis;
 	
 	btVector3 computeReflectionDirection (const btVector3& direction, const btVector3& normal);
 	btVector3 parallelComponent (const btVector3& direction, const btVector3& normal);
 	btVector3 perpindicularComponent (const btVector3& direction, const btVector3& normal);
 
-	bool recoverFromPenetration (btCollisionWorld* collisionWorld);
+	bool recoverFromPenetration ( btCollisionWorld* collisionWorld);
 	void stepUp (btCollisionWorld* collisionWorld);
 	void updateTargetPositionBasedOnCollision (const btVector3& hit_normal, btScalar tangentMag = btScalar(0.0), btScalar normalMag = btScalar(1.0));
 	void stepForwardAndStrafe (btCollisionWorld* collisionWorld, const btVector3& walkMove);
 	void stepDown (btCollisionWorld* collisionWorld, btScalar dt);
 public:
-	btKinematicCharacterController (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight);
+	btKinematicCharacterController (btPairCachingGhostObject* ghostObject,btConvexShape* convexShape,btScalar stepHeight, int upAxis = 1);
 	~btKinematicCharacterController ();
 	
+
+	///btActionInterface interface
+	virtual void updateAction( btCollisionWorld* collisionWorld,btScalar deltaTime)
+	{
+		preStep ( collisionWorld);
+		playerStep (collisionWorld, deltaTime);
+	}
+	
+	///btActionInterface interface
+	void	debugDraw(btIDebugDraw* debugDrawer);
+
+	void setUpAxis (int axis)
+	{
+		if (axis < 0)
+			axis = 0;
+		if (axis > 2)
+			axis = 2;
+		m_upAxis = axis;
+	}
+
 	virtual void	setWalkDirection(const btVector3& walkDirection)
 	{
 		m_walkDirection = walkDirection;
@@ -84,8 +106,8 @@ public:
 	void reset ();
 	void warp (const btVector3& origin);
 
-	void preStep ( btCollisionWorld* collisionWorld);
-	void playerStep (btCollisionWorld* collisionWorld, btScalar dt);
+	void preStep (  btCollisionWorld* collisionWorld);
+	void playerStep ( btCollisionWorld* collisionWorld, btScalar dt);
 
 	void setFallSpeed (btScalar fallSpeed);
 	void setJumpSpeed (btScalar jumpSpeed);

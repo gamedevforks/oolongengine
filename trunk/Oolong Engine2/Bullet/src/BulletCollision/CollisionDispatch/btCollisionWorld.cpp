@@ -69,6 +69,7 @@ btCollisionWorld::~btCollisionWorld()
 			//
 			getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(bp,m_dispatcher1);
 			getBroadphase()->destroyProxy(bp,m_dispatcher1);
+			collisionObject->setBroadphaseHandle(0);
 		}
 	}
 
@@ -118,6 +119,39 @@ void	btCollisionWorld::addCollisionObject(btCollisionObject* collisionObject,sho
 
 
 
+void	btCollisionWorld::updateSingleAabb(btCollisionObject* colObj)
+{
+	btVector3 minAabb,maxAabb;
+	colObj->getCollisionShape()->getAabb(colObj->getWorldTransform(), minAabb,maxAabb);
+	//need to increase the aabb for contact thresholds
+	btVector3 contactThreshold(gContactBreakingThreshold,gContactBreakingThreshold,gContactBreakingThreshold);
+	minAabb -= contactThreshold;
+	maxAabb += contactThreshold;
+
+	btBroadphaseInterface* bp = (btBroadphaseInterface*)m_broadphasePairCache;
+
+	//moving objects should be moderately sized, probably something wrong if not
+	if ( colObj->isStaticObject() || ((maxAabb-minAabb).length2() < btScalar(1e12)))
+	{
+		bp->setAabb(colObj->getBroadphaseHandle(),minAabb,maxAabb, m_dispatcher1);
+	} else
+	{
+		//something went wrong, investigate
+		//this assert is unwanted in 3D modelers (danger of loosing work)
+		colObj->setActivationState(DISABLE_SIMULATION);
+
+		static bool reportMe = true;
+		if (reportMe && m_debugDrawer)
+		{
+			reportMe = false;
+			m_debugDrawer->reportErrorWarning("Overflow in AABB, object removed from simulation");
+			m_debugDrawer->reportErrorWarning("If you can reproduce this, please email bugs@continuousphysics.com\n");
+			m_debugDrawer->reportErrorWarning("Please include above information, your Platform, version of OS.\n");
+			m_debugDrawer->reportErrorWarning("Thanks.\n");
+		}
+	}
+}
+
 void	btCollisionWorld::updateAabbs()
 {
 	BT_PROFILE("updateAabbs");
@@ -130,38 +164,9 @@ void	btCollisionWorld::updateAabbs()
 		//only update aabb of active objects
 		if (colObj->isActive())
 		{
-			btVector3 minAabb,maxAabb;
-			colObj->getCollisionShape()->getAabb(colObj->getWorldTransform(), minAabb,maxAabb);
-			//need to increase the aabb for contact thresholds
-			btVector3 contactThreshold(gContactBreakingThreshold,gContactBreakingThreshold,gContactBreakingThreshold);
-			minAabb -= contactThreshold;
-			maxAabb += contactThreshold;
-
-			btBroadphaseInterface* bp = (btBroadphaseInterface*)m_broadphasePairCache;
-
-			//moving objects should be moderately sized, probably something wrong if not
-			if ( colObj->isStaticObject() || ((maxAabb-minAabb).length2() < btScalar(1e12)))
-			{
-				bp->setAabb(colObj->getBroadphaseHandle(),minAabb,maxAabb, m_dispatcher1);
-			} else
-			{
-				//something went wrong, investigate
-				//this assert is unwanted in 3D modelers (danger of loosing work)
-				colObj->setActivationState(DISABLE_SIMULATION);
-
-				static bool reportMe = true;
-				if (reportMe && m_debugDrawer)
-				{
-					reportMe = false;
-					m_debugDrawer->reportErrorWarning("Overflow in AABB, object removed from simulation");
-					m_debugDrawer->reportErrorWarning("If you can reproduce this, please email bugs@continuousphysics.com\n");
-					m_debugDrawer->reportErrorWarning("Please include above information, your Platform, version of OS.\n");
-					m_debugDrawer->reportErrorWarning("Thanks.\n");
-				}
-			}
+			updateSingleAabb(colObj);
 		}
 	}
-
 }
 
 
@@ -293,7 +298,8 @@ void	btCollisionWorld::rayTestSingle(const btTransform& rayFromTrans,const btTra
 
 					BridgeTriangleRaycastCallback( const btVector3& from,const btVector3& to,
 						btCollisionWorld::RayResultCallback* resultCallback, btCollisionObject* collisionObject,btTriangleMeshShape*	triangleMesh):
-						btTriangleRaycastCallback(from,to),
+                  //@BP Mod
+						btTriangleRaycastCallback(from,to, resultCallback->m_flags),
 							m_resultCallback(resultCallback),
 							m_collisionObject(collisionObject),
 							m_triangleMesh(triangleMesh)
@@ -342,7 +348,8 @@ void	btCollisionWorld::rayTestSingle(const btTransform& rayFromTrans,const btTra
 
 					BridgeTriangleRaycastCallback( const btVector3& from,const btVector3& to,
 						btCollisionWorld::RayResultCallback* resultCallback, btCollisionObject* collisionObject,btConcaveShape*	triangleMesh):
-						btTriangleRaycastCallback(from,to),
+                  //@BP Mod
+                  btTriangleRaycastCallback(from,to, resultCallback->m_flags),
 							m_resultCallback(resultCallback),
 							m_collisionObject(collisionObject),
 							m_triangleMesh(triangleMesh)
@@ -663,7 +670,7 @@ struct btSingleRayCallback : public btBroadphaseRayCallback
 		{
 			//RigidcollisionObject* collisionObject = ctrl->GetRigidcollisionObject();
 			//btVector3 collisionObjectAabbMin,collisionObjectAabbMax;
-			
+#if 0
 #ifdef RECALCULATE_AABB
 			btVector3 collisionObjectAabbMin,collisionObjectAabbMax;
 			collisionObject->getCollisionShape()->getAabb(collisionObject->getWorldTransform(),collisionObjectAabbMin,collisionObjectAabbMax);
@@ -671,6 +678,7 @@ struct btSingleRayCallback : public btBroadphaseRayCallback
 			//getBroadphase()->getAabb(collisionObject->getBroadphaseHandle(),collisionObjectAabbMin,collisionObjectAabbMax);
 			const btVector3& collisionObjectAabbMin = collisionObject->getBroadphaseHandle()->m_aabbMin;
 			const btVector3& collisionObjectAabbMax = collisionObject->getBroadphaseHandle()->m_aabbMax;
+#endif
 #endif
 			//btScalar hitLambda = m_resultCallback.m_closestHitFraction;
 			//culling already done by broadphase

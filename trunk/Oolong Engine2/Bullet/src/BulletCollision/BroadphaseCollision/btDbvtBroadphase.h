@@ -24,7 +24,7 @@ subject to the following restrictions:
 //
 
 #define	DBVT_BP_PROFILE					0
-#define DBVT_BP_SORTPAIRS				1
+//#define DBVT_BP_SORTPAIRS				1
 #define DBVT_BP_PREVENTFALSEUPDATE		0
 #define DBVT_BP_ACCURATESLEEPING		0
 #define DBVT_BP_ENABLE_BENCHMARK		0
@@ -114,6 +114,13 @@ struct	btDbvtBroadphase : btBroadphaseInterface
 	void							getBroadphaseAabb(btVector3& aabbMin,btVector3& aabbMax) const;
 	void							printStats();
 	static void						benchmark(btBroadphaseInterface*);
+
+
+	void	performDeferredRemoval(btDispatcher* dispatcher);
+
+	///reset broadphase internal structures, to ensure determinism/reproducability
+	virtual void resetPool(btDispatcher* dispatcher);
+
 };
 
 #endif

@@ -69,7 +69,8 @@ CONCAVE_SHAPES_END_HERE,
 	COMPOUND_SHAPE_PROXYTYPE,
 
 	SOFTBODY_SHAPE_PROXYTYPE,
-
+	HFFLUID_SHAPE_PROXYTYPE,
+	HFFLUID_BUOYANT_CONVEX_SHAPE_PROXYTYPE,
 	INVALID_SHAPE_PROXYTYPE,
 
 	MAX_BROADPHASE_COLLISION_TYPES
@@ -187,7 +188,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 	{
 
 		//keep them sorted, so the std::set operations work
-		if (&proxy0 < &proxy1)
+		if (proxy0.m_uniqueId < proxy1.m_uniqueId)
         { 
             m_pProxy0 = &proxy0; 
             m_pProxy1 = &proxy1; 
@@ -228,8 +229,13 @@ class btBroadphasePairSortPredicate
 
 		bool operator() ( const btBroadphasePair& a, const btBroadphasePair& b )
 		{
-			 return a.m_pProxy0 > b.m_pProxy0 || 
-				(a.m_pProxy0 == b.m_pProxy0 && a.m_pProxy1 > b.m_pProxy1) ||
+			const int uidA0 = a.m_pProxy0 ? a.m_pProxy0->m_uniqueId : -1;
+			const int uidB0 = b.m_pProxy0 ? b.m_pProxy0->m_uniqueId : -1;
+			const int uidA1 = a.m_pProxy1 ? a.m_pProxy1->m_uniqueId : -1;
+			const int uidB1 = b.m_pProxy1 ? b.m_pProxy1->m_uniqueId : -1;
+
+			 return uidA0 > uidB0 || 
+				(a.m_pProxy0 == b.m_pProxy0 && uidA1 > uidB1) ||
 				(a.m_pProxy0 == b.m_pProxy0 && a.m_pProxy1 == b.m_pProxy1 && a.m_algorithm > b.m_algorithm); 
 		}
 };

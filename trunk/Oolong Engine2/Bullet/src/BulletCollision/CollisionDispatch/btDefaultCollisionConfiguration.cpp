@@ -244,7 +244,7 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 
 	if ((proxyType0 == BOX_SHAPE_PROXYTYPE) && (proxyType1 == BOX_SHAPE_PROXYTYPE))
 	{
-		return m_boxBoxCF;
+		//return m_boxBoxCF;
 	}
 	
 	if (btBroadphaseProxy::isConvex(proxyType0) && (proxyType1 == STATIC_PLANE_PROXYTYPE))
@@ -287,4 +287,11 @@ btCollisionAlgorithmCreateFunc* btDefaultCollisionConfiguration::getCollisionAlg
 
 	//failed to find an algorithm
 	return m_emptyCreateFunc;
+}
+
+void btDefaultCollisionConfiguration::setConvexConvexMultipointIterations(int numPerturbationIterations, int minimumPointsPerturbationThreshold)
+{
+	btConvexConvexAlgorithm::CreateFunc* convexConvex = (btConvexConvexAlgorithm::CreateFunc*) m_convexConvexCreateFunc;
+	convexConvex->m_numPerturbationIterations = numPerturbationIterations;
+	convexConvex->m_minimumPointsPerturbationThreshold = minimumPointsPerturbationThreshold;
 }

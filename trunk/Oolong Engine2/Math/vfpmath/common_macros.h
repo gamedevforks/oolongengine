@@ -41,17 +41,33 @@ not be misrepresented as being the original software.
 
 // NOTE: Lots of VFP macros overwrite register r0, therefore you have to make sure 
 //       to include "r0" in the list of registers used, as in above example.
-  
+
+#define NO_THUMB
+
+#ifndef NO_THUMB
+#warning "Compiling in Thumb Mode. Mode switches activated."
+#else
+#warning "Compiling in ARM mode. Mode switches deactivated."
+#endif
+
 // Switches to from THUMB to ARM mode.
-#define VFP_SWITCH_TO_ARM ".align 4               \n\t" \
-                          "mov     r0, pc         \n\t" \
-                          "bx      r0             \n\t" \
-                          ".arm                   \n\t" 
+#ifndef NO_THUMB
+  #define VFP_SWITCH_TO_ARM ".align 4               \n\t" \
+                            "mov     r0, pc         \n\t" \
+                            "bx      r0             \n\t" \
+                            ".arm                   \n\t" 
+#else
+  #define VFP_SWITCH_TO_ARM
+#endif
 
 // Switches from ARM to THUMB mode.
-#define VFP_SWITCH_TO_THUMB "add     r0, pc, #1     \n\t" \
-                            "bx      r0             \n\t" \
-                            ".thumb                 \n\t" 
+#ifndef NO_THUMB
+  #define VFP_SWITCH_TO_THUMB "add     r0, pc, #1     \n\t" \
+                              "bx      r0             \n\t" \
+                              ".thumb                 \n\t" 
+#else
+  #define VFP_SWITCH_TO_THUMB
+#endif
 
 // NOTE: Both VFP_VECTOR_LENGTH* macros will stall the FP unit, 
 //       until all currently processed operations have been executed.

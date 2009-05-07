@@ -34,12 +34,21 @@ int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
 int frames;
 float frameRate;
 
+structTimer DrawCubeTimer;
+float DrawCubeT;
+
+structTimer DrawUITimer;
+float DrawUIT;
+
 bool CShell::InitApplication()
 {
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
 		printf("Display text textures loaded\n");
+	
+	StartTimer(&DrawCubeTimer);
+	StartTimer(&DrawUITimer);
 
 	return true;
 }
@@ -55,6 +64,9 @@ bool CShell::QuitApplication()
 
 bool CShell::UpdateScene()
 {
+	ResetTimer(&DrawCubeTimer);
+
+	
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,15 +78,15 @@ bool CShell::UpdateScene()
 	MATRIX	MyPerspMatrix;
 	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
 	glMultMatrixf(MyPerspMatrix.f);
-	
+
 	++frames;
 
 	CFTimeInterval			TimeInterval;
 
 	frameRate = GetFps(frames, TimeInterval);
 
-	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-	
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f Cube: %3.2fms UI: %3.2fms", frameRate, DrawCubeT, DrawUIT);
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(0.0, 0.0, - 10.0f);
@@ -145,11 +157,17 @@ bool CShell::RenderScene()
     glVertexPointer(3, GL_FLOAT, 0, verts + 60);
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
+	DrawCubeT = GetAverageTimeValueInMS(&DrawCubeTimer);
+	
+	ResetTimer(&DrawUITimer);
+	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("Basic Skeleton", "", eDisplayTextLogoIMG);
 	
 	AppDisplayText->Flush();	
 	
+	DrawUIT = GetAverageTimeValueInMS(&DrawUITimer);
+
 	return true;
 }
 

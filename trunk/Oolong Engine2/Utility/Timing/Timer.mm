@@ -13,19 +13,11 @@
  3. This notice may not be removed or altered from any source distribution.
 */
 #include "Timer.h"
-#include <sys/time.h>
-
-#include <stdio.h>
-#include <sys/time.h>
-
-#include <mach/mach.h>
-#include <mach/mach_time.h>
-#include <Mathematics.h>
 
 int GetFps(int frame, CFTimeInterval &TimeInterval)
 {
 	// do all the timing
-	static CFTimeInterval	startTime = 0;
+	static CFTimeInterval startTime = 0;
 	
 	int frameRate = 0;
 
@@ -43,69 +35,32 @@ int GetFps(int frame, CFTimeInterval &TimeInterval)
 	return frameRate;
 }
 
-/*
-static CFTimeInterval	startTime = 0;
-CFTimeInterval			TimeInterval;
-
-// Absolute time is measured in seconds relative to the absolute reference date of Jan 1 2001 00:00:00 GMT. 
-// A positive value represents a date after the reference date, a negative value represents a date before it. 
-TimeInterval = CFAbsoluteTimeGetCurrent();
-if(startTime == 0)
-startTime = TimeInterval;
-
-frames++;
-if (TimeInterval - startTime) 
+void StartTimer(structTimer* timer)
 {
-	m_fFPS = ((float)frames/(TimeInterval - startTime));
-}
-*/
-// 
-// GetTime
-// Time in milliseconds since 1970
-// this is probably not very stable .. check out CFAbsoluteTimeGetCurrent() instead
-//
-U32 GetTimeInMsSince1970()
-{
-	timeval tv;
-	// The time is expressed in seconds and microseconds since midnight (0 hour), January 1, 1970.
-	gettimeofday(&tv,NULL);
-	// to receive milliseconds we transform the seconds to milliseconds and the microseconds to milliseconds
-	// and then add them
-	return (tv.tv_sec * 1000) + (U32)(tv.tv_usec / 1000.0f);
+	/* Get the timebase info */
+	mach_timebase_info(&timer->info);
 }
 
-//
-// This is a replacement for QueryPerformanceFrequency / QueryPerformanceCounter
-// returns nanoseconds since system start
-//
-U32 GetTimeInNsSinceCPUStart()
+void ResetTimer(structTimer* timer)
 {
-	double time;
+	// calculate our local time
+	timer->startTime = mach_absolute_time();
+}
+
+float GetAverageTimeValueInMS(structTimer* timer)
+{
+	uint64_t TimeInterval;
 	
-	time = mach_absolute_time();
+	// calculate our local time
+	TimeInterval = mach_absolute_time();
 	
-	// this is the timebase info
-    static mach_timebase_info_data_t info;
-    mach_timebase_info(&info);
-    double nano = ( (double) info.numer) / ((double) info.denom);
+	U32 duration = (U32)(TimeInterval - timer->startTime);
 	
-	return nano * time / 1000000000.0;
-}
+	/* Convert to nanoseconds */
+	duration *= timer->info.numer;
+	duration /= timer->info.denom;
 
-//
-// returns Ticks since system start
-//
-U32 GetTimeInTicksSinceCPUStart()
-{
-		// return value is nanoseconds
-		//result = gethrtime();
-		//result = _rdtsc();
-		INT64BIT time;
-		// This function returns its result in terms of the Mach absolute time unit. 
-		// This unit is CPU dependent, so you can't just multiply it by a constant to get a real world value. 
-		time = (INT64BIT) mach_absolute_time();
-		
-		return time;
+	// return in milliseconds
+	return ((float)duration) / 1000.0f;	
 }
-
 

@@ -13,10 +13,28 @@
  3. This notice may not be removed or altered from any source distribution.
 */
 #include "Type.h"
+#include <Mathematics.h>
 
-U32 GetTimeInMsSince1970();
-U32 GetTimeInNsSinceCPUStart();
-U32 GetTimeInTicksSinceCPUStart();
+#include <sys/time.h>
+
+#include <stdio.h>
+#include <sys/time.h>
+
+#include <mach/mach.h>
+#include <mach/mach_time.h>
 
 int GetFps(int frame, CFTimeInterval &TimeInterval);
+
+
+typedef struct
+{
+	uint64_t startTime;
+	mach_timebase_info_data_t info;
+} structTimer;
+
+void StartTimer(structTimer* timer);
+void ResetTimer(structTimer* timer);
+float GetAverageTimeValueInMS(structTimer* timer);
+
+
 

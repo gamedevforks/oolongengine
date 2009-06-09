@@ -1318,7 +1318,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1346,7 +1345,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
-				PROVISIONING_PROFILE = DefaultProfileUuid;
 				SDKROOT = iphoneos2.2;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1356,7 +1354,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1382,7 +1379,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
-				PROVISIONING_PROFILE = DefaultProfileUuid;
 				SDKROOT = iphoneos2.2;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1401,13 +1397,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../../../Bullet/src,
 				);
-				PROVISIONING_PROFILE = "3376181A-0C8B-4B94-A31B-1DCD79141412";
-				SDKROOT = iphoneos2.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				"New Setting" = "";
+				OTHER_CFLAGS = "-fno-regmove";
+				PROVISIONING_PROFILE = "D9747F63-D548-4763-8B11-47130356AEF0";
+				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
 		};

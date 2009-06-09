@@ -1,6 +1,6 @@
 /*
 Bullet Continuous Collision Detection and Physics Library
-Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
+Copyright (c) 2003-2009 Erwin Coumans  http://bulletphysics.org
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -1013,11 +1013,13 @@ void btDiscreteDynamicsWorld::debugDrawObject(const btTransform& worldTransform,
 			{
 				const btMultiSphereShape* multiSphereShape = static_cast<const btMultiSphereShape*>(shape);
 
+				btTransform childTransform;
+				childTransform.setIdentity();
+
 				for (int i = multiSphereShape->getSphereCount()-1; i>=0;i--)
 				{
-					btTransform childTransform = worldTransform;
-					childTransform.getOrigin() += multiSphereShape->getSpherePosition(i);
-					debugDrawSphere(multiSphereShape->getSphereRadius(i), childTransform, color);
+					childTransform.setOrigin(multiSphereShape->getSpherePosition(i));
+					debugDrawSphere(multiSphereShape->getSphereRadius(i), worldTransform*childTransform, color);
 				}
 
 				break;
@@ -1145,8 +1147,8 @@ void btDiscreteDynamicsWorld::debugDrawObject(const btTransform& worldTransform,
 					btConcaveShape* concaveMesh = (btConcaveShape*) shape;
 					
 					///@todo pass camera, for some culling? no -> we are not a graphics lib
-					btVector3 aabbMax(btScalar(1e30),btScalar(1e30),btScalar(1e30));
-					btVector3 aabbMin(btScalar(-1e30),btScalar(-1e30),btScalar(-1e30));
+					btVector3 aabbMax(btScalar(BT_LARGE_FLOAT),btScalar(BT_LARGE_FLOAT),btScalar(BT_LARGE_FLOAT));
+					btVector3 aabbMin(btScalar(-BT_LARGE_FLOAT),btScalar(-BT_LARGE_FLOAT),btScalar(-BT_LARGE_FLOAT));
 
 					DebugDrawcallback drawCallback(getDebugDrawer(),worldTransform,color);
 					concaveMesh->processAllTriangles(&drawCallback,aabbMin,aabbMax);
@@ -1157,8 +1159,8 @@ void btDiscreteDynamicsWorld::debugDrawObject(const btTransform& worldTransform,
 				{
 					btConvexTriangleMeshShape* convexMesh = (btConvexTriangleMeshShape*) shape;
 					//todo: pass camera for some culling			
-					btVector3 aabbMax(btScalar(1e30),btScalar(1e30),btScalar(1e30));
-					btVector3 aabbMin(btScalar(-1e30),btScalar(-1e30),btScalar(-1e30));
+					btVector3 aabbMax(btScalar(BT_LARGE_FLOAT),btScalar(BT_LARGE_FLOAT),btScalar(BT_LARGE_FLOAT));
+					btVector3 aabbMin(btScalar(-BT_LARGE_FLOAT),btScalar(-BT_LARGE_FLOAT),btScalar(-BT_LARGE_FLOAT));
 					//DebugDrawcallback drawCallback;
 					DebugDrawcallback drawCallback(getDebugDrawer(),worldTransform,color);
 					convexMesh->getMeshInterface()->InternalProcessAllTriangles(&drawCallback,aabbMin,aabbMax);
@@ -1366,7 +1368,7 @@ void btDiscreteDynamicsWorld::debugDrawConstraint(btTypedConstraint* constraint)
 			break;
 	}
 	return;
-} // btDiscreteDynamicsWorld::debugDrawConstraint()
+}
 
 
 

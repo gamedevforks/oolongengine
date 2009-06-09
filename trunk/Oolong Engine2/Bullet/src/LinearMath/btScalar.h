@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2006 Gino van den Bergen / Erwin Coumans  http://continuousphysics.com/Bullet/
+Copyright (c) 2003-2009 Erwin Coumans  http://bullet.googlecode.com
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -18,14 +18,13 @@ subject to the following restrictions:
 #define SIMD___SCALAR_H
 
 #include <math.h>
-
 #include <stdlib.h>//size_t for MSVC 6.0
-
 #include <cstdlib>
 #include <cfloat>
 #include <float.h>
 
-#define BT_BULLET_VERSION 274
+/* SVN $Revision$ on $Date$ from http://bullet.googlecode.com*/
+#define BT_BULLET_VERSION 275
 
 inline int	btGetVersion()
 {
@@ -156,20 +155,16 @@ inline int	btGetVersion()
 #endif	//__CELLOS_LV2__
 #endif
 
-/// older compilers (gcc 3.x) and Sun needs double version of sqrt etc.
-/// exclude Apple Intel (i's assumed to be a Macbook or new Intel Dual Core Processor)
-#if defined (__sun) || defined (__sun__) || defined (__sparc) || (defined (__APPLE__) && ! defined (__i386__))
-//use slow double float precision operation on those platforms
-#ifndef BT_USE_DOUBLE_PRECISION
-#define BT_FORCE_DOUBLE_FUNCTIONS
-#endif
-#endif
 
 ///The btScalar type abstracts floating point numbers, to easily switch between double and single floating point precision.
 #if defined(BT_USE_DOUBLE_PRECISION)
 typedef double btScalar;
+//this number could be bigger in double precision
+#define BT_LARGE_FLOAT 1e30
 #else
 typedef float btScalar;
+//keep BT_LARGE_FLOAT*BT_LARGE_FLOAT < FLT_MAX
+#define BT_LARGE_FLOAT 1e18f
 #endif
 
 

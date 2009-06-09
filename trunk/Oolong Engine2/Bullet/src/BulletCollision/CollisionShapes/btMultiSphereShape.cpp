@@ -1,6 +1,6 @@
 /*
 Bullet Continuous Collision Detection and Physics Library
-Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
+Copyright (c) 2003-2009 Erwin Coumans  http://bulletphysics.org
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -13,25 +13,28 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+
+
 #include "btMultiSphereShape.h"
 #include "BulletCollision/CollisionShapes/btCollisionMargin.h"
 #include "LinearMath/btQuaternion.h"
 
 btMultiSphereShape::btMultiSphereShape (const btVector3& inertiaHalfExtents,const btVector3* positions,const btScalar* radi,int numSpheres)
-:btConvexInternalShape (), m_inertiaHalfExtents(inertiaHalfExtents)
+:btConvexInternalAabbCachingShape (), m_inertiaHalfExtents(inertiaHalfExtents)
 {
 	m_shapeType = MULTI_SPHERE_SHAPE_PROXYTYPE;
-	btScalar startMargin = btScalar(1e30);
+	btScalar startMargin = btScalar(BT_LARGE_FLOAT);
 
-	m_numSpheres = numSpheres;
-	for (int i=0;i<m_numSpheres;i++)
+	m_localPositionArray.resize(numSpheres);
+	m_radiArray.resize(numSpheres);
+	for (int i=0;i<numSpheres;i++)
 	{
-		m_localPositions[i] = positions[i];
-		m_radi[i] = radi[i];
-		if (radi[i] < startMargin)
-			startMargin = radi[i];
+		m_localPositionArray[i] = positions[i];
+		m_radiArray[i] = radi[i];
+		
 	}
-	setMargin(startMargin);
+
+	recalcLocalAabb();
 
 }
 
@@ -43,7 +46,7 @@ btMultiSphereShape::btMultiSphereShape (const btVector3& inertiaHalfExtents,cons
 	int i;
 	btVector3 supVec(0,0,0);
 
-	btScalar maxDot(btScalar(-1e30));
+	btScalar maxDot(btScalar(-BT_LARGE_FLOAT));
 
 
 	btVector3 vec = vec0;
@@ -60,10 +63,11 @@ btMultiSphereShape::btMultiSphereShape (const btVector3& inertiaHalfExtents,cons
 	btVector3 vtx;
 	btScalar newDot;
 
-	const btVector3* pos = &m_localPositions[0];
-	const btScalar* rad = &m_radi[0];
+	const btVector3* pos = &m_localPositionArray[0];
+	const btScalar* rad = &m_radiArray[0];
+	int numSpheres = m_localPositionArray.size();
 
-	for (i=0;i<m_numSpheres;i++)
+	for (i=0;i<numSpheres;i++)
 	{
 		vtx = (*pos) +vec*m_localScaling*(*rad) - vec * getMargin();
 		pos++;
@@ -85,17 +89,17 @@ btMultiSphereShape::btMultiSphereShape (const btVector3& inertiaHalfExtents,cons
 
 	for (int j=0;j<numVectors;j++)
 	{
-		btScalar maxDot(btScalar(-1e30));
+		btScalar maxDot(btScalar(-BT_LARGE_FLOAT));
 
 		const btVector3& vec = vectors[j];
 
 		btVector3 vtx;
 		btScalar newDot;
 
-		const btVector3* pos = &m_localPositions[0];
-		const btScalar* rad = &m_radi[0];
-
-		for (int i=0;i<m_numSpheres;i++)
+		const btVector3* pos = &m_localPositionArray[0];
+		const btScalar* rad = &m_radiArray[0];
+		int numSpheres = m_localPositionArray.size();
+		for (int i=0;i<numSpheres;i++)
 		{
 			vtx = (*pos) +vec*m_localScaling*(*rad) - vec * getMargin();
 			pos++;
@@ -144,6 +148,5 @@ void	btMultiSphereShape::calculateLocalInertia(btScalar mass,btVector3& inertia)
 	inertia[2] = scaledmass * (x2+y2);
 
 }
-
 
 

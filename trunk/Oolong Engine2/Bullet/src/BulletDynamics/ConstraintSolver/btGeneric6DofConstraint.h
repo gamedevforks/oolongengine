@@ -54,6 +54,7 @@ public:
     //! temp_variables
     //!@{
     btScalar m_currentLimitError;//!  How much is violated this limit
+    btScalar m_currentPosition;     //!  current value of angle 
     int m_currentLimit;//!< 0=free, 1=at lo limit, 2=at hi limit
     btScalar m_accumulatedImpulse;
     //!@}
@@ -134,6 +135,7 @@ public:
     btVector3	m_targetVelocity;//!< target motor velocity
     btVector3	m_maxMotorForce;//!< max force on motor
     btVector3	m_currentLimitError;//!  How much is violated this limit
+    btVector3	m_currentLinearDiff;//!  Current relative offset of constraint frames
     int			m_currentLimit[3];//!< 0=free, 1=at lower limit, 2=at upper limit
 
     btTranslationalLimitMotor()
@@ -380,14 +382,21 @@ public:
 
     //! Get the relative Euler angle
     /*!
-	\pre btGeneric6DofConstraint.buildJacobian must be called previously.
+	\pre btGeneric6DofConstraint::calculateTransforms() must be called previously.
 	*/
     btScalar getAngle(int axis_index) const;
+
+	//! Get the relative position of the constraint pivot
+    /*!
+	\pre btGeneric6DofConstraint::calculateTransforms() must be called previously.
+	*/
+	btScalar getRelativePivotPosition(int axis_index) const;
+
 
 	//! Test angular limit.
 	/*!
 	Calculates angular correction and returns true if limit needs to be corrected.
-	\pre btGeneric6DofConstraint.buildJacobian must be called previously.
+	\pre btGeneric6DofConstraint::calculateTransforms() must be called previously.
 	*/
     bool testAngularLimitMotor(int axis_index);
 
@@ -476,5 +485,6 @@ public:
 
 
 };
+
 
 #endif //GENERIC_6DOF_CONSTRAINT_H

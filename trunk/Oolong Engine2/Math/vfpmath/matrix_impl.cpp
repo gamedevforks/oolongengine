@@ -39,15 +39,15 @@ void Matrix4Mul(const float* src_mat_1, const float* src_mat_2, float* dst_mat) 
                 // function computes A*B as (B^T * A^T)^T.
                 
                 // Load the whole matrix into memory.
-                "fldmias  %2, {s8-s23}    \n\t"
+                "fldmias  %1, {s8-s23}    \n\t"
                 // Load first column to scalar bank.
-                "fldmias  %1!, {s0-s3}    \n\t"
+                "fldmias  %2!, {s0-s3}    \n\t"
                 // First column times matrix.
                 "fmuls s24, s8, s0        \n\t"
                 "fmacs s24, s12, s1       \n\t"
 
                 // Load second column to scalar bank.
-                "fldmias %1!,  {s4-s7}    \n\t"
+                "fldmias %2!,  {s4-s7}    \n\t"
 
                 "fmacs s24, s16, s2       \n\t"
                 "fmacs s24, s20, s3       \n\t"
@@ -59,7 +59,7 @@ void Matrix4Mul(const float* src_mat_1, const float* src_mat_2, float* dst_mat) 
                 "fmacs s28, s12, s5       \n\t"
 		
                 // Load third column to scalar bank.
-                "fldmias  %1!, {s0-s3}    \n\t"
+                "fldmias  %2!, {s0-s3}    \n\t"
 
                 "fmacs s28, s16, s6       \n\t"
                 "fmacs s28, s20, s7       \n\t"
@@ -71,7 +71,7 @@ void Matrix4Mul(const float* src_mat_1, const float* src_mat_2, float* dst_mat) 
                 "fmacs s24, s12, s1       \n\t"
 		
                 // Load fourth column to scalar bank.
-                "fldmias %1,  {s4-s7}    \n\t"
+                "fldmias %2,  {s4-s7}    \n\t"
 
                 "fmacs s24, s16, s2       \n\t"
                 "fmacs s24, s20, s3       \n\t"

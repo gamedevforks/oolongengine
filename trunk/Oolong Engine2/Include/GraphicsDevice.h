@@ -15,16 +15,17 @@ subject to the following restrictions:
 #ifndef GRAPHICSDEVICE_H_
 #define GRAPHICSDEVICE_H_
 
-#define GLOS1xSUPPORT 0
+#define OPENGL20SUPPORT 1
 
-#if GLOS1xSUPPORT
-#include "../Renderer/Core/GraphicsDevice/OS1x/UIGLView.h"
-#else
-#include "../Renderer/Core/GraphicsDevice/OS2x/EAGLView.h"
-#include "../Renderer/Core/GraphicsDevice/OS2x/OpenGL_Internal.h"
+#if _OPENGLES20
+#include "../Renderer/Core/GraphicsDevice/GLES20/EAGLView2.h"
+#include "../Renderer/Core/GraphicsDevice/GLES20/OpenGL_Internal.h"
+#include "../Renderer/Core/GraphicsDevice/Shader.h"
 #include "../Renderer/Core/GraphicsDevice/Texture.h"
-#include "../Renderer/Core/GraphicsDevice/OpenGLESExt.h"
-
+#else // Only GLES 1.1 Support On Device.
+#include "../Renderer/Core/GraphicsDevice/GLES11/EAGLView.h"
+#include "../Renderer/Core/GraphicsDevice/GLES11/OpenGL_Internal.h"
+#include "../Renderer/Core/GraphicsDevice/Texture.h"
 #endif
 
 #endif

@@ -15,9 +15,7 @@ subject to the following restrictions:
 #ifndef GRAPHICSDEVICE_H_
 #define GRAPHICSDEVICE_H_
 
-#define OPENGL20SUPPORT 1
-
-#if _OPENGLES20
+#if _OPENGLES20 // Preprocessor Definition.
 #include "../Renderer/Core/GraphicsDevice/GLES20/EAGLView2.h"
 #include "../Renderer/Core/GraphicsDevice/GLES20/OpenGL_Internal.h"
 #include "../Renderer/Core/GraphicsDevice/Shader.h"

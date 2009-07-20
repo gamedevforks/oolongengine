@@ -238,22 +238,24 @@
 		791F46590E174E2600E927FE /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
-				791F465C0E174E2600E927FE /* OS2x */,
+				791F465C0E174E2600E927FE /* GLES11 */,
 				791F46600E174E2600E927FE /* Texture.h */,
 				791F46610E174E2600E927FE /* Texture.mm */,
 			);
 			path = GraphicsDevice;
 			sourceTree = "<group>";
 		};
-		791F465C0E174E2600E927FE /* OS2x */ = {
+		791F465C0E174E2600E927FE /* GLES11 */ = {
 			isa = PBXGroup;
 			children = (
 				791F465D0E174E2600E927FE /* EAGLView.h */,
 				791F465E0E174E2600E927FE /* EAGLView.m */,
 				791F465F0E174E2600E927FE /* OpenGL_Internal.h */,
 			);
-			path = OS2x;
+			includeInIndex = 0;
+			path = GLES11;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		791F46620E174E2600E927FE /* UI */ = {
 			isa = PBXGroup;

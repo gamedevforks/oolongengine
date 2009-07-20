@@ -19,7 +19,6 @@
 		791F49C80E1755E800E927FE /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F499A0E1755E800E927FE /* ResourceFile.cpp */; };
 		791F49C90E1755E800E927FE /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F499C0E1755E800E927FE /* Streaming.cpp */; };
 		791F49CA0E1755E800E927FE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 791F49A00E1755E800E927FE /* main.m */; };
-		791F49CF0E1755E800E927FE /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 791F49B10E1755E800E927FE /* EAGLView.m */; };
 		791F49D00E1755E800E927FE /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 791F49B40E1755E800E927FE /* Texture.mm */; };
 		791F49D10E1755E800E927FE /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F49B60E1755E800E927FE /* DisplayText.cpp */; };
 		791F49D20E1755E800E927FE /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F49B80E1755E800E927FE /* DisplayTextAPI.cpp */; };
@@ -43,6 +42,7 @@
 		79616E850EECFA4800802AED /* IntroducingPOD_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79616E820EECFA4800802AED /* IntroducingPOD_float.pod */; };
 		79616E860EECFA4800802AED /* tex_arm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E830EECFA4800802AED /* tex_arm.pvr */; };
 		79616E870EECFA4800802AED /* tex_base.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E840EECFA4800802AED /* tex_base.pvr */; };
+		F9FC04031014F5D9006ACEAA /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FC04011014F5D9006ACEAA /* EAGLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,9 +64,6 @@
 		791F499D0E1755E800E927FE /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Streaming.h; path = ../../../../Renderer/Resource/Streaming.h; sourceTree = SOURCE_ROOT; };
 		791F499F0E1755E800E927FE /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		791F49A00E1755E800E927FE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		791F49B00E1755E800E927FE /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		791F49B10E1755E800E927FE /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		791F49B20E1755E800E927FE /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		791F49B30E1755E800E927FE /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		791F49B40E1755E800E927FE /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		791F49B60E1755E800E927FE /* DisplayText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayText.cpp; sourceTree = "<group>"; };
@@ -112,6 +109,9 @@
 		79616E830EECFA4800802AED /* tex_arm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_arm.pvr; path = Media/tex_arm.pvr; sourceTree = "<group>"; };
 		79616E840EECFA4800802AED /* tex_base.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_base.pvr; path = Media/tex_base.pvr; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9FC04001014F5D9006ACEAA /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = GLES11/EAGLView.h; sourceTree = "<group>"; };
+		F9FC04011014F5D9006ACEAA /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = GLES11/EAGLView.m; sourceTree = "<group>"; };
+		F9FC04021014F5D9006ACEAA /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGL_Internal.h; path = GLES11/OpenGL_Internal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,21 +245,11 @@
 		791F49AE0E1755E800E927FE /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
-				791F49AF0E1755E800E927FE /* OS2x */,
+				F9FC03FF1014F5C1006ACEAA /* GLES11 */,
 				791F49B30E1755E800E927FE /* Texture.h */,
 				791F49B40E1755E800E927FE /* Texture.mm */,
 			);
 			path = GraphicsDevice;
-			sourceTree = "<group>";
-		};
-		791F49AF0E1755E800E927FE /* OS2x */ = {
-			isa = PBXGroup;
-			children = (
-				791F49B00E1755E800E927FE /* EAGLView.h */,
-				791F49B10E1755E800E927FE /* EAGLView.m */,
-				791F49B20E1755E800E927FE /* OpenGL_Internal.h */,
-			);
-			path = OS2x;
 			sourceTree = "<group>";
 		};
 		791F49B50E1755E800E927FE /* UI */ = {
@@ -346,6 +336,16 @@
 			path = ../../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
+		F9FC03FF1014F5C1006ACEAA /* GLES11 */ = {
+			isa = PBXGroup;
+			children = (
+				F9FC04001014F5D9006ACEAA /* EAGLView.h */,
+				F9FC04011014F5D9006ACEAA /* EAGLView.m */,
+				F9FC04021014F5D9006ACEAA /* OpenGL_Internal.h */,
+			);
+			name = GLES11;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -410,7 +410,6 @@
 				791F49C80E1755E800E927FE /* ResourceFile.cpp in Sources */,
 				791F49C90E1755E800E927FE /* Streaming.cpp in Sources */,
 				791F49CA0E1755E800E927FE /* main.m in Sources */,
-				791F49CF0E1755E800E927FE /* EAGLView.m in Sources */,
 				791F49D00E1755E800E927FE /* Texture.mm in Sources */,
 				791F49D10E1755E800E927FE /* DisplayText.cpp in Sources */,
 				791F49D20E1755E800E927FE /* DisplayTextAPI.cpp in Sources */,
@@ -428,6 +427,7 @@
 				79317AD80EDB153800247E3D /* utility_impl.cpp in Sources */,
 				7931810B0EDF0E0500247E3D /* mmgr.cpp in Sources */,
 				79616DDF0EECF2C300802AED /* ResourcePath.mm in Sources */,
+				F9FC04031014F5D9006ACEAA /* EAGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,7 @@ subject to the following restrictions:
 #include <stdio.h>
 
 #include "MemoryManager.h"
+#include "OpenGLESExt.h"
 
 
 //#include "String.h"

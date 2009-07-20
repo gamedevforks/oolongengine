@@ -255,19 +255,19 @@
 		79EA043C0DAFC7950038ED3D /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
-				79EA043F0DAFC7950038ED3D /* OS2x */,
+				79EA043F0DAFC7950038ED3D /* GLES11 */,
 			);
 			path = GraphicsDevice;
 			sourceTree = "<group>";
 		};
-		79EA043F0DAFC7950038ED3D /* OS2x */ = {
+		79EA043F0DAFC7950038ED3D /* GLES11 */ = {
 			isa = PBXGroup;
 			children = (
 				79EA04400DAFC7950038ED3D /* EAGLView.h */,
 				79EA04410DAFC7950038ED3D /* EAGLView.m */,
 				79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */,
 			);
-			path = OS2x;
+			path = GLES11;
 			sourceTree = "<group>";
 		};
 		79EA044D0DAFC7950038ED3D /* UI */ = {

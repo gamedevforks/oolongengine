@@ -568,7 +568,7 @@ bool BackgroundDraw(const GLuint ui32Texture)
 	glBindBuffer(GL_ARRAY_BUFFER, m_uiBackground32Vbo);
 	
 	// set pointers
-	glVertexPointer(3  ,VERTTYPEENUM,m_i32BackgroundStride, m_pBackgroundTextureOffset);
+	glVertexPointer(3,VERTTYPEENUM,m_i32BackgroundStride, m_pBackgroundVertexOffset);
 	glTexCoordPointer(2,VERTTYPEENUM,m_i32BackgroundStride, m_pBackgroundTextureOffset);
 	
 	// Render geometry

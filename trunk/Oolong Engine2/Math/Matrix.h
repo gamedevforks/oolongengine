@@ -111,6 +111,14 @@ void MatrixMultiply(
 	const MATRIX	&mA,
 	const MATRIX	&mB);
 	
+//
+// Multiply vector vIn by matrix mIn and assign result to vOut.
+// Copies result vector, so vIn and vOut can be the same.
+//
+void MatrixVec4Multiply(
+	VECTOR4			&vOut,
+	const VECTOR4	&vIn,
+	const MATRIX	&mIn);
 
 //
 // Build a translation matrix mOut using fX, fY and fZ.

@@ -32,7 +32,11 @@ subject to the following restrictions:
 #ifdef __APPLE__
 #include <TargetConditionals.h>
 #if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+#ifdef _ARM_ARCH_7
+#include "neonmath/neon_matrix_impl.h"
+#else
 #include "vfpmath/matrix_impl.h"
+#endif
 #endif
 #endif
 
@@ -60,10 +64,13 @@ void MatrixMultiply(
 	const MATRIX	&mB)
 {
 #if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
-	Matrix4Mul(mA.f,
-				mB.f,
-				mOut.f);
-
+	#ifdef _ARM_ARCH_7
+		NEON_Matrix4Mul( mA.f, mB.f, mOut.f );
+	#else
+		Matrix4Mul(mA.f,
+					mB.f,
+					mOut.f);
+	#endif
 #else	
 	MATRIX mRet;
 
@@ -92,6 +99,31 @@ void MatrixMultiply(
 	mOut = mRet;
 #endif
  }
+
+void MatrixVec4Multiply(VECTOR4			&vOut,
+						const VECTOR4	&vIn,
+						const MATRIX	&mIn)
+{
+#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+	#ifdef _ARM_ARCH_7
+		NEON_Matrix4Vector4Mul( mIn.f, &vIn.x, &vOut.x );
+	#else
+		Matrix4Vector4Mul(mIn.f,
+						  &vIn.x,
+						  &vOut.x);
+	#endif
+#else
+	VECTOR4 result;
+	
+	/* Perform calculation on a dummy VECTOR (result) */
+	result.x = mIn.f[_11] * vIn.x + mIn.f[_21] * vIn.y + mIn.f[_31] * vIn.z + mIn.f[_41] * vIn.w;
+	result.y = mIn.f[_12] * vIn.x + mIn.f[_22] * vIn.y + mIn.f[_32] * vIn.z + mIn.f[_42] * vIn.w;
+	result.z = mIn.f[_13] * vIn.x + mIn.f[_23] * vIn.y + mIn.f[_33] * vIn.z + mIn.f[_43] * vIn.w;
+	result.w = mIn.f[_14] * vIn.x + mIn.f[_24] * vIn.y + mIn.f[_34] * vIn.z + mIn.f[_44] * vIn.w;
+	
+	vOut = result;
+#endif
+}
 
 
 void MatrixTranslation(

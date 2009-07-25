@@ -67,6 +67,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import <OpenGLES/ES2/glext.h>
 
 //CLASSES:
+extern int __OPENGLES_VERSION;
 
 @class EAGLView2;
 

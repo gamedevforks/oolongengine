@@ -68,6 +68,8 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 //CLASS IMPLEMENTATIONS:
 
+int __OPENGLES_VERSION = 0;
+
 @implementation EAGLView2
 
 @synthesize delegate=_delegate, autoresizesSurface=_autoresize, surfaceSize=_size, framebuffer = _framebuffer, pixelFormat = _format, depthFormat = _depthFormat, context = _context;
@@ -154,6 +156,13 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 		[EAGLContext setCurrentContext:oldContext];
 }
 
+- (id)initWithCoder:(NSCoder *)decoder;
+{
+	[super initWithCoder:decoder];
+	
+	return [self initWithFrame:[self frame] pixelFormat:GL_RGB565 depthFormat:GL_DEPTH_COMPONENT16 preserveBackbuffer:NO];
+}
+
 - (id) initWithFrame:(CGRect)frame
 {
 	return [self initWithFrame:frame pixelFormat:GL_RGB565 depthFormat:0 preserveBackbuffer:NO];
@@ -175,11 +184,23 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 		_format = format;
 		_depthFormat = depth;
 		
+#ifndef _FORCE_OPENGLES11
 		_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-		if(_context == nil) {
-			[self release];
-			return nil;
+		if(_context == nil)
+#endif
+		{
+			_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+			if(_context == nil) {
+				[self release];
+				return nil;
+			}
+			__OPENGLES_VERSION = 1;
 		}
+#ifndef _FORCE_OPENGLES11
+		else {
+			__OPENGLES_VERSION = 2;
+		}
+#endif
 		
 		if(![self _createSurface]) {
 			[self release];

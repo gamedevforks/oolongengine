@@ -13,6 +13,8 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#include <TargetConditionals.h>
+#include <Availability.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,7 +23,7 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "Macros.h"
 #include "MemoryManager.h"
-
+#include "Shader.h"
 
 #include "DisplayText.h"
 #include "DisplayTextdat.h"		// texture data
@@ -40,8 +42,49 @@ subject to the following restrictions:
 #define DisplayText_ADJUST_SIZE	64
 #define DisplayText_NO_BORDER	128
 
+extern int __OPENGLES_VERSION;
+
 float WindowWidth = 320.0f;
 float WindowHeight = 480.0f;
+
+
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+// This ties in with the shader attribute to link to openGL, see pszVertShader.
+static const char* pszAttribs[] = { "myVertex", "myColor", "myTexCoord" };
+
+	
+
+static char vsh[] = "\
+attribute highp vec4	myVertex;											\
+attribute highp vec4	myColor;											\
+attribute highp vec2	myTexCoord;											\
+																			\
+uniform mediump mat4	myPMVMatrix;										\
+																			\
+varying mediump vec2	v_textureCoord;										\
+varying mediump vec4	v_color;											\
+																			\
+void main(void)																\
+{																			\
+	gl_Position = myPMVMatrix * myVertex;									\
+	v_textureCoord = myTexCoord;											\
+	v_color = myColor;														\
+}																			\
+";
+
+static char fsh[] = "\
+varying mediump vec2	v_textureCoord;										\
+varying mediump vec4	v_color;											\
+uniform sampler2D		s_texture;											\
+																			\
+void main(void)																\
+{																			\
+	gl_FragColor = texture2D(s_texture, v_textureCoord) * v_color;			\
+}																			\
+";
+
+#endif
 
 //DEFINE_HEAP(CDisplayText, "UI");
 
@@ -51,6 +94,21 @@ CDisplayText::CDisplayText()
 
 	// Initialise all variables
 	memset(this, 0, sizeof(*this));
+	
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+	if( __OPENGLES_VERSION >= 2 ) {
+		if(ShaderLoadSourceFromMemory( fsh, GL_FRAGMENT_SHADER, &uiFragShader) == 0)
+			printf("Loading the fragment shader fails");
+		if(ShaderLoadSourceFromMemory( vsh, GL_VERTEX_SHADER, &uiVertShader) == 0)
+			printf("Loading the vertex shader fails");
+		
+		CreateProgram(&uiProgramObject, uiVertShader, uiFragShader, pszAttribs, 3);
+		
+		// First gets the location of that variable in the shader using its name
+		PMVMatrixHandle = glGetUniformLocation(uiProgramObject, "myPMVMatrix");
+		TextureHandle = glGetUniformLocation(uiProgramObject, "s_texture");			
+	}
+#endif
 
 #endif
 }
@@ -59,8 +117,17 @@ CDisplayText::CDisplayText()
 CDisplayText::~CDisplayText()
 {
 #if !defined (DISABLE_DISPLAYTEXT)
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
+	if( __OPENGLES_VERSION >= 2 )
+	{
+		// Frees the OpenGL handles for the program and the 2 shaders
+		glDeleteProgram(uiProgramObject);
+		glDeleteShader(uiFragShader);
+		glDeleteShader(uiVertShader);
+	}
 #endif
 	APIRelease();
+#endif
 }
 
 //
@@ -1018,7 +1085,12 @@ bool CDisplayText::UpdateBackgroundWindow(unsigned int dwWin, unsigned int Color
 	for (i=0; i<16; i++)
 	{
 		vBox[i].sz		= f2vt(fZPos);
-		vBox[i].color	= Color;
+		//vBox[i].color	= Color;
+		vBox[i].r = ((float)((Color & 0xFF)>>0)) / 255.0f;
+		vBox[i].g = ((float)((Color & 0xFF00)>>8)) / 255.0f;
+		vBox[i].b = ((float)((Color & 0xFF0000)>>16)) / 255.0f;
+		vBox[i].a = ((float)((Color & 0xFF000000)>>24)) / 255.0f;
+
 		vBox[i].tu		= f2vt(fU[i]/16.0f);
 		vBox[i].tv		= f2vt(1.0f - fV[i]/16.0f);
 	}
@@ -1258,11 +1330,31 @@ unsigned int CDisplayText::UpdateLine(const unsigned int dwWin, const float fZPo
 		pVertices[VertexCount+3].tu		= f2vt(UPos+USize);
 		pVertices[VertexCount+3].tv		= f2vt(VPos-VSize);
 
-		pVertices[VertexCount+0].color	= Colour;
-		pVertices[VertexCount+1].color	= Colour;
-		pVertices[VertexCount+2].color	= Colour;
-		pVertices[VertexCount+3].color	= Colour;
-
+		float r = ((float)((Colour & 0xFF)>>0)) / 255.0f;
+		float g = ((float)((Colour & 0xFF00)>>8)) / 255.0f;
+		float b = ((float)((Colour & 0xFF0000)>>16)) / 255.0f;
+		float a = ((float)((Colour & 0xFF000000)>>24)) / 255.0f;
+		
+		pVertices[VertexCount+0].r = r;
+		pVertices[VertexCount+0].g = g;
+		pVertices[VertexCount+0].b = b;
+		pVertices[VertexCount+0].a = a;
+		
+		pVertices[VertexCount+1].r = r;
+		pVertices[VertexCount+1].g = g;
+		pVertices[VertexCount+1].b = b;
+		pVertices[VertexCount+1].a = a;
+		
+		pVertices[VertexCount+2].r = r;
+		pVertices[VertexCount+2].g = g;
+		pVertices[VertexCount+2].b = b;
+		pVertices[VertexCount+2].a = a;
+		
+		pVertices[VertexCount+3].r = r;
+		pVertices[VertexCount+3].g = g;
+		pVertices[VertexCount+3].b = b;
+		pVertices[VertexCount+3].a = a;
+		
 		VertexCount += 4;
 
 		XSize = XFixBug;

@@ -211,18 +211,12 @@ bool CShell::UpdateScene()
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 	if( __OPENGLES_VERSION >= 2 ) {
+		glUseProgram(uiProgramObject);
 
 		// Then passes the matrix to that variable
 		glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, mMVP.f);
 
-		/*
-			Enable the custom vertex attribute at index VERTEX_ARRAY.
-			We previously just bound that index to the variable in our shader "vec4 MyVertex;"
-		*/
-		glEnableVertexAttribArray(VERTEX_ARRAY);
 
-		// Sets the vertex data to this attribute index
-		glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 	else 
 #endif
@@ -241,10 +235,7 @@ bool CShell::UpdateScene()
 	CFTimeInterval			TimeInterval;
 	frameRate = GetFps(frames, TimeInterval);
 
-	if( __OPENGLES_VERSION < 2 ) 
-	{
-		AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f Cube: %3.2fms UI: %3.2fms", frameRate, DrawCubeT, DrawUIT);
-	}
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f Cube: %3.2fms UI: %3.2fms", frameRate, DrawCubeT, DrawUIT);
 	
 	return true;
 }
@@ -259,6 +250,19 @@ bool CShell::RenderScene()
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	if( __OPENGLES_VERSION >= 2 ) 
 	{
+		glUseProgram(uiProgramObject);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, ui32Vbo);
+		
+		/*
+		 Enable the custom vertex attribute at index VERTEX_ARRAY.
+		 We previously just bound that index to the variable in our shader "vec4 MyVertex;"
+		 */
+		glEnableVertexAttribArray(VERTEX_ARRAY);
+		
+		// Sets the vertex data to this attribute index
+		glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		
 		// First gets the location of the color variable in the shader using its name
 		// Then passes the proper color to that variable.
 		glUniform4f(ColHandle, 1.0, 0.0, 0.0, 1.0);
@@ -303,11 +307,9 @@ bool CShell::RenderScene()
 	
 	ResetTimer(&DrawUITimer);
 	
-	if( __OPENGLES_VERSION < 2 ) {
-		// show text on the display
-		AppDisplayText->DisplayDefaultTitle("Basic Skeleton (XIB)", "", eDisplayTextLogoIMG);
-		AppDisplayText->Flush();	
-	}
+	// show text on the display
+	AppDisplayText->DisplayDefaultTitle("Basic Skeleton (XIB)", "", eDisplayTextLogoIMG);
+	AppDisplayText->Flush();	
 	
 	DrawUIT = GetAverageTimeValueInMS(&DrawUITimer);
 

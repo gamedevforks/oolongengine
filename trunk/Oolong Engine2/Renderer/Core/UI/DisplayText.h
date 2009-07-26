@@ -15,6 +15,8 @@ subject to the following restrictions:
 #ifndef DISPLAYTEXT_H_
 #define DISPLAYTEXT_H_
 
+#include <TargetConditionals.h>
+#include <Availability.h>
 #include "MemoryManager.h"
 
 #define DISPLAYTEXT_MAX_WINDOWS				(512)
@@ -41,7 +43,7 @@ typedef enum {
 struct SDisplayTextAPIVertex
 {
 	VERTTYPE		sx, sy, sz, rhw;
-	unsigned int	color;
+	VERTTYPE		r, g, b, a;
 	VERTTYPE		tu, tv;
 };
 
@@ -296,7 +298,15 @@ int Flush();
 
 private:
 
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+	// Declare the fragment and vertex shaders.
+	GLuint uiFragShader, uiVertShader;		// Used to hold the fragment and vertex shader handles
+	GLuint uiProgramObject;					// Used to hold the program handle (made out of the two previous shaders)
+	// Handles for the uniform variables.
+	int PMVMatrixHandle;
+	int TextureHandle;
+#endif
+	
 //
 // Initialization and texture upload. Should be called only once
 // for a given context.

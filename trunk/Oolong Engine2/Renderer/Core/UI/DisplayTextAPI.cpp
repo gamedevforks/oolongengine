@@ -13,8 +13,16 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#include <TargetConditionals.h>
+#include <Availability.h>
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+#else
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
+#endif
 
 
 #include <stdarg.h>
@@ -29,6 +37,7 @@ subject to the following restrictions:
 
 #include "DisplayText.h"
 
+extern int __OPENGLES_VERSION;
 
 struct SDisplayTextAPI
 {
@@ -79,9 +88,10 @@ int CDisplayText::Flush()
 
 	/* Save render states */
 	APIRenderStates(0);
-
+	
 	/* Set font texture */
 	glBindTexture(GL_TEXTURE_2D, m_pAPI->uTexture[0]);
+	
 
 	/* Set blending mode */
 //	glEnable(GL_BLEND);
@@ -100,57 +110,92 @@ int CDisplayText::Flush()
 		_ASSERT(nTris <= (DISPLAYTEXT_MAX_RENDERABLE_LETTERS*2));
 		_ASSERT((nVtx % 4) == 0);
 
-		/* Draw triangles */
-		glVertexPointer(3,		VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].sx);
-		glColorPointer(4,		GL_UNSIGNED_BYTE,	sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].color);
-		glTexCoordPointer(2,	VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].tu);
-		glDrawElements(GL_TRIANGLES, nTris * 3, GL_UNSIGNED_SHORT, m_pwFacesFont);
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+		
+		if( __OPENGLES_VERSION >= 2 )
+		{
+			// Bind the VBO so we can fill it with data
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, VERTTYPEENUM, GL_FALSE, sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].sx);	
 
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 4, VERTTYPEENUM, GL_FALSE, sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].r);	
+			
+			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(2, 2, VERTTYPEENUM, GL_FALSE, sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].tu);
+			
+			if (glGetError())
+			{
+				//_RPT0(_CRT_WARN,"\n");
+			}
+		}
+		else 
+#endif
+		{		
+			/* Draw triangles */
+			glVertexPointer(3,		VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].sx);
+			glColorPointer(4,		VERTTYPEENUM,	sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].r);
+			glTexCoordPointer(2,	VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].tu);
+
+		}
+		
+		glDrawElements(GL_TRIANGLES, nTris * 3, GL_UNSIGNED_SHORT, m_pwFacesFont);
+		//glDrawArrays(GL_TRIANGLES,  0, 3);
+		
 		if (glGetError())
 		{
 			_RPT0(_CRT_WARN,"glDrawElements(GL_TRIANGLES, (VertexCount/2)*3, GL_UNSIGNED_SHORT, m_pFacesFont); failed\n");
 		}
+		
 		nVtxBase		+= nVtx;
 		m_nVtxCache	-= nVtx;
 	}
+	
 
-	/* Draw a logo if requested */
-#if defined(FORCE_NO_LOGO)
-	/* Do nothing */
 
-#elif defined(FORCE_PVR_LOGO)
-    APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
-
-#elif defined(FORCE_IMG_LOGO)
-	APIDrawLogo(eDisplayTextLogoIMG, 1);	/* IMG to the right */
-
-#elif defined(FORCE_ALL_LOGOS)
-	APIDrawLogo(eDisplayTextLogoIMG, -1); /* IMG to the left */
-	APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
-
-#else
-	/* User selected logos */
-	switch (m_uLogoToDisplay)
 	{
-		case eDisplayTextLogoNone:
-			break;
-		default:
-		case eDisplayTextLogoPVR:
-			APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
-			break;
-		case eDisplayTextLogoIMG:
-			APIDrawLogo(eDisplayTextLogoIMG, 1);	/* IMG to the right */
-			break;
-		case (eDisplayTextLogoPVR | eDisplayTextLogoIMG):
-			APIDrawLogo(eDisplayTextLogoIMG, -1); /* IMG to the left */
-			APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
-			break;
+		/* Draw a logo if requested */
+	#if defined(FORCE_NO_LOGO)
+		/* Do nothing */
+
+	#elif defined(FORCE_PVR_LOGO)
+		APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
+
+	#elif defined(FORCE_IMG_LOGO)
+		APIDrawLogo(eDisplayTextLogoIMG, 1);	/* IMG to the right */
+
+	#elif defined(FORCE_ALL_LOGOS)
+		APIDrawLogo(eDisplayTextLogoIMG, -1); /* IMG to the left */
+		APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
+
+	#else
+		/* User selected logos */
+		switch (m_uLogoToDisplay)
+		{
+			case eDisplayTextLogoNone:
+				break;
+			default:
+			case eDisplayTextLogoPVR:
+				APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
+				break;
+			case eDisplayTextLogoIMG:
+				APIDrawLogo(eDisplayTextLogoIMG, 1);	/* IMG to the right */
+				break;
+			case (eDisplayTextLogoPVR | eDisplayTextLogoIMG):
+				APIDrawLogo(eDisplayTextLogoIMG, -1); /* IMG to the left */
+				APIDrawLogo(eDisplayTextLogoPVR, 1);	/* PVR to the right */
+				break;
+		}
+	#endif
 	}
-#endif
+
+
 
 	/* Restore render states */
 	APIRenderStates(1);
-
+	
 	return nTrisTot;
 
 #else
@@ -346,7 +391,7 @@ void CDisplayText::DrawBackgroundWindowUP(unsigned int dwWin, SDisplayTextAPIVer
 
 	/* Set pointers */
 	glVertexPointer(3,		VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &pVtx[0].sx);
-	glColorPointer(4,		GL_UNSIGNED_BYTE,	sizeof(SDisplayTextAPIVertex), &pVtx[0].color);
+	glColorPointer(4,		VERTTYPEENUM,	sizeof(SDisplayTextAPIVertex), &pVtx[0].r);
 	glTexCoordPointer(2,	VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &pVtx[0].tu);
 
 	/* Draw triangles */
@@ -382,10 +427,13 @@ void CDisplayText::APIRenderStates(int nAction)
 		//glGetbooleanv(GL_VERTEX_ARRAY,		&bVertexPointerEnabled);
 		//glGetbooleanv(GL_COLOR_ARRAY,			&bColorPointerEnabled);
 		//glGetbooleanv(GL_TEXTURE_COORD_ARRAY,	&bTexCoorPointerEnabled);
-		
-		bVertexPointerEnabled = glIsEnabled(GL_VERTEX_ARRAY);
-		bColorPointerEnabled = glIsEnabled(GL_COLOR_ARRAY);
-		bTexCoorPointerEnabled = glIsEnabled(GL_TEXTURE_COORD_ARRAY);
+		if( __OPENGLES_VERSION >= 2 ) {
+		}
+		else {		
+			bVertexPointerEnabled = glIsEnabled(GL_VERTEX_ARRAY);
+			bColorPointerEnabled = glIsEnabled(GL_COLOR_ARRAY);
+			bTexCoorPointerEnabled = glIsEnabled(GL_TEXTURE_COORD_ARRAY);
+		}
 
 		bLighting = glIsEnabled(GL_LIGHTING);
 		bCullFace = glIsEnabled(GL_CULL_FACE);
@@ -398,20 +446,26 @@ void CDisplayText::APIRenderStates(int nAction)
 		glGetIntegerv(GL_BLEND_DST, &iDestBlend);
 		glGetIntegerv(GL_BLEND_SRC, &iSrcBlend);
       
-      // save texture unit state
-      glActiveTexture(GL_TEXTURE0);
-      bTextureEnabled0 = glIsEnabled(GL_TEXTURE_2D);
+        // save texture unit state
+		glActiveTexture(GL_TEXTURE0);
+		bTextureEnabled0 = glIsEnabled(GL_TEXTURE_2D);
       
 		glActiveTexture(GL_TEXTURE1);
-      bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
+		bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
 		
-		/* Save matrices */
-		glGetIntegerv(GL_MATRIX_MODE, &iMatrixMode);
-
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glMatrixMode(GL_PROJECTION);
-		glPushMatrix();
+		if( __OPENGLES_VERSION >= 2 ) {
+			glBindBuffer( GL_ARRAY_BUFFER, 0 );
+			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+		}
+		else {
+			/* Save matrices */
+			glGetIntegerv(GL_MATRIX_MODE, &iMatrixMode);
+			
+			glMatrixMode(GL_MODELVIEW);
+			glPushMatrix();
+			glMatrixMode(GL_PROJECTION);
+			glPushMatrix();
+		}
 
 
 		/******************************
@@ -433,12 +487,22 @@ void CDisplayText::APIRenderStates(int nAction)
 		Matrix.f[13] = f2vt(1.0f);
 		Matrix.f[15] = f2vt(1.0f);
 
-		/* Set matrix mode so that screen coordinates can be specified */
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+		if( __OPENGLES_VERSION >= 2 ) {
+			glUseProgram(uiProgramObject);
+			glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, Matrix.f);
+		}
+		else 
+#endif
+		{			
+			/* Set matrix mode so that screen coordinates can be specified */
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(Matrix.f);
+			glMatrixMode(GL_MODELVIEW);
+			glLoadMatrixf(Matrix.f);
+		}
+			
 		glDisable(GL_LIGHTING);
 
 		/* Culling */
@@ -446,19 +510,32 @@ void CDisplayText::APIRenderStates(int nAction)
 		glFrontFace(GL_CW);
 		glCullFace(GL_FRONT);
 
-		/* Set client states */
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-
-		glClientActiveTexture(GL_TEXTURE0);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+		if( __OPENGLES_VERSION >= 2 ) {
+			glUniform1i( TextureHandle, 0 );
+		}
+		else 		
+#endif
+		{	
+			/* Set client states */
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_COLOR_ARRAY);
+			glClientActiveTexture(GL_TEXTURE0);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		}
+			
 
 		/* texture 	*/
 		glActiveTexture(GL_TEXTURE1);
 		glDisable(GL_TEXTURE_2D);
 		glActiveTexture(GL_TEXTURE0);
 		glEnable(GL_TEXTURE_2D);
-		glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+			
+		if( __OPENGLES_VERSION >= 2 ) {
+		}
+		else {			
+			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+		}
 
 		/* Blending mode */
 		glEnable(GL_BLEND);
@@ -476,27 +553,36 @@ void CDisplayText::APIRenderStates(int nAction)
 		break;
 
 	case 1:
-		/* Restore render states */
-		if (!bVertexPointerEnabled)		
-			glDisableClientState(GL_VERTEX_ARRAY);
-		else 
-			glEnableClientState(GL_VERTEX_ARRAY);
-		if (!bColorPointerEnabled)		
-			glDisableClientState(GL_COLOR_ARRAY);
-		else
-			glEnableClientState(GL_COLOR_ARRAY);
-		if (!bTexCoorPointerEnabled)		
-		    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		else
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		if( __OPENGLES_VERSION >= 2 ) {
+		}
+		else {				
+			/* Restore render states */
+			if (!bVertexPointerEnabled)		
+				glDisableClientState(GL_VERTEX_ARRAY);
+			else 
+				glEnableClientState(GL_VERTEX_ARRAY);
+			if (!bColorPointerEnabled)		
+				glDisableClientState(GL_COLOR_ARRAY);
+			else
+				glEnableClientState(GL_COLOR_ARRAY);
+			if (!bTexCoorPointerEnabled)		
+				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+			else
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		}
 
-		/* Restore matrix mode & matrix */
-		glMatrixMode(GL_PROJECTION);
-		glPopMatrix();
-		glMatrixMode(GL_MODELVIEW);
-		glPopMatrix();
+		if( __OPENGLES_VERSION >= 2 ) {
+		}
+		else {
+			/* Restore matrix mode & matrix */
+			glMatrixMode(GL_PROJECTION);
+			glPopMatrix();
+			glMatrixMode(GL_MODELVIEW);
+			glPopMatrix();
 
-		glMatrixMode(iMatrixMode);
+			glMatrixMode(iMatrixMode);
+		}
+			
 
 		// Restore some values
 		if(bLighting)		glEnable(GL_LIGHTING);
@@ -511,8 +597,8 @@ void CDisplayText::APIRenderStates(int nAction)
 		glBlendFunc(iSrcBlend, iDestBlend);
 		if(bBlend == 0) glDisable(GL_BLEND);
 
-      // restore texture states
-      glActiveTexture(GL_TEXTURE1);
+		// restore texture states
+		glActiveTexture(GL_TEXTURE1);
 		bTextureEnabled1 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 		glActiveTexture(GL_TEXTURE0);
 		bTextureEnabled0 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
@@ -581,17 +667,33 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		pVertices = VerticesLeft;
 	}
 
-	//Matrices
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	if(bScreenRotate)
-	{
-		glRotatef(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+	if( __OPENGLES_VERSION >= 2 ) {
+		MATRIX mx;
+		MatrixIdentity(mx);
+		if(bScreenRotate)
+		{
+			MatrixRotationZ( mx, -90.0 * PIf /180.0f );
+		}
+		glUseProgram(uiProgramObject);
+		glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, mx.f);
 	}
+	else 
+#else
+	{	
+		//Matrices
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
 
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		if(bScreenRotate)
+		{
+			glRotatef(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
+		}
+	}
+#endif
+	
 	// Render states
 	glActiveTexture(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
@@ -600,23 +702,45 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_ZERO, GL_SRC_COLOR);
 
-	// Vertices
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3,VERTTYPEENUM,0,pVertices);
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+	
+	if( __OPENGLES_VERSION >= 2 )
+	{
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, VERTTYPEENUM, GL_FALSE, 0, pVertices);	
+		
+		//glEnableVertexAttribArray(1);
+		//glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].color);	
+		
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, VERTTYPEENUM, GL_FALSE, 0, pUV);
+		
+		glUniform1i( TextureHandle, 0 );			
+		
+		glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+	}
+	else 
+#endif	// Vertices
+	{
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3,VERTTYPEENUM,0,pVertices);
 
-	glEnableClientState(GL_COLOR_ARRAY);
-	glColorPointer(4,VERTTYPEENUM,0,pColours);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(4,VERTTYPEENUM,0,pColours);
 
-	glClientActiveTexture(GL_TEXTURE0);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2,VERTTYPEENUM,0,pUV);
+		glClientActiveTexture(GL_TEXTURE0);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2,VERTTYPEENUM,0,pUV);
+		
+		glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+		
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
+		glClientActiveTexture(GL_TEXTURE0);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
 
-	glDrawArrays(GL_TRIANGLE_STRIP,0,4);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glClientActiveTexture(GL_TEXTURE0);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	// Restore render states
 	glDisable (GL_BLEND);

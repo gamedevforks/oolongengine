@@ -16,6 +16,8 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 
 //#include "Log.h"
+#include <TargetConditionals.h>
+#include <Availability.h>
 #include "App.h"
 #include "Mathematics.h"
 #include "GraphicsDevice.h"
@@ -44,17 +46,19 @@ float DrawUIT;
 
 // Index to bind the attributes to vertex shaders
 #define VERTEX_ARRAY	0
+#define TEXCOORD_ARRAY	1
 
 // Declare the fragment and vertex shaders.
 GLuint uiFragShader, uiVertShader;		// Used to hold the fragment and vertex shader handles
 GLuint uiProgramObject;					// Used to hold the program handle (made out of the two previous shaders)
 
 // This ties in with the shader attribute to link to openGL, see pszVertShader.
-const char* pszAttribs[] = { "myVertex"};
+const char* pszAttribs[] = { "myVertex", "myTexCoord" };
 
 // Handles for the uniform variables.
 int PMVMatrixHandle;
 int ColHandle;	
+int TextureHandle;	
 	
 GLuint ui32Vbo = 0;					    // Vertex buffer object handle
 
@@ -65,36 +69,46 @@ float			m_fAngleY;
 MATRIX mView, mProjection, mViewProjection, mMVP, mModel, mRotate, mRotateY, mRotateX;
 Vec3 vTo, vFrom;
 
+CTexture *texture;
+GLuint texID_rock = -1;
+
+
+
+
 bool CShell::InitApplication()
 {
 	AppDisplayText = new CDisplayText;  
 	
-	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth,FALSE)) // Last parameter = NOT ROTATE screen (portrait mode)
+	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
 		printf("Display text textures loaded\n");
+	
 	
 	StartTimer(&DrawCubeTimer);
 	StartTimer(&DrawUITimer);
+
+	char buffer[2048];
+	GetResourcePathASCII(buffer, 2048);
+	
+	CPVRTResourceFile::SetReadPath(buffer);
+	
+	texture = new CTexture();
+	texture->LoadTextureFromPVR( "/rock_mipmap_4.pvr", &texID_rock );
 	
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 	if( __OPENGLES_VERSION >= 2 )
 	{
-		char buffer[2048];
-		GetResourcePathASCII(buffer, 2048);
-		
-		CPVRTResourceFile::SetReadPath(buffer);
-		
 		/* Gets the Data Path */	
-		if(ShaderLoadFromFile("blank", "/ColorFragShader.fsh", GL_FRAGMENT_SHADER, 0, &uiFragShader) == 0)
+		if(ShaderLoadFromFile("blank", "/TextureFragShader.fsh", GL_FRAGMENT_SHADER, 0, &uiFragShader) == 0)
 			printf("Loading the fragment shader fails");
-		if(ShaderLoadFromFile("blank", "/ColorVertShader.vsh", GL_VERTEX_SHADER, 0, &uiVertShader) == 0)
+		if(ShaderLoadFromFile("blank", "/TextureVertShader.vsh", GL_VERTEX_SHADER, 0, &uiVertShader) == 0)
 			printf("Loading the vertex shader fails");
 		
-		
-		CreateProgram(&uiProgramObject, uiVertShader, uiFragShader, pszAttribs, 1);
+		CreateProgram(&uiProgramObject, uiVertShader, uiFragShader, pszAttribs, 2);
 		
 		// First gets the location of that variable in the shader using its name
 		PMVMatrixHandle = glGetUniformLocation(uiProgramObject, "myPMVMatrix");
 		ColHandle = glGetUniformLocation(uiProgramObject, "Col");		
+		TextureHandle = glGetUniformLocation(uiProgramObject, "s_texture");		
 	}
 #endif
 	
@@ -102,35 +116,41 @@ bool CShell::InitApplication()
 	{
 		GLfloat verts[] =
 		{
-			1.0f, 1.0f,-1.0f,	
-			-1.0f, 1.0f,-1.0f,	
-			-1.0f, 1.0f, 1.0f,	
-			1.0f, 1.0f, 1.0f,	
+			// Top - facing to +Y		// Texture Coord
+			 1.0f, 1.0f,-1.0f,			1.0f, 0.0f,	
+			-1.0f, 1.0f,-1.0f,			0.0f, 0.0f,	
+			-1.0f, 1.0f, 1.0f,			0.0f, 1.0f,
+			 1.0f, 1.0f, 1.0f,			1.0f, 1.0f,
 			
-			1.0f,-1.0f, 1.0f,	
-			-1.0f,-1.0f, 1.0f,	
-			-1.0f,-1.0f,-1.0f,	
-			1.0f,-1.0f,-1.0f,	
+			// Bottom - facing to -Y
+			 1.0f,-1.0f, 1.0f,			1.0f, 0.0f,
+			-1.0f,-1.0f, 1.0f,			0.0f, 0.0f,
+			-1.0f,-1.0f,-1.0f,			0.0f, 1.0f,
+			 1.0f,-1.0f,-1.0f,			1.0f, 1.0f,
 			
-			1.0f, 1.0f, 1.0f,	
-			-1.0f, 1.0f, 1.0f,	
-			-1.0f,-1.0f, 1.0f,	
-			1.0f,-1.0f, 1.0f,	
+			// Front - facing to +Z
+			 1.0f, 1.0f, 1.0f,			1.0f, 0.0f,
+			-1.0f, 1.0f, 1.0f,			0.0f, 0.0f,
+			-1.0f,-1.0f, 1.0f,			0.0f, 1.0f,
+			 1.0f,-1.0f, 1.0f,			1.0f, 1.0f,
 			
-			1.0f,-1.0f,-1.0f,	
-			-1.0f,-1.0f,-1.0f,	
-			-1.0f, 1.0f,-1.0f,	
-			1.0f, 1.0f,-1.0f,	
+			// Back - facing to -Z
+			 1.0f,-1.0f,-1.0f,			1.0f, 0.0f,
+			-1.0f,-1.0f,-1.0f,			0.0f, 0.0f,
+			-1.0f, 1.0f,-1.0f,			0.0f, 1.0f,
+			 1.0f, 1.0f,-1.0f,			1.0f, 1.0f,
 			
-			1.0f, 1.0f,-1.0f,	
-			1.0f, 1.0f, 1.0f,	
-			1.0f,-1.0f, 1.0f,	
-			1.0f,-1.0f,-1.0f,
+			// Right - facing to +X
+			 1.0f, 1.0f,-1.0f,			1.0f, 0.0f,
+			 1.0f, 1.0f, 1.0f,			0.0f, 0.0f,
+			 1.0f,-1.0f, 1.0f,			0.0f, 1.0f,
+			 1.0f,-1.0f,-1.0f,			1.0f, 1.0f,
 			
-			-1.0f, 1.0f, 1.0f,	
-			-1.0f, 1.0f,-1.0f,	
-			-1.0f,-1.0f,-1.0f,	
-			-1.0f,-1.0f, 1.0f
+			// Left - facing to -X
+			-1.0f, 1.0f, 1.0f,			1.0f, 0.0f,
+			-1.0f, 1.0f,-1.0f,			0.0f, 0.0f,
+			-1.0f,-1.0f,-1.0f,			0.0f, 1.0f,
+			-1.0f,-1.0f, 1.0f,			1.0f, 1.0f
 		};
 		
 		// Generate the vertex buffer object (VBO)
@@ -141,7 +161,7 @@ bool CShell::InitApplication()
 		
 		// Set the buffer's data
 		// Calculate verts size: (3 vertices * stride (3 GLfloats per each vertex))
-		unsigned int uiSize = 24 * (sizeof(GLfloat) * 3);
+		unsigned int uiSize = 24 * (sizeof(GLfloat) * 5);
 		glBufferData(GL_ARRAY_BUFFER, uiSize, verts, GL_STATIC_DRAW);
 	}
 	
@@ -150,7 +170,7 @@ bool CShell::InitApplication()
 	vFrom = Vec3(0.0f, 0.0f, 0.0f);
 	MatrixLookAtRH(mView, vFrom, vTo, Vec3(0,1,0));
 	
-	MatrixPerspectiveFovRH(mProjection, f2vt(40*PIf/180.0f), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0); // Last parameter = NOT ROTATE screen (portrait mode)
+	MatrixPerspectiveFovRH(mProjection, f2vt(30*PIf/180.0f), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 1);
 
 	m_fAngleY = 0.0;	
 	
@@ -214,8 +234,6 @@ bool CShell::UpdateScene()
 		glUseProgram(uiProgramObject);
 		// Then passes the matrix to that variable
 		glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, mMVP.f);
-
-
 	}
 	else 
 #endif
@@ -241,40 +259,34 @@ bool CShell::UpdateScene()
 
 bool CShell::RenderScene()
 {
-	/*
-	 Just drew a non-indexed triangle array from the pointers previously given.
-	 This function allows the use of other primitive types : triangle strips, lines, ...
-	 For indexed geometry, use the function glDrawElements() with an index list.
-	 */
+	glActiveTexture( GL_TEXTURE0 );
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texID_rock);
+	
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	if( __OPENGLES_VERSION >= 2 ) 
 	{
 		glUseProgram(uiProgramObject);
 		
+		// Bind the VBO so we can fill it with data
 		glBindBuffer(GL_ARRAY_BUFFER, ui32Vbo);
 		
-		/*
-		 Enable the custom vertex attribute at index VERTEX_ARRAY.
-		 We previously just bound that index to the variable in our shader "vec4 MyVertex;"
-		 */
 		glEnableVertexAttribArray(VERTEX_ARRAY);
+		glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_FALSE, 20, 0);	// Stride = 20 bytes
 		
-		// Sets the vertex data to this attribute index
-		glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(TEXCOORD_ARRAY);
+		glVertexAttribPointer(TEXCOORD_ARRAY, 2, GL_FLOAT, GL_FALSE, 20, (void *)12);
+		
+		glUniform1i( TextureHandle, 0 );
 		
 		// First gets the location of the color variable in the shader using its name
 		// Then passes the proper color to that variable.
-		glUniform4f(ColHandle, 1.0, 0.0, 0.0, 1.0);
+		glUniform4f(ColHandle, 1.0, 1.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN,  0, 4);
-		glUniform4f(ColHandle, 0.0, 1.0, 0.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN,  4, 4);
-		glUniform4f(ColHandle, 0.0, 0.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN,  8, 4);
-		glUniform4f(ColHandle, 1.0, 0.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 12, 4);
-		glUniform4f(ColHandle, 1.0, 1.0, 0.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
-		glUniform4f(ColHandle, 0.0, 1.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
 	}
 	else
@@ -283,19 +295,16 @@ bool CShell::RenderScene()
 		// Bind the VBO so we can fill it with data
 		glBindBuffer(GL_ARRAY_BUFFER, ui32Vbo);
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, 0, 0);
+		glVertexPointer(3, GL_FLOAT, 20, 0);	// Stride = 20 bytes
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);	
+		glTexCoordPointer(2, GL_FLOAT, 20, (void *)12);
 		
-		glColor4f(1.0, 0.0, 0.0, 1.0);
+		glColor4f(1.0, 1.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-		glColor4f(0.0, 1.0, 0.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 4, 4);
-		glColor4f(0.0, 0.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 8, 4);
-		glColor4f(1.0, 0.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 12, 4);
-		glColor4f(1.0, 1.0, 0.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
-		glColor4f(0.0, 1.0, 1.0, 1.0);
 		glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
 		
 		// Bind the VBO so we can fill it with data
@@ -307,7 +316,7 @@ bool CShell::RenderScene()
 	ResetTimer(&DrawUITimer);
 	
 	// show text on the display
-	AppDisplayText->DisplayDefaultTitle("Basic Skeleton (XIB-Portrait)", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("Texture", "", eDisplayTextLogoIMG);
 	AppDisplayText->Flush();	
 	
 	DrawUIT = GetAverageTimeValueInMS(&DrawUITimer);

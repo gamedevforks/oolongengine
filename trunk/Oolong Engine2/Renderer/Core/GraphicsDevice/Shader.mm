@@ -11,6 +11,7 @@
  @Description  Shader handling for OpenGL ES 2.0
 
 ******************************************************************************/
+
 #include <string>
 #include "Shader.h"
 #include "ResourceFile.h"
@@ -19,6 +20,7 @@
 #define SUCCESS			1
 #define FAIL			0
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 /*!***************************************************************************
  @Function		ShaderLoadSourceFromMemory
  @Input			pszShaderCode	shader source code
@@ -227,3 +229,4 @@ bool TestGLError(const char* pszLocation)
 /*****************************************************************************
  End of file (Shader.cpp)
 *****************************************************************************/
+#endif

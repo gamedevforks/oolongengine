@@ -72,10 +72,9 @@ subject to the following restrictions:
 #define _ASSERT(X) //
 #endif
 
-// define window size ... do not want to store this in a variable, because it changes
-// not at all :-)
-#define WindowHeight 320.0f 
-#define WindowWidth 480.0f
+// Window Width and Height will be set in DisplayText depend of Screen orientation.
+extern float WindowHeight; 
+extern float WindowWidth;
 
 
 #endif // MACROS_H_

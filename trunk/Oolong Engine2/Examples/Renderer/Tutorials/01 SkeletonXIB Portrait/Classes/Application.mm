@@ -69,7 +69,7 @@ bool CShell::InitApplication()
 {
 	AppDisplayText = new CDisplayText;  
 	
-	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
+	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth,FALSE)) // Last parameter = NOT ROTATE screen (portrait mode)
 		printf("Display text textures loaded\n");
 	
 	StartTimer(&DrawCubeTimer);
@@ -150,7 +150,7 @@ bool CShell::InitApplication()
 	vFrom = Vec3(0.0f, 0.0f, 0.0f);
 	MatrixLookAtRH(mView, vFrom, vTo, Vec3(0,1,0));
 	
-	MatrixPerspectiveFovRH(mProjection, f2vt(30*PIf/180.0f), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 1);
+	MatrixPerspectiveFovRH(mProjection, f2vt(40*PIf/180.0f), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0); // Last parameter = NOT ROTATE screen (portrait mode)
 
 	m_fAngleY = 0.0;	
 	

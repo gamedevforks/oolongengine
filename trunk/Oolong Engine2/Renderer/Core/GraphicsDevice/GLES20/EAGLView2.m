@@ -94,6 +94,7 @@ int __OPENGLES_VERSION = 0;
 	newSize.width = roundf(newSize.width);
 	newSize.height = roundf(newSize.height);
 	
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	glGetIntegerv(GL_RENDERBUFFER_BINDING, (GLint *) &oldRenderbuffer);
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint *) &oldFramebuffer);
 	
@@ -115,7 +116,7 @@ int __OPENGLES_VERSION = 0;
 		glRenderbufferStorage(GL_RENDERBUFFER, _depthFormat, newSize.width, newSize.height);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthBuffer);
 	}
-
+	
 	_size = newSize;
 	if(!_hasBeenCurrent) {
 		glViewport(0, 0, newSize.width, newSize.height);
@@ -126,6 +127,43 @@ int __OPENGLES_VERSION = 0;
 		glBindFramebuffer(GL_FRAMEBUFFER, oldFramebuffer);
 	}
 	glBindRenderbuffer(GL_RENDERBUFFER, oldRenderbuffer);
+#else
+	glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint *) &oldRenderbuffer);
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES, (GLint *) &oldFramebuffer);
+	
+	glGenRenderbuffersOES(1, &_renderbuffer);
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderbuffer);
+	
+	if(![_context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(id<EAGLDrawable>)eaglLayer]) {
+		glDeleteRenderbuffersOES(1, &_renderbuffer);
+		glBindRenderbufferOES(GL_RENDERBUFFER_BINDING_OES, oldRenderbuffer);
+		return NO;
+	}
+	
+	glGenFramebuffersOES(1, &_framebuffer);
+	glBindFramebufferOES(GL_FRAMEBUFFER_OES, _framebuffer);
+	glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, _renderbuffer);
+	if (_depthFormat) {
+		glGenRenderbuffersOES(1, &_depthBuffer);
+		glBindRenderbufferOES(GL_RENDERBUFFER_OES, _depthBuffer);
+		glRenderbufferStorageOES(GL_RENDERBUFFER_OES, _depthFormat, newSize.width, newSize.height);
+		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, _depthBuffer);
+	}
+	
+	_size = newSize;
+	if(!_hasBeenCurrent) {
+		glViewport(0, 0, newSize.width, newSize.height);
+		glScissor(0, 0, newSize.width, newSize.height);
+		_hasBeenCurrent = YES;
+	}
+	else {
+		glBindFramebufferOES(GL_FRAMEBUFFER_OES, oldFramebuffer);
+	}
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, oldRenderbuffer);
+
+#endif
+
+
 	
 	// Error handling here
 	
@@ -141,6 +179,7 @@ int __OPENGLES_VERSION = 0;
 	if (oldContext != _context)
 		[EAGLContext setCurrentContext:_context];
 	
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	if(_depthFormat) {
 		glDeleteRenderbuffers(1, &_depthBuffer);
 		_depthBuffer = 0;
@@ -151,7 +190,18 @@ int __OPENGLES_VERSION = 0;
 
 	glDeleteFramebuffers(1, &_framebuffer);
 	_framebuffer = 0;
+#else
+	if(_depthFormat) {
+		glDeleteRenderbuffersOES(1, &_depthBuffer);
+		_depthBuffer = 0;
+	}
 	
+	glDeleteRenderbuffersOES(1, &_renderbuffer);
+	_renderbuffer = 0;
+
+	glDeleteFramebuffersOES(1, &_framebuffer);
+	_framebuffer = 0;
+#endif	
 	if (oldContext != _context)
 		[EAGLContext setCurrentContext:oldContext];
 }
@@ -160,12 +210,20 @@ int __OPENGLES_VERSION = 0;
 {
 	[super initWithCoder:decoder];
 	
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	return [self initWithFrame:[self frame] pixelFormat:GL_RGB565 depthFormat:GL_DEPTH_COMPONENT16 preserveBackbuffer:NO];
+#else
+	return [self initWithFrame:[self frame] pixelFormat:GL_RGB565_OES depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO];
+#endif
 }
 
 - (id) initWithFrame:(CGRect)frame
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	return [self initWithFrame:frame pixelFormat:GL_RGB565 depthFormat:0 preserveBackbuffer:NO];
+#else
+	return [self initWithFrame:[self frame] pixelFormat:GL_RGB565_OES depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO];
+#endif
 }
 
 - (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format 
@@ -184,9 +242,11 @@ int __OPENGLES_VERSION = 0;
 		_format = format;
 		_depthFormat = depth;
 		
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 #ifndef _FORCE_OPENGLES11
 		_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 		if(_context == nil)
+#endif
 #endif
 		{
 			_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
@@ -196,10 +256,12 @@ int __OPENGLES_VERSION = 0;
 			}
 			__OPENGLES_VERSION = 1;
 		}
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000			
 #ifndef _FORCE_OPENGLES11
 		else {
 			__OPENGLES_VERSION = 2;
 		}
+#endif
 #endif
 		
 		if(![self _createSurface]) {
@@ -266,11 +328,19 @@ int __OPENGLES_VERSION = 0;
 	
 	// CHECK_GL_ERROR();
 	
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	glGetIntegerv(GL_RENDERBUFFER_BINDING, (GLint *) &oldRenderbuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer);
 	
 	if(![_context presentRenderbuffer:GL_RENDERBUFFER])
 		printf("Failed to swap renderbuffer in %s\n", __FUNCTION__);
+#else
+	glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint *) &oldRenderbuffer);
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderbuffer);
+	
+	if(![_context presentRenderbuffer:GL_RENDERBUFFER_OES])
+		printf("Failed to swap renderbuffer in %s\n", __FUNCTION__);
+#endif
 
 	if(oldContext != _context)
 		[EAGLContext setCurrentContext:oldContext];

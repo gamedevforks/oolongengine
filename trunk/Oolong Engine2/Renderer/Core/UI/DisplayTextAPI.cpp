@@ -587,7 +587,7 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	if(m_fScreenScale[0] * WindowWidth<m_fScreenScale[1] * WindowHeight)
+	if(bScreenRotate)
 	{
 		glRotatef(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
 	}

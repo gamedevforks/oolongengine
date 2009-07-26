@@ -16,9 +16,10 @@ subject to the following restrictions:
 #define _SHADER_H_
 
 //#include "Context.h"
-#include <OpenGLES/EAGL.h>
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
+#include "GraphicsDevice.h"
+//#include <OpenGLES/EAGL.h>
+//#include <OpenGLES/ES2/gl.h>
+//#include <OpenGLES/ES2/glext.h>
 #include <string>
 //#include "../Error.h"
 

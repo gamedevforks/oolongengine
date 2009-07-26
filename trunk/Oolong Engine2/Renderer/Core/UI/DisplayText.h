@@ -92,6 +92,7 @@ public:
 	CDisplayText();
 	~CDisplayText();
 
+	bool bScreenRotate;
 //
 // pContext		Context
 // dwScreenX		Screen resolution along X
@@ -101,8 +102,9 @@ public:
 // for a given context.
 //
 bool SetTextures(
-		const unsigned int	dwScreenX,
-		const unsigned int	dwScreenY);
+	const unsigned int	dwScreenX,
+	const unsigned int	dwScreenY,
+	bool			bRotate = true ); 
 
 // 
 // fPosX		Position of the text along X

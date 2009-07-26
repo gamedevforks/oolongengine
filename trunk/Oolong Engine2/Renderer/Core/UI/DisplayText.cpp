@@ -40,6 +40,9 @@ subject to the following restrictions:
 #define DisplayText_ADJUST_SIZE	64
 #define DisplayText_NO_BORDER	128
 
+float WindowWidth = 320.0f;
+float WindowHeight = 480.0f;
+
 //DEFINE_HEAP(CDisplayText, "UI");
 
 CDisplayText::CDisplayText()
@@ -57,6 +60,7 @@ CDisplayText::~CDisplayText()
 {
 #if !defined (DISABLE_DISPLAYTEXT)
 #endif
+	APIRelease();
 }
 
 //
@@ -69,13 +73,24 @@ CDisplayText::~CDisplayText()
 //
 bool CDisplayText::SetTextures(
 	const unsigned int	dwScreenX,
-	const unsigned int	dwScreenY)
+	const unsigned int	dwScreenY,
+	bool			bRotate ) 
 {
 #if !defined (DISABLE_DISPLAYTEXT)
 
 	int				i;
 	bool			bStatus;
 
+	bScreenRotate = bRotate; 
+	
+	if( bRotate ) {
+		WindowWidth = 480;
+		WindowHeight = 320;
+	}
+	else {
+		WindowWidth = 320;
+		WindowHeight = 480;
+	}
 	/* Set the aspect ratio, so we can change it without updating textures or anything else */
 	m_fScreenScale[0] = (float)dwScreenX/WindowWidth;
 	m_fScreenScale[1] = (float)dwScreenY/WindowHeight;
@@ -301,7 +316,7 @@ unsigned int CDisplayText::CreateDefaultWindow(float fPosX, float fPosY, int nXS
 
 	/* Set title */
 	if (sTitle)
-		SetTitle(dwActualWin, RGBA(0x20, 0x20, 0xB0, 0xE0), 0.6f, RGBA(0xFF, 0xFF, 0x30, 0xFF), sTitle, RGBA(0xFF, 0xFF, 0x30, 0xFF), "");
+		SetTitle(dwActualWin, RGBA(0x20, 0x20, 0xB0, 0xE0), 0.6f, RGBA(0xFF, 0xFF, 0x30, 0xFF), sTitle, RGBA(0xFF, 0xFF, 0x30, 0xFF), (char *)"");
 
 	/* Set window text */
 	if (sBody)
@@ -1057,7 +1072,7 @@ bool CDisplayText::UpdateBackgroundWindow(unsigned int dwWin, unsigned int Color
 	vBox[15].sx = f2vt((fPosX + fU[15]) * m_fScreenScale[0]);
 	vBox[15].sy = f2vt((fPosY + fV[15] + fSizeY) * m_fScreenScale[1]);
 
-	if(m_fScreenScale[0]*WindowWidth<m_fScreenScale[1]*WindowHeight)
+	if(bScreenRotate)
 	{
 		Rotate(vBox, 16);
 	}
@@ -1262,7 +1277,7 @@ unsigned int CDisplayText::UpdateLine(const unsigned int dwWin, const float fZPo
 		}
 	}
 
-	if(m_fScreenScale[0]*WindowWidth<m_fScreenScale[1]*WindowHeight)
+	if(bScreenRotate)
 	{
 		Rotate(pVertices, VertexCount);
 	}

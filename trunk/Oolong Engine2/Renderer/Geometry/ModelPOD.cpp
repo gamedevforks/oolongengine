@@ -324,7 +324,7 @@ static bool WritePOD(
 
 	// Save: file version
 	{
-		char *pszVersion = PVRTMODELPOD_VERSION;
+		char *pszVersion = (char *)PVRTMODELPOD_VERSION;
 
 		if(!WriteData(pFile, ePODFileVersion, pszVersion, bChangeEndian, (unsigned int)strlen(pszVersion) + 1)) return false;
 	}

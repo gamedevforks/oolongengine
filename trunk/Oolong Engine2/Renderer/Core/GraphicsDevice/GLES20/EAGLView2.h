@@ -63,8 +63,13 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 #import <UIKit/UIKit.h>
 #import <OpenGLES/EAGL.h>
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
+#else
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#endif
 
 //CLASSES:
 extern int __OPENGLES_VERSION;

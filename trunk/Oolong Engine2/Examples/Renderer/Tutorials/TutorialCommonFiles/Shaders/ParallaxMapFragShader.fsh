@@ -16,17 +16,19 @@ void main(void)
 {
 	vec4 nx = texture2D(s_normalmap, (v_textureCoord * 0.5)) * 2.0;
 	vec3 n = nx.xyz - vec3( 1.0, 1.0, 1.0 );
+	n = n * vec3( -1, 1, 1 );
 	vec3 l = normalize( v_light );
 	vec3 h = normalize( l + normalize( v_view ) );
 	
-	float height = texture2D(s_normalmap, (v_textureCoord * 0.5)+vec2(0.5,0.0)).x;
-	height = (height * 0.06)-0.03;
-	vec2 newUV = v_textureCoord - (height * normalize(v_view.xz));
-	
-	vec4 color = texture2D(s_texture, newUV);
-	
 	float diff = dot( n, l );
 	float spec = pow( dot(n,h), material_shininess );
+	
+	float height = texture2D(s_normalmap, (v_textureCoord * 0.5)+vec2(0.5,0.0)).x;
+	float shiftx = ((v_view.x * height) * 0.04) - 0.0;
+	float shifty = ((v_view.y * height) * 0.04) - 0.0;
+	vec2 newUV = vec2( v_textureCoord.x - shiftx, v_textureCoord.y + shifty );
+	
+	vec4 color = texture2D(s_texture, newUV);
 	
 	gl_FragColor = color * (ambient_ic + (diff * diffuse_ic) + (spec * specular_ic)); 
 }

@@ -17,6 +17,7 @@ void main(void)
 {
 	vec4 nx = texture2D(s_normalmap, v_textureCoord) * 2.0;
 	vec3 n = nx.xyz - vec3( 1.0, 1.0, 1.0 );
+	n = n * vec3( -1, 1, 1 );
 	vec3 l = normalize( v_light );
 	vec3 h = normalize( l + normalize( v_view ) );
 	

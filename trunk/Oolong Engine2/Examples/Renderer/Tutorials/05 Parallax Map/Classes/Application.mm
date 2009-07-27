@@ -95,8 +95,8 @@ float light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 
 float material_ambient[] = { 0.3, 0.3, 0.3, 1.0 };
 float material_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
-float material_specular[] = { 0.2, 0.2, 0.2, 1.0 };
-float material_shininess = 2;
+float material_specular[] = { 0.5, 0.5, 0.5, 1.0 };
+float material_shininess = 5;
 
 bool CShell::InitApplication()
 {
@@ -149,37 +149,37 @@ bool CShell::InitApplication()
 	{
 		GLfloat verts[] =
 		{
-			// Top - facing to +Y		// Normal				// Texture Coord
-			 1.0f, 1.0f,-1.0f,			 0.0f, 1.0f,0.0f,		1.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
+			// Top - facing to +Y		// Normal				// Texture Coord	//Tangent
+			1.0f, 1.0f,-1.0f,			 0.0f, 1.0f,0.0f,		1.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
 			-1.0f, 1.0f,-1.0f,			 0.0f, 1.0f,0.0f,		0.0f, 0.0f,			 1.0f, 0.0f, 0.0f,	
 			-1.0f, 1.0f, 1.0f,			 0.0f, 1.0f,0.0f,		0.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
-			 1.0f, 1.0f, 1.0f,			 0.0f, 1.0f,0.0f,		1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
+			1.0f, 1.0f, 1.0f,			 0.0f, 1.0f,0.0f,		1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
 			
 			// Bottom - facing to -Y
-			 1.0f,-1.0f, 1.0f,			 0.0f,-1.0f,0.0f,		1.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
+			1.0f,-1.0f, 1.0f,			 0.0f,-1.0f,0.0f,		1.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
 			-1.0f,-1.0f, 1.0f,			 0.0f,-1.0f,0.0f,		0.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
 			-1.0f,-1.0f,-1.0f,			 0.0f,-1.0f,0.0f,		0.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
-			 1.0f,-1.0f,-1.0f,			 0.0f,-1.0f,0.0f,		1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
+			1.0f,-1.0f,-1.0f,			 0.0f,-1.0f,0.0f,		1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
 			
 			// Front - facing to +Z
-			 1.0f, 1.0f, 1.0f,			 0.0f, 0.0f, 1.0f,		1.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
+			1.0f, 1.0f, 1.0f,			 0.0f, 0.0f, 1.0f,		1.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
 			-1.0f, 1.0f, 1.0f,			 0.0f, 0.0f, 1.0f,		0.0f, 0.0f,			 1.0f, 0.0f, 0.0f,
 			-1.0f,-1.0f, 1.0f,			 0.0f, 0.0f, 1.0f,		0.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
-			 1.0f,-1.0f, 1.0f,			 0.0f, 0.0f, 1.0f,		1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
+			1.0f,-1.0f, 1.0f,			 0.0f, 0.0f, 1.0f,		1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,
 			
 			// Back - facing to -Z
-			 1.0f,-1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		1.0f, 0.0f,			-1.0f, 0.0f, 0.0f,
-			-1.0f,-1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		0.0f, 0.0f,			-1.0f, 0.0f, 0.0f,
-			-1.0f, 1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		0.0f, 1.0f,			-1.0f, 0.0f, 0.0f,
-			 1.0f, 1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		1.0f, 1.0f,			-1.0f, 0.0f, 0.0f,
+			-1.0f, 1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		1.0f, 0.0f,			-1.0f, 0.0f, 0.0f,
+			1.0f, 1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		0.0f, 0.0f,			-1.0f, 0.0f, 0.0f,
+			1.0f,-1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		0.0f, 1.0f,			-1.0f, 0.0f, 0.0f,
+			-1.0f,-1.0f,-1.0f,			 0.0f, 0.0f,-1.0f,		1.0f, 1.0f,			-1.0f, 0.0f, 0.0f,
 			
-			// Right - facing to +X
-			 1.0f, 1.0f,-1.0f,			 1.0f, 0.0f, 0.0f,		1.0f, 0.0f,			 0.0f, 0.0f,-1.0f,
-			 1.0f, 1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,		0.0f, 0.0f,			 0.0f, 0.0f,-1.0f,
-			 1.0f,-1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,		0.0f, 1.0f,			 0.0f, 0.0f,-1.0f,
-			 1.0f,-1.0f,-1.0f,			 1.0f, 0.0f, 0.0f,		1.0f, 1.0f,			 0.0f, 0.0f,-1.0f,
+			// Left - facing to +X
+			1.0f, 1.0f,-1.0f,			 1.0f, 0.0f, 0.0f,		1.0f, 0.0f,			 0.0f, 0.0f,-1.0f,
+			1.0f, 1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,		0.0f, 0.0f,			 0.0f, 0.0f,-1.0f,
+			1.0f,-1.0f, 1.0f,			 1.0f, 0.0f, 0.0f,		0.0f, 1.0f,			 0.0f, 0.0f,-1.0f,
+			1.0f,-1.0f,-1.0f,			 1.0f, 0.0f, 0.0f,		1.0f, 1.0f,			 0.0f, 0.0f,-1.0f,
 			
-			// Left - facing to -X
+			// Right - facing to -X
 			-1.0f, 1.0f, 1.0f,			-1.0f, 0.0f, 0.0f,		1.0f, 0.0f,			 0.0f, 0.0f, 1.0f,
 			-1.0f, 1.0f,-1.0f,			-1.0f, 0.0f, 0.0f,		0.0f, 0.0f,			 0.0f, 0.0f, 1.0f,
 			-1.0f,-1.0f,-1.0f,			-1.0f, 0.0f, 0.0f,		0.0f, 1.0f,			 0.0f, 0.0f, 1.0f,
@@ -253,7 +253,7 @@ bool CShell::UpdateScene()
 	MatrixTranslation(mModel, 0.0f, 0.0f, 10.0f);
 	// Rotate the model by a small amount.
 	MatrixRotationY(mRotateY, m_fAngleY);
-	MatrixRotationX(mRotateX, m_fAngleY);
+	//MatrixRotationX(mRotateX, m_fAngleY);
 	MatrixMultiply(mRotate, mRotateY, mRotateX);
 	MatrixMultiply(mModel, mRotate, mModel);
 	

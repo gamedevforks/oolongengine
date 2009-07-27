@@ -113,15 +113,15 @@ bool CShell::InitApplication()
 	texture1 = new CTexture();
 	texture1->LoadTextureFromPVR( "/rock_mipmap_4.pvr", &texID_rock );
 	texture2 = new CTexture();
-	texture2->LoadTextureFromPVR( "/rockNormal_mipmap_4.pvr", &texID_rockNormal );
+	texture2->LoadTextureFromPVR( "/rockNH_mipmap_4.pvr", &texID_rockNormal );
 	
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 	if( __OPENGLES_VERSION >= 2 )
 	{
 		/* Gets the Data Path */	
-		if(ShaderLoadFromFile("blank", "/NormalMapFragShader.fsh", GL_FRAGMENT_SHADER, 0, &uiFragShader) == 0)
+		if(ShaderLoadFromFile("blank", "/ParallaxMapFragShader.fsh", GL_FRAGMENT_SHADER, 0, &uiFragShader) == 0)
 			printf("Loading the fragment shader fails");
-		if(ShaderLoadFromFile("blank", "/NormalMapVertShader.vsh", GL_VERTEX_SHADER, 0, &uiVertShader) == 0)
+		if(ShaderLoadFromFile("blank", "/ParallaxMapVertShader.vsh", GL_VERTEX_SHADER, 0, &uiVertShader) == 0)
 			printf("Loading the vertex shader fails");
 		
 		CreateProgram(&uiProgramObject, uiVertShader, uiFragShader, pszAttribs, 4);
@@ -401,7 +401,7 @@ bool CShell::RenderScene()
 	ResetTimer(&DrawUITimer);
 	
 	// show text on the display
-	AppDisplayText->DisplayDefaultTitle("Normal Map", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("Parallax Map", "", eDisplayTextLogoIMG);
 	AppDisplayText->Flush();	
 	
 	DrawUIT = GetAverageTimeValueInMS(&DrawUITimer);

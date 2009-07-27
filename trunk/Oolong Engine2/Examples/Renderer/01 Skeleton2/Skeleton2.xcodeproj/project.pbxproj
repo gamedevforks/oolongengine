@@ -479,7 +479,7 @@
 					_OPENGLES20,
 				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = 4.0;
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
@@ -508,6 +508,7 @@
 					_OPENGLES20,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton2;

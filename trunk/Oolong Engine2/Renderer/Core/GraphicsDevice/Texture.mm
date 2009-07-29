@@ -18,6 +18,8 @@ subject to the following restrictions:
 
 #include "Texture.h"
 #include "OpenGLESExt.h"
+#include "Pathes.h"
+#include "ResourceFile.h"
 
 //#include "Log.h"
 #include "Resource.h"
@@ -30,6 +32,67 @@ typedef unsigned char U8;
 
 CTexture::CTexture(){};
 CTexture::~CTexture(){};
+
+//
+// filename			Filename of the .PNG or .JPG file to load the texture from
+// texName			the OpenGL ES texture name as returned by glBindTexture
+// psTextureHeader	Pointer to a PVR_Texture_Header struct. Modified to
+//					contain the header data of the returned texture Ignored if NULL.
+unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLuint * const texName, const void *psTextureHeader) 
+{
+	CGImageRef textureImage;
+	CGContextRef textureContext;
+	
+	GLuint textureID = 0;
+	char *buffer = new char[2048];
+	GetResourcePathASCII(buffer, 2048);
+	strcat( buffer, filename );
+	NSString *path = [NSString stringWithUTF8String:buffer];
+	
+	UIImage *uiImage = [UIImage imageWithContentsOfFile:path];
+	if( uiImage ) {
+		textureImage = uiImage.CGImage;
+		
+		int width = CGImageGetWidth(textureImage);
+		int height = CGImageGetHeight(textureImage);
+		
+		GLubyte *textureData;
+		
+		if(textureImage) {
+			textureData = (GLubyte *) malloc(width * height * 4);
+			textureContext = CGBitmapContextCreate(textureData, width, height, 8, width * 4, CGImageGetColorSpace(textureImage), kCGImageAlphaPremultipliedLast);
+			CGContextDrawImage(textureContext, CGRectMake(0.0, 0.0, (float)width, (float)height), textureImage);
+			CGContextRelease(textureContext);
+		}
+		
+		glGenTextures(1, &textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE );
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
+		free(textureData);
+		free(buffer);
+	}
+	else {
+		GLuint textureID;
+		GLubyte pixels[4*3] = {
+			255, 0, 0, 
+			0, 255, 0, 
+			0, 0, 255,
+			255,255,0
+		};
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glGenTextures(1, &textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+	}
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		
+	*texName = textureID;
+	
+	return true;
+}
 
 //
 //-------------------- load Texture from PVR -----------------------

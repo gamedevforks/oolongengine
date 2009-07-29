@@ -16,7 +16,13 @@ subject to the following restrictions:
 #define _TEXTURE_h_
 
 #import <OpenGLES/EAGL.h>
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+#else
 #import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#endif
 #include <stdio.h>
 
 #include "MemoryManager.h"
@@ -223,6 +229,9 @@ unsigned int LoadPartialTextureFromPointer(const void * const pointer,
 // Release texture by calling ReleaseTexture.  Decompresses to RGBA8888 internally.
 //
 unsigned int LoadTextureFromPointer(const void* pointer, GLuint *const texName, const void *psTextureHeader=NULL);
+	
+//-------------------- load Texture from PNG or JPG -------------------
+unsigned int LoadTextureFromImageFile(const char * const filename, GLuint * const texName, const void *psTextureHeader=NULL);
 
 //-------------------- load Texture from PVR -----------------------
 

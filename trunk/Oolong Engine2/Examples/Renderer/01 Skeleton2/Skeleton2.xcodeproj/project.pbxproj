@@ -40,6 +40,7 @@
 		79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA049B0DAFCC980038ED3D /* Streaming.cpp */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 		79F0FEE20EDF316B00102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FEE10EDF316B00102B0B /* Timer.mm */; };
+		D0DA0DF51021105400E8EA79 /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0DA0DF31021105400E8EA79 /* neon_matrix_impl.cpp */; };
 		F9C7FCC9100E682A001A4CA9 /* FragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F9C7FCC7100E682A001A4CA9 /* FragShader.fsh */; };
 		F9C7FCCA100E682A001A4CA9 /* VertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F9C7FCC8100E682A001A4CA9 /* VertShader.vsh */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,8 @@
 		79F0FEDA0EDF309100102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		79F0FEE10EDF316B00102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0DA0DF31021105400E8EA79 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = neon_matrix_impl.cpp; sourceTree = "<group>"; };
+		D0DA0DF41021105400E8EA79 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neon_matrix_impl.h; sourceTree = "<group>"; };
 		F9C7FCC7100E682A001A4CA9 /* FragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FragShader.fsh; sourceTree = "<group>"; };
 		F9C7FCC8100E682A001A4CA9 /* VertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertShader.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,6 +250,7 @@
 		79235CD70DAD243A00F918F8 /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				D0DA0DF21021105400E8EA79 /* neonmath */,
 				793179FA0EDA639E00247E3D /* Matrix.cpp */,
 				7976BBB00EDA4E9B00106906 /* vfpmath */,
 				79235CDC0DAD243A00F918F8 /* Matrix.h */,
@@ -371,6 +375,15 @@
 			path = ../../../Utility/Timing;
 			sourceTree = SOURCE_ROOT;
 		};
+		D0DA0DF21021105400E8EA79 /* neonmath */ = {
+			isa = PBXGroup;
+			children = (
+				D0DA0DF31021105400E8EA79 /* neon_matrix_impl.cpp */,
+				D0DA0DF41021105400E8EA79 /* neon_matrix_impl.h */,
+			);
+			path = neonmath;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,6 +465,7 @@
 				65AC4F9A0FFC10C0005A894A /* Shader.mm in Sources */,
 				65E58E8C100523A20051A2EC /* EAGLView.m in Sources */,
 				6585D59A1007DF7400FC1E9C /* ResourcePath.mm in Sources */,
+				D0DA0DF51021105400E8EA79 /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +476,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Justin Saunders";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -484,7 +499,6 @@
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton2;
-				PROVISIONING_PROFILE = "CF299EF6-CAFA-43B1-8C51-70569A146744";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -493,7 +507,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Justin Saunders";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (

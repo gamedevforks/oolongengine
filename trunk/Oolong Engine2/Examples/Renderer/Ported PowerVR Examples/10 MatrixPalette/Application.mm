@@ -75,6 +75,16 @@ void LoadMaterial(int i32Index);
 void LoadVbos();
 void DrawModel();
 
+U32 GetTimeInMsSince1970()
+{
+	timeval tv;
+	// The time is expressed in seconds and microseconds since midnight (0 hour), January 1, 1970.
+	gettimeofday(&tv,NULL);
+	// to receive milliseconds we transform the seconds to milliseconds and the microseconds to milliseconds
+	// and then add them
+	return (tv.tv_sec * 1000) + (U32)(tv.tv_usec / 1000.0f);
+}
+
 bool CShell::InitApplication()
 {
    AppDisplayText = new CDisplayText;    

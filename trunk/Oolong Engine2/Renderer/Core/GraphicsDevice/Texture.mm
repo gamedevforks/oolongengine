@@ -44,7 +44,7 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 	CGContextRef textureContext;
 	
 	GLuint textureID = 0;
-	char *buffer = new char[2048];
+	char buffer[2048];
 	GetResourcePathASCII(buffer, 2048);
 	strcat( buffer, filename );
 	NSString *path = [NSString stringWithUTF8String:buffer];
@@ -70,7 +70,6 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 		glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE );
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
 		free(textureData);
-		free(buffer);
 	}
 	else {
 		GLuint textureID;

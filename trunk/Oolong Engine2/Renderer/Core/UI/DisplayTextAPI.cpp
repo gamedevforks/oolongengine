@@ -37,7 +37,9 @@ subject to the following restrictions:
 
 #include "DisplayText.h"
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 extern int __OPENGLES_VERSION;
+#endif
 
 struct SDisplayTextAPI
 {
@@ -427,9 +429,12 @@ void CDisplayText::APIRenderStates(int nAction)
 		//glGetbooleanv(GL_VERTEX_ARRAY,		&bVertexPointerEnabled);
 		//glGetbooleanv(GL_COLOR_ARRAY,			&bColorPointerEnabled);
 		//glGetbooleanv(GL_TEXTURE_COORD_ARRAY,	&bTexCoorPointerEnabled);
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
-		else {		
+		else 
+#endif
+		{		
 			bVertexPointerEnabled = glIsEnabled(GL_VERTEX_ARRAY);
 			bColorPointerEnabled = glIsEnabled(GL_COLOR_ARRAY);
 			bTexCoorPointerEnabled = glIsEnabled(GL_TEXTURE_COORD_ARRAY);
@@ -453,11 +458,14 @@ void CDisplayText::APIRenderStates(int nAction)
 		glActiveTexture(GL_TEXTURE1);
 		bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
 		
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 			glBindBuffer( GL_ARRAY_BUFFER, 0 );
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
 		}
-		else {
+		else 
+#endif
+		{
 			/* Save matrices */
 			glGetIntegerv(GL_MATRIX_MODE, &iMatrixMode);
 			
@@ -531,9 +539,12 @@ void CDisplayText::APIRenderStates(int nAction)
 		glActiveTexture(GL_TEXTURE0);
 		glEnable(GL_TEXTURE_2D);
 			
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
-		else {			
+		else 
+#endif
+		{			
 			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 		}
 
@@ -553,9 +564,12 @@ void CDisplayText::APIRenderStates(int nAction)
 		break;
 
 	case 1:
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
-		else {				
+		else 
+#endif
+		{				
 			/* Restore render states */
 			if (!bVertexPointerEnabled)		
 				glDisableClientState(GL_VERTEX_ARRAY);
@@ -571,9 +585,12 @@ void CDisplayText::APIRenderStates(int nAction)
 				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		}
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
-		else {
+		else 
+#endif
+		{
 			/* Restore matrix mode & matrix */
 			glMatrixMode(GL_PROJECTION);
 			glPopMatrix();

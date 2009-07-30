@@ -23,7 +23,9 @@ subject to the following restrictions:
 #include "Geometry.h"
 #include "Macros.h"
 #include "MemoryManager.h"
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 #include "Shader.h"
+#endif
 
 #include "DisplayText.h"
 #include "DisplayTextdat.h"		// texture data
@@ -42,7 +44,9 @@ subject to the following restrictions:
 #define DisplayText_ADJUST_SIZE	64
 #define DisplayText_NO_BORDER	128
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 extern int __OPENGLES_VERSION;
+#endif
 
 float WindowWidth = 320.0f;
 float WindowHeight = 480.0f;

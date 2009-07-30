@@ -48,6 +48,7 @@
 		79832D5F0F049E26000F58D6 /* skybox6.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832D570F049E26000F58D6 /* skybox6.pvr */; };
 		799121BE0E1F410C00035EEA /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 799121BD0E1F410C00035EEA /* ResourcePath.mm */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
+		BDE212581021834700B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE212571021834700B215F9 /* Shader.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +123,8 @@
 		799121BD0E1F410C00035EEA /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE212561021834700B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE212571021834700B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +241,8 @@
 		791F46590E174E2600E927FE /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
+				BDE212561021834700B215F9 /* Shader.h */,
+				BDE212571021834700B215F9 /* Shader.mm */,
 				791F465C0E174E2600E927FE /* GLES11 */,
 				791F46600E174E2600E927FE /* Texture.h */,
 				791F46610E174E2600E927FE /* Texture.mm */,
@@ -450,6 +455,7 @@
 				79317C300EDBC07200247E3D /* matrix_impl.cpp in Sources */,
 				79317C310EDBC07200247E3D /* utility_impl.cpp in Sources */,
 				795AC7F70EDF0FE4004CF7D4 /* mmgr.cpp in Sources */,
+				BDE212581021834700B215F9 /* Shader.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -472,10 +478,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skybox;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -484,7 +492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -494,10 +502,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skybox;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

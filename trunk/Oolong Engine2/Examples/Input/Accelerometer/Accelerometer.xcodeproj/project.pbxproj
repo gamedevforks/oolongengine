@@ -17,7 +17,6 @@
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
 		791406540DBAD7AB00C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 791406530DBAD7AB00C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
-		79235D1D0DAD25E900F918F8 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235D170DAD25E900F918F8 /* EAGLView.m */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
 		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
 		79317E190EDC54C900247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E0B0EDC54C900247E3D /* Matrix.cpp */; };
@@ -30,6 +29,12 @@
 		79EA026B0DAEFC190038ED3D /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA026A0DAEFC190038ED3D /* Accelerometer.m */; };
 		79EA05B90DAFE28A0038ED3D /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA05B50DAFE28A0038ED3D /* DisplayText.cpp */; };
 		79EA05BA0DAFE28A0038ED3D /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA05B70DAFE28A0038ED3D /* DisplayTextAPI.cpp */; };
+		BDE20E6D1021421800B215F9 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE20E6B1021421800B215F9 /* EAGLView.m */; };
+		BDE20E94102142D000B215F9 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20E93102142D000B215F9 /* Texture.mm */; };
+		BDE20E9C102142F200B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20E9B102142F200B215F9 /* Shader.mm */; };
+		BDE20EA51021430C00B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20EA41021430C00B215F9 /* ResourcePath.mm */; };
+		BDE20EB31021433400B215F9 /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE20EAD1021433400B215F9 /* ResourceFile.cpp */; };
+		BDE20EB41021433400B215F9 /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE20EAF1021433400B215F9 /* Streaming.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,9 +51,6 @@
 		791406530DBAD7AB00C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		79235CD40DAD243A00F918F8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		79235D160DAD25E900F918F8 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		79235D170DAD25E900F918F8 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		79235D180DAD25E900F918F8 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		79317E0B0EDC54C900247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
@@ -76,6 +78,20 @@
 		79EA05B70DAFE28A0038ED3D /* DisplayTextAPI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayTextAPI.cpp; sourceTree = "<group>"; };
 		79EA05B80DAFE28A0038ED3D /* DisplayTextdat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayTextdat.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE20E6A1021421800B215F9 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		BDE20E6B1021421800B215F9 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		BDE20E6C1021421800B215F9 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
+		BDE20E92102142D000B215F9 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		BDE20E93102142D000B215F9 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		BDE20E9A102142F200B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE20E9B102142F200B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
+		BDE20EA31021430C00B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		BDE20EA41021430C00B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		BDE20EAC1021433400B215F9 /* MemoryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryFile.h; sourceTree = "<group>"; };
+		BDE20EAD1021433400B215F9 /* ResourceFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceFile.cpp; sourceTree = "<group>"; };
+		BDE20EAE1021433400B215F9 /* ResourceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceFile.h; sourceTree = "<group>"; };
+		BDE20EAF1021433400B215F9 /* Streaming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Streaming.cpp; sourceTree = "<group>"; };
+		BDE20EB01021433400B215F9 /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Streaming.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +169,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDE20EAB1021433400B215F9 /* Resource */,
+				BDE20EA21021430C00B215F9 /* Pathes */,
 				795AC93C0EDF12D3004CF7D4 /* MemoryManager */,
 				79317E0A0EDC54C900247E3D /* Math */,
 				79EA01400DAEF0020038ED3D /* Input */,
@@ -200,19 +218,13 @@
 		79235D140DAD25E900F918F8 /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
-				79235D150DAD25E900F918F8 /* OS2x */,
+				BDE20E9A102142F200B215F9 /* Shader.h */,
+				BDE20E9B102142F200B215F9 /* Shader.mm */,
+				BDE20E92102142D000B215F9 /* Texture.h */,
+				BDE20E93102142D000B215F9 /* Texture.mm */,
+				BDE20E691021421800B215F9 /* GLES11 */,
 			);
 			path = GraphicsDevice;
-			sourceTree = "<group>";
-		};
-		79235D150DAD25E900F918F8 /* OS2x */ = {
-			isa = PBXGroup;
-			children = (
-				79235D160DAD25E900F918F8 /* EAGLView.h */,
-				79235D170DAD25E900F918F8 /* EAGLView.m */,
-				79235D180DAD25E900F918F8 /* OpenGL_Internal.h */,
-			);
-			path = OS2x;
 			sourceTree = "<group>";
 		};
 		79317E0A0EDC54C900247E3D /* Math */ = {
@@ -286,6 +298,39 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		BDE20E691021421800B215F9 /* GLES11 */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20E6A1021421800B215F9 /* EAGLView.h */,
+				BDE20E6B1021421800B215F9 /* EAGLView.m */,
+				BDE20E6C1021421800B215F9 /* OpenGL_Internal.h */,
+			);
+			path = GLES11;
+			sourceTree = "<group>";
+		};
+		BDE20EA21021430C00B215F9 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20EA31021430C00B215F9 /* ResourcePath.h */,
+				BDE20EA41021430C00B215F9 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
+		BDE20EAB1021433400B215F9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20EAC1021433400B215F9 /* MemoryFile.h */,
+				BDE20EAD1021433400B215F9 /* ResourceFile.cpp */,
+				BDE20EAE1021433400B215F9 /* ResourceFile.h */,
+				BDE20EAF1021433400B215F9 /* Streaming.cpp */,
+				BDE20EB01021433400B215F9 /* Streaming.h */,
+			);
+			name = Resource;
+			path = ../../../Renderer/Resource;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,7 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79235CF10DAD243A00F918F8 /* main.m in Sources */,
-				79235D1D0DAD25E900F918F8 /* EAGLView.m in Sources */,
 				79235D500DAD2BEA00F918F8 /* Application.mm in Sources */,
 				79EA026B0DAEFC190038ED3D /* Accelerometer.m in Sources */,
 				79EA05B90DAFE28A0038ED3D /* DisplayText.cpp in Sources */,
@@ -355,6 +399,12 @@
 				79317E1C0EDC54C900247E3D /* matrix_impl.cpp in Sources */,
 				79317E1D0EDC54C900247E3D /* utility_impl.cpp in Sources */,
 				795AC9420EDF12D3004CF7D4 /* mmgr.cpp in Sources */,
+				BDE20E6D1021421800B215F9 /* EAGLView.m in Sources */,
+				BDE20E94102142D000B215F9 /* Texture.mm in Sources */,
+				BDE20E9C102142F200B215F9 /* Shader.mm in Sources */,
+				BDE20EA51021430C00B215F9 /* ResourcePath.mm in Sources */,
+				BDE20EB31021433400B215F9 /* ResourceFile.cpp in Sources */,
+				BDE20EB41021433400B215F9 /* Streaming.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -377,10 +427,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Accelerometer;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -389,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -398,9 +452,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = Skeleton;
+				PRODUCT_NAME = Accelerometer;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -410,7 +467,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
@@ -419,7 +476,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				HEADER_SEARCH_PATHS = ../../../Include;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
 		};

@@ -17,7 +17,6 @@
 		6585D59A1007DF7400FC1E9C /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6585D5991007DF7400FC1E9C /* ResourcePath.mm */; };
 		65AC4F9A0FFC10C0005A894A /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 65AC4F990FFC10C0005A894A /* Shader.mm */; };
 		65B1D10B0FFBE815006AAE64 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1D1050FFBE815006AAE64 /* EAGLView2.m */; };
-		65E58E8C100523A20051A2EC /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E58E8A100523A20051A2EC /* EAGLView.m */; };
 		7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914067B0DBAD8D100C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
 		79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CE00DAD243A00F918F8 /* Transform.cpp */; };
@@ -60,9 +59,6 @@
 		65AC4F990FFC10C0005A894A /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 		65B1D1040FFBE815006AAE64 /* EAGLView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView2.h; path = GLES20/EAGLView2.h; sourceTree = "<group>"; };
 		65B1D1050FFBE815006AAE64 /* EAGLView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView2.m; path = GLES20/EAGLView2.m; sourceTree = "<group>"; };
-		65E58E89100523A20051A2EC /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = ../../../Renderer/Core/GraphicsDevice/GLES11/EAGLView.h; sourceTree = SOURCE_ROOT; };
-		65E58E8A100523A20051A2EC /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = ../../../Renderer/Core/GraphicsDevice/GLES11/EAGLView.m; sourceTree = SOURCE_ROOT; };
-		65E58E8B100523A20051A2EC /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGL_Internal.h; path = ../../../Renderer/Core/GraphicsDevice/GLES11/OpenGL_Internal.h; sourceTree = SOURCE_ROOT; };
 		7914067A0DBAD8D100C9A379 /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		7914067B0DBAD8D100C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
@@ -305,19 +301,8 @@
 				65AC4F980FFC10C0005A894A /* Shader.h */,
 				65AC4F990FFC10C0005A894A /* Shader.mm */,
 				65B1D1030FFBE7E3006AAE64 /* GLES20 */,
-				79EA043F0DAFC7950038ED3D /* GLES11 */,
 			);
 			path = GraphicsDevice;
-			sourceTree = "<group>";
-		};
-		79EA043F0DAFC7950038ED3D /* GLES11 */ = {
-			isa = PBXGroup;
-			children = (
-				65E58E89100523A20051A2EC /* EAGLView.h */,
-				65E58E8A100523A20051A2EC /* EAGLView.m */,
-				65E58E8B100523A20051A2EC /* OpenGL_Internal.h */,
-			);
-			path = GLES11;
 			sourceTree = "<group>";
 		};
 		79EA044D0DAFC7950038ED3D /* UI */ = {
@@ -463,7 +448,6 @@
 				79F0FEE20EDF316B00102B0B /* Timer.mm in Sources */,
 				65B1D10B0FFBE815006AAE64 /* EAGLView2.m in Sources */,
 				65AC4F9A0FFC10C0005A894A /* Shader.mm in Sources */,
-				65E58E8C100523A20051A2EC /* EAGLView.m in Sources */,
 				6585D59A1007DF7400FC1E9C /* ResourcePath.mm in Sources */,
 				D0DA0DF51021105400E8EA79 /* neon_matrix_impl.cpp in Sources */,
 			);
@@ -477,7 +461,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Justin Saunders";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -499,6 +483,7 @@
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton2;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -508,7 +493,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Justin Saunders";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (

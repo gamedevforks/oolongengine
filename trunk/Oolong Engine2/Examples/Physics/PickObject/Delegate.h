@@ -17,7 +17,7 @@
 @interface AppController : NSObject
 {
 	UIWindow*			_window;
-	EAGLView*			_glView;
+	EAGLView2*			_glView;
 }
 
 

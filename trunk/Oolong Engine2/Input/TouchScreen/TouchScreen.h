@@ -13,7 +13,7 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#import "EAGLView.h"
+#import "EAGLView2.h"
 
 @class EAGLCameraView;
 
@@ -34,7 +34,7 @@ typedef struct Touches
 TouchScreenValues; 
 
 
-@interface EAGLCameraView : EAGLView
+@interface EAGLCameraView : EAGLView2
 {
 	TouchScreenValues TouchScreen;	
 }

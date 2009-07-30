@@ -42,6 +42,7 @@
 		79832DB60F04A6BE000F58D6 /* Granite.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832DB40F04A6BE000F58D6 /* Granite.pvr */; };
 		79832DB70F04A6BE000F58D6 /* Mesh_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832DB50F04A6BE000F58D6 /* Mesh_float.pod */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
+		BDE21266102183AD00B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE21265102183AD00B215F9 /* Shader.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,8 @@
 		79832DB50F04A6BE000F58D6 /* Mesh_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; name = Mesh_float.pod; path = Media/Mesh_float.pod; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE21264102183AD00B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE21265102183AD00B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +245,8 @@
 		791F47300E17521600E927FE /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
+				BDE21264102183AD00B215F9 /* Shader.h */,
+				BDE21265102183AD00B215F9 /* Shader.mm */,
 				791F47310E17521600E927FE /* GLES11 */,
 				791F47350E17521600E927FE /* Texture.h */,
 				791F47360E17521600E927FE /* Texture.mm */,
@@ -424,6 +429,7 @@
 				79317C600EDBC15400247E3D /* utility_impl.cpp in Sources */,
 				795AC8170EDF1006004CF7D4 /* mmgr.cpp in Sources */,
 				79832D970F04A4B9000F58D6 /* ResourcePath.mm in Sources */,
+				BDE21266102183AD00B215F9 /* Shader.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -446,10 +452,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = ClipPlanes;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -458,7 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -468,10 +476,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = ClipPlanes;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

@@ -67,6 +67,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "EAGLView.h"
 
 //CLASS IMPLEMENTATIONS:
+int __OPENGLES_VERSION = 1;
 
 @implementation EAGLView
 

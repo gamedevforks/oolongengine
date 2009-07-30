@@ -37,6 +37,9 @@
 		79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA049B0DAFCC980038ED3D /* Streaming.cpp */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
 		79F0FEE20EDF316B00102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FEE10EDF316B00102B0B /* Timer.mm */; };
+		BDE2108F102178E600B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2108C102178E600B215F9 /* Shader.mm */; };
+		BDE21090102178E600B215F9 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2108E102178E600B215F9 /* Texture.mm */; };
+		BDE210981021791C00B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE210971021791C00B215F9 /* ResourcePath.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +101,12 @@
 		79F0FEDA0EDF309100102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		79F0FEE10EDF316B00102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE2108B102178E600B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE2108C102178E600B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
+		BDE2108D102178E600B215F9 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		BDE2108E102178E600B215F9 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		BDE210961021791C00B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		BDE210971021791C00B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +184,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDE210951021791C00B215F9 /* Pathes */,
 				79F0FED80EDF309100102B0B /* Timing */,
 				79317F250EDE50EB00247E3D /* MemoryManager */,
 				79EA043B0DAFC7950038ED3D /* Core */,
@@ -255,6 +265,10 @@
 		79EA043C0DAFC7950038ED3D /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
+				BDE2108B102178E600B215F9 /* Shader.h */,
+				BDE2108C102178E600B215F9 /* Shader.mm */,
+				BDE2108D102178E600B215F9 /* Texture.h */,
+				BDE2108E102178E600B215F9 /* Texture.mm */,
 				79EA043F0DAFC7950038ED3D /* GLES11 */,
 			);
 			path = GraphicsDevice;
@@ -323,6 +337,16 @@
 			);
 			name = Timing;
 			path = ../../../Utility/Timing;
+			sourceTree = SOURCE_ROOT;
+		};
+		BDE210951021791C00B215F9 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				BDE210961021791C00B215F9 /* ResourcePath.h */,
+				BDE210971021791C00B215F9 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -401,6 +425,9 @@
 				793179FB0EDA639E00247E3D /* Matrix.cpp in Sources */,
 				79317F2A0EDE50EB00247E3D /* mmgr.cpp in Sources */,
 				79F0FEE20EDF316B00102B0B /* Timer.mm in Sources */,
+				BDE2108F102178E600B215F9 /* Shader.mm in Sources */,
+				BDE21090102178E600B215F9 /* Texture.mm in Sources */,
+				BDE210981021791C00B215F9 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -423,11 +450,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -436,7 +464,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -446,10 +474,11 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -458,7 +487,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
@@ -467,7 +498,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = ../../../Include;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Release;

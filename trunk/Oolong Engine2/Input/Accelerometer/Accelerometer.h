@@ -12,7 +12,13 @@ subject to the following restrictions:
 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
-#import "GraphicsDevice.h"
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+#else
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#endif
 
 @interface Accel : NSObject <UIAccelerometerDelegate>
 {

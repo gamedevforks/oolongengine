@@ -26,7 +26,6 @@
 		795AC9610EDF1307004CF7D4 /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 795AC95D0EDF1307004CF7D4 /* mmgr.cpp */; };
 		795AC9620EDF1307004CF7D4 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795AC9600EDF1307004CF7D4 /* readme.txt */; };
 		799121F70E1F462D00035EEA /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799121F60E1F462D00035EEA /* OpenAL.framework */; };
-		799123D10E20082200035EEA /* SoundEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 799123CF0E20082200035EEA /* SoundEngine.cpp */; };
 		799123FB0E2373FC00035EEA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799123FA0E2373FC00035EEA /* CoreAudio.framework */; };
 		799124030E23742600035EEA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799124020E23742600035EEA /* AudioToolbox.framework */; };
 		79E5F1360E330B6200C7BFD6 /* Failure.caf in Resources */ = {isa = PBXBuildFile; fileRef = 79E5F1320E330B6200C7BFD6 /* Failure.caf */; };
@@ -35,7 +34,6 @@
 		79E5F1390E330B6200C7BFD6 /* Thrust.caf in Resources */ = {isa = PBXBuildFile; fileRef = 79E5F1350E330B6200C7BFD6 /* Thrust.caf */; };
 		79E5F1600E330EFB00C7BFD6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79E5F15F0E330EFB00C7BFD6 /* ResourcePath.mm */; };
 		79E5F1DE0E33180D00C7BFD6 /* TouchScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */; };
-		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
 		79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA044E0DAFC7950038ED3D /* DisplayText.cpp */; };
 		79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04500DAFC7950038ED3D /* DisplayTextAPI.cpp */; };
 		79EA049F0DAFCC980038ED3D /* BoneBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA048A0DAFCC980038ED3D /* BoneBatch.cpp */; };
@@ -48,6 +46,10 @@
 		79EA04A60DAFCC980038ED3D /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04990DAFCC980038ED3D /* ResourceFile.cpp */; };
 		79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA049B0DAFCC980038ED3D /* Streaming.cpp */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
+		BDE20CDE1021347300B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20CDB1021347300B215F9 /* Shader.mm */; };
+		BDE20CDF1021347300B215F9 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20CDD1021347300B215F9 /* Texture.mm */; };
+		BDE20CF61021357800B215F9 /* SoundEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE20CF41021357800B215F9 /* SoundEngine.cpp */; };
+		BDE20E411021410700B215F9 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE20E3F1021410700B215F9 /* EAGLView2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,8 +86,6 @@
 		795AC95F0EDF1307004CF7D4 /* nommgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nommgr.h; sourceTree = "<group>"; };
 		795AC9600EDF1307004CF7D4 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		799121F60E1F462D00035EEA /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		799123CF0E20082200035EEA /* SoundEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoundEngine.cpp; path = ../../../Audio/SoundEngine.cpp; sourceTree = SOURCE_ROOT; };
-		799123D00E20082200035EEA /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundEngine.h; path = ../../../Audio/SoundEngine.h; sourceTree = SOURCE_ROOT; };
 		799123FA0E2373FC00035EEA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		799124020E23742600035EEA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		79E5F1320E330B6200C7BFD6 /* Failure.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Failure.caf; path = Sounds/Failure.caf; sourceTree = "<group>"; };
@@ -96,9 +96,6 @@
 		79E5F15F0E330EFB00C7BFD6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		79E5F1DC0E33180D00C7BFD6 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchScreen.h; path = ../../../Input/TouchScreen/TouchScreen.h; sourceTree = SOURCE_ROOT; };
 		79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TouchScreen.mm; path = ../../../Input/TouchScreen/TouchScreen.mm; sourceTree = SOURCE_ROOT; };
-		79EA04400DAFC7950038ED3D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		79EA04410DAFC7950038ED3D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		79EA044E0DAFC7950038ED3D /* DisplayText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayText.cpp; sourceTree = "<group>"; };
 		79EA044F0DAFC7950038ED3D /* DisplayText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayText.h; sourceTree = "<group>"; };
 		79EA04500DAFC7950038ED3D /* DisplayTextAPI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayTextAPI.cpp; sourceTree = "<group>"; };
@@ -123,6 +120,15 @@
 		79EA049C0DAFCC980038ED3D /* Streaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Streaming.h; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE20CDA1021347300B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE20CDB1021347300B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
+		BDE20CDC1021347300B215F9 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		BDE20CDD1021347300B215F9 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		BDE20CF41021357800B215F9 /* SoundEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundEngine.cpp; sourceTree = "<group>"; };
+		BDE20CF51021357800B215F9 /* SoundEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEngine.h; sourceTree = "<group>"; };
+		BDE20E3E1021410700B215F9 /* EAGLView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView2.h; sourceTree = "<group>"; };
+		BDE20E3F1021410700B215F9 /* EAGLView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView2.m; sourceTree = "<group>"; };
+		BDE20E401021410700B215F9 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,13 +216,12 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDE20CF31021357800B215F9 /* Audio */,
 				795AC95B0EDF1307004CF7D4 /* MemoryManager */,
 				79317E5B0EDC568500247E3D /* Math */,
 				79E5F1DC0E33180D00C7BFD6 /* TouchScreen.h */,
 				79E5F1DD0E33180D00C7BFD6 /* TouchScreen.mm */,
 				79E5F15D0E330EFB00C7BFD6 /* Pathes */,
-				799123CF0E20082200035EEA /* SoundEngine.cpp */,
-				799123D00E20082200035EEA /* SoundEngine.h */,
 				79EA043B0DAFC7950038ED3D /* Core */,
 				79235CD00DAD243A00F918F8 /* Application */,
 			);
@@ -307,19 +312,13 @@
 		79EA043C0DAFC7950038ED3D /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
-				79EA043F0DAFC7950038ED3D /* OS2x */,
+				BDE20E3D1021410700B215F9 /* GLES20 */,
+				BDE20CDA1021347300B215F9 /* Shader.h */,
+				BDE20CDB1021347300B215F9 /* Shader.mm */,
+				BDE20CDC1021347300B215F9 /* Texture.h */,
+				BDE20CDD1021347300B215F9 /* Texture.mm */,
 			);
 			path = GraphicsDevice;
-			sourceTree = "<group>";
-		};
-		79EA043F0DAFC7950038ED3D /* OS2x */ = {
-			isa = PBXGroup;
-			children = (
-				79EA04400DAFC7950038ED3D /* EAGLView.h */,
-				79EA04410DAFC7950038ED3D /* EAGLView.m */,
-				79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */,
-			);
-			path = OS2x;
 			sourceTree = "<group>";
 		};
 		79EA044D0DAFC7950038ED3D /* UI */ = {
@@ -366,6 +365,26 @@
 			name = Resource;
 			path = ../../../Renderer/Resource;
 			sourceTree = SOURCE_ROOT;
+		};
+		BDE20CF31021357800B215F9 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20CF41021357800B215F9 /* SoundEngine.cpp */,
+				BDE20CF51021357800B215F9 /* SoundEngine.h */,
+			);
+			name = Audio;
+			path = ../../../Audio;
+			sourceTree = SOURCE_ROOT;
+		};
+		BDE20E3D1021410700B215F9 /* GLES20 */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20E3E1021410700B215F9 /* EAGLView2.h */,
+				BDE20E3F1021410700B215F9 /* EAGLView2.m */,
+				BDE20E401021410700B215F9 /* OpenGL_Internal.h */,
+			);
+			path = GLES20;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -429,7 +448,6 @@
 			files = (
 				79235CF10DAD243A00F918F8 /* main.m in Sources */,
 				79235D500DAD2BEA00F918F8 /* Application.mm in Sources */,
-				79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */,
 				79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */,
 				79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */,
 				79EA049F0DAFCC980038ED3D /* BoneBatch.cpp in Sources */,
@@ -442,7 +460,6 @@
 				79EA04A60DAFCC980038ED3D /* ResourceFile.cpp in Sources */,
 				79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */,
 				7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */,
-				799123D10E20082200035EEA /* SoundEngine.cpp in Sources */,
 				79E5F1600E330EFB00C7BFD6 /* ResourcePath.mm in Sources */,
 				79E5F1DE0E33180D00C7BFD6 /* TouchScreen.mm in Sources */,
 				79317E6A0EDC568500247E3D /* Matrix.cpp in Sources */,
@@ -451,6 +468,10 @@
 				79317E6D0EDC568500247E3D /* matrix_impl.cpp in Sources */,
 				79317E6E0EDC568500247E3D /* utility_impl.cpp in Sources */,
 				795AC9610EDF1307004CF7D4 /* mmgr.cpp in Sources */,
+				BDE20CDE1021347300B215F9 /* Shader.mm in Sources */,
+				BDE20CDF1021347300B215F9 /* Texture.mm in Sources */,
+				BDE20CF61021357800B215F9 /* SoundEngine.cpp in Sources */,
+				BDE20E411021410700B215F9 /* EAGLView2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,7 +482,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -473,10 +495,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = _FORCE_OPENGLES11;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Loadwav;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -485,7 +510,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -495,9 +521,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = _FORCE_OPENGLES11;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Loadwav;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -507,7 +536,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
@@ -516,7 +545,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				HEADER_SEARCH_PATHS = ../../../Include;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
 		};

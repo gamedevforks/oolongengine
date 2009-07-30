@@ -26,7 +26,6 @@
 		799FAEA50EB5720300F75289 /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 799FAEA40EB5720300F75289 /* Accelerometer.m */; };
 		79A6EF910DB5A18200B35A2C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A6EF900DB5A18200B35A2C /* Default.png */; };
 		79AAE95F0DD16BAC00CC242E /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79AAE95E0DD16BAC00CC242E /* Texture.mm */; };
-		79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04410DAFC7950038ED3D /* EAGLView.m */; };
 		79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA044E0DAFC7950038ED3D /* DisplayText.cpp */; };
 		79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04500DAFC7950038ED3D /* DisplayTextAPI.cpp */; };
 		79EA049F0DAFCC980038ED3D /* BoneBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA048A0DAFCC980038ED3D /* BoneBatch.cpp */; };
@@ -152,6 +151,10 @@
 		7AD356210EC90AB20004CB13 /* btConvexHull.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD3559B0EC90AB10004CB13 /* btConvexHull.cpp */; };
 		7AD356220EC90AB20004CB13 /* btGeometryUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD3559E0EC90AB10004CB13 /* btGeometryUtil.cpp */; };
 		7AD356230EC90AB20004CB13 /* btQuickprof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD355AA0EC90AB10004CB13 /* btQuickprof.cpp */; };
+		BDE20FDF1021749900B215F9 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE20FDA1021749900B215F9 /* EAGLView.m */; };
+		BDE20FE01021749900B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20FDE1021749900B215F9 /* Shader.mm */; };
+		BDE20FE5102174AF00B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20FE4102174AF00B215F9 /* ResourcePath.mm */; };
+		BDE20FF9102175EB00B215F9 /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE20FF7102175EB00B215F9 /* neon_matrix_impl.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -186,9 +189,6 @@
 		799FAEA40EB5720300F75289 /* Accelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Accelerometer.m; path = ../../../Input/Accelerometer/Accelerometer.m; sourceTree = SOURCE_ROOT; };
 		79A6EF900DB5A18200B35A2C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		79AAE95E0DD16BAC00CC242E /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
-		79EA04400DAFC7950038ED3D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		79EA04410DAFC7950038ED3D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		79EA04440DAFC7950038ED3D /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		79EA044E0DAFC7950038ED3D /* DisplayText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayText.cpp; sourceTree = "<group>"; };
 		79EA044F0DAFC7950038ED3D /* DisplayText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayText.h; sourceTree = "<group>"; };
@@ -500,6 +500,16 @@
 		7AD355B00EC90AB10004CB13 /* btTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btTransformUtil.h; sourceTree = "<group>"; };
 		7AD355B10EC90AB10004CB13 /* btVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btVector3.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE20FD91021749900B215F9 /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		BDE20FDA1021749900B215F9 /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		BDE20FDB1021749900B215F9 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
+		BDE20FDC1021749900B215F9 /* OpenGLESExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLESExt.h; sourceTree = "<group>"; };
+		BDE20FDD1021749900B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE20FDE1021749900B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
+		BDE20FE3102174AF00B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		BDE20FE4102174AF00B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		BDE20FF7102175EB00B215F9 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = neon_matrix_impl.cpp; sourceTree = "<group>"; };
+		BDE20FF8102175EB00B215F9 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neon_matrix_impl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -577,6 +587,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDE20FE2102174AF00B215F9 /* Pathes */,
 				79317D190EDC516600247E3D /* Math */,
 				7AD354820EC90A9C0004CB13 /* Bullet */,
 				799FAEA30EB5720300F75289 /* Accelerometer.h */,
@@ -607,6 +618,7 @@
 		79317D190EDC516600247E3D /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				BDE20FF6102175EB00B215F9 /* neonmath */,
 				79317D1A0EDC516600247E3D /* Matrix.cpp */,
 				79317D1B0EDC516600247E3D /* Matrix.h */,
 				79317D1C0EDC516600247E3D /* Quaternion.h */,
@@ -648,21 +660,14 @@
 		79EA043C0DAFC7950038ED3D /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
-				79EA043F0DAFC7950038ED3D /* OS2x */,
+				BDE20FD81021749900B215F9 /* GLES11 */,
+				BDE20FDC1021749900B215F9 /* OpenGLESExt.h */,
+				BDE20FDD1021749900B215F9 /* Shader.h */,
+				BDE20FDE1021749900B215F9 /* Shader.mm */,
 				79AAE95E0DD16BAC00CC242E /* Texture.mm */,
 				79EA04440DAFC7950038ED3D /* Texture.h */,
 			);
 			path = GraphicsDevice;
-			sourceTree = "<group>";
-		};
-		79EA043F0DAFC7950038ED3D /* OS2x */ = {
-			isa = PBXGroup;
-			children = (
-				79EA04400DAFC7950038ED3D /* EAGLView.h */,
-				79EA04410DAFC7950038ED3D /* EAGLView.m */,
-				79EA04420DAFC7950038ED3D /* OpenGL_Internal.h */,
-			);
-			path = OS2x;
 			sourceTree = "<group>";
 		};
 		79EA044D0DAFC7950038ED3D /* UI */ = {
@@ -1117,6 +1122,35 @@
 			path = LinearMath;
 			sourceTree = "<group>";
 		};
+		BDE20FD81021749900B215F9 /* GLES11 */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20FD91021749900B215F9 /* EAGLView.h */,
+				BDE20FDA1021749900B215F9 /* EAGLView.m */,
+				BDE20FDB1021749900B215F9 /* OpenGL_Internal.h */,
+			);
+			path = GLES11;
+			sourceTree = "<group>";
+		};
+		BDE20FE2102174AF00B215F9 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20FE3102174AF00B215F9 /* ResourcePath.h */,
+				BDE20FE4102174AF00B215F9 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../Utility/Pathes;
+			sourceTree = SOURCE_ROOT;
+		};
+		BDE20FF6102175EB00B215F9 /* neonmath */ = {
+			isa = PBXGroup;
+			children = (
+				BDE20FF7102175EB00B215F9 /* neon_matrix_impl.cpp */,
+				BDE20FF8102175EB00B215F9 /* neon_matrix_impl.h */,
+			);
+			path = neonmath;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1174,7 +1208,6 @@
 			files = (
 				79235CF10DAD243A00F918F8 /* main.m in Sources */,
 				79235D500DAD2BEA00F918F8 /* Application.mm in Sources */,
-				79EA04530DAFC7950038ED3D /* EAGLView.m in Sources */,
 				79EA04580DAFC7950038ED3D /* DisplayText.cpp in Sources */,
 				79EA04590DAFC7950038ED3D /* DisplayTextAPI.cpp in Sources */,
 				79EA049F0DAFCC980038ED3D /* BoneBatch.cpp in Sources */,
@@ -1308,6 +1341,10 @@
 				79317D2A0EDC516600247E3D /* Transform.cpp in Sources */,
 				79317D2B0EDC516600247E3D /* matrix_impl.cpp in Sources */,
 				79317D2C0EDC516600247E3D /* utility_impl.cpp in Sources */,
+				BDE20FDF1021749900B215F9 /* EAGLView.m in Sources */,
+				BDE20FE01021749900B215F9 /* Shader.mm in Sources */,
+				BDE20FE5102174AF00B215F9 /* ResourcePath.mm in Sources */,
+				BDE20FF9102175EB00B215F9 /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1355,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1330,6 +1369,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = _NOMEMORYMANAGER;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = (
 					../../../Bullet/src,
 					../../../Math,
@@ -1345,6 +1386,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos2.2;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1354,6 +1396,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1364,6 +1408,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = _NOMEMORYMANAGER;
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = (
 					../../../Math,
 					../../../Include,
@@ -1379,6 +1424,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos2.2;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1387,16 +1433,16 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				GCC_OPTIMIZATION_LEVEL = 2;
@@ -1408,7 +1454,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				"New Setting" = "";
 				OTHER_CFLAGS = "-fno-regmove";
-				PROVISIONING_PROFILE = "D9747F63-D548-4763-8B11-47130356AEF0";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;

@@ -42,6 +42,7 @@
 		79616E850EECFA4800802AED /* IntroducingPOD_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79616E820EECFA4800802AED /* IntroducingPOD_float.pod */; };
 		79616E860EECFA4800802AED /* tex_arm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E830EECFA4800802AED /* tex_arm.pvr */; };
 		79616E870EECFA4800802AED /* tex_base.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E840EECFA4800802AED /* tex_base.pvr */; };
+		BDE2115F10217E1E00B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2115E10217E1E00B215F9 /* Shader.mm */; };
 		F9FC04031014F5D9006ACEAA /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FC04011014F5D9006ACEAA /* EAGLView.m */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,8 @@
 		79616E830EECFA4800802AED /* tex_arm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_arm.pvr; path = Media/tex_arm.pvr; sourceTree = "<group>"; };
 		79616E840EECFA4800802AED /* tex_base.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_base.pvr; path = Media/tex_base.pvr; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE2115D10217E1E00B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE2115E10217E1E00B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 		F9FC04001014F5D9006ACEAA /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = GLES11/EAGLView.h; sourceTree = "<group>"; };
 		F9FC04011014F5D9006ACEAA /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = GLES11/EAGLView.m; sourceTree = "<group>"; };
 		F9FC04021014F5D9006ACEAA /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGL_Internal.h; path = GLES11/OpenGL_Internal.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 		791F49AE0E1755E800E927FE /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
+				BDE2115D10217E1E00B215F9 /* Shader.h */,
+				BDE2115E10217E1E00B215F9 /* Shader.mm */,
 				F9FC03FF1014F5C1006ACEAA /* GLES11 */,
 				791F49B30E1755E800E927FE /* Texture.h */,
 				791F49B40E1755E800E927FE /* Texture.mm */,
@@ -428,6 +433,7 @@
 				7931810B0EDF0E0500247E3D /* mmgr.cpp in Sources */,
 				79616DDF0EECF2C300802AED /* ResourcePath.mm in Sources */,
 				F9FC04031014F5D9006ACEAA /* EAGLView.m in Sources */,
+				BDE2115F10217E1E00B215F9 /* Shader.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -450,11 +456,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = POD;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -463,7 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -473,11 +480,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = POD;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

@@ -41,6 +41,7 @@
 		79832E360F054E9B000F58D6 /* Mallet.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79832E340F054E9B000F58D6 /* Mallet.pvr */; };
 		79832E720F05508D000F58D6 /* model_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832E710F05508D000F58D6 /* model_float.pod */; };
 		79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FF470EDF4DF500102B0B /* Timer.mm */; };
+		BDE212A9102184BD00B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE212A8102184BD00B215F9 /* Shader.mm */; };
 		D24A57640E92AFA70009339C /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = D24A57630E92AFA70009339C /* Application.mm */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,8 @@
 		79F0FF460EDF4DF500102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		79F0FF470EDF4DF500102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE212A7102184BD00B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE212A8102184BD00B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 		D246B7460E92F769000E72AE /* model_float.pod */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_float.pod; sourceTree = "<group>"; };
 		D246B7470E92F769000E72AE /* mallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mallet.h; sourceTree = "<group>"; };
 		D24A57630E92AFA70009339C /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 		791F49AE0E1755E800E927FE /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
+				BDE212A7102184BD00B215F9 /* Shader.h */,
+				BDE212A8102184BD00B215F9 /* Shader.mm */,
 				791F49AF0E1755E800E927FE /* GLES11 */,
 				791F49B30E1755E800E927FE /* Texture.h */,
 				791F49B40E1755E800E927FE /* Texture.mm */,
@@ -431,6 +436,7 @@
 				795AC8550EDF1043004CF7D4 /* mmgr.cpp in Sources */,
 				79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */,
 				79832E330F054E87000F58D6 /* ResourcePath.mm in Sources */,
+				BDE212A9102184BD00B215F9 /* Shader.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,7 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -454,11 +460,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = _NOMEMORYMANAGER;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = MatrixPalette;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -467,7 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -478,11 +485,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = _NOMEMORYMANAGER;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = MatrixPalette;
-				PROVISIONING_PROFILE = "FC59351E-90DC-4935-972B-698BAFDDBD2D";
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

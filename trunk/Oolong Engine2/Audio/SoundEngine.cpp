@@ -77,6 +77,14 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 //
 // dummy functions whilst the simulator doesn't support OpenAL
 //
+
+
+extern "C"
+OSStatus  SoundEngine_Initialize(Float32 inMixerOutputRate)
+{
+    return noErr;
+}
+
 extern "C"
 OSStatus  SoundEngine_Teardown()
 {
@@ -84,7 +92,115 @@ OSStatus  SoundEngine_Teardown()
 }
 
 extern "C"
-OSStatus  SoundEngine_Initialize(Float32 inMixerOutputRate)
+OSStatus  SoundEngine_SetMasterVolume(Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_SetListenerPosition(Float32 inX, Float32 inY, Float32 inZ)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_SetListenerGain(Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_LoadBackgroundMusicTrack(const char* inPath, Boolean inAddToQueue, Boolean inLoadAtOnce)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_UnloadBackgroundMusicTrack()
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_StartBackgroundMusic()
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_StopBackgroundMusic(Boolean inStopAtEnd)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_SetBackgroundMusicVolume(Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_LoadLoopingEffect(const char* inLoopFilePath, const char* inAttackFilePath, const char* inDecayFilePath, UInt32* outEffectID)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_LoadEffect(const char* inPath, UInt32* outEffectID)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_UnloadEffect(UInt32 inEffectID)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_StartEffect(UInt32 inEffectID)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_StopEffect(UInt32 inEffectID, Boolean inDoDecay)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_SetEffectPitch(UInt32 inEffectID, Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_SetEffectLevel(UInt32 inEffectID, Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus	SoundEngine_SetEffectPosition(UInt32 inEffectID, Float32 inX, Float32 inY, Float32 inZ)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus  SoundEngine_SetEffectsVolume(Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus	SoundEngine_SetMaxDistance(Float32 inValue)
+{
+    return noErr;
+}
+
+extern "C"
+OSStatus	SoundEngine_SetReferenceDistance(Float32 inValue)
 {
     return noErr;
 }

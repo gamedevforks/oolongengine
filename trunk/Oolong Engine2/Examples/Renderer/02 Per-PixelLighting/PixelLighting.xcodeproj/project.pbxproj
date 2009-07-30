@@ -40,6 +40,8 @@
 		79EA04A60DAFCC980038ED3D /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04990DAFCC980038ED3D /* ResourceFile.cpp */; };
 		79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA049B0DAFCC980038ED3D /* Streaming.cpp */; };
 		79F0FF210EDF4D6E00102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FF200EDF4D6E00102B0B /* Timer.mm */; };
+		BDE2111D10217CFA00B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2111C10217CFA00B215F9 /* Shader.mm */; };
+		BDE2113110217D7700B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2113010217D7700B215F9 /* ResourcePath.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +108,10 @@
 		79F0FF1F0EDF4D6E00102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		79F0FF200EDF4D6E00102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDE2111B10217CFA00B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		BDE2111C10217CFA00B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
+		BDE2112F10217D7700B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
+		BDE2113010217D7700B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDE2112E10217D7700B215F9 /* Pathes */,
 				79F0FF1E0EDF4D6E00102B0B /* Timing */,
 				793180E40EDF0D2900247E3D /* MemoryManager */,
 				79317A8F0EDB142700247E3D /* Math */,
@@ -266,6 +273,8 @@
 		79EA043C0DAFC7950038ED3D /* GraphicsDevice */ = {
 			isa = PBXGroup;
 			children = (
+				BDE2111B10217CFA00B215F9 /* Shader.h */,
+				BDE2111C10217CFA00B215F9 /* Shader.mm */,
 				79EA043F0DAFC7950038ED3D /* GLES11 */,
 				79AAE9190DD16A3700CC242E /* Texture.mm */,
 				79EA04440DAFC7950038ED3D /* Texture.h */,
@@ -336,6 +345,16 @@
 			);
 			name = Timing;
 			path = ../../../Utility/Timing;
+			sourceTree = SOURCE_ROOT;
+		};
+		BDE2112E10217D7700B215F9 /* Pathes */ = {
+			isa = PBXGroup;
+			children = (
+				BDE2112F10217D7700B215F9 /* ResourcePath.h */,
+				BDE2113010217D7700B215F9 /* ResourcePath.mm */,
+			);
+			name = Pathes;
+			path = ../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -417,6 +436,8 @@
 				79317AA20EDB142700247E3D /* utility_impl.cpp in Sources */,
 				793180EA0EDF0D2900247E3D /* mmgr.cpp in Sources */,
 				79F0FF210EDF4D6E00102B0B /* Timer.mm in Sources */,
+				BDE2111D10217CFA00B215F9 /* Shader.mm in Sources */,
+				BDE2113110217D7700B215F9 /* ResourcePath.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +448,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -439,10 +461,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = PixelLighting;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -451,7 +475,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Wolfgang Engel";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -461,9 +486,11 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = PixelLighting;
+				PROVISIONING_PROFILE = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -473,7 +500,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;
 		};
@@ -482,7 +509,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				HEADER_SEARCH_PATHS = ../../../Include;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
 		};

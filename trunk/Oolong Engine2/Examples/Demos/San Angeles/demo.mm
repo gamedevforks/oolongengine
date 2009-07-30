@@ -41,6 +41,11 @@
 #include "shapes.h"
 #include "cams.h"
 
+#include "Sphere_inline.h"
+#include "AABB_inline.h"
+#include "Frustum_inline.h"
+#include "Plane_inline.h"
+
 extern int gAppAlive;
 
 // Total run length is 20 * camera track base unit length (see cams.h).
@@ -57,7 +62,7 @@ typedef struct
 }Statistics;
 Statistics Stats;
 
-//CFrustum *Frustum;
+CFrustum *Frustum;
 
 static unsigned long sRandomSeed = 0;
 
@@ -116,8 +121,8 @@ typedef struct
     GLsizei VertexCount;
 #endif
 	//unsigned byte* IndexList;
-	//	CSphere *CullSphere;
-	//	CAABB *AABBox;
+	CSphere *CullSphere;
+	CAABB *AABBox;
 
 } GLOBJECT;
 
@@ -148,8 +153,8 @@ static void freeGLObject(GLOBJECT *object)
     
 	free(object->colorArray);
 
-//	free(object->AABBox);
-//	free(object->CullSphere);
+	free(object->AABBox);
+	free(object->CullSphere);
 #ifdef INDEXEDTRIANGLELIST	
 	free(object->IndexList);
 	// this is allocated in createSuperShape ... not really a clean solution here
@@ -207,8 +212,8 @@ static GLOBJECT * newGLObject(
 
 #endif	
 	
-//	result->AABBox = (CAABB *) malloc(sizeof(CAABB));
-//	result->CullSphere = (CSphere *) malloc(sizeof(CSphere));
+	result->AABBox = (CAABB *) malloc(sizeof(CAABB));
+	result->CullSphere = (CSphere *) malloc(sizeof(CSphere));
 	
 	if (
 #ifdef INDEXEDTRIANGLELIST
@@ -272,30 +277,35 @@ static void drawGLObject(GLOBJECT *object)
 	Stats.NumOfTriangles += object->VertexCount / 3;
 }
 
-/*
+
+
+
 static bool cullGLObject(GLOBJECT *object)
 {
+	
+	/*
 	VECTOR3 SphereCenter = object->CullSphere->GetCenter();
 	VERTTYPE SphereRadius = object->CullSphere->GetRadius();
 	
 	// the sphere center needs to be on the negative side plus sphere radius should 
 	// stay positive as long as it is in the frustum
 	if((Frustum->GetNearPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
-		return true;
-	else if((Frustum->GetFarPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
-		return true;
-	else if((Frustum->GetRightPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
-		return true;
-	else if((Frustum->GetLeftPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
-		return true;
-	else if((Frustum->GetBottomPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
-		return true;
-	else if((Frustum->GetTopPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
-		return true;
+		return false;
+	if((Frustum->GetFarPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
+		return false;
+	if((Frustum->GetRightPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
+		return false;
+	if((Frustum->GetLeftPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
+		return false;
+	if((Frustum->GetBottomPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
+		return false;
+	if((Frustum->GetTopPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
+		return false;
+	 */
 
-	return false;
+	return true;
 }
-*/
+
 
 static void vector3Sub(DEMOVECTOR3 *dest, DEMOVECTOR3 *v1, DEMOVECTOR3 *v2)
 {
@@ -566,10 +576,10 @@ static GLOBJECT * createSuperShape(const float *params)
  }
 */		
 	// create AABB box
-	//result->AABBox->ComputeAABB((const VECTOR3 *)result->vertexArray, (const int) result->VertexCount);
+	result->AABBox->ComputeAABB((const VECTOR3 *)result->vertexArray, (const int) result->VertexCount);
 	
 	// create sphere from AABB box
-	//result->CullSphere->CreateSphereFromAABB(*result->AABBox);
+	result->CullSphere->CreateSphereFromAABB(*result->AABBox);
 	
 	return result;
 }
@@ -756,7 +766,7 @@ void appInit()
     glEnableClientState(GL_COLOR_ARRAY);
 	
 	// allocate heap for frustum planes
-//	Frustum = (CFrustum *) malloc(sizeof(CFrustum));
+    Frustum = (CFrustum *) malloc(sizeof(CFrustum));
 	
     seedRandom(15);
 
@@ -780,7 +790,7 @@ void appDeinit()
 
     freeGLObject(sGroundPlane);
 	
-//	free(Frustum);
+ 	free(Frustum);
 }
 
 
@@ -823,7 +833,7 @@ static void prepareFrame(int width, int height)
 	glGetFloatv(GL_PROJECTION_MATRIX, PerspMatrix.f);
 #endif
 	
-//	Frustum->ExtractPlanes(PerspMatrix, true); 
+ 	Frustum->ExtractPlanes(PerspMatrix, true); 
 
 	glMatrixMode(GL_MODELVIEW);
 
@@ -871,6 +881,14 @@ static void drawModels(float zScale)
 {
     const int translationScale = 9;
     int x, y;
+	
+	MATRIX	ProjMatrix;
+	
+#ifdef FIXEDPOINTENABLE
+	glGetFixedv(GL_PROJECTION_MATRIX, ProjMatrix.f);
+#else
+	glGetFloatv(GL_PROJECTION_MATRIX, ProjMatrix.f);
+#endif
 
     seedRandom(9);
 
@@ -902,15 +920,14 @@ static void drawModels(float zScale)
 			glGetFloatv(GL_MODELVIEW_MATRIX, ViewMatrix.f);
 		#endif
 		
-			MATRIX	ProjMatrix;
-	
-		#ifdef FIXEDPOINTENABLE
-			glGetFixedv(GL_PROJECTION_MATRIX, ProjMatrix.f);
-		#else
-			glGetFloatv(GL_PROJECTION_MATRIX, ProjMatrix.f);
-		#endif
 
-//			if(cullGLObject(sSuperShapeObjects[curShape]))
+			
+			MATRIX MVPMatrix;
+			MatrixMultiply(MVPMatrix, ViewMatrix, ProjMatrix);
+			
+			bool bNeedZClipping;
+
+			if( sSuperShapeObjects[curShape]->AABBox->IsVisible( &MVPMatrix, &bNeedZClipping ) )
 				drawGLObject(sSuperShapeObjects[curShape]);
 
             glPopMatrix();
@@ -926,7 +943,21 @@ static void drawModels(float zScale)
         glPushMatrix();
         glTranslatef(fixedOffs, f2vt(-4), f2vt(2));
 		
-//		if(cullGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]))
+		MATRIX	ViewMatrix;
+		
+#ifdef FIXEDPOINTENABLE
+		glGetFixedv(GL_MODELVIEW_MATRIX, ViewMatrix.f);
+#else
+		glGetFloatv(GL_MODELVIEW_MATRIX, ViewMatrix.f);
+#endif
+		
+		
+		MATRIX MVPMatrix;
+		MatrixMultiply(MVPMatrix, ViewMatrix, ProjMatrix);
+		
+		bool bNeedZClipping;
+		
+		if( sSuperShapeObjects[SUPERSHAPE_COUNT - 1]->AABBox->IsVisible( &MVPMatrix, &bNeedZClipping ) )
 			drawGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]);
 
         glPopMatrix();
@@ -934,7 +965,16 @@ static void drawModels(float zScale)
         glTranslatef(f2vt(-4), fixedOffs, f2vt(4));
         glRotatef(f2vt(90), 0, 0, f2vt(1));
 		
-//		if(cullGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]))
+#ifdef FIXEDPOINTENABLE
+		glGetFixedv(GL_MODELVIEW_MATRIX, ViewMatrix.f);
+#else
+		glGetFloatv(GL_MODELVIEW_MATRIX, ViewMatrix.f);
+#endif
+		
+		MatrixMultiply(MVPMatrix, ViewMatrix, ProjMatrix);
+		
+		
+		if( sSuperShapeObjects[SUPERSHAPE_COUNT - 1]->AABBox->IsVisible( &MVPMatrix, &bNeedZClipping ) )
 			drawGLObject(sSuperShapeObjects[SUPERSHAPE_COUNT - 1]);
         glPopMatrix();
     }
@@ -1106,10 +1146,10 @@ void appRender(long tick, int width, int height)
     // Update the camera position and set the lookat.
     camTrack();
 	
-	glDisable(GL_CULL_FACE); /// switched off backface culling
+	//glDisable(GL_CULL_FACE); /// switched off backface culling
 	
-	//glEnable(GL_CULL_FACE); /// switched on backface culling
-	//glCullFace(GL_FRONT);
+	glEnable(GL_CULL_FACE); /// switched on backface culling
+	glCullFace(GL_FRONT);
 
     // Draw the reflection by drawing models with negated Z-axis.
     glPushMatrix();

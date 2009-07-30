@@ -175,6 +175,89 @@ inline VERTTYPE CAABB::GetWidth(void) const {return _ABS(m_Max.x - m_Min.x);}
 inline VERTTYPE CAABB::GetHeight(void) const {return _ABS(m_Max.y - m_Min.y);}
 inline VERTTYPE CAABB::GetDepth(void) const {return _ABS(m_Max.z - m_Min.z);}
 
+inline bool CAABB::IsVisible( const MATRIX	* const pMatrix,
+							  bool			* const pNeedsZClipping)
+{
+	VERTTYPE	fX, fY, fZ, fW;
+	int			i, nX0, nX1, nY0, nY1, nZ;
+	
+	nX0 = 8;
+	nX1 = 8;
+	nY0 = 8;
+	nY1 = 8;
+	nZ  = 8;
+	
+	VECTOR3 Point[8];
+	Point[0].x = m_Min.x; Point[0].y = m_Min.y; Point[0].z = m_Min.z;
+	Point[1].x = m_Min.x; Point[1].y = m_Min.y; Point[1].z = m_Max.z;
+	Point[2].x = m_Min.x; Point[2].y = m_Max.y; Point[2].z = m_Min.z;
+	Point[3].x = m_Min.x; Point[3].y = m_Max.y; Point[3].z = m_Max.z;
+	Point[4].x = m_Max.x; Point[4].y = m_Min.y; Point[4].z = m_Min.z;
+	Point[5].x = m_Max.x; Point[5].y = m_Min.y; Point[5].z = m_Max.z;
+	Point[6].x = m_Max.x; Point[6].y = m_Max.y; Point[6].z = m_Min.z;
+	Point[7].x = m_Max.x; Point[7].y = m_Max.y; Point[7].z = m_Max.z;
+	
+	// Transform the eight bounding box vertices //
+	i = 8;
+	while(i)
+	{
+		i--;
+		fX =	pMatrix->f[ 0]*Point[i].x +
+				pMatrix->f[ 4]*Point[i].y +
+				pMatrix->f[ 8]*Point[i].z +
+				pMatrix->f[12];
+		fY =	pMatrix->f[ 1]*Point[i].x +
+				pMatrix->f[ 5]*Point[i].y +
+				pMatrix->f[ 9]*Point[i].z +
+				pMatrix->f[13];
+		fZ =	pMatrix->f[ 2]*Point[i].x +
+				pMatrix->f[ 6]*Point[i].y +
+				pMatrix->f[10]*Point[i].z +
+				pMatrix->f[14];
+		fW =	pMatrix->f[ 3]*Point[i].x +
+				pMatrix->f[ 7]*Point[i].y +
+				pMatrix->f[11]*Point[i].z +
+				pMatrix->f[15];
+		
+		if(fX < -fW)
+			nX0--;
+		else if(fX > fW)
+			nX1--;
+		
+		if(fY < -fW)
+			nY0--;
+		else if(fY > fW)
+			nY1--;
+		
+		if(fZ < 0)
+			nZ--;
+	}
+	
+	if(nZ)
+	{
+		if(!(nX0 * nX1 * nY0 * nY1))
+		{
+			*pNeedsZClipping = false;
+			return false;
+		}
+		
+		if(nZ == 8)
+		{
+			*pNeedsZClipping = false;
+			return true;
+		}
+		
+		*pNeedsZClipping = true;
+		return true;
+	}
+	else
+	{
+		*pNeedsZClipping = false;
+		return false;
+	}
+}
+
+
 /*
 typedef struct BOUNDINGBOX_TAG
 {

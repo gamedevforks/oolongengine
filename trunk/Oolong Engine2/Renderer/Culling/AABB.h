@@ -66,6 +66,9 @@ public:
 	// apply a scale to the box
 	inline void Scale(float scale);
 	
+	inline bool IsVisible( const MATRIX	* const pMatrix,
+								 bool			* const pNeedsZClipping);
+	
 	VECTOR3 m_Min, m_Max;
 	float m_BoundingRadius;
 };

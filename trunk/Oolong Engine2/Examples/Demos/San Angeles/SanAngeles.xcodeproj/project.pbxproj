@@ -117,6 +117,14 @@
 		BDE20B831021250900B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		BDE20C3010212C7500B215F9 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = neon_matrix_impl.cpp; sourceTree = "<group>"; };
 		BDE20C3110212C7500B215F9 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neon_matrix_impl.h; sourceTree = "<group>"; };
+		BDE214751021B16B00B215F9 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
+		BDE214761021B16B00B215F9 /* AABB_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB_inline.h; sourceTree = "<group>"; };
+		BDE214771021B16B00B215F9 /* Frustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
+		BDE214781021B16B00B215F9 /* Frustum_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frustum_inline.h; sourceTree = "<group>"; };
+		BDE214791021B16B00B215F9 /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
+		BDE2147A1021B16B00B215F9 /* Plane_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plane_inline.h; sourceTree = "<group>"; };
+		BDE2147B1021B16B00B215F9 /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
+		BDE2147C1021B16B00B215F9 /* Sphere_inline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere_inline.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +206,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDE214741021B16B00B215F9 /* Culling */,
 				BDE20B811021250900B215F9 /* Pathes */,
 				796E14F30EE0A777007BB71F /* MemoryManager */,
 				79317E340EDC54FF00247E3D /* Math */,
@@ -365,6 +374,22 @@
 			path = neonmath;
 			sourceTree = "<group>";
 		};
+		BDE214741021B16B00B215F9 /* Culling */ = {
+			isa = PBXGroup;
+			children = (
+				BDE214751021B16B00B215F9 /* AABB.h */,
+				BDE214761021B16B00B215F9 /* AABB_inline.h */,
+				BDE214771021B16B00B215F9 /* Frustum.h */,
+				BDE214781021B16B00B215F9 /* Frustum_inline.h */,
+				BDE214791021B16B00B215F9 /* Plane.h */,
+				BDE2147A1021B16B00B215F9 /* Plane_inline.h */,
+				BDE2147B1021B16B00B215F9 /* Sphere.h */,
+				BDE2147C1021B16B00B215F9 /* Sphere_inline.h */,
+			);
+			name = Culling;
+			path = ../../../Renderer/Culling;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -514,7 +539,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos3.0;
 			};
@@ -523,7 +548,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				HEADER_SEARCH_PATHS = ../../../Include;
 				SDKROOT = iphoneos3.0;
 			};

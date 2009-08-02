@@ -28,6 +28,9 @@ typedef struct Touches
 	float LocationYTouchesMoved;
 	float CountTouchesMoved;
 	float TapCountTouchesMoved;
+	
+	float LocationXTouchesEnded;	// x and y coordinates where the touch moved
+	float LocationYTouchesEnded;
 		
 	bool TouchesEnd;				// nothing touches the screen anymore
 } 

@@ -64,6 +64,14 @@ TouchScreenValues* GetValuesTouchScreen()
 	TouchScreen.CountTouchesBegan = (int) [touches count];
 	TouchScreen.TapCountTouchesBegan = [touch tapCount];
 	
+	TouchScreen.LocationXTouchesMoved = location.x;
+    TouchScreen.LocationYTouchesMoved = location.y;
+	TouchScreen.CountTouchesMoved = (int) [touches count];
+	TouchScreen.TapCountTouchesMoved = [touch tapCount];
+	
+	TouchScreen.LocationXTouchesEnded = 0.0;
+	TouchScreen.LocationYTouchesEnded = 0.0;
+	
 	TouchScreen.TouchesEnd = false;
 }
 
@@ -80,7 +88,10 @@ TouchScreenValues* GetValuesTouchScreen()
 	TouchScreen.CountTouchesMoved = (int) 0;
 	TouchScreen.TapCountTouchesMoved = 0;
 	
-	
+	UITouch* touch = [touches anyObject];
+	CGPoint	 location = [touch locationInView:self];
+	TouchScreen.LocationXTouchesEnded = location.x;
+	TouchScreen.LocationYTouchesEnded = location.y;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

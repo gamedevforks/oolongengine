@@ -171,7 +171,7 @@ int __OPENGLES_VERSION = 1;
 		CAEAGLLayer*			eaglLayer = (CAEAGLLayer*)[self layer];
 		
 		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-										[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+										[NSNumber numberWithBool:retained], kEAGLDrawablePropertyRetainedBacking, (format == GL_RGB565_OES) ? kEAGLColorFormatRGB565 : kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
 		
 		_format = format;
 		_depthFormat = depth;

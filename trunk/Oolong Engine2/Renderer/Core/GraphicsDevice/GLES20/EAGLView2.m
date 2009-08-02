@@ -236,9 +236,13 @@ int __OPENGLES_VERSION = 0;
 	if((self = [super initWithFrame:frame])) {
 		CAEAGLLayer*			eaglLayer = (CAEAGLLayer*)[self layer];
 		
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-										[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
-		
+										[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, (format == GL_RGB565) ? kEAGLColorFormatRGB565 : kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+#else
+		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+										[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, (format == GL_RGB565_OES) ? kEAGLColorFormatRGB565 : kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+#endif
 		_format = format;
 		_depthFormat = depth;
 		

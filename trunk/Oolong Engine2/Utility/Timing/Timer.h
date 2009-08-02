@@ -23,7 +23,7 @@
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 
-int GetFps(int frame, CFTimeInterval &TimeInterval);
+int GetFps(int frame, CFTimeInterval &TimeInterval, CFTimeInterval *frameTime=NULL);
 
 
 typedef struct

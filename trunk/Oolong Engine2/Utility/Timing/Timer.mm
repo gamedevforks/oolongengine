@@ -14,10 +14,11 @@
 */
 #include "Timer.h"
 
-int GetFps(int frame, CFTimeInterval &TimeInterval)
+int GetFps(int frame, CFTimeInterval &TimeInterval, CFTimeInterval *pFrameTime )
 {
 	// do all the timing
 	static CFTimeInterval startTime = 0;
+	static CFTimeInterval lastFrameTime = 0;
 	
 	int frameRate = 0;
 
@@ -26,8 +27,15 @@ int GetFps(int frame, CFTimeInterval &TimeInterval)
 	
 	if(startTime == 0)
 		startTime = TimeInterval;
+	
+	if(lastFrameTime == 0)
+		lastFrameTime = TimeInterval;
+	if( pFrameTime ) {
+		*pFrameTime = TimeInterval - lastFrameTime;
+	}
+	lastFrameTime = TimeInterval;
 
-		TimeInterval = TimeInterval - startTime;
+	TimeInterval = TimeInterval - startTime;
 
 	if (TimeInterval) 
 		frameRate = ((float)frame/(TimeInterval)) + 1.0f;

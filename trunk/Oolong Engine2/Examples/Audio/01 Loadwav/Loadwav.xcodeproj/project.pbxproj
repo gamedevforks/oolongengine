@@ -17,7 +17,6 @@
 		7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914067B0DBAD8D100C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
-		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
 		79317E6A0EDC568500247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E5C0EDC568500247E3D /* Matrix.cpp */; };
 		79317E6B0EDC568500247E3D /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E5F0EDC568500247E3D /* Random.cpp */; };
 		79317E6C0EDC568500247E3D /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317E610EDC568500247E3D /* Transform.cpp */; };
@@ -66,7 +65,6 @@
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		79235CD40DAD243A00F918F8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
-		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		79317E5C0EDC568500247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		79317E5D0EDC568500247E3D /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		79317E5E0EDC568500247E3D /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				1D3623EC0D0F72F000981E51 /* CoreGraphics.framework in Frameworks */,
 				2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */,
 				2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */,
-				79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */,
 				799121F70E1F462D00035EEA /* OpenAL.framework in Frameworks */,
 				799123FB0E2373FC00035EEA /* CoreAudio.framework in Frameworks */,
 				799124030E23742600035EEA /* AudioToolbox.framework in Frameworks */,
@@ -203,7 +200,6 @@
 				799124020E23742600035EEA /* AudioToolbox.framework */,
 				799123FA0E2373FC00035EEA /* CoreAudio.framework */,
 				799121F60E1F462D00035EEA /* OpenAL.framework */,
-				79235D940DAD3D5100F918F8 /* GraphicsServices.framework */,
 				1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */,
 				2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */,
 				2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */,

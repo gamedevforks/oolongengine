@@ -18,7 +18,6 @@
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
 		79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CE00DAD243A00F918F8 /* Transform.cpp */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
-		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
 		793179FB0EDA639E00247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 793179FA0EDA639E00247E3D /* Matrix.cpp */; };
 		79317F2A0EDE50EB00247E3D /* mmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317F260EDE50EB00247E3D /* mmgr.cpp */; };
 		7976BBB60EDA4E9B00106906 /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7976BBB20EDA4E9B00106906 /* matrix_impl.cpp */; };
@@ -61,7 +60,6 @@
 		79235CE10DAD243A00F918F8 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
 		79235CE20DAD243A00F918F8 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
-		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		793179FA0EDA639E00247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		79317F260EDE50EB00247E3D /* mmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mmgr.cpp; sourceTree = "<group>"; };
 		79317F270EDE50EB00247E3D /* mmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmgr.h; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				1D3623EC0D0F72F000981E51 /* CoreGraphics.framework in Frameworks */,
 				2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */,
 				2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */,
-				79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +168,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79235D940DAD3D5100F918F8 /* GraphicsServices.framework */,
 				1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */,
 				2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */,
 				2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */,

@@ -29,7 +29,6 @@
 		791F49D70E1755E800E927FE /* TriStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F49C20E1755E800E927FE /* TriStrip.cpp */; };
 		791F49D80E1755E800E927FE /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F49C40E1755E800E927FE /* Vertex.cpp */; };
 		791F49D90E1755E800E927FE /* VertexLookup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F49C60E1755E800E927FE /* VertexLookup.cpp */; };
-		79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79235D940DAD3D5100F918F8 /* GraphicsServices.framework */; };
 		79317CBD0EDC4FA500247E3D /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317CAF0EDC4FA500247E3D /* Matrix.cpp */; };
 		79317CBE0EDC4FA500247E3D /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317CB20EDC4FA500247E3D /* Random.cpp */; };
 		79317CBF0EDC4FA500247E3D /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79317CB40EDC4FA500247E3D /* Transform.cpp */; };
@@ -85,7 +84,6 @@
 		791F49C50E1755E800E927FE /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		791F49C60E1755E800E927FE /* VertexLookup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexLookup.cpp; sourceTree = "<group>"; };
 		791F49C70E1755E800E927FE /* VertexLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexLookup.h; sourceTree = "<group>"; };
-		79235D940DAD3D5100F918F8 /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		79317CAF0EDC4FA500247E3D /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		79317CB00EDC4FA500247E3D /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		79317CB10EDC4FA500247E3D /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				1D3623EC0D0F72F000981E51 /* CoreGraphics.framework in Frameworks */,
 				2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */,
 				2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */,
-				79235D950DAD3D5100F918F8 /* GraphicsServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +179,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79235D940DAD3D5100F918F8 /* GraphicsServices.framework */,
 				1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */,
 				2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */,
 				2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */,

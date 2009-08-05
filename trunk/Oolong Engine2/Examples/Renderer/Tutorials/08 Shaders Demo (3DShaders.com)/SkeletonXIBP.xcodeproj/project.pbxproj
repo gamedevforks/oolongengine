@@ -47,7 +47,6 @@
 		382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765AD101AAD5500A2904E /* QuartzCore.framework */; };
 		382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B2101AAD7000A2904E /* AudioToolbox.framework */; };
 		382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B3101AAD7000A2904E /* OpenAL.framework */; };
-		38276644101AB0E600A2904E /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38276643101AB0E600A2904E /* GraphicsServices.framework */; };
 		BD531E331029F520005AC463 /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD531DC31029F51F005AC463 /* Surface.cpp */; };
 		BD531E341029F520005AC463 /* Brick.frag in Resources */ = {isa = PBXBuildFile; fileRef = BD531DC71029F51F005AC463 /* Brick.frag */; };
 		BD531E351029F520005AC463 /* Brick.vert in Resources */ = {isa = PBXBuildFile; fileRef = BD531DC81029F51F005AC463 /* Brick.vert */; };
@@ -203,7 +202,6 @@
 		382765AD101AAD5500A2904E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		382765B2101AAD7000A2904E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		382765B3101AAD7000A2904E /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		38276643101AB0E600A2904E /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BD531DC31029F51F005AC463 /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
 		BD531DC41029F51F005AC463 /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 				382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */,
 				382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */,
 				382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */,
-				38276644101AB0E600A2904E /* GraphicsServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +330,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38276643101AB0E600A2904E /* GraphicsServices.framework */,
 				382765B2101AAD7000A2904E /* AudioToolbox.framework */,
 				382765B3101AAD7000A2904E /* OpenAL.framework */,
 				382765AD101AAD5500A2904E /* QuartzCore.framework */,
@@ -878,7 +874,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = _OPENGLES20;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_OPENGLES20,
+					FORCE_NO_LOGO,
+				);
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../Include;
 				INFOPLIST_FILE = Info.plist;
@@ -900,6 +899,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_NOMEMORYMANAGER,
 					_OPENGLES20,
+					FORCE_NO_LOGO,
 				);
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../Include;

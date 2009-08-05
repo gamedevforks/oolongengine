@@ -47,7 +47,6 @@
 		382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765AD101AAD5500A2904E /* QuartzCore.framework */; };
 		382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B2101AAD7000A2904E /* AudioToolbox.framework */; };
 		382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B3101AAD7000A2904E /* OpenAL.framework */; };
-		38276644101AB0E600A2904E /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38276643101AB0E600A2904E /* GraphicsServices.framework */; };
 		BD11CBAC101C318500B80F52 /* rock_mipmap_4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = BD11CBAB101C318500B80F52 /* rock_mipmap_4.pvr */; };
 		BD11CC34101C412900B80F52 /* TextureFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BD11CC32101C412900B80F52 /* TextureFragShader.fsh */; };
 		BD11CC35101C412900B80F52 /* TextureVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = BD11CC33101C412900B80F52 /* TextureVertShader.vsh */; };
@@ -167,7 +166,6 @@
 		382765AD101AAD5500A2904E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		382765B2101AAD7000A2904E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		382765B3101AAD7000A2904E /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		38276643101AB0E600A2904E /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BD11CBA8101C313100B80F52 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		BD11CBAB101C318500B80F52 /* rock_mipmap_4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock_mipmap_4.pvr; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */,
 				382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */,
 				382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */,
-				38276644101AB0E600A2904E /* GraphicsServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +253,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38276643101AB0E600A2904E /* GraphicsServices.framework */,
 				382765B2101AAD7000A2904E /* AudioToolbox.framework */,
 				382765B3101AAD7000A2904E /* OpenAL.framework */,
 				382765AD101AAD5500A2904E /* QuartzCore.framework */,

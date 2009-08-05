@@ -123,6 +123,10 @@ typedef struct
 	//unsigned byte* IndexList;
 	CSphere *CullSphere;
 	CAABB *AABBox;
+	
+	GLuint ui32vboVertex;
+	GLuint ui32vboNormal;
+	GLuint ui32vboColor;
 
 } GLOBJECT;
 
@@ -181,6 +185,9 @@ static GLOBJECT * newGLObject(
         return NULL;
 	
 #ifdef INDEXEDTRIANGLELIST
+	result->ui32vboVertex = 0;
+	result->ui32vboColor = 0;
+	result->ui32vboNormal = 0;
     result->vertexComponents = vertexComponents;
 
 	result->IndexCount = indices;
@@ -248,18 +255,41 @@ static void drawGLObject(GLOBJECT *object)
     glVertexPointer(object->vertexComponents, GL_FIXED,
                     0, object->vertexArray);
 #else
-    glVertexPointer(object->vertexComponents, GL_FLOAT,
+	if( object->ui32vboVertex != 0 ) {
+		glBindBuffer(GL_ARRAY_BUFFER, object->ui32vboVertex);
+		glVertexPointer(object->vertexComponents, GL_FLOAT,
+						0, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	}
+	else {
+		glVertexPointer(object->vertexComponents, GL_FLOAT,
                     0, object->vertexArray);
+	}
 #endif
 
-    glColorPointer(4, GL_UNSIGNED_BYTE, 0, object->colorArray);
-
+	if( object->ui32vboColor != 0 ) {
+		glBindBuffer(GL_ARRAY_BUFFER, object->ui32vboColor);
+		glColorPointer(4, GL_UNSIGNED_BYTE, 0, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	else {
+		glColorPointer(4, GL_UNSIGNED_BYTE, 0, object->colorArray);
+	}
+	
     if (object->normalArray)
     {
 	#ifdef FIXEDPOINTENABLE
         glNormalPointer(GL_FIXED, 0, object->normalArray);
 	#else
-        glNormalPointer(GL_FLOAT, 0, object->normalArray);
+		if( object->ui32vboNormal != 0 ) {
+			glBindBuffer(GL_ARRAY_BUFFER, object->ui32vboNormal);
+			glNormalPointer(GL_FLOAT, 0, 0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);			
+		}
+		else {
+			glNormalPointer(GL_FLOAT, 0, object->normalArray);
+		}
 	#endif
         glEnableClientState(GL_NORMAL_ARRAY);
     }
@@ -580,6 +610,28 @@ static GLOBJECT * createSuperShape(const float *params)
 	
 	// create sphere from AABB box
 	result->CullSphere->CreateSphereFromAABB(*result->AABBox);
+	
+	
+	glGenBuffers(1, &result->ui32vboVertex );
+	glBindBuffer(GL_ARRAY_BUFFER, result->ui32vboVertex);
+	unsigned int uiSize = result->VertexCount * (sizeof(VERTTYPE) * result->vertexComponents);
+	glBufferData(GL_ARRAY_BUFFER, uiSize, result->vertexArray, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	if( result->normalArray ) {
+		glGenBuffers(1, &result->ui32vboNormal );
+		glBindBuffer(GL_ARRAY_BUFFER, result->ui32vboNormal);
+		uiSize = result->VertexCount * (sizeof(VERTTYPE) * 3);
+		glBufferData(GL_ARRAY_BUFFER, uiSize, result->normalArray, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	glGenBuffers(1, &result->ui32vboColor );
+	glBindBuffer(GL_ARRAY_BUFFER, result->ui32vboColor);
+	uiSize = result->VertexCount * (sizeof(GLubyte) * 4);
+	glBufferData(GL_ARRAY_BUFFER, uiSize, result->colorArray, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	 
 	
 	return result;
 }

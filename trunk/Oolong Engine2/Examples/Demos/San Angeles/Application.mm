@@ -89,6 +89,8 @@ bool CShell::RenderScene()
  	static struct timeval time = {0,0};
  
  	frames++;
+	static int totalFrames = 0;
+	totalFrames++;
 
 	gettimeofday(&currentTime, NULL); // The gettimeofday() function shall obtain the current time, expressed as seconds and microseconds since the 
 	                               // Epoch, and store it in the timeval structure pointed to by tp. The resolution of the system clock is unspecified.
@@ -113,6 +115,7 @@ bool CShell::RenderScene()
 	AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), "Number of Draw Calls %d", NumCalls);
 	AppDisplayText->DisplayText(0, 14, 0.4f, RGBA(255,255,255,255), "Number of Triangles %d", NumTriangles);
 	AppDisplayText->DisplayText(0, 18, 0.4f, RGBA(255,255,255,255), "Number of Vertices %d", NumVertices);
+	AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "Number of Frames %i", totalFrames);
 
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("San Angeles", "", eDisplayTextLogoIMG);

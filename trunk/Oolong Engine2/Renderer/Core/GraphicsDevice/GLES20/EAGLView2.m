@@ -277,13 +277,16 @@ int __OPENGLES_VERSION = 0;
 	return self;
 }
 
-- (void) dealloc
-{
+- (void) releaseContext {
 	[self _destroySurface];
 	
 	[_context release];
 	_context = nil;
 	
+}
+
+- (void) dealloc
+{
 	[super dealloc];
 }
 

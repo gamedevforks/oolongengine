@@ -44,12 +44,15 @@ static CShell *shell = NULL;
 	[NSTimer scheduledTimerWithTimeInterval:(1.0 / kFPS) target:self selector:@selector(update) userInfo:nil repeats:YES];	
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application {
+	if(!shell->QuitApplication())
+		printf("QuitApplication error\n");	
+	if( glView )
+		[glView releaseContext];
+}
 
 - (void)dealloc {
-	if(!shell->QuitApplication())
-		printf("QuitApplication error\n");
-	
-    [window release];
+    //[window release];
     [super dealloc];
 }
 

@@ -106,6 +106,7 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
 - (id) initWithFrame:(CGRect)frame; //These also set the current context
 - (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format;
 - (id) initWithFrame:(CGRect)frame pixelFormat:(GLuint)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained;
+- (void) releaseContext;
 
 @property(readonly) GLuint framebuffer;
 @property(readonly) GLuint pixelFormat;

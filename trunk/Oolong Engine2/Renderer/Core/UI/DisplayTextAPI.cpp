@@ -438,11 +438,17 @@ void CDisplayText::APIRenderStates(int nAction)
 			bVertexPointerEnabled = glIsEnabled(GL_VERTEX_ARRAY);
 			bColorPointerEnabled = glIsEnabled(GL_COLOR_ARRAY);
 			bTexCoorPointerEnabled = glIsEnabled(GL_TEXTURE_COORD_ARRAY);
+			bLighting = glIsEnabled(GL_LIGHTING);
+			bFog = glIsEnabled(GL_FOG);
+			// save texture unit state
+			glActiveTexture(GL_TEXTURE0);
+			bTextureEnabled0 = glIsEnabled(GL_TEXTURE_2D);
+			
+			glActiveTexture(GL_TEXTURE1);
+			bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
 		}
 
-		bLighting = glIsEnabled(GL_LIGHTING);
 		bCullFace = glIsEnabled(GL_CULL_FACE);
-		bFog = glIsEnabled(GL_FOG);
 		bDepthTest = glIsEnabled(GL_DEPTH_TEST);
 //		bVertexProgram = glIsEnabled(GL_IMG_vertex_program);
 		bBlend = glIsEnabled(GL_BLEND);
@@ -451,12 +457,6 @@ void CDisplayText::APIRenderStates(int nAction)
 		glGetIntegerv(GL_BLEND_DST, &iDestBlend);
 		glGetIntegerv(GL_BLEND_SRC, &iSrcBlend);
       
-        // save texture unit state
-		glActiveTexture(GL_TEXTURE0);
-		bTextureEnabled0 = glIsEnabled(GL_TEXTURE_2D);
-      
-		glActiveTexture(GL_TEXTURE1);
-		bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
 		
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
@@ -509,9 +509,9 @@ void CDisplayText::APIRenderStates(int nAction)
 
 			glMatrixMode(GL_MODELVIEW);
 			glLoadMatrixf(Matrix.f);
+			glDisable(GL_LIGHTING);
 		}
 			
-		glDisable(GL_LIGHTING);
 
 		/* Culling */
 		glEnable(GL_CULL_FACE);
@@ -530,14 +530,16 @@ void CDisplayText::APIRenderStates(int nAction)
 			glEnableClientState(GL_COLOR_ARRAY);
 			glClientActiveTexture(GL_TEXTURE0);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			
+			/* texture 	*/
+			glActiveTexture(GL_TEXTURE1);
+			glDisable(GL_TEXTURE_2D);
+			glActiveTexture(GL_TEXTURE0);
+			glEnable(GL_TEXTURE_2D);
 		}
 			
 
-		/* texture 	*/
-		glActiveTexture(GL_TEXTURE1);
-		glDisable(GL_TEXTURE_2D);
-		glActiveTexture(GL_TEXTURE0);
-		glEnable(GL_TEXTURE_2D);
+
 			
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
@@ -546,14 +548,13 @@ void CDisplayText::APIRenderStates(int nAction)
 #endif
 		{			
 			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+			/* Disable fog */
+			glDisable(GL_FOG);
 		}
 
 		/* Blending mode */
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		/* Disable fog */
-		glDisable(GL_FOG);
 
 		/* Set Z compare properties */
 		glDisable(GL_DEPTH_TEST);
@@ -598,13 +599,19 @@ void CDisplayText::APIRenderStates(int nAction)
 			glPopMatrix();
 
 			glMatrixMode(iMatrixMode);
+			if(bLighting)		glEnable(GL_LIGHTING);
+			if(bFog)			glEnable(GL_FOG);
+
+			// restore texture states
+			glActiveTexture(GL_TEXTURE1);
+			bTextureEnabled1 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+			glActiveTexture(GL_TEXTURE0);
+			bTextureEnabled0 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 		}
 			
 
 		// Restore some values
-		if(bLighting)		glEnable(GL_LIGHTING);
 		if(!bCullFace)		glDisable(GL_CULL_FACE);
-		if(bFog)			glEnable(GL_FOG);
 		if(bDepthTest)		glEnable(GL_DEPTH_TEST);
 //		if(bVertexProgram)	glEnable(GL_IMG_vertex_program);
 			
@@ -614,11 +621,6 @@ void CDisplayText::APIRenderStates(int nAction)
 		glBlendFunc(iSrcBlend, iDestBlend);
 		if(bBlend == 0) glDisable(GL_BLEND);
 
-		// restore texture states
-		glActiveTexture(GL_TEXTURE1);
-		bTextureEnabled1 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
-		glActiveTexture(GL_TEXTURE0);
-		bTextureEnabled0 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 
 
 		break;
@@ -694,6 +696,10 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		}
 		glUseProgram(uiProgramObject);
 		glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, mx.f);
+		
+		// Render states
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, tex);
 	}
 	else 
 #else
@@ -708,13 +714,13 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		{
 			glRotatef(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
 		}
+		glActiveTexture(GL_TEXTURE0);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 	}
 #endif
 	
-	// Render states
-	glActiveTexture(GL_TEXTURE0);
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, tex);
+
 
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_ZERO, GL_SRC_COLOR);

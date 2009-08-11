@@ -151,6 +151,45 @@ void MatrixScaling(
 	mOut.f[ 3]=0.0f;	mOut.f[ 7]=0.0f;	mOut.f[11]=0.0f;	mOut.f[15]=1.0f;
 }
 
+void MatrixRotationAxis( MATRIX &mOut, 
+						const float fAngle, 	
+						const float fX,
+						const float fY,
+						const float fZ) 
+{
+	Vec3 axis(fX, fY, fZ);
+	axis.normalize();
+	float s = (float)sin(fAngle);
+	float c = (float)cos(fAngle);
+	float x, y, z;
+	
+	x = axis.x;
+	y = axis.y;
+	z = axis.z;
+	
+	mOut.f[ 0] = x * x * (1 - c) + c;
+	mOut.f[ 4] = x * y * (1 - c) - (z * s);
+	mOut.f[ 8] = x * z * (1 - c) + (y * s);
+	mOut.f[12] = 0;
+	
+	mOut.f[ 1] = y * x * (1 - c) + (z * s);
+	mOut.f[ 5] = y * y * (1 - c) + c;
+	mOut.f[ 9] = y * z * (1 - c) - (x * s);
+	mOut.f[13] = 0;
+	
+	mOut.f[ 2] = z * x * (1 - c) - (y * s);
+	mOut.f[ 6] = z * y * (1 - c) + (x * s);
+	mOut.f[10] = z * z * (1 - c) + c;
+	mOut.f[14] = 0.0f;
+	
+	mOut.f[ 3] = 0.0f;
+	mOut.f[ 7] = 0.0f;
+	mOut.f[11] = 0.0f;
+	mOut.f[15] = 1.0f;
+}
+
+
+
 
 void MatrixRotationX(
 	MATRIX	&mOut,

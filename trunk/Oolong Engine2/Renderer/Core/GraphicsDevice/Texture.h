@@ -15,6 +15,8 @@ subject to the following restrictions:
 #ifndef _TEXTURE_h_
 #define _TEXTURE_h_
 
+#include <TargetConditionals.h>
+#include <Availability.h>
 #import <OpenGLES/EAGL.h>
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 #import <OpenGLES/ES2/gl.h>

@@ -139,7 +139,14 @@ void MatrixScaling(
 	const float fY,
 	const float fZ);
 
-
+//
+// Create an around-axis rotation matrix mOut. - added by Jimmy
+//
+void MatrixRotationAxis( MATRIX &mOut, 
+						const float fAngle, 	
+						const float fX,
+						const float fY,
+						const float fZ);
 
 //
 // Create an X rotation matrix mOut.

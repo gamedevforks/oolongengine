@@ -53,6 +53,7 @@ static CShell *shell = NULL;
 	NSString *name = @"Title";
 	NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"m4v"];
 	theMovie=[[[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:path]] retain];
+	theMovie.movieControlMode = MPMovieControlModeHidden;
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(myMovieFinishedCallback:)
 												 name:MPMoviePlayerPlaybackDidFinishNotification

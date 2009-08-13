@@ -310,10 +310,11 @@ static void drawGLObject(GLOBJECT *object)
 
 
 
+	/*
 static bool cullGLObject(GLOBJECT *object)
 {
 	
-	/*
+
 	VECTOR3 SphereCenter = object->CullSphere->GetCenter();
 	VERTTYPE SphereRadius = object->CullSphere->GetRadius();
 	
@@ -331,21 +332,17 @@ static bool cullGLObject(GLOBJECT *object)
 		return false;
 	if((Frustum->GetTopPlane().DistanceToPlane(SphereCenter) + SphereRadius) < 0)
 		return false;
-	 */
+
 
 	return true;
 }
+	 	 */
 
 
-static void vector3Sub(DEMOVECTOR3 *dest, DEMOVECTOR3 *v1, DEMOVECTOR3 *v2)
-{
-    dest->x = v1->x - v2->x;
-    dest->y = v1->y - v2->y;
-    dest->z = v1->z - v2->z;
-}
 
 
-static void superShapeMap(DEMOVECTOR3 *point, float r1, float r2, float t, float p)
+
+static void superShapeMap(Vec3 *point, float r1, float r2, float t, float p)
 {
     // sphere-mapping of supershape parameters
     point->x = (float)(cosf(t) * cosf(p) / r1 / r2);
@@ -403,8 +400,8 @@ static GLOBJECT * createSuperShape(const float *params)
     currentQuad = 0;
     currentVertex = 0;
 	
-	DEMOVECTOR3 pa, pb, pc, pd;
-	DEMOVECTOR3 v1, v2, n;
+	Vec3 pa, pb, pc, pd;
+	Vec3 v1, v2, n;
 	float ca;
 
 
@@ -440,8 +437,15 @@ static GLOBJECT * createSuperShape(const float *params)
                 if (latitude == latitudeBegin + 1)
                     pa.z = pb.z = 0;
 
-                vector3Sub(&v1, &pb, &pa);
-                vector3Sub(&v2, &pd, &pa);
+				if( pa.z < 0 ) pa.z = 0;
+				if( pb.z < 0 ) pb.z = 0;
+				if( pc.z < 0 ) pc.z = 0;
+				if( pd.z < 0 ) pd.z = 0;
+
+				v1 = pb - pa;
+				v2 = pd - pa;
+
+
 
                 // Calculate normal with cross product.
                 /*   i    j    k      i    j
@@ -449,10 +453,17 @@ static GLOBJECT * createSuperShape(const float *params)
                  * v2.x v2.y v2.z | v2.x v2.y
                  */
 
-                n.x = v1.y * v2.z - v1.z * v2.y;
-                n.y = v1.z * v2.x - v1.x * v2.z;
-                n.z = v1.x * v2.y - v1.y * v2.x;
+                //n.x = v1.y * v2.z - v1.z * v2.y;
+                //n.y = v1.z * v2.x - v1.x * v2.z;
+                //n.z = v1.x * v2.y - v1.y * v2.x;
+				
+				MatrixVec3CrossProduct(n, v1, v2);
 
+				float lenSq = n.length();
+				if( lenSq == 0 )
+					continue;
+
+				
                 /* Pre-normalization of the normals is disabled here because
                  * they will be normalized anyway later due to automatic
                  * normalization (GL_NORMALIZE). It is enabled because the

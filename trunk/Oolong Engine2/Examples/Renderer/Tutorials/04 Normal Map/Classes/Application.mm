@@ -361,6 +361,10 @@ bool CShell::RenderScene()
 		glDrawArrays(GL_TRIANGLE_FAN, 12, 4);
 		glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
 		glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glActiveTexture( GL_TEXTURE0 );
+
 	}
 	else
 #endif

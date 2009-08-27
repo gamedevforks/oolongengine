@@ -68,41 +68,22 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 		}
 		//glActiveTexture(GL_TEXTURE0);
 		glGenTextures(1, &textureID);
-		if(glGetError())
-		{
-			printf("glGenTextures failed. ");
-			return 0;
-		}
-
 		glBindTexture(GL_TEXTURE_2D, textureID);
-		if(glGetError())
-		{
-			printf("glBindTexture failed. ");
-			return 0;
-		}
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		if( __OPENGLES_VERSION < 2 ) {
 			glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE );
 		}
-		if(glGetError())
-		{
-			printf("glTexParameteri failed. ");
-			//return 0;
-		}
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
-		if(glGetError())
-		{
-			printf("glTexImage2D failed. ");
-			return 0;
-		}
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 			glGenerateMipmap( GL_TEXTURE_2D );
 		}
+#endif
 		if(glGetError())
 		{
 			printf("glTexImage2D failed. ");
-			return 0;
+			//return 0;
 		}
 		free(textureData);
 		CGContextRelease(textureContext);

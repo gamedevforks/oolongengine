@@ -15,6 +15,8 @@ subject to the following restrictions:
 #ifndef APP_H_
 #define APP_H_
 
+#include <TargetConditionals.h>
+#include <Availability.h>
 
 #include "../Application/Application.h"
 

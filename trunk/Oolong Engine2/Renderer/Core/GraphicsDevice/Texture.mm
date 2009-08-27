@@ -25,6 +25,8 @@ subject to the following restrictions:
 #include "Resource.h"
 #include "Macros.h"
 
+extern int __OPENGLES_VERSION;
+
 typedef unsigned long U32;
 typedef unsigned char U8;
 
@@ -49,6 +51,7 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 	strcat( buffer, filename );
 	NSString *path = [NSString stringWithUTF8String:buffer];
 	
+	
 	UIImage *uiImage = [UIImage imageWithContentsOfFile:path];
 	if( uiImage ) {
 		textureImage = uiImage.CGImage;
@@ -62,14 +65,47 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 			textureData = (GLubyte *) malloc(width * height * 4);
 			textureContext = CGBitmapContextCreate(textureData, width, height, 8, width * 4, CGImageGetColorSpace(textureImage), kCGImageAlphaPremultipliedLast);
 			CGContextDrawImage(textureContext, CGRectMake(0.0, 0.0, (float)width, (float)height), textureImage);
-			CGContextRelease(textureContext);
 		}
-		
+		//glActiveTexture(GL_TEXTURE0);
 		glGenTextures(1, &textureID);
+		if(glGetError())
+		{
+			printf("glGenTextures failed. ");
+			return 0;
+		}
+
 		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE );
+		if(glGetError())
+		{
+			printf("glBindTexture failed. ");
+			return 0;
+		}
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		if( __OPENGLES_VERSION < 2 ) {
+			glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE );
+		}
+		if(glGetError())
+		{
+			printf("glTexParameteri failed. ");
+			//return 0;
+		}
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
+		if(glGetError())
+		{
+			printf("glTexImage2D failed. ");
+			return 0;
+		}
+		if( __OPENGLES_VERSION >= 2 ) {
+			glGenerateMipmap( GL_TEXTURE_2D );
+		}
+		if(glGetError())
+		{
+			printf("glTexImage2D failed. ");
+			return 0;
+		}
 		free(textureData);
+		CGContextRelease(textureContext);
 	}
 	else {
 		GLuint textureID;
@@ -84,9 +120,7 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 	}
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 		
 	*texName = textureID;
 	

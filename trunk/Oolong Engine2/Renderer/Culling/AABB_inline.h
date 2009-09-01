@@ -51,6 +51,38 @@ inline void CAABB::ComputeAABB(const VECTOR3* const pV, const int nNumberOfVerti
 	Set(min, max);
 }
 
+inline void CAABB::ComputeAABB(const float	* pV, const int stride, const int nNumberOfVertices)
+{
+	int			i;
+	//	VERTTYPE	MinX, MaxX, MinY, MaxY, MinZ, MaxZ;
+	VECTOR3 min; 
+	VECTOR3 max;
+	
+	// Inialise values to first vertex //
+	min.x=pV[0];	max.x=pV[0];
+	min.y=pV[1];	max.y=pV[1];
+	min.z=pV[2];	max.z=pV[2];
+	
+	// Loop through all vertices to find extremas //
+	for (i=1; i < nNumberOfVertices; i++)
+	{
+		// Minimum and Maximum X //
+		if (pV[0] < min.x) min.x = pV[0];
+		if (pV[0] > max.x) max.x = pV[0];
+		
+		// Minimum and Maximum Y //
+		if (pV[1] < min.y) min.y = pV[1];
+		if (pV[1] > max.y) max.y = pV[1];
+		
+		// Minimum and Maximum Z //
+		if (pV[2] < min.z) min.z = pV[2];
+		if (pV[2] > max.z) max.z = pV[2];
+			
+		pV = (float *)(((int)pV)+stride);
+	}
+	
+	Set(min, max);
+}
 
 inline void CAABB::Set(const VECTOR3& min, const VECTOR3& max) 
 {

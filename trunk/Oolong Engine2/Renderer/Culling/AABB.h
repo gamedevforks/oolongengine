@@ -44,6 +44,7 @@ public:
 	}
 	
 	inline void ComputeAABB(const VECTOR3	* const pV, const int nNumberOfVertices);
+	inline void ComputeAABB(const float	* pV, const int stride, const int nNumberOfVertices);
 	
 	// set min / max and bounding radius
 	inline void Set(const VECTOR3 &min, const VECTOR3 &max);

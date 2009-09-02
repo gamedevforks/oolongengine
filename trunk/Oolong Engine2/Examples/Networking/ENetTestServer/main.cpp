@@ -44,6 +44,7 @@ int main (int argc, char * const argv[]) {
 	while(true)
 	{
 		ENetEvent event;
+		ENetPacket* packet;
 		while(enet_host_service(server, &event, 1000) > 0)
 		{
 			switch(event.type)
@@ -62,7 +63,7 @@ int main (int argc, char * const argv[]) {
 							event.packet->dataLength,
 							event.packet->data);
 					
-					ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength, ENET_PACKET_FLAG_RELIABLE);
+					packet = enet_packet_create(event.packet->data, event.packet->dataLength, ENET_PACKET_FLAG_RELIABLE);
 					enet_host_broadcast(server, 0, packet);
 					enet_host_flush(server);
 					

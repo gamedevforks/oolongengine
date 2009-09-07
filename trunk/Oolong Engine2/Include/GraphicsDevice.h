@@ -20,6 +20,8 @@ subject to the following restrictions:
 #include "../Renderer/Core/GraphicsDevice/GLES20/OpenGL_Internal.h"
 #include "../Renderer/Core/GraphicsDevice/Shader.h"
 #include "../Renderer/Core/GraphicsDevice/Texture.h"
+#include "../Renderer/Core/GraphicsDevice/PFXParser.h"
+#include "../Renderer/Core/GraphicsDevice/PFXParserAPI.h"
 #else // Only GLES 1.1 Support On Device.
 #include "../Renderer/Core/GraphicsDevice/GLES11/EAGLView.h"
 #include "../Renderer/Core/GraphicsDevice/GLES11/OpenGL_Internal.h"

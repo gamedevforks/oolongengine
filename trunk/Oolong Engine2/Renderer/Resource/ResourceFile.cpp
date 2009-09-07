@@ -61,12 +61,11 @@ string CPVRTResourceFile::GetReadPath()
 CPVRTResourceFile::CPVRTResourceFile(const char* const pszFilename) :
 	m_bOpen(false),
 	m_bMemoryFile(false),
-	m_Size(0),
-	m_pData(0)
+	m_Size(0),	m_pData(0)
 {
 	string Path(s_ReadPath);
 	Path += pszFilename;
-
+	
 	FILE* pFile = fopen(Path.c_str(), "rb");
 	if (pFile)
 	{
@@ -93,12 +92,10 @@ CPVRTResourceFile::CPVRTResourceFile(const char* const pszFilename) :
 		fclose(pFile);
 	}
 
-#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL) || defined(BUILD_OVG) || defined(BUILD_DX9) || defined(BUILD_DX10)
 	if (!m_bOpen)
 	{
 		m_bOpen = m_bMemoryFile = CPVRTMemoryFileSystem::GetFile(pszFilename, (const void**)(&m_pData), &m_Size);
 	}
-#endif
 }
 
 /*!***************************************************************************
@@ -179,7 +176,7 @@ void CPVRTResourceFile::Close()
 	}
 }
 
-#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL) || defined(BUILD_OVG) || defined(BUILD_DX9) || defined(BUILD_DX10)
+//#if defined(BUILD_OGLES2) || defined(BUILD_OGLES) || defined(BUILD_OGL) || defined(BUILD_OVG) || defined(BUILD_DX9) || defined(BUILD_DX10)
 
 /****************************************************************************
 ** class CPVRTMemoryFileSystem
@@ -311,4 +308,4 @@ const char* CPVRTMemoryFileSystem::GetFilename(int i32Index)
 //	return Out.str();
 //}
 
-#endif
+//#endif

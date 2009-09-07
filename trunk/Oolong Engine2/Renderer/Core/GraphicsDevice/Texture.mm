@@ -338,6 +338,7 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 	GLuint textureName;
 	GLenum textureFormat = 0;
 	GLenum textureType = GL_RGB;
+	GLenum eTarget; //OGLES2 Variable.
 
 	bool IsPVRTCSupported = true; // hack until extension check is available //OpenGLESExt::IsGLExtensionSupported("GL_IMG_texture_compression_pvrtc");
 
@@ -441,12 +442,25 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 
 	//  check that this data is cube map data or not.
 	if(psPVRHeader->dwpfFlags & PVRTEX_CUBEMAP)
-	{ // not in OGLES you don't
-		printf("LoadPartialTextureFromPointer failed: cube map textures are not available in OGLES1.x. ");
-		return 0;
+	{ 		
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+		if( __OPENGLES_VERSION >= 2 ) 
+		{
+			// OGLES 2.0, let's go ahead and make the eTarget a Cube Map.
+			eTarget = GL_TEXTURE_CUBE_MAP;
+			glBindTexture(GL_TEXTURE_CUBE_MAP, textureName);
+		}
+		else 
+#endif
+		{
+			// Not in OGLES1.1, you don't!
+			printf("LoadPartialTextureFromPointer failed: cube map textures are not available in OGLES1.x. ");
+			return 0;
+		}
 	}
 	else
 	{
+		eTarget = GL_TEXTURE_2D;
 		glBindTexture(GL_TEXTURE_2D, textureName);
 	}
 
@@ -490,18 +504,29 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 				{
 					if(IsCompressedFormatSupported)
 					{
-						//if(psPVRHeader->dwpfFlags&PVRTEX_CUBEMAP)
-						//{
-						//	/* Load compressed texture data at selected MIP level */
-						//	glCompressedTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i, nMIPMapLevel-nLoadFromLevel, textureFormat, nSizeX, nSizeY, 0,
-						//					CompressedImageSize, theTextureToLoad);
-						//}
-						//else
+						if(psPVRHeader->dwpfFlags&PVRTEX_CUBEMAP)
+						{
+							#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+							if( __OPENGLES_VERSION >= 2 ) 
+							{
+								//And should enter here.
+								/* Load compressed texture data at selected MIP level */
+								glCompressedTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i, nMIPMapLevel-nLoadFromLevel, textureFormat, nSizeX, nSizeY, 0,
+													   CompressedImageSize, theTextureToLoad);
+							}
+							else 
+							#endif
+							{
+								printf("Should not reach this statement.  Trying to load a cubemap for OpenGL ES 1.1.\n");
+								return 0;
+							}
+						}
+						else
 						{
 							/* Load compressed texture data at selected MIP level */
 							glCompressedTexImage2D(GL_TEXTURE_2D, nMIPMapLevel-nLoadFromLevel, textureFormat, nSizeX, nSizeY, 0,
-											CompressedImageSize, theTextureToLoad);
-
+												   CompressedImageSize, theTextureToLoad);
+							
 						}
 					}
 					else
@@ -520,18 +545,29 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 						}
 
 
-						//if(psPVRHeader->dwpfFlags&PVRTEX_CUBEMAP)
-						//{// Load compressed cubemap data at selected MIP level
-						//	// Upload the texture as 32-bits
-						//	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,nMIPMapLevel-nLoadFromLevel,GL_RGBA,
-						//		nSizeX,nSizeY,0, GL_RGBA,GL_UNSIGNED_BYTE,u8TempTexture);
-						//	free(u8TempTexture);
-						//}
-						//else
+						if(psPVRHeader->dwpfFlags&PVRTEX_CUBEMAP)
+						{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+							if( __OPENGLES_VERSION >= 2 ) 
+							{
+								// Load compressed cubemap data at selected MIP level
+								// Upload the texture as 32-bits
+								glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,nMIPMapLevel-nLoadFromLevel,GL_RGBA,
+											 nSizeX,nSizeY,0, GL_RGBA,GL_UNSIGNED_BYTE,u8TempTexture);
+								free(u8TempTexture);
+							}
+							else 
+#endif
+							{
+								printf("Failed when trying to load an unsupported feature (cubemap) for OpenGL ES 1.1.\n");
+								return 0;
+							}
+						}
+						else
 						{// Load compressed 2D data at selected MIP level
 							// Upload the texture as 32-bits
 							glTexImage2D(GL_TEXTURE_2D,nMIPMapLevel-nLoadFromLevel,GL_RGBA,
-								nSizeX,nSizeY,0, GL_RGBA,GL_UNSIGNED_BYTE,u8TempTexture);
+										 nSizeX,nSizeY,0, GL_RGBA,GL_UNSIGNED_BYTE,u8TempTexture);
 							free(u8TempTexture);
 						}
 					}
@@ -541,13 +577,23 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 			{
 				if(((signed int)nMIPMapLevel - (signed int)nLoadFromLevel) >= 0)
 				{
-					//if(psPVRHeader->dwpfFlags&PVRTEX_CUBEMAP)
-					//{
-					//	/* Load uncompressed texture data at selected MIP level */
-					//	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,nMIPMapLevel-nLoadFromLevel,textureType,nSizeX,nSizeY,
-					//		0, textureType,textureFormat,theTextureToLoad);
-					//}
-					//else
+					if(psPVRHeader->dwpfFlags&PVRTEX_CUBEMAP)
+					{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+						if( __OPENGLES_VERSION >= 2 ) 
+						{
+							/* Load uncompressed texture data at selected MIP level */
+							glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,nMIPMapLevel-nLoadFromLevel,textureType,nSizeX,nSizeY,
+										 0, textureType,textureFormat,theTextureToLoad);
+						}
+						else 
+#endif
+						{
+							printf("Failed when trying to load an unsupported feature (cubemap) for OpenGL ES 1.1.\n");
+							return 0;
+						}
+					}
+					else
 					{
 						/* Load uncompressed texture data at selected MIP level */
 						glTexImage2D(GL_TEXTURE_2D,nMIPMapLevel-nLoadFromLevel,textureType,nSizeX,nSizeY,0, textureType,textureFormat,theTextureToLoad);
@@ -585,7 +631,22 @@ unsigned int CTexture::LoadPartialTextureFromPointer(const void * const pointer,
 		((PVR_Texture_Header*)psTextureHeader)->dwNumSurfs = u32NumSurfs;
 	}
 
-	return psPVRHeader->dwpfFlags|0x80000000;		// PVR psPVRHeader flags with topmost bit set so that it is non-zero 
+	/* 1.1 Return line. */
+	//return psPVRHeader->dwpfFlags|0x80000000;		// PVR psPVRHeader flags with topmost bit set so that it is non-zero
+	
+	/* 2.0 Return line. */
+	if(!psPVRHeader->dwMipMapCount)
+	{
+		glTexParameteri(eTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(eTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+	else
+	{
+        glTexParameteri(eTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+		glTexParameteri(eTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+	
+	return 1; 
 }
 
 

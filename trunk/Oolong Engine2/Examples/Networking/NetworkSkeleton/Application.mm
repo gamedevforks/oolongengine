@@ -38,11 +38,11 @@ int frames;
 float frameRate;
 
 static int sMessageCounter;
-static char* sMessageData;
+static char* sMessageData = 0;
 static ENetHost* sClient;
 static ENetPeer* sPeer;
 
-const char* IP_ADDRESS = "74.14.6.40";
+const char* IP_ADDRESS = "172.16.189.1";
 const int PORT = 9050;
 
 bool CShell::InitApplication()
@@ -149,7 +149,9 @@ bool CShell::UpdateScene()
 		frameRate = ((float)frames/(TimeInterval));
 	
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f", frameRate);
-	
+	if(sMessageData != 0)
+		AppDisplayText->DisplayText(0, 10, 0.4f, RGBA(255,255,255,255), sMessageData);
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(0.0, 0.0, - 10.0f);
@@ -246,7 +248,7 @@ bool CShell::RenderScene()
 	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("ENet Networking", "", eDisplayTextLogoIMG);
-	
+	//AppDisplayText->DisplayDefaultTitle(sMessageData, "", eDisplayTextLogoIMG);
 	AppDisplayText->Flush();	
 	
 	return true;

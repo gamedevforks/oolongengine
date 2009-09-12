@@ -1,0 +1,219 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* RaknetBasic1 */ = {
+		activeExec = 0;
+		executables = (
+			D94F9E85104ECA3900D137CC /* RaknetBasic1 */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = D94F9E85104ECA3900D137CC /* RaknetBasic1 */;
+		activeSDKPreference = iphonesimulator3.1;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* RaknetBasic1 */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* RaknetBasic1 */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = D94F9E94104ECA4200D137CC /* Code sense */;
+		executables = (
+			D94F9E85104ECA3900D137CC /* RaknetBasic1 */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1059,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFindDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFindDataSource_LocationID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					200,
+					1073,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFindDataSource_MessageID,
+					PBXFindDataSource_LocationID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1019,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 274466360;
+			PBXWorkspaceStateSaveDate = 274466360;
+		};
+		perUserProjectItems = {
+			D94D6B64105B6B8100D1043A /* PBXTextBookmark */ = D94D6B64105B6B8100D1043A /* PBXTextBookmark */;
+			D94D6EF9105C094B00D1043A /* PBXTextBookmark */ = D94D6EF9105C094B00D1043A /* PBXTextBookmark */;
+			D96693D6105AB93200854FD3 /* PBXTextBookmark */ = D96693D6105AB93200854FD3 /* PBXTextBookmark */;
+			D9669458105AC20400854FD3 /* PBXTextBookmark */ = D9669458105AC20400854FD3 /* PBXTextBookmark */;
+			D9A10154105B1950001C668A /* PBXTextBookmark */ = D9A10154105B1950001C668A /* PBXTextBookmark */;
+		};
+		sourceControlManager = D94F9E93104ECA4200D137CC /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1713, 3146}}";
+			sepNavSelRange = "{3700, 0}";
+			sepNavVisRange = "{3088, 1597}";
+			sepNavWindowFrame = "{{-2476, 183}, {1489, 1349}}";
+		};
+	};
+	D94D6B64105B6B8100D1043A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 125";
+		rLen = 0;
+		rLoc = 3601;
+		rType = 0;
+		vrLen = 1614;
+		vrLoc = 2937;
+	};
+	D94D6EF9105C094B00D1043A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 135";
+		rLen = 0;
+		rLoc = 3700;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 3088;
+	};
+	D94F9E85104ECA3900D137CC /* RaknetBasic1 */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = RaknetBasic1;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	D94F9E93104ECA4200D137CC /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	D94F9E94104ECA4200D137CC /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	D96693D6105AB93200854FD3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D96693D7105AB93200854FD3 /* Chat Example Client.cpp */;
+		name = "Chat Example Client.cpp: 29";
+		rLen = 1;
+		rLoc = 890;
+		rType = 0;
+		vrLen = 1983;
+		vrLoc = 0;
+	};
+	D96693D7105AB93200854FD3 /* Chat Example Client.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = "Chat Example Client.cpp";
+		path = "/Users/jwoynillowicz/Code/raknet/trunk/Samples/Chat Example/Chat Example Client.cpp";
+		sourceTree = "<absolute>";
+	};
+	D9669458105AC20400854FD3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D9669459105AC20400854FD3 /* Chat Example Server.cpp */;
+		name = "Chat Example Server.cpp: 38";
+		rLen = 1;
+		rLoc = 998;
+		rType = 0;
+		vrLen = 1997;
+		vrLoc = 0;
+	};
+	D9669459105AC20400854FD3 /* Chat Example Server.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = "Chat Example Server.cpp";
+		path = "/Users/jwoynillowicz/Code/raknet/trunk/Samples/Chat Example/Chat Example Server.cpp";
+		sourceTree = "<absolute>";
+	};
+	D9A10154105B1950001C668A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D9A10155105B1950001C668A /* ServerClientTest.cpp */;
+		name = "ServerClientTest.cpp: 10";
+		rLen = 1;
+		rLoc = 275;
+		rType = 0;
+		vrLen = 1633;
+		vrLoc = 899;
+	};
+	D9A10155105B1950001C668A /* ServerClientTest.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = ServerClientTest.cpp;
+		path = /Users/jwoynillowicz/Code/raknet/trunk/Samples/ServerClientTest/ServerClientTest.cpp;
+		sourceTree = "<absolute>";
+	};
+}

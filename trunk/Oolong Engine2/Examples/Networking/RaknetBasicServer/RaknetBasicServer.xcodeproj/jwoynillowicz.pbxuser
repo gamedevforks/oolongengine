@@ -1,0 +1,203 @@
+// !$*UTF8*$!
+{
+	08FB7793FE84155DC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = D91E78B8104ECFC20006CC14 /* RaknetBasicServer */;
+		activeSDKPreference = macosx10.5;
+		activeTarget = 8DD76F620486A84900D96B5E /* RaknetBasicServer */;
+		addToTargets = (
+			8DD76F620486A84900D96B5E /* RaknetBasicServer */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = D91E78C3104ECFE00006CC14 /* Code sense */;
+		executables = (
+			D91E78B8104ECFC20006CC14 /* RaknetBasicServer */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					1032,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1144,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1104,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 274467066;
+			PBXWorkspaceStateSaveDate = 274467066;
+		};
+		perUserProjectItems = {
+			D94D6E9E105C077B00D1043A /* PBXTextBookmark */ = D94D6E9E105C077B00D1043A /* PBXTextBookmark */;
+			D94D6EB7105C084000D1043A /* PBXTextBookmark */ = D94D6EB7105C084000D1043A /* PBXTextBookmark */;
+			D94D6EE7105C090A00D1043A /* PBXTextBookmark */ = D94D6EE7105C090A00D1043A /* PBXTextBookmark */;
+			D94D6EF8105C094900D1043A /* PBXTextBookmark */ = D94D6EF8105C094900D1043A /* PBXTextBookmark */;
+		};
+		sourceControlManager = D91E78C2104ECFE00006CC14 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1720, 1872}}";
+			sepNavSelRange = "{1562, 0}";
+			sepNavVisRange = "{2840, 1936}";
+			sepNavWindowFrame = "{{-1764, 116}, {1489, 1349}}";
+		};
+	};
+	8DD76F620486A84900D96B5E /* RaknetBasicServer */ = {
+		activeExec = 0;
+		executables = (
+			D91E78B8104ECFC20006CC14 /* RaknetBasicServer */,
+		);
+	};
+	D91E78B8104ECFC20006CC14 /* RaknetBasicServer */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = RaknetBasicServer;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	D91E78C2104ECFE00006CC14 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	D91E78C3104ECFE00006CC14 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	D94D6E9E105C077B00D1043A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D94D6E9F105C077B00D1043A /* Chat Example Client.cpp */;
+		name = "Chat Example Client.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1844;
+		vrLoc = 0;
+	};
+	D94D6E9F105C077B00D1043A /* Chat Example Client.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = "Chat Example Client.cpp";
+		path = "/Users/jwoynillowicz/Code/raknet/trunk/Samples/Chat Example/Chat Example Client.cpp";
+		sourceTree = "<absolute>";
+	};
+	D94D6EB7105C084000D1043A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D9607D3F105AF8B0003B98AB /* Chat Example Server.cpp */;
+		name = "Chat Example Server.cpp: 4";
+		rLen = 0;
+		rLoc = 158;
+		rType = 0;
+		vrLen = 1853;
+		vrLoc = 0;
+	};
+	D94D6EE7105C090A00D1043A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 39";
+		rLen = 0;
+		rLoc = 1562;
+		rType = 0;
+		vrLen = 1936;
+		vrLoc = 2840;
+	};
+	D94D6EF8105C094900D1043A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 39";
+		rLen = 0;
+		rLoc = 1562;
+		rType = 0;
+		vrLen = 1936;
+		vrLoc = 2840;
+	};
+	D9607D3F105AF8B0003B98AB /* Chat Example Server.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = "Chat Example Server.cpp";
+		path = "/Users/jwoynillowicz/Code/raknet/trunk/Samples/Chat Example/Chat Example Server.cpp";
+		sourceTree = "<absolute>";
+	};
+}

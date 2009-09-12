@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* ENetTestServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* ENetTestServer.1 */; };
-		D9F439140E98560500982662 /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F439050E98560500982662 /* callbacks.c */; };
-		D9F439150E98560500982662 /* host.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F439080E98560500982662 /* host.c */; };
-		D9F439160E98560500982662 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F439090E98560500982662 /* list.c */; };
-		D9F439170E98560500982662 /* packet.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F4390B0E98560500982662 /* packet.c */; };
-		D9F439180E98560500982662 /* peer.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F4390C0E98560500982662 /* peer.c */; };
-		D9F439190E98560500982662 /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F4390D0E98560500982662 /* protocol.c */; };
-		D9F4391A0E98560500982662 /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = D9F439110E98560500982662 /* unix.c */; };
+		D94D6B88105C059C00D1043A /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B79105C059C00D1043A /* callbacks.c */; };
+		D94D6B89105C059C00D1043A /* host.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B7C105C059C00D1043A /* host.c */; };
+		D94D6B8A105C059C00D1043A /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B7D105C059C00D1043A /* list.c */; };
+		D94D6B8B105C059C00D1043A /* packet.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B7F105C059C00D1043A /* packet.c */; };
+		D94D6B8C105C059C00D1043A /* peer.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B80105C059C00D1043A /* peer.c */; };
+		D94D6B8D105C059C00D1043A /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B81105C059C00D1043A /* protocol.c */; };
+		D94D6B8E105C059C00D1043A /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = D94D6B85105C059C00D1043A /* unix.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,21 +35,21 @@
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* ENetTestServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ENetTestServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* ENetTestServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = ENetTestServer.1; sourceTree = "<group>"; };
-		D9F439050E98560500982662 /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = callbacks.c; sourceTree = "<group>"; };
-		D9F439060E98560500982662 /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = "<group>"; };
-		D9F439070E98560500982662 /* enet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enet.h; sourceTree = "<group>"; };
-		D9F439080E98560500982662 /* host.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = host.c; sourceTree = "<group>"; };
-		D9F439090E98560500982662 /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
-		D9F4390A0E98560500982662 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
-		D9F4390B0E98560500982662 /* packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = packet.c; sourceTree = "<group>"; };
-		D9F4390C0E98560500982662 /* peer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = peer.c; sourceTree = "<group>"; };
-		D9F4390D0E98560500982662 /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = protocol.c; sourceTree = "<group>"; };
-		D9F4390E0E98560500982662 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
-		D9F4390F0E98560500982662 /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
-		D9F439100E98560500982662 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		D9F439110E98560500982662 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
-		D9F439120E98560500982662 /* unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unix.h; sourceTree = "<group>"; };
-		D9F439130E98560500982662 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		D94D6B79105C059C00D1043A /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = callbacks.c; sourceTree = "<group>"; };
+		D94D6B7A105C059C00D1043A /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = "<group>"; };
+		D94D6B7B105C059C00D1043A /* enet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enet.h; sourceTree = "<group>"; };
+		D94D6B7C105C059C00D1043A /* host.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = host.c; sourceTree = "<group>"; };
+		D94D6B7D105C059C00D1043A /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
+		D94D6B7E105C059C00D1043A /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		D94D6B7F105C059C00D1043A /* packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = packet.c; sourceTree = "<group>"; };
+		D94D6B80105C059C00D1043A /* peer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = peer.c; sourceTree = "<group>"; };
+		D94D6B81105C059C00D1043A /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = protocol.c; sourceTree = "<group>"; };
+		D94D6B82105C059C00D1043A /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
+		D94D6B83105C059C00D1043A /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		D94D6B84105C059C00D1043A /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		D94D6B85105C059C00D1043A /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
+		D94D6B86105C059C00D1043A /* unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unix.h; sourceTree = "<group>"; };
+		D94D6B87105C059C00D1043A /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 		08FB7794FE84155DC02AAC07 /* ENetTestServer */ = {
 			isa = PBXGroup;
 			children = (
-				D9F439040E98560500982662 /* Enet */,
+				D94D6B78105C059C00D1043A /* Enet */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -98,27 +98,27 @@
 			name = Documentation;
 			sourceTree = "<group>";
 		};
-		D9F439040E98560500982662 /* Enet */ = {
+		D94D6B78105C059C00D1043A /* Enet */ = {
 			isa = PBXGroup;
 			children = (
-				D9F439050E98560500982662 /* callbacks.c */,
-				D9F439060E98560500982662 /* callbacks.h */,
-				D9F439070E98560500982662 /* enet.h */,
-				D9F439080E98560500982662 /* host.c */,
-				D9F439090E98560500982662 /* list.c */,
-				D9F4390A0E98560500982662 /* list.h */,
-				D9F4390B0E98560500982662 /* packet.c */,
-				D9F4390C0E98560500982662 /* peer.c */,
-				D9F4390D0E98560500982662 /* protocol.c */,
-				D9F4390E0E98560500982662 /* protocol.h */,
-				D9F4390F0E98560500982662 /* time.h */,
-				D9F439100E98560500982662 /* types.h */,
-				D9F439110E98560500982662 /* unix.c */,
-				D9F439120E98560500982662 /* unix.h */,
-				D9F439130E98560500982662 /* utility.h */,
+				D94D6B79105C059C00D1043A /* callbacks.c */,
+				D94D6B7A105C059C00D1043A /* callbacks.h */,
+				D94D6B7B105C059C00D1043A /* enet.h */,
+				D94D6B7C105C059C00D1043A /* host.c */,
+				D94D6B7D105C059C00D1043A /* list.c */,
+				D94D6B7E105C059C00D1043A /* list.h */,
+				D94D6B7F105C059C00D1043A /* packet.c */,
+				D94D6B80105C059C00D1043A /* peer.c */,
+				D94D6B81105C059C00D1043A /* protocol.c */,
+				D94D6B82105C059C00D1043A /* protocol.h */,
+				D94D6B83105C059C00D1043A /* time.h */,
+				D94D6B84105C059C00D1043A /* types.h */,
+				D94D6B85105C059C00D1043A /* unix.c */,
+				D94D6B86105C059C00D1043A /* unix.h */,
+				D94D6B87105C059C00D1043A /* utility.h */,
 			);
 			name = Enet;
-			path = ../../../Enet;
+			path = ../../../Networking/Enet;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -165,13 +165,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
-				D9F439140E98560500982662 /* callbacks.c in Sources */,
-				D9F439150E98560500982662 /* host.c in Sources */,
-				D9F439160E98560500982662 /* list.c in Sources */,
-				D9F439170E98560500982662 /* packet.c in Sources */,
-				D9F439180E98560500982662 /* peer.c in Sources */,
-				D9F439190E98560500982662 /* protocol.c in Sources */,
-				D9F4391A0E98560500982662 /* unix.c in Sources */,
+				D94D6B88105C059C00D1043A /* callbacks.c in Sources */,
+				D94D6B89105C059C00D1043A /* host.c in Sources */,
+				D94D6B8A105C059C00D1043A /* list.c in Sources */,
+				D94D6B8B105C059C00D1043A /* packet.c in Sources */,
+				D94D6B8C105C059C00D1043A /* peer.c in Sources */,
+				D94D6B8D105C059C00D1043A /* protocol.c in Sources */,
+				D94D6B8E105C059C00D1043A /* unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

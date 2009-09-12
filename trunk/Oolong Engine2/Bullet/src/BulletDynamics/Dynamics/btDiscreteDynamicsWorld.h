@@ -124,11 +124,16 @@ public:
 
 	virtual btVector3 getGravity () const;
 
+	virtual void	addCollisionObject(btCollisionObject* collisionObject,short int collisionFilterGroup=btBroadphaseProxy::StaticFilter,short int collisionFilterMask=btBroadphaseProxy::AllFilter ^ btBroadphaseProxy::StaticFilter);
+
 	virtual void	addRigidBody(btRigidBody* body);
 
 	virtual void	addRigidBody(btRigidBody* body, short group, short mask);
 
 	virtual void	removeRigidBody(btRigidBody* body);
+
+	///removeCollisionObject will first check if it is a rigid body, if so call removeRigidBody otherwise call btCollisionWorld::removeCollisionObject
+	virtual void	removeCollisionObject(btCollisionObject* collisionObject);
 
 	void	debugDrawObject(const btTransform& worldTransform, const btCollisionShape* shape, const btVector3& color);
 

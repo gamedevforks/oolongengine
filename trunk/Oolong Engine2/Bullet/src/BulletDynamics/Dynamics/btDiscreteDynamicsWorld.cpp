@@ -64,8 +64,8 @@ btDiscreteDynamicsWorld::btDiscreteDynamicsWorld(btDispatcher* dispatcher,btBroa
 m_constraintSolver(constraintSolver),
 m_gravity(0,-10,0),
 m_localTime(btScalar(1.)/btScalar(60.)),
-m_profileTimings(0),
-m_synchronizeAllMotionStates(false)
+m_synchronizeAllMotionStates(false),
+m_profileTimings(0)
 {
 	if (!m_constraintSolver)
 	{
@@ -343,9 +343,10 @@ int	btDiscreteDynamicsWorld::stepSimulation( btScalar timeStep,int maxSubSteps, 
 			synchronizeMotionStates();
 		}
 
-	} 
-
-	synchronizeMotionStates();
+	} else
+	{
+		synchronizeMotionStates();
+	}
 
 	clearForces();
 
@@ -360,6 +361,10 @@ void	btDiscreteDynamicsWorld::internalSingleStepSimulation(btScalar timeStep)
 {
 	
 	BT_PROFILE("internalSingleStepSimulation");
+
+	if(0 != m_internalPreTickCallback) {
+		(*m_internalPreTickCallback)(this, timeStep);
+	}	
 
 	///apply gravity, predict motion
 	predictUnconstraintMotion(timeStep);
@@ -416,12 +421,26 @@ btVector3 btDiscreteDynamicsWorld::getGravity () const
 	return m_gravity;
 }
 
+void	btDiscreteDynamicsWorld::addCollisionObject(btCollisionObject* collisionObject,short int collisionFilterGroup,short int collisionFilterMask)
+{
+	btCollisionWorld::addCollisionObject(collisionObject,collisionFilterGroup,collisionFilterMask);
+}
+
+void	btDiscreteDynamicsWorld::removeCollisionObject(btCollisionObject* collisionObject)
+{
+	btRigidBody* body = btRigidBody::upcast(collisionObject);
+	if (body)
+		removeRigidBody(body);
+	else
+		btCollisionWorld::removeCollisionObject(collisionObject);
+}
 
 void	btDiscreteDynamicsWorld::removeRigidBody(btRigidBody* body)
 {
 	m_nonStaticRigidBodies.remove(body);
-	removeCollisionObject(body);
+	btCollisionWorld::removeCollisionObject(body);
 }
+
 
 void	btDiscreteDynamicsWorld::addRigidBody(btRigidBody* body)
 {
@@ -851,7 +870,7 @@ void	btDiscreteDynamicsWorld::integrateTransforms(btScalar timeStep)
 					gNumClampedCcdMotions++;
 					
 					btClosestNotMeConvexResultCallback sweepResults(body,body->getWorldTransform().getOrigin(),predictedTrans.getOrigin(),getBroadphase()->getOverlappingPairCache(),getDispatcher());
-					btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
+					//btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
 					btSphereShape tmpSphere(body->getCcdSweptSphereRadius());//btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
 
 					sweepResults.m_collisionFilterGroup = body->getBroadphaseProxy()->m_collisionFilterGroup;

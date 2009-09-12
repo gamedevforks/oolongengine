@@ -45,7 +45,8 @@ subject to the following restrictions:
 btCollisionWorld::btCollisionWorld(btDispatcher* dispatcher,btBroadphaseInterface* pairCache, btCollisionConfiguration* collisionConfiguration)
 :m_dispatcher1(dispatcher),
 m_broadphasePairCache(pairCache),
-m_debugDrawer(0)
+m_debugDrawer(0),
+m_forceUpdateAllAabbs(true)
 {
 	m_stackAlloc = collisionConfiguration->getStackAllocator();
 	m_dispatchInfo.m_stackAllocator = m_stackAlloc;
@@ -87,6 +88,8 @@ btCollisionWorld::~btCollisionWorld()
 
 void	btCollisionWorld::addCollisionObject(btCollisionObject* collisionObject,short int collisionFilterGroup,short int collisionFilterMask)
 {
+
+	btAssert(collisionObject);
 
 	//check that the object isn't already added
 		btAssert( m_collisionObjects.findLinearSearch(collisionObject)  == m_collisionObjects.size());
@@ -162,7 +165,7 @@ void	btCollisionWorld::updateAabbs()
 		btCollisionObject* colObj = m_collisionObjects[i];
 
 		//only update aabb of active objects
-		if (colObj->isActive())
+		if (m_forceUpdateAllAabbs || colObj->isActive())
 		{
 			updateSingleAabb(colObj);
 		}
@@ -705,7 +708,7 @@ struct btSingleRayCallback : public btBroadphaseRayCallback
 
 void	btCollisionWorld::rayTest(const btVector3& rayFromWorld, const btVector3& rayToWorld, RayResultCallback& resultCallback) const
 {
-	BT_PROFILE("rayTest");
+	//BT_PROFILE("rayTest");
 	/// use the broadphase to accelerate the search for objects, based on their aabb
 	/// and for each object with ray-aabb overlap, perform an exact ray test
 	btSingleRayCallback rayCB(rayFromWorld,rayToWorld,this,resultCallback);

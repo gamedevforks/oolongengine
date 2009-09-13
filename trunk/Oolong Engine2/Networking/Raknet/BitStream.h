@@ -460,6 +460,9 @@ namespace RakNet
 		/// \param[in] numberOfBytesToWrite The size of input.
 		void WriteAlignedBytes( const unsigned char *input, const unsigned int numberOfBytesToWrite );
 
+		// Endian swap bytes already in the bitstream
+		void EndianSwapBytes( int byteOffset, int length );
+
 		/// \brief Aligns the bitstream, writes inputLength, and writes input. Won't write beyond maxBytesToWrite
 		/// \param[in] input The data
 		/// \param[in] inputLength The size of input.
@@ -752,7 +755,7 @@ namespace RakNet
 #endif
 
 		inline static bool DoEndianSwap(void) {
-#ifndef __BITSTREAM_NATIVE_END 
+#ifndef __BITSTREAM_NATIVE_END
 			return IsNetworkOrder()==false;
 #else
 			return false;

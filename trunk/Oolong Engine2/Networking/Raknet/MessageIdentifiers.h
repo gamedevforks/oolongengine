@@ -293,6 +293,9 @@ enum DefaultMessageIDTypes
 	/// Sent to NatTypeDetectionClient. Byte 1 contains the type of NAT detected.
 	ID_NAT_TYPE_DETECTION_RESULT,
 
+	/// Events happening with SQLiteClientLoggerPlugin
+	ID_SQLLITE_LOGGER,
+
 	// For the user to use.  Start your first enumeration at this value.
 	ID_USER_PACKET_ENUM,
 	//-------------------------------------------------------------------------------------------------------------

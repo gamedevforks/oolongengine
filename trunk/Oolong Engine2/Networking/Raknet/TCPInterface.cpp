@@ -219,6 +219,11 @@ SystemAddress TCPInterface::Connect(const char* host, unsigned short remotePort,
 		completedConnectionAttempts.Push(remoteClient->systemAddress);
 		completedConnectionAttemptMutex.Unlock();
 
+		while (remoteClients.Size()==0)
+		{
+			RakSleep(30);
+		}
+
 		return remoteClient->systemAddress;
 	}
 	else

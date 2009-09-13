@@ -329,7 +329,13 @@ void BitStream::WriteAlignedBytes( const unsigned char* input, const unsigned in
 	AlignWriteToByteBoundary();
 	Write((const char*) input, numberOfBytesToWrite);
 }
-
+void BitStream::EndianSwapBytes( int byteOffset, int length )
+{
+	if (DoEndianSwap())
+	{
+		ReverseBytesInPlace(data+byteOffset, length);
+	}
+}
 /// Aligns the bitstream, writes inputLength, and writes input. Won't write beyond maxBytesToWrite
 void BitStream::WriteAlignedBytesSafe( const char *input, const unsigned int inputLength, const unsigned int maxBytesToWrite )
 {

@@ -120,14 +120,13 @@ bool SocketLayer::IsPortInUse(unsigned short port)
 }
 void SocketLayer::SetDoNotFragment( SOCKET listenSocket, int opt )
 {
-// JOEW: commented as OSX does not have IP_DONTFRAGMENT declared.
-	/*
+
 #if defined(_WIN32) && !defined(_XBOX) && defined(_DEBUG) && !defined(X360)
 	// If this assert hit you improperly linked against WSock32.h
 	RakAssert(IP_DONTFRAGMENT==14);
 #endif
 
-#if !defined(_XBOX) && !defined(X360) && !defined(_PS3) && !defined(__PS3__) && !defined(SN_TARGET_PS3)
+#if !defined(_XBOX) && !defined(X360) && !defined(_PS3) && !defined(__PS3__) && !defined(SN_TARGET_PS3) && !defined(__APPLE__)
 	if ( setsockopt( listenSocket, IPPROTO_IP, IP_DONTFRAGMENT, ( char * ) & opt, sizeof ( opt ) ) == -1 )
 	{
 #if defined(_WIN32) && defined(_DEBUG)
@@ -140,7 +139,7 @@ void SocketLayer::SetDoNotFragment( SOCKET listenSocket, int opt )
 		LocalFree( messageBuffer );
 #endif
 	}
-#endif*/
+#endif
 
 }
 void SocketLayer::SetSocketOptions( SOCKET listenSocket)

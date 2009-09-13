@@ -115,7 +115,6 @@
 		7AD357C30EC90B3E0004CB13 /* btContinuousConvexCollision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD357010EC90B3D0004CB13 /* btContinuousConvexCollision.cpp */; };
 		7AD357C40EC90B3E0004CB13 /* btConvexCast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD357030EC90B3D0004CB13 /* btConvexCast.cpp */; };
 		7AD357C50EC90B3E0004CB13 /* btGjkConvexCast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD357070EC90B3D0004CB13 /* btGjkConvexCast.cpp */; };
-		7AD357C60EC90B3E0004CB13 /* btGjkEpa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD357090EC90B3D0004CB13 /* btGjkEpa.cpp */; };
 		7AD357C70EC90B3E0004CB13 /* btGjkEpa2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD3570B0EC90B3D0004CB13 /* btGjkEpa2.cpp */; };
 		7AD357C80EC90B3E0004CB13 /* btGjkEpaPenetrationDepthSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD3570D0EC90B3D0004CB13 /* btGjkEpaPenetrationDepthSolver.cpp */; };
 		7AD357C90EC90B3E0004CB13 /* btGjkPairDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD3570F0EC90B3D0004CB13 /* btGjkPairDetector.cpp */; };
@@ -398,8 +397,6 @@
 		7AD357060EC90B3D0004CB13 /* btDiscreteCollisionDetectorInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btDiscreteCollisionDetectorInterface.h; sourceTree = "<group>"; };
 		7AD357070EC90B3D0004CB13 /* btGjkConvexCast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGjkConvexCast.cpp; sourceTree = "<group>"; };
 		7AD357080EC90B3D0004CB13 /* btGjkConvexCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGjkConvexCast.h; sourceTree = "<group>"; };
-		7AD357090EC90B3D0004CB13 /* btGjkEpa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGjkEpa.cpp; sourceTree = "<group>"; };
-		7AD3570A0EC90B3D0004CB13 /* btGjkEpa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGjkEpa.h; sourceTree = "<group>"; };
 		7AD3570B0EC90B3D0004CB13 /* btGjkEpa2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGjkEpa2.cpp; sourceTree = "<group>"; };
 		7AD3570C0EC90B3D0004CB13 /* btGjkEpa2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btGjkEpa2.h; sourceTree = "<group>"; };
 		7AD3570D0EC90B3D0004CB13 /* btGjkEpaPenetrationDepthSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btGjkEpaPenetrationDepthSolver.cpp; sourceTree = "<group>"; };
@@ -990,8 +987,6 @@
 				7AD357060EC90B3D0004CB13 /* btDiscreteCollisionDetectorInterface.h */,
 				7AD357070EC90B3D0004CB13 /* btGjkConvexCast.cpp */,
 				7AD357080EC90B3D0004CB13 /* btGjkConvexCast.h */,
-				7AD357090EC90B3D0004CB13 /* btGjkEpa.cpp */,
-				7AD3570A0EC90B3D0004CB13 /* btGjkEpa.h */,
 				7AD3570B0EC90B3D0004CB13 /* btGjkEpa2.cpp */,
 				7AD3570C0EC90B3D0004CB13 /* btGjkEpa2.h */,
 				7AD3570D0EC90B3D0004CB13 /* btGjkEpaPenetrationDepthSolver.cpp */,
@@ -1347,7 +1342,6 @@
 				7AD357C30EC90B3E0004CB13 /* btContinuousConvexCollision.cpp in Sources */,
 				7AD357C40EC90B3E0004CB13 /* btConvexCast.cpp in Sources */,
 				7AD357C50EC90B3E0004CB13 /* btGjkConvexCast.cpp in Sources */,
-				7AD357C60EC90B3E0004CB13 /* btGjkEpa.cpp in Sources */,
 				7AD357C70EC90B3E0004CB13 /* btGjkEpa2.cpp in Sources */,
 				7AD357C80EC90B3E0004CB13 /* btGjkEpaPenetrationDepthSolver.cpp in Sources */,
 				7AD357C90EC90B3E0004CB13 /* btGjkPairDetector.cpp in Sources */,

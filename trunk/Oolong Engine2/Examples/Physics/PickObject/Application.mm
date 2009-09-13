@@ -77,22 +77,6 @@ bool CShell::InitApplication()
 	sDynamicsWorld = new btDiscreteDynamicsWorld(sCollisionDispatcher,sBroadphase,sConstraintSolver,sCollisionConfig);
 	sDynamicsWorld->setGravity(btVector3(0,0,0));
 	//btCollisionShape* shape = new btBoxShape(btVector3(1,1,1));
-	{
-		btTransform groundTransform;
-		groundTransform.setIdentity();
-		btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0,1,0),0);
-		btScalar mass(0.);	//rigidbody is dynamic if and only if mass is non zero, otherwise static
-		bool isDynamic = (mass != 0.f);
-		btVector3 localInertia(0,0,0);
-		if (isDynamic)
-				groundShape->calculateLocalInertia(mass,localInertia);
-		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-		btDefaultMotionState* myMotionState = new btDefaultMotionState(groundTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,groundShape,localInertia);
-		sFloorPlaneBody = new btRigidBody(rbInfo);
-		//add the body to the dynamics world
-		sDynamicsWorld->addRigidBody(sFloorPlaneBody);
-	}
 	for (int i=0;i<numBodies;i++)
 	{
 		btTransform bodyTransform;
@@ -383,7 +367,6 @@ bool CShell::UpdateScene()
 		
 	}
 	
-	return true;
  	static struct timeval time = {0,0};
 	struct timeval currTime = {0,0};
  

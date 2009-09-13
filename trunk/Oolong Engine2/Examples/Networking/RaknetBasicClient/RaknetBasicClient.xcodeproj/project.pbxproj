@@ -40,105 +40,105 @@
 		BDE20F6C1021729800B215F9 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20F6A1021729800B215F9 /* Texture.mm */; };
 		BDE20F951021735200B215F9 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE20F931021735200B215F9 /* EAGLView.m */; };
 		BDE20FA4102173A800B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20FA3102173A800B215F9 /* ResourcePath.mm */; };
-		D94D6CCB105C064900D1043A /* _FindFirst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BD2105C064900D1043A /* _FindFirst.cpp */; };
-		D94D6CCC105C064900D1043A /* AsynchronousFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BD4105C064900D1043A /* AsynchronousFileIO.cpp */; };
-		D94D6CCD105C064900D1043A /* AutoRPC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BD8105C064900D1043A /* AutoRPC.cpp */; };
-		D94D6CCE105C064900D1043A /* BigInt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BDA105C064900D1043A /* BigInt.cpp */; };
-		D94D6CCF105C064900D1043A /* BitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BDC105C064900D1043A /* BitStream.cpp */; };
-		D94D6CD0105C064900D1043A /* BitStream_NoTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BDE105C064900D1043A /* BitStream_NoTemplate.cpp */; };
-		D94D6CD1105C064900D1043A /* CCRakNetUDT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BE0105C064900D1043A /* CCRakNetUDT.cpp */; };
-		D94D6CD2105C064900D1043A /* CheckSum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BE2105C064900D1043A /* CheckSum.cpp */; };
-		D94D6CD3105C064900D1043A /* CommandParserInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BE5105C064900D1043A /* CommandParserInterface.cpp */; };
-		D94D6CD4105C064900D1043A /* ConnectionGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BE7105C064900D1043A /* ConnectionGraph.cpp */; };
-		D94D6CD5105C064900D1043A /* ConnectionGraph2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BE9105C064900D1043A /* ConnectionGraph2.cpp */; };
-		D94D6CD6105C064900D1043A /* ConsoleServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BEB105C064900D1043A /* ConsoleServer.cpp */; };
-		D94D6CD7105C064900D1043A /* DataBlockEncryptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BED105C064900D1043A /* DataBlockEncryptor.cpp */; };
-		D94D6CD8105C064900D1043A /* DataCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BEF105C064900D1043A /* DataCompressor.cpp */; };
-		D94D6CD9105C064900D1043A /* DirectoryDeltaTransfer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BF1105C064900D1043A /* DirectoryDeltaTransfer.cpp */; };
-		D94D6CDA105C064900D1043A /* DS_BytePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BF5105C064900D1043A /* DS_BytePool.cpp */; };
-		D94D6CDB105C064900D1043A /* DS_ByteQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BF7105C064900D1043A /* DS_ByteQueue.cpp */; };
-		D94D6CDC105C064900D1043A /* DS_HuffmanEncodingTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6BFA105C064900D1043A /* DS_HuffmanEncodingTree.cpp */; };
-		D94D6CDD105C064900D1043A /* DS_Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C08105C064900D1043A /* DS_Table.cpp */; };
-		D94D6CDE105C064900D1043A /* EmailSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C0D105C064900D1043A /* EmailSender.cpp */; };
-		D94D6CDF105C064900D1043A /* EncodeClassName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C0F105C064900D1043A /* EncodeClassName.cpp */; };
-		D94D6CE0105C064900D1043A /* EpochTimeToString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C10105C064900D1043A /* EpochTimeToString.cpp */; };
-		D94D6CE1105C064900D1043A /* ExtendedOverlappedPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C13105C064900D1043A /* ExtendedOverlappedPool.cpp */; };
-		D94D6CE2105C064900D1043A /* FileList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C15105C064900D1043A /* FileList.cpp */; };
-		D94D6CE3105C064900D1043A /* FileListTransfer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C18105C064900D1043A /* FileListTransfer.cpp */; };
-		D94D6CE4105C064900D1043A /* FileOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C1B105C064900D1043A /* FileOperations.cpp */; };
-		D94D6CE5105C064900D1043A /* FormatString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C1D105C064900D1043A /* FormatString.cpp */; };
-		D94D6CE6105C064900D1043A /* FullyConnectedMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C1F105C064900D1043A /* FullyConnectedMesh.cpp */; };
-		D94D6CE7105C064900D1043A /* FullyConnectedMesh2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C21105C064900D1043A /* FullyConnectedMesh2.cpp */; };
-		D94D6CE8105C064900D1043A /* FunctionThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C23105C064900D1043A /* FunctionThread.cpp */; };
-		D94D6CE9105C064900D1043A /* Gen_RPC8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C25105C064900D1043A /* Gen_RPC8.cpp */; };
-		D94D6CEA105C064900D1043A /* GetTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C27105C064900D1043A /* GetTime.cpp */; };
-		D94D6CEB105C064900D1043A /* gettimeofday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C29105C064900D1043A /* gettimeofday.cpp */; };
-		D94D6CEC105C064900D1043A /* GridSectorizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C2B105C064900D1043A /* GridSectorizer.cpp */; };
-		D94D6CED105C064900D1043A /* HTTPConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C2D105C064900D1043A /* HTTPConnection.cpp */; };
-		D94D6CEE105C064900D1043A /* IncrementalReadInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C2F105C064900D1043A /* IncrementalReadInterface.cpp */; };
-		D94D6CEF105C064900D1043A /* InlineFunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C31105C064900D1043A /* InlineFunctor.cpp */; };
-		D94D6CF0105C064900D1043A /* Itoa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C34105C064900D1043A /* Itoa.cpp */; };
-		D94D6CF1105C064900D1043A /* LightweightDatabaseClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C37105C064900D1043A /* LightweightDatabaseClient.cpp */; };
-		D94D6CF2105C064900D1043A /* LightweightDatabaseCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C39105C064900D1043A /* LightweightDatabaseCommon.cpp */; };
-		D94D6CF3105C064900D1043A /* LightweightDatabaseServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C3B105C064900D1043A /* LightweightDatabaseServer.cpp */; };
-		D94D6CF4105C064900D1043A /* LinuxStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C3D105C064900D1043A /* LinuxStrings.cpp */; };
-		D94D6CF5105C064900D1043A /* LogCommandParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C3F105C064900D1043A /* LogCommandParser.cpp */; };
-		D94D6CF6105C064900D1043A /* MessageFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C41105C064900D1043A /* MessageFilter.cpp */; };
-		D94D6CF7105C064900D1043A /* NatPunchthroughClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C46105C064900D1043A /* NatPunchthroughClient.cpp */; };
-		D94D6CF8105C064900D1043A /* NatPunchthroughServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C48105C064900D1043A /* NatPunchthroughServer.cpp */; };
-		D94D6CF9105C064900D1043A /* NatTypeDetectionClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C4A105C064900D1043A /* NatTypeDetectionClient.cpp */; };
-		D94D6CFA105C064900D1043A /* NatTypeDetectionCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C4C105C064900D1043A /* NatTypeDetectionCommon.cpp */; };
-		D94D6CFB105C064900D1043A /* NatTypeDetectionServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C4E105C064900D1043A /* NatTypeDetectionServer.cpp */; };
-		D94D6CFC105C064900D1043A /* NetworkIDManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C50105C064900D1043A /* NetworkIDManager.cpp */; };
-		D94D6CFD105C064900D1043A /* NetworkIDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C52105C064900D1043A /* NetworkIDObject.cpp */; };
-		D94D6CFE105C064900D1043A /* PacketConsoleLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C54105C064900D1043A /* PacketConsoleLogger.cpp */; };
-		D94D6CFF105C064900D1043A /* PacketFileLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C56105C064900D1043A /* PacketFileLogger.cpp */; };
-		D94D6D00105C064900D1043A /* PacketizedTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C58105C064900D1043A /* PacketizedTCP.cpp */; };
-		D94D6D01105C064900D1043A /* PacketLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C5A105C064900D1043A /* PacketLogger.cpp */; };
-		D94D6D02105C064900D1043A /* PacketOutputWindowLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C5C105C064900D1043A /* PacketOutputWindowLogger.cpp */; };
-		D94D6D03105C064900D1043A /* PluginInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C61105C064900D1043A /* PluginInterface.cpp */; };
-		D94D6D04105C064900D1043A /* PluginInterface2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C63105C064900D1043A /* PluginInterface2.cpp */; };
-		D94D6D05105C064900D1043A /* RakMemoryOverride.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C67105C064900D1043A /* RakMemoryOverride.cpp */; };
-		D94D6D06105C064900D1043A /* RakNetCommandParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C69105C064900D1043A /* RakNetCommandParser.cpp */; };
-		D94D6D07105C064900D1043A /* RakNetSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C6D105C064900D1043A /* RakNetSocket.cpp */; };
-		D94D6D08105C064900D1043A /* RakNetStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C6F105C064900D1043A /* RakNetStatistics.cpp */; };
-		D94D6D09105C064900D1043A /* RakNetTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C72105C064900D1043A /* RakNetTransport.cpp */; };
-		D94D6D0A105C064900D1043A /* RakNetTransport2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C74105C064900D1043A /* RakNetTransport2.cpp */; };
-		D94D6D0B105C064900D1043A /* RakNetTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C76105C064900D1043A /* RakNetTypes.cpp */; };
-		D94D6D0C105C064900D1043A /* RakNetworkFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C79105C064900D1043A /* RakNetworkFactory.cpp */; };
-		D94D6D0D105C064900D1043A /* RakPeer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C7B105C064900D1043A /* RakPeer.cpp */; };
-		D94D6D0E105C064900D1043A /* RakSleep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C7E105C064900D1043A /* RakSleep.cpp */; };
-		D94D6D0F105C064900D1043A /* RakString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C80105C064900D1043A /* RakString.cpp */; };
-		D94D6D10105C064900D1043A /* RakThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C82105C064900D1043A /* RakThread.cpp */; };
-		D94D6D11105C064900D1043A /* Rand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C84105C064900D1043A /* Rand.cpp */; };
-		D94D6D12105C064900D1043A /* ReadyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C86105C064900D1043A /* ReadyEvent.cpp */; };
-		D94D6D13105C064900D1043A /* ReliabilityLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C89105C064900D1043A /* ReliabilityLayer.cpp */; };
-		D94D6D14105C064900D1043A /* ReplicaManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C8D105C064900D1043A /* ReplicaManager.cpp */; };
-		D94D6D15105C064900D1043A /* ReplicaManager2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C8F105C064900D1043A /* ReplicaManager2.cpp */; };
-		D94D6D16105C064900D1043A /* ReplicaManager3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C91105C064900D1043A /* ReplicaManager3.cpp */; };
-		D94D6D17105C064900D1043A /* rijndael.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C94105C064900D1043A /* rijndael.cpp */; };
-		D94D6D18105C064900D1043A /* Router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C96105C064900D1043A /* Router.cpp */; };
-		D94D6D19105C064900D1043A /* RPCMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C99105C064900D1043A /* RPCMap.cpp */; };
-		D94D6D1A105C064900D1043A /* RSACrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C9C105C064900D1043A /* RSACrypt.cpp */; };
-		D94D6D1B105C064900D1043A /* SendToThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6C9E105C064900D1043A /* SendToThread.cpp */; };
-		D94D6D1C105C064900D1043A /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CA0105C064900D1043A /* SHA1.cpp */; };
-		D94D6D1D105C064900D1043A /* SignaledEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CA2105C064900D1043A /* SignaledEvent.cpp */; };
-		D94D6D1E105C064900D1043A /* SimpleMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CA4105C064900D1043A /* SimpleMutex.cpp */; };
-		D94D6D1F105C064900D1043A /* SocketLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CA9105C064900D1043A /* SocketLayer.cpp */; };
-		D94D6D20105C064900D1043A /* StringCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CAB105C064900D1043A /* StringCompressor.cpp */; };
-		D94D6D21105C064900D1043A /* StringTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CAD105C064900D1043A /* StringTable.cpp */; };
-		D94D6D22105C064900D1043A /* SuperFastHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CAF105C064900D1043A /* SuperFastHash.cpp */; };
-		D94D6D23105C064900D1043A /* SystemAddressList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CB1105C064900D1043A /* SystemAddressList.cpp */; };
-		D94D6D24105C064900D1043A /* TableSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CB3105C064900D1043A /* TableSerializer.cpp */; };
-		D94D6D25105C064900D1043A /* TCPInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CB5105C064900D1043A /* TCPInterface.cpp */; };
-		D94D6D26105C064900D1043A /* TelnetTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CB7105C064900D1043A /* TelnetTransport.cpp */; };
-		D94D6D27105C064900D1043A /* ThreadsafePacketLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CBA105C064900D1043A /* ThreadsafePacketLogger.cpp */; };
-		D94D6D28105C064900D1043A /* UDPForwarder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CBD105C064900D1043A /* UDPForwarder.cpp */; };
-		D94D6D29105C064900D1043A /* UDPProxyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CBF105C064900D1043A /* UDPProxyClient.cpp */; };
-		D94D6D2A105C064900D1043A /* UDPProxyCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CC2105C064900D1043A /* UDPProxyCoordinator.cpp */; };
-		D94D6D2B105C064900D1043A /* UDPProxyServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CC4105C064900D1043A /* UDPProxyServer.cpp */; };
-		D94D6D2C105C064900D1043A /* VariadicSQLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CC6105C064900D1043A /* VariadicSQLParser.cpp */; };
-		D94D6D2D105C064900D1043A /* WSAStartupSingleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94D6CC9105C064900D1043A /* WSAStartupSingleton.cpp */; };
+		D9C01E1D105D8C8000F44CA5 /* _FindFirst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D24105D8C7F00F44CA5 /* _FindFirst.cpp */; };
+		D9C01E1E105D8C8000F44CA5 /* AsynchronousFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D26105D8C7F00F44CA5 /* AsynchronousFileIO.cpp */; };
+		D9C01E1F105D8C8000F44CA5 /* AutoRPC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D2A105D8C7F00F44CA5 /* AutoRPC.cpp */; };
+		D9C01E20105D8C8000F44CA5 /* BigInt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D2C105D8C7F00F44CA5 /* BigInt.cpp */; };
+		D9C01E21105D8C8000F44CA5 /* BitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D2E105D8C7F00F44CA5 /* BitStream.cpp */; };
+		D9C01E22105D8C8000F44CA5 /* BitStream_NoTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D30105D8C7F00F44CA5 /* BitStream_NoTemplate.cpp */; };
+		D9C01E23105D8C8000F44CA5 /* CCRakNetUDT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D32105D8C7F00F44CA5 /* CCRakNetUDT.cpp */; };
+		D9C01E24105D8C8000F44CA5 /* CheckSum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D34105D8C7F00F44CA5 /* CheckSum.cpp */; };
+		D9C01E25105D8C8000F44CA5 /* CommandParserInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D37105D8C7F00F44CA5 /* CommandParserInterface.cpp */; };
+		D9C01E26105D8C8000F44CA5 /* ConnectionGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D39105D8C7F00F44CA5 /* ConnectionGraph.cpp */; };
+		D9C01E27105D8C8000F44CA5 /* ConnectionGraph2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D3B105D8C7F00F44CA5 /* ConnectionGraph2.cpp */; };
+		D9C01E28105D8C8000F44CA5 /* ConsoleServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D3D105D8C7F00F44CA5 /* ConsoleServer.cpp */; };
+		D9C01E29105D8C8000F44CA5 /* DataBlockEncryptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D3F105D8C7F00F44CA5 /* DataBlockEncryptor.cpp */; };
+		D9C01E2A105D8C8000F44CA5 /* DataCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D41105D8C7F00F44CA5 /* DataCompressor.cpp */; };
+		D9C01E2B105D8C8000F44CA5 /* DirectoryDeltaTransfer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D43105D8C7F00F44CA5 /* DirectoryDeltaTransfer.cpp */; };
+		D9C01E2C105D8C8000F44CA5 /* DS_BytePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D47105D8C7F00F44CA5 /* DS_BytePool.cpp */; };
+		D9C01E2D105D8C8000F44CA5 /* DS_ByteQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D49105D8C7F00F44CA5 /* DS_ByteQueue.cpp */; };
+		D9C01E2E105D8C8000F44CA5 /* DS_HuffmanEncodingTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D4C105D8C7F00F44CA5 /* DS_HuffmanEncodingTree.cpp */; };
+		D9C01E2F105D8C8000F44CA5 /* DS_Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D5A105D8C7F00F44CA5 /* DS_Table.cpp */; };
+		D9C01E30105D8C8000F44CA5 /* EmailSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D5F105D8C7F00F44CA5 /* EmailSender.cpp */; };
+		D9C01E31105D8C8000F44CA5 /* EncodeClassName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D61105D8C7F00F44CA5 /* EncodeClassName.cpp */; };
+		D9C01E32105D8C8000F44CA5 /* EpochTimeToString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D62105D8C7F00F44CA5 /* EpochTimeToString.cpp */; };
+		D9C01E33105D8C8000F44CA5 /* ExtendedOverlappedPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D65105D8C7F00F44CA5 /* ExtendedOverlappedPool.cpp */; };
+		D9C01E34105D8C8000F44CA5 /* FileList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D67105D8C7F00F44CA5 /* FileList.cpp */; };
+		D9C01E35105D8C8000F44CA5 /* FileListTransfer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D6A105D8C8000F44CA5 /* FileListTransfer.cpp */; };
+		D9C01E36105D8C8000F44CA5 /* FileOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D6D105D8C8000F44CA5 /* FileOperations.cpp */; };
+		D9C01E37105D8C8000F44CA5 /* FormatString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D6F105D8C8000F44CA5 /* FormatString.cpp */; };
+		D9C01E38105D8C8000F44CA5 /* FullyConnectedMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D71105D8C8000F44CA5 /* FullyConnectedMesh.cpp */; };
+		D9C01E39105D8C8000F44CA5 /* FullyConnectedMesh2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D73105D8C8000F44CA5 /* FullyConnectedMesh2.cpp */; };
+		D9C01E3A105D8C8000F44CA5 /* FunctionThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D75105D8C8000F44CA5 /* FunctionThread.cpp */; };
+		D9C01E3B105D8C8000F44CA5 /* Gen_RPC8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D77105D8C8000F44CA5 /* Gen_RPC8.cpp */; };
+		D9C01E3C105D8C8000F44CA5 /* GetTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D79105D8C8000F44CA5 /* GetTime.cpp */; };
+		D9C01E3D105D8C8000F44CA5 /* gettimeofday.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D7B105D8C8000F44CA5 /* gettimeofday.cpp */; };
+		D9C01E3E105D8C8000F44CA5 /* GridSectorizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D7D105D8C8000F44CA5 /* GridSectorizer.cpp */; };
+		D9C01E3F105D8C8000F44CA5 /* HTTPConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D7F105D8C8000F44CA5 /* HTTPConnection.cpp */; };
+		D9C01E40105D8C8000F44CA5 /* IncrementalReadInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D81105D8C8000F44CA5 /* IncrementalReadInterface.cpp */; };
+		D9C01E41105D8C8000F44CA5 /* InlineFunctor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D83105D8C8000F44CA5 /* InlineFunctor.cpp */; };
+		D9C01E42105D8C8000F44CA5 /* Itoa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D86105D8C8000F44CA5 /* Itoa.cpp */; };
+		D9C01E43105D8C8000F44CA5 /* LightweightDatabaseClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D89105D8C8000F44CA5 /* LightweightDatabaseClient.cpp */; };
+		D9C01E44105D8C8000F44CA5 /* LightweightDatabaseCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D8B105D8C8000F44CA5 /* LightweightDatabaseCommon.cpp */; };
+		D9C01E45105D8C8000F44CA5 /* LightweightDatabaseServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D8D105D8C8000F44CA5 /* LightweightDatabaseServer.cpp */; };
+		D9C01E46105D8C8000F44CA5 /* LinuxStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D8F105D8C8000F44CA5 /* LinuxStrings.cpp */; };
+		D9C01E47105D8C8000F44CA5 /* LogCommandParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D91105D8C8000F44CA5 /* LogCommandParser.cpp */; };
+		D9C01E48105D8C8000F44CA5 /* MessageFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D93105D8C8000F44CA5 /* MessageFilter.cpp */; };
+		D9C01E49105D8C8000F44CA5 /* NatPunchthroughClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D98105D8C8000F44CA5 /* NatPunchthroughClient.cpp */; };
+		D9C01E4A105D8C8000F44CA5 /* NatPunchthroughServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D9A105D8C8000F44CA5 /* NatPunchthroughServer.cpp */; };
+		D9C01E4B105D8C8000F44CA5 /* NatTypeDetectionClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D9C105D8C8000F44CA5 /* NatTypeDetectionClient.cpp */; };
+		D9C01E4C105D8C8000F44CA5 /* NatTypeDetectionCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01D9E105D8C8000F44CA5 /* NatTypeDetectionCommon.cpp */; };
+		D9C01E4D105D8C8000F44CA5 /* NatTypeDetectionServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DA0105D8C8000F44CA5 /* NatTypeDetectionServer.cpp */; };
+		D9C01E4E105D8C8000F44CA5 /* NetworkIDManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DA2105D8C8000F44CA5 /* NetworkIDManager.cpp */; };
+		D9C01E4F105D8C8000F44CA5 /* NetworkIDObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DA4105D8C8000F44CA5 /* NetworkIDObject.cpp */; };
+		D9C01E50105D8C8000F44CA5 /* PacketConsoleLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DA6105D8C8000F44CA5 /* PacketConsoleLogger.cpp */; };
+		D9C01E51105D8C8000F44CA5 /* PacketFileLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DA8105D8C8000F44CA5 /* PacketFileLogger.cpp */; };
+		D9C01E52105D8C8000F44CA5 /* PacketizedTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DAA105D8C8000F44CA5 /* PacketizedTCP.cpp */; };
+		D9C01E53105D8C8000F44CA5 /* PacketLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DAC105D8C8000F44CA5 /* PacketLogger.cpp */; };
+		D9C01E54105D8C8000F44CA5 /* PacketOutputWindowLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DAE105D8C8000F44CA5 /* PacketOutputWindowLogger.cpp */; };
+		D9C01E55105D8C8000F44CA5 /* PluginInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DB3105D8C8000F44CA5 /* PluginInterface.cpp */; };
+		D9C01E56105D8C8000F44CA5 /* PluginInterface2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DB5105D8C8000F44CA5 /* PluginInterface2.cpp */; };
+		D9C01E57105D8C8000F44CA5 /* RakMemoryOverride.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DB9105D8C8000F44CA5 /* RakMemoryOverride.cpp */; };
+		D9C01E58105D8C8000F44CA5 /* RakNetCommandParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DBB105D8C8000F44CA5 /* RakNetCommandParser.cpp */; };
+		D9C01E59105D8C8000F44CA5 /* RakNetSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DBF105D8C8000F44CA5 /* RakNetSocket.cpp */; };
+		D9C01E5A105D8C8000F44CA5 /* RakNetStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DC1105D8C8000F44CA5 /* RakNetStatistics.cpp */; };
+		D9C01E5B105D8C8000F44CA5 /* RakNetTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DC4105D8C8000F44CA5 /* RakNetTransport.cpp */; };
+		D9C01E5C105D8C8000F44CA5 /* RakNetTransport2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DC6105D8C8000F44CA5 /* RakNetTransport2.cpp */; };
+		D9C01E5D105D8C8000F44CA5 /* RakNetTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DC8105D8C8000F44CA5 /* RakNetTypes.cpp */; };
+		D9C01E5E105D8C8000F44CA5 /* RakNetworkFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DCB105D8C8000F44CA5 /* RakNetworkFactory.cpp */; };
+		D9C01E5F105D8C8000F44CA5 /* RakPeer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DCD105D8C8000F44CA5 /* RakPeer.cpp */; };
+		D9C01E60105D8C8000F44CA5 /* RakSleep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DD0105D8C8000F44CA5 /* RakSleep.cpp */; };
+		D9C01E61105D8C8000F44CA5 /* RakString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DD2105D8C8000F44CA5 /* RakString.cpp */; };
+		D9C01E62105D8C8000F44CA5 /* RakThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DD4105D8C8000F44CA5 /* RakThread.cpp */; };
+		D9C01E63105D8C8000F44CA5 /* Rand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DD6105D8C8000F44CA5 /* Rand.cpp */; };
+		D9C01E64105D8C8000F44CA5 /* ReadyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DD8105D8C8000F44CA5 /* ReadyEvent.cpp */; };
+		D9C01E65105D8C8000F44CA5 /* ReliabilityLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DDB105D8C8000F44CA5 /* ReliabilityLayer.cpp */; };
+		D9C01E66105D8C8000F44CA5 /* ReplicaManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DDF105D8C8000F44CA5 /* ReplicaManager.cpp */; };
+		D9C01E67105D8C8000F44CA5 /* ReplicaManager2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DE1105D8C8000F44CA5 /* ReplicaManager2.cpp */; };
+		D9C01E68105D8C8000F44CA5 /* ReplicaManager3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DE3105D8C8000F44CA5 /* ReplicaManager3.cpp */; };
+		D9C01E69105D8C8000F44CA5 /* rijndael.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DE6105D8C8000F44CA5 /* rijndael.cpp */; };
+		D9C01E6A105D8C8000F44CA5 /* Router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DE8105D8C8000F44CA5 /* Router.cpp */; };
+		D9C01E6B105D8C8000F44CA5 /* RPCMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DEB105D8C8000F44CA5 /* RPCMap.cpp */; };
+		D9C01E6C105D8C8000F44CA5 /* RSACrypt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DEE105D8C8000F44CA5 /* RSACrypt.cpp */; };
+		D9C01E6D105D8C8000F44CA5 /* SendToThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DF0105D8C8000F44CA5 /* SendToThread.cpp */; };
+		D9C01E6E105D8C8000F44CA5 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DF2105D8C8000F44CA5 /* SHA1.cpp */; };
+		D9C01E6F105D8C8000F44CA5 /* SignaledEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DF4105D8C8000F44CA5 /* SignaledEvent.cpp */; };
+		D9C01E70105D8C8000F44CA5 /* SimpleMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DF6105D8C8000F44CA5 /* SimpleMutex.cpp */; };
+		D9C01E71105D8C8000F44CA5 /* SocketLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DFB105D8C8000F44CA5 /* SocketLayer.cpp */; };
+		D9C01E72105D8C8000F44CA5 /* StringCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DFD105D8C8000F44CA5 /* StringCompressor.cpp */; };
+		D9C01E73105D8C8000F44CA5 /* StringTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01DFF105D8C8000F44CA5 /* StringTable.cpp */; };
+		D9C01E74105D8C8000F44CA5 /* SuperFastHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E01105D8C8000F44CA5 /* SuperFastHash.cpp */; };
+		D9C01E75105D8C8000F44CA5 /* SystemAddressList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E03105D8C8000F44CA5 /* SystemAddressList.cpp */; };
+		D9C01E76105D8C8000F44CA5 /* TableSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E05105D8C8000F44CA5 /* TableSerializer.cpp */; };
+		D9C01E77105D8C8000F44CA5 /* TCPInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E07105D8C8000F44CA5 /* TCPInterface.cpp */; };
+		D9C01E78105D8C8000F44CA5 /* TelnetTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E09105D8C8000F44CA5 /* TelnetTransport.cpp */; };
+		D9C01E79105D8C8000F44CA5 /* ThreadsafePacketLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E0C105D8C8000F44CA5 /* ThreadsafePacketLogger.cpp */; };
+		D9C01E7A105D8C8000F44CA5 /* UDPForwarder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E0F105D8C8000F44CA5 /* UDPForwarder.cpp */; };
+		D9C01E7B105D8C8000F44CA5 /* UDPProxyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E11105D8C8000F44CA5 /* UDPProxyClient.cpp */; };
+		D9C01E7C105D8C8000F44CA5 /* UDPProxyCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E14105D8C8000F44CA5 /* UDPProxyCoordinator.cpp */; };
+		D9C01E7D105D8C8000F44CA5 /* UDPProxyServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E16105D8C8000F44CA5 /* UDPProxyServer.cpp */; };
+		D9C01E7E105D8C8000F44CA5 /* VariadicSQLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E18105D8C8000F44CA5 /* VariadicSQLParser.cpp */; };
+		D9C01E7F105D8C8000F44CA5 /* WSAStartupSingleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9C01E1B105D8C8000F44CA5 /* WSAStartupSingleton.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -224,255 +224,255 @@
 		BDE20F941021735200B215F9 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		BDE20FA2102173A800B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
 		BDE20FA3102173A800B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
-		D94D6BD2105C064900D1043A /* _FindFirst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = _FindFirst.cpp; sourceTree = "<group>"; };
-		D94D6BD3105C064900D1043A /* _FindFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _FindFirst.h; sourceTree = "<group>"; };
-		D94D6BD4105C064900D1043A /* AsynchronousFileIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AsynchronousFileIO.cpp; sourceTree = "<group>"; };
-		D94D6BD5105C064900D1043A /* AsynchronousFileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFileIO.h; sourceTree = "<group>"; };
-		D94D6BD6105C064900D1043A /* AutopatcherPatchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutopatcherPatchContext.h; sourceTree = "<group>"; };
-		D94D6BD7105C064900D1043A /* AutopatcherRepositoryInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutopatcherRepositoryInterface.h; sourceTree = "<group>"; };
-		D94D6BD8105C064900D1043A /* AutoRPC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoRPC.cpp; sourceTree = "<group>"; };
-		D94D6BD9105C064900D1043A /* AutoRPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoRPC.h; sourceTree = "<group>"; };
-		D94D6BDA105C064900D1043A /* BigInt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigInt.cpp; sourceTree = "<group>"; };
-		D94D6BDB105C064900D1043A /* BigInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigInt.h; sourceTree = "<group>"; };
-		D94D6BDC105C064900D1043A /* BitStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitStream.cpp; sourceTree = "<group>"; };
-		D94D6BDD105C064900D1043A /* BitStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitStream.h; sourceTree = "<group>"; };
-		D94D6BDE105C064900D1043A /* BitStream_NoTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitStream_NoTemplate.cpp; sourceTree = "<group>"; };
-		D94D6BDF105C064900D1043A /* BitStream_NoTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitStream_NoTemplate.h; sourceTree = "<group>"; };
-		D94D6BE0105C064900D1043A /* CCRakNetUDT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCRakNetUDT.cpp; sourceTree = "<group>"; };
-		D94D6BE1105C064900D1043A /* CCRakNetUDT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRakNetUDT.h; sourceTree = "<group>"; };
-		D94D6BE2105C064900D1043A /* CheckSum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheckSum.cpp; sourceTree = "<group>"; };
-		D94D6BE3105C064900D1043A /* CheckSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSum.h; sourceTree = "<group>"; };
-		D94D6BE4105C064900D1043A /* ClientContextStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientContextStruct.h; sourceTree = "<group>"; };
-		D94D6BE5105C064900D1043A /* CommandParserInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommandParserInterface.cpp; sourceTree = "<group>"; };
-		D94D6BE6105C064900D1043A /* CommandParserInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandParserInterface.h; sourceTree = "<group>"; };
-		D94D6BE7105C064900D1043A /* ConnectionGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionGraph.cpp; sourceTree = "<group>"; };
-		D94D6BE8105C064900D1043A /* ConnectionGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionGraph.h; sourceTree = "<group>"; };
-		D94D6BE9105C064900D1043A /* ConnectionGraph2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionGraph2.cpp; sourceTree = "<group>"; };
-		D94D6BEA105C064900D1043A /* ConnectionGraph2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionGraph2.h; sourceTree = "<group>"; };
-		D94D6BEB105C064900D1043A /* ConsoleServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleServer.cpp; sourceTree = "<group>"; };
-		D94D6BEC105C064900D1043A /* ConsoleServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleServer.h; sourceTree = "<group>"; };
-		D94D6BED105C064900D1043A /* DataBlockEncryptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataBlockEncryptor.cpp; sourceTree = "<group>"; };
-		D94D6BEE105C064900D1043A /* DataBlockEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBlockEncryptor.h; sourceTree = "<group>"; };
-		D94D6BEF105C064900D1043A /* DataCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataCompressor.cpp; sourceTree = "<group>"; };
-		D94D6BF0105C064900D1043A /* DataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCompressor.h; sourceTree = "<group>"; };
-		D94D6BF1105C064900D1043A /* DirectoryDeltaTransfer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectoryDeltaTransfer.cpp; sourceTree = "<group>"; };
-		D94D6BF2105C064900D1043A /* DirectoryDeltaTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryDeltaTransfer.h; sourceTree = "<group>"; };
-		D94D6BF3105C064900D1043A /* DS_BinarySearchTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_BinarySearchTree.h; sourceTree = "<group>"; };
-		D94D6BF4105C064900D1043A /* DS_BPlusTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_BPlusTree.h; sourceTree = "<group>"; };
-		D94D6BF5105C064900D1043A /* DS_BytePool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_BytePool.cpp; sourceTree = "<group>"; };
-		D94D6BF6105C064900D1043A /* DS_BytePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_BytePool.h; sourceTree = "<group>"; };
-		D94D6BF7105C064900D1043A /* DS_ByteQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_ByteQueue.cpp; sourceTree = "<group>"; };
-		D94D6BF8105C064900D1043A /* DS_ByteQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_ByteQueue.h; sourceTree = "<group>"; };
-		D94D6BF9105C064900D1043A /* DS_Heap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Heap.h; sourceTree = "<group>"; };
-		D94D6BFA105C064900D1043A /* DS_HuffmanEncodingTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_HuffmanEncodingTree.cpp; sourceTree = "<group>"; };
-		D94D6BFB105C064900D1043A /* DS_HuffmanEncodingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_HuffmanEncodingTree.h; sourceTree = "<group>"; };
-		D94D6BFC105C064900D1043A /* DS_HuffmanEncodingTreeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_HuffmanEncodingTreeFactory.h; sourceTree = "<group>"; };
-		D94D6BFD105C064900D1043A /* DS_HuffmanEncodingTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_HuffmanEncodingTreeNode.h; sourceTree = "<group>"; };
-		D94D6BFE105C064900D1043A /* DS_LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_LinkedList.h; sourceTree = "<group>"; };
-		D94D6BFF105C064900D1043A /* DS_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_List.h; sourceTree = "<group>"; };
-		D94D6C00105C064900D1043A /* DS_Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Map.h; sourceTree = "<group>"; };
-		D94D6C01105C064900D1043A /* DS_MemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_MemoryPool.h; sourceTree = "<group>"; };
-		D94D6C02105C064900D1043A /* DS_Multilist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Multilist.h; sourceTree = "<group>"; };
-		D94D6C03105C064900D1043A /* DS_OrderedChannelHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_OrderedChannelHeap.h; sourceTree = "<group>"; };
-		D94D6C04105C064900D1043A /* DS_OrderedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_OrderedList.h; sourceTree = "<group>"; };
-		D94D6C05105C064900D1043A /* DS_Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Queue.h; sourceTree = "<group>"; };
-		D94D6C06105C064900D1043A /* DS_QueueLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_QueueLinkedList.h; sourceTree = "<group>"; };
-		D94D6C07105C064900D1043A /* DS_RangeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_RangeList.h; sourceTree = "<group>"; };
-		D94D6C08105C064900D1043A /* DS_Table.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_Table.cpp; sourceTree = "<group>"; };
-		D94D6C09105C064900D1043A /* DS_Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Table.h; sourceTree = "<group>"; };
-		D94D6C0A105C064900D1043A /* DS_ThreadsafeAllocatingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_ThreadsafeAllocatingQueue.h; sourceTree = "<group>"; };
-		D94D6C0B105C064900D1043A /* DS_Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Tree.h; sourceTree = "<group>"; };
-		D94D6C0C105C064900D1043A /* DS_WeightedGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_WeightedGraph.h; sourceTree = "<group>"; };
-		D94D6C0D105C064900D1043A /* EmailSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmailSender.cpp; sourceTree = "<group>"; };
-		D94D6C0E105C064900D1043A /* EmailSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSender.h; sourceTree = "<group>"; };
-		D94D6C0F105C064900D1043A /* EncodeClassName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EncodeClassName.cpp; sourceTree = "<group>"; };
-		D94D6C10105C064900D1043A /* EpochTimeToString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EpochTimeToString.cpp; sourceTree = "<group>"; };
-		D94D6C11105C064900D1043A /* EpochTimeToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpochTimeToString.h; sourceTree = "<group>"; };
-		D94D6C12105C064900D1043A /* Export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Export.h; sourceTree = "<group>"; };
-		D94D6C13105C064900D1043A /* ExtendedOverlappedPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExtendedOverlappedPool.cpp; sourceTree = "<group>"; };
-		D94D6C14105C064900D1043A /* ExtendedOverlappedPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedOverlappedPool.h; sourceTree = "<group>"; };
-		D94D6C15105C064900D1043A /* FileList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileList.cpp; sourceTree = "<group>"; };
-		D94D6C16105C064900D1043A /* FileList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileList.h; sourceTree = "<group>"; };
-		D94D6C17105C064900D1043A /* FileListNodeContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListNodeContext.h; sourceTree = "<group>"; };
-		D94D6C18105C064900D1043A /* FileListTransfer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileListTransfer.cpp; sourceTree = "<group>"; };
-		D94D6C19105C064900D1043A /* FileListTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTransfer.h; sourceTree = "<group>"; };
-		D94D6C1A105C064900D1043A /* FileListTransferCBInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTransferCBInterface.h; sourceTree = "<group>"; };
-		D94D6C1B105C064900D1043A /* FileOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileOperations.cpp; sourceTree = "<group>"; };
-		D94D6C1C105C064900D1043A /* FileOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOperations.h; sourceTree = "<group>"; };
-		D94D6C1D105C064900D1043A /* FormatString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormatString.cpp; sourceTree = "<group>"; };
-		D94D6C1E105C064900D1043A /* FormatString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatString.h; sourceTree = "<group>"; };
-		D94D6C1F105C064900D1043A /* FullyConnectedMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FullyConnectedMesh.cpp; sourceTree = "<group>"; };
-		D94D6C20105C064900D1043A /* FullyConnectedMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullyConnectedMesh.h; sourceTree = "<group>"; };
-		D94D6C21105C064900D1043A /* FullyConnectedMesh2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FullyConnectedMesh2.cpp; sourceTree = "<group>"; };
-		D94D6C22105C064900D1043A /* FullyConnectedMesh2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullyConnectedMesh2.h; sourceTree = "<group>"; };
-		D94D6C23105C064900D1043A /* FunctionThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FunctionThread.cpp; sourceTree = "<group>"; };
-		D94D6C24105C064900D1043A /* FunctionThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunctionThread.h; sourceTree = "<group>"; };
-		D94D6C25105C064900D1043A /* Gen_RPC8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gen_RPC8.cpp; sourceTree = "<group>"; };
-		D94D6C26105C064900D1043A /* Gen_RPC8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gen_RPC8.h; sourceTree = "<group>"; };
-		D94D6C27105C064900D1043A /* GetTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GetTime.cpp; sourceTree = "<group>"; };
-		D94D6C28105C064900D1043A /* GetTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTime.h; sourceTree = "<group>"; };
-		D94D6C29105C064900D1043A /* gettimeofday.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gettimeofday.cpp; sourceTree = "<group>"; };
-		D94D6C2A105C064900D1043A /* gettimeofday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gettimeofday.h; sourceTree = "<group>"; };
-		D94D6C2B105C064900D1043A /* GridSectorizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridSectorizer.cpp; sourceTree = "<group>"; };
-		D94D6C2C105C064900D1043A /* GridSectorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridSectorizer.h; sourceTree = "<group>"; };
-		D94D6C2D105C064900D1043A /* HTTPConnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HTTPConnection.cpp; sourceTree = "<group>"; };
-		D94D6C2E105C064900D1043A /* HTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPConnection.h; sourceTree = "<group>"; };
-		D94D6C2F105C064900D1043A /* IncrementalReadInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IncrementalReadInterface.cpp; sourceTree = "<group>"; };
-		D94D6C30105C064900D1043A /* IncrementalReadInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncrementalReadInterface.h; sourceTree = "<group>"; };
-		D94D6C31105C064900D1043A /* InlineFunctor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InlineFunctor.cpp; sourceTree = "<group>"; };
-		D94D6C32105C064900D1043A /* InlineFunctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InlineFunctor.h; sourceTree = "<group>"; };
-		D94D6C33105C064900D1043A /* InternalPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalPacket.h; sourceTree = "<group>"; };
-		D94D6C34105C064900D1043A /* Itoa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Itoa.cpp; sourceTree = "<group>"; };
-		D94D6C35105C064900D1043A /* Itoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Itoa.h; sourceTree = "<group>"; };
-		D94D6C36105C064900D1043A /* Kbhit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kbhit.h; sourceTree = "<group>"; };
-		D94D6C37105C064900D1043A /* LightweightDatabaseClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightweightDatabaseClient.cpp; sourceTree = "<group>"; };
-		D94D6C38105C064900D1043A /* LightweightDatabaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightweightDatabaseClient.h; sourceTree = "<group>"; };
-		D94D6C39105C064900D1043A /* LightweightDatabaseCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightweightDatabaseCommon.cpp; sourceTree = "<group>"; };
-		D94D6C3A105C064900D1043A /* LightweightDatabaseCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightweightDatabaseCommon.h; sourceTree = "<group>"; };
-		D94D6C3B105C064900D1043A /* LightweightDatabaseServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightweightDatabaseServer.cpp; sourceTree = "<group>"; };
-		D94D6C3C105C064900D1043A /* LightweightDatabaseServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightweightDatabaseServer.h; sourceTree = "<group>"; };
-		D94D6C3D105C064900D1043A /* LinuxStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinuxStrings.cpp; sourceTree = "<group>"; };
-		D94D6C3E105C064900D1043A /* LinuxStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinuxStrings.h; sourceTree = "<group>"; };
-		D94D6C3F105C064900D1043A /* LogCommandParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogCommandParser.cpp; sourceTree = "<group>"; };
-		D94D6C40105C064900D1043A /* LogCommandParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogCommandParser.h; sourceTree = "<group>"; };
-		D94D6C41105C064900D1043A /* MessageFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MessageFilter.cpp; sourceTree = "<group>"; };
-		D94D6C42105C064900D1043A /* MessageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFilter.h; sourceTree = "<group>"; };
-		D94D6C43105C064900D1043A /* MessageIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageIdentifiers.h; sourceTree = "<group>"; };
-		D94D6C44105C064900D1043A /* MTUSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUSize.h; sourceTree = "<group>"; };
-		D94D6C45105C064900D1043A /* NativeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeTypes.h; sourceTree = "<group>"; };
-		D94D6C46105C064900D1043A /* NatPunchthroughClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatPunchthroughClient.cpp; sourceTree = "<group>"; };
-		D94D6C47105C064900D1043A /* NatPunchthroughClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatPunchthroughClient.h; sourceTree = "<group>"; };
-		D94D6C48105C064900D1043A /* NatPunchthroughServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatPunchthroughServer.cpp; sourceTree = "<group>"; };
-		D94D6C49105C064900D1043A /* NatPunchthroughServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatPunchthroughServer.h; sourceTree = "<group>"; };
-		D94D6C4A105C064900D1043A /* NatTypeDetectionClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatTypeDetectionClient.cpp; sourceTree = "<group>"; };
-		D94D6C4B105C064900D1043A /* NatTypeDetectionClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeDetectionClient.h; sourceTree = "<group>"; };
-		D94D6C4C105C064900D1043A /* NatTypeDetectionCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatTypeDetectionCommon.cpp; sourceTree = "<group>"; };
-		D94D6C4D105C064900D1043A /* NatTypeDetectionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeDetectionCommon.h; sourceTree = "<group>"; };
-		D94D6C4E105C064900D1043A /* NatTypeDetectionServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatTypeDetectionServer.cpp; sourceTree = "<group>"; };
-		D94D6C4F105C064900D1043A /* NatTypeDetectionServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeDetectionServer.h; sourceTree = "<group>"; };
-		D94D6C50105C064900D1043A /* NetworkIDManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkIDManager.cpp; sourceTree = "<group>"; };
-		D94D6C51105C064900D1043A /* NetworkIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkIDManager.h; sourceTree = "<group>"; };
-		D94D6C52105C064900D1043A /* NetworkIDObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkIDObject.cpp; sourceTree = "<group>"; };
-		D94D6C53105C064900D1043A /* NetworkIDObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkIDObject.h; sourceTree = "<group>"; };
-		D94D6C54105C064900D1043A /* PacketConsoleLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketConsoleLogger.cpp; sourceTree = "<group>"; };
-		D94D6C55105C064900D1043A /* PacketConsoleLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketConsoleLogger.h; sourceTree = "<group>"; };
-		D94D6C56105C064900D1043A /* PacketFileLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketFileLogger.cpp; sourceTree = "<group>"; };
-		D94D6C57105C064900D1043A /* PacketFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketFileLogger.h; sourceTree = "<group>"; };
-		D94D6C58105C064900D1043A /* PacketizedTCP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketizedTCP.cpp; sourceTree = "<group>"; };
-		D94D6C59105C064900D1043A /* PacketizedTCP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketizedTCP.h; sourceTree = "<group>"; };
-		D94D6C5A105C064900D1043A /* PacketLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketLogger.cpp; sourceTree = "<group>"; };
-		D94D6C5B105C064900D1043A /* PacketLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketLogger.h; sourceTree = "<group>"; };
-		D94D6C5C105C064900D1043A /* PacketOutputWindowLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketOutputWindowLogger.cpp; sourceTree = "<group>"; };
-		D94D6C5D105C064900D1043A /* PacketOutputWindowLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketOutputWindowLogger.h; sourceTree = "<group>"; };
-		D94D6C5E105C064900D1043A /* PacketPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketPool.h; sourceTree = "<group>"; };
-		D94D6C5F105C064900D1043A /* PacketPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketPriority.h; sourceTree = "<group>"; };
-		D94D6C60105C064900D1043A /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		D94D6C61105C064900D1043A /* PluginInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PluginInterface.cpp; sourceTree = "<group>"; };
-		D94D6C62105C064900D1043A /* PluginInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginInterface.h; sourceTree = "<group>"; };
-		D94D6C63105C064900D1043A /* PluginInterface2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PluginInterface2.cpp; sourceTree = "<group>"; };
-		D94D6C64105C064900D1043A /* PluginInterface2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginInterface2.h; sourceTree = "<group>"; };
-		D94D6C65105C064900D1043A /* RakAlloca.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakAlloca.h; sourceTree = "<group>"; };
-		D94D6C66105C064900D1043A /* RakAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakAssert.h; sourceTree = "<group>"; };
-		D94D6C67105C064900D1043A /* RakMemoryOverride.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakMemoryOverride.cpp; sourceTree = "<group>"; };
-		D94D6C68105C064900D1043A /* RakMemoryOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakMemoryOverride.h; sourceTree = "<group>"; };
-		D94D6C69105C064900D1043A /* RakNetCommandParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetCommandParser.cpp; sourceTree = "<group>"; };
-		D94D6C6A105C064900D1043A /* RakNetCommandParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetCommandParser.h; sourceTree = "<group>"; };
-		D94D6C6B105C064900D1043A /* RakNetDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetDefines.h; sourceTree = "<group>"; };
-		D94D6C6C105C064900D1043A /* RakNetSmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetSmartPtr.h; sourceTree = "<group>"; };
-		D94D6C6D105C064900D1043A /* RakNetSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetSocket.cpp; sourceTree = "<group>"; };
-		D94D6C6E105C064900D1043A /* RakNetSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetSocket.h; sourceTree = "<group>"; };
-		D94D6C6F105C064900D1043A /* RakNetStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetStatistics.cpp; sourceTree = "<group>"; };
-		D94D6C70105C064900D1043A /* RakNetStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetStatistics.h; sourceTree = "<group>"; };
-		D94D6C71105C064900D1043A /* RakNetTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTime.h; sourceTree = "<group>"; };
-		D94D6C72105C064900D1043A /* RakNetTransport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetTransport.cpp; sourceTree = "<group>"; };
-		D94D6C73105C064900D1043A /* RakNetTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTransport.h; sourceTree = "<group>"; };
-		D94D6C74105C064900D1043A /* RakNetTransport2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetTransport2.cpp; sourceTree = "<group>"; };
-		D94D6C75105C064900D1043A /* RakNetTransport2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTransport2.h; sourceTree = "<group>"; };
-		D94D6C76105C064900D1043A /* RakNetTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetTypes.cpp; sourceTree = "<group>"; };
-		D94D6C77105C064900D1043A /* RakNetTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTypes.h; sourceTree = "<group>"; };
-		D94D6C78105C064900D1043A /* RakNetVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetVersion.h; sourceTree = "<group>"; };
-		D94D6C79105C064900D1043A /* RakNetworkFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetworkFactory.cpp; sourceTree = "<group>"; };
-		D94D6C7A105C064900D1043A /* RakNetworkFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetworkFactory.h; sourceTree = "<group>"; };
-		D94D6C7B105C064900D1043A /* RakPeer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakPeer.cpp; sourceTree = "<group>"; };
-		D94D6C7C105C064900D1043A /* RakPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakPeer.h; sourceTree = "<group>"; };
-		D94D6C7D105C064900D1043A /* RakPeerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakPeerInterface.h; sourceTree = "<group>"; };
-		D94D6C7E105C064900D1043A /* RakSleep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakSleep.cpp; sourceTree = "<group>"; };
-		D94D6C7F105C064900D1043A /* RakSleep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakSleep.h; sourceTree = "<group>"; };
-		D94D6C80105C064900D1043A /* RakString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakString.cpp; sourceTree = "<group>"; };
-		D94D6C81105C064900D1043A /* RakString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakString.h; sourceTree = "<group>"; };
-		D94D6C82105C064900D1043A /* RakThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakThread.cpp; sourceTree = "<group>"; };
-		D94D6C83105C064900D1043A /* RakThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakThread.h; sourceTree = "<group>"; };
-		D94D6C84105C064900D1043A /* Rand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rand.cpp; sourceTree = "<group>"; };
-		D94D6C85105C064900D1043A /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
-		D94D6C86105C064900D1043A /* ReadyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReadyEvent.cpp; sourceTree = "<group>"; };
-		D94D6C87105C064900D1043A /* ReadyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadyEvent.h; sourceTree = "<group>"; };
-		D94D6C88105C064900D1043A /* RefCountedObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCountedObj.h; sourceTree = "<group>"; };
-		D94D6C89105C064900D1043A /* ReliabilityLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReliabilityLayer.cpp; sourceTree = "<group>"; };
-		D94D6C8A105C064900D1043A /* ReliabilityLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReliabilityLayer.h; sourceTree = "<group>"; };
-		D94D6C8B105C064900D1043A /* Replica.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Replica.h; sourceTree = "<group>"; };
-		D94D6C8C105C064900D1043A /* ReplicaEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaEnums.h; sourceTree = "<group>"; };
-		D94D6C8D105C064900D1043A /* ReplicaManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicaManager.cpp; sourceTree = "<group>"; };
-		D94D6C8E105C064900D1043A /* ReplicaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaManager.h; sourceTree = "<group>"; };
-		D94D6C8F105C064900D1043A /* ReplicaManager2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicaManager2.cpp; sourceTree = "<group>"; };
-		D94D6C90105C064900D1043A /* ReplicaManager2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaManager2.h; sourceTree = "<group>"; };
-		D94D6C91105C064900D1043A /* ReplicaManager3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicaManager3.cpp; sourceTree = "<group>"; };
-		D94D6C92105C064900D1043A /* ReplicaManager3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaManager3.h; sourceTree = "<group>"; };
-		D94D6C93105C064900D1043A /* Rijndael-Boxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rijndael-Boxes.h"; sourceTree = "<group>"; };
-		D94D6C94105C064900D1043A /* rijndael.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rijndael.cpp; sourceTree = "<group>"; };
-		D94D6C95105C064900D1043A /* Rijndael.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rijndael.h; sourceTree = "<group>"; };
-		D94D6C96105C064900D1043A /* Router.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Router.cpp; sourceTree = "<group>"; };
-		D94D6C97105C064900D1043A /* Router.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Router.h; sourceTree = "<group>"; };
-		D94D6C98105C064900D1043A /* RouterInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouterInterface.h; sourceTree = "<group>"; };
-		D94D6C99105C064900D1043A /* RPCMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RPCMap.cpp; sourceTree = "<group>"; };
-		D94D6C9A105C064900D1043A /* RPCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPCMap.h; sourceTree = "<group>"; };
-		D94D6C9B105C064900D1043A /* RPCNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPCNode.h; sourceTree = "<group>"; };
-		D94D6C9C105C064900D1043A /* RSACrypt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RSACrypt.cpp; sourceTree = "<group>"; };
-		D94D6C9D105C064900D1043A /* RSACrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSACrypt.h; sourceTree = "<group>"; };
-		D94D6C9E105C064900D1043A /* SendToThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SendToThread.cpp; sourceTree = "<group>"; };
-		D94D6C9F105C064900D1043A /* SendToThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendToThread.h; sourceTree = "<group>"; };
-		D94D6CA0105C064900D1043A /* SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA1.cpp; sourceTree = "<group>"; };
-		D94D6CA1105C064900D1043A /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
-		D94D6CA2105C064900D1043A /* SignaledEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SignaledEvent.cpp; sourceTree = "<group>"; };
-		D94D6CA3105C064900D1043A /* SignaledEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignaledEvent.h; sourceTree = "<group>"; };
-		D94D6CA4105C064900D1043A /* SimpleMutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleMutex.cpp; sourceTree = "<group>"; };
-		D94D6CA5105C064900D1043A /* SimpleMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleMutex.h; sourceTree = "<group>"; };
-		D94D6CA6105C064900D1043A /* SimpleTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTCPServer.h; sourceTree = "<group>"; };
-		D94D6CA7105C064900D1043A /* SingleProducerConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleProducerConsumer.h; sourceTree = "<group>"; };
-		D94D6CA8105C064900D1043A /* SocketIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIncludes.h; sourceTree = "<group>"; };
-		D94D6CA9105C064900D1043A /* SocketLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketLayer.cpp; sourceTree = "<group>"; };
-		D94D6CAA105C064900D1043A /* SocketLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketLayer.h; sourceTree = "<group>"; };
-		D94D6CAB105C064900D1043A /* StringCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringCompressor.cpp; sourceTree = "<group>"; };
-		D94D6CAC105C064900D1043A /* StringCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringCompressor.h; sourceTree = "<group>"; };
-		D94D6CAD105C064900D1043A /* StringTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringTable.cpp; sourceTree = "<group>"; };
-		D94D6CAE105C064900D1043A /* StringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTable.h; sourceTree = "<group>"; };
-		D94D6CAF105C064900D1043A /* SuperFastHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SuperFastHash.cpp; sourceTree = "<group>"; };
-		D94D6CB0105C064900D1043A /* SuperFastHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperFastHash.h; sourceTree = "<group>"; };
-		D94D6CB1105C064900D1043A /* SystemAddressList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemAddressList.cpp; sourceTree = "<group>"; };
-		D94D6CB2105C064900D1043A /* SystemAddressList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAddressList.h; sourceTree = "<group>"; };
-		D94D6CB3105C064900D1043A /* TableSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableSerializer.cpp; sourceTree = "<group>"; };
-		D94D6CB4105C064900D1043A /* TableSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSerializer.h; sourceTree = "<group>"; };
-		D94D6CB5105C064900D1043A /* TCPInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPInterface.cpp; sourceTree = "<group>"; };
-		D94D6CB6105C064900D1043A /* TCPInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPInterface.h; sourceTree = "<group>"; };
-		D94D6CB7105C064900D1043A /* TelnetTransport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TelnetTransport.cpp; sourceTree = "<group>"; };
-		D94D6CB8105C064900D1043A /* TelnetTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelnetTransport.h; sourceTree = "<group>"; };
-		D94D6CB9105C064900D1043A /* ThreadPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadPool.h; sourceTree = "<group>"; };
-		D94D6CBA105C064900D1043A /* ThreadsafePacketLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadsafePacketLogger.cpp; sourceTree = "<group>"; };
-		D94D6CBB105C064900D1043A /* ThreadsafePacketLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadsafePacketLogger.h; sourceTree = "<group>"; };
-		D94D6CBC105C064900D1043A /* TransportInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportInterface.h; sourceTree = "<group>"; };
-		D94D6CBD105C064900D1043A /* UDPForwarder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPForwarder.cpp; sourceTree = "<group>"; };
-		D94D6CBE105C064900D1043A /* UDPForwarder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPForwarder.h; sourceTree = "<group>"; };
-		D94D6CBF105C064900D1043A /* UDPProxyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPProxyClient.cpp; sourceTree = "<group>"; };
-		D94D6CC0105C064900D1043A /* UDPProxyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyClient.h; sourceTree = "<group>"; };
-		D94D6CC1105C064900D1043A /* UDPProxyCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyCommon.h; sourceTree = "<group>"; };
-		D94D6CC2105C064900D1043A /* UDPProxyCoordinator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPProxyCoordinator.cpp; sourceTree = "<group>"; };
-		D94D6CC3105C064900D1043A /* UDPProxyCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyCoordinator.h; sourceTree = "<group>"; };
-		D94D6CC4105C064900D1043A /* UDPProxyServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPProxyServer.cpp; sourceTree = "<group>"; };
-		D94D6CC5105C064900D1043A /* UDPProxyServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyServer.h; sourceTree = "<group>"; };
-		D94D6CC6105C064900D1043A /* VariadicSQLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VariadicSQLParser.cpp; sourceTree = "<group>"; };
-		D94D6CC7105C064900D1043A /* VariadicSQLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariadicSQLParser.h; sourceTree = "<group>"; };
-		D94D6CC8105C064900D1043A /* WindowsIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowsIncludes.h; sourceTree = "<group>"; };
-		D94D6CC9105C064900D1043A /* WSAStartupSingleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WSAStartupSingleton.cpp; sourceTree = "<group>"; };
-		D94D6CCA105C064900D1043A /* WSAStartupSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSAStartupSingleton.h; sourceTree = "<group>"; };
+		D9C01D24105D8C7F00F44CA5 /* _FindFirst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = _FindFirst.cpp; sourceTree = "<group>"; };
+		D9C01D25105D8C7F00F44CA5 /* _FindFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _FindFirst.h; sourceTree = "<group>"; };
+		D9C01D26105D8C7F00F44CA5 /* AsynchronousFileIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AsynchronousFileIO.cpp; sourceTree = "<group>"; };
+		D9C01D27105D8C7F00F44CA5 /* AsynchronousFileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousFileIO.h; sourceTree = "<group>"; };
+		D9C01D28105D8C7F00F44CA5 /* AutopatcherPatchContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutopatcherPatchContext.h; sourceTree = "<group>"; };
+		D9C01D29105D8C7F00F44CA5 /* AutopatcherRepositoryInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutopatcherRepositoryInterface.h; sourceTree = "<group>"; };
+		D9C01D2A105D8C7F00F44CA5 /* AutoRPC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoRPC.cpp; sourceTree = "<group>"; };
+		D9C01D2B105D8C7F00F44CA5 /* AutoRPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoRPC.h; sourceTree = "<group>"; };
+		D9C01D2C105D8C7F00F44CA5 /* BigInt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigInt.cpp; sourceTree = "<group>"; };
+		D9C01D2D105D8C7F00F44CA5 /* BigInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigInt.h; sourceTree = "<group>"; };
+		D9C01D2E105D8C7F00F44CA5 /* BitStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitStream.cpp; sourceTree = "<group>"; };
+		D9C01D2F105D8C7F00F44CA5 /* BitStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitStream.h; sourceTree = "<group>"; };
+		D9C01D30105D8C7F00F44CA5 /* BitStream_NoTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitStream_NoTemplate.cpp; sourceTree = "<group>"; };
+		D9C01D31105D8C7F00F44CA5 /* BitStream_NoTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitStream_NoTemplate.h; sourceTree = "<group>"; };
+		D9C01D32105D8C7F00F44CA5 /* CCRakNetUDT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCRakNetUDT.cpp; sourceTree = "<group>"; };
+		D9C01D33105D8C7F00F44CA5 /* CCRakNetUDT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRakNetUDT.h; sourceTree = "<group>"; };
+		D9C01D34105D8C7F00F44CA5 /* CheckSum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheckSum.cpp; sourceTree = "<group>"; };
+		D9C01D35105D8C7F00F44CA5 /* CheckSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSum.h; sourceTree = "<group>"; };
+		D9C01D36105D8C7F00F44CA5 /* ClientContextStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientContextStruct.h; sourceTree = "<group>"; };
+		D9C01D37105D8C7F00F44CA5 /* CommandParserInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommandParserInterface.cpp; sourceTree = "<group>"; };
+		D9C01D38105D8C7F00F44CA5 /* CommandParserInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandParserInterface.h; sourceTree = "<group>"; };
+		D9C01D39105D8C7F00F44CA5 /* ConnectionGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionGraph.cpp; sourceTree = "<group>"; };
+		D9C01D3A105D8C7F00F44CA5 /* ConnectionGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionGraph.h; sourceTree = "<group>"; };
+		D9C01D3B105D8C7F00F44CA5 /* ConnectionGraph2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionGraph2.cpp; sourceTree = "<group>"; };
+		D9C01D3C105D8C7F00F44CA5 /* ConnectionGraph2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionGraph2.h; sourceTree = "<group>"; };
+		D9C01D3D105D8C7F00F44CA5 /* ConsoleServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleServer.cpp; sourceTree = "<group>"; };
+		D9C01D3E105D8C7F00F44CA5 /* ConsoleServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleServer.h; sourceTree = "<group>"; };
+		D9C01D3F105D8C7F00F44CA5 /* DataBlockEncryptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataBlockEncryptor.cpp; sourceTree = "<group>"; };
+		D9C01D40105D8C7F00F44CA5 /* DataBlockEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBlockEncryptor.h; sourceTree = "<group>"; };
+		D9C01D41105D8C7F00F44CA5 /* DataCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataCompressor.cpp; sourceTree = "<group>"; };
+		D9C01D42105D8C7F00F44CA5 /* DataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCompressor.h; sourceTree = "<group>"; };
+		D9C01D43105D8C7F00F44CA5 /* DirectoryDeltaTransfer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectoryDeltaTransfer.cpp; sourceTree = "<group>"; };
+		D9C01D44105D8C7F00F44CA5 /* DirectoryDeltaTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryDeltaTransfer.h; sourceTree = "<group>"; };
+		D9C01D45105D8C7F00F44CA5 /* DS_BinarySearchTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_BinarySearchTree.h; sourceTree = "<group>"; };
+		D9C01D46105D8C7F00F44CA5 /* DS_BPlusTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_BPlusTree.h; sourceTree = "<group>"; };
+		D9C01D47105D8C7F00F44CA5 /* DS_BytePool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_BytePool.cpp; sourceTree = "<group>"; };
+		D9C01D48105D8C7F00F44CA5 /* DS_BytePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_BytePool.h; sourceTree = "<group>"; };
+		D9C01D49105D8C7F00F44CA5 /* DS_ByteQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_ByteQueue.cpp; sourceTree = "<group>"; };
+		D9C01D4A105D8C7F00F44CA5 /* DS_ByteQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_ByteQueue.h; sourceTree = "<group>"; };
+		D9C01D4B105D8C7F00F44CA5 /* DS_Heap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Heap.h; sourceTree = "<group>"; };
+		D9C01D4C105D8C7F00F44CA5 /* DS_HuffmanEncodingTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_HuffmanEncodingTree.cpp; sourceTree = "<group>"; };
+		D9C01D4D105D8C7F00F44CA5 /* DS_HuffmanEncodingTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_HuffmanEncodingTree.h; sourceTree = "<group>"; };
+		D9C01D4E105D8C7F00F44CA5 /* DS_HuffmanEncodingTreeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_HuffmanEncodingTreeFactory.h; sourceTree = "<group>"; };
+		D9C01D4F105D8C7F00F44CA5 /* DS_HuffmanEncodingTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_HuffmanEncodingTreeNode.h; sourceTree = "<group>"; };
+		D9C01D50105D8C7F00F44CA5 /* DS_LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_LinkedList.h; sourceTree = "<group>"; };
+		D9C01D51105D8C7F00F44CA5 /* DS_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_List.h; sourceTree = "<group>"; };
+		D9C01D52105D8C7F00F44CA5 /* DS_Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Map.h; sourceTree = "<group>"; };
+		D9C01D53105D8C7F00F44CA5 /* DS_MemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_MemoryPool.h; sourceTree = "<group>"; };
+		D9C01D54105D8C7F00F44CA5 /* DS_Multilist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Multilist.h; sourceTree = "<group>"; };
+		D9C01D55105D8C7F00F44CA5 /* DS_OrderedChannelHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_OrderedChannelHeap.h; sourceTree = "<group>"; };
+		D9C01D56105D8C7F00F44CA5 /* DS_OrderedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_OrderedList.h; sourceTree = "<group>"; };
+		D9C01D57105D8C7F00F44CA5 /* DS_Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Queue.h; sourceTree = "<group>"; };
+		D9C01D58105D8C7F00F44CA5 /* DS_QueueLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_QueueLinkedList.h; sourceTree = "<group>"; };
+		D9C01D59105D8C7F00F44CA5 /* DS_RangeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_RangeList.h; sourceTree = "<group>"; };
+		D9C01D5A105D8C7F00F44CA5 /* DS_Table.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS_Table.cpp; sourceTree = "<group>"; };
+		D9C01D5B105D8C7F00F44CA5 /* DS_Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Table.h; sourceTree = "<group>"; };
+		D9C01D5C105D8C7F00F44CA5 /* DS_ThreadsafeAllocatingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_ThreadsafeAllocatingQueue.h; sourceTree = "<group>"; };
+		D9C01D5D105D8C7F00F44CA5 /* DS_Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_Tree.h; sourceTree = "<group>"; };
+		D9C01D5E105D8C7F00F44CA5 /* DS_WeightedGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS_WeightedGraph.h; sourceTree = "<group>"; };
+		D9C01D5F105D8C7F00F44CA5 /* EmailSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmailSender.cpp; sourceTree = "<group>"; };
+		D9C01D60105D8C7F00F44CA5 /* EmailSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSender.h; sourceTree = "<group>"; };
+		D9C01D61105D8C7F00F44CA5 /* EncodeClassName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EncodeClassName.cpp; sourceTree = "<group>"; };
+		D9C01D62105D8C7F00F44CA5 /* EpochTimeToString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EpochTimeToString.cpp; sourceTree = "<group>"; };
+		D9C01D63105D8C7F00F44CA5 /* EpochTimeToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpochTimeToString.h; sourceTree = "<group>"; };
+		D9C01D64105D8C7F00F44CA5 /* Export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Export.h; sourceTree = "<group>"; };
+		D9C01D65105D8C7F00F44CA5 /* ExtendedOverlappedPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExtendedOverlappedPool.cpp; sourceTree = "<group>"; };
+		D9C01D66105D8C7F00F44CA5 /* ExtendedOverlappedPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedOverlappedPool.h; sourceTree = "<group>"; };
+		D9C01D67105D8C7F00F44CA5 /* FileList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileList.cpp; sourceTree = "<group>"; };
+		D9C01D68105D8C7F00F44CA5 /* FileList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileList.h; sourceTree = "<group>"; };
+		D9C01D69105D8C8000F44CA5 /* FileListNodeContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListNodeContext.h; sourceTree = "<group>"; };
+		D9C01D6A105D8C8000F44CA5 /* FileListTransfer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileListTransfer.cpp; sourceTree = "<group>"; };
+		D9C01D6B105D8C8000F44CA5 /* FileListTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTransfer.h; sourceTree = "<group>"; };
+		D9C01D6C105D8C8000F44CA5 /* FileListTransferCBInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListTransferCBInterface.h; sourceTree = "<group>"; };
+		D9C01D6D105D8C8000F44CA5 /* FileOperations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileOperations.cpp; sourceTree = "<group>"; };
+		D9C01D6E105D8C8000F44CA5 /* FileOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOperations.h; sourceTree = "<group>"; };
+		D9C01D6F105D8C8000F44CA5 /* FormatString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormatString.cpp; sourceTree = "<group>"; };
+		D9C01D70105D8C8000F44CA5 /* FormatString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatString.h; sourceTree = "<group>"; };
+		D9C01D71105D8C8000F44CA5 /* FullyConnectedMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FullyConnectedMesh.cpp; sourceTree = "<group>"; };
+		D9C01D72105D8C8000F44CA5 /* FullyConnectedMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullyConnectedMesh.h; sourceTree = "<group>"; };
+		D9C01D73105D8C8000F44CA5 /* FullyConnectedMesh2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FullyConnectedMesh2.cpp; sourceTree = "<group>"; };
+		D9C01D74105D8C8000F44CA5 /* FullyConnectedMesh2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullyConnectedMesh2.h; sourceTree = "<group>"; };
+		D9C01D75105D8C8000F44CA5 /* FunctionThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FunctionThread.cpp; sourceTree = "<group>"; };
+		D9C01D76105D8C8000F44CA5 /* FunctionThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunctionThread.h; sourceTree = "<group>"; };
+		D9C01D77105D8C8000F44CA5 /* Gen_RPC8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gen_RPC8.cpp; sourceTree = "<group>"; };
+		D9C01D78105D8C8000F44CA5 /* Gen_RPC8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gen_RPC8.h; sourceTree = "<group>"; };
+		D9C01D79105D8C8000F44CA5 /* GetTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GetTime.cpp; sourceTree = "<group>"; };
+		D9C01D7A105D8C8000F44CA5 /* GetTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTime.h; sourceTree = "<group>"; };
+		D9C01D7B105D8C8000F44CA5 /* gettimeofday.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gettimeofday.cpp; sourceTree = "<group>"; };
+		D9C01D7C105D8C8000F44CA5 /* gettimeofday.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gettimeofday.h; sourceTree = "<group>"; };
+		D9C01D7D105D8C8000F44CA5 /* GridSectorizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridSectorizer.cpp; sourceTree = "<group>"; };
+		D9C01D7E105D8C8000F44CA5 /* GridSectorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridSectorizer.h; sourceTree = "<group>"; };
+		D9C01D7F105D8C8000F44CA5 /* HTTPConnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HTTPConnection.cpp; sourceTree = "<group>"; };
+		D9C01D80105D8C8000F44CA5 /* HTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPConnection.h; sourceTree = "<group>"; };
+		D9C01D81105D8C8000F44CA5 /* IncrementalReadInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IncrementalReadInterface.cpp; sourceTree = "<group>"; };
+		D9C01D82105D8C8000F44CA5 /* IncrementalReadInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncrementalReadInterface.h; sourceTree = "<group>"; };
+		D9C01D83105D8C8000F44CA5 /* InlineFunctor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InlineFunctor.cpp; sourceTree = "<group>"; };
+		D9C01D84105D8C8000F44CA5 /* InlineFunctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InlineFunctor.h; sourceTree = "<group>"; };
+		D9C01D85105D8C8000F44CA5 /* InternalPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalPacket.h; sourceTree = "<group>"; };
+		D9C01D86105D8C8000F44CA5 /* Itoa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Itoa.cpp; sourceTree = "<group>"; };
+		D9C01D87105D8C8000F44CA5 /* Itoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Itoa.h; sourceTree = "<group>"; };
+		D9C01D88105D8C8000F44CA5 /* Kbhit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kbhit.h; sourceTree = "<group>"; };
+		D9C01D89105D8C8000F44CA5 /* LightweightDatabaseClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightweightDatabaseClient.cpp; sourceTree = "<group>"; };
+		D9C01D8A105D8C8000F44CA5 /* LightweightDatabaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightweightDatabaseClient.h; sourceTree = "<group>"; };
+		D9C01D8B105D8C8000F44CA5 /* LightweightDatabaseCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightweightDatabaseCommon.cpp; sourceTree = "<group>"; };
+		D9C01D8C105D8C8000F44CA5 /* LightweightDatabaseCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightweightDatabaseCommon.h; sourceTree = "<group>"; };
+		D9C01D8D105D8C8000F44CA5 /* LightweightDatabaseServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightweightDatabaseServer.cpp; sourceTree = "<group>"; };
+		D9C01D8E105D8C8000F44CA5 /* LightweightDatabaseServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightweightDatabaseServer.h; sourceTree = "<group>"; };
+		D9C01D8F105D8C8000F44CA5 /* LinuxStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinuxStrings.cpp; sourceTree = "<group>"; };
+		D9C01D90105D8C8000F44CA5 /* LinuxStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinuxStrings.h; sourceTree = "<group>"; };
+		D9C01D91105D8C8000F44CA5 /* LogCommandParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogCommandParser.cpp; sourceTree = "<group>"; };
+		D9C01D92105D8C8000F44CA5 /* LogCommandParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogCommandParser.h; sourceTree = "<group>"; };
+		D9C01D93105D8C8000F44CA5 /* MessageFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MessageFilter.cpp; sourceTree = "<group>"; };
+		D9C01D94105D8C8000F44CA5 /* MessageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageFilter.h; sourceTree = "<group>"; };
+		D9C01D95105D8C8000F44CA5 /* MessageIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageIdentifiers.h; sourceTree = "<group>"; };
+		D9C01D96105D8C8000F44CA5 /* MTUSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUSize.h; sourceTree = "<group>"; };
+		D9C01D97105D8C8000F44CA5 /* NativeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeTypes.h; sourceTree = "<group>"; };
+		D9C01D98105D8C8000F44CA5 /* NatPunchthroughClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatPunchthroughClient.cpp; sourceTree = "<group>"; };
+		D9C01D99105D8C8000F44CA5 /* NatPunchthroughClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatPunchthroughClient.h; sourceTree = "<group>"; };
+		D9C01D9A105D8C8000F44CA5 /* NatPunchthroughServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatPunchthroughServer.cpp; sourceTree = "<group>"; };
+		D9C01D9B105D8C8000F44CA5 /* NatPunchthroughServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatPunchthroughServer.h; sourceTree = "<group>"; };
+		D9C01D9C105D8C8000F44CA5 /* NatTypeDetectionClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatTypeDetectionClient.cpp; sourceTree = "<group>"; };
+		D9C01D9D105D8C8000F44CA5 /* NatTypeDetectionClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeDetectionClient.h; sourceTree = "<group>"; };
+		D9C01D9E105D8C8000F44CA5 /* NatTypeDetectionCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatTypeDetectionCommon.cpp; sourceTree = "<group>"; };
+		D9C01D9F105D8C8000F44CA5 /* NatTypeDetectionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeDetectionCommon.h; sourceTree = "<group>"; };
+		D9C01DA0105D8C8000F44CA5 /* NatTypeDetectionServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NatTypeDetectionServer.cpp; sourceTree = "<group>"; };
+		D9C01DA1105D8C8000F44CA5 /* NatTypeDetectionServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NatTypeDetectionServer.h; sourceTree = "<group>"; };
+		D9C01DA2105D8C8000F44CA5 /* NetworkIDManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkIDManager.cpp; sourceTree = "<group>"; };
+		D9C01DA3105D8C8000F44CA5 /* NetworkIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkIDManager.h; sourceTree = "<group>"; };
+		D9C01DA4105D8C8000F44CA5 /* NetworkIDObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkIDObject.cpp; sourceTree = "<group>"; };
+		D9C01DA5105D8C8000F44CA5 /* NetworkIDObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkIDObject.h; sourceTree = "<group>"; };
+		D9C01DA6105D8C8000F44CA5 /* PacketConsoleLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketConsoleLogger.cpp; sourceTree = "<group>"; };
+		D9C01DA7105D8C8000F44CA5 /* PacketConsoleLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketConsoleLogger.h; sourceTree = "<group>"; };
+		D9C01DA8105D8C8000F44CA5 /* PacketFileLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketFileLogger.cpp; sourceTree = "<group>"; };
+		D9C01DA9105D8C8000F44CA5 /* PacketFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketFileLogger.h; sourceTree = "<group>"; };
+		D9C01DAA105D8C8000F44CA5 /* PacketizedTCP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketizedTCP.cpp; sourceTree = "<group>"; };
+		D9C01DAB105D8C8000F44CA5 /* PacketizedTCP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketizedTCP.h; sourceTree = "<group>"; };
+		D9C01DAC105D8C8000F44CA5 /* PacketLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketLogger.cpp; sourceTree = "<group>"; };
+		D9C01DAD105D8C8000F44CA5 /* PacketLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketLogger.h; sourceTree = "<group>"; };
+		D9C01DAE105D8C8000F44CA5 /* PacketOutputWindowLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PacketOutputWindowLogger.cpp; sourceTree = "<group>"; };
+		D9C01DAF105D8C8000F44CA5 /* PacketOutputWindowLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketOutputWindowLogger.h; sourceTree = "<group>"; };
+		D9C01DB0105D8C8000F44CA5 /* PacketPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketPool.h; sourceTree = "<group>"; };
+		D9C01DB1105D8C8000F44CA5 /* PacketPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketPriority.h; sourceTree = "<group>"; };
+		D9C01DB2105D8C8000F44CA5 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		D9C01DB3105D8C8000F44CA5 /* PluginInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PluginInterface.cpp; sourceTree = "<group>"; };
+		D9C01DB4105D8C8000F44CA5 /* PluginInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginInterface.h; sourceTree = "<group>"; };
+		D9C01DB5105D8C8000F44CA5 /* PluginInterface2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PluginInterface2.cpp; sourceTree = "<group>"; };
+		D9C01DB6105D8C8000F44CA5 /* PluginInterface2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginInterface2.h; sourceTree = "<group>"; };
+		D9C01DB7105D8C8000F44CA5 /* RakAlloca.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakAlloca.h; sourceTree = "<group>"; };
+		D9C01DB8105D8C8000F44CA5 /* RakAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakAssert.h; sourceTree = "<group>"; };
+		D9C01DB9105D8C8000F44CA5 /* RakMemoryOverride.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakMemoryOverride.cpp; sourceTree = "<group>"; };
+		D9C01DBA105D8C8000F44CA5 /* RakMemoryOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakMemoryOverride.h; sourceTree = "<group>"; };
+		D9C01DBB105D8C8000F44CA5 /* RakNetCommandParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetCommandParser.cpp; sourceTree = "<group>"; };
+		D9C01DBC105D8C8000F44CA5 /* RakNetCommandParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetCommandParser.h; sourceTree = "<group>"; };
+		D9C01DBD105D8C8000F44CA5 /* RakNetDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetDefines.h; sourceTree = "<group>"; };
+		D9C01DBE105D8C8000F44CA5 /* RakNetSmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetSmartPtr.h; sourceTree = "<group>"; };
+		D9C01DBF105D8C8000F44CA5 /* RakNetSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetSocket.cpp; sourceTree = "<group>"; };
+		D9C01DC0105D8C8000F44CA5 /* RakNetSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetSocket.h; sourceTree = "<group>"; };
+		D9C01DC1105D8C8000F44CA5 /* RakNetStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetStatistics.cpp; sourceTree = "<group>"; };
+		D9C01DC2105D8C8000F44CA5 /* RakNetStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetStatistics.h; sourceTree = "<group>"; };
+		D9C01DC3105D8C8000F44CA5 /* RakNetTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTime.h; sourceTree = "<group>"; };
+		D9C01DC4105D8C8000F44CA5 /* RakNetTransport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetTransport.cpp; sourceTree = "<group>"; };
+		D9C01DC5105D8C8000F44CA5 /* RakNetTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTransport.h; sourceTree = "<group>"; };
+		D9C01DC6105D8C8000F44CA5 /* RakNetTransport2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetTransport2.cpp; sourceTree = "<group>"; };
+		D9C01DC7105D8C8000F44CA5 /* RakNetTransport2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTransport2.h; sourceTree = "<group>"; };
+		D9C01DC8105D8C8000F44CA5 /* RakNetTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetTypes.cpp; sourceTree = "<group>"; };
+		D9C01DC9105D8C8000F44CA5 /* RakNetTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetTypes.h; sourceTree = "<group>"; };
+		D9C01DCA105D8C8000F44CA5 /* RakNetVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetVersion.h; sourceTree = "<group>"; };
+		D9C01DCB105D8C8000F44CA5 /* RakNetworkFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakNetworkFactory.cpp; sourceTree = "<group>"; };
+		D9C01DCC105D8C8000F44CA5 /* RakNetworkFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakNetworkFactory.h; sourceTree = "<group>"; };
+		D9C01DCD105D8C8000F44CA5 /* RakPeer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakPeer.cpp; sourceTree = "<group>"; };
+		D9C01DCE105D8C8000F44CA5 /* RakPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakPeer.h; sourceTree = "<group>"; };
+		D9C01DCF105D8C8000F44CA5 /* RakPeerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakPeerInterface.h; sourceTree = "<group>"; };
+		D9C01DD0105D8C8000F44CA5 /* RakSleep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakSleep.cpp; sourceTree = "<group>"; };
+		D9C01DD1105D8C8000F44CA5 /* RakSleep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakSleep.h; sourceTree = "<group>"; };
+		D9C01DD2105D8C8000F44CA5 /* RakString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakString.cpp; sourceTree = "<group>"; };
+		D9C01DD3105D8C8000F44CA5 /* RakString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakString.h; sourceTree = "<group>"; };
+		D9C01DD4105D8C8000F44CA5 /* RakThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RakThread.cpp; sourceTree = "<group>"; };
+		D9C01DD5105D8C8000F44CA5 /* RakThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakThread.h; sourceTree = "<group>"; };
+		D9C01DD6105D8C8000F44CA5 /* Rand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rand.cpp; sourceTree = "<group>"; };
+		D9C01DD7105D8C8000F44CA5 /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
+		D9C01DD8105D8C8000F44CA5 /* ReadyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReadyEvent.cpp; sourceTree = "<group>"; };
+		D9C01DD9105D8C8000F44CA5 /* ReadyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadyEvent.h; sourceTree = "<group>"; };
+		D9C01DDA105D8C8000F44CA5 /* RefCountedObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCountedObj.h; sourceTree = "<group>"; };
+		D9C01DDB105D8C8000F44CA5 /* ReliabilityLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReliabilityLayer.cpp; sourceTree = "<group>"; };
+		D9C01DDC105D8C8000F44CA5 /* ReliabilityLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReliabilityLayer.h; sourceTree = "<group>"; };
+		D9C01DDD105D8C8000F44CA5 /* Replica.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Replica.h; sourceTree = "<group>"; };
+		D9C01DDE105D8C8000F44CA5 /* ReplicaEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaEnums.h; sourceTree = "<group>"; };
+		D9C01DDF105D8C8000F44CA5 /* ReplicaManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicaManager.cpp; sourceTree = "<group>"; };
+		D9C01DE0105D8C8000F44CA5 /* ReplicaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaManager.h; sourceTree = "<group>"; };
+		D9C01DE1105D8C8000F44CA5 /* ReplicaManager2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicaManager2.cpp; sourceTree = "<group>"; };
+		D9C01DE2105D8C8000F44CA5 /* ReplicaManager2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaManager2.h; sourceTree = "<group>"; };
+		D9C01DE3105D8C8000F44CA5 /* ReplicaManager3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicaManager3.cpp; sourceTree = "<group>"; };
+		D9C01DE4105D8C8000F44CA5 /* ReplicaManager3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplicaManager3.h; sourceTree = "<group>"; };
+		D9C01DE5105D8C8000F44CA5 /* Rijndael-Boxes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rijndael-Boxes.h"; sourceTree = "<group>"; };
+		D9C01DE6105D8C8000F44CA5 /* rijndael.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rijndael.cpp; sourceTree = "<group>"; };
+		D9C01DE7105D8C8000F44CA5 /* Rijndael.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rijndael.h; sourceTree = "<group>"; };
+		D9C01DE8105D8C8000F44CA5 /* Router.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Router.cpp; sourceTree = "<group>"; };
+		D9C01DE9105D8C8000F44CA5 /* Router.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Router.h; sourceTree = "<group>"; };
+		D9C01DEA105D8C8000F44CA5 /* RouterInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouterInterface.h; sourceTree = "<group>"; };
+		D9C01DEB105D8C8000F44CA5 /* RPCMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RPCMap.cpp; sourceTree = "<group>"; };
+		D9C01DEC105D8C8000F44CA5 /* RPCMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPCMap.h; sourceTree = "<group>"; };
+		D9C01DED105D8C8000F44CA5 /* RPCNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPCNode.h; sourceTree = "<group>"; };
+		D9C01DEE105D8C8000F44CA5 /* RSACrypt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RSACrypt.cpp; sourceTree = "<group>"; };
+		D9C01DEF105D8C8000F44CA5 /* RSACrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSACrypt.h; sourceTree = "<group>"; };
+		D9C01DF0105D8C8000F44CA5 /* SendToThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SendToThread.cpp; sourceTree = "<group>"; };
+		D9C01DF1105D8C8000F44CA5 /* SendToThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendToThread.h; sourceTree = "<group>"; };
+		D9C01DF2105D8C8000F44CA5 /* SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA1.cpp; sourceTree = "<group>"; };
+		D9C01DF3105D8C8000F44CA5 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
+		D9C01DF4105D8C8000F44CA5 /* SignaledEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SignaledEvent.cpp; sourceTree = "<group>"; };
+		D9C01DF5105D8C8000F44CA5 /* SignaledEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignaledEvent.h; sourceTree = "<group>"; };
+		D9C01DF6105D8C8000F44CA5 /* SimpleMutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleMutex.cpp; sourceTree = "<group>"; };
+		D9C01DF7105D8C8000F44CA5 /* SimpleMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleMutex.h; sourceTree = "<group>"; };
+		D9C01DF8105D8C8000F44CA5 /* SimpleTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTCPServer.h; sourceTree = "<group>"; };
+		D9C01DF9105D8C8000F44CA5 /* SingleProducerConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleProducerConsumer.h; sourceTree = "<group>"; };
+		D9C01DFA105D8C8000F44CA5 /* SocketIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIncludes.h; sourceTree = "<group>"; };
+		D9C01DFB105D8C8000F44CA5 /* SocketLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketLayer.cpp; sourceTree = "<group>"; };
+		D9C01DFC105D8C8000F44CA5 /* SocketLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketLayer.h; sourceTree = "<group>"; };
+		D9C01DFD105D8C8000F44CA5 /* StringCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringCompressor.cpp; sourceTree = "<group>"; };
+		D9C01DFE105D8C8000F44CA5 /* StringCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringCompressor.h; sourceTree = "<group>"; };
+		D9C01DFF105D8C8000F44CA5 /* StringTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringTable.cpp; sourceTree = "<group>"; };
+		D9C01E00105D8C8000F44CA5 /* StringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTable.h; sourceTree = "<group>"; };
+		D9C01E01105D8C8000F44CA5 /* SuperFastHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SuperFastHash.cpp; sourceTree = "<group>"; };
+		D9C01E02105D8C8000F44CA5 /* SuperFastHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperFastHash.h; sourceTree = "<group>"; };
+		D9C01E03105D8C8000F44CA5 /* SystemAddressList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemAddressList.cpp; sourceTree = "<group>"; };
+		D9C01E04105D8C8000F44CA5 /* SystemAddressList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAddressList.h; sourceTree = "<group>"; };
+		D9C01E05105D8C8000F44CA5 /* TableSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableSerializer.cpp; sourceTree = "<group>"; };
+		D9C01E06105D8C8000F44CA5 /* TableSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSerializer.h; sourceTree = "<group>"; };
+		D9C01E07105D8C8000F44CA5 /* TCPInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPInterface.cpp; sourceTree = "<group>"; };
+		D9C01E08105D8C8000F44CA5 /* TCPInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPInterface.h; sourceTree = "<group>"; };
+		D9C01E09105D8C8000F44CA5 /* TelnetTransport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TelnetTransport.cpp; sourceTree = "<group>"; };
+		D9C01E0A105D8C8000F44CA5 /* TelnetTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelnetTransport.h; sourceTree = "<group>"; };
+		D9C01E0B105D8C8000F44CA5 /* ThreadPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadPool.h; sourceTree = "<group>"; };
+		D9C01E0C105D8C8000F44CA5 /* ThreadsafePacketLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadsafePacketLogger.cpp; sourceTree = "<group>"; };
+		D9C01E0D105D8C8000F44CA5 /* ThreadsafePacketLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadsafePacketLogger.h; sourceTree = "<group>"; };
+		D9C01E0E105D8C8000F44CA5 /* TransportInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportInterface.h; sourceTree = "<group>"; };
+		D9C01E0F105D8C8000F44CA5 /* UDPForwarder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPForwarder.cpp; sourceTree = "<group>"; };
+		D9C01E10105D8C8000F44CA5 /* UDPForwarder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPForwarder.h; sourceTree = "<group>"; };
+		D9C01E11105D8C8000F44CA5 /* UDPProxyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPProxyClient.cpp; sourceTree = "<group>"; };
+		D9C01E12105D8C8000F44CA5 /* UDPProxyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyClient.h; sourceTree = "<group>"; };
+		D9C01E13105D8C8000F44CA5 /* UDPProxyCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyCommon.h; sourceTree = "<group>"; };
+		D9C01E14105D8C8000F44CA5 /* UDPProxyCoordinator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPProxyCoordinator.cpp; sourceTree = "<group>"; };
+		D9C01E15105D8C8000F44CA5 /* UDPProxyCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyCoordinator.h; sourceTree = "<group>"; };
+		D9C01E16105D8C8000F44CA5 /* UDPProxyServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPProxyServer.cpp; sourceTree = "<group>"; };
+		D9C01E17105D8C8000F44CA5 /* UDPProxyServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPProxyServer.h; sourceTree = "<group>"; };
+		D9C01E18105D8C8000F44CA5 /* VariadicSQLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VariadicSQLParser.cpp; sourceTree = "<group>"; };
+		D9C01E19105D8C8000F44CA5 /* VariadicSQLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariadicSQLParser.h; sourceTree = "<group>"; };
+		D9C01E1A105D8C8000F44CA5 /* WindowsIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowsIncludes.h; sourceTree = "<group>"; };
+		D9C01E1B105D8C8000F44CA5 /* WSAStartupSingleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WSAStartupSingleton.cpp; sourceTree = "<group>"; };
+		D9C01E1C105D8C8000F44CA5 /* WSAStartupSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSAStartupSingleton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,7 +548,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D94D6BD1105C064900D1043A /* Raknet */,
+				D9C01D23105D8C7F00F44CA5 /* Raknet */,
 				BDE20FA1102173A800B215F9 /* Pathes */,
 				BDE20F791021731000B215F9 /* Include */,
 				795AC9020EDF1293004CF7D4 /* MemoryManager */,
@@ -733,258 +733,258 @@
 			path = ../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
-		D94D6BD1105C064900D1043A /* Raknet */ = {
+		D9C01D23105D8C7F00F44CA5 /* Raknet */ = {
 			isa = PBXGroup;
 			children = (
-				D94D6BD2105C064900D1043A /* _FindFirst.cpp */,
-				D94D6BD3105C064900D1043A /* _FindFirst.h */,
-				D94D6BD4105C064900D1043A /* AsynchronousFileIO.cpp */,
-				D94D6BD5105C064900D1043A /* AsynchronousFileIO.h */,
-				D94D6BD6105C064900D1043A /* AutopatcherPatchContext.h */,
-				D94D6BD7105C064900D1043A /* AutopatcherRepositoryInterface.h */,
-				D94D6BD8105C064900D1043A /* AutoRPC.cpp */,
-				D94D6BD9105C064900D1043A /* AutoRPC.h */,
-				D94D6BDA105C064900D1043A /* BigInt.cpp */,
-				D94D6BDB105C064900D1043A /* BigInt.h */,
-				D94D6BDC105C064900D1043A /* BitStream.cpp */,
-				D94D6BDD105C064900D1043A /* BitStream.h */,
-				D94D6BDE105C064900D1043A /* BitStream_NoTemplate.cpp */,
-				D94D6BDF105C064900D1043A /* BitStream_NoTemplate.h */,
-				D94D6BE0105C064900D1043A /* CCRakNetUDT.cpp */,
-				D94D6BE1105C064900D1043A /* CCRakNetUDT.h */,
-				D94D6BE2105C064900D1043A /* CheckSum.cpp */,
-				D94D6BE3105C064900D1043A /* CheckSum.h */,
-				D94D6BE4105C064900D1043A /* ClientContextStruct.h */,
-				D94D6BE5105C064900D1043A /* CommandParserInterface.cpp */,
-				D94D6BE6105C064900D1043A /* CommandParserInterface.h */,
-				D94D6BE7105C064900D1043A /* ConnectionGraph.cpp */,
-				D94D6BE8105C064900D1043A /* ConnectionGraph.h */,
-				D94D6BE9105C064900D1043A /* ConnectionGraph2.cpp */,
-				D94D6BEA105C064900D1043A /* ConnectionGraph2.h */,
-				D94D6BEB105C064900D1043A /* ConsoleServer.cpp */,
-				D94D6BEC105C064900D1043A /* ConsoleServer.h */,
-				D94D6BED105C064900D1043A /* DataBlockEncryptor.cpp */,
-				D94D6BEE105C064900D1043A /* DataBlockEncryptor.h */,
-				D94D6BEF105C064900D1043A /* DataCompressor.cpp */,
-				D94D6BF0105C064900D1043A /* DataCompressor.h */,
-				D94D6BF1105C064900D1043A /* DirectoryDeltaTransfer.cpp */,
-				D94D6BF2105C064900D1043A /* DirectoryDeltaTransfer.h */,
-				D94D6BF3105C064900D1043A /* DS_BinarySearchTree.h */,
-				D94D6BF4105C064900D1043A /* DS_BPlusTree.h */,
-				D94D6BF5105C064900D1043A /* DS_BytePool.cpp */,
-				D94D6BF6105C064900D1043A /* DS_BytePool.h */,
-				D94D6BF7105C064900D1043A /* DS_ByteQueue.cpp */,
-				D94D6BF8105C064900D1043A /* DS_ByteQueue.h */,
-				D94D6BF9105C064900D1043A /* DS_Heap.h */,
-				D94D6BFA105C064900D1043A /* DS_HuffmanEncodingTree.cpp */,
-				D94D6BFB105C064900D1043A /* DS_HuffmanEncodingTree.h */,
-				D94D6BFC105C064900D1043A /* DS_HuffmanEncodingTreeFactory.h */,
-				D94D6BFD105C064900D1043A /* DS_HuffmanEncodingTreeNode.h */,
-				D94D6BFE105C064900D1043A /* DS_LinkedList.h */,
-				D94D6BFF105C064900D1043A /* DS_List.h */,
-				D94D6C00105C064900D1043A /* DS_Map.h */,
-				D94D6C01105C064900D1043A /* DS_MemoryPool.h */,
-				D94D6C02105C064900D1043A /* DS_Multilist.h */,
-				D94D6C03105C064900D1043A /* DS_OrderedChannelHeap.h */,
-				D94D6C04105C064900D1043A /* DS_OrderedList.h */,
-				D94D6C05105C064900D1043A /* DS_Queue.h */,
-				D94D6C06105C064900D1043A /* DS_QueueLinkedList.h */,
-				D94D6C07105C064900D1043A /* DS_RangeList.h */,
-				D94D6C08105C064900D1043A /* DS_Table.cpp */,
-				D94D6C09105C064900D1043A /* DS_Table.h */,
-				D94D6C0A105C064900D1043A /* DS_ThreadsafeAllocatingQueue.h */,
-				D94D6C0B105C064900D1043A /* DS_Tree.h */,
-				D94D6C0C105C064900D1043A /* DS_WeightedGraph.h */,
-				D94D6C0D105C064900D1043A /* EmailSender.cpp */,
-				D94D6C0E105C064900D1043A /* EmailSender.h */,
-				D94D6C0F105C064900D1043A /* EncodeClassName.cpp */,
-				D94D6C10105C064900D1043A /* EpochTimeToString.cpp */,
-				D94D6C11105C064900D1043A /* EpochTimeToString.h */,
-				D94D6C12105C064900D1043A /* Export.h */,
-				D94D6C13105C064900D1043A /* ExtendedOverlappedPool.cpp */,
-				D94D6C14105C064900D1043A /* ExtendedOverlappedPool.h */,
-				D94D6C15105C064900D1043A /* FileList.cpp */,
-				D94D6C16105C064900D1043A /* FileList.h */,
-				D94D6C17105C064900D1043A /* FileListNodeContext.h */,
-				D94D6C18105C064900D1043A /* FileListTransfer.cpp */,
-				D94D6C19105C064900D1043A /* FileListTransfer.h */,
-				D94D6C1A105C064900D1043A /* FileListTransferCBInterface.h */,
-				D94D6C1B105C064900D1043A /* FileOperations.cpp */,
-				D94D6C1C105C064900D1043A /* FileOperations.h */,
-				D94D6C1D105C064900D1043A /* FormatString.cpp */,
-				D94D6C1E105C064900D1043A /* FormatString.h */,
-				D94D6C1F105C064900D1043A /* FullyConnectedMesh.cpp */,
-				D94D6C20105C064900D1043A /* FullyConnectedMesh.h */,
-				D94D6C21105C064900D1043A /* FullyConnectedMesh2.cpp */,
-				D94D6C22105C064900D1043A /* FullyConnectedMesh2.h */,
-				D94D6C23105C064900D1043A /* FunctionThread.cpp */,
-				D94D6C24105C064900D1043A /* FunctionThread.h */,
-				D94D6C25105C064900D1043A /* Gen_RPC8.cpp */,
-				D94D6C26105C064900D1043A /* Gen_RPC8.h */,
-				D94D6C27105C064900D1043A /* GetTime.cpp */,
-				D94D6C28105C064900D1043A /* GetTime.h */,
-				D94D6C29105C064900D1043A /* gettimeofday.cpp */,
-				D94D6C2A105C064900D1043A /* gettimeofday.h */,
-				D94D6C2B105C064900D1043A /* GridSectorizer.cpp */,
-				D94D6C2C105C064900D1043A /* GridSectorizer.h */,
-				D94D6C2D105C064900D1043A /* HTTPConnection.cpp */,
-				D94D6C2E105C064900D1043A /* HTTPConnection.h */,
-				D94D6C2F105C064900D1043A /* IncrementalReadInterface.cpp */,
-				D94D6C30105C064900D1043A /* IncrementalReadInterface.h */,
-				D94D6C31105C064900D1043A /* InlineFunctor.cpp */,
-				D94D6C32105C064900D1043A /* InlineFunctor.h */,
-				D94D6C33105C064900D1043A /* InternalPacket.h */,
-				D94D6C34105C064900D1043A /* Itoa.cpp */,
-				D94D6C35105C064900D1043A /* Itoa.h */,
-				D94D6C36105C064900D1043A /* Kbhit.h */,
-				D94D6C37105C064900D1043A /* LightweightDatabaseClient.cpp */,
-				D94D6C38105C064900D1043A /* LightweightDatabaseClient.h */,
-				D94D6C39105C064900D1043A /* LightweightDatabaseCommon.cpp */,
-				D94D6C3A105C064900D1043A /* LightweightDatabaseCommon.h */,
-				D94D6C3B105C064900D1043A /* LightweightDatabaseServer.cpp */,
-				D94D6C3C105C064900D1043A /* LightweightDatabaseServer.h */,
-				D94D6C3D105C064900D1043A /* LinuxStrings.cpp */,
-				D94D6C3E105C064900D1043A /* LinuxStrings.h */,
-				D94D6C3F105C064900D1043A /* LogCommandParser.cpp */,
-				D94D6C40105C064900D1043A /* LogCommandParser.h */,
-				D94D6C41105C064900D1043A /* MessageFilter.cpp */,
-				D94D6C42105C064900D1043A /* MessageFilter.h */,
-				D94D6C43105C064900D1043A /* MessageIdentifiers.h */,
-				D94D6C44105C064900D1043A /* MTUSize.h */,
-				D94D6C45105C064900D1043A /* NativeTypes.h */,
-				D94D6C46105C064900D1043A /* NatPunchthroughClient.cpp */,
-				D94D6C47105C064900D1043A /* NatPunchthroughClient.h */,
-				D94D6C48105C064900D1043A /* NatPunchthroughServer.cpp */,
-				D94D6C49105C064900D1043A /* NatPunchthroughServer.h */,
-				D94D6C4A105C064900D1043A /* NatTypeDetectionClient.cpp */,
-				D94D6C4B105C064900D1043A /* NatTypeDetectionClient.h */,
-				D94D6C4C105C064900D1043A /* NatTypeDetectionCommon.cpp */,
-				D94D6C4D105C064900D1043A /* NatTypeDetectionCommon.h */,
-				D94D6C4E105C064900D1043A /* NatTypeDetectionServer.cpp */,
-				D94D6C4F105C064900D1043A /* NatTypeDetectionServer.h */,
-				D94D6C50105C064900D1043A /* NetworkIDManager.cpp */,
-				D94D6C51105C064900D1043A /* NetworkIDManager.h */,
-				D94D6C52105C064900D1043A /* NetworkIDObject.cpp */,
-				D94D6C53105C064900D1043A /* NetworkIDObject.h */,
-				D94D6C54105C064900D1043A /* PacketConsoleLogger.cpp */,
-				D94D6C55105C064900D1043A /* PacketConsoleLogger.h */,
-				D94D6C56105C064900D1043A /* PacketFileLogger.cpp */,
-				D94D6C57105C064900D1043A /* PacketFileLogger.h */,
-				D94D6C58105C064900D1043A /* PacketizedTCP.cpp */,
-				D94D6C59105C064900D1043A /* PacketizedTCP.h */,
-				D94D6C5A105C064900D1043A /* PacketLogger.cpp */,
-				D94D6C5B105C064900D1043A /* PacketLogger.h */,
-				D94D6C5C105C064900D1043A /* PacketOutputWindowLogger.cpp */,
-				D94D6C5D105C064900D1043A /* PacketOutputWindowLogger.h */,
-				D94D6C5E105C064900D1043A /* PacketPool.h */,
-				D94D6C5F105C064900D1043A /* PacketPriority.h */,
-				D94D6C60105C064900D1043A /* Platform.h */,
-				D94D6C61105C064900D1043A /* PluginInterface.cpp */,
-				D94D6C62105C064900D1043A /* PluginInterface.h */,
-				D94D6C63105C064900D1043A /* PluginInterface2.cpp */,
-				D94D6C64105C064900D1043A /* PluginInterface2.h */,
-				D94D6C65105C064900D1043A /* RakAlloca.h */,
-				D94D6C66105C064900D1043A /* RakAssert.h */,
-				D94D6C67105C064900D1043A /* RakMemoryOverride.cpp */,
-				D94D6C68105C064900D1043A /* RakMemoryOverride.h */,
-				D94D6C69105C064900D1043A /* RakNetCommandParser.cpp */,
-				D94D6C6A105C064900D1043A /* RakNetCommandParser.h */,
-				D94D6C6B105C064900D1043A /* RakNetDefines.h */,
-				D94D6C6C105C064900D1043A /* RakNetSmartPtr.h */,
-				D94D6C6D105C064900D1043A /* RakNetSocket.cpp */,
-				D94D6C6E105C064900D1043A /* RakNetSocket.h */,
-				D94D6C6F105C064900D1043A /* RakNetStatistics.cpp */,
-				D94D6C70105C064900D1043A /* RakNetStatistics.h */,
-				D94D6C71105C064900D1043A /* RakNetTime.h */,
-				D94D6C72105C064900D1043A /* RakNetTransport.cpp */,
-				D94D6C73105C064900D1043A /* RakNetTransport.h */,
-				D94D6C74105C064900D1043A /* RakNetTransport2.cpp */,
-				D94D6C75105C064900D1043A /* RakNetTransport2.h */,
-				D94D6C76105C064900D1043A /* RakNetTypes.cpp */,
-				D94D6C77105C064900D1043A /* RakNetTypes.h */,
-				D94D6C78105C064900D1043A /* RakNetVersion.h */,
-				D94D6C79105C064900D1043A /* RakNetworkFactory.cpp */,
-				D94D6C7A105C064900D1043A /* RakNetworkFactory.h */,
-				D94D6C7B105C064900D1043A /* RakPeer.cpp */,
-				D94D6C7C105C064900D1043A /* RakPeer.h */,
-				D94D6C7D105C064900D1043A /* RakPeerInterface.h */,
-				D94D6C7E105C064900D1043A /* RakSleep.cpp */,
-				D94D6C7F105C064900D1043A /* RakSleep.h */,
-				D94D6C80105C064900D1043A /* RakString.cpp */,
-				D94D6C81105C064900D1043A /* RakString.h */,
-				D94D6C82105C064900D1043A /* RakThread.cpp */,
-				D94D6C83105C064900D1043A /* RakThread.h */,
-				D94D6C84105C064900D1043A /* Rand.cpp */,
-				D94D6C85105C064900D1043A /* Rand.h */,
-				D94D6C86105C064900D1043A /* ReadyEvent.cpp */,
-				D94D6C87105C064900D1043A /* ReadyEvent.h */,
-				D94D6C88105C064900D1043A /* RefCountedObj.h */,
-				D94D6C89105C064900D1043A /* ReliabilityLayer.cpp */,
-				D94D6C8A105C064900D1043A /* ReliabilityLayer.h */,
-				D94D6C8B105C064900D1043A /* Replica.h */,
-				D94D6C8C105C064900D1043A /* ReplicaEnums.h */,
-				D94D6C8D105C064900D1043A /* ReplicaManager.cpp */,
-				D94D6C8E105C064900D1043A /* ReplicaManager.h */,
-				D94D6C8F105C064900D1043A /* ReplicaManager2.cpp */,
-				D94D6C90105C064900D1043A /* ReplicaManager2.h */,
-				D94D6C91105C064900D1043A /* ReplicaManager3.cpp */,
-				D94D6C92105C064900D1043A /* ReplicaManager3.h */,
-				D94D6C93105C064900D1043A /* Rijndael-Boxes.h */,
-				D94D6C94105C064900D1043A /* rijndael.cpp */,
-				D94D6C95105C064900D1043A /* Rijndael.h */,
-				D94D6C96105C064900D1043A /* Router.cpp */,
-				D94D6C97105C064900D1043A /* Router.h */,
-				D94D6C98105C064900D1043A /* RouterInterface.h */,
-				D94D6C99105C064900D1043A /* RPCMap.cpp */,
-				D94D6C9A105C064900D1043A /* RPCMap.h */,
-				D94D6C9B105C064900D1043A /* RPCNode.h */,
-				D94D6C9C105C064900D1043A /* RSACrypt.cpp */,
-				D94D6C9D105C064900D1043A /* RSACrypt.h */,
-				D94D6C9E105C064900D1043A /* SendToThread.cpp */,
-				D94D6C9F105C064900D1043A /* SendToThread.h */,
-				D94D6CA0105C064900D1043A /* SHA1.cpp */,
-				D94D6CA1105C064900D1043A /* SHA1.h */,
-				D94D6CA2105C064900D1043A /* SignaledEvent.cpp */,
-				D94D6CA3105C064900D1043A /* SignaledEvent.h */,
-				D94D6CA4105C064900D1043A /* SimpleMutex.cpp */,
-				D94D6CA5105C064900D1043A /* SimpleMutex.h */,
-				D94D6CA6105C064900D1043A /* SimpleTCPServer.h */,
-				D94D6CA7105C064900D1043A /* SingleProducerConsumer.h */,
-				D94D6CA8105C064900D1043A /* SocketIncludes.h */,
-				D94D6CA9105C064900D1043A /* SocketLayer.cpp */,
-				D94D6CAA105C064900D1043A /* SocketLayer.h */,
-				D94D6CAB105C064900D1043A /* StringCompressor.cpp */,
-				D94D6CAC105C064900D1043A /* StringCompressor.h */,
-				D94D6CAD105C064900D1043A /* StringTable.cpp */,
-				D94D6CAE105C064900D1043A /* StringTable.h */,
-				D94D6CAF105C064900D1043A /* SuperFastHash.cpp */,
-				D94D6CB0105C064900D1043A /* SuperFastHash.h */,
-				D94D6CB1105C064900D1043A /* SystemAddressList.cpp */,
-				D94D6CB2105C064900D1043A /* SystemAddressList.h */,
-				D94D6CB3105C064900D1043A /* TableSerializer.cpp */,
-				D94D6CB4105C064900D1043A /* TableSerializer.h */,
-				D94D6CB5105C064900D1043A /* TCPInterface.cpp */,
-				D94D6CB6105C064900D1043A /* TCPInterface.h */,
-				D94D6CB7105C064900D1043A /* TelnetTransport.cpp */,
-				D94D6CB8105C064900D1043A /* TelnetTransport.h */,
-				D94D6CB9105C064900D1043A /* ThreadPool.h */,
-				D94D6CBA105C064900D1043A /* ThreadsafePacketLogger.cpp */,
-				D94D6CBB105C064900D1043A /* ThreadsafePacketLogger.h */,
-				D94D6CBC105C064900D1043A /* TransportInterface.h */,
-				D94D6CBD105C064900D1043A /* UDPForwarder.cpp */,
-				D94D6CBE105C064900D1043A /* UDPForwarder.h */,
-				D94D6CBF105C064900D1043A /* UDPProxyClient.cpp */,
-				D94D6CC0105C064900D1043A /* UDPProxyClient.h */,
-				D94D6CC1105C064900D1043A /* UDPProxyCommon.h */,
-				D94D6CC2105C064900D1043A /* UDPProxyCoordinator.cpp */,
-				D94D6CC3105C064900D1043A /* UDPProxyCoordinator.h */,
-				D94D6CC4105C064900D1043A /* UDPProxyServer.cpp */,
-				D94D6CC5105C064900D1043A /* UDPProxyServer.h */,
-				D94D6CC6105C064900D1043A /* VariadicSQLParser.cpp */,
-				D94D6CC7105C064900D1043A /* VariadicSQLParser.h */,
-				D94D6CC8105C064900D1043A /* WindowsIncludes.h */,
-				D94D6CC9105C064900D1043A /* WSAStartupSingleton.cpp */,
-				D94D6CCA105C064900D1043A /* WSAStartupSingleton.h */,
+				D9C01D24105D8C7F00F44CA5 /* _FindFirst.cpp */,
+				D9C01D25105D8C7F00F44CA5 /* _FindFirst.h */,
+				D9C01D26105D8C7F00F44CA5 /* AsynchronousFileIO.cpp */,
+				D9C01D27105D8C7F00F44CA5 /* AsynchronousFileIO.h */,
+				D9C01D28105D8C7F00F44CA5 /* AutopatcherPatchContext.h */,
+				D9C01D29105D8C7F00F44CA5 /* AutopatcherRepositoryInterface.h */,
+				D9C01D2A105D8C7F00F44CA5 /* AutoRPC.cpp */,
+				D9C01D2B105D8C7F00F44CA5 /* AutoRPC.h */,
+				D9C01D2C105D8C7F00F44CA5 /* BigInt.cpp */,
+				D9C01D2D105D8C7F00F44CA5 /* BigInt.h */,
+				D9C01D2E105D8C7F00F44CA5 /* BitStream.cpp */,
+				D9C01D2F105D8C7F00F44CA5 /* BitStream.h */,
+				D9C01D30105D8C7F00F44CA5 /* BitStream_NoTemplate.cpp */,
+				D9C01D31105D8C7F00F44CA5 /* BitStream_NoTemplate.h */,
+				D9C01D32105D8C7F00F44CA5 /* CCRakNetUDT.cpp */,
+				D9C01D33105D8C7F00F44CA5 /* CCRakNetUDT.h */,
+				D9C01D34105D8C7F00F44CA5 /* CheckSum.cpp */,
+				D9C01D35105D8C7F00F44CA5 /* CheckSum.h */,
+				D9C01D36105D8C7F00F44CA5 /* ClientContextStruct.h */,
+				D9C01D37105D8C7F00F44CA5 /* CommandParserInterface.cpp */,
+				D9C01D38105D8C7F00F44CA5 /* CommandParserInterface.h */,
+				D9C01D39105D8C7F00F44CA5 /* ConnectionGraph.cpp */,
+				D9C01D3A105D8C7F00F44CA5 /* ConnectionGraph.h */,
+				D9C01D3B105D8C7F00F44CA5 /* ConnectionGraph2.cpp */,
+				D9C01D3C105D8C7F00F44CA5 /* ConnectionGraph2.h */,
+				D9C01D3D105D8C7F00F44CA5 /* ConsoleServer.cpp */,
+				D9C01D3E105D8C7F00F44CA5 /* ConsoleServer.h */,
+				D9C01D3F105D8C7F00F44CA5 /* DataBlockEncryptor.cpp */,
+				D9C01D40105D8C7F00F44CA5 /* DataBlockEncryptor.h */,
+				D9C01D41105D8C7F00F44CA5 /* DataCompressor.cpp */,
+				D9C01D42105D8C7F00F44CA5 /* DataCompressor.h */,
+				D9C01D43105D8C7F00F44CA5 /* DirectoryDeltaTransfer.cpp */,
+				D9C01D44105D8C7F00F44CA5 /* DirectoryDeltaTransfer.h */,
+				D9C01D45105D8C7F00F44CA5 /* DS_BinarySearchTree.h */,
+				D9C01D46105D8C7F00F44CA5 /* DS_BPlusTree.h */,
+				D9C01D47105D8C7F00F44CA5 /* DS_BytePool.cpp */,
+				D9C01D48105D8C7F00F44CA5 /* DS_BytePool.h */,
+				D9C01D49105D8C7F00F44CA5 /* DS_ByteQueue.cpp */,
+				D9C01D4A105D8C7F00F44CA5 /* DS_ByteQueue.h */,
+				D9C01D4B105D8C7F00F44CA5 /* DS_Heap.h */,
+				D9C01D4C105D8C7F00F44CA5 /* DS_HuffmanEncodingTree.cpp */,
+				D9C01D4D105D8C7F00F44CA5 /* DS_HuffmanEncodingTree.h */,
+				D9C01D4E105D8C7F00F44CA5 /* DS_HuffmanEncodingTreeFactory.h */,
+				D9C01D4F105D8C7F00F44CA5 /* DS_HuffmanEncodingTreeNode.h */,
+				D9C01D50105D8C7F00F44CA5 /* DS_LinkedList.h */,
+				D9C01D51105D8C7F00F44CA5 /* DS_List.h */,
+				D9C01D52105D8C7F00F44CA5 /* DS_Map.h */,
+				D9C01D53105D8C7F00F44CA5 /* DS_MemoryPool.h */,
+				D9C01D54105D8C7F00F44CA5 /* DS_Multilist.h */,
+				D9C01D55105D8C7F00F44CA5 /* DS_OrderedChannelHeap.h */,
+				D9C01D56105D8C7F00F44CA5 /* DS_OrderedList.h */,
+				D9C01D57105D8C7F00F44CA5 /* DS_Queue.h */,
+				D9C01D58105D8C7F00F44CA5 /* DS_QueueLinkedList.h */,
+				D9C01D59105D8C7F00F44CA5 /* DS_RangeList.h */,
+				D9C01D5A105D8C7F00F44CA5 /* DS_Table.cpp */,
+				D9C01D5B105D8C7F00F44CA5 /* DS_Table.h */,
+				D9C01D5C105D8C7F00F44CA5 /* DS_ThreadsafeAllocatingQueue.h */,
+				D9C01D5D105D8C7F00F44CA5 /* DS_Tree.h */,
+				D9C01D5E105D8C7F00F44CA5 /* DS_WeightedGraph.h */,
+				D9C01D5F105D8C7F00F44CA5 /* EmailSender.cpp */,
+				D9C01D60105D8C7F00F44CA5 /* EmailSender.h */,
+				D9C01D61105D8C7F00F44CA5 /* EncodeClassName.cpp */,
+				D9C01D62105D8C7F00F44CA5 /* EpochTimeToString.cpp */,
+				D9C01D63105D8C7F00F44CA5 /* EpochTimeToString.h */,
+				D9C01D64105D8C7F00F44CA5 /* Export.h */,
+				D9C01D65105D8C7F00F44CA5 /* ExtendedOverlappedPool.cpp */,
+				D9C01D66105D8C7F00F44CA5 /* ExtendedOverlappedPool.h */,
+				D9C01D67105D8C7F00F44CA5 /* FileList.cpp */,
+				D9C01D68105D8C7F00F44CA5 /* FileList.h */,
+				D9C01D69105D8C8000F44CA5 /* FileListNodeContext.h */,
+				D9C01D6A105D8C8000F44CA5 /* FileListTransfer.cpp */,
+				D9C01D6B105D8C8000F44CA5 /* FileListTransfer.h */,
+				D9C01D6C105D8C8000F44CA5 /* FileListTransferCBInterface.h */,
+				D9C01D6D105D8C8000F44CA5 /* FileOperations.cpp */,
+				D9C01D6E105D8C8000F44CA5 /* FileOperations.h */,
+				D9C01D6F105D8C8000F44CA5 /* FormatString.cpp */,
+				D9C01D70105D8C8000F44CA5 /* FormatString.h */,
+				D9C01D71105D8C8000F44CA5 /* FullyConnectedMesh.cpp */,
+				D9C01D72105D8C8000F44CA5 /* FullyConnectedMesh.h */,
+				D9C01D73105D8C8000F44CA5 /* FullyConnectedMesh2.cpp */,
+				D9C01D74105D8C8000F44CA5 /* FullyConnectedMesh2.h */,
+				D9C01D75105D8C8000F44CA5 /* FunctionThread.cpp */,
+				D9C01D76105D8C8000F44CA5 /* FunctionThread.h */,
+				D9C01D77105D8C8000F44CA5 /* Gen_RPC8.cpp */,
+				D9C01D78105D8C8000F44CA5 /* Gen_RPC8.h */,
+				D9C01D79105D8C8000F44CA5 /* GetTime.cpp */,
+				D9C01D7A105D8C8000F44CA5 /* GetTime.h */,
+				D9C01D7B105D8C8000F44CA5 /* gettimeofday.cpp */,
+				D9C01D7C105D8C8000F44CA5 /* gettimeofday.h */,
+				D9C01D7D105D8C8000F44CA5 /* GridSectorizer.cpp */,
+				D9C01D7E105D8C8000F44CA5 /* GridSectorizer.h */,
+				D9C01D7F105D8C8000F44CA5 /* HTTPConnection.cpp */,
+				D9C01D80105D8C8000F44CA5 /* HTTPConnection.h */,
+				D9C01D81105D8C8000F44CA5 /* IncrementalReadInterface.cpp */,
+				D9C01D82105D8C8000F44CA5 /* IncrementalReadInterface.h */,
+				D9C01D83105D8C8000F44CA5 /* InlineFunctor.cpp */,
+				D9C01D84105D8C8000F44CA5 /* InlineFunctor.h */,
+				D9C01D85105D8C8000F44CA5 /* InternalPacket.h */,
+				D9C01D86105D8C8000F44CA5 /* Itoa.cpp */,
+				D9C01D87105D8C8000F44CA5 /* Itoa.h */,
+				D9C01D88105D8C8000F44CA5 /* Kbhit.h */,
+				D9C01D89105D8C8000F44CA5 /* LightweightDatabaseClient.cpp */,
+				D9C01D8A105D8C8000F44CA5 /* LightweightDatabaseClient.h */,
+				D9C01D8B105D8C8000F44CA5 /* LightweightDatabaseCommon.cpp */,
+				D9C01D8C105D8C8000F44CA5 /* LightweightDatabaseCommon.h */,
+				D9C01D8D105D8C8000F44CA5 /* LightweightDatabaseServer.cpp */,
+				D9C01D8E105D8C8000F44CA5 /* LightweightDatabaseServer.h */,
+				D9C01D8F105D8C8000F44CA5 /* LinuxStrings.cpp */,
+				D9C01D90105D8C8000F44CA5 /* LinuxStrings.h */,
+				D9C01D91105D8C8000F44CA5 /* LogCommandParser.cpp */,
+				D9C01D92105D8C8000F44CA5 /* LogCommandParser.h */,
+				D9C01D93105D8C8000F44CA5 /* MessageFilter.cpp */,
+				D9C01D94105D8C8000F44CA5 /* MessageFilter.h */,
+				D9C01D95105D8C8000F44CA5 /* MessageIdentifiers.h */,
+				D9C01D96105D8C8000F44CA5 /* MTUSize.h */,
+				D9C01D97105D8C8000F44CA5 /* NativeTypes.h */,
+				D9C01D98105D8C8000F44CA5 /* NatPunchthroughClient.cpp */,
+				D9C01D99105D8C8000F44CA5 /* NatPunchthroughClient.h */,
+				D9C01D9A105D8C8000F44CA5 /* NatPunchthroughServer.cpp */,
+				D9C01D9B105D8C8000F44CA5 /* NatPunchthroughServer.h */,
+				D9C01D9C105D8C8000F44CA5 /* NatTypeDetectionClient.cpp */,
+				D9C01D9D105D8C8000F44CA5 /* NatTypeDetectionClient.h */,
+				D9C01D9E105D8C8000F44CA5 /* NatTypeDetectionCommon.cpp */,
+				D9C01D9F105D8C8000F44CA5 /* NatTypeDetectionCommon.h */,
+				D9C01DA0105D8C8000F44CA5 /* NatTypeDetectionServer.cpp */,
+				D9C01DA1105D8C8000F44CA5 /* NatTypeDetectionServer.h */,
+				D9C01DA2105D8C8000F44CA5 /* NetworkIDManager.cpp */,
+				D9C01DA3105D8C8000F44CA5 /* NetworkIDManager.h */,
+				D9C01DA4105D8C8000F44CA5 /* NetworkIDObject.cpp */,
+				D9C01DA5105D8C8000F44CA5 /* NetworkIDObject.h */,
+				D9C01DA6105D8C8000F44CA5 /* PacketConsoleLogger.cpp */,
+				D9C01DA7105D8C8000F44CA5 /* PacketConsoleLogger.h */,
+				D9C01DA8105D8C8000F44CA5 /* PacketFileLogger.cpp */,
+				D9C01DA9105D8C8000F44CA5 /* PacketFileLogger.h */,
+				D9C01DAA105D8C8000F44CA5 /* PacketizedTCP.cpp */,
+				D9C01DAB105D8C8000F44CA5 /* PacketizedTCP.h */,
+				D9C01DAC105D8C8000F44CA5 /* PacketLogger.cpp */,
+				D9C01DAD105D8C8000F44CA5 /* PacketLogger.h */,
+				D9C01DAE105D8C8000F44CA5 /* PacketOutputWindowLogger.cpp */,
+				D9C01DAF105D8C8000F44CA5 /* PacketOutputWindowLogger.h */,
+				D9C01DB0105D8C8000F44CA5 /* PacketPool.h */,
+				D9C01DB1105D8C8000F44CA5 /* PacketPriority.h */,
+				D9C01DB2105D8C8000F44CA5 /* Platform.h */,
+				D9C01DB3105D8C8000F44CA5 /* PluginInterface.cpp */,
+				D9C01DB4105D8C8000F44CA5 /* PluginInterface.h */,
+				D9C01DB5105D8C8000F44CA5 /* PluginInterface2.cpp */,
+				D9C01DB6105D8C8000F44CA5 /* PluginInterface2.h */,
+				D9C01DB7105D8C8000F44CA5 /* RakAlloca.h */,
+				D9C01DB8105D8C8000F44CA5 /* RakAssert.h */,
+				D9C01DB9105D8C8000F44CA5 /* RakMemoryOverride.cpp */,
+				D9C01DBA105D8C8000F44CA5 /* RakMemoryOverride.h */,
+				D9C01DBB105D8C8000F44CA5 /* RakNetCommandParser.cpp */,
+				D9C01DBC105D8C8000F44CA5 /* RakNetCommandParser.h */,
+				D9C01DBD105D8C8000F44CA5 /* RakNetDefines.h */,
+				D9C01DBE105D8C8000F44CA5 /* RakNetSmartPtr.h */,
+				D9C01DBF105D8C8000F44CA5 /* RakNetSocket.cpp */,
+				D9C01DC0105D8C8000F44CA5 /* RakNetSocket.h */,
+				D9C01DC1105D8C8000F44CA5 /* RakNetStatistics.cpp */,
+				D9C01DC2105D8C8000F44CA5 /* RakNetStatistics.h */,
+				D9C01DC3105D8C8000F44CA5 /* RakNetTime.h */,
+				D9C01DC4105D8C8000F44CA5 /* RakNetTransport.cpp */,
+				D9C01DC5105D8C8000F44CA5 /* RakNetTransport.h */,
+				D9C01DC6105D8C8000F44CA5 /* RakNetTransport2.cpp */,
+				D9C01DC7105D8C8000F44CA5 /* RakNetTransport2.h */,
+				D9C01DC8105D8C8000F44CA5 /* RakNetTypes.cpp */,
+				D9C01DC9105D8C8000F44CA5 /* RakNetTypes.h */,
+				D9C01DCA105D8C8000F44CA5 /* RakNetVersion.h */,
+				D9C01DCB105D8C8000F44CA5 /* RakNetworkFactory.cpp */,
+				D9C01DCC105D8C8000F44CA5 /* RakNetworkFactory.h */,
+				D9C01DCD105D8C8000F44CA5 /* RakPeer.cpp */,
+				D9C01DCE105D8C8000F44CA5 /* RakPeer.h */,
+				D9C01DCF105D8C8000F44CA5 /* RakPeerInterface.h */,
+				D9C01DD0105D8C8000F44CA5 /* RakSleep.cpp */,
+				D9C01DD1105D8C8000F44CA5 /* RakSleep.h */,
+				D9C01DD2105D8C8000F44CA5 /* RakString.cpp */,
+				D9C01DD3105D8C8000F44CA5 /* RakString.h */,
+				D9C01DD4105D8C8000F44CA5 /* RakThread.cpp */,
+				D9C01DD5105D8C8000F44CA5 /* RakThread.h */,
+				D9C01DD6105D8C8000F44CA5 /* Rand.cpp */,
+				D9C01DD7105D8C8000F44CA5 /* Rand.h */,
+				D9C01DD8105D8C8000F44CA5 /* ReadyEvent.cpp */,
+				D9C01DD9105D8C8000F44CA5 /* ReadyEvent.h */,
+				D9C01DDA105D8C8000F44CA5 /* RefCountedObj.h */,
+				D9C01DDB105D8C8000F44CA5 /* ReliabilityLayer.cpp */,
+				D9C01DDC105D8C8000F44CA5 /* ReliabilityLayer.h */,
+				D9C01DDD105D8C8000F44CA5 /* Replica.h */,
+				D9C01DDE105D8C8000F44CA5 /* ReplicaEnums.h */,
+				D9C01DDF105D8C8000F44CA5 /* ReplicaManager.cpp */,
+				D9C01DE0105D8C8000F44CA5 /* ReplicaManager.h */,
+				D9C01DE1105D8C8000F44CA5 /* ReplicaManager2.cpp */,
+				D9C01DE2105D8C8000F44CA5 /* ReplicaManager2.h */,
+				D9C01DE3105D8C8000F44CA5 /* ReplicaManager3.cpp */,
+				D9C01DE4105D8C8000F44CA5 /* ReplicaManager3.h */,
+				D9C01DE5105D8C8000F44CA5 /* Rijndael-Boxes.h */,
+				D9C01DE6105D8C8000F44CA5 /* rijndael.cpp */,
+				D9C01DE7105D8C8000F44CA5 /* Rijndael.h */,
+				D9C01DE8105D8C8000F44CA5 /* Router.cpp */,
+				D9C01DE9105D8C8000F44CA5 /* Router.h */,
+				D9C01DEA105D8C8000F44CA5 /* RouterInterface.h */,
+				D9C01DEB105D8C8000F44CA5 /* RPCMap.cpp */,
+				D9C01DEC105D8C8000F44CA5 /* RPCMap.h */,
+				D9C01DED105D8C8000F44CA5 /* RPCNode.h */,
+				D9C01DEE105D8C8000F44CA5 /* RSACrypt.cpp */,
+				D9C01DEF105D8C8000F44CA5 /* RSACrypt.h */,
+				D9C01DF0105D8C8000F44CA5 /* SendToThread.cpp */,
+				D9C01DF1105D8C8000F44CA5 /* SendToThread.h */,
+				D9C01DF2105D8C8000F44CA5 /* SHA1.cpp */,
+				D9C01DF3105D8C8000F44CA5 /* SHA1.h */,
+				D9C01DF4105D8C8000F44CA5 /* SignaledEvent.cpp */,
+				D9C01DF5105D8C8000F44CA5 /* SignaledEvent.h */,
+				D9C01DF6105D8C8000F44CA5 /* SimpleMutex.cpp */,
+				D9C01DF7105D8C8000F44CA5 /* SimpleMutex.h */,
+				D9C01DF8105D8C8000F44CA5 /* SimpleTCPServer.h */,
+				D9C01DF9105D8C8000F44CA5 /* SingleProducerConsumer.h */,
+				D9C01DFA105D8C8000F44CA5 /* SocketIncludes.h */,
+				D9C01DFB105D8C8000F44CA5 /* SocketLayer.cpp */,
+				D9C01DFC105D8C8000F44CA5 /* SocketLayer.h */,
+				D9C01DFD105D8C8000F44CA5 /* StringCompressor.cpp */,
+				D9C01DFE105D8C8000F44CA5 /* StringCompressor.h */,
+				D9C01DFF105D8C8000F44CA5 /* StringTable.cpp */,
+				D9C01E00105D8C8000F44CA5 /* StringTable.h */,
+				D9C01E01105D8C8000F44CA5 /* SuperFastHash.cpp */,
+				D9C01E02105D8C8000F44CA5 /* SuperFastHash.h */,
+				D9C01E03105D8C8000F44CA5 /* SystemAddressList.cpp */,
+				D9C01E04105D8C8000F44CA5 /* SystemAddressList.h */,
+				D9C01E05105D8C8000F44CA5 /* TableSerializer.cpp */,
+				D9C01E06105D8C8000F44CA5 /* TableSerializer.h */,
+				D9C01E07105D8C8000F44CA5 /* TCPInterface.cpp */,
+				D9C01E08105D8C8000F44CA5 /* TCPInterface.h */,
+				D9C01E09105D8C8000F44CA5 /* TelnetTransport.cpp */,
+				D9C01E0A105D8C8000F44CA5 /* TelnetTransport.h */,
+				D9C01E0B105D8C8000F44CA5 /* ThreadPool.h */,
+				D9C01E0C105D8C8000F44CA5 /* ThreadsafePacketLogger.cpp */,
+				D9C01E0D105D8C8000F44CA5 /* ThreadsafePacketLogger.h */,
+				D9C01E0E105D8C8000F44CA5 /* TransportInterface.h */,
+				D9C01E0F105D8C8000F44CA5 /* UDPForwarder.cpp */,
+				D9C01E10105D8C8000F44CA5 /* UDPForwarder.h */,
+				D9C01E11105D8C8000F44CA5 /* UDPProxyClient.cpp */,
+				D9C01E12105D8C8000F44CA5 /* UDPProxyClient.h */,
+				D9C01E13105D8C8000F44CA5 /* UDPProxyCommon.h */,
+				D9C01E14105D8C8000F44CA5 /* UDPProxyCoordinator.cpp */,
+				D9C01E15105D8C8000F44CA5 /* UDPProxyCoordinator.h */,
+				D9C01E16105D8C8000F44CA5 /* UDPProxyServer.cpp */,
+				D9C01E17105D8C8000F44CA5 /* UDPProxyServer.h */,
+				D9C01E18105D8C8000F44CA5 /* VariadicSQLParser.cpp */,
+				D9C01E19105D8C8000F44CA5 /* VariadicSQLParser.h */,
+				D9C01E1A105D8C8000F44CA5 /* WindowsIncludes.h */,
+				D9C01E1B105D8C8000F44CA5 /* WSAStartupSingleton.cpp */,
+				D9C01E1C105D8C8000F44CA5 /* WSAStartupSingleton.h */,
 			);
 			name = Raknet;
 			path = ../../../Networking/Raknet;
@@ -1070,105 +1070,105 @@
 				BDE20F6C1021729800B215F9 /* Texture.mm in Sources */,
 				BDE20F951021735200B215F9 /* EAGLView.m in Sources */,
 				BDE20FA4102173A800B215F9 /* ResourcePath.mm in Sources */,
-				D94D6CCB105C064900D1043A /* _FindFirst.cpp in Sources */,
-				D94D6CCC105C064900D1043A /* AsynchronousFileIO.cpp in Sources */,
-				D94D6CCD105C064900D1043A /* AutoRPC.cpp in Sources */,
-				D94D6CCE105C064900D1043A /* BigInt.cpp in Sources */,
-				D94D6CCF105C064900D1043A /* BitStream.cpp in Sources */,
-				D94D6CD0105C064900D1043A /* BitStream_NoTemplate.cpp in Sources */,
-				D94D6CD1105C064900D1043A /* CCRakNetUDT.cpp in Sources */,
-				D94D6CD2105C064900D1043A /* CheckSum.cpp in Sources */,
-				D94D6CD3105C064900D1043A /* CommandParserInterface.cpp in Sources */,
-				D94D6CD4105C064900D1043A /* ConnectionGraph.cpp in Sources */,
-				D94D6CD5105C064900D1043A /* ConnectionGraph2.cpp in Sources */,
-				D94D6CD6105C064900D1043A /* ConsoleServer.cpp in Sources */,
-				D94D6CD7105C064900D1043A /* DataBlockEncryptor.cpp in Sources */,
-				D94D6CD8105C064900D1043A /* DataCompressor.cpp in Sources */,
-				D94D6CD9105C064900D1043A /* DirectoryDeltaTransfer.cpp in Sources */,
-				D94D6CDA105C064900D1043A /* DS_BytePool.cpp in Sources */,
-				D94D6CDB105C064900D1043A /* DS_ByteQueue.cpp in Sources */,
-				D94D6CDC105C064900D1043A /* DS_HuffmanEncodingTree.cpp in Sources */,
-				D94D6CDD105C064900D1043A /* DS_Table.cpp in Sources */,
-				D94D6CDE105C064900D1043A /* EmailSender.cpp in Sources */,
-				D94D6CDF105C064900D1043A /* EncodeClassName.cpp in Sources */,
-				D94D6CE0105C064900D1043A /* EpochTimeToString.cpp in Sources */,
-				D94D6CE1105C064900D1043A /* ExtendedOverlappedPool.cpp in Sources */,
-				D94D6CE2105C064900D1043A /* FileList.cpp in Sources */,
-				D94D6CE3105C064900D1043A /* FileListTransfer.cpp in Sources */,
-				D94D6CE4105C064900D1043A /* FileOperations.cpp in Sources */,
-				D94D6CE5105C064900D1043A /* FormatString.cpp in Sources */,
-				D94D6CE6105C064900D1043A /* FullyConnectedMesh.cpp in Sources */,
-				D94D6CE7105C064900D1043A /* FullyConnectedMesh2.cpp in Sources */,
-				D94D6CE8105C064900D1043A /* FunctionThread.cpp in Sources */,
-				D94D6CE9105C064900D1043A /* Gen_RPC8.cpp in Sources */,
-				D94D6CEA105C064900D1043A /* GetTime.cpp in Sources */,
-				D94D6CEB105C064900D1043A /* gettimeofday.cpp in Sources */,
-				D94D6CEC105C064900D1043A /* GridSectorizer.cpp in Sources */,
-				D94D6CED105C064900D1043A /* HTTPConnection.cpp in Sources */,
-				D94D6CEE105C064900D1043A /* IncrementalReadInterface.cpp in Sources */,
-				D94D6CEF105C064900D1043A /* InlineFunctor.cpp in Sources */,
-				D94D6CF0105C064900D1043A /* Itoa.cpp in Sources */,
-				D94D6CF1105C064900D1043A /* LightweightDatabaseClient.cpp in Sources */,
-				D94D6CF2105C064900D1043A /* LightweightDatabaseCommon.cpp in Sources */,
-				D94D6CF3105C064900D1043A /* LightweightDatabaseServer.cpp in Sources */,
-				D94D6CF4105C064900D1043A /* LinuxStrings.cpp in Sources */,
-				D94D6CF5105C064900D1043A /* LogCommandParser.cpp in Sources */,
-				D94D6CF6105C064900D1043A /* MessageFilter.cpp in Sources */,
-				D94D6CF7105C064900D1043A /* NatPunchthroughClient.cpp in Sources */,
-				D94D6CF8105C064900D1043A /* NatPunchthroughServer.cpp in Sources */,
-				D94D6CF9105C064900D1043A /* NatTypeDetectionClient.cpp in Sources */,
-				D94D6CFA105C064900D1043A /* NatTypeDetectionCommon.cpp in Sources */,
-				D94D6CFB105C064900D1043A /* NatTypeDetectionServer.cpp in Sources */,
-				D94D6CFC105C064900D1043A /* NetworkIDManager.cpp in Sources */,
-				D94D6CFD105C064900D1043A /* NetworkIDObject.cpp in Sources */,
-				D94D6CFE105C064900D1043A /* PacketConsoleLogger.cpp in Sources */,
-				D94D6CFF105C064900D1043A /* PacketFileLogger.cpp in Sources */,
-				D94D6D00105C064900D1043A /* PacketizedTCP.cpp in Sources */,
-				D94D6D01105C064900D1043A /* PacketLogger.cpp in Sources */,
-				D94D6D02105C064900D1043A /* PacketOutputWindowLogger.cpp in Sources */,
-				D94D6D03105C064900D1043A /* PluginInterface.cpp in Sources */,
-				D94D6D04105C064900D1043A /* PluginInterface2.cpp in Sources */,
-				D94D6D05105C064900D1043A /* RakMemoryOverride.cpp in Sources */,
-				D94D6D06105C064900D1043A /* RakNetCommandParser.cpp in Sources */,
-				D94D6D07105C064900D1043A /* RakNetSocket.cpp in Sources */,
-				D94D6D08105C064900D1043A /* RakNetStatistics.cpp in Sources */,
-				D94D6D09105C064900D1043A /* RakNetTransport.cpp in Sources */,
-				D94D6D0A105C064900D1043A /* RakNetTransport2.cpp in Sources */,
-				D94D6D0B105C064900D1043A /* RakNetTypes.cpp in Sources */,
-				D94D6D0C105C064900D1043A /* RakNetworkFactory.cpp in Sources */,
-				D94D6D0D105C064900D1043A /* RakPeer.cpp in Sources */,
-				D94D6D0E105C064900D1043A /* RakSleep.cpp in Sources */,
-				D94D6D0F105C064900D1043A /* RakString.cpp in Sources */,
-				D94D6D10105C064900D1043A /* RakThread.cpp in Sources */,
-				D94D6D11105C064900D1043A /* Rand.cpp in Sources */,
-				D94D6D12105C064900D1043A /* ReadyEvent.cpp in Sources */,
-				D94D6D13105C064900D1043A /* ReliabilityLayer.cpp in Sources */,
-				D94D6D14105C064900D1043A /* ReplicaManager.cpp in Sources */,
-				D94D6D15105C064900D1043A /* ReplicaManager2.cpp in Sources */,
-				D94D6D16105C064900D1043A /* ReplicaManager3.cpp in Sources */,
-				D94D6D17105C064900D1043A /* rijndael.cpp in Sources */,
-				D94D6D18105C064900D1043A /* Router.cpp in Sources */,
-				D94D6D19105C064900D1043A /* RPCMap.cpp in Sources */,
-				D94D6D1A105C064900D1043A /* RSACrypt.cpp in Sources */,
-				D94D6D1B105C064900D1043A /* SendToThread.cpp in Sources */,
-				D94D6D1C105C064900D1043A /* SHA1.cpp in Sources */,
-				D94D6D1D105C064900D1043A /* SignaledEvent.cpp in Sources */,
-				D94D6D1E105C064900D1043A /* SimpleMutex.cpp in Sources */,
-				D94D6D1F105C064900D1043A /* SocketLayer.cpp in Sources */,
-				D94D6D20105C064900D1043A /* StringCompressor.cpp in Sources */,
-				D94D6D21105C064900D1043A /* StringTable.cpp in Sources */,
-				D94D6D22105C064900D1043A /* SuperFastHash.cpp in Sources */,
-				D94D6D23105C064900D1043A /* SystemAddressList.cpp in Sources */,
-				D94D6D24105C064900D1043A /* TableSerializer.cpp in Sources */,
-				D94D6D25105C064900D1043A /* TCPInterface.cpp in Sources */,
-				D94D6D26105C064900D1043A /* TelnetTransport.cpp in Sources */,
-				D94D6D27105C064900D1043A /* ThreadsafePacketLogger.cpp in Sources */,
-				D94D6D28105C064900D1043A /* UDPForwarder.cpp in Sources */,
-				D94D6D29105C064900D1043A /* UDPProxyClient.cpp in Sources */,
-				D94D6D2A105C064900D1043A /* UDPProxyCoordinator.cpp in Sources */,
-				D94D6D2B105C064900D1043A /* UDPProxyServer.cpp in Sources */,
-				D94D6D2C105C064900D1043A /* VariadicSQLParser.cpp in Sources */,
-				D94D6D2D105C064900D1043A /* WSAStartupSingleton.cpp in Sources */,
+				D9C01E1D105D8C8000F44CA5 /* _FindFirst.cpp in Sources */,
+				D9C01E1E105D8C8000F44CA5 /* AsynchronousFileIO.cpp in Sources */,
+				D9C01E1F105D8C8000F44CA5 /* AutoRPC.cpp in Sources */,
+				D9C01E20105D8C8000F44CA5 /* BigInt.cpp in Sources */,
+				D9C01E21105D8C8000F44CA5 /* BitStream.cpp in Sources */,
+				D9C01E22105D8C8000F44CA5 /* BitStream_NoTemplate.cpp in Sources */,
+				D9C01E23105D8C8000F44CA5 /* CCRakNetUDT.cpp in Sources */,
+				D9C01E24105D8C8000F44CA5 /* CheckSum.cpp in Sources */,
+				D9C01E25105D8C8000F44CA5 /* CommandParserInterface.cpp in Sources */,
+				D9C01E26105D8C8000F44CA5 /* ConnectionGraph.cpp in Sources */,
+				D9C01E27105D8C8000F44CA5 /* ConnectionGraph2.cpp in Sources */,
+				D9C01E28105D8C8000F44CA5 /* ConsoleServer.cpp in Sources */,
+				D9C01E29105D8C8000F44CA5 /* DataBlockEncryptor.cpp in Sources */,
+				D9C01E2A105D8C8000F44CA5 /* DataCompressor.cpp in Sources */,
+				D9C01E2B105D8C8000F44CA5 /* DirectoryDeltaTransfer.cpp in Sources */,
+				D9C01E2C105D8C8000F44CA5 /* DS_BytePool.cpp in Sources */,
+				D9C01E2D105D8C8000F44CA5 /* DS_ByteQueue.cpp in Sources */,
+				D9C01E2E105D8C8000F44CA5 /* DS_HuffmanEncodingTree.cpp in Sources */,
+				D9C01E2F105D8C8000F44CA5 /* DS_Table.cpp in Sources */,
+				D9C01E30105D8C8000F44CA5 /* EmailSender.cpp in Sources */,
+				D9C01E31105D8C8000F44CA5 /* EncodeClassName.cpp in Sources */,
+				D9C01E32105D8C8000F44CA5 /* EpochTimeToString.cpp in Sources */,
+				D9C01E33105D8C8000F44CA5 /* ExtendedOverlappedPool.cpp in Sources */,
+				D9C01E34105D8C8000F44CA5 /* FileList.cpp in Sources */,
+				D9C01E35105D8C8000F44CA5 /* FileListTransfer.cpp in Sources */,
+				D9C01E36105D8C8000F44CA5 /* FileOperations.cpp in Sources */,
+				D9C01E37105D8C8000F44CA5 /* FormatString.cpp in Sources */,
+				D9C01E38105D8C8000F44CA5 /* FullyConnectedMesh.cpp in Sources */,
+				D9C01E39105D8C8000F44CA5 /* FullyConnectedMesh2.cpp in Sources */,
+				D9C01E3A105D8C8000F44CA5 /* FunctionThread.cpp in Sources */,
+				D9C01E3B105D8C8000F44CA5 /* Gen_RPC8.cpp in Sources */,
+				D9C01E3C105D8C8000F44CA5 /* GetTime.cpp in Sources */,
+				D9C01E3D105D8C8000F44CA5 /* gettimeofday.cpp in Sources */,
+				D9C01E3E105D8C8000F44CA5 /* GridSectorizer.cpp in Sources */,
+				D9C01E3F105D8C8000F44CA5 /* HTTPConnection.cpp in Sources */,
+				D9C01E40105D8C8000F44CA5 /* IncrementalReadInterface.cpp in Sources */,
+				D9C01E41105D8C8000F44CA5 /* InlineFunctor.cpp in Sources */,
+				D9C01E42105D8C8000F44CA5 /* Itoa.cpp in Sources */,
+				D9C01E43105D8C8000F44CA5 /* LightweightDatabaseClient.cpp in Sources */,
+				D9C01E44105D8C8000F44CA5 /* LightweightDatabaseCommon.cpp in Sources */,
+				D9C01E45105D8C8000F44CA5 /* LightweightDatabaseServer.cpp in Sources */,
+				D9C01E46105D8C8000F44CA5 /* LinuxStrings.cpp in Sources */,
+				D9C01E47105D8C8000F44CA5 /* LogCommandParser.cpp in Sources */,
+				D9C01E48105D8C8000F44CA5 /* MessageFilter.cpp in Sources */,
+				D9C01E49105D8C8000F44CA5 /* NatPunchthroughClient.cpp in Sources */,
+				D9C01E4A105D8C8000F44CA5 /* NatPunchthroughServer.cpp in Sources */,
+				D9C01E4B105D8C8000F44CA5 /* NatTypeDetectionClient.cpp in Sources */,
+				D9C01E4C105D8C8000F44CA5 /* NatTypeDetectionCommon.cpp in Sources */,
+				D9C01E4D105D8C8000F44CA5 /* NatTypeDetectionServer.cpp in Sources */,
+				D9C01E4E105D8C8000F44CA5 /* NetworkIDManager.cpp in Sources */,
+				D9C01E4F105D8C8000F44CA5 /* NetworkIDObject.cpp in Sources */,
+				D9C01E50105D8C8000F44CA5 /* PacketConsoleLogger.cpp in Sources */,
+				D9C01E51105D8C8000F44CA5 /* PacketFileLogger.cpp in Sources */,
+				D9C01E52105D8C8000F44CA5 /* PacketizedTCP.cpp in Sources */,
+				D9C01E53105D8C8000F44CA5 /* PacketLogger.cpp in Sources */,
+				D9C01E54105D8C8000F44CA5 /* PacketOutputWindowLogger.cpp in Sources */,
+				D9C01E55105D8C8000F44CA5 /* PluginInterface.cpp in Sources */,
+				D9C01E56105D8C8000F44CA5 /* PluginInterface2.cpp in Sources */,
+				D9C01E57105D8C8000F44CA5 /* RakMemoryOverride.cpp in Sources */,
+				D9C01E58105D8C8000F44CA5 /* RakNetCommandParser.cpp in Sources */,
+				D9C01E59105D8C8000F44CA5 /* RakNetSocket.cpp in Sources */,
+				D9C01E5A105D8C8000F44CA5 /* RakNetStatistics.cpp in Sources */,
+				D9C01E5B105D8C8000F44CA5 /* RakNetTransport.cpp in Sources */,
+				D9C01E5C105D8C8000F44CA5 /* RakNetTransport2.cpp in Sources */,
+				D9C01E5D105D8C8000F44CA5 /* RakNetTypes.cpp in Sources */,
+				D9C01E5E105D8C8000F44CA5 /* RakNetworkFactory.cpp in Sources */,
+				D9C01E5F105D8C8000F44CA5 /* RakPeer.cpp in Sources */,
+				D9C01E60105D8C8000F44CA5 /* RakSleep.cpp in Sources */,
+				D9C01E61105D8C8000F44CA5 /* RakString.cpp in Sources */,
+				D9C01E62105D8C8000F44CA5 /* RakThread.cpp in Sources */,
+				D9C01E63105D8C8000F44CA5 /* Rand.cpp in Sources */,
+				D9C01E64105D8C8000F44CA5 /* ReadyEvent.cpp in Sources */,
+				D9C01E65105D8C8000F44CA5 /* ReliabilityLayer.cpp in Sources */,
+				D9C01E66105D8C8000F44CA5 /* ReplicaManager.cpp in Sources */,
+				D9C01E67105D8C8000F44CA5 /* ReplicaManager2.cpp in Sources */,
+				D9C01E68105D8C8000F44CA5 /* ReplicaManager3.cpp in Sources */,
+				D9C01E69105D8C8000F44CA5 /* rijndael.cpp in Sources */,
+				D9C01E6A105D8C8000F44CA5 /* Router.cpp in Sources */,
+				D9C01E6B105D8C8000F44CA5 /* RPCMap.cpp in Sources */,
+				D9C01E6C105D8C8000F44CA5 /* RSACrypt.cpp in Sources */,
+				D9C01E6D105D8C8000F44CA5 /* SendToThread.cpp in Sources */,
+				D9C01E6E105D8C8000F44CA5 /* SHA1.cpp in Sources */,
+				D9C01E6F105D8C8000F44CA5 /* SignaledEvent.cpp in Sources */,
+				D9C01E70105D8C8000F44CA5 /* SimpleMutex.cpp in Sources */,
+				D9C01E71105D8C8000F44CA5 /* SocketLayer.cpp in Sources */,
+				D9C01E72105D8C8000F44CA5 /* StringCompressor.cpp in Sources */,
+				D9C01E73105D8C8000F44CA5 /* StringTable.cpp in Sources */,
+				D9C01E74105D8C8000F44CA5 /* SuperFastHash.cpp in Sources */,
+				D9C01E75105D8C8000F44CA5 /* SystemAddressList.cpp in Sources */,
+				D9C01E76105D8C8000F44CA5 /* TableSerializer.cpp in Sources */,
+				D9C01E77105D8C8000F44CA5 /* TCPInterface.cpp in Sources */,
+				D9C01E78105D8C8000F44CA5 /* TelnetTransport.cpp in Sources */,
+				D9C01E79105D8C8000F44CA5 /* ThreadsafePacketLogger.cpp in Sources */,
+				D9C01E7A105D8C8000F44CA5 /* UDPForwarder.cpp in Sources */,
+				D9C01E7B105D8C8000F44CA5 /* UDPProxyClient.cpp in Sources */,
+				D9C01E7C105D8C8000F44CA5 /* UDPProxyCoordinator.cpp in Sources */,
+				D9C01E7D105D8C8000F44CA5 /* UDPProxyServer.cpp in Sources */,
+				D9C01E7E105D8C8000F44CA5 /* VariadicSQLParser.cpp in Sources */,
+				D9C01E7F105D8C8000F44CA5 /* WSAStartupSingleton.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,8 +1232,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Joe Woynillowicz";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Joe Woynillowicz (SQ9Z828383)";
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "C4EF9707-5643-49A1-A195-550BCD0E0537";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;

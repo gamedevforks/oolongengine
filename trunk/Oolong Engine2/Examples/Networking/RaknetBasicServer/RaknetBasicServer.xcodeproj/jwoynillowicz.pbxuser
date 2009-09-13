@@ -73,14 +73,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 274467066;
-			PBXWorkspaceStateSaveDate = 274467066;
+			PBXPerProjectTemplateStateSaveDate = 274566112;
+			PBXWorkspaceStateSaveDate = 274566112;
 		};
 		perUserProjectItems = {
 			D94D6E9E105C077B00D1043A /* PBXTextBookmark */ = D94D6E9E105C077B00D1043A /* PBXTextBookmark */;
 			D94D6EB7105C084000D1043A /* PBXTextBookmark */ = D94D6EB7105C084000D1043A /* PBXTextBookmark */;
-			D94D6EE7105C090A00D1043A /* PBXTextBookmark */ = D94D6EE7105C090A00D1043A /* PBXTextBookmark */;
-			D94D6EF8105C094900D1043A /* PBXTextBookmark */ = D94D6EF8105C094900D1043A /* PBXTextBookmark */;
+			D9C01E9A105D8CB400F44CA5 /* PBXTextBookmark */ = D9C01E9A105D8CB400F44CA5 /* PBXTextBookmark */;
+			D9E68D65105CB6390011437D /* PBXTextBookmark */ = D9E68D65105CB6390011437D /* PBXTextBookmark */;
 		};
 		sourceControlManager = D91E78C2104ECFE00006CC14 /* Source Control */;
 		userBuildSettings = {
@@ -89,8 +89,8 @@
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1720, 1872}}";
-			sepNavSelRange = "{1562, 0}";
-			sepNavVisRange = "{2840, 1936}";
+			sepNavSelRange = "{2148, 0}";
+			sepNavVisRange = "{1149, 1640}";
 			sepNavWindowFrame = "{{-1764, 116}, {1489, 1349}}";
 		};
 	};
@@ -173,31 +173,47 @@
 		vrLen = 1853;
 		vrLoc = 0;
 	};
-	D94D6EE7105C090A00D1043A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
-		name = "main.cpp: 39";
-		rLen = 0;
-		rLoc = 1562;
-		rType = 0;
-		vrLen = 1936;
-		vrLoc = 2840;
-	};
-	D94D6EF8105C094900D1043A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
-		name = "main.cpp: 39";
-		rLen = 0;
-		rLoc = 1562;
-		rType = 0;
-		vrLen = 1936;
-		vrLoc = 2840;
-	};
 	D9607D3F105AF8B0003B98AB /* Chat Example Server.cpp */ = {
 		isa = PBXFileReference;
 		lastKnownFileType = sourcecode.cpp.cpp;
 		name = "Chat Example Server.cpp";
 		path = "/Users/jwoynillowicz/Code/raknet/trunk/Samples/Chat Example/Chat Example Server.cpp";
 		sourceTree = "<absolute>";
+	};
+	D9C01C21105D8BF300F44CA5 /* Platform.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {720, 3562}}";
+			sepNavSelRange = "{113, 6}";
+			sepNavVisRange = "{0, 248}";
+			sepNavWindowFrame = "{{-2522, 225}, {1489, 1349}}";
+		};
+	};
+	D9C01C6A105D8BF400F44CA5 /* SocketLayer.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1753, 13494}}";
+			sepNavSelRange = "{4075, 0}";
+			sepNavVisRange = "{3038, 2480}";
+			sepNavWindowFrame = "{{-1765, 132}, {1489, 1349}}";
+		};
+	};
+	D9C01E9A105D8CB400F44CA5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 54";
+		rLen = 0;
+		rLoc = 2148;
+		rType = 0;
+		vrLen = 1640;
+		vrLoc = 1149;
+	};
+	D9E68D65105CB6390011437D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 54";
+		rLen = 0;
+		rLoc = 2148;
+		rType = 0;
+		vrLen = 1644;
+		vrLoc = 1145;
 	};
 }

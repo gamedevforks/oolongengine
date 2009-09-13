@@ -51,7 +51,7 @@ int main (int argc, char * const argv[]) {
 	// for low priority threads
 	SocketDescriptor socketDescriptor(9050,0);
 	bool started = server->Startup(32, 30, &socketDescriptor, 1);
-	server->SetMaximumIncomingConnections(2);
+	server->SetMaximumIncomingConnections(5);
 	if(started)
 		std::cout << "Server started, waiting for connections." << std::endl;
 	else {

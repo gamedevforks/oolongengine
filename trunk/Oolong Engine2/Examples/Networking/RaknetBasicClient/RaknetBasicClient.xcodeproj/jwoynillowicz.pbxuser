@@ -7,6 +7,7 @@
 		);
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeArchitecturePreference = armv6;
 		activeBuildConfigurationName = Debug;
 		activeExecutable = D94F9E85104ECA3900D137CC /* RaknetBasic1 */;
 		activeSDKPreference = iphonesimulator3.1;
@@ -21,6 +22,20 @@
 			D94F9E85104ECA3900D137CC /* RaknetBasic1 */,
 		);
 		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					946.58349609375,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
@@ -77,15 +92,15 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 274466360;
-			PBXWorkspaceStateSaveDate = 274466360;
+			PBXPerProjectTemplateStateSaveDate = 274566253;
+			PBXWorkspaceStateSaveDate = 274566253;
 		};
 		perUserProjectItems = {
-			D94D6B64105B6B8100D1043A /* PBXTextBookmark */ = D94D6B64105B6B8100D1043A /* PBXTextBookmark */;
-			D94D6EF9105C094B00D1043A /* PBXTextBookmark */ = D94D6EF9105C094B00D1043A /* PBXTextBookmark */;
 			D96693D6105AB93200854FD3 /* PBXTextBookmark */ = D96693D6105AB93200854FD3 /* PBXTextBookmark */;
 			D9669458105AC20400854FD3 /* PBXTextBookmark */ = D9669458105AC20400854FD3 /* PBXTextBookmark */;
 			D9A10154105B1950001C668A /* PBXTextBookmark */ = D9A10154105B1950001C668A /* PBXTextBookmark */;
+			D9C01E99105D8CB000F44CA5 /* PBXTextBookmark */ = D9C01E99105D8CB000F44CA5 /* PBXTextBookmark */;
+			D9E68D58105CB6320011437D /* PBXTextBookmark */ = D9E68D58105CB6320011437D /* PBXTextBookmark */;
 		};
 		sourceControlManager = D94F9E93104ECA4200D137CC /* Source Control */;
 		userBuildSettings = {
@@ -93,31 +108,11 @@
 	};
 	79235D4F0DAD2BEA00F918F8 /* Application.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1713, 3146}}";
-			sepNavSelRange = "{3700, 0}";
-			sepNavVisRange = "{3088, 1597}";
+			sepNavIntBoundsRect = "{{0, 0}, {1713, 3042}}";
+			sepNavSelRange = "{3497, 0}";
+			sepNavVisRange = "{1903, 1559}";
 			sepNavWindowFrame = "{{-2476, 183}, {1489, 1349}}";
 		};
-	};
-	D94D6B64105B6B8100D1043A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 125";
-		rLen = 0;
-		rLoc = 3601;
-		rType = 0;
-		vrLen = 1614;
-		vrLoc = 2937;
-	};
-	D94D6EF9105C094B00D1043A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
-		name = "Application.mm: 135";
-		rLen = 0;
-		rLoc = 3700;
-		rType = 0;
-		vrLen = 1597;
-		vrLoc = 3088;
 	};
 	D94F9E85104ECA3900D137CC /* RaknetBasic1 */ = {
 		isa = PBXExecutable;
@@ -126,7 +121,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -215,5 +210,25 @@
 		name = ServerClientTest.cpp;
 		path = /Users/jwoynillowicz/Code/raknet/trunk/Samples/ServerClientTest/ServerClientTest.cpp;
 		sourceTree = "<absolute>";
+	};
+	D9C01E99105D8CB000F44CA5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 123";
+		rLen = 0;
+		rLoc = 3497;
+		rType = 0;
+		vrLen = 1559;
+		vrLoc = 1903;
+	};
+	D9E68D58105CB6320011437D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */;
+		name = "Application.mm: 123";
+		rLen = 0;
+		rLoc = 3497;
+		rType = 0;
+		vrLen = 1590;
+		vrLoc = 1872;
 	};
 }

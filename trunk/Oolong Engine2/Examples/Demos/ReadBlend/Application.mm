@@ -20,6 +20,9 @@ subject to the following restrictions:
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES1/gl.h>
 
+#include "OolongReadBlend.h"
+#include "btBulletDynamicsCommon.h"
+
 //#include "Log.h"
 #include "App.h"
 #include "Mathematics.h"
@@ -32,8 +35,7 @@ subject to the following restrictions:
 #include <stdio.h>
 #include <sys/time.h>
 
-#include "OolongReadBlend.h"
-#include "btBulletDynamicsCommon.h"
+
 
 class OolongBulletBlendReader* blendReader = 0;
 class btDiscreteDynamicsWorld* dynamicsWorld = 0;

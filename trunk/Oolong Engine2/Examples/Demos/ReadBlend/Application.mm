@@ -74,6 +74,7 @@ char* AppleGetBundleDirectory(void) {
 	return path;
 }
 
+
 bool CShell::InitApplication()
 {
 	AppDisplayText = new CDisplayText;  
@@ -99,6 +100,8 @@ bool CShell::InitApplication()
 	FILE* file = 0;
 	
 	char* name="PhysicsAnimationBakingDemo.blend";
+	//char* name="Ragdoll.blend";
+
 	char fullName[512];
 	
 	sprintf(fullName,"%s/%s",AppleGetBundleDirectory(),name);
@@ -190,8 +193,12 @@ bool CShell::UpdateScene()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, - 20.0f);
-	glRotatef(-45.0f, 0.0, 1.0, 0.0);
+
+	glRotatef(90.0, 0.0, 0.0, 1.0);
+	
+	float m[16];
+	blendReader->m_cameraTrans.inverse().getOpenGLMatrix(m);
+	glMultMatrixf(m);
 	
 	return true;
 }

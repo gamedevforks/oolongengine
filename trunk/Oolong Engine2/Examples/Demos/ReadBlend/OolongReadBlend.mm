@@ -102,7 +102,7 @@ void GfxObject::render()
 OolongBulletBlendReader::OolongBulletBlendReader(class btDynamicsWorld* destinationWorld)
 :BulletBlendReader(destinationWorld)
 {
-	
+	m_cameraTrans.setIdentity();
 }
 	
 OolongBulletBlendReader::~OolongBulletBlendReader()
@@ -368,10 +368,15 @@ void* OolongBulletBlendReader::createGraphicsObject(_bObj* tmpObject, class btCo
 }
 
 
+
 void	OolongBulletBlendReader::addCamera(_bObj* tmpObject)
 {
-	printf("added Camera\n");
+	m_cameraTrans.setOrigin(btVector3(tmpObject->location[IRR_X],tmpObject->location[IRR_Y],tmpObject->location[IRR_Z]));
+	btMatrix3x3 mat;
+	mat.setEulerZYX(tmpObject->rotphr[0],tmpObject->rotphr[1],tmpObject->rotphr[2]);
+	m_cameraTrans.setBasis(mat);
 }
+
 	
 void	OolongBulletBlendReader::addLight(_bObj* tmpObject)
 {

@@ -19,7 +19,7 @@
 #include "BulletBlendReader.h"
 #include "readblend.h"
 #include "blendtype.h"
-#include "LinearMath/btVector3.h"
+#include "LinearMath/btTransform.h"
 #include "LinearMath/btAlignedObjectArray.h"
 class btCollisionObject;
 
@@ -49,6 +49,7 @@ class OolongBulletBlendReader : public BulletBlendReader
 public:
 	btAlignedObjectArray<GfxObject>	m_graphicsObjects;
 	
+	btTransform m_cameraTrans;
 	
 	OolongBulletBlendReader(class btDynamicsWorld* destinationWorld);
 	

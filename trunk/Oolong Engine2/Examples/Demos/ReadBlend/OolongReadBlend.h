@@ -21,6 +21,8 @@
 #include "blendtype.h"
 #include "LinearMath/btTransform.h"
 #include "LinearMath/btAlignedObjectArray.h"
+#include "LinearMath/btHashMap.h"
+
 class btCollisionObject;
 
 struct GfxVertex
@@ -31,7 +33,8 @@ struct GfxVertex
 
 struct GfxObject
 {
-	GLuint m_ui32Vbo;  // Vertex buffer object handle
+	struct BasicTexture*	m_texture;
+	
 	int	m_numVerts;
 	btAlignedObjectArray<unsigned short int>	m_indices;
 	btAlignedObjectArray<GfxVertex>	m_vertices;
@@ -49,7 +52,11 @@ class OolongBulletBlendReader : public BulletBlendReader
 public:
 	btAlignedObjectArray<GfxObject>	m_graphicsObjects;
 	
+	btHashMap<btHashString,BasicTexture*> m_textures;
+		
 	btTransform m_cameraTrans;
+	
+	BasicTexture* findTexture(const char* fileName);
 	
 	OolongBulletBlendReader(class btDynamicsWorld* destinationWorld);
 	

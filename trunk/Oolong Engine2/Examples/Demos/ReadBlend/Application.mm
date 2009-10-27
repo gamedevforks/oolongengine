@@ -154,6 +154,8 @@ bool CShell::InitApplication()
 	return true;
 }
 
+
+
 bool CShell::QuitApplication()
 {
 	AppDisplayText->ReleaseTextures();

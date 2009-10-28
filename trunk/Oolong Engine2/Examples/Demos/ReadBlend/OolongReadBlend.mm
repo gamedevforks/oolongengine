@@ -140,6 +140,7 @@ struct BasicTexture
 #define	USE_IPHONE_SDK_JPEGLIB
 #ifdef  USE_IPHONE_SDK_JPEGLIB
 		NSData *imageData = [NSData dataWithBytes:m_jpgData length:m_jpgSize];
+//		NSData *imageData = [NSData dataWithBytesNoCopy:m_jpgData length:m_jpgSize freeWhenDone:NO];
 		UIImage *uiImage = [UIImage imageWithData:imageData];
 		
 		CGImageRef textureImage;

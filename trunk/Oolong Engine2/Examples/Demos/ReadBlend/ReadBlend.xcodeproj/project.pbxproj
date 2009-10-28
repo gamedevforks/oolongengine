@@ -12,7 +12,6 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		BC068C2C1096508D00120032 /* BulletBlendReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C281096508D00120032 /* BulletBlendReader.cpp */; };
-		BC068C2D1096508D00120032 /* readblend.c in Sources */ = {isa = PBXBuildFile; fileRef = BC068C2A1096508D00120032 /* readblend.c */; };
 		BC068D681096509E00120032 /* btAxisSweep3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C341096509E00120032 /* btAxisSweep3.cpp */; };
 		BC068D691096509E00120032 /* btBroadphaseProxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C371096509E00120032 /* btBroadphaseProxy.cpp */; };
 		BC068D6A1096509E00120032 /* btCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C391096509E00120032 /* btCollisionAlgorithm.cpp */; };
@@ -180,7 +179,6 @@
 		BC068C271096508D00120032 /* blendtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blendtype.h; sourceTree = "<group>"; };
 		BC068C281096508D00120032 /* BulletBlendReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletBlendReader.cpp; sourceTree = "<group>"; };
 		BC068C291096508D00120032 /* BulletBlendReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBlendReader.h; sourceTree = "<group>"; };
-		BC068C2A1096508D00120032 /* readblend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = readblend.c; sourceTree = "<group>"; };
 		BC068C2B1096508D00120032 /* readblend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readblend.h; sourceTree = "<group>"; };
 		BC068C2F1096509E00120032 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		BC068C301096509E00120032 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -1085,7 +1083,6 @@
 				BC068C271096508D00120032 /* blendtype.h */,
 				BC068C281096508D00120032 /* BulletBlendReader.cpp */,
 				BC068C291096508D00120032 /* BulletBlendReader.h */,
-				BC068C2A1096508D00120032 /* readblend.c */,
 				BC068C2B1096508D00120032 /* readblend.h */,
 			);
 			name = ReadBlend;
@@ -1380,7 +1377,6 @@
 				BC8518DC109630F200721ADB /* utility_impl.cpp in Sources */,
 				BC8519B9109631B700721ADB /* EAGLView.m in Sources */,
 				BC068C2C1096508D00120032 /* BulletBlendReader.cpp in Sources */,
-				BC068C2D1096508D00120032 /* readblend.c in Sources */,
 				BC068D681096509E00120032 /* btAxisSweep3.cpp in Sources */,
 				BC068D691096509E00120032 /* btBroadphaseProxy.cpp in Sources */,
 				BC068D6A1096509E00120032 /* btCollisionAlgorithm.cpp in Sources */,

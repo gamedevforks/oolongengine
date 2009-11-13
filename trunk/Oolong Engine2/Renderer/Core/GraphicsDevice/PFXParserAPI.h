@@ -14,8 +14,14 @@
 #ifndef _PFXPARSERAPI_H_
 #define _PFXPARSERAPI_H_
 
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+#else
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#endif
+
 
 /****************************************************************************
 ** Structures

@@ -42,7 +42,7 @@ static char* sMessageData = 0;
 static ENetHost* sClient;
 static ENetPeer* sPeer;
 
-const char* IP_ADDRESS = "172.16.189.1";
+const char* IP_ADDRESS = "192.168.2.17";
 const int PORT = 9050;
 
 bool CShell::InitApplication()

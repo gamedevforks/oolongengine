@@ -40,13 +40,13 @@
 		BDE20F6C1021729800B215F9 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20F6A1021729800B215F9 /* Texture.mm */; };
 		BDE20F951021735200B215F9 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE20F931021735200B215F9 /* EAGLView.m */; };
 		BDE20FA4102173A800B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20FA3102173A800B215F9 /* ResourcePath.mm */; };
-		D9915E31107129D70074764D /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E22107129D70074764D /* callbacks.c */; };
-		D9915E32107129D70074764D /* host.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E25107129D70074764D /* host.c */; };
-		D9915E33107129D70074764D /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E26107129D70074764D /* list.c */; };
-		D9915E34107129D70074764D /* packet.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E28107129D70074764D /* packet.c */; };
-		D9915E35107129D70074764D /* peer.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E29107129D70074764D /* peer.c */; };
-		D9915E36107129D70074764D /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E2A107129D70074764D /* protocol.c */; };
-		D9915E37107129D70074764D /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = D9915E2E107129D70074764D /* unix.c */; };
+		D97C4F6E10F794FC0003B2CA /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F5F10F794FC0003B2CA /* callbacks.c */; };
+		D97C4F6F10F794FC0003B2CA /* host.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F6210F794FC0003B2CA /* host.c */; };
+		D97C4F7010F794FC0003B2CA /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F6310F794FC0003B2CA /* list.c */; };
+		D97C4F7110F794FC0003B2CA /* packet.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F6510F794FC0003B2CA /* packet.c */; };
+		D97C4F7210F794FC0003B2CA /* peer.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F6610F794FC0003B2CA /* peer.c */; };
+		D97C4F7310F794FC0003B2CA /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F6710F794FC0003B2CA /* protocol.c */; };
+		D97C4F7410F794FC0003B2CA /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4F6B10F794FC0003B2CA /* unix.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +54,7 @@
 		1BF3A1350DA68E6200C48976 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623EB0D0F72F000981E51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* ENetTestClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ENetTestClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* NetworkSkeleton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkSkeleton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -132,21 +132,21 @@
 		BDE20F941021735200B215F9 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		BDE20FA2102173A800B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
 		BDE20FA3102173A800B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
-		D9915E22107129D70074764D /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = callbacks.c; sourceTree = "<group>"; };
-		D9915E23107129D70074764D /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = "<group>"; };
-		D9915E24107129D70074764D /* enet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enet.h; sourceTree = "<group>"; };
-		D9915E25107129D70074764D /* host.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = host.c; sourceTree = "<group>"; };
-		D9915E26107129D70074764D /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
-		D9915E27107129D70074764D /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
-		D9915E28107129D70074764D /* packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = packet.c; sourceTree = "<group>"; };
-		D9915E29107129D70074764D /* peer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = peer.c; sourceTree = "<group>"; };
-		D9915E2A107129D70074764D /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = protocol.c; sourceTree = "<group>"; };
-		D9915E2B107129D70074764D /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
-		D9915E2C107129D70074764D /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
-		D9915E2D107129D70074764D /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		D9915E2E107129D70074764D /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
-		D9915E2F107129D70074764D /* unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unix.h; sourceTree = "<group>"; };
-		D9915E30107129D70074764D /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		D97C4F5F10F794FC0003B2CA /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = callbacks.c; path = ../../../enet/callbacks.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6010F794FC0003B2CA /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = callbacks.h; path = ../../../enet/callbacks.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6110F794FC0003B2CA /* enet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = enet.h; path = ../../../enet/enet.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6210F794FC0003B2CA /* host.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = host.c; path = ../../../enet/host.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6310F794FC0003B2CA /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = list.c; path = ../../../enet/list.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6410F794FC0003B2CA /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = ../../../enet/list.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6510F794FC0003B2CA /* packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = packet.c; path = ../../../enet/packet.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6610F794FC0003B2CA /* peer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = peer.c; path = ../../../enet/peer.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6710F794FC0003B2CA /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = protocol.c; path = ../../../enet/protocol.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6810F794FC0003B2CA /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = protocol.h; path = ../../../enet/protocol.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6910F794FC0003B2CA /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = time.h; path = ../../../enet/time.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6A10F794FC0003B2CA /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../../enet/types.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6B10F794FC0003B2CA /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unix.c; path = ../../../enet/unix.c; sourceTree = SOURCE_ROOT; };
+		D97C4F6C10F794FC0003B2CA /* unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unix.h; path = ../../../enet/unix.h; sourceTree = SOURCE_ROOT; };
+		D97C4F6D10F794FC0003B2CA /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utility.h; path = ../../../enet/utility.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +168,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* ENetTestClient.app */,
+				1D6058910D05DD3D006BFB54 /* NetworkSkeleton.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,7 +222,21 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D9915E21107129D70074764D /* Enet */,
+				D97C4F5F10F794FC0003B2CA /* callbacks.c */,
+				D97C4F6010F794FC0003B2CA /* callbacks.h */,
+				D97C4F6110F794FC0003B2CA /* enet.h */,
+				D97C4F6210F794FC0003B2CA /* host.c */,
+				D97C4F6310F794FC0003B2CA /* list.c */,
+				D97C4F6410F794FC0003B2CA /* list.h */,
+				D97C4F6510F794FC0003B2CA /* packet.c */,
+				D97C4F6610F794FC0003B2CA /* peer.c */,
+				D97C4F6710F794FC0003B2CA /* protocol.c */,
+				D97C4F6810F794FC0003B2CA /* protocol.h */,
+				D97C4F6910F794FC0003B2CA /* time.h */,
+				D97C4F6A10F794FC0003B2CA /* types.h */,
+				D97C4F6B10F794FC0003B2CA /* unix.c */,
+				D97C4F6C10F794FC0003B2CA /* unix.h */,
+				D97C4F6D10F794FC0003B2CA /* utility.h */,
 				BDE20FA1102173A800B215F9 /* Pathes */,
 				BDE20F791021731000B215F9 /* Include */,
 				795AC9020EDF1293004CF7D4 /* MemoryManager */,
@@ -407,29 +421,6 @@
 			path = ../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
-		D9915E21107129D70074764D /* Enet */ = {
-			isa = PBXGroup;
-			children = (
-				D9915E22107129D70074764D /* callbacks.c */,
-				D9915E23107129D70074764D /* callbacks.h */,
-				D9915E24107129D70074764D /* enet.h */,
-				D9915E25107129D70074764D /* host.c */,
-				D9915E26107129D70074764D /* list.c */,
-				D9915E27107129D70074764D /* list.h */,
-				D9915E28107129D70074764D /* packet.c */,
-				D9915E29107129D70074764D /* peer.c */,
-				D9915E2A107129D70074764D /* protocol.c */,
-				D9915E2B107129D70074764D /* protocol.h */,
-				D9915E2C107129D70074764D /* time.h */,
-				D9915E2D107129D70074764D /* types.h */,
-				D9915E2E107129D70074764D /* unix.c */,
-				D9915E2F107129D70074764D /* unix.h */,
-				D9915E30107129D70074764D /* utility.h */,
-			);
-			name = Enet;
-			path = ../../../Enet;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -447,7 +438,7 @@
 			);
 			name = ENetTestClient;
 			productName = foo;
-			productReference = 1D6058910D05DD3D006BFB54 /* ENetTestClient.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* NetworkSkeleton.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -510,13 +501,13 @@
 				BDE20F6C1021729800B215F9 /* Texture.mm in Sources */,
 				BDE20F951021735200B215F9 /* EAGLView.m in Sources */,
 				BDE20FA4102173A800B215F9 /* ResourcePath.mm in Sources */,
-				D9915E31107129D70074764D /* callbacks.c in Sources */,
-				D9915E32107129D70074764D /* host.c in Sources */,
-				D9915E33107129D70074764D /* list.c in Sources */,
-				D9915E34107129D70074764D /* packet.c in Sources */,
-				D9915E35107129D70074764D /* peer.c in Sources */,
-				D9915E36107129D70074764D /* protocol.c in Sources */,
-				D9915E37107129D70074764D /* unix.c in Sources */,
+				D97C4F6E10F794FC0003B2CA /* callbacks.c in Sources */,
+				D97C4F6F10F794FC0003B2CA /* host.c in Sources */,
+				D97C4F7010F794FC0003B2CA /* list.c in Sources */,
+				D97C4F7110F794FC0003B2CA /* packet.c in Sources */,
+				D97C4F7210F794FC0003B2CA /* peer.c in Sources */,
+				D97C4F7310F794FC0003B2CA /* protocol.c in Sources */,
+				D97C4F7410F794FC0003B2CA /* unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

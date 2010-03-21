@@ -16,9 +16,7 @@
 #ifndef OOLONG_READ_BLEND_H
 #define OOLONG_READ_BLEND_H
 
-#include "BulletBlendReader.h"
-#include "readblend.h"
-#include "blendtype.h"
+#include "BulletBlendReaderNew.h"
 #include "LinearMath/btTransform.h"
 #include "LinearMath/btAlignedObjectArray.h"
 #include "LinearMath/btHashMap.h"
@@ -28,6 +26,7 @@ class btCollisionObject;
 struct GfxVertex
 {
 	btVector3 m_position;
+	btVector3 m_normal;
 	float	m_uv[2];
 };
 
@@ -42,12 +41,13 @@ struct GfxObject
 	btCollisionObject* m_colObj;
 	
 	GfxObject(GLuint vboId,btCollisionObject* colObj);
+	btVector3 m_scaling;
 	
 	void render();
 	
 };
 
-class OolongBulletBlendReader : public BulletBlendReader
+class OolongBulletBlendReader : public BulletBlendReaderNew
 {
 public:
 	btAlignedObjectArray<GfxObject>	m_graphicsObjects;
@@ -63,11 +63,12 @@ public:
 	virtual ~OolongBulletBlendReader();
 	
 	///for each Blender Object, this method will be called to convert/retrieve data from the bObj
-	virtual void* createGraphicsObject(_bObj* tmpObject, btCollisionObject* bulletObject);
+	virtual void*   createGraphicsObject(Blender::Object* tmpObject, class btCollisionObject* bulletObject);
+
 	
-	virtual	void	addCamera(_bObj* tmpObject);
+	virtual	void	addCamera(Blender::Object* tmpObject);
 	
-	virtual	void	addLight(_bObj* tmpObject);
+	virtual	void	addLight(Blender::Object* tmpObject);
 	
 	virtual void	convertLogicBricks();
 	

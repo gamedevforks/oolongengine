@@ -107,10 +107,35 @@ bool CShell::InitApplication()
 	sprintf(fullName,"%s/%s",AppleGetBundleDirectory(),name);
 	file = fopen(fullName,"rb");
 
+	if (!file)
+		exit(0);
+	
+	int fileLen;
+	char*memoryBuffer =  0;
+	
+	{
+		long currentpos = ftell(file); /* save current cursor position */
+		long newpos;
+		int bytesRead = 0;
+		
+		fseek(file, 0, SEEK_END); /* seek to end */
+		newpos = ftell(file); /* find position of end -- this is the length */
+		fseek(file, currentpos, SEEK_SET); /* restore previous cursor position */
+		
+		fileLen = newpos;
+		
+		memoryBuffer = (char*)malloc(fileLen);
+		bytesRead = fread(memoryBuffer,fileLen,1,file);
+		
+	}
+	
+	fclose(file);
+	
+	
 	if (file)
 	{
 		bool verboseDumpAllTypes = false;
-		if (blendReader->readFile(file, verboseDumpAllTypes))
+		if (blendReader->readFile(memoryBuffer,fileLen, verboseDumpAllTypes))
 		{
 			blendReader->convertAllObjects(verboseDumpAllTypes);
 		} else {
@@ -221,7 +246,7 @@ bool CShell::RenderScene()
 	ResetTimer(&DrawUITimer);
 	
 	// show text on the display
-	AppDisplayText->DisplayDefaultTitle("Read Blend", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("BlendParse", "", eDisplayTextLogoIMG);
 	
 	AppDisplayText->Flush();	
 	

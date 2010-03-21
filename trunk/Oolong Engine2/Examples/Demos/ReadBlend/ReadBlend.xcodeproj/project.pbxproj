@@ -11,7 +11,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
-		BC068C2C1096508D00120032 /* BulletBlendReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C281096508D00120032 /* BulletBlendReader.cpp */; };
 		BC068D681096509E00120032 /* btAxisSweep3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C341096509E00120032 /* btAxisSweep3.cpp */; };
 		BC068D691096509E00120032 /* btBroadphaseProxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C371096509E00120032 /* btBroadphaseProxy.cpp */; };
 		BC068D6A1096509E00120032 /* btCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C391096509E00120032 /* btCollisionAlgorithm.cpp */; };
@@ -134,6 +133,14 @@
 		BC068DDF1096509E00120032 /* btQuickprof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068D601096509E00120032 /* btQuickprof.cpp */; };
 		BC068DF11096547200120032 /* OolongReadBlend.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC068DF01096547200120032 /* OolongReadBlend.mm */; };
 		BC068E031096550400120032 /* PhysicsAnimationBakingDemo.blend in Resources */ = {isa = PBXBuildFile; fileRef = BC068E021096550400120032 /* PhysicsAnimationBakingDemo.blend */; };
+		BC0E65661156CD8F0094B477 /* bFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E65591156CD8F0094B477 /* bFile.cpp */; };
+		BC0E65671156CD8F0094B477 /* bDNA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E655B1156CD8F0094B477 /* bDNA.cpp */; };
+		BC0E65681156CD8F0094B477 /* bChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E655F1156CD8F0094B477 /* bChunk.cpp */; };
+		BC0E65691156CD8F0094B477 /* dna249.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E65601156CD8F0094B477 /* dna249.cpp */; };
+		BC0E656A1156CD8F0094B477 /* dna249-64bit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E65611156CD8F0094B477 /* dna249-64bit.cpp */; };
+		BC0E656B1156CD8F0094B477 /* bMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E65631156CD8F0094B477 /* bMain.cpp */; };
+		BC0E656C1156CD8F0094B477 /* bBlenderFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E65651156CD8F0094B477 /* bBlenderFile.cpp */; };
+		BC0E67101156D3B10094B477 /* BulletBlendReaderNew.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0E670F1156D3B10094B477 /* BulletBlendReaderNew.cpp */; };
 		BC8517DA10962CB800721ADB /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC8517D510962CB800721ADB /* Application.mm */; };
 		BC8517DB10962CB800721ADB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8517D610962CB800721ADB /* Default.png */; };
 		BC8517DC10962CB800721ADB /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC8517D810962CB800721ADB /* Delegate.mm */; };
@@ -175,11 +182,6 @@
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ReadBlend_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadBlend_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ReadBlend-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadBlend-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		BC068C261096508D00120032 /* abs-file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "abs-file.h"; sourceTree = "<group>"; };
-		BC068C271096508D00120032 /* blendtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blendtype.h; sourceTree = "<group>"; };
-		BC068C281096508D00120032 /* BulletBlendReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletBlendReader.cpp; sourceTree = "<group>"; };
-		BC068C291096508D00120032 /* BulletBlendReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBlendReader.h; sourceTree = "<group>"; };
-		BC068C2B1096508D00120032 /* readblend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readblend.h; sourceTree = "<group>"; };
 		BC068C2F1096509E00120032 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		BC068C301096509E00120032 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
 		BC068C311096509E00120032 /* Bullet-C-Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bullet-C-Api.h"; sourceTree = "<group>"; };
@@ -483,6 +485,341 @@
 		BC068DEF1096547200120032 /* OolongReadBlend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OolongReadBlend.h; sourceTree = "<group>"; };
 		BC068DF01096547200120032 /* OolongReadBlend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OolongReadBlend.mm; sourceTree = "<group>"; };
 		BC068E021096550400120032 /* PhysicsAnimationBakingDemo.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhysicsAnimationBakingDemo.blend; sourceTree = "<group>"; };
+		BC0E65581156CD8F0094B477 /* bFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bFile.h; path = BlenderSerialize/bFile.h; sourceTree = "<group>"; };
+		BC0E65591156CD8F0094B477 /* bFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bFile.cpp; path = BlenderSerialize/bFile.cpp; sourceTree = "<group>"; };
+		BC0E655A1156CD8F0094B477 /* bDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bDNA.h; path = BlenderSerialize/bDNA.h; sourceTree = "<group>"; };
+		BC0E655B1156CD8F0094B477 /* bDNA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bDNA.cpp; path = BlenderSerialize/bDNA.cpp; sourceTree = "<group>"; };
+		BC0E655C1156CD8F0094B477 /* bDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bDefines.h; path = BlenderSerialize/bDefines.h; sourceTree = "<group>"; };
+		BC0E655D1156CD8F0094B477 /* bCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bCommon.h; path = BlenderSerialize/bCommon.h; sourceTree = "<group>"; };
+		BC0E655E1156CD8F0094B477 /* bChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bChunk.h; path = BlenderSerialize/bChunk.h; sourceTree = "<group>"; };
+		BC0E655F1156CD8F0094B477 /* bChunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bChunk.cpp; path = BlenderSerialize/bChunk.cpp; sourceTree = "<group>"; };
+		BC0E65601156CD8F0094B477 /* dna249.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dna249.cpp; path = BlenderSerialize/dna249.cpp; sourceTree = "<group>"; };
+		BC0E65611156CD8F0094B477 /* dna249-64bit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "dna249-64bit.cpp"; path = "BlenderSerialize/dna249-64bit.cpp"; sourceTree = "<group>"; };
+		BC0E65621156CD8F0094B477 /* bMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bMain.h; path = BlenderSerialize/bMain.h; sourceTree = "<group>"; };
+		BC0E65631156CD8F0094B477 /* bMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bMain.cpp; path = BlenderSerialize/bMain.cpp; sourceTree = "<group>"; };
+		BC0E65641156CD8F0094B477 /* bBlenderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bBlenderFile.h; path = BlenderSerialize/bBlenderFile.h; sourceTree = "<group>"; };
+		BC0E65651156CD8F0094B477 /* bBlenderFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bBlenderFile.cpp; path = BlenderSerialize/bBlenderFile.cpp; sourceTree = "<group>"; };
+		BC0E65771156CDA30094B477 /* blender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender.h; sourceTree = "<group>"; };
+		BC0E65781156CDA30094B477 /* blender_ArmatureModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ArmatureModifierData.h; sourceTree = "<group>"; };
+		BC0E65791156CDA30094B477 /* blender_ArrayModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ArrayModifierData.h; sourceTree = "<group>"; };
+		BC0E657A1156CDA30094B477 /* blender_AudioData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_AudioData.h; sourceTree = "<group>"; };
+		BC0E657B1156CDA30094B477 /* blender_AviCodecData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_AviCodecData.h; sourceTree = "<group>"; };
+		BC0E657C1156CDA30094B477 /* blender_bAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bAction.h; sourceTree = "<group>"; };
+		BC0E657D1156CDA30094B477 /* blender_bActionActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActionActuator.h; sourceTree = "<group>"; };
+		BC0E657E1156CDA30094B477 /* blender_bActionChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActionChannel.h; sourceTree = "<group>"; };
+		BC0E657F1156CDA30094B477 /* blender_bActionConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActionConstraint.h; sourceTree = "<group>"; };
+		BC0E65801156CDA30094B477 /* blender_bActionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActionGroup.h; sourceTree = "<group>"; };
+		BC0E65811156CDA30094B477 /* blender_bActionModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActionModifier.h; sourceTree = "<group>"; };
+		BC0E65821156CDA30094B477 /* blender_bActionStrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActionStrip.h; sourceTree = "<group>"; };
+		BC0E65831156CDA30094B477 /* blender_bActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActuator.h; sourceTree = "<group>"; };
+		BC0E65841156CDA30094B477 /* blender_bActuatorSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bActuatorSensor.h; sourceTree = "<group>"; };
+		BC0E65851156CDA30094B477 /* blender_bAddObjectActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bAddObjectActuator.h; sourceTree = "<group>"; };
+		BC0E65861156CDA30094B477 /* blender_bArmature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bArmature.h; sourceTree = "<group>"; };
+		BC0E65871156CDA30094B477 /* blender_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Base.h; sourceTree = "<group>"; };
+		BC0E65881156CDA30094B477 /* blender_bCameraActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bCameraActuator.h; sourceTree = "<group>"; };
+		BC0E65891156CDA30094B477 /* blender_bCDActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bCDActuator.h; sourceTree = "<group>"; };
+		BC0E658A1156CDA30094B477 /* blender_bChildOfConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bChildOfConstraint.h; sourceTree = "<group>"; };
+		BC0E658B1156CDA30094B477 /* blender_bClampToConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bClampToConstraint.h; sourceTree = "<group>"; };
+		BC0E658C1156CDA30094B477 /* blender_bCollisionSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bCollisionSensor.h; sourceTree = "<group>"; };
+		BC0E658D1156CDA30094B477 /* blender_bConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bConstraint.h; sourceTree = "<group>"; };
+		BC0E658E1156CDA30094B477 /* blender_bConstraintActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bConstraintActuator.h; sourceTree = "<group>"; };
+		BC0E658F1156CDA30094B477 /* blender_bConstraintChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bConstraintChannel.h; sourceTree = "<group>"; };
+		BC0E65901156CDA30094B477 /* blender_bConstraintTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bConstraintTarget.h; sourceTree = "<group>"; };
+		BC0E65911156CDA30094B477 /* blender_bController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bController.h; sourceTree = "<group>"; };
+		BC0E65921156CDA30094B477 /* blender_bDeformGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bDeformGroup.h; sourceTree = "<group>"; };
+		BC0E65931156CDA30094B477 /* blender_bDelaySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bDelaySensor.h; sourceTree = "<group>"; };
+		BC0E65941156CDA30094B477 /* blender_bDistanceLimitConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bDistanceLimitConstraint.h; sourceTree = "<group>"; };
+		BC0E65951156CDA30094B477 /* blender_bDistLimitConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bDistLimitConstraint.h; sourceTree = "<group>"; };
+		BC0E65961156CDA30094B477 /* blender_bEditObjectActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bEditObjectActuator.h; sourceTree = "<group>"; };
+		BC0E65971156CDA30094B477 /* blender_BevelModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BevelModifierData.h; sourceTree = "<group>"; };
+		BC0E65981156CDA30094B477 /* blender_bExpressionCont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bExpressionCont.h; sourceTree = "<group>"; };
+		BC0E65991156CDA30094B477 /* blender_BezTriple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BezTriple.h; sourceTree = "<group>"; };
+		BC0E659A1156CDA30094B477 /* blender_bFollowPathConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bFollowPathConstraint.h; sourceTree = "<group>"; };
+		BC0E659B1156CDA30094B477 /* blender_bGameActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGameActuator.h; sourceTree = "<group>"; };
+		BC0E659C1156CDA30094B477 /* blender_bGPdata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGPdata.h; sourceTree = "<group>"; };
+		BC0E659D1156CDA30094B477 /* blender_bGPDframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGPDframe.h; sourceTree = "<group>"; };
+		BC0E659E1156CDA30094B477 /* blender_bGPDlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGPDlayer.h; sourceTree = "<group>"; };
+		BC0E659F1156CDA30094B477 /* blender_bGPDspoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGPDspoint.h; sourceTree = "<group>"; };
+		BC0E65A01156CDA30094B477 /* blender_bGPDstroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGPDstroke.h; sourceTree = "<group>"; };
+		BC0E65A11156CDA30094B477 /* blender_BGpic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BGpic.h; sourceTree = "<group>"; };
+		BC0E65A21156CDA30094B477 /* blender_bGroupActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bGroupActuator.h; sourceTree = "<group>"; };
+		BC0E65A31156CDA30094B477 /* blender_bIpoActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bIpoActuator.h; sourceTree = "<group>"; };
+		BC0E65A41156CDA30094B477 /* blender_bJoystickSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bJoystickSensor.h; sourceTree = "<group>"; };
+		BC0E65A51156CDA30094B477 /* blender_bKeyboardSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bKeyboardSensor.h; sourceTree = "<group>"; };
+		BC0E65A61156CDA30094B477 /* blender_bKinematicConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bKinematicConstraint.h; sourceTree = "<group>"; };
+		BC0E65A71156CDA30094B477 /* blender_bLocateLikeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bLocateLikeConstraint.h; sourceTree = "<group>"; };
+		BC0E65A81156CDA30094B477 /* blender_bLockTrackConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bLockTrackConstraint.h; sourceTree = "<group>"; };
+		BC0E65A91156CDA30094B477 /* blender_bLocLimitConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bLocLimitConstraint.h; sourceTree = "<group>"; };
+		BC0E65AA1156CDA30094B477 /* blender_BMeshModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BMeshModifierData.h; sourceTree = "<group>"; };
+		BC0E65AB1156CDA30094B477 /* blender_bMessageActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bMessageActuator.h; sourceTree = "<group>"; };
+		BC0E65AC1156CDA30094B477 /* blender_bMessageSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bMessageSensor.h; sourceTree = "<group>"; };
+		BC0E65AD1156CDA30094B477 /* blender_bMinMaxConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bMinMaxConstraint.h; sourceTree = "<group>"; };
+		BC0E65AE1156CDA30094B477 /* blender_bMouseSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bMouseSensor.h; sourceTree = "<group>"; };
+		BC0E65AF1156CDA30094B477 /* blender_bNearSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bNearSensor.h; sourceTree = "<group>"; };
+		BC0E65B01156CDA30094B477 /* blender_bNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bNode.h; sourceTree = "<group>"; };
+		BC0E65B11156CDA30094B477 /* blender_bNodeLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bNodeLink.h; sourceTree = "<group>"; };
+		BC0E65B21156CDA30094B477 /* blender_bNodeSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bNodeSocket.h; sourceTree = "<group>"; };
+		BC0E65B31156CDA30094B477 /* blender_bNodeStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bNodeStack.h; sourceTree = "<group>"; };
+		BC0E65B41156CDA30094B477 /* blender_bNodeTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bNodeTree.h; sourceTree = "<group>"; };
+		BC0E65B51156CDA30094B477 /* blender_bObjectActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bObjectActuator.h; sourceTree = "<group>"; };
+		BC0E65B61156CDA30094B477 /* blender_Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Bone.h; sourceTree = "<group>"; };
+		BC0E65B71156CDA30094B477 /* blender_BooleanModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BooleanModifierData.h; sourceTree = "<group>"; };
+		BC0E65B81156CDA30094B477 /* blender_BoundBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BoundBox.h; sourceTree = "<group>"; };
+		BC0E65B91156CDA30094B477 /* blender_bParentActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bParentActuator.h; sourceTree = "<group>"; };
+		BC0E65BA1156CDA30094B477 /* blender_BPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BPoint.h; sourceTree = "<group>"; };
+		BC0E65BB1156CDA30094B477 /* blender_bPose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bPose.h; sourceTree = "<group>"; };
+		BC0E65BC1156CDA30094B477 /* blender_bPoseChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bPoseChannel.h; sourceTree = "<group>"; };
+		BC0E65BD1156CDA30094B477 /* blender_bProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bProperty.h; sourceTree = "<group>"; };
+		BC0E65BE1156CDA30094B477 /* blender_bPropertyActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bPropertyActuator.h; sourceTree = "<group>"; };
+		BC0E65BF1156CDA30094B477 /* blender_bPropertySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bPropertySensor.h; sourceTree = "<group>"; };
+		BC0E65C01156CDA30094B477 /* blender_bPythonConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bPythonConstraint.h; sourceTree = "<group>"; };
+		BC0E65C11156CDA30094B477 /* blender_bPythonCont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bPythonCont.h; sourceTree = "<group>"; };
+		BC0E65C21156CDA30094B477 /* blender_bRadarSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRadarSensor.h; sourceTree = "<group>"; };
+		BC0E65C31156CDA30094B477 /* blender_bRandomActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRandomActuator.h; sourceTree = "<group>"; };
+		BC0E65C41156CDA30094B477 /* blender_bRandomSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRandomSensor.h; sourceTree = "<group>"; };
+		BC0E65C51156CDA30094B477 /* blender_bRaySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRaySensor.h; sourceTree = "<group>"; };
+		BC0E65C61156CDA30094B477 /* blender_bRigidBodyJointConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRigidBodyJointConstraint.h; sourceTree = "<group>"; };
+		BC0E65C71156CDA30094B477 /* blender_bRotateLikeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRotateLikeConstraint.h; sourceTree = "<group>"; };
+		BC0E65C81156CDA30094B477 /* blender_bRotationConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRotationConstraint.h; sourceTree = "<group>"; };
+		BC0E65C91156CDA30094B477 /* blender_bRotLimitConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bRotLimitConstraint.h; sourceTree = "<group>"; };
+		BC0E65CA1156CDA30094B477 /* blender_Brush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Brush.h; sourceTree = "<group>"; };
+		BC0E65CB1156CDA30094B477 /* blender_BrushClone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BrushClone.h; sourceTree = "<group>"; };
+		BC0E65CC1156CDA30094B477 /* blender_BrushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BrushData.h; sourceTree = "<group>"; };
+		BC0E65CD1156CDA30094B477 /* blender_bSceneActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSceneActuator.h; sourceTree = "<group>"; };
+		BC0E65CE1156CDA30094B477 /* blender_bScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bScreen.h; sourceTree = "<group>"; };
+		BC0E65CF1156CDA30094B477 /* blender_bSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSensor.h; sourceTree = "<group>"; };
+		BC0E65D01156CDA30094B477 /* blender_bShrinkwrapConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bShrinkwrapConstraint.h; sourceTree = "<group>"; };
+		BC0E65D11156CDA30094B477 /* blender_bSizeLikeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSizeLikeConstraint.h; sourceTree = "<group>"; };
+		BC0E65D21156CDA30094B477 /* blender_bSizeLimitConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSizeLimitConstraint.h; sourceTree = "<group>"; };
+		BC0E65D31156CDA30094B477 /* blender_bSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSound.h; sourceTree = "<group>"; };
+		BC0E65D41156CDA30094B477 /* blender_bSoundActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSoundActuator.h; sourceTree = "<group>"; };
+		BC0E65D51156CDA30094B477 /* blender_bSoundListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bSoundListener.h; sourceTree = "<group>"; };
+		BC0E65D61156CDA30094B477 /* blender_bStateActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bStateActuator.h; sourceTree = "<group>"; };
+		BC0E65D71156CDA30094B477 /* blender_bStretchToConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bStretchToConstraint.h; sourceTree = "<group>"; };
+		BC0E65D81156CDA30094B477 /* blender_bTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bTheme.h; sourceTree = "<group>"; };
+		BC0E65D91156CDA30094B477 /* blender_bTouchSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bTouchSensor.h; sourceTree = "<group>"; };
+		BC0E65DA1156CDA30094B477 /* blender_bTrackToConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bTrackToConstraint.h; sourceTree = "<group>"; };
+		BC0E65DB1156CDA30094B477 /* blender_bTransformConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bTransformConstraint.h; sourceTree = "<group>"; };
+		BC0E65DC1156CDA30094B477 /* blender_bTwoDFilterActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bTwoDFilterActuator.h; sourceTree = "<group>"; };
+		BC0E65DD1156CDA30094B477 /* blender_BuildEff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BuildEff.h; sourceTree = "<group>"; };
+		BC0E65DE1156CDA30094B477 /* blender_BuildModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BuildModifierData.h; sourceTree = "<group>"; };
+		BC0E65DF1156CDA30094B477 /* blender_BulletSoftBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_BulletSoftBody.h; sourceTree = "<group>"; };
+		BC0E65E01156CDA30094B477 /* blender_bVisibilityActuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_bVisibilityActuator.h; sourceTree = "<group>"; };
+		BC0E65E11156CDA30094B477 /* blender_Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Camera.h; sourceTree = "<group>"; };
+		BC0E65E21156CDA30094B477 /* blender_CastModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CastModifierData.h; sourceTree = "<group>"; };
+		BC0E65E31156CDA30094B477 /* blender_CBData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CBData.h; sourceTree = "<group>"; };
+		BC0E65E41156CDA30094B477 /* blender_CharInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CharInfo.h; sourceTree = "<group>"; };
+		BC0E65E51156CDA30094B477 /* blender_ChildParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ChildParticle.h; sourceTree = "<group>"; };
+		BC0E65E61156CDA30094B477 /* blender_ClothCollSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ClothCollSettings.h; sourceTree = "<group>"; };
+		BC0E65E71156CDA30094B477 /* blender_ClothModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ClothModifierData.h; sourceTree = "<group>"; };
+		BC0E65E81156CDA30094B477 /* blender_ClothSimSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ClothSimSettings.h; sourceTree = "<group>"; };
+		BC0E65E91156CDA30094B477 /* blender_CollisionModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CollisionModifierData.h; sourceTree = "<group>"; };
+		BC0E65EA1156CDA30094B477 /* blender_ColorBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ColorBand.h; sourceTree = "<group>"; };
+		BC0E65EB1156CDA30094B477 /* blender_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Common.h; sourceTree = "<group>"; };
+		BC0E65EC1156CDA30094B477 /* blender_Curve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Curve.h; sourceTree = "<group>"; };
+		BC0E65ED1156CDA30094B477 /* blender_CurveMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CurveMap.h; sourceTree = "<group>"; };
+		BC0E65EE1156CDA30094B477 /* blender_CurveMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CurveMapping.h; sourceTree = "<group>"; };
+		BC0E65EF1156CDA30094B477 /* blender_CurveMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CurveMapPoint.h; sourceTree = "<group>"; };
+		BC0E65F01156CDA30094B477 /* blender_CurveModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CurveModifierData.h; sourceTree = "<group>"; };
+		BC0E65F11156CDA30094B477 /* blender_CustomData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CustomData.h; sourceTree = "<group>"; };
+		BC0E65F21156CDA30094B477 /* blender_CustomDataLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_CustomDataLayer.h; sourceTree = "<group>"; };
+		BC0E65F31156CDA30094B477 /* blender_DecimateModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_DecimateModifierData.h; sourceTree = "<group>"; };
+		BC0E65F41156CDA30094B477 /* blender_DisplaceModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_DisplaceModifierData.h; sourceTree = "<group>"; };
+		BC0E65F51156CDA30094B477 /* blender_EdgeSplitModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_EdgeSplitModifierData.h; sourceTree = "<group>"; };
+		BC0E65F61156CDA30094B477 /* blender_Editing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Editing.h; sourceTree = "<group>"; };
+		BC0E65F71156CDA30094B477 /* blender_Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Effect.h; sourceTree = "<group>"; };
+		BC0E65F81156CDA30094B477 /* blender_EnvMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_EnvMap.h; sourceTree = "<group>"; };
+		BC0E65F91156CDA30094B477 /* blender_ExplodeModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ExplodeModifierData.h; sourceTree = "<group>"; };
+		BC0E65FA1156CDA30094B477 /* blender_FFMpegCodecData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_FFMpegCodecData.h; sourceTree = "<group>"; };
+		BC0E65FB1156CDA30094B477 /* blender_FileGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_FileGlobal.h; sourceTree = "<group>"; };
+		BC0E65FC1156CDA30094B477 /* blender_FluidsimModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_FluidsimModifierData.h; sourceTree = "<group>"; };
+		BC0E65FD1156CDA30094B477 /* blender_FluidsimSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_FluidsimSettings.h; sourceTree = "<group>"; };
+		BC0E65FE1156CDA30094B477 /* blender_FreeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_FreeCamera.h; sourceTree = "<group>"; };
+		BC0E65FF1156CDA30094B477 /* blender_GameFraming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_GameFraming.h; sourceTree = "<group>"; };
+		BC0E66001156CDA30094B477 /* blender_GlowVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_GlowVars.h; sourceTree = "<group>"; };
+		BC0E66011156CDA30094B477 /* blender_Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Group.h; sourceTree = "<group>"; };
+		BC0E66021156CDA30094B477 /* blender_GroupObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_GroupObject.h; sourceTree = "<group>"; };
+		BC0E66031156CDA30094B477 /* blender_HairKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_HairKey.h; sourceTree = "<group>"; };
+		BC0E66041156CDA30094B477 /* blender_HookModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_HookModifierData.h; sourceTree = "<group>"; };
+		BC0E66051156CDA30094B477 /* blender_ID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ID.h; sourceTree = "<group>"; };
+		BC0E66061156CDA30094B477 /* blender_IDProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_IDProperty.h; sourceTree = "<group>"; };
+		BC0E66071156CDA30094B477 /* blender_IDPropertyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_IDPropertyData.h; sourceTree = "<group>"; };
+		BC0E66081156CDA30094B477 /* blender_Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Image.h; sourceTree = "<group>"; };
+		BC0E66091156CDA30094B477 /* blender_ImagePaintSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ImagePaintSettings.h; sourceTree = "<group>"; };
+		BC0E660A1156CDA30094B477 /* blender_ImageUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ImageUser.h; sourceTree = "<group>"; };
+		BC0E660B1156CDA30094B477 /* blender_Ipo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Ipo.h; sourceTree = "<group>"; };
+		BC0E660C1156CDA30094B477 /* blender_IpoCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_IpoCurve.h; sourceTree = "<group>"; };
+		BC0E660D1156CDA30094B477 /* blender_IpoDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_IpoDriver.h; sourceTree = "<group>"; };
+		BC0E660E1156CDA30094B477 /* blender_Key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Key.h; sourceTree = "<group>"; };
+		BC0E660F1156CDA30094B477 /* blender_KeyBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_KeyBlock.h; sourceTree = "<group>"; };
+		BC0E66101156CDA30094B477 /* blender_Lamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Lamp.h; sourceTree = "<group>"; };
+		BC0E66111156CDA30094B477 /* blender_Lattice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Lattice.h; sourceTree = "<group>"; };
+		BC0E66121156CDA30094B477 /* blender_LatticeModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_LatticeModifierData.h; sourceTree = "<group>"; };
+		BC0E66131156CDA30094B477 /* blender_LBuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_LBuf.h; sourceTree = "<group>"; };
+		BC0E66141156CDA30094B477 /* blender_Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Library.h; sourceTree = "<group>"; };
+		BC0E66151156CDA30094B477 /* blender_Link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Link.h; sourceTree = "<group>"; };
+		BC0E66161156CDA30094B477 /* blender_LinkData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_LinkData.h; sourceTree = "<group>"; };
+		BC0E66171156CDA30094B477 /* blender_ListBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ListBase.h; sourceTree = "<group>"; };
+		BC0E66181156CDA30094B477 /* blender_MaskModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MaskModifierData.h; sourceTree = "<group>"; };
+		BC0E66191156CDA30094B477 /* blender_Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Material.h; sourceTree = "<group>"; };
+		BC0E661A1156CDA30094B477 /* blender_MCol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MCol.h; sourceTree = "<group>"; };
+		BC0E661B1156CDA30094B477 /* blender_MDefCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MDefCell.h; sourceTree = "<group>"; };
+		BC0E661C1156CDA30094B477 /* blender_MDefInfluence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MDefInfluence.h; sourceTree = "<group>"; };
+		BC0E661D1156CDA30094B477 /* blender_MDeformVert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MDeformVert.h; sourceTree = "<group>"; };
+		BC0E661E1156CDA30094B477 /* blender_MDeformWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MDeformWeight.h; sourceTree = "<group>"; };
+		BC0E661F1156CDA30094B477 /* blender_MEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MEdge.h; sourceTree = "<group>"; };
+		BC0E66201156CDA30094B477 /* blender_Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Mesh.h; sourceTree = "<group>"; };
+		BC0E66211156CDA30094B477 /* blender_MeshDeformModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MeshDeformModifierData.h; sourceTree = "<group>"; };
+		BC0E66221156CDA30094B477 /* blender_MetaBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MetaBall.h; sourceTree = "<group>"; };
+		BC0E66231156CDA30094B477 /* blender_MetaElem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MetaElem.h; sourceTree = "<group>"; };
+		BC0E66241156CDA30094B477 /* blender_MetaStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MetaStack.h; sourceTree = "<group>"; };
+		BC0E66251156CDA30094B477 /* blender_MFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MFace.h; sourceTree = "<group>"; };
+		BC0E66261156CDA30094B477 /* blender_MFloatProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MFloatProperty.h; sourceTree = "<group>"; };
+		BC0E66271156CDA30094B477 /* blender_MIntProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MIntProperty.h; sourceTree = "<group>"; };
+		BC0E66281156CDA30094B477 /* blender_MirrorModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MirrorModifierData.h; sourceTree = "<group>"; };
+		BC0E66291156CDA30094B477 /* blender_MLoopCol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MLoopCol.h; sourceTree = "<group>"; };
+		BC0E662A1156CDA30094B477 /* blender_MLoopUV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MLoopUV.h; sourceTree = "<group>"; };
+		BC0E662B1156CDA30094B477 /* blender_ModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ModifierData.h; sourceTree = "<group>"; };
+		BC0E662C1156CDA30094B477 /* blender_MSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MSelect.h; sourceTree = "<group>"; };
+		BC0E662D1156CDA30094B477 /* blender_MSticky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MSticky.h; sourceTree = "<group>"; };
+		BC0E662E1156CDA30094B477 /* blender_MStringProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MStringProperty.h; sourceTree = "<group>"; };
+		BC0E662F1156CDA30094B477 /* blender_MTex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MTex.h; sourceTree = "<group>"; };
+		BC0E66301156CDA30094B477 /* blender_MTexPoly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MTexPoly.h; sourceTree = "<group>"; };
+		BC0E66311156CDA30094B477 /* blender_MTFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MTFace.h; sourceTree = "<group>"; };
+		BC0E66321156CDA30094B477 /* blender_Multires.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Multires.h; sourceTree = "<group>"; };
+		BC0E66331156CDA30094B477 /* blender_MultiresCol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MultiresCol.h; sourceTree = "<group>"; };
+		BC0E66341156CDA30094B477 /* blender_MultiresColFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MultiresColFace.h; sourceTree = "<group>"; };
+		BC0E66351156CDA30094B477 /* blender_MultiresEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MultiresEdge.h; sourceTree = "<group>"; };
+		BC0E66361156CDA30094B477 /* blender_MultiresFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MultiresFace.h; sourceTree = "<group>"; };
+		BC0E66371156CDA30094B477 /* blender_MultiresLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MultiresLevel.h; sourceTree = "<group>"; };
+		BC0E66381156CDA30094B477 /* blender_MVert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_MVert.h; sourceTree = "<group>"; };
+		BC0E66391156CDA30094B477 /* blender_NodeBilateralBlurData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeBilateralBlurData.h; sourceTree = "<group>"; };
+		BC0E663A1156CDA30094B477 /* blender_NodeBlurData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeBlurData.h; sourceTree = "<group>"; };
+		BC0E663B1156CDA40094B477 /* blender_NodeChroma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeChroma.h; sourceTree = "<group>"; };
+		BC0E663C1156CDA40094B477 /* blender_NodeDBlurData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeDBlurData.h; sourceTree = "<group>"; };
+		BC0E663D1156CDA40094B477 /* blender_NodeDefocus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeDefocus.h; sourceTree = "<group>"; };
+		BC0E663E1156CDA40094B477 /* blender_NodeGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeGeometry.h; sourceTree = "<group>"; };
+		BC0E663F1156CDA40094B477 /* blender_NodeGlare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeGlare.h; sourceTree = "<group>"; };
+		BC0E66401156CDA40094B477 /* blender_NodeHueSat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeHueSat.h; sourceTree = "<group>"; };
+		BC0E66411156CDA40094B477 /* blender_NodeImageAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeImageAnim.h; sourceTree = "<group>"; };
+		BC0E66421156CDA40094B477 /* blender_NodeImageFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeImageFile.h; sourceTree = "<group>"; };
+		BC0E66431156CDA40094B477 /* blender_NodeLensDist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeLensDist.h; sourceTree = "<group>"; };
+		BC0E66441156CDA40094B477 /* blender_NodeScriptDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeScriptDict.h; sourceTree = "<group>"; };
+		BC0E66451156CDA40094B477 /* blender_NodeTonemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeTonemap.h; sourceTree = "<group>"; };
+		BC0E66461156CDA40094B477 /* blender_NodeTwoFloats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeTwoFloats.h; sourceTree = "<group>"; };
+		BC0E66471156CDA40094B477 /* blender_NodeTwoXYs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeTwoXYs.h; sourceTree = "<group>"; };
+		BC0E66481156CDA40094B477 /* blender_NodeVertexCol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_NodeVertexCol.h; sourceTree = "<group>"; };
+		BC0E66491156CDA40094B477 /* blender_Nurb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Nurb.h; sourceTree = "<group>"; };
+		BC0E664A1156CDA40094B477 /* blender_ObHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ObHook.h; sourceTree = "<group>"; };
+		BC0E664B1156CDA40094B477 /* blender_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Object.h; sourceTree = "<group>"; };
+		BC0E664C1156CDA40094B477 /* blender_OcInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_OcInfo.h; sourceTree = "<group>"; };
+		BC0E664D1156CDA40094B477 /* blender_Oops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Oops.h; sourceTree = "<group>"; };
+		BC0E664E1156CDA40094B477 /* blender_OrigSpaceFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_OrigSpaceFace.h; sourceTree = "<group>"; };
+		BC0E664F1156CDA40094B477 /* blender_PackedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PackedFile.h; sourceTree = "<group>"; };
+		BC0E66501156CDA40094B477 /* blender_Panel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Panel.h; sourceTree = "<group>"; };
+		BC0E66511156CDA40094B477 /* blender_PartDeflect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PartDeflect.h; sourceTree = "<group>"; };
+		BC0E66521156CDA40094B477 /* blender_PartEff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PartEff.h; sourceTree = "<group>"; };
+		BC0E66531156CDA40094B477 /* blender_PartialVisibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PartialVisibility.h; sourceTree = "<group>"; };
+		BC0E66541156CDA40094B477 /* blender_ParticleBrushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleBrushData.h; sourceTree = "<group>"; };
+		BC0E66551156CDA40094B477 /* blender_ParticleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleData.h; sourceTree = "<group>"; };
+		BC0E66561156CDA40094B477 /* blender_ParticleEditSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleEditSettings.h; sourceTree = "<group>"; };
+		BC0E66571156CDA40094B477 /* blender_ParticleInstanceModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleInstanceModifierData.h; sourceTree = "<group>"; };
+		BC0E66581156CDA40094B477 /* blender_ParticleKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleKey.h; sourceTree = "<group>"; };
+		BC0E66591156CDA40094B477 /* blender_ParticleSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleSettings.h; sourceTree = "<group>"; };
+		BC0E665A1156CDA40094B477 /* blender_ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleSystem.h; sourceTree = "<group>"; };
+		BC0E665B1156CDA40094B477 /* blender_ParticleSystemModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ParticleSystemModifierData.h; sourceTree = "<group>"; };
+		BC0E665C1156CDA40094B477 /* blender_PluginSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PluginSeq.h; sourceTree = "<group>"; };
+		BC0E665D1156CDA40094B477 /* blender_PluginTex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PluginTex.h; sourceTree = "<group>"; };
+		BC0E665E1156CDA40094B477 /* blender_PointCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PointCache.h; sourceTree = "<group>"; };
+		BC0E665F1156CDA40094B477 /* blender_PreviewImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_PreviewImage.h; sourceTree = "<group>"; };
+		BC0E66601156CDA40094B477 /* blender_QuicktimeCodecData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_QuicktimeCodecData.h; sourceTree = "<group>"; };
+		BC0E66611156CDA40094B477 /* blender_Radio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Radio.h; sourceTree = "<group>"; };
+		BC0E66621156CDA40094B477 /* blender_rctf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_rctf.h; sourceTree = "<group>"; };
+		BC0E66631156CDA40094B477 /* blender_rcti.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_rcti.h; sourceTree = "<group>"; };
+		BC0E66641156CDA40094B477 /* blender_RenderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_RenderData.h; sourceTree = "<group>"; };
+		BC0E66651156CDA40094B477 /* blender_RenderProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_RenderProfile.h; sourceTree = "<group>"; };
+		BC0E66661156CDA40094B477 /* blender_SBVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SBVertex.h; sourceTree = "<group>"; };
+		BC0E66671156CDA40094B477 /* blender_Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Scene.h; sourceTree = "<group>"; };
+		BC0E66681156CDA40094B477 /* blender_SceneRenderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SceneRenderLayer.h; sourceTree = "<group>"; };
+		BC0E66691156CDA40094B477 /* blender_ScrArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ScrArea.h; sourceTree = "<group>"; };
+		BC0E666A1156CDA40094B477 /* blender_ScrEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ScrEdge.h; sourceTree = "<group>"; };
+		BC0E666B1156CDA40094B477 /* blender_Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Script.h; sourceTree = "<group>"; };
+		BC0E666C1156CDA40094B477 /* blender_ScriptLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ScriptLink.h; sourceTree = "<group>"; };
+		BC0E666D1156CDA40094B477 /* blender_ScrVert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ScrVert.h; sourceTree = "<group>"; };
+		BC0E666E1156CDA40094B477 /* blender_SculptData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SculptData.h; sourceTree = "<group>"; };
+		BC0E666F1156CDA40094B477 /* blender_Sequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Sequence.h; sourceTree = "<group>"; };
+		BC0E66701156CDA40094B477 /* blender_ShrinkwrapModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ShrinkwrapModifierData.h; sourceTree = "<group>"; };
+		BC0E66711156CDA40094B477 /* blender_SimpleDeformModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SimpleDeformModifierData.h; sourceTree = "<group>"; };
+		BC0E66721156CDA40094B477 /* blender_SmoothModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SmoothModifierData.h; sourceTree = "<group>"; };
+		BC0E66731156CDA40094B477 /* blender_SoftBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SoftBody.h; sourceTree = "<group>"; };
+		BC0E66741156CDA40094B477 /* blender_SoftbodyModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SoftbodyModifierData.h; sourceTree = "<group>"; };
+		BC0E66751156CDA40094B477 /* blender_SolidColorVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SolidColorVars.h; sourceTree = "<group>"; };
+		BC0E66761156CDA40094B477 /* blender_SolidLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SolidLight.h; sourceTree = "<group>"; };
+		BC0E66771156CDA40094B477 /* blender_SpaceAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceAction.h; sourceTree = "<group>"; };
+		BC0E66781156CDA40094B477 /* blender_SpaceButs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceButs.h; sourceTree = "<group>"; };
+		BC0E66791156CDA40094B477 /* blender_SpaceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceFile.h; sourceTree = "<group>"; };
+		BC0E667A1156CDA40094B477 /* blender_SpaceImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceImage.h; sourceTree = "<group>"; };
+		BC0E667B1156CDA40094B477 /* blender_SpaceImaSel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceImaSel.h; sourceTree = "<group>"; };
+		BC0E667C1156CDA40094B477 /* blender_SpaceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceInfo.h; sourceTree = "<group>"; };
+		BC0E667D1156CDA40094B477 /* blender_SpaceIpo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceIpo.h; sourceTree = "<group>"; };
+		BC0E667E1156CDA40094B477 /* blender_SpaceLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceLink.h; sourceTree = "<group>"; };
+		BC0E667F1156CDA40094B477 /* blender_SpaceNla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceNla.h; sourceTree = "<group>"; };
+		BC0E66801156CDA40094B477 /* blender_SpaceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceNode.h; sourceTree = "<group>"; };
+		BC0E66811156CDA40094B477 /* blender_SpaceOops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceOops.h; sourceTree = "<group>"; };
+		BC0E66821156CDA40094B477 /* blender_SpaceScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceScript.h; sourceTree = "<group>"; };
+		BC0E66831156CDA40094B477 /* blender_SpaceSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceSeq.h; sourceTree = "<group>"; };
+		BC0E66841156CDA40094B477 /* blender_SpaceSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceSound.h; sourceTree = "<group>"; };
+		BC0E66851156CDA40094B477 /* blender_SpaceText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceText.h; sourceTree = "<group>"; };
+		BC0E66861156CDA40094B477 /* blender_SpaceTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpaceTime.h; sourceTree = "<group>"; };
+		BC0E66871156CDA40094B477 /* blender_SpeedControlVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SpeedControlVars.h; sourceTree = "<group>"; };
+		BC0E66881156CDA40094B477 /* blender_Strip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Strip.h; sourceTree = "<group>"; };
+		BC0E66891156CDA40094B477 /* blender_StripColorBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_StripColorBalance.h; sourceTree = "<group>"; };
+		BC0E668A1156CDA40094B477 /* blender_StripCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_StripCrop.h; sourceTree = "<group>"; };
+		BC0E668B1156CDA40094B477 /* blender_StripElem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_StripElem.h; sourceTree = "<group>"; };
+		BC0E668C1156CDA40094B477 /* blender_StripProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_StripProxy.h; sourceTree = "<group>"; };
+		BC0E668D1156CDA40094B477 /* blender_StripTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_StripTransform.h; sourceTree = "<group>"; };
+		BC0E668E1156CDA40094B477 /* blender_SubsurfModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SubsurfModifierData.h; sourceTree = "<group>"; };
+		BC0E668F1156CDA40094B477 /* blender_SurfaceModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_SurfaceModifierData.h; sourceTree = "<group>"; };
+		BC0E66901156CDA40094B477 /* blender_Tex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Tex.h; sourceTree = "<group>"; };
+		BC0E66911156CDA40094B477 /* blender_TexMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TexMapping.h; sourceTree = "<group>"; };
+		BC0E66921156CDA40094B477 /* blender_TexNodeOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TexNodeOutput.h; sourceTree = "<group>"; };
+		BC0E66931156CDA40094B477 /* blender_Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Text.h; sourceTree = "<group>"; };
+		BC0E66941156CDA40094B477 /* blender_TextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TextBox.h; sourceTree = "<group>"; };
+		BC0E66951156CDA40094B477 /* blender_TextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TextLine.h; sourceTree = "<group>"; };
+		BC0E66961156CDA40094B477 /* blender_TextMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TextMarker.h; sourceTree = "<group>"; };
+		BC0E66971156CDA40094B477 /* blender_TFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TFace.h; sourceTree = "<group>"; };
+		BC0E66981156CDA40094B477 /* blender_ThemeSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ThemeSpace.h; sourceTree = "<group>"; };
+		BC0E66991156CDA40094B477 /* blender_ThemeUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ThemeUI.h; sourceTree = "<group>"; };
+		BC0E669A1156CDA40094B477 /* blender_ThemeWireColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ThemeWireColor.h; sourceTree = "<group>"; };
+		BC0E669B1156CDA40094B477 /* blender_TimeMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TimeMarker.h; sourceTree = "<group>"; };
+		BC0E669C1156CDA40094B477 /* blender_ToolSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_ToolSettings.h; sourceTree = "<group>"; };
+		BC0E669D1156CDA40094B477 /* blender_TransformOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TransformOrientation.h; sourceTree = "<group>"; };
+		BC0E669E1156CDA40094B477 /* blender_TransformVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TransformVars.h; sourceTree = "<group>"; };
+		BC0E669F1156CDA40094B477 /* blender_TreeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TreeStore.h; sourceTree = "<group>"; };
+		BC0E66A01156CDA40094B477 /* blender_TreeStoreElem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TreeStoreElem.h; sourceTree = "<group>"; };
+		BC0E66A11156CDA40094B477 /* blender_TStripElem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_TStripElem.h; sourceTree = "<group>"; };
+		BC0E66A21156CDA40094B477 /* blender_UserDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_UserDef.h; sourceTree = "<group>"; };
+		BC0E66A31156CDA40094B477 /* blender_UVProjectModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_UVProjectModifierData.h; sourceTree = "<group>"; };
+		BC0E66A41156CDA40094B477 /* blender_vec2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec2d.h; sourceTree = "<group>"; };
+		BC0E66A51156CDA40094B477 /* blender_vec2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec2f.h; sourceTree = "<group>"; };
+		BC0E66A61156CDA40094B477 /* blender_vec2i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec2i.h; sourceTree = "<group>"; };
+		BC0E66A71156CDA40094B477 /* blender_vec2s.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec2s.h; sourceTree = "<group>"; };
+		BC0E66A81156CDA40094B477 /* blender_vec3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec3d.h; sourceTree = "<group>"; };
+		BC0E66A91156CDA40094B477 /* blender_vec3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec3f.h; sourceTree = "<group>"; };
+		BC0E66AA1156CDA40094B477 /* blender_vec3i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec3i.h; sourceTree = "<group>"; };
+		BC0E66AB1156CDA40094B477 /* blender_vec4d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec4d.h; sourceTree = "<group>"; };
+		BC0E66AC1156CDA40094B477 /* blender_vec4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec4f.h; sourceTree = "<group>"; };
+		BC0E66AD1156CDA40094B477 /* blender_vec4i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_vec4i.h; sourceTree = "<group>"; };
+		BC0E66AE1156CDA40094B477 /* blender_VFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_VFont.h; sourceTree = "<group>"; };
+		BC0E66AF1156CDA40094B477 /* blender_View2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_View2D.h; sourceTree = "<group>"; };
+		BC0E66B01156CDA40094B477 /* blender_View3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_View3D.h; sourceTree = "<group>"; };
+		BC0E66B11156CDA40094B477 /* blender_Wave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_Wave.h; sourceTree = "<group>"; };
+		BC0E66B21156CDA40094B477 /* blender_WaveEff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_WaveEff.h; sourceTree = "<group>"; };
+		BC0E66B31156CDA40094B477 /* blender_WaveModifierData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_WaveModifierData.h; sourceTree = "<group>"; };
+		BC0E66B41156CDA40094B477 /* blender_WipeVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_WipeVars.h; sourceTree = "<group>"; };
+		BC0E66B51156CDA40094B477 /* blender_World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blender_World.h; sourceTree = "<group>"; };
+		BC0E670E1156D3B10094B477 /* BulletBlendReaderNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBlendReaderNew.h; sourceTree = "<group>"; };
+		BC0E670F1156D3B10094B477 /* BulletBlendReaderNew.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletBlendReaderNew.cpp; sourceTree = "<group>"; };
 		BC8517D510962CB800721ADB /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
 		BC8517D610962CB800721ADB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BC8517D710962CB800721ADB /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
@@ -603,6 +940,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BC0E670E1156D3B10094B477 /* BulletBlendReaderNew.h */,
+				BC0E670F1156D3B10094B477 /* BulletBlendReaderNew.cpp */,
 				BC8517F110962D8C00721ADB /* main.m */,
 				BC8517F010962D8C00721ADB /* Application.h */,
 				BC8517D510962CB800721ADB /* Application.mm */,
@@ -610,7 +949,8 @@
 				BC8517D810962CB800721ADB /* Delegate.mm */,
 				BC068DEF1096547200120032 /* OolongReadBlend.h */,
 				BC068DF01096547200120032 /* OolongReadBlend.mm */,
-				BC068E0E1096557000120032 /* ReadBlend */,
+				BC0E65761156CDA30094B477 /* autogenerated */,
+				BC068E0E1096557000120032 /* BlendParse */,
 				BC068DE0109650AC00120032 /* Bullet */,
 				BC8518C1109630F200721ADB /* Math */,
 				BC85185A10962E6C00721ADB /* Utility */,
@@ -1076,16 +1416,351 @@
 			name = Bullet;
 			sourceTree = "<group>";
 		};
-		BC068E0E1096557000120032 /* ReadBlend */ = {
+		BC068E0E1096557000120032 /* BlendParse */ = {
 			isa = PBXGroup;
 			children = (
-				BC068C261096508D00120032 /* abs-file.h */,
-				BC068C271096508D00120032 /* blendtype.h */,
-				BC068C281096508D00120032 /* BulletBlendReader.cpp */,
-				BC068C291096508D00120032 /* BulletBlendReader.h */,
-				BC068C2B1096508D00120032 /* readblend.h */,
+				BC0E65581156CD8F0094B477 /* bFile.h */,
+				BC0E65591156CD8F0094B477 /* bFile.cpp */,
+				BC0E655A1156CD8F0094B477 /* bDNA.h */,
+				BC0E655B1156CD8F0094B477 /* bDNA.cpp */,
+				BC0E655C1156CD8F0094B477 /* bDefines.h */,
+				BC0E655D1156CD8F0094B477 /* bCommon.h */,
+				BC0E655E1156CD8F0094B477 /* bChunk.h */,
+				BC0E655F1156CD8F0094B477 /* bChunk.cpp */,
+				BC0E65601156CD8F0094B477 /* dna249.cpp */,
+				BC0E65611156CD8F0094B477 /* dna249-64bit.cpp */,
+				BC0E65621156CD8F0094B477 /* bMain.h */,
+				BC0E65631156CD8F0094B477 /* bMain.cpp */,
+				BC0E65641156CD8F0094B477 /* bBlenderFile.h */,
+				BC0E65651156CD8F0094B477 /* bBlenderFile.cpp */,
 			);
-			name = ReadBlend;
+			name = BlendParse;
+			sourceTree = "<group>";
+		};
+		BC0E65761156CDA30094B477 /* autogenerated */ = {
+			isa = PBXGroup;
+			children = (
+				BC0E65771156CDA30094B477 /* blender.h */,
+				BC0E65781156CDA30094B477 /* blender_ArmatureModifierData.h */,
+				BC0E65791156CDA30094B477 /* blender_ArrayModifierData.h */,
+				BC0E657A1156CDA30094B477 /* blender_AudioData.h */,
+				BC0E657B1156CDA30094B477 /* blender_AviCodecData.h */,
+				BC0E657C1156CDA30094B477 /* blender_bAction.h */,
+				BC0E657D1156CDA30094B477 /* blender_bActionActuator.h */,
+				BC0E657E1156CDA30094B477 /* blender_bActionChannel.h */,
+				BC0E657F1156CDA30094B477 /* blender_bActionConstraint.h */,
+				BC0E65801156CDA30094B477 /* blender_bActionGroup.h */,
+				BC0E65811156CDA30094B477 /* blender_bActionModifier.h */,
+				BC0E65821156CDA30094B477 /* blender_bActionStrip.h */,
+				BC0E65831156CDA30094B477 /* blender_bActuator.h */,
+				BC0E65841156CDA30094B477 /* blender_bActuatorSensor.h */,
+				BC0E65851156CDA30094B477 /* blender_bAddObjectActuator.h */,
+				BC0E65861156CDA30094B477 /* blender_bArmature.h */,
+				BC0E65871156CDA30094B477 /* blender_Base.h */,
+				BC0E65881156CDA30094B477 /* blender_bCameraActuator.h */,
+				BC0E65891156CDA30094B477 /* blender_bCDActuator.h */,
+				BC0E658A1156CDA30094B477 /* blender_bChildOfConstraint.h */,
+				BC0E658B1156CDA30094B477 /* blender_bClampToConstraint.h */,
+				BC0E658C1156CDA30094B477 /* blender_bCollisionSensor.h */,
+				BC0E658D1156CDA30094B477 /* blender_bConstraint.h */,
+				BC0E658E1156CDA30094B477 /* blender_bConstraintActuator.h */,
+				BC0E658F1156CDA30094B477 /* blender_bConstraintChannel.h */,
+				BC0E65901156CDA30094B477 /* blender_bConstraintTarget.h */,
+				BC0E65911156CDA30094B477 /* blender_bController.h */,
+				BC0E65921156CDA30094B477 /* blender_bDeformGroup.h */,
+				BC0E65931156CDA30094B477 /* blender_bDelaySensor.h */,
+				BC0E65941156CDA30094B477 /* blender_bDistanceLimitConstraint.h */,
+				BC0E65951156CDA30094B477 /* blender_bDistLimitConstraint.h */,
+				BC0E65961156CDA30094B477 /* blender_bEditObjectActuator.h */,
+				BC0E65971156CDA30094B477 /* blender_BevelModifierData.h */,
+				BC0E65981156CDA30094B477 /* blender_bExpressionCont.h */,
+				BC0E65991156CDA30094B477 /* blender_BezTriple.h */,
+				BC0E659A1156CDA30094B477 /* blender_bFollowPathConstraint.h */,
+				BC0E659B1156CDA30094B477 /* blender_bGameActuator.h */,
+				BC0E659C1156CDA30094B477 /* blender_bGPdata.h */,
+				BC0E659D1156CDA30094B477 /* blender_bGPDframe.h */,
+				BC0E659E1156CDA30094B477 /* blender_bGPDlayer.h */,
+				BC0E659F1156CDA30094B477 /* blender_bGPDspoint.h */,
+				BC0E65A01156CDA30094B477 /* blender_bGPDstroke.h */,
+				BC0E65A11156CDA30094B477 /* blender_BGpic.h */,
+				BC0E65A21156CDA30094B477 /* blender_bGroupActuator.h */,
+				BC0E65A31156CDA30094B477 /* blender_bIpoActuator.h */,
+				BC0E65A41156CDA30094B477 /* blender_bJoystickSensor.h */,
+				BC0E65A51156CDA30094B477 /* blender_bKeyboardSensor.h */,
+				BC0E65A61156CDA30094B477 /* blender_bKinematicConstraint.h */,
+				BC0E65A71156CDA30094B477 /* blender_bLocateLikeConstraint.h */,
+				BC0E65A81156CDA30094B477 /* blender_bLockTrackConstraint.h */,
+				BC0E65A91156CDA30094B477 /* blender_bLocLimitConstraint.h */,
+				BC0E65AA1156CDA30094B477 /* blender_BMeshModifierData.h */,
+				BC0E65AB1156CDA30094B477 /* blender_bMessageActuator.h */,
+				BC0E65AC1156CDA30094B477 /* blender_bMessageSensor.h */,
+				BC0E65AD1156CDA30094B477 /* blender_bMinMaxConstraint.h */,
+				BC0E65AE1156CDA30094B477 /* blender_bMouseSensor.h */,
+				BC0E65AF1156CDA30094B477 /* blender_bNearSensor.h */,
+				BC0E65B01156CDA30094B477 /* blender_bNode.h */,
+				BC0E65B11156CDA30094B477 /* blender_bNodeLink.h */,
+				BC0E65B21156CDA30094B477 /* blender_bNodeSocket.h */,
+				BC0E65B31156CDA30094B477 /* blender_bNodeStack.h */,
+				BC0E65B41156CDA30094B477 /* blender_bNodeTree.h */,
+				BC0E65B51156CDA30094B477 /* blender_bObjectActuator.h */,
+				BC0E65B61156CDA30094B477 /* blender_Bone.h */,
+				BC0E65B71156CDA30094B477 /* blender_BooleanModifierData.h */,
+				BC0E65B81156CDA30094B477 /* blender_BoundBox.h */,
+				BC0E65B91156CDA30094B477 /* blender_bParentActuator.h */,
+				BC0E65BA1156CDA30094B477 /* blender_BPoint.h */,
+				BC0E65BB1156CDA30094B477 /* blender_bPose.h */,
+				BC0E65BC1156CDA30094B477 /* blender_bPoseChannel.h */,
+				BC0E65BD1156CDA30094B477 /* blender_bProperty.h */,
+				BC0E65BE1156CDA30094B477 /* blender_bPropertyActuator.h */,
+				BC0E65BF1156CDA30094B477 /* blender_bPropertySensor.h */,
+				BC0E65C01156CDA30094B477 /* blender_bPythonConstraint.h */,
+				BC0E65C11156CDA30094B477 /* blender_bPythonCont.h */,
+				BC0E65C21156CDA30094B477 /* blender_bRadarSensor.h */,
+				BC0E65C31156CDA30094B477 /* blender_bRandomActuator.h */,
+				BC0E65C41156CDA30094B477 /* blender_bRandomSensor.h */,
+				BC0E65C51156CDA30094B477 /* blender_bRaySensor.h */,
+				BC0E65C61156CDA30094B477 /* blender_bRigidBodyJointConstraint.h */,
+				BC0E65C71156CDA30094B477 /* blender_bRotateLikeConstraint.h */,
+				BC0E65C81156CDA30094B477 /* blender_bRotationConstraint.h */,
+				BC0E65C91156CDA30094B477 /* blender_bRotLimitConstraint.h */,
+				BC0E65CA1156CDA30094B477 /* blender_Brush.h */,
+				BC0E65CB1156CDA30094B477 /* blender_BrushClone.h */,
+				BC0E65CC1156CDA30094B477 /* blender_BrushData.h */,
+				BC0E65CD1156CDA30094B477 /* blender_bSceneActuator.h */,
+				BC0E65CE1156CDA30094B477 /* blender_bScreen.h */,
+				BC0E65CF1156CDA30094B477 /* blender_bSensor.h */,
+				BC0E65D01156CDA30094B477 /* blender_bShrinkwrapConstraint.h */,
+				BC0E65D11156CDA30094B477 /* blender_bSizeLikeConstraint.h */,
+				BC0E65D21156CDA30094B477 /* blender_bSizeLimitConstraint.h */,
+				BC0E65D31156CDA30094B477 /* blender_bSound.h */,
+				BC0E65D41156CDA30094B477 /* blender_bSoundActuator.h */,
+				BC0E65D51156CDA30094B477 /* blender_bSoundListener.h */,
+				BC0E65D61156CDA30094B477 /* blender_bStateActuator.h */,
+				BC0E65D71156CDA30094B477 /* blender_bStretchToConstraint.h */,
+				BC0E65D81156CDA30094B477 /* blender_bTheme.h */,
+				BC0E65D91156CDA30094B477 /* blender_bTouchSensor.h */,
+				BC0E65DA1156CDA30094B477 /* blender_bTrackToConstraint.h */,
+				BC0E65DB1156CDA30094B477 /* blender_bTransformConstraint.h */,
+				BC0E65DC1156CDA30094B477 /* blender_bTwoDFilterActuator.h */,
+				BC0E65DD1156CDA30094B477 /* blender_BuildEff.h */,
+				BC0E65DE1156CDA30094B477 /* blender_BuildModifierData.h */,
+				BC0E65DF1156CDA30094B477 /* blender_BulletSoftBody.h */,
+				BC0E65E01156CDA30094B477 /* blender_bVisibilityActuator.h */,
+				BC0E65E11156CDA30094B477 /* blender_Camera.h */,
+				BC0E65E21156CDA30094B477 /* blender_CastModifierData.h */,
+				BC0E65E31156CDA30094B477 /* blender_CBData.h */,
+				BC0E65E41156CDA30094B477 /* blender_CharInfo.h */,
+				BC0E65E51156CDA30094B477 /* blender_ChildParticle.h */,
+				BC0E65E61156CDA30094B477 /* blender_ClothCollSettings.h */,
+				BC0E65E71156CDA30094B477 /* blender_ClothModifierData.h */,
+				BC0E65E81156CDA30094B477 /* blender_ClothSimSettings.h */,
+				BC0E65E91156CDA30094B477 /* blender_CollisionModifierData.h */,
+				BC0E65EA1156CDA30094B477 /* blender_ColorBand.h */,
+				BC0E65EB1156CDA30094B477 /* blender_Common.h */,
+				BC0E65EC1156CDA30094B477 /* blender_Curve.h */,
+				BC0E65ED1156CDA30094B477 /* blender_CurveMap.h */,
+				BC0E65EE1156CDA30094B477 /* blender_CurveMapping.h */,
+				BC0E65EF1156CDA30094B477 /* blender_CurveMapPoint.h */,
+				BC0E65F01156CDA30094B477 /* blender_CurveModifierData.h */,
+				BC0E65F11156CDA30094B477 /* blender_CustomData.h */,
+				BC0E65F21156CDA30094B477 /* blender_CustomDataLayer.h */,
+				BC0E65F31156CDA30094B477 /* blender_DecimateModifierData.h */,
+				BC0E65F41156CDA30094B477 /* blender_DisplaceModifierData.h */,
+				BC0E65F51156CDA30094B477 /* blender_EdgeSplitModifierData.h */,
+				BC0E65F61156CDA30094B477 /* blender_Editing.h */,
+				BC0E65F71156CDA30094B477 /* blender_Effect.h */,
+				BC0E65F81156CDA30094B477 /* blender_EnvMap.h */,
+				BC0E65F91156CDA30094B477 /* blender_ExplodeModifierData.h */,
+				BC0E65FA1156CDA30094B477 /* blender_FFMpegCodecData.h */,
+				BC0E65FB1156CDA30094B477 /* blender_FileGlobal.h */,
+				BC0E65FC1156CDA30094B477 /* blender_FluidsimModifierData.h */,
+				BC0E65FD1156CDA30094B477 /* blender_FluidsimSettings.h */,
+				BC0E65FE1156CDA30094B477 /* blender_FreeCamera.h */,
+				BC0E65FF1156CDA30094B477 /* blender_GameFraming.h */,
+				BC0E66001156CDA30094B477 /* blender_GlowVars.h */,
+				BC0E66011156CDA30094B477 /* blender_Group.h */,
+				BC0E66021156CDA30094B477 /* blender_GroupObject.h */,
+				BC0E66031156CDA30094B477 /* blender_HairKey.h */,
+				BC0E66041156CDA30094B477 /* blender_HookModifierData.h */,
+				BC0E66051156CDA30094B477 /* blender_ID.h */,
+				BC0E66061156CDA30094B477 /* blender_IDProperty.h */,
+				BC0E66071156CDA30094B477 /* blender_IDPropertyData.h */,
+				BC0E66081156CDA30094B477 /* blender_Image.h */,
+				BC0E66091156CDA30094B477 /* blender_ImagePaintSettings.h */,
+				BC0E660A1156CDA30094B477 /* blender_ImageUser.h */,
+				BC0E660B1156CDA30094B477 /* blender_Ipo.h */,
+				BC0E660C1156CDA30094B477 /* blender_IpoCurve.h */,
+				BC0E660D1156CDA30094B477 /* blender_IpoDriver.h */,
+				BC0E660E1156CDA30094B477 /* blender_Key.h */,
+				BC0E660F1156CDA30094B477 /* blender_KeyBlock.h */,
+				BC0E66101156CDA30094B477 /* blender_Lamp.h */,
+				BC0E66111156CDA30094B477 /* blender_Lattice.h */,
+				BC0E66121156CDA30094B477 /* blender_LatticeModifierData.h */,
+				BC0E66131156CDA30094B477 /* blender_LBuf.h */,
+				BC0E66141156CDA30094B477 /* blender_Library.h */,
+				BC0E66151156CDA30094B477 /* blender_Link.h */,
+				BC0E66161156CDA30094B477 /* blender_LinkData.h */,
+				BC0E66171156CDA30094B477 /* blender_ListBase.h */,
+				BC0E66181156CDA30094B477 /* blender_MaskModifierData.h */,
+				BC0E66191156CDA30094B477 /* blender_Material.h */,
+				BC0E661A1156CDA30094B477 /* blender_MCol.h */,
+				BC0E661B1156CDA30094B477 /* blender_MDefCell.h */,
+				BC0E661C1156CDA30094B477 /* blender_MDefInfluence.h */,
+				BC0E661D1156CDA30094B477 /* blender_MDeformVert.h */,
+				BC0E661E1156CDA30094B477 /* blender_MDeformWeight.h */,
+				BC0E661F1156CDA30094B477 /* blender_MEdge.h */,
+				BC0E66201156CDA30094B477 /* blender_Mesh.h */,
+				BC0E66211156CDA30094B477 /* blender_MeshDeformModifierData.h */,
+				BC0E66221156CDA30094B477 /* blender_MetaBall.h */,
+				BC0E66231156CDA30094B477 /* blender_MetaElem.h */,
+				BC0E66241156CDA30094B477 /* blender_MetaStack.h */,
+				BC0E66251156CDA30094B477 /* blender_MFace.h */,
+				BC0E66261156CDA30094B477 /* blender_MFloatProperty.h */,
+				BC0E66271156CDA30094B477 /* blender_MIntProperty.h */,
+				BC0E66281156CDA30094B477 /* blender_MirrorModifierData.h */,
+				BC0E66291156CDA30094B477 /* blender_MLoopCol.h */,
+				BC0E662A1156CDA30094B477 /* blender_MLoopUV.h */,
+				BC0E662B1156CDA30094B477 /* blender_ModifierData.h */,
+				BC0E662C1156CDA30094B477 /* blender_MSelect.h */,
+				BC0E662D1156CDA30094B477 /* blender_MSticky.h */,
+				BC0E662E1156CDA30094B477 /* blender_MStringProperty.h */,
+				BC0E662F1156CDA30094B477 /* blender_MTex.h */,
+				BC0E66301156CDA30094B477 /* blender_MTexPoly.h */,
+				BC0E66311156CDA30094B477 /* blender_MTFace.h */,
+				BC0E66321156CDA30094B477 /* blender_Multires.h */,
+				BC0E66331156CDA30094B477 /* blender_MultiresCol.h */,
+				BC0E66341156CDA30094B477 /* blender_MultiresColFace.h */,
+				BC0E66351156CDA30094B477 /* blender_MultiresEdge.h */,
+				BC0E66361156CDA30094B477 /* blender_MultiresFace.h */,
+				BC0E66371156CDA30094B477 /* blender_MultiresLevel.h */,
+				BC0E66381156CDA30094B477 /* blender_MVert.h */,
+				BC0E66391156CDA30094B477 /* blender_NodeBilateralBlurData.h */,
+				BC0E663A1156CDA30094B477 /* blender_NodeBlurData.h */,
+				BC0E663B1156CDA40094B477 /* blender_NodeChroma.h */,
+				BC0E663C1156CDA40094B477 /* blender_NodeDBlurData.h */,
+				BC0E663D1156CDA40094B477 /* blender_NodeDefocus.h */,
+				BC0E663E1156CDA40094B477 /* blender_NodeGeometry.h */,
+				BC0E663F1156CDA40094B477 /* blender_NodeGlare.h */,
+				BC0E66401156CDA40094B477 /* blender_NodeHueSat.h */,
+				BC0E66411156CDA40094B477 /* blender_NodeImageAnim.h */,
+				BC0E66421156CDA40094B477 /* blender_NodeImageFile.h */,
+				BC0E66431156CDA40094B477 /* blender_NodeLensDist.h */,
+				BC0E66441156CDA40094B477 /* blender_NodeScriptDict.h */,
+				BC0E66451156CDA40094B477 /* blender_NodeTonemap.h */,
+				BC0E66461156CDA40094B477 /* blender_NodeTwoFloats.h */,
+				BC0E66471156CDA40094B477 /* blender_NodeTwoXYs.h */,
+				BC0E66481156CDA40094B477 /* blender_NodeVertexCol.h */,
+				BC0E66491156CDA40094B477 /* blender_Nurb.h */,
+				BC0E664A1156CDA40094B477 /* blender_ObHook.h */,
+				BC0E664B1156CDA40094B477 /* blender_Object.h */,
+				BC0E664C1156CDA40094B477 /* blender_OcInfo.h */,
+				BC0E664D1156CDA40094B477 /* blender_Oops.h */,
+				BC0E664E1156CDA40094B477 /* blender_OrigSpaceFace.h */,
+				BC0E664F1156CDA40094B477 /* blender_PackedFile.h */,
+				BC0E66501156CDA40094B477 /* blender_Panel.h */,
+				BC0E66511156CDA40094B477 /* blender_PartDeflect.h */,
+				BC0E66521156CDA40094B477 /* blender_PartEff.h */,
+				BC0E66531156CDA40094B477 /* blender_PartialVisibility.h */,
+				BC0E66541156CDA40094B477 /* blender_ParticleBrushData.h */,
+				BC0E66551156CDA40094B477 /* blender_ParticleData.h */,
+				BC0E66561156CDA40094B477 /* blender_ParticleEditSettings.h */,
+				BC0E66571156CDA40094B477 /* blender_ParticleInstanceModifierData.h */,
+				BC0E66581156CDA40094B477 /* blender_ParticleKey.h */,
+				BC0E66591156CDA40094B477 /* blender_ParticleSettings.h */,
+				BC0E665A1156CDA40094B477 /* blender_ParticleSystem.h */,
+				BC0E665B1156CDA40094B477 /* blender_ParticleSystemModifierData.h */,
+				BC0E665C1156CDA40094B477 /* blender_PluginSeq.h */,
+				BC0E665D1156CDA40094B477 /* blender_PluginTex.h */,
+				BC0E665E1156CDA40094B477 /* blender_PointCache.h */,
+				BC0E665F1156CDA40094B477 /* blender_PreviewImage.h */,
+				BC0E66601156CDA40094B477 /* blender_QuicktimeCodecData.h */,
+				BC0E66611156CDA40094B477 /* blender_Radio.h */,
+				BC0E66621156CDA40094B477 /* blender_rctf.h */,
+				BC0E66631156CDA40094B477 /* blender_rcti.h */,
+				BC0E66641156CDA40094B477 /* blender_RenderData.h */,
+				BC0E66651156CDA40094B477 /* blender_RenderProfile.h */,
+				BC0E66661156CDA40094B477 /* blender_SBVertex.h */,
+				BC0E66671156CDA40094B477 /* blender_Scene.h */,
+				BC0E66681156CDA40094B477 /* blender_SceneRenderLayer.h */,
+				BC0E66691156CDA40094B477 /* blender_ScrArea.h */,
+				BC0E666A1156CDA40094B477 /* blender_ScrEdge.h */,
+				BC0E666B1156CDA40094B477 /* blender_Script.h */,
+				BC0E666C1156CDA40094B477 /* blender_ScriptLink.h */,
+				BC0E666D1156CDA40094B477 /* blender_ScrVert.h */,
+				BC0E666E1156CDA40094B477 /* blender_SculptData.h */,
+				BC0E666F1156CDA40094B477 /* blender_Sequence.h */,
+				BC0E66701156CDA40094B477 /* blender_ShrinkwrapModifierData.h */,
+				BC0E66711156CDA40094B477 /* blender_SimpleDeformModifierData.h */,
+				BC0E66721156CDA40094B477 /* blender_SmoothModifierData.h */,
+				BC0E66731156CDA40094B477 /* blender_SoftBody.h */,
+				BC0E66741156CDA40094B477 /* blender_SoftbodyModifierData.h */,
+				BC0E66751156CDA40094B477 /* blender_SolidColorVars.h */,
+				BC0E66761156CDA40094B477 /* blender_SolidLight.h */,
+				BC0E66771156CDA40094B477 /* blender_SpaceAction.h */,
+				BC0E66781156CDA40094B477 /* blender_SpaceButs.h */,
+				BC0E66791156CDA40094B477 /* blender_SpaceFile.h */,
+				BC0E667A1156CDA40094B477 /* blender_SpaceImage.h */,
+				BC0E667B1156CDA40094B477 /* blender_SpaceImaSel.h */,
+				BC0E667C1156CDA40094B477 /* blender_SpaceInfo.h */,
+				BC0E667D1156CDA40094B477 /* blender_SpaceIpo.h */,
+				BC0E667E1156CDA40094B477 /* blender_SpaceLink.h */,
+				BC0E667F1156CDA40094B477 /* blender_SpaceNla.h */,
+				BC0E66801156CDA40094B477 /* blender_SpaceNode.h */,
+				BC0E66811156CDA40094B477 /* blender_SpaceOops.h */,
+				BC0E66821156CDA40094B477 /* blender_SpaceScript.h */,
+				BC0E66831156CDA40094B477 /* blender_SpaceSeq.h */,
+				BC0E66841156CDA40094B477 /* blender_SpaceSound.h */,
+				BC0E66851156CDA40094B477 /* blender_SpaceText.h */,
+				BC0E66861156CDA40094B477 /* blender_SpaceTime.h */,
+				BC0E66871156CDA40094B477 /* blender_SpeedControlVars.h */,
+				BC0E66881156CDA40094B477 /* blender_Strip.h */,
+				BC0E66891156CDA40094B477 /* blender_StripColorBalance.h */,
+				BC0E668A1156CDA40094B477 /* blender_StripCrop.h */,
+				BC0E668B1156CDA40094B477 /* blender_StripElem.h */,
+				BC0E668C1156CDA40094B477 /* blender_StripProxy.h */,
+				BC0E668D1156CDA40094B477 /* blender_StripTransform.h */,
+				BC0E668E1156CDA40094B477 /* blender_SubsurfModifierData.h */,
+				BC0E668F1156CDA40094B477 /* blender_SurfaceModifierData.h */,
+				BC0E66901156CDA40094B477 /* blender_Tex.h */,
+				BC0E66911156CDA40094B477 /* blender_TexMapping.h */,
+				BC0E66921156CDA40094B477 /* blender_TexNodeOutput.h */,
+				BC0E66931156CDA40094B477 /* blender_Text.h */,
+				BC0E66941156CDA40094B477 /* blender_TextBox.h */,
+				BC0E66951156CDA40094B477 /* blender_TextLine.h */,
+				BC0E66961156CDA40094B477 /* blender_TextMarker.h */,
+				BC0E66971156CDA40094B477 /* blender_TFace.h */,
+				BC0E66981156CDA40094B477 /* blender_ThemeSpace.h */,
+				BC0E66991156CDA40094B477 /* blender_ThemeUI.h */,
+				BC0E669A1156CDA40094B477 /* blender_ThemeWireColor.h */,
+				BC0E669B1156CDA40094B477 /* blender_TimeMarker.h */,
+				BC0E669C1156CDA40094B477 /* blender_ToolSettings.h */,
+				BC0E669D1156CDA40094B477 /* blender_TransformOrientation.h */,
+				BC0E669E1156CDA40094B477 /* blender_TransformVars.h */,
+				BC0E669F1156CDA40094B477 /* blender_TreeStore.h */,
+				BC0E66A01156CDA40094B477 /* blender_TreeStoreElem.h */,
+				BC0E66A11156CDA40094B477 /* blender_TStripElem.h */,
+				BC0E66A21156CDA40094B477 /* blender_UserDef.h */,
+				BC0E66A31156CDA40094B477 /* blender_UVProjectModifierData.h */,
+				BC0E66A41156CDA40094B477 /* blender_vec2d.h */,
+				BC0E66A51156CDA40094B477 /* blender_vec2f.h */,
+				BC0E66A61156CDA40094B477 /* blender_vec2i.h */,
+				BC0E66A71156CDA40094B477 /* blender_vec2s.h */,
+				BC0E66A81156CDA40094B477 /* blender_vec3d.h */,
+				BC0E66A91156CDA40094B477 /* blender_vec3f.h */,
+				BC0E66AA1156CDA40094B477 /* blender_vec3i.h */,
+				BC0E66AB1156CDA40094B477 /* blender_vec4d.h */,
+				BC0E66AC1156CDA40094B477 /* blender_vec4f.h */,
+				BC0E66AD1156CDA40094B477 /* blender_vec4i.h */,
+				BC0E66AE1156CDA40094B477 /* blender_VFont.h */,
+				BC0E66AF1156CDA40094B477 /* blender_View2D.h */,
+				BC0E66B01156CDA40094B477 /* blender_View3D.h */,
+				BC0E66B11156CDA40094B477 /* blender_Wave.h */,
+				BC0E66B21156CDA40094B477 /* blender_WaveEff.h */,
+				BC0E66B31156CDA40094B477 /* blender_WaveModifierData.h */,
+				BC0E66B41156CDA40094B477 /* blender_WipeVars.h */,
+				BC0E66B51156CDA40094B477 /* blender_World.h */,
+			);
+			path = autogenerated;
 			sourceTree = "<group>";
 		};
 		BC8517F710962DA500721ADB /* Renderer */ = {
@@ -1376,7 +2051,6 @@
 				BC8518DB109630F200721ADB /* matrix_impl.cpp in Sources */,
 				BC8518DC109630F200721ADB /* utility_impl.cpp in Sources */,
 				BC8519B9109631B700721ADB /* EAGLView.m in Sources */,
-				BC068C2C1096508D00120032 /* BulletBlendReader.cpp in Sources */,
 				BC068D681096509E00120032 /* btAxisSweep3.cpp in Sources */,
 				BC068D691096509E00120032 /* btBroadphaseProxy.cpp in Sources */,
 				BC068D6A1096509E00120032 /* btCollisionAlgorithm.cpp in Sources */,
@@ -1498,6 +2172,14 @@
 				BC068DDE1096509E00120032 /* btGeometryUtil.cpp in Sources */,
 				BC068DDF1096509E00120032 /* btQuickprof.cpp in Sources */,
 				BC068DF11096547200120032 /* OolongReadBlend.mm in Sources */,
+				BC0E65661156CD8F0094B477 /* bFile.cpp in Sources */,
+				BC0E65671156CD8F0094B477 /* bDNA.cpp in Sources */,
+				BC0E65681156CD8F0094B477 /* bChunk.cpp in Sources */,
+				BC0E65691156CD8F0094B477 /* dna249.cpp in Sources */,
+				BC0E656A1156CD8F0094B477 /* dna249-64bit.cpp in Sources */,
+				BC0E656B1156CD8F0094B477 /* bMain.cpp in Sources */,
+				BC0E656C1156CD8F0094B477 /* bBlenderFile.cpp in Sources */,
+				BC0E67101156D3B10094B477 /* BulletBlendReaderNew.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

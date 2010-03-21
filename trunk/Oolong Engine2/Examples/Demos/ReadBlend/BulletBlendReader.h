@@ -227,7 +227,7 @@ struct	btLogicManager
 
 
 
-typedef btHashKey<int> btHashInt;
+//typedef btHashKey<int> btHashInt;
 
 class	BulletBlendReader
 {

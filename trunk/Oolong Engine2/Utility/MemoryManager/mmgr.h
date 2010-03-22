@@ -37,7 +37,7 @@
 #ifdef __APPLE__
 #include <TargetConditionals.h>
 
-#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1) && (!_NOMEMORYMANAGER))
+#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1) && defined(USEMEMORYMANAGER))
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 // For systems that don't have the __FUNCTION__ variable, we can just define it here
@@ -151,7 +151,6 @@ void	*operator new[](size_t reportedSize, const char *sourceFile, int sourceLine
 void	operator delete(void *reportedAddress);
 void	operator delete[](void *reportedAddress);
 
-#endif // _H_MMGR
 
 // ---------------------------------------------------------------------------------------------------------------------------------
 // Macros -- "Kids, please don't try this at home. We're trained professionals here." :)
@@ -168,5 +167,9 @@ void	operator delete[](void *reportedAddress);
 // ---------------------------------------------------------------------------------------------------------------------------------
 // mmgr.h - End of file
 // ---------------------------------------------------------------------------------------------------------------------------------
-#endif
-#endif
+#endif//USEMEMORYMANAGER
+#endif//__APPLE__
+#endif // _H_MMGR
+
+
+

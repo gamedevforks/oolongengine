@@ -78,7 +78,7 @@
 #ifdef __APPLE__
 #include <TargetConditionals.h>
 
-#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1) && (!_NOMEMORYMANAGER))
+#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1) && (USEMEMORYMANAGER))
 
 
 //#include "stdafx.h"

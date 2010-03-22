@@ -6,7 +6,7 @@
 
 #include "../Utility/MemoryManager/MemoryTemplates.h"
 
-#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1) && (!_NOMEMORYMANAGER))
+#if((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1) && (USEMEMORYMANAGER))
 #include "../Utility/MemoryManager/mmgr.h"
 #else
 #include "../Utility/MemoryManager/nommgr.h"

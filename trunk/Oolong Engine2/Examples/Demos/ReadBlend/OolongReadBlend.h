@@ -56,6 +56,8 @@ public:
 		
 	btTransform m_cameraTrans;
 	
+	BasicTexture*	m_notFoundTexture;
+	
 	BasicTexture* findTexture(const char* fileName);
 	
 	OolongBulletBlendReader(class btDynamicsWorld* destinationWorld);

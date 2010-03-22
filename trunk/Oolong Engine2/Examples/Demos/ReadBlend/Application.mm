@@ -99,6 +99,8 @@ bool CShell::InitApplication()
 	
 	FILE* file = 0;
 	
+	
+	
 	char* name="PhysicsAnimationBakingDemo.blend";
 	//char* name="Ragdoll.blend";
 

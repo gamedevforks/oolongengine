@@ -84,10 +84,21 @@ struct BasicTexture
 	int				m_height;
 	GLuint			m_textureName;
 	bool			m_initialized;
+	GLint			m_pixelColorComponents;
 	
 	//contains the uncompressed R8G8B8 pixel data
 	unsigned char*	m_output;
-	
+
+	BasicTexture(unsigned char* textureData,int width,int height)
+	:m_jpgData(0),
+	m_jpgSize(0),
+	m_width(width),
+	m_height(height),
+	m_output(textureData),
+	m_initialized(false)
+	{
+		m_pixelColorComponents = GL_RGB;
+	}		
 	
 	BasicTexture(unsigned char* jpgData,int jpgSize)
 	: m_jpgData(jpgData),
@@ -96,7 +107,7 @@ struct BasicTexture
 	m_textureName(-1),
 	m_initialized(false)
 	{
-		
+		m_pixelColorComponents = GL_RGBA;
 	}
 	
 	virtual ~BasicTexture()
@@ -137,7 +148,7 @@ struct BasicTexture
 			glBindTexture(GL_TEXTURE_2D,m_textureName);
 			
 //			gluBuild2DMipmaps(GL_TEXTURE_2D,3,m_width,m_height,GL_RGB,GL_UNSIGNED_BYTE,m_output);
-			glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,m_width,m_height,0,GL_RGBA,GL_UNSIGNED_BYTE,m_output);
+			glTexImage2D(GL_TEXTURE_2D,0,m_pixelColorComponents,m_width,m_height,0,m_pixelColorComponents,GL_UNSIGNED_BYTE,m_output);
 			
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -348,6 +359,7 @@ void GfxObject::render()
 OolongBulletBlendReader::OolongBulletBlendReader(class btDynamicsWorld* destinationWorld)
 :BulletBlendReaderNew(destinationWorld)
 {
+	m_notFoundTexture=0;
 	m_cameraTrans.setIdentity();
 }
 	
@@ -614,6 +626,33 @@ void*	OolongBulletBlendReader::createGraphicsObject(Blender::Object* tmpObject, 
 					m_textures.insert(fileName,texture0);
 				}
 			}
+		}
+		
+		if (!texture0)
+		{
+			if (!m_notFoundTexture)
+			{
+				int width=256;
+				int height=256;
+				unsigned char*  imageData=new unsigned char[256*256*3];
+				for(int y=0;y<256;++y)
+				{
+					const int       t=y>>4;
+					unsigned char*  pi=imageData+y*256*3;
+					for(int x=0;x<256;++x)
+					{
+						const int               s=x>>4;
+						const unsigned char     b=180;
+						unsigned char                   c=b+((s+t&1)&1)*(255-b);
+						pi[0]= 255;
+						pi[1]=pi[2]=c;pi+=3;
+					}
+				}
+				
+				m_notFoundTexture = new BasicTexture(imageData,width,height);
+				
+			}
+			texture0 = m_notFoundTexture;
 		}
 		
 		if (texture0 && mesh)

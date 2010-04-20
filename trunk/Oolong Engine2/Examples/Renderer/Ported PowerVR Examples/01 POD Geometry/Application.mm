@@ -67,6 +67,7 @@ bool CShell::InitApplication()
 {
 	AppDisplayText = (CDisplayText*)malloc(sizeof(CDisplayText));    
 	memset(AppDisplayText, 0, sizeof(CDisplayText));
+	
 	Textures = (CTexture*)malloc(sizeof(CTexture));
 	memset(Textures, 0, sizeof(CTexture));
 	

@@ -19,6 +19,8 @@ subject to the following restrictions:
 #include <stdio.h>
 #include <string.h>
 
+
+#include "DeviceType.h"
 #include "Mathematics.h"
 #include "Geometry.h"
 #include "Macros.h"
@@ -50,8 +52,6 @@ extern int __OPENGLES_VERSION;
 
 float WindowWidth = 320.0f;
 float WindowHeight = 480.0f;
-
-
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 // This ties in with the shader attribute to link to openGL, see pszVertShader.
@@ -87,6 +87,7 @@ void main(void)																\
 	gl_FragColor = texture2D(s_texture, v_textureCoord) * v_color;			\
 }																			\
 ";
+
 
 #endif
 
@@ -145,7 +146,7 @@ CDisplayText::~CDisplayText()
 bool CDisplayText::SetTextures(
 	const unsigned int	dwScreenX,
 	const unsigned int	dwScreenY,
-	bool			bRotate ) 
+	bool			bRotate) 
 {
 #if !defined (DISABLE_DISPLAYTEXT)
 
@@ -153,14 +154,30 @@ bool CDisplayText::SetTextures(
 	bool			bStatus;
 
 	bScreenRotate = bRotate; 
-	
+	//bScreenRotate = false;
 	if( bRotate ) {
-		WindowWidth = 480;
-		WindowHeight = 320;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+		if (GetDeviceType()==IPAD_DEVICE)
+		{
+			WindowWidth = 1024;
+			WindowHeight = 768;
+		}
+		else 
+#endif
+		{
+			WindowWidth = 480;
+			WindowHeight = 320;
+		}
+
 	}
 	else {
-		WindowWidth = 320;
-		WindowHeight = 480;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+		if (GetDeviceType()==IPAD_DEVICE)
+		{
+			WindowWidth = 768;
+			WindowHeight = 1024;
+		}
+#endif
 	}
 	/* Set the aspect ratio, so we can change it without updating textures or anything else */
 	m_fScreenScale[0] = (float)dwScreenX/WindowWidth;
@@ -1010,7 +1027,7 @@ void CDisplayText::GetSize(
 		}
 
 		if(pfHeight)
-			*pfHeight = m_fScreenScale[1] * fScale * 27.0f * (100.0f / 480.0f);
+			*pfHeight = m_fScreenScale[1] * fScale * 27.0f * (100.0f / WindowWidth);//CHANGED THIS>>>>480.0f);
 	}
 	else /* System font */
 	{
@@ -1028,7 +1045,7 @@ void CDisplayText::GetSize(
 			if(Val>='0' && Val <= '9')
 				Val = '0'; /* That's for fixing the number width */
 
-			fSize += DisplayTextSize_System[Val]  * fScale * (100.0f / 480.0f);
+			fSize += DisplayTextSize_System[Val]  * fScale * (100.0f / WindowWidth);//CHANGED THIS>>>>>480.0f);
 			Val = *sString++;
 		}
 
@@ -1185,6 +1202,10 @@ unsigned int CDisplayText::UpdateLine(const unsigned int dwWin, const float fZPo
 
 	XPos *= m_fScreenScale[0];
 	YPos *= m_fScreenScale[1];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+	if(GetDeviceType()==IPAD_DEVICE)
+		YPos /=2.0f;
+#endif
 
 	fPreXPos = XPos;
 
@@ -1604,12 +1625,16 @@ void CDisplayText::Rotate(SDisplayTextAPIVertex * const pv, const unsigned int n
 {
 	unsigned int	i;
 	VERTTYPE		x, y;
+	
 
 	for(i = 0; i < nCnt; ++i)
 	{
 		x = VERTTYPEDIV((VERTTYPE&)pv[i].sx, f2vt(WindowWidth * m_fScreenScale[0]));
 		y = VERTTYPEDIV((VERTTYPE&)pv[i].sy, f2vt(WindowHeight * m_fScreenScale[1]));
-		(VERTTYPE&)pv[i].sx = VERTTYPEMUL(y, f2vt(WindowWidth * m_fScreenScale[0]));
-		(VERTTYPE&)pv[i].sy = VERTTYPEMUL(f2vt(1.0f) - x, f2vt(WindowHeight * m_fScreenScale[1]));
+		
+		(VERTTYPE&)pv[i].sx = VERTTYPEMUL(-y+f2vt(1.0f), f2vt(WindowWidth * m_fScreenScale[0]));
+		(VERTTYPE&)pv[i].sy = VERTTYPEMUL(x, f2vt(WindowHeight * m_fScreenScale[1]));
+		//(VERTTYPE&)pv[i].sx = VERTTYPEMUL(y, f2vt(WindowWidth * m_fScreenScale[0]));
+		//(VERTTYPE&)pv[i].sy = VERTTYPEMUL(f2vt(1.0f) - x, f2vt(WindowHeight * m_fScreenScale[1]));
 	}
 }

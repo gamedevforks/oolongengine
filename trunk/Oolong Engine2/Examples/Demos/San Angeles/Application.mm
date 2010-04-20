@@ -26,6 +26,7 @@ subject to the following restrictions:
 #include "Macros.h"
 #include "Timing.h"
 #include "MemoryManager.h"
+#include "DeviceType.h"
 
 #include "demo.h"
 
@@ -97,7 +98,15 @@ bool CShell::RenderScene()
 
     unsigned long TickCount = (unsigned long)((currentTime.tv_sec - startTime.tv_sec) * 1000)
             + (unsigned long)((currentTime.tv_usec - startTime.tv_usec) / 1000);
-	appRender(TickCount, 480, 320);
+	
+	//if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+	if(GetDeviceType()==IPAD_DEVICE)
+		appRender(TickCount, 1024, 768);
+	else 
+#endif
+		appRender(TickCount, 480, 320);
+
 
 	if (currentTime.tv_usec - time.tv_usec) 
 	{

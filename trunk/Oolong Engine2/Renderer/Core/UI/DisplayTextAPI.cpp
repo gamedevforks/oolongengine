@@ -87,16 +87,16 @@ int CDisplayText::Flush()
 
 	_ASSERT((m_nVtxCache % 4) == 0);
 	_ASSERT(m_nVtxCache <= m_nVtxCacheMax);
-
+	
+	
 	/* Save render states */
 	APIRenderStates(0);
-	
+
 	/* Set font texture */
-	glBindTexture(GL_TEXTURE_2D, m_pAPI->uTexture[0]);
-	
+	glBindTexture(GL_TEXTURE_2D, m_pAPI->uTexture[0]);	
 
 	/* Set blending mode */
-//	glEnable(GL_BLEND);
+	//glEnable(GL_BLEND);
 
 	nTrisTot = m_nVtxCache >> 1;
 
@@ -127,10 +127,10 @@ int CDisplayText::Flush()
 			
 			glEnableVertexAttribArray(2);
 			glVertexAttribPointer(2, 2, VERTTYPEENUM, GL_FALSE, sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].tu);
-			
+
 			if (glGetError())
 			{
-				//_RPT0(_CRT_WARN,"\n");
+				_RPT0(_CRT_WARN,"Error while binding bufer for CDisplayText::Flush\n");
 			}
 		}
 		else 
@@ -192,8 +192,6 @@ int CDisplayText::Flush()
 		}
 	#endif
 	}
-
-
 
 	/* Restore render states */
 	APIRenderStates(1);
@@ -397,6 +395,7 @@ void CDisplayText::DrawBackgroundWindowUP(unsigned int dwWin, SDisplayTextAPIVer
 	glTexCoordPointer(2,	VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &pVtx[0].tu);
 
 	/* Draw triangles */
+	
 	glDrawElements(GL_TRIANGLES, 18*3, GL_UNSIGNED_SHORT, c_pwFacesWindow);
 	if (glGetError())
 	{
@@ -460,7 +459,7 @@ void CDisplayText::APIRenderStates(int nAction)
 		
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
-			glBindBuffer( GL_ARRAY_BUFFER, 0 );
+			//glBindBuffer( GL_ARRAY_BUFFER, 0 );
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
 		}
 		else 
@@ -473,9 +472,8 @@ void CDisplayText::APIRenderStates(int nAction)
 			glPushMatrix();
 			glMatrixMode(GL_PROJECTION);
 			glPushMatrix();
-		}
-
-
+		}		
+			
 		/******************************
 		** SET DisplayText RENDER STATES **
 		******************************/
@@ -490,11 +488,14 @@ void CDisplayText::APIRenderStates(int nAction)
 		}
 		Matrix.f[0] =	f2vt(2.0f/(m_fScreenScale[0]*WindowWidth));
 		Matrix.f[5] =	f2vt(-2.0f/(m_fScreenScale[1]*WindowHeight));
+
+		
 		Matrix.f[10] = f2vt(1.0f);
 		Matrix.f[12] = f2vt(-1.0f);
 		Matrix.f[13] = f2vt(1.0f);
 		Matrix.f[15] = f2vt(1.0f);
-
+			
+			
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 			glUseProgram(uiProgramObject);
@@ -508,11 +509,12 @@ void CDisplayText::APIRenderStates(int nAction)
 			glLoadIdentity();
 
 			glMatrixMode(GL_MODELVIEW);
+			
 			glLoadMatrixf(Matrix.f);
 			glDisable(GL_LIGHTING);
 		}
+					
 			
-
 		/* Culling */
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CW);
@@ -520,6 +522,7 @@ void CDisplayText::APIRenderStates(int nAction)
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
+			glActiveTexture(GL_TEXTURE0);
 			glUniform1i( TextureHandle, 0 );
 		}
 		else 		
@@ -537,10 +540,7 @@ void CDisplayText::APIRenderStates(int nAction)
 			glActiveTexture(GL_TEXTURE0);
 			glEnable(GL_TEXTURE_2D);
 		}
-			
 
-
-			
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
@@ -560,8 +560,8 @@ void CDisplayText::APIRenderStates(int nAction)
 		glDisable(GL_DEPTH_TEST);
 
 		// Disable vertex program
-//		glDisable(GL_IMG_vertex_program);
-
+//		glDisable(GL_IMG_vertex_program);			
+			
 		break;
 
 	case 1:
@@ -692,7 +692,7 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		MatrixIdentity(mx);
 		if(bScreenRotate)
 		{
-			MatrixRotationZ( mx, -90.0 * PIf /180.0f );
+			MatrixRotationZ( mx, 90.0 * PIf /180.0f );
 		}
 		glUseProgram(uiProgramObject);
 		glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, mx.f);
@@ -702,7 +702,8 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		glBindTexture(GL_TEXTURE_2D, tex);
 	}
 	else 
-#else
+#endif		
+//#else
 	{	
 		//Matrices
 		glMatrixMode(GL_PROJECTION);
@@ -712,13 +713,13 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		glLoadIdentity();
 		if(bScreenRotate)
 		{
-			glRotatef(f2vt(90), f2vt(0), f2vt(0), f2vt(1));
+			glRotatef(f2vt(-90), f2vt(0), f2vt(0), f2vt(1));
 		}
 		glActiveTexture(GL_TEXTURE0);
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
 	}
-#endif
+//#endif
 	
 
 

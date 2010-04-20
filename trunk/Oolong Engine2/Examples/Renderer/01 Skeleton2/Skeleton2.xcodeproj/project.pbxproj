@@ -14,6 +14,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		651B1CAD1178EC2F00C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B1CAC1178EC2F00C027B2 /* DeviceType.mm */; };
 		6585D59A1007DF7400FC1E9C /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6585D5991007DF7400FC1E9C /* ResourcePath.mm */; };
 		65AC4F9A0FFC10C0005A894A /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 65AC4F990FFC10C0005A894A /* Shader.mm */; };
 		65B1D10B0FFBE815006AAE64 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1D1050FFBE815006AAE64 /* EAGLView2.m */; };
@@ -52,6 +53,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		651B1CAB1178EC2F00C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B1CAC1178EC2F00C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		6585D5981007DF7400FC1E9C /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
 		6585D5991007DF7400FC1E9C /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		65AC4F980FFC10C0005A894A /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 				2D500B6F0D5A793600DBA0E3 /* Support */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B18911173905E00C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -185,6 +189,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				651B1CAA1178EC2F00C027B2 /* DeviceType */,
 				6585D5961007DF5E00FC1E9C /* Path */,
 				79F0FED80EDF309100102B0B /* Timing */,
 				79317F250EDE50EB00247E3D /* MemoryManager */,
@@ -201,6 +206,23 @@
 			);
 			name = Support;
 			sourceTree = "<group>";
+		};
+		651B18911173905E00C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
+		651B1CAA1178EC2F00C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B1CAB1178EC2F00C027B2 /* DeviceType.h */,
+				651B1CAC1178EC2F00C027B2 /* DeviceType.mm */,
+			);
+			name = DeviceType;
+			path = ../../../Utility/DeviceType;
+			sourceTree = SOURCE_ROOT;
 		};
 		6585D5961007DF5E00FC1E9C /* Path */ = {
 			isa = PBXGroup;
@@ -446,6 +468,7 @@
 				65AC4F9A0FFC10C0005A894A /* Shader.mm in Sources */,
 				6585D59A1007DF7400FC1E9C /* ResourcePath.mm in Sources */,
 				D0DA0DF51021105400E8EA79 /* neon_matrix_impl.cpp in Sources */,
+				651B1CAD1178EC2F00C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +480,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -477,9 +500,13 @@
 				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton2;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "C097EB91-1235-4003-A704-2E744AC4B277";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -489,7 +516,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -506,8 +533,12 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton2;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -529,9 +560,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
+				GCC_MODEL_TUNING = "";
 				GCC_PREPROCESSOR_DEFINITIONS = _OPENGLES20;
 				HEADER_SEARCH_PATHS = ../../../Include;
-				SDKROOT = iphonesimulator3.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PROVISIONING_PROFILE = "D1FC50A7-822A-4A61-BDE7-F638D3A21CBC";
+				SDKROOT = iphoneos3.2;
 			};
 			name = Release;
 		};

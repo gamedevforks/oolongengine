@@ -14,6 +14,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		651B1D5F1178EEA500C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B1D5E1178EEA500C027B2 /* DeviceType.mm */; };
 		7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914067B0DBAD8D100C9A379 /* Delegate.mm */; };
 		791F491F0E17553000E927FE /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48F10E17553000E927FE /* ResourceFile.cpp */; };
 		791F49200E17553000E927FE /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F48F30E17553000E927FE /* Streaming.cpp */; };
@@ -55,6 +56,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		651B1D5D1178EEA500C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B1D5E1178EEA500C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		7914067A0DBAD8D100C9A379 /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		7914067B0DBAD8D100C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		791F48F00E17553000E927FE /* MemoryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoryFile.h; path = ../../../../Renderer/Resource/MemoryFile.h; sourceTree = SOURCE_ROOT; };
@@ -152,6 +155,7 @@
 				2D500B6F0D5A793600DBA0E3 /* Support */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B1D6B1178EEE500C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -194,6 +198,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				651B1D5C1178EEA500C027B2 /* DeviceType */,
 				79832B7B0F040E1F000F58D6 /* Pathes */,
 				79782B7E0EDF0EF9001C0CE6 /* MemoryManager */,
 				79317B2A0EDBBAD300247E3D /* Math */,
@@ -210,6 +215,23 @@
 			children = (
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		651B1D5C1178EEA500C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B1D5D1178EEA500C027B2 /* DeviceType.h */,
+				651B1D5E1178EEA500C027B2 /* DeviceType.mm */,
+			);
+			name = DeviceType;
+			path = ../../../../Utility/DeviceType;
+			sourceTree = SOURCE_ROOT;
+		};
+		651B1D6B1178EEE500C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		791F48EF0E17553000E927FE /* Resources */ = {
@@ -434,6 +456,7 @@
 				79782B840EDF0EF9001C0CE6 /* mmgr.cpp in Sources */,
 				79832B7E0F040E1F000F58D6 /* ResourcePath.mm in Sources */,
 				BDE2119810217F4200B215F9 /* Shader.mm in Sources */,
+				651B1D5F1178EEA500C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +467,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -459,9 +483,11 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
 				PRODUCT_NAME = Shadows;
-				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -470,6 +496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -483,9 +510,12 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
 				PRODUCT_NAME = Shadows;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -504,7 +534,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				HEADER_SEARCH_PATHS = ../../../Include;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

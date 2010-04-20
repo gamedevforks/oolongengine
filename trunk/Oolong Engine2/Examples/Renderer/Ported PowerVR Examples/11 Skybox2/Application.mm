@@ -41,9 +41,8 @@ subject to the following restrictions:
 
 // Camera constants. Used for making the projection matrix.
 // Assuming a 4:3 aspect ratio.
-#define WIDTH 320
-#define HEIGHT 480
-#define CAM_ASPECT	((float)WIDTH / (float) HEIGHT)
+
+#define CAM_ASPECT	(WindowHeight / WindowWidth)
 #define CAM_NEAR	(4.0f)
 #define CAM_FAR		(1000.0f)
 
@@ -252,11 +251,11 @@ bool CShell::InitApplication()
 	vUp.y = f2vt(1);
 	vUp.z = f2vt(0);	
 	
-	//AppDisplayText = new CDisplayText;
+	AppDisplayText = new CDisplayText;
 	Textures = new CTexture;
 	
-	//if(AppDisplayText->SetTextures(WindowHeight, WindowWidth) != SUCCESS)
-	//	printf("Coult not properly load assets for displaying text!\n");
+	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth) != SUCCESS)
+		printf("Coult not properly load assets for displaying text!\n");
 	
 	/**********************/
 	/* Create the Effects */
@@ -402,7 +401,7 @@ bool CShell::QuitApplication()
 	m_Scene.Destroy();
 	
 	// Clear up display text information.
-	//AppDisplayText->ReleaseTextures();
+	AppDisplayText->ReleaseTextures();
 	delete AppDisplayText;
 
 	return true;
@@ -433,6 +432,7 @@ bool CShell::UpdateScene()
 			m_i32Effect = 1;
 			m_fFrame = 0.0f;
 		}
+		
 		fDemoFrame = 0.0f;
 		fBurnAnim = 0.0f;
 
@@ -440,6 +440,7 @@ bool CShell::UpdateScene()
 		//printf("Now entering shader %d.\n", m_i32Effect);
 		//printf("Frame count (cyclical) is now: %f.\n", m_fFrame);
 	}
+
 	
 	/* Setup Shader and Shader Constants */
 	
@@ -450,9 +451,9 @@ bool CShell::UpdateScene()
 	CFTimeInterval			TimeInterval;
 	frameRate = GetFps(frames, TimeInterval);
 
-	//AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), 
-	//							"fps: %3.2f Skybox: %3.2fms UI: %3.2fms", 
-	//							frameRate, DrawSkyboxT, DrawUIT);
+	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), 
+								"fps: %3.2f Skybox: %3.2fms UI: %3.2fms", 
+								frameRate, DrawSkyboxT, DrawUIT);
 	
 	return true;
 }
@@ -691,9 +692,9 @@ bool CShell::RenderScene()
 	ResetTimer(&DrawUITimer);
 	
 	// show text on the display
-	//AppDisplayText->DisplayDefaultTitle("Skybox 2", "", eDisplayTextLogoIMG);
+	AppDisplayText->DisplayDefaultTitle("Skybox 2", "", eDisplayTextLogoIMG);
 	
-	//AppDisplayText->Flush();	
+	AppDisplayText->Flush();	
 	
 	DrawUIT = GetAverageTimeValueInMS(&DrawUITimer);
 

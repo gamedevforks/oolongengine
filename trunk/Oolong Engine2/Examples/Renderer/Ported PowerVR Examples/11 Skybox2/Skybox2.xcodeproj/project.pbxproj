@@ -17,6 +17,7 @@
 		6585D59A1007DF7400FC1E9C /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6585D5991007DF7400FC1E9C /* ResourcePath.mm */; };
 		65AC4F9A0FFC10C0005A894A /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 65AC4F990FFC10C0005A894A /* Shader.mm */; };
 		65B1D10B0FFBE815006AAE64 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1D1050FFBE815006AAE64 /* EAGLView2.m */; };
+		65D5A692117CE5120099A832 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 65D5A691117CE5120099A832 /* DeviceType.mm */; };
 		7914067C0DBAD8D100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914067B0DBAD8D100C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
 		79235CF60DAD243A00F918F8 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79235CE00DAD243A00F918F8 /* Transform.cpp */; };
@@ -67,6 +68,8 @@
 		65AC4F990FFC10C0005A894A /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 		65B1D1040FFBE815006AAE64 /* EAGLView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView2.h; path = GLES20/EAGLView2.h; sourceTree = "<group>"; };
 		65B1D1050FFBE815006AAE64 /* EAGLView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView2.m; path = GLES20/EAGLView2.m; sourceTree = "<group>"; };
+		65D5A690117CE5120099A832 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		65D5A691117CE5120099A832 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		7914067A0DBAD8D100C9A379 /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		7914067B0DBAD8D100C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
@@ -185,6 +188,7 @@
 				2D500B6F0D5A793600DBA0E3 /* Support */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B1F421178F5F500C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -228,6 +232,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				65D5A68F117CE5120099A832 /* DeviceType */,
 				6585D5971007DF7400FC1E9C /* Pathes */,
 				79F0FED80EDF309100102B0B /* Timing */,
 				79317F250EDE50EB00247E3D /* MemoryManager */,
@@ -243,6 +248,13 @@
 			children = (
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		651B1F421178F5F500C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		6585D5971007DF7400FC1E9C /* Pathes */ = {
@@ -263,6 +275,16 @@
 			);
 			name = GLES20;
 			sourceTree = "<group>";
+		};
+		65D5A68F117CE5120099A832 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				65D5A690117CE5120099A832 /* DeviceType.h */,
+				65D5A691117CE5120099A832 /* DeviceType.mm */,
+			);
+			name = DeviceType;
+			path = ../../../../Utility/DeviceType;
+			sourceTree = SOURCE_ROOT;
 		};
 		79235CD00DAD243A00F918F8 /* Application */ = {
 			isa = PBXGroup;
@@ -552,6 +574,7 @@
 				F93AB121102398720039A520 /* PFXParser.cpp in Sources */,
 				F93AB122102398720039A520 /* PFXParserAPI.mm in Sources */,
 				F93AB123102398720039A520 /* Texture.mm in Sources */,
+				65D5A692117CE5120099A832 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +586,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -585,7 +608,9 @@
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skybox2;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "C097EB91-1235-4003-A704-2E744AC4B277";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -613,8 +638,11 @@
 				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skybox2;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

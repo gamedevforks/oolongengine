@@ -14,6 +14,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		651B211911791EA700C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B211811791EA700C027B2 /* DeviceType.mm */; };
 		7914066F0DBAD84100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914066E0DBAD84100C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
@@ -165,6 +166,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		651B211711791EA700C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B211811791EA700C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		7914066D0DBAD84100C9A379 /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		7914066E0DBAD84100C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
@@ -601,6 +604,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				651B211611791EA700C027B2 /* DeviceType */,
 				BDE2104C1021781900B215F9 /* Pathes */,
 				BDE21023102176F600B215F9 /* Include */,
 				795AC8EC0EDF1250004CF7D4 /* MemoryManager */,
@@ -620,6 +624,16 @@
 			);
 			name = Support;
 			sourceTree = "<group>";
+		};
+		651B211611791EA700C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B211711791EA700C027B2 /* DeviceType.h */,
+				651B211811791EA700C027B2 /* DeviceType.mm */,
+			);
+			name = DeviceType;
+			path = ../../../Utility/DeviceType;
+			sourceTree = SOURCE_ROOT;
 		};
 		79235CD00DAD243A00F918F8 /* Application */ = {
 			isa = PBXGroup;
@@ -1387,6 +1401,7 @@
 				BDE21013102176AC00B215F9 /* Shader.mm in Sources */,
 				BDE21022102176E300B215F9 /* EAGLView2.m in Sources */,
 				BDE2104F1021781900B215F9 /* ResourcePath.mm in Sources */,
+				651B211911791EA700C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

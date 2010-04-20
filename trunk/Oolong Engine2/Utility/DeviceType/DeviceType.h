@@ -12,8 +12,13 @@
  2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
  3. This notice may not be removed or altered from any source distribution.
 */
-void GetResourcePathASCII(char* cBuffer, int iLength)
-{
-	NSString* readPath = [[NSBundle mainBundle] resourcePath];
-	[readPath getCString:cBuffer maxLength:iLength encoding:NSUTF8StringEncoding];
-}
+
+//
+// returns the device type
+//
+
+enum DEVICETYPE {
+	IPHONE_DEVICE, IPAD_DEVICE
+};
+
+int GetDeviceType();

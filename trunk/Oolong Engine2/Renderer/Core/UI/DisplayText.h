@@ -106,7 +106,7 @@ public:
 bool SetTextures(
 	const unsigned int	dwScreenX,
 	const unsigned int	dwScreenY,
-	bool			bRotate = true ); 
+	bool			bRotate = true); 
 
 // 
 // fPosX		Position of the text along X

@@ -45,6 +45,8 @@
 		382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765AD101AAD5500A2904E /* QuartzCore.framework */; };
 		382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B2101AAD7000A2904E /* AudioToolbox.framework */; };
 		382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B3101AAD7000A2904E /* OpenAL.framework */; };
+		651B20CD1178FE5E00C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B20CC1178FE5E00C027B2 /* DeviceType.mm */; };
+		651B20D41178FE9D00C027B2 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 651B20D31178FE9D00C027B2 /* MainWindow-iPad.xib */; };
 		BDE208241020515900B215F9 /* VertexColorFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BDE208221020515900B215F9 /* VertexColorFragShader.fsh */; };
 		BDE208251020515900B215F9 /* VertexColorVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = BDE208231020515900B215F9 /* VertexColorVertShader.vsh */; };
 		BDE20B171020AD2A00B215F9 /* TextureFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BDE20B151020AD2A00B215F9 /* TextureFragShader.fsh */; };
@@ -159,6 +161,9 @@
 		382765AD101AAD5500A2904E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		382765B2101AAD7000A2904E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		382765B3101AAD7000A2904E /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		651B20CB1178FE5E00C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B20CC1178FE5E00C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
+		651B20D31178FE9D00C027B2 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BDE208221020515900B215F9 /* VertexColorFragShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexColorFragShader.fsh; sourceTree = "<group>"; };
 		BDE208231020515900B215F9 /* VertexColorVertShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexColorVertShader.vsh; sourceTree = "<group>"; };
@@ -211,6 +216,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B20D21178FE9700C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -504,6 +510,7 @@
 		38276519101AAC2900A2904E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				651B20CA1178FE5E00C027B2 /* DeviceType */,
 				3827651A101AAC2900A2904E /* Macros.h */,
 				3827651B101AAC2900A2904E /* MemoryManager */,
 				38276521101AAC2900A2904E /* Pathes */,
@@ -542,6 +549,23 @@
 				38276532101AAC2900A2904E /* Timer.mm */,
 			);
 			path = Timing;
+			sourceTree = "<group>";
+		};
+		651B20CA1178FE5E00C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B20CB1178FE5E00C027B2 /* DeviceType.h */,
+				651B20CC1178FE5E00C027B2 /* DeviceType.mm */,
+			);
+			path = DeviceType;
+			sourceTree = "<group>";
+		};
+		651B20D21178FE9700C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				651B20D31178FE9D00C027B2 /* MainWindow-iPad.xib */,
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		BDE20B191020AD3700B215F9 /* Images */ = {
@@ -602,6 +626,7 @@
 				BDE20B171020AD2A00B215F9 /* TextureFragShader.fsh in Resources */,
 				BDE20B181020AD2A00B215F9 /* TextureVertShader.vsh in Resources */,
 				BDE20B1B1020AD3700B215F9 /* crosshair.png in Resources */,
+				651B20D41178FE9D00C027B2 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,6 +665,7 @@
 				38276552101AAC2900A2904E /* ResourcePath.mm in Sources */,
 				38276559101AAC2900A2904E /* Timer.mm in Sources */,
 				38105D80101AB7C90055165D /* Application.mm in Sources */,
+				651B20CD1178FE5E00C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +676,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -663,7 +690,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../Include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = HUD;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -671,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -685,7 +716,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../Include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = HUD;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -14,6 +14,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		651B21341179205800C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B21331179205800C027B2 /* DeviceType.mm */; };
 		7914066F0DBAD84100C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7914066E0DBAD84100C9A379 /* Delegate.mm */; };
 		79235CF10DAD243A00F918F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79235CD40DAD243A00F918F8 /* main.m */; };
 		79235D500DAD2BEA00F918F8 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79235D4F0DAD2BEA00F918F8 /* Application.mm */; };
@@ -164,6 +165,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		651B21321179205800C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B21331179205800C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		7914066D0DBAD84100C9A379 /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		7914066E0DBAD84100C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		79235CD10DAD243A00F918F8 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
@@ -542,6 +545,7 @@
 				2D500B6F0D5A793600DBA0E3 /* Support */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B21371179206400C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -580,6 +584,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				651B21311179205800C027B2 /* DeviceType */,
 				BDE20FE2102174AF00B215F9 /* Pathes */,
 				79317D190EDC516600247E3D /* Math */,
 				7AD354820EC90A9C0004CB13 /* Bullet */,
@@ -596,6 +601,23 @@
 			children = (
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		651B21311179205800C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B21321179205800C027B2 /* DeviceType.h */,
+				651B21331179205800C027B2 /* DeviceType.mm */,
+			);
+			name = DeviceType;
+			path = ../../../Utility/DeviceType;
+			sourceTree = SOURCE_ROOT;
+		};
+		651B21371179206400C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		79235CD00DAD243A00F918F8 /* Application */ = {
@@ -1335,6 +1357,7 @@
 				BDE20FE01021749900B215F9 /* Shader.mm in Sources */,
 				BDE20FE5102174AF00B215F9 /* ResourcePath.mm in Sources */,
 				BDE20FF9102175EB00B215F9 /* neon_matrix_impl.cpp in Sources */,
+				651B21341179205800C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,7 +1369,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1367,6 +1390,7 @@
 					../../../Include,
 				);
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Bullet/src/LinearMath/Release\"",
@@ -1376,8 +1400,8 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
-				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -1415,7 +1439,8 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = FallingCubes;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

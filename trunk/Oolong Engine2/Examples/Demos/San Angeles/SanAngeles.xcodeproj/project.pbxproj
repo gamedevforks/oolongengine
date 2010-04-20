@@ -40,7 +40,7 @@
 		79EA06B40DAFEC5C0038ED3D /* demo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79EA06B30DAFEC5C0038ED3D /* demo.mm */; };
 		BDE20B5A1021237C00B215F9 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE20B581021237C00B215F9 /* EAGLView.m */; };
 		BDE20B60102123C300B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20B5F102123C300B215F9 /* Shader.mm */; };
-		BDE20B841021250900B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20B831021250900B215F9 /* ResourcePath.mm */; };
+		BDE20B841021250900B215F9 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE20B831021250900B215F9 /* DeviceType.mm */; };
 		BDE20C3210212C7500B215F9 /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDE20C3010212C7500B215F9 /* neon_matrix_impl.cpp */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +111,8 @@
 		BDE20B591021237C00B215F9 /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		BDE20B5E102123C300B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		BDE20B5F102123C300B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
-		BDE20B821021250900B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
-		BDE20B831021250900B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		BDE20B821021250900B215F9 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceType.h; path = ../DeviceType/DeviceType.h; sourceTree = "<group>"; };
+		BDE20B831021250900B215F9 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DeviceType.mm; path = ../DeviceType/DeviceType.mm; sourceTree = "<group>"; };
 		BDE20C3010212C7500B215F9 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = neon_matrix_impl.cpp; sourceTree = "<group>"; };
 		BDE20C3110212C7500B215F9 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neon_matrix_impl.h; sourceTree = "<group>"; };
 		BDE214751021B16B00B215F9 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
@@ -164,6 +164,7 @@
 				2D500B6F0D5A793600DBA0E3 /* Support */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B18A91173909800C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -217,6 +218,13 @@
 			children = (
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		651B18A91173909800C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		79235CD00DAD243A00F918F8 /* Application */ = {
@@ -354,8 +362,8 @@
 		BDE20B811021250900B215F9 /* Pathes */ = {
 			isa = PBXGroup;
 			children = (
-				BDE20B821021250900B215F9 /* ResourcePath.h */,
-				BDE20B831021250900B215F9 /* ResourcePath.mm */,
+				BDE20B821021250900B215F9 /* DeviceType.h */,
+				BDE20B831021250900B215F9 /* DeviceType.mm */,
 			);
 			name = Pathes;
 			path = ../../../Utility/Pathes;
@@ -466,7 +474,7 @@
 				796E14F90EE0A777007BB71F /* mmgr.cpp in Sources */,
 				BDE20B5A1021237C00B215F9 /* EAGLView.m in Sources */,
 				BDE20B60102123C300B215F9 /* Shader.mm in Sources */,
-				BDE20B841021250900B215F9 /* ResourcePath.mm in Sources */,
+				BDE20B841021250900B215F9 /* DeviceType.mm in Sources */,
 				BDE20C3210212C7500B215F9 /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,9 +504,12 @@
 				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = SanAngeles;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -508,7 +519,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -525,9 +536,12 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = SanAngeles;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "C097EB91-1235-4003-A704-2E744AC4B277";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

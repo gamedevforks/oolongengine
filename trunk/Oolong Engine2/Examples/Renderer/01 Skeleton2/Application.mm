@@ -78,7 +78,7 @@ bool CShell::InitApplication()
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 	if( __OPENGLES_VERSION >= 2 )
 	{
-		char buffer[2048];
+	char buffer[2048];
 	GetResourcePathASCII(buffer, 2048);
 	
 	CPVRTResourceFile::SetReadPath(buffer);
@@ -92,8 +92,9 @@ bool CShell::InitApplication()
 	
 	//printf(filename);
 
-	delete buffer;
-	
+	//delete buffer;
+	//delete [] buffer;
+		
 	CreateProgram(&uiProgramObject, uiVertShader, uiFragShader, pszAttribs, 1);
 
 		// First gets the location of that variable in the shader using its name
@@ -154,7 +155,7 @@ bool CShell::InitApplication()
 	vFrom = Vec3(0.0f, 0.0f, 0.0f);
 	MatrixLookAtRH(mView, vFrom, vTo, Vec3(0,1,0));
 	
-	MatrixPerspectiveFovRH(mProjection, f2vt(30*PIf/180.0f), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 1);
+	MatrixPerspectiveFovRH(mProjection, f2vt(30*PIf/180.0f), f2vt((WindowHeight / WindowWidth)), f2vt(0.1f), f2vt(1000.0f), 1);
 
 	m_fAngleY = 0.0;	
 	
@@ -251,17 +252,16 @@ bool CShell::RenderScene()
 	 This function allows the use of other primitive types : triangle strips, lines, ...
 	 For indexed geometry, use the function glDrawElements() with an index list.
 	 */
+	
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
 	if( __OPENGLES_VERSION >= 2 ) 
 	{
-	glUseProgram(uiProgramObject);
+//	glUseProgram(uiProgramObject);
 		
 	glBindBuffer(GL_ARRAY_BUFFER, ui32Vbo);
 	
-		/*
-		 Enable the custom vertex attribute at index VERTEX_ARRAY.
-		 We previously just bound that index to the variable in our shader "vec4 MyVertex;"
-		 */
+	// Enable the custom vertex attribute at index VERTEX_ARRAY.
+	// We previously just bound that index to the variable in our shader "vec4 MyVertex;"
 	glEnableVertexAttribArray(VERTEX_ARRAY);
 		
 		// Sets the vertex data to this attribute index

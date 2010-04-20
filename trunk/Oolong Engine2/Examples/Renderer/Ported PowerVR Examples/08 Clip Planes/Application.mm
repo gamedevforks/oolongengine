@@ -41,10 +41,6 @@ subject to the following restrictions:
 #define PI 3.14159f
 #endif
 
-#define WIDTH 320
-#define HEIGHT 480
-
-
 
 CDisplayText * AppDisplayText;
 CTexture * Textures;
@@ -134,9 +130,9 @@ bool CShell::InitApplication()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	MatrixPerspectiveFovRH(mPerspective, f2vt(20.0f*(PI/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
+	MatrixPerspectiveFovRH(mPerspective, f2vt(20.0f*(PI/180.0f)), f2vt(WindowHeight/WindowWidth), f2vt(10.0f), f2vt(1200.0f), true);
 	glMultMatrixf(mPerspective.f);
-	
+		
 	/* Modelview matrix */
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -281,7 +277,7 @@ bool CShell::UpdateScene()
 bool CShell::RenderScene()
 {
 	// Set Vieweport size
-	glViewport(0, 0, WIDTH, HEIGHT);
+	glViewport(0, 0, WindowHeight, WindowWidth);
 	
 	// Clear the buffers
 	glEnable(GL_DEPTH_TEST);

@@ -551,7 +551,7 @@ void MatrixPerspectiveFovRH(
 	if (bRotate)
 	{
 		MATRIX mRotation, mTemp = mOut;
-		MatrixRotationZ(mRotation, -90.0f*PIf/180.0f);
+		MatrixRotationZ(mRotation, 90.0f*PIf/180.0f);
 		MatrixMultiply(mOut, mTemp, mRotation);
 	}
 }

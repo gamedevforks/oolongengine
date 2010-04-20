@@ -14,6 +14,7 @@
 		287ABCA00D7F541C00CE0163 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 287ABC9F0D7F541C00CE0163 /* Default.png */; };
 		2D500B940D5A79C200DBA0E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */; };
 		2D500B9A0D5A79CF00DBA0E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */; };
+		651B1F191178F59600C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B1F181178F59600C027B2 /* DeviceType.mm */; };
 		791406D80DBAD99A00C9A379 /* Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 791406D70DBAD99A00C9A379 /* Delegate.mm */; };
 		791F49C80E1755E800E927FE /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F499A0E1755E800E927FE /* ResourceFile.cpp */; };
 		791F49C90E1755E800E927FE /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 791F499C0E1755E800E927FE /* Streaming.cpp */; };
@@ -53,6 +54,8 @@
 		287ABC9F0D7F541C00CE0163 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2D500B920D5A79C200DBA0E3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		2D500B990D5A79CF00DBA0E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		651B1F171178F59600C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B1F181178F59600C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		791406D60DBAD99A00C9A379 /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		791406D70DBAD99A00C9A379 /* Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Delegate.mm; sourceTree = "<group>"; };
 		791F49990E1755E800E927FE /* MemoryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoryFile.h; path = ../../../../Renderer/Resource/MemoryFile.h; sourceTree = SOURCE_ROOT; };
@@ -149,6 +152,7 @@
 				2D500B1D0D5A766B00DBA0E3 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B1F251178F5B000C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -191,6 +195,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				651B1F161178F59600C027B2 /* DeviceType */,
 				79832E300F054E87000F58D6 /* Pathes */,
 				79F0FF450EDF4DF500102B0B /* Timing */,
 				795AC84F0EDF1043004CF7D4 /* MemoryManager */,
@@ -201,6 +206,23 @@
 				791F49980E1755E800E927FE /* Resources */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		651B1F161178F59600C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B1F171178F59600C027B2 /* DeviceType.h */,
+				651B1F181178F59600C027B2 /* DeviceType.mm */,
+			);
+			name = DeviceType;
+			path = ../../../../Utility/DeviceType;
+			sourceTree = SOURCE_ROOT;
+		};
+		651B1F251178F5B000C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		791F49980E1755E800E927FE /* Resources */ = {
@@ -433,6 +455,7 @@
 				79F0FF480EDF4DF500102B0B /* Timer.mm in Sources */,
 				79832E330F054E87000F58D6 /* ResourcePath.mm in Sources */,
 				BDE212A9102184BD00B215F9 /* Shader.mm in Sources */,
+				651B1F191178F59600C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -459,9 +483,12 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = MatrixPalette;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -470,6 +497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -484,9 +512,12 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = MatrixPalette;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

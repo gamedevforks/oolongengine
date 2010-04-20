@@ -47,6 +47,8 @@
 		382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765AD101AAD5500A2904E /* QuartzCore.framework */; };
 		382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B2101AAD7000A2904E /* AudioToolbox.framework */; };
 		382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B3101AAD7000A2904E /* OpenAL.framework */; };
+		651B20841178FD7500C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B20831178FD7500C027B2 /* DeviceType.mm */; };
+		651B208D1178FDAC00C027B2 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 651B208C1178FDAC00C027B2 /* MainWindow-iPad.xib */; };
 		BD11CBAC101C318500B80F52 /* rock_mipmap_4.pvr in Resources */ = {isa = PBXBuildFile; fileRef = BD11CBAB101C318500B80F52 /* rock_mipmap_4.pvr */; };
 		BD11CC34101C412900B80F52 /* TextureFragShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BD11CC32101C412900B80F52 /* TextureFragShader.fsh */; };
 		BD11CC35101C412900B80F52 /* TextureVertShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = BD11CC33101C412900B80F52 /* TextureVertShader.vsh */; };
@@ -168,6 +170,9 @@
 		382765AD101AAD5500A2904E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		382765B2101AAD7000A2904E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		382765B3101AAD7000A2904E /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		651B20821178FD7500C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B20831178FD7500C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
+		651B208C1178FDAC00C027B2 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BD11CBA8101C313100B80F52 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		BD11CBAB101C318500B80F52 /* rock_mipmap_4.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = rock_mipmap_4.pvr; sourceTree = "<group>"; };
@@ -227,6 +232,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				651B208B1178FDA800C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -526,6 +532,7 @@
 		38276519101AAC2900A2904E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				651B20811178FD7500C027B2 /* DeviceType */,
 				3827651A101AAC2900A2904E /* Macros.h */,
 				3827651B101AAC2900A2904E /* MemoryManager */,
 				38276521101AAC2900A2904E /* Pathes */,
@@ -564,6 +571,23 @@
 				38276532101AAC2900A2904E /* Timer.mm */,
 			);
 			path = Timing;
+			sourceTree = "<group>";
+		};
+		651B20811178FD7500C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B20821178FD7500C027B2 /* DeviceType.h */,
+				651B20831178FD7500C027B2 /* DeviceType.mm */,
+			);
+			path = DeviceType;
+			sourceTree = "<group>";
+		};
+		651B208B1178FDA800C027B2 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				651B208C1178FDAC00C027B2 /* MainWindow-iPad.xib */,
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		BD11CBA7101C313100B80F52 /* Images */ = {
@@ -635,6 +659,7 @@
 				BDC90A96101D8B8B00BB69B7 /* ParallaxMapFragShader.fsh in Resources */,
 				BDC90A97101D8B8B00BB69B7 /* ParallaxMapVertShader.vsh in Resources */,
 				BDC90AA3101D8D8F00BB69B7 /* rockNH_mipmap_4.pvr in Resources */,
+				651B208D1178FDAC00C027B2 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +719,7 @@
 				38276552101AAC2900A2904E /* ResourcePath.mm in Sources */,
 				38276559101AAC2900A2904E /* Timer.mm in Sources */,
 				38105D80101AB7C90055165D /* Application.mm in Sources */,
+				651B20841178FD7500C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +730,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -720,7 +747,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../Include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = ParallaxMap;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -728,6 +758,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -742,7 +773,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = ../../../../Include;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = ParallaxMap;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

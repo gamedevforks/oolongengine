@@ -32,10 +32,6 @@ subject to the following restrictions:
 #include <stdio.h>
 #include <sys/time.h>
 
-#define WIDTH 320
-#define HEIGHT 480
-
-
 CDisplayText * AppDisplayText;
 CTexture * Textures;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
@@ -188,7 +184,7 @@ bool CShell::InitApplication()
 	/* Calculate projection matrix */
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(35.0f*(3.14f/180.0f)), f2vt((float)WIDTH/(float)HEIGHT), f2vt(10.0f), f2vt(1200.0f), true);
+	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(35.0f*(3.14f/180.0f)), f2vt(WindowHeight/WindowWidth), f2vt(10.0f), f2vt(1200.0f), true);
 	glMultMatrixf(MyPerspMatrix.f);
 	
 	/* Enable texturing */
@@ -313,7 +309,7 @@ bool CShell::RenderScene()
 	MATRIX RotationMatrix, TmpX, TmpY;
 	
 	/* Set up viewport */
-	glViewport(0, 0, WIDTH, HEIGHT);
+	glViewport(0, 0, WindowHeight, WindowWidth);
 	
 	/* Increase rotation angles */
 	m_fAngleX += VERTTYPEDIV(PI, f2vt(100.0f));

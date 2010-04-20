@@ -47,6 +47,7 @@
 		382765AE101AAD5500A2904E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765AD101AAD5500A2904E /* QuartzCore.framework */; };
 		382765B4101AAD7000A2904E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B2101AAD7000A2904E /* AudioToolbox.framework */; };
 		382765B5101AAD7000A2904E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382765B3101AAD7000A2904E /* OpenAL.framework */; };
+		651B1FBB1178F88600C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B1FBA1178F88600C027B2 /* DeviceType.mm */; };
 		BD357E8B1033072500F6447C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD357E8A1033072500F6447C /* MediaPlayer.framework */; };
 		BD357E92103307AA00F6447C /* Title.m4v in Resources */ = {isa = PBXBuildFile; fileRef = BD357E91103307AA00F6447C /* Title.m4v */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,8 @@
 		382765AD101AAD5500A2904E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		382765B2101AAD7000A2904E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		382765B3101AAD7000A2904E /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		651B1FB91178F88600C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		651B1FBA1178F88600C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		BD357E8A1033072500F6447C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BD357E91103307AA00F6447C /* Title.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Title.m4v; sourceTree = "<group>"; };
@@ -502,6 +505,7 @@
 		38276519101AAC2900A2904E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				651B1FB81178F88600C027B2 /* DeviceType */,
 				3827651A101AAC2900A2904E /* Macros.h */,
 				3827651B101AAC2900A2904E /* MemoryManager */,
 				38276521101AAC2900A2904E /* Pathes */,
@@ -540,6 +544,15 @@
 				38276532101AAC2900A2904E /* Timer.mm */,
 			);
 			path = Timing;
+			sourceTree = "<group>";
+		};
+		651B1FB81178F88600C027B2 /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				651B1FB91178F88600C027B2 /* DeviceType.h */,
+				651B1FBA1178F88600C027B2 /* DeviceType.mm */,
+			);
+			path = DeviceType;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -628,6 +641,7 @@
 				38276552101AAC2900A2904E /* ResourcePath.mm in Sources */,
 				38276559101AAC2900A2904E /* Timer.mm in Sources */,
 				38105D80101AB7C90055165D /* Application.mm in Sources */,
+				651B1FBB1178F88600C027B2 /* DeviceType.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

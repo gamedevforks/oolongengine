@@ -209,7 +209,7 @@ bool CShell::UpdateScene()
 	glLoadIdentity();
 	
 	MATRIX	MyPerspMatrix;
-	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(0.1f), f2vt(1000.0f), 0);
+	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt((WindowHeight / WindowWidth)), f2vt(0.1f), f2vt(1000.0f), 0);
 	glMultMatrixf(MyPerspMatrix.f);
 
 	++frames;
@@ -223,7 +223,7 @@ bool CShell::UpdateScene()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	glRotatef(90.0, 0.0, 0.0, 1.0);
+	glRotatef(-90.0, 0.0, 0.0, 1.0);
 	
 	float m[16];
 	blendReader->m_cameraTrans.inverse().getOpenGLMatrix(m);

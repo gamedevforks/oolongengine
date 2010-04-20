@@ -886,7 +886,7 @@ static void prepareFrame(int width, int height)
     glLoadIdentity();
     
 	gluPerspective(80, (float)height / width, 0.3f, 75.0f);
-	glRotatef(f2vt(90), 0, 0, f2vt(1));
+	glRotatef(f2vt(-90), 0, 0, f2vt(1));
 	
 	MATRIX	PerspMatrix;
 	

@@ -1,0 +1,15 @@
+#summary Blender .blend parser
+
+= Introduction =
+
+The open source Blender modeler uses the binary .blend format to store all its assets. We developed a parser, fully under the permissive zlib license, to extract any data from this file format. The parsing is very fast so it can be directly used in a game or application. If necessary, you can optimize the data further, using the PowerVR SDK.
+
+= Details =
+
+Some of the data that can be extracted from a .blend file:
+  * triangle meshes, vertices and indices
+  * textures embedded/packed in the jpg format
+  * collision and physics information
+  * animation and skinning information (see example in the OgreKit demo at the gamekit project)
+
+See also the gamekit project at http://gamekit.googlecode.com

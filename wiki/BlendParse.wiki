@@ -2,7 +2,7 @@
 
 = Introduction =
 
-The open source Blender modeler uses the binary .blend format to store all its assets. We developed a parser, fully under the permissive zlib license, to extract any data from this file format. The parsing is very fast so it can be directly used in a game or application. If necessary, you can optimize the data further, using the PowerVR SDK.
+The open source Blender modeler uses the binary .blend format to store all its assets. We developed a parser, fully under the permissive zlib license, to extract any data from this file format. The parsing is very fast so it can be directly used in a game or application. If necessary, you can optimize the data further, using PowerVR SDK utilities such as TriStrip. See the TriStripList function in OolongEngine2/Renderer/Geometry/TriStrip.cpp. Textures could be optimized using PVRTC compression.
 
 = Details =
 

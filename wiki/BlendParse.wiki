@@ -12,4 +12,8 @@ Some of the data that can be extracted from a .blend file:
   * collision and physics information
   * animation and skinning information (see example in the OgreKit demo at the gamekit project)
 
-See also the gamekit project at http://gamekit.googlecode.com
+= Implementation =
+
+The .blend parser and example code is located in Oolong Engine2/Examples/Demos/ReadBlend.
+
+See also the OgreKit project at http://gamekit.googlecode.com on more advanced usage, such as extracting skeletal animation and skinning from a .blend file.

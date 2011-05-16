@@ -1,0 +1,11 @@
+todo:
+
++ make sample app that demonstrates facebook-ios-sdk integration with oolong
++ move lua integration from github fork
+
+-------------
+Documentation
+-------------
+
+facebook-ios-sdk
++ https://github.com/facebook/facebook-ios-sdk

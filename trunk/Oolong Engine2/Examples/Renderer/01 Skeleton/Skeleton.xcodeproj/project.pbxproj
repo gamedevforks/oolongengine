@@ -40,6 +40,7 @@
 		BDE2108F102178E600B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2108C102178E600B215F9 /* Shader.mm */; };
 		BDE21090102178E600B215F9 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2108E102178E600B215F9 /* Texture.mm */; };
 		BDE210981021791C00B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE210971021791C00B215F9 /* ResourcePath.mm */; };
+		CE125AA01381C4AF002D6B0A /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE125A9E1381C4AF002D6B0A /* neon_matrix_impl.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,8 @@
 		BDE2108E102178E600B215F9 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		BDE210961021791C00B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
 		BDE210971021791C00B215F9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		CE125A9E1381C4AF002D6B0A /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = neon_matrix_impl.cpp; sourceTree = "<group>"; };
+		CE125A9F1381C4AF002D6B0A /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neon_matrix_impl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,7 @@
 		79235CD70DAD243A00F918F8 /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				CE125A9D1381C4AF002D6B0A /* neonmath */,
 				793179FA0EDA639E00247E3D /* Matrix.cpp */,
 				7976BBB00EDA4E9B00106906 /* vfpmath */,
 				79235CDC0DAD243A00F918F8 /* Matrix.h */,
@@ -367,6 +371,15 @@
 			path = ../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
+		CE125A9D1381C4AF002D6B0A /* neonmath */ = {
+			isa = PBXGroup;
+			children = (
+				CE125A9E1381C4AF002D6B0A /* neon_matrix_impl.cpp */,
+				CE125A9F1381C4AF002D6B0A /* neon_matrix_impl.h */,
+			);
+			path = neonmath;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,7 +407,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Skeleton" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -447,6 +464,7 @@
 				BDE21090102178E600B215F9 /* Texture.mm in Sources */,
 				BDE210981021791C00B215F9 /* ResourcePath.mm in Sources */,
 				651B1C901178EBF400C027B2 /* DeviceType.mm in Sources */,
+				CE125AA01381C4AF002D6B0A /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +495,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -488,7 +506,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -503,8 +521,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = Skeleton;
-				PROVISIONING_PROFILE = "C097EB91-1235-4003-A704-2E744AC4B277";
-				SDKROOT = iphoneos3.2;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -514,8 +532,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Joe Woynillowicz (SQ9Z828383)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;

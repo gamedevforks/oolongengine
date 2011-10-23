@@ -211,9 +211,8 @@ int CDisplayText::Flush()
 //
 bool CDisplayText::APIInit()
 {
-    m_pAPI = new () SDisplayTextAPI;
+    m_pAPI = new SDisplayTextAPI;
 
-	//m_pAPI = new SDisplayTextAPI;
 	if(!m_pAPI)
 		return false;
 	return true;

@@ -2016,7 +2016,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ReadBlend" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2229,7 +2233,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ReadBlend;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C097EB91-1235-4003-A704-2E744AC4B277";
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2250,7 +2254,7 @@
 				INFOPLIST_FILE = "ReadBlend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = ReadBlend;
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2269,7 +2273,7 @@
 					../../../Include,
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -2286,7 +2290,7 @@
 					../../../Include,
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

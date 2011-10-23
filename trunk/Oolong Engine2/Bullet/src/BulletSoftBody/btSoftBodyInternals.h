@@ -172,8 +172,9 @@ public:
 template <typename T>
 static inline void			ZeroInitialize(T& value)
 {
-	static const T	zerodummy;
-	value=zerodummy;
+ 
+    memset(&value,0,sizeof(T));
+    
 }
 //
 template <typename T>

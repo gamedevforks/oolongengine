@@ -17,13 +17,13 @@
 
 int GetDeviceType()
 {
-#ifdef UI_USER_INTERFACE_IDIOM()
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+//#ifdef UI_USER_INTERFACE_IDIOM
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		return IPAD_DEVICE;
-	else 
-		return IPHONE_DEVICE;
-#else
-	return IPHONE_DEVICE;
+//#endif
 #endif
+	
+	return IPHONE_DEVICE;
 
 }

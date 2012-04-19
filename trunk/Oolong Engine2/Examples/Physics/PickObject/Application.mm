@@ -27,7 +27,7 @@ static btBroadphaseInterface* sBroadphase=0;
 btAlignedObjectArray<btCollisionShape*> sCollisionShapes;
 btAlignedObjectArray<btRigidBody*> sBoxBodies;
 btRigidBody* sFloorPlaneBody=0;
-int numBodies = 25;
+int numBodies = 55;
 
 //////////////////////////////////
 
@@ -38,7 +38,7 @@ int numBodies = 25;
 #include "UI.h"
 #include "Macros.h"
 #include "TouchScreen.h"
-
+#include "DeviceType.h"
 #include <stdio.h>
 #include <sys/time.h>
 
@@ -54,10 +54,19 @@ btVector3 Ray;
 
 btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 cameraUp, btVector3 CameraPosition, btVector3 CameraTargetPosition);
 
+
+btVector3 m_cameraPosition;
+btScalar m_ele(0),m_azi(0);
+btVector3 m_cameraUp(0,1,0);
+int m_forwardAxis=2;
+
+btVector3 m_cameraTargetPosition(0,0,0);
+btScalar m_cameraDistance = 20;
+
 bool CShell::InitApplication()
 {
 //	LOGFUNC("InitApplication()");
-	
+   
 	AppDisplayText = new CDisplayText;  
 	
 	if(AppDisplayText->SetTextures(WindowHeight, WindowWidth))
@@ -81,7 +90,7 @@ bool CShell::InitApplication()
 	{
 		btTransform bodyTransform;
 		bodyTransform.setIdentity();
-		bodyTransform.setOrigin(btVector3(0,10+i*2,0));
+		bodyTransform.setOrigin(btVector3(0,-50+i*4,0));
 		btCollisionShape* boxShape = new btBoxShape(btVector3(1,1,1));
 		btScalar mass(1.);//positive mass means dynamic/moving  object
 		bool isDynamic = (mass != 0.f);
@@ -120,15 +129,6 @@ bool CShell::QuitApplication()
 	//////////////
 	return true;
 }
-
-btVector3 m_cameraPosition;
-btScalar m_ele(0),m_azi(0);
-btVector3 m_cameraUp(0,1,0);
-int m_forwardAxis=2;
-int m_glutScreenWidth = 320;
-int m_glutScreenHeight = 480;
-btVector3 m_cameraTargetPosition(0,0,0);
-btScalar m_cameraDistance = 20;
 
 
 
@@ -238,10 +238,12 @@ btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 camer
 	vertical.normalize();
 	
 	float tanfov = tanf(0.5f*fov);
-	
-	float aspect = (float)480 / (float)320;
-	
-	hor *= 2.f * farPlane * tanfov;
+
+    float aspect = 0.f;
+    
+    aspect = WindowHeight/WindowWidth;
+    
+	hor *=      2.f * farPlane * tanfov;
 	vertical *= 2.f * farPlane * tanfov;
 	
 	if (aspect<1)
@@ -253,9 +255,10 @@ btVector3 GetRayTo(int x,int y, float nearPlane, float farPlane, btVector3 camer
 	}
 	
 	btVector3 rayToCenter = rayFrom + rayForward;
-	btVector3 dHor = hor * 1.f/float(320);
-	btVector3 dVert = vertical * 1.f/float(480);
-	
+    
+    btVector3 dHor = hor * 1.f/float(WindowHeight);
+    btVector3 dVert = vertical * 1.f/float(WindowWidth);
+
 	btVector3 rayTo = rayToCenter - 0.5f * hor + 0.5f * vertical;
 	rayTo += x * dHor;
 	rayTo -= y * dVert;
@@ -268,35 +271,6 @@ bool CShell::UpdateScene()
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	//    glDisable(GL_CULL_FACE);
-	
-	//	UpdatePolarCamera();
-	/*
-	 //Set the OpenGL projection matrix
-	 glMatrixMode(GL_PROJECTION);
-	 glLoadIdentity();
-	 
-	 MATRIX	MyPerspMatrix;
-	 MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt(((float) 320 / (float) 480)), f2vt(1.0f), f2vt(10000.0f), 0);
-	 myglMultMatrix(MyPerspMatrix.f);
-	 
-	 //	glOrthof(-40 / 2, 40 / 2, -60 / 2, 60 / 2, -1, 1);
-	 
-	 static CFTimeInterval	startTime = 0;
-	 CFTimeInterval			time;
-	 
-	 //Calculate our local time
-	 time = CFAbsoluteTimeGetCurrent();
-	 if(startTime == 0)
-	 startTime = time;
-	 time = time - startTime;
-	 
-	 glMatrixMode(GL_MODELVIEW);
-	 glLoadIdentity();
-	 glTranslatef(0.0, 0.0, -30.0f);
-	 //	glRotatef(50.0f * fmod(time, 360.0), 0.0, 1.0, 1.0);
-	 */
 	
 	
 	glMatrixMode(GL_PROJECTION);
@@ -325,15 +299,8 @@ bool CShell::UpdateScene()
 	m_cameraPosition[1] = eyePos.getY();
 	m_cameraPosition[2] = eyePos.getZ();
 	
-	if (m_glutScreenWidth > m_glutScreenHeight) 
-	{
-		btScalar aspect = m_glutScreenWidth / (btScalar)m_glutScreenHeight;
-		glFrustumf (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
-	} else 
-	{
-		btScalar aspect = m_glutScreenHeight / (btScalar)m_glutScreenWidth;
-		glFrustumf (-1.0, 1.0, -aspect, aspect, 1.0, 10000.0);
-	}
+    btScalar aspect = WindowWidth / (btScalar)WindowHeight;
+	glFrustumf (-aspect, aspect, -1.0, 1.0, 1.0, 10000.0);
 	
 	
     glMatrixMode(GL_MODELVIEW);
@@ -354,8 +321,11 @@ bool CShell::UpdateScene()
 	// screen ... in the x direction the values range from -9875..9875 in x direction and
 	// 15.000..-15000 in the y direction
 	
+
 	
-	
+        AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "screenWidth: %3.2f Height: %3.2f",WindowWidth, WindowHeight); 
+  
+                                    
 	if(TouchScreen->TouchesEnd == false)
 	{
 		
@@ -408,42 +378,7 @@ bool CShell::RenderScene()
 		glMultMatrixf(worldMat);
 		
 		
-		//if(TouchScreen->TouchesEnd == false)
-		{			
-			btVector3 CameraPosition = m_cameraPosition;
-			
-			btCollisionWorld::ClosestRayResultCallback rayCallback(CameraPosition, Ray);
-		
-			// CountTouchesMoved shows how many fingers are moved ... if there is one finger or more moved this is 
-			// 1 or higher
-			// while CountTouchesBegan shows how many fingers have touched the sreen when the gesture started
-			if (sDynamicsWorld)// && (TouchScreen->CountTouchesMoved >= 1))
-			{
-				Ray = GetRayTo(TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, 
-							   1.0f, 10000.0f,m_cameraUp, m_cameraPosition, 
-							   m_cameraTargetPosition);
-				
-				sDynamicsWorld->rayTest(CameraPosition, Ray, rayCallback);
-				if (rayCallback.hasHit())
-				{
-					AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "RayHit!");
-					
-					btRigidBody* body = btRigidBody::upcast(rayCallback.m_collisionObject);
-					if (body)
-					{
-						body->setActivationState(ACTIVE_TAG);
-						btVector3 impulse = Ray;
-						impulse.normalize();
-						float impulseStrength = 10.f;
-						impulse *= impulseStrength;
-						btVector3 relPos = rayCallback.m_hitPointWorld - body->getCenterOfMassPosition();
-						body->applyImpulse(impulse,relPos);
-					}
-				}
-			}
-		}
-		
-		
+	
 
 		const float verts[] =
 		{
@@ -506,6 +441,43 @@ bool CShell::RenderScene()
 	
 		glPopMatrix();
 	}
+    
+    //if(TouchScreen->TouchesEnd == false)
+    {			
+        btVector3 CameraPosition = m_cameraPosition;
+        
+        btCollisionWorld::ClosestRayResultCallback rayCallback(CameraPosition, Ray);
+		
+        // CountTouchesMoved shows how many fingers are moved ... if there is one finger or more moved this is 
+        // 1 or higher
+        // while CountTouchesBegan shows how many fingers have touched the sreen when the gesture started
+        if (sDynamicsWorld)// && (TouchScreen->CountTouchesMoved >= 1))
+        {
+            Ray = GetRayTo(TouchScreen->LocationXTouchesBegan, TouchScreen->LocationYTouchesBegan, 
+                           1.0f, 10000.0f,m_cameraUp, m_cameraPosition, 
+                           m_cameraTargetPosition);
+            
+            sDynamicsWorld->rayTest(CameraPosition, Ray, rayCallback);
+            if (rayCallback.hasHit())
+            {
+                AppDisplayText->DisplayText(0, 22, 0.4f, RGBA(255,255,255,255), "RayHit!");
+                
+                btRigidBody* body = btRigidBody::upcast(rayCallback.m_collisionObject);
+                if (body)
+                {
+                    body->setActivationState(ACTIVE_TAG);
+                    btVector3 impulse = Ray;
+                    impulse.normalize();
+                    float impulseStrength = 10.f;
+                    impulse *= impulseStrength;
+                    btVector3 relPos = rayCallback.m_hitPointWorld - body->getCenterOfMassPosition();
+                    body->applyImpulse(impulse,relPos);
+                }
+            }
+        }
+    }
+    
+    
 	
 	// show text on the display
 	AppDisplayText->DisplayDefaultTitle("Kick Cubes :-)", "", eDisplayTextLogoIMG);

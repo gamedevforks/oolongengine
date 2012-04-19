@@ -42,6 +42,7 @@
 		79616E850EECFA4800802AED /* IntroducingPOD_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79616E820EECFA4800802AED /* IntroducingPOD_float.pod */; };
 		79616E860EECFA4800802AED /* tex_arm.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E830EECFA4800802AED /* tex_arm.pvr */; };
 		79616E870EECFA4800802AED /* tex_base.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 79616E840EECFA4800802AED /* tex_base.pvr */; };
+		BC713DD6153F8B3400C8F7A1 /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC713DD4153F8B3400C8F7A1 /* neon_matrix_impl.cpp */; };
 		BDE2115F10217E1E00B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2115E10217E1E00B215F9 /* Shader.mm */; };
 		F9FC04031014F5D9006ACEAA /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FC04011014F5D9006ACEAA /* EAGLView.m */; };
 /* End PBXBuildFile section */
@@ -111,6 +112,8 @@
 		79616E830EECFA4800802AED /* tex_arm.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_arm.pvr; path = Media/tex_arm.pvr; sourceTree = "<group>"; };
 		79616E840EECFA4800802AED /* tex_base.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = tex_base.pvr; path = Media/tex_base.pvr; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC713DD4153F8B3400C8F7A1 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = neon_matrix_impl.cpp; path = ../neonmath/neon_matrix_impl.cpp; sourceTree = "<group>"; };
+		BC713DD5153F8B3400C8F7A1 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = neon_matrix_impl.h; path = ../neonmath/neon_matrix_impl.h; sourceTree = "<group>"; };
 		BDE2115D10217E1E00B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		BDE2115E10217E1E00B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 		F9FC04001014F5D9006ACEAA /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAGLView.h; path = GLES11/EAGLView.h; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 		79317ACE0EDB153800247E3D /* vfpmath */ = {
 			isa = PBXGroup;
 			children = (
+				BC713DD4153F8B3400C8F7A1 /* neon_matrix_impl.cpp */,
+				BC713DD5153F8B3400C8F7A1 /* neon_matrix_impl.h */,
 				79317ACF0EDB153800247E3D /* common_macros.h */,
 				79317AD00EDB153800247E3D /* matrix_impl.cpp */,
 				79317AD10EDB153800247E3D /* matrix_impl.h */,
@@ -396,7 +401,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "POD" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -453,6 +462,7 @@
 				F9FC04031014F5D9006ACEAA /* EAGLView.m in Sources */,
 				BDE2115F10217E1E00B215F9 /* Shader.mm in Sources */,
 				651B1D101178EDF500C027B2 /* DeviceType.mm in Sources */,
+				BC713DD6153F8B3400C8F7A1 /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +474,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wolfgang Engel (YW963PKFQV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -477,11 +487,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;
 				PRODUCT_NAME = POD;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wall";
@@ -504,6 +516,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;

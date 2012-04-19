@@ -43,6 +43,7 @@
 		79832AC50F02AF64000F58D6 /* SphereOpt_float.pod in Resources */ = {isa = PBXBuildFile; fileRef = 79832AC20F02AF64000F58D6 /* SphereOpt_float.pod */; };
 		79832AFB0F02B1F2000F58D6 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79832AFA0F02B1F2000F58D6 /* ResourcePath.mm */; };
 		79EA07100DAFF0550038ED3D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA070F0DAFF0550038ED3D /* Default.png */; };
+		BC713DDF153F8B8C00C8F7A1 /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC713DDD153F8B8C00C8F7A1 /* neon_matrix_impl.cpp */; };
 		BDE2118510217EC600B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2118410217EC600B215F9 /* Shader.mm */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,8 @@
 		79832AFA0F02B1F2000F58D6 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		79EA070F0DAFF0550038ED3D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC713DDD153F8B8C00C8F7A1 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = neon_matrix_impl.cpp; path = neonmath/neon_matrix_impl.cpp; sourceTree = "<group>"; };
+		BC713DDE153F8B8C00C8F7A1 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = neon_matrix_impl.h; path = neonmath/neon_matrix_impl.h; sourceTree = "<group>"; };
 		BDE2118310217EC600B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		BDE2118410217EC600B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -320,6 +323,7 @@
 		79317AF60EDB167800247E3D /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				BC713DDB153F8B8400C8F7A1 /* neonmath */,
 				79317AF70EDB167800247E3D /* Matrix.cpp */,
 				79317AF80EDB167800247E3D /* Matrix.h */,
 				79317AF90EDB167800247E3D /* Quaternion.h */,
@@ -369,6 +373,15 @@
 			path = ../../../../Utility/Pathes;
 			sourceTree = SOURCE_ROOT;
 		};
+		BC713DDB153F8B8400C8F7A1 /* neonmath */ = {
+			isa = PBXGroup;
+			children = (
+				BC713DDD153F8B8C00C8F7A1 /* neon_matrix_impl.cpp */,
+				BC713DDE153F8B8C00C8F7A1 /* neon_matrix_impl.h */,
+			);
+			name = neonmath;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,7 +409,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OptimizedMesh" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -453,6 +470,7 @@
 				79832AFB0F02B1F2000F58D6 /* ResourcePath.mm in Sources */,
 				BDE2118510217EC600B215F9 /* Shader.mm in Sources */,
 				651B1D3C1178EE4800C027B2 /* DeviceType.mm in Sources */,
+				BC713DDF153F8B8C00C8F7A1 /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +495,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
@@ -505,6 +524,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = ../../../../include;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;

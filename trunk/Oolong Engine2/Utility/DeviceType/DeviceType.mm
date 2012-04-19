@@ -17,8 +17,13 @@
 
 int GetDeviceType()
 {
+#ifdef UI_USER_INTERFACE_IDIOM()
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		return IPAD_DEVICE;
 	else 
 		return IPHONE_DEVICE;
+#else
+	return IPHONE_DEVICE;
+#endif
+
 }

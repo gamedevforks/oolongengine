@@ -20,6 +20,8 @@ subject to the following restrictions:
 #include "OpenGLESExt.h"
 #include "Pathes.h"
 #include "ResourceFile.h"
+#include <CoreGraphics/CoreGraphics.h>
+#include <UIKit/UIKit.h>
 
 //#include "Log.h"
 #include "Resource.h"

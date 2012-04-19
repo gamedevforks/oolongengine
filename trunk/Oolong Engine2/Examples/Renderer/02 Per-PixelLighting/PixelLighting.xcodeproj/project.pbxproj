@@ -40,6 +40,7 @@
 		79EA04A60DAFCC980038ED3D /* ResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA04990DAFCC980038ED3D /* ResourceFile.cpp */; };
 		79EA04A70DAFCC980038ED3D /* Streaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79EA049B0DAFCC980038ED3D /* Streaming.cpp */; };
 		79F0FF210EDF4D6E00102B0B /* Timer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 79F0FF200EDF4D6E00102B0B /* Timer.mm */; };
+		BC713DEC153F8BD000C8F7A1 /* neon_matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC713DEA153F8BD000C8F7A1 /* neon_matrix_impl.cpp */; };
 		BDE2111D10217CFA00B215F9 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2111C10217CFA00B215F9 /* Shader.mm */; };
 		BDE2113110217D7700B215F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDE2113010217D7700B215F9 /* ResourcePath.mm */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,8 @@
 		79F0FF1F0EDF4D6E00102B0B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		79F0FF200EDF4D6E00102B0B /* Timer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Timer.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC713DEA153F8BD000C8F7A1 /* neon_matrix_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = neon_matrix_impl.cpp; path = neonmath/neon_matrix_impl.cpp; sourceTree = "<group>"; };
+		BC713DEB153F8BD000C8F7A1 /* neon_matrix_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = neon_matrix_impl.h; path = neonmath/neon_matrix_impl.h; sourceTree = "<group>"; };
 		BDE2111B10217CFA00B215F9 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		BDE2111C10217CFA00B215F9 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shader.mm; sourceTree = "<group>"; };
 		BDE2112F10217D7700B215F9 /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
@@ -237,6 +240,7 @@
 		79317A8F0EDB142700247E3D /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				BC713DE8153F8BC800C8F7A1 /* neon */,
 				79317A900EDB142700247E3D /* Matrix.cpp */,
 				79317A910EDB142700247E3D /* Matrix.h */,
 				79317A920EDB142700247E3D /* Quaternion.h */,
@@ -365,6 +369,15 @@
 			path = ../../../Utility/Timing;
 			sourceTree = SOURCE_ROOT;
 		};
+		BC713DE8153F8BC800C8F7A1 /* neon */ = {
+			isa = PBXGroup;
+			children = (
+				BC713DEA153F8BD000C8F7A1 /* neon_matrix_impl.cpp */,
+				BC713DEB153F8BD000C8F7A1 /* neon_matrix_impl.h */,
+			);
+			name = neon;
+			sourceTree = "<group>";
+		};
 		BDE2112E10217D7700B215F9 /* Pathes */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,7 +415,11 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PixelLighting" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -457,6 +474,7 @@
 				BDE2111D10217CFA00B215F9 /* Shader.mm in Sources */,
 				BDE2113110217D7700B215F9 /* ResourcePath.mm in Sources */,
 				651B1CFA1178EDA300C027B2 /* DeviceType.mm in Sources */,
+				BC713DEC153F8BD000C8F7A1 /* neon_matrix_impl.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +499,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = ../../../Include;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
@@ -509,6 +528,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PREBINDING = NO;

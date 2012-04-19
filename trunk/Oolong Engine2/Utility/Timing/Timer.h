@@ -14,7 +14,7 @@
 */
 #include "Type.h"
 #include <Mathematics.h>
-
+#include <CoreFoundation/CoreFoundation.h>
 #include <sys/time.h>
 
 #include <stdio.h>

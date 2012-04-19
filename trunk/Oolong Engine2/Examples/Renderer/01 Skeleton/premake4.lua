@@ -31,7 +31,8 @@ xcodebuildsettings
 'ARCHS = "$(ARCHS_STANDARD_32_BIT)"',
 'GCC_VERSION = "com.apple.compilers.llvmgcc42"',
 'GCC_THUMB_SUPPORT = NO',
-'TARGETED_DEVICE_FAMILY = "1,2"'
+'TARGETED_DEVICE_FAMILY = "1,2"',
+'STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic'
 }
 
 --links {

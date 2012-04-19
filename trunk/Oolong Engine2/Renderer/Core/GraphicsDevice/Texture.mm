@@ -91,7 +91,6 @@ unsigned int CTexture::LoadTextureFromImageFile(const char * const filename, GLu
 		CGContextRelease(textureContext);
 	}
 	else {
-		GLuint textureID;
 		GLubyte pixels[4*3] = {
 			255, 0, 0, 
 			0, 255, 0, 
